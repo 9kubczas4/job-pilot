@@ -1,0 +1,31 @@
+{
+  "hosting": {
+    "public": "dist/job-pilot/browser",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "storage": {
+    "rules": "storage.rules"
+  },
+  "auth": {
+    "providers": {
+      "googleSignIn": {
+        "oAuthBrandDisplayName": "Job Pilot",
+        "supportEmail": "pawel.kubiak.1994@gmail.com"
+      }
+    }
+  }
+}

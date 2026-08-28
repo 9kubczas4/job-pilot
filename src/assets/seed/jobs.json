@@ -1,0 +1,2368 @@
+[
+  {
+    "id": "job-001",
+    "title": "Frontend Developer",
+    "company": {
+      "id": "acme",
+      "name": "Acme"
+    },
+    "description": "Frontend Developer opportunity working with Angular, TypeScript, RxJS on modern product teams.",
+    "seniority": [
+      "senior",
+      "lead"
+    ],
+    "skills": [
+      {
+        "name": "Angular",
+        "level": "required"
+      },
+      {
+        "name": "TypeScript",
+        "level": "required"
+      },
+      {
+        "name": "RxJS",
+        "level": "required"
+      }
+    ],
+    "salary": {
+      "min": 18000,
+      "max": 24000,
+      "currency": "PLN",
+      "period": "month"
+    },
+    "contractTypes": [
+      "b2b"
+    ],
+    "workplace": "remote",
+    "responsibilities": [
+      "Build product features",
+      "Collaborate with design and backend",
+      "Improve frontend quality"
+    ],
+    "requirements": [
+      "Strong Angular experience",
+      "Strong TypeScript experience",
+      "Strong RxJS experience"
+    ],
+    "niceToHave": [
+      "Accessibility",
+      "Performance tuning"
+    ],
+    "benefits": [
+      "Flexible hours",
+      "Learning budget"
+    ],
+    "publishedAt": "2026-08-28T20:15:00.573Z"
+  },
+  {
+    "id": "job-002",
+    "title": "Frontend Tech Lead",
+    "company": {
+      "id": "novatech",
+      "name": "NovaTech"
+    },
+    "description": "Frontend Tech Lead opportunity working with React, TypeScript, Next.js on modern product teams.",
+    "seniority": [
+      "mid",
+      "senior"
+    ],
+    "skills": [
+      {
+        "name": "React",
+        "level": "required"
+      },
+      {
+        "name": "TypeScript",
+        "level": "required"
+      },
+      {
+        "name": "Next.js",
+        "level": "required"
+      }
+    ],
+    "salary": {
+      "min": 20000,
+      "max": 26500,
+      "currency": "PLN",
+      "period": "month"
+    },
+    "contractTypes": [
+      "b2b"
+    ],
+    "workplace": "hybrid",
+    "location": {
+      "city": "Krakow",
+      "country": "Poland",
+      "latitude": 50.0647,
+      "longitude": 19.945
+    },
+    "responsibilities": [
+      "Build product features",
+      "Collaborate with design and backend",
+      "Improve frontend quality"
+    ],
+    "requirements": [
+      "Strong React experience",
+      "Strong TypeScript experience",
+      "Strong Next.js experience"
+    ],
+    "niceToHave": [
+      "Accessibility",
+      "Performance tuning"
+    ],
+    "benefits": [
+      "Flexible hours",
+      "Learning budget"
+    ],
+    "publishedAt": "2026-08-27T20:15:00.574Z"
+  },
+  {
+    "id": "job-003",
+    "title": "Staff Frontend Engineer",
+    "company": {
+      "id": "blueriver",
+      "name": "BlueRiver"
+    },
+    "description": "Staff Frontend Engineer opportunity working with Vue, TypeScript, Pinia on modern product teams.",
+    "seniority": [
+      "lead",
+      "staff"
+    ],
+    "skills": [
+      {
+        "name": "Vue",
+        "level": "required"
+      },
+      {
+        "name": "TypeScript",
+        "level": "required"
+      },
+      {
+        "name": "Pinia",
+        "level": "required"
+      }
+    ],
+    "salary": {
+      "min": 22000,
+      "max": 29000,
+      "currency": "PLN",
+      "period": "month"
+    },
+    "contractTypes": [
+      "b2b"
+    ],
+    "workplace": "onsite",
+    "location": {
+      "city": "Wroclaw",
+      "country": "Poland",
+      "latitude": 51.1079,
+      "longitude": 17.0385
+    },
+    "responsibilities": [
+      "Build product features",
+      "Collaborate with design and backend",
+      "Improve frontend quality"
+    ],
+    "requirements": [
+      "Strong Vue experience",
+      "Strong TypeScript experience",
+      "Strong Pinia experience"
+    ],
+    "niceToHave": [
+      "Accessibility",
+      "Performance tuning"
+    ],
+    "benefits": [
+      "Flexible hours",
+      "Learning budget"
+    ],
+    "publishedAt": "2026-08-26T20:15:00.574Z"
+  },
+  {
+    "id": "job-004",
+    "title": "Senior Frontend Engineer",
+    "company": {
+      "id": "skylabs",
+      "name": "SkyLabs"
+    },
+    "description": "Senior Frontend Engineer opportunity working with Java, Spring, Kafka on modern product teams.",
+    "seniority": [
+      "junior",
+      "mid"
+    ],
+    "skills": [
+      {
+        "name": "Java",
+        "level": "required"
+      },
+      {
+        "name": "Spring",
+        "level": "required"
+      },
+      {
+        "name": "Kafka",
+        "level": "required"
+      }
+    ],
+    "salary": {
+      "min": 24000,
+      "max": 31500,
+      "currency": "PLN",
+      "period": "month"
+    },
+    "contractTypes": [
+      "b2b"
+    ],
+    "workplace": "remote",
+    "responsibilities": [
+      "Build product features",
+      "Collaborate with design and backend",
+      "Improve frontend quality"
+    ],
+    "requirements": [
+      "Strong Java experience",
+      "Strong Spring experience",
+      "Strong Kafka experience"
+    ],
+    "niceToHave": [
+      "Accessibility",
+      "Performance tuning"
+    ],
+    "benefits": [
+      "Flexible hours",
+      "Learning budget"
+    ],
+    "publishedAt": "2026-08-25T20:15:00.574Z"
+  },
+  {
+    "id": "job-005",
+    "title": "Backend Developer",
+    "company": {
+      "id": "polarsoft",
+      "name": "PolarSoft"
+    },
+    "description": "Backend Developer opportunity working with .NET, C#, Azure on modern product teams.",
+    "seniority": [
+      "senior",
+      "lead"
+    ],
+    "skills": [
+      {
+        "name": ".NET",
+        "level": "required"
+      },
+      {
+        "name": "C#",
+        "level": "required"
+      },
+      {
+        "name": "Azure",
+        "level": "required"
+      }
+    ],
+    "salary": {
+      "min": 26000,
+      "max": 34000,
+      "currency": "PLN",
+      "period": "month"
+    },
+    "contractTypes": [
+      "b2b"
+    ],
+    "workplace": "hybrid",
+    "location": {
+      "city": "Poznan",
+      "country": "Poland",
+      "latitude": 52.4064,
+      "longitude": 16.9252
+    },
+    "responsibilities": [
+      "Build product features",
+      "Collaborate with design and backend",
+      "Improve frontend quality"
+    ],
+    "requirements": [
+      "Strong .NET experience",
+      "Strong C# experience",
+      "Strong Azure experience"
+    ],
+    "niceToHave": [
+      "Accessibility",
+      "Performance tuning"
+    ],
+    "benefits": [
+      "Flexible hours",
+      "Learning budget"
+    ],
+    "publishedAt": "2026-08-24T20:15:00.574Z"
+  },
+  {
+    "id": "job-006",
+    "title": "Full Stack Engineer",
+    "company": {
+      "id": "northline",
+      "name": "NorthLine"
+    },
+    "description": "Full Stack Engineer opportunity working with Python, FastAPI, PostgreSQL on modern product teams.",
+    "seniority": [
+      "mid",
+      "senior"
+    ],
+    "skills": [
+      {
+        "name": "Python",
+        "level": "required"
+      },
+      {
+        "name": "FastAPI",
+        "level": "required"
+      },
+      {
+        "name": "PostgreSQL",
+        "level": "required"
+      }
+    ],
+    "salary": {
+      "min": 28000,
+      "max": 36500,
+      "currency": "PLN",
+      "period": "month"
+    },
+    "contractTypes": [
+      "b2b"
+    ],
+    "workplace": "remote",
+    "responsibilities": [
+      "Build product features",
+      "Collaborate with design and backend",
+      "Improve frontend quality"
+    ],
+    "requirements": [
+      "Strong Python experience",
+      "Strong FastAPI experience",
+      "Strong PostgreSQL experience"
+    ],
+    "niceToHave": [
+      "Accessibility",
+      "Performance tuning"
+    ],
+    "benefits": [
+      "Flexible hours",
+      "Learning budget"
+    ],
+    "publishedAt": "2026-08-23T20:15:00.574Z"
+  },
+  {
+    "id": "job-007",
+    "title": "Cloud Engineer",
+    "company": {
+      "id": "devforge",
+      "name": "DevForge"
+    },
+    "description": "Cloud Engineer opportunity working with TypeScript, Node.js, AWS on modern product teams.",
+    "seniority": [
+      "lead",
+      "staff"
+    ],
+    "skills": [
+      {
+        "name": "TypeScript",
+        "level": "required"
+      },
+      {
+        "name": "Node.js",
+        "level": "required"
+      },
+      {
+        "name": "AWS",
+        "level": "required"
+      }
+    ],
+    "salary": {
+      "min": 30000,
+      "max": 39000,
+      "currency": "PLN",
+      "period": "month"
+    },
+    "contractTypes": [
+      "b2b"
+    ],
+    "workplace": "remote",
+    "responsibilities": [
+      "Build product features",
+      "Collaborate with design and backend",
+      "Improve frontend quality"
+    ],
+    "requirements": [
+      "Strong TypeScript experience",
+      "Strong Node.js experience",
+      "Strong AWS experience"
+    ],
+    "niceToHave": [
+      "Accessibility",
+      "Performance tuning"
+    ],
+    "benefits": [
+      "Flexible hours",
+      "Learning budget"
+    ],
+    "publishedAt": "2026-08-22T20:15:00.574Z"
+  },
+  {
+    "id": "job-008",
+    "title": "ML Engineer",
+    "company": {
+      "id": "cloudnine",
+      "name": "CloudNine"
+    },
+    "description": "ML Engineer opportunity working with Angular, Nx, AWS on modern product teams.",
+    "seniority": [
+      "junior",
+      "mid"
+    ],
+    "skills": [
+      {
+        "name": "Angular",
+        "level": "required"
+      },
+      {
+        "name": "Nx",
+        "level": "required"
+      },
+      {
+        "name": "AWS",
+        "level": "required"
+      }
+    ],
+    "salary": {
+      "min": 32000,
+      "max": 41500,
+      "currency": "PLN",
+      "period": "month"
+    },
+    "contractTypes": [
+      "b2b"
+    ],
+    "workplace": "hybrid",
+    "location": {
+      "city": "Krakow",
+      "country": "Poland",
+      "latitude": 50.0647,
+      "longitude": 19.945
+    },
+    "responsibilities": [
+      "Build product features",
+      "Collaborate with design and backend",
+      "Improve frontend quality"
+    ],
+    "requirements": [
+      "Strong Angular experience",
+      "Strong Nx experience",
+      "Strong AWS experience"
+    ],
+    "niceToHave": [
+      "Accessibility",
+      "Performance tuning"
+    ],
+    "benefits": [
+      "Flexible hours",
+      "Learning budget"
+    ],
+    "publishedAt": "2026-08-21T20:15:00.574Z"
+  },
+  {
+    "id": "job-009",
+    "title": "Frontend Developer",
+    "company": {
+      "id": "acme",
+      "name": "Acme"
+    },
+    "description": "Frontend Developer opportunity working with Angular, TypeScript, RxJS on modern product teams.",
+    "seniority": [
+      "senior",
+      "lead"
+    ],
+    "skills": [
+      {
+        "name": "Angular",
+        "level": "required"
+      },
+      {
+        "name": "TypeScript",
+        "level": "required"
+      },
+      {
+        "name": "RxJS",
+        "level": "required"
+      }
+    ],
+    "salary": {
+      "min": 18000,
+      "max": 24000,
+      "currency": "PLN",
+      "period": "month"
+    },
+    "contractTypes": [
+      "b2b"
+    ],
+    "workplace": "onsite",
+    "location": {
+      "city": "Wroclaw",
+      "country": "Poland",
+      "latitude": 51.1079,
+      "longitude": 17.0385
+    },
+    "responsibilities": [
+      "Build product features",
+      "Collaborate with design and backend",
+      "Improve frontend quality"
+    ],
+    "requirements": [
+      "Strong Angular experience",
+      "Strong TypeScript experience",
+      "Strong RxJS experience"
+    ],
+    "niceToHave": [
+      "Accessibility",
+      "Performance tuning"
+    ],
+    "benefits": [
+      "Flexible hours",
+      "Learning budget"
+    ],
+    "publishedAt": "2026-08-20T20:15:00.574Z"
+  },
+  {
+    "id": "job-010",
+    "title": "Frontend Tech Lead",
+    "company": {
+      "id": "novatech",
+      "name": "NovaTech"
+    },
+    "description": "Frontend Tech Lead opportunity working with React, TypeScript, Next.js on modern product teams.",
+    "seniority": [
+      "mid",
+      "senior"
+    ],
+    "skills": [
+      {
+        "name": "React",
+        "level": "required"
+      },
+      {
+        "name": "TypeScript",
+        "level": "required"
+      },
+      {
+        "name": "Next.js",
+        "level": "required"
+      }
+    ],
+    "salary": {
+      "min": 20000,
+      "max": 26500,
+      "currency": "PLN",
+      "period": "month"
+    },
+    "contractTypes": [
+      "b2b"
+    ],
+    "workplace": "remote",
+    "responsibilities": [
+      "Build product features",
+      "Collaborate with design and backend",
+      "Improve frontend quality"
+    ],
+    "requirements": [
+      "Strong React experience",
+      "Strong TypeScript experience",
+      "Strong Next.js experience"
+    ],
+    "niceToHave": [
+      "Accessibility",
+      "Performance tuning"
+    ],
+    "benefits": [
+      "Flexible hours",
+      "Learning budget"
+    ],
+    "publishedAt": "2026-08-19T20:15:00.574Z"
+  },
+  {
+    "id": "job-011",
+    "title": "Staff Frontend Engineer",
+    "company": {
+      "id": "blueriver",
+      "name": "BlueRiver"
+    },
+    "description": "Staff Frontend Engineer opportunity working with Vue, TypeScript, Pinia on modern product teams.",
+    "seniority": [
+      "lead",
+      "staff"
+    ],
+    "skills": [
+      {
+        "name": "Vue",
+        "level": "required"
+      },
+      {
+        "name": "TypeScript",
+        "level": "required"
+      },
+      {
+        "name": "Pinia",
+        "level": "required"
+      }
+    ],
+    "salary": {
+      "min": 22000,
+      "max": 29000,
+      "currency": "PLN",
+      "period": "month"
+    },
+    "contractTypes": [
+      "b2b"
+    ],
+    "workplace": "remote",
+    "responsibilities": [
+      "Build product features",
+      "Collaborate with design and backend",
+      "Improve frontend quality"
+    ],
+    "requirements": [
+      "Strong Vue experience",
+      "Strong TypeScript experience",
+      "Strong Pinia experience"
+    ],
+    "niceToHave": [
+      "Accessibility",
+      "Performance tuning"
+    ],
+    "benefits": [
+      "Flexible hours",
+      "Learning budget"
+    ],
+    "publishedAt": "2026-08-18T20:15:00.574Z"
+  },
+  {
+    "id": "job-012",
+    "title": "Senior Frontend Engineer",
+    "company": {
+      "id": "skylabs",
+      "name": "SkyLabs"
+    },
+    "description": "Senior Frontend Engineer opportunity working with Java, Spring, Kafka on modern product teams.",
+    "seniority": [
+      "junior",
+      "mid"
+    ],
+    "skills": [
+      {
+        "name": "Java",
+        "level": "required"
+      },
+      {
+        "name": "Spring",
+        "level": "required"
+      },
+      {
+        "name": "Kafka",
+        "level": "required"
+      }
+    ],
+    "salary": {
+      "min": 24000,
+      "max": 31500,
+      "currency": "PLN",
+      "period": "month"
+    },
+    "contractTypes": [
+      "b2b"
+    ],
+    "workplace": "onsite",
+    "location": {
+      "city": "Katowice",
+      "country": "Poland",
+      "latitude": 50.2649,
+      "longitude": 19.0238
+    },
+    "responsibilities": [
+      "Build product features",
+      "Collaborate with design and backend",
+      "Improve frontend quality"
+    ],
+    "requirements": [
+      "Strong Java experience",
+      "Strong Spring experience",
+      "Strong Kafka experience"
+    ],
+    "niceToHave": [
+      "Accessibility",
+      "Performance tuning"
+    ],
+    "benefits": [
+      "Flexible hours",
+      "Learning budget"
+    ],
+    "publishedAt": "2026-08-17T20:15:00.574Z"
+  },
+  {
+    "id": "job-013",
+    "title": "Backend Developer",
+    "company": {
+      "id": "polarsoft",
+      "name": "PolarSoft"
+    },
+    "description": "Backend Developer opportunity working with .NET, C#, Azure on modern product teams.",
+    "seniority": [
+      "senior",
+      "lead"
+    ],
+    "skills": [
+      {
+        "name": ".NET",
+        "level": "required"
+      },
+      {
+        "name": "C#",
+        "level": "required"
+      },
+      {
+        "name": "Azure",
+        "level": "required"
+      }
+    ],
+    "salary": {
+      "min": 26000,
+      "max": 34000,
+      "currency": "PLN",
+      "period": "month"
+    },
+    "contractTypes": [
+      "b2b"
+    ],
+    "workplace": "remote",
+    "responsibilities": [
+      "Build product features",
+      "Collaborate with design and backend",
+      "Improve frontend quality"
+    ],
+    "requirements": [
+      "Strong .NET experience",
+      "Strong C# experience",
+      "Strong Azure experience"
+    ],
+    "niceToHave": [
+      "Accessibility",
+      "Performance tuning"
+    ],
+    "benefits": [
+      "Flexible hours",
+      "Learning budget"
+    ],
+    "publishedAt": "2026-08-16T20:15:00.574Z"
+  },
+  {
+    "id": "job-014",
+    "title": "Full Stack Engineer",
+    "company": {
+      "id": "northline",
+      "name": "NorthLine"
+    },
+    "description": "Full Stack Engineer opportunity working with Python, FastAPI, PostgreSQL on modern product teams.",
+    "seniority": [
+      "mid",
+      "senior"
+    ],
+    "skills": [
+      {
+        "name": "Python",
+        "level": "required"
+      },
+      {
+        "name": "FastAPI",
+        "level": "required"
+      },
+      {
+        "name": "PostgreSQL",
+        "level": "required"
+      }
+    ],
+    "salary": {
+      "min": 28000,
+      "max": 36500,
+      "currency": "PLN",
+      "period": "month"
+    },
+    "contractTypes": [
+      "b2b"
+    ],
+    "workplace": "hybrid",
+    "location": {
+      "city": "Krakow",
+      "country": "Poland",
+      "latitude": 50.0647,
+      "longitude": 19.945
+    },
+    "responsibilities": [
+      "Build product features",
+      "Collaborate with design and backend",
+      "Improve frontend quality"
+    ],
+    "requirements": [
+      "Strong Python experience",
+      "Strong FastAPI experience",
+      "Strong PostgreSQL experience"
+    ],
+    "niceToHave": [
+      "Accessibility",
+      "Performance tuning"
+    ],
+    "benefits": [
+      "Flexible hours",
+      "Learning budget"
+    ],
+    "publishedAt": "2026-08-15T20:15:00.574Z"
+  },
+  {
+    "id": "job-015",
+    "title": "Cloud Engineer",
+    "company": {
+      "id": "devforge",
+      "name": "DevForge"
+    },
+    "description": "Cloud Engineer opportunity working with TypeScript, Node.js, AWS on modern product teams.",
+    "seniority": [
+      "lead",
+      "staff"
+    ],
+    "skills": [
+      {
+        "name": "TypeScript",
+        "level": "required"
+      },
+      {
+        "name": "Node.js",
+        "level": "required"
+      },
+      {
+        "name": "AWS",
+        "level": "required"
+      }
+    ],
+    "salary": {
+      "min": 30000,
+      "max": 39000,
+      "currency": "PLN",
+      "period": "month"
+    },
+    "contractTypes": [
+      "b2b"
+    ],
+    "workplace": "onsite",
+    "location": {
+      "city": "Wroclaw",
+      "country": "Poland",
+      "latitude": 51.1079,
+      "longitude": 17.0385
+    },
+    "responsibilities": [
+      "Build product features",
+      "Collaborate with design and backend",
+      "Improve frontend quality"
+    ],
+    "requirements": [
+      "Strong TypeScript experience",
+      "Strong Node.js experience",
+      "Strong AWS experience"
+    ],
+    "niceToHave": [
+      "Accessibility",
+      "Performance tuning"
+    ],
+    "benefits": [
+      "Flexible hours",
+      "Learning budget"
+    ],
+    "publishedAt": "2026-08-14T20:15:00.574Z"
+  },
+  {
+    "id": "job-016",
+    "title": "ML Engineer",
+    "company": {
+      "id": "cloudnine",
+      "name": "CloudNine"
+    },
+    "description": "ML Engineer opportunity working with Angular, Nx, AWS on modern product teams.",
+    "seniority": [
+      "junior",
+      "mid"
+    ],
+    "skills": [
+      {
+        "name": "Angular",
+        "level": "required"
+      },
+      {
+        "name": "Nx",
+        "level": "required"
+      },
+      {
+        "name": "AWS",
+        "level": "required"
+      }
+    ],
+    "salary": {
+      "min": 32000,
+      "max": 41500,
+      "currency": "PLN",
+      "period": "month"
+    },
+    "contractTypes": [
+      "b2b"
+    ],
+    "workplace": "remote",
+    "responsibilities": [
+      "Build product features",
+      "Collaborate with design and backend",
+      "Improve frontend quality"
+    ],
+    "requirements": [
+      "Strong Angular experience",
+      "Strong Nx experience",
+      "Strong AWS experience"
+    ],
+    "niceToHave": [
+      "Accessibility",
+      "Performance tuning"
+    ],
+    "benefits": [
+      "Flexible hours",
+      "Learning budget"
+    ],
+    "publishedAt": "2026-08-13T20:15:00.574Z"
+  },
+  {
+    "id": "job-017",
+    "title": "Frontend Developer",
+    "company": {
+      "id": "acme",
+      "name": "Acme"
+    },
+    "description": "Frontend Developer opportunity working with Angular, TypeScript, RxJS on modern product teams.",
+    "seniority": [
+      "senior",
+      "lead"
+    ],
+    "skills": [
+      {
+        "name": "Angular",
+        "level": "required"
+      },
+      {
+        "name": "TypeScript",
+        "level": "required"
+      },
+      {
+        "name": "RxJS",
+        "level": "required"
+      }
+    ],
+    "salary": {
+      "min": 18000,
+      "max": 24000,
+      "currency": "PLN",
+      "period": "month"
+    },
+    "contractTypes": [
+      "b2b"
+    ],
+    "workplace": "hybrid",
+    "location": {
+      "city": "Poznan",
+      "country": "Poland",
+      "latitude": 52.4064,
+      "longitude": 16.9252
+    },
+    "responsibilities": [
+      "Build product features",
+      "Collaborate with design and backend",
+      "Improve frontend quality"
+    ],
+    "requirements": [
+      "Strong Angular experience",
+      "Strong TypeScript experience",
+      "Strong RxJS experience"
+    ],
+    "niceToHave": [
+      "Accessibility",
+      "Performance tuning"
+    ],
+    "benefits": [
+      "Flexible hours",
+      "Learning budget"
+    ],
+    "publishedAt": "2026-08-12T20:15:00.574Z"
+  },
+  {
+    "id": "job-018",
+    "title": "Frontend Tech Lead",
+    "company": {
+      "id": "novatech",
+      "name": "NovaTech"
+    },
+    "description": "Frontend Tech Lead opportunity working with React, TypeScript, Next.js on modern product teams.",
+    "seniority": [
+      "mid",
+      "senior"
+    ],
+    "skills": [
+      {
+        "name": "React",
+        "level": "required"
+      },
+      {
+        "name": "TypeScript",
+        "level": "required"
+      },
+      {
+        "name": "Next.js",
+        "level": "required"
+      }
+    ],
+    "salary": {
+      "min": 20000,
+      "max": 26500,
+      "currency": "PLN",
+      "period": "month"
+    },
+    "contractTypes": [
+      "b2b"
+    ],
+    "workplace": "onsite",
+    "location": {
+      "city": "Katowice",
+      "country": "Poland",
+      "latitude": 50.2649,
+      "longitude": 19.0238
+    },
+    "responsibilities": [
+      "Build product features",
+      "Collaborate with design and backend",
+      "Improve frontend quality"
+    ],
+    "requirements": [
+      "Strong React experience",
+      "Strong TypeScript experience",
+      "Strong Next.js experience"
+    ],
+    "niceToHave": [
+      "Accessibility",
+      "Performance tuning"
+    ],
+    "benefits": [
+      "Flexible hours",
+      "Learning budget"
+    ],
+    "publishedAt": "2026-08-11T20:15:00.574Z"
+  },
+  {
+    "id": "job-019",
+    "title": "Staff Frontend Engineer",
+    "company": {
+      "id": "blueriver",
+      "name": "BlueRiver"
+    },
+    "description": "Staff Frontend Engineer opportunity working with Vue, TypeScript, Pinia on modern product teams.",
+    "seniority": [
+      "lead",
+      "staff"
+    ],
+    "skills": [
+      {
+        "name": "Vue",
+        "level": "required"
+      },
+      {
+        "name": "TypeScript",
+        "level": "required"
+      },
+      {
+        "name": "Pinia",
+        "level": "required"
+      }
+    ],
+    "salary": {
+      "min": 22000,
+      "max": 29000,
+      "currency": "PLN",
+      "period": "month"
+    },
+    "contractTypes": [
+      "b2b"
+    ],
+    "workplace": "remote",
+    "responsibilities": [
+      "Build product features",
+      "Collaborate with design and backend",
+      "Improve frontend quality"
+    ],
+    "requirements": [
+      "Strong Vue experience",
+      "Strong TypeScript experience",
+      "Strong Pinia experience"
+    ],
+    "niceToHave": [
+      "Accessibility",
+      "Performance tuning"
+    ],
+    "benefits": [
+      "Flexible hours",
+      "Learning budget"
+    ],
+    "publishedAt": "2026-08-10T20:15:00.574Z"
+  },
+  {
+    "id": "job-020",
+    "title": "Senior Frontend Engineer",
+    "company": {
+      "id": "skylabs",
+      "name": "SkyLabs"
+    },
+    "description": "Senior Frontend Engineer opportunity working with Java, Spring, Kafka on modern product teams.",
+    "seniority": [
+      "junior",
+      "mid"
+    ],
+    "skills": [
+      {
+        "name": "Java",
+        "level": "required"
+      },
+      {
+        "name": "Spring",
+        "level": "required"
+      },
+      {
+        "name": "Kafka",
+        "level": "required"
+      }
+    ],
+    "salary": {
+      "min": 24000,
+      "max": 31500,
+      "currency": "PLN",
+      "period": "month"
+    },
+    "contractTypes": [
+      "b2b"
+    ],
+    "workplace": "hybrid",
+    "location": {
+      "city": "Krakow",
+      "country": "Poland",
+      "latitude": 50.0647,
+      "longitude": 19.945
+    },
+    "responsibilities": [
+      "Build product features",
+      "Collaborate with design and backend",
+      "Improve frontend quality"
+    ],
+    "requirements": [
+      "Strong Java experience",
+      "Strong Spring experience",
+      "Strong Kafka experience"
+    ],
+    "niceToHave": [
+      "Accessibility",
+      "Performance tuning"
+    ],
+    "benefits": [
+      "Flexible hours",
+      "Learning budget"
+    ],
+    "publishedAt": "2026-08-09T20:15:00.574Z"
+  },
+  {
+    "id": "job-021",
+    "title": "Backend Developer",
+    "company": {
+      "id": "polarsoft",
+      "name": "PolarSoft"
+    },
+    "description": "Backend Developer opportunity working with .NET, C#, Azure on modern product teams.",
+    "seniority": [
+      "senior",
+      "lead"
+    ],
+    "skills": [
+      {
+        "name": ".NET",
+        "level": "required"
+      },
+      {
+        "name": "C#",
+        "level": "required"
+      },
+      {
+        "name": "Azure",
+        "level": "required"
+      }
+    ],
+    "salary": {
+      "min": 26000,
+      "max": 34000,
+      "currency": "PLN",
+      "period": "month"
+    },
+    "contractTypes": [
+      "b2b"
+    ],
+    "workplace": "remote",
+    "responsibilities": [
+      "Build product features",
+      "Collaborate with design and backend",
+      "Improve frontend quality"
+    ],
+    "requirements": [
+      "Strong .NET experience",
+      "Strong C# experience",
+      "Strong Azure experience"
+    ],
+    "niceToHave": [
+      "Accessibility",
+      "Performance tuning"
+    ],
+    "benefits": [
+      "Flexible hours",
+      "Learning budget"
+    ],
+    "publishedAt": "2026-08-08T20:15:00.574Z"
+  },
+  {
+    "id": "job-022",
+    "title": "Full Stack Engineer",
+    "company": {
+      "id": "northline",
+      "name": "NorthLine"
+    },
+    "description": "Full Stack Engineer opportunity working with Python, FastAPI, PostgreSQL on modern product teams.",
+    "seniority": [
+      "mid",
+      "senior"
+    ],
+    "skills": [
+      {
+        "name": "Python",
+        "level": "required"
+      },
+      {
+        "name": "FastAPI",
+        "level": "required"
+      },
+      {
+        "name": "PostgreSQL",
+        "level": "required"
+      }
+    ],
+    "salary": {
+      "min": 28000,
+      "max": 36500,
+      "currency": "PLN",
+      "period": "month"
+    },
+    "contractTypes": [
+      "b2b"
+    ],
+    "workplace": "remote",
+    "responsibilities": [
+      "Build product features",
+      "Collaborate with design and backend",
+      "Improve frontend quality"
+    ],
+    "requirements": [
+      "Strong Python experience",
+      "Strong FastAPI experience",
+      "Strong PostgreSQL experience"
+    ],
+    "niceToHave": [
+      "Accessibility",
+      "Performance tuning"
+    ],
+    "benefits": [
+      "Flexible hours",
+      "Learning budget"
+    ],
+    "publishedAt": "2026-08-07T20:15:00.574Z"
+  },
+  {
+    "id": "job-023",
+    "title": "Cloud Engineer",
+    "company": {
+      "id": "devforge",
+      "name": "DevForge"
+    },
+    "description": "Cloud Engineer opportunity working with TypeScript, Node.js, AWS on modern product teams.",
+    "seniority": [
+      "lead",
+      "staff"
+    ],
+    "skills": [
+      {
+        "name": "TypeScript",
+        "level": "required"
+      },
+      {
+        "name": "Node.js",
+        "level": "required"
+      },
+      {
+        "name": "AWS",
+        "level": "required"
+      }
+    ],
+    "salary": {
+      "min": 30000,
+      "max": 39000,
+      "currency": "PLN",
+      "period": "month"
+    },
+    "contractTypes": [
+      "b2b"
+    ],
+    "workplace": "hybrid",
+    "location": {
+      "city": "Poznan",
+      "country": "Poland",
+      "latitude": 52.4064,
+      "longitude": 16.9252
+    },
+    "responsibilities": [
+      "Build product features",
+      "Collaborate with design and backend",
+      "Improve frontend quality"
+    ],
+    "requirements": [
+      "Strong TypeScript experience",
+      "Strong Node.js experience",
+      "Strong AWS experience"
+    ],
+    "niceToHave": [
+      "Accessibility",
+      "Performance tuning"
+    ],
+    "benefits": [
+      "Flexible hours",
+      "Learning budget"
+    ],
+    "publishedAt": "2026-08-06T20:15:00.574Z"
+  },
+  {
+    "id": "job-024",
+    "title": "ML Engineer",
+    "company": {
+      "id": "cloudnine",
+      "name": "CloudNine"
+    },
+    "description": "ML Engineer opportunity working with Angular, Nx, AWS on modern product teams.",
+    "seniority": [
+      "junior",
+      "mid"
+    ],
+    "skills": [
+      {
+        "name": "Angular",
+        "level": "required"
+      },
+      {
+        "name": "Nx",
+        "level": "required"
+      },
+      {
+        "name": "AWS",
+        "level": "required"
+      }
+    ],
+    "salary": {
+      "min": 32000,
+      "max": 41500,
+      "currency": "PLN",
+      "period": "month"
+    },
+    "contractTypes": [
+      "b2b"
+    ],
+    "workplace": "onsite",
+    "location": {
+      "city": "Katowice",
+      "country": "Poland",
+      "latitude": 50.2649,
+      "longitude": 19.0238
+    },
+    "responsibilities": [
+      "Build product features",
+      "Collaborate with design and backend",
+      "Improve frontend quality"
+    ],
+    "requirements": [
+      "Strong Angular experience",
+      "Strong Nx experience",
+      "Strong AWS experience"
+    ],
+    "niceToHave": [
+      "Accessibility",
+      "Performance tuning"
+    ],
+    "benefits": [
+      "Flexible hours",
+      "Learning budget"
+    ],
+    "publishedAt": "2026-08-05T20:15:00.574Z"
+  },
+  {
+    "id": "job-025",
+    "title": "Frontend Developer",
+    "company": {
+      "id": "acme",
+      "name": "Acme"
+    },
+    "description": "Frontend Developer opportunity working with Angular, TypeScript, RxJS on modern product teams.",
+    "seniority": [
+      "senior",
+      "lead"
+    ],
+    "skills": [
+      {
+        "name": "Angular",
+        "level": "required"
+      },
+      {
+        "name": "TypeScript",
+        "level": "required"
+      },
+      {
+        "name": "RxJS",
+        "level": "required"
+      }
+    ],
+    "salary": {
+      "min": 18000,
+      "max": 24000,
+      "currency": "PLN",
+      "period": "month"
+    },
+    "contractTypes": [
+      "b2b"
+    ],
+    "workplace": "remote",
+    "responsibilities": [
+      "Build product features",
+      "Collaborate with design and backend",
+      "Improve frontend quality"
+    ],
+    "requirements": [
+      "Strong Angular experience",
+      "Strong TypeScript experience",
+      "Strong RxJS experience"
+    ],
+    "niceToHave": [
+      "Accessibility",
+      "Performance tuning"
+    ],
+    "benefits": [
+      "Flexible hours",
+      "Learning budget"
+    ],
+    "publishedAt": "2026-08-04T20:15:00.574Z"
+  },
+  {
+    "id": "job-026",
+    "title": "Frontend Tech Lead",
+    "company": {
+      "id": "novatech",
+      "name": "NovaTech"
+    },
+    "description": "Frontend Tech Lead opportunity working with React, TypeScript, Next.js on modern product teams.",
+    "seniority": [
+      "mid",
+      "senior"
+    ],
+    "skills": [
+      {
+        "name": "React",
+        "level": "required"
+      },
+      {
+        "name": "TypeScript",
+        "level": "required"
+      },
+      {
+        "name": "Next.js",
+        "level": "required"
+      }
+    ],
+    "salary": {
+      "min": 20000,
+      "max": 26500,
+      "currency": "PLN",
+      "period": "month"
+    },
+    "contractTypes": [
+      "b2b"
+    ],
+    "workplace": "remote",
+    "responsibilities": [
+      "Build product features",
+      "Collaborate with design and backend",
+      "Improve frontend quality"
+    ],
+    "requirements": [
+      "Strong React experience",
+      "Strong TypeScript experience",
+      "Strong Next.js experience"
+    ],
+    "niceToHave": [
+      "Accessibility",
+      "Performance tuning"
+    ],
+    "benefits": [
+      "Flexible hours",
+      "Learning budget"
+    ],
+    "publishedAt": "2026-08-03T20:15:00.574Z"
+  },
+  {
+    "id": "job-027",
+    "title": "Staff Frontend Engineer",
+    "company": {
+      "id": "blueriver",
+      "name": "BlueRiver"
+    },
+    "description": "Staff Frontend Engineer opportunity working with Vue, TypeScript, Pinia on modern product teams.",
+    "seniority": [
+      "lead",
+      "staff"
+    ],
+    "skills": [
+      {
+        "name": "Vue",
+        "level": "required"
+      },
+      {
+        "name": "TypeScript",
+        "level": "required"
+      },
+      {
+        "name": "Pinia",
+        "level": "required"
+      }
+    ],
+    "salary": {
+      "min": 22000,
+      "max": 29000,
+      "currency": "PLN",
+      "period": "month"
+    },
+    "contractTypes": [
+      "b2b"
+    ],
+    "workplace": "onsite",
+    "location": {
+      "city": "Wroclaw",
+      "country": "Poland",
+      "latitude": 51.1079,
+      "longitude": 17.0385
+    },
+    "responsibilities": [
+      "Build product features",
+      "Collaborate with design and backend",
+      "Improve frontend quality"
+    ],
+    "requirements": [
+      "Strong Vue experience",
+      "Strong TypeScript experience",
+      "Strong Pinia experience"
+    ],
+    "niceToHave": [
+      "Accessibility",
+      "Performance tuning"
+    ],
+    "benefits": [
+      "Flexible hours",
+      "Learning budget"
+    ],
+    "publishedAt": "2026-08-02T20:15:00.574Z"
+  },
+  {
+    "id": "job-028",
+    "title": "Senior Frontend Engineer",
+    "company": {
+      "id": "skylabs",
+      "name": "SkyLabs"
+    },
+    "description": "Senior Frontend Engineer opportunity working with Java, Spring, Kafka on modern product teams.",
+    "seniority": [
+      "junior",
+      "mid"
+    ],
+    "skills": [
+      {
+        "name": "Java",
+        "level": "required"
+      },
+      {
+        "name": "Spring",
+        "level": "required"
+      },
+      {
+        "name": "Kafka",
+        "level": "required"
+      }
+    ],
+    "salary": {
+      "min": 24000,
+      "max": 31500,
+      "currency": "PLN",
+      "period": "month"
+    },
+    "contractTypes": [
+      "b2b"
+    ],
+    "workplace": "remote",
+    "responsibilities": [
+      "Build product features",
+      "Collaborate with design and backend",
+      "Improve frontend quality"
+    ],
+    "requirements": [
+      "Strong Java experience",
+      "Strong Spring experience",
+      "Strong Kafka experience"
+    ],
+    "niceToHave": [
+      "Accessibility",
+      "Performance tuning"
+    ],
+    "benefits": [
+      "Flexible hours",
+      "Learning budget"
+    ],
+    "publishedAt": "2026-08-01T20:15:00.574Z"
+  },
+  {
+    "id": "job-029",
+    "title": "Backend Developer",
+    "company": {
+      "id": "polarsoft",
+      "name": "PolarSoft"
+    },
+    "description": "Backend Developer opportunity working with .NET, C#, Azure on modern product teams.",
+    "seniority": [
+      "senior",
+      "lead"
+    ],
+    "skills": [
+      {
+        "name": ".NET",
+        "level": "required"
+      },
+      {
+        "name": "C#",
+        "level": "required"
+      },
+      {
+        "name": "Azure",
+        "level": "required"
+      }
+    ],
+    "salary": {
+      "min": 26000,
+      "max": 34000,
+      "currency": "PLN",
+      "period": "month"
+    },
+    "contractTypes": [
+      "b2b"
+    ],
+    "workplace": "hybrid",
+    "location": {
+      "city": "Poznan",
+      "country": "Poland",
+      "latitude": 52.4064,
+      "longitude": 16.9252
+    },
+    "responsibilities": [
+      "Build product features",
+      "Collaborate with design and backend",
+      "Improve frontend quality"
+    ],
+    "requirements": [
+      "Strong .NET experience",
+      "Strong C# experience",
+      "Strong Azure experience"
+    ],
+    "niceToHave": [
+      "Accessibility",
+      "Performance tuning"
+    ],
+    "benefits": [
+      "Flexible hours",
+      "Learning budget"
+    ],
+    "publishedAt": "2026-07-31T20:15:00.574Z"
+  },
+  {
+    "id": "job-030",
+    "title": "Full Stack Engineer",
+    "company": {
+      "id": "northline",
+      "name": "NorthLine"
+    },
+    "description": "Full Stack Engineer opportunity working with Python, FastAPI, PostgreSQL on modern product teams.",
+    "seniority": [
+      "mid",
+      "senior"
+    ],
+    "skills": [
+      {
+        "name": "Python",
+        "level": "required"
+      },
+      {
+        "name": "FastAPI",
+        "level": "required"
+      },
+      {
+        "name": "PostgreSQL",
+        "level": "required"
+      }
+    ],
+    "salary": {
+      "min": 28000,
+      "max": 36500,
+      "currency": "PLN",
+      "period": "month"
+    },
+    "contractTypes": [
+      "b2b"
+    ],
+    "workplace": "onsite",
+    "location": {
+      "city": "Katowice",
+      "country": "Poland",
+      "latitude": 50.2649,
+      "longitude": 19.0238
+    },
+    "responsibilities": [
+      "Build product features",
+      "Collaborate with design and backend",
+      "Improve frontend quality"
+    ],
+    "requirements": [
+      "Strong Python experience",
+      "Strong FastAPI experience",
+      "Strong PostgreSQL experience"
+    ],
+    "niceToHave": [
+      "Accessibility",
+      "Performance tuning"
+    ],
+    "benefits": [
+      "Flexible hours",
+      "Learning budget"
+    ],
+    "publishedAt": "2026-07-30T20:15:00.574Z"
+  },
+  {
+    "id": "job-031",
+    "title": "Cloud Engineer",
+    "company": {
+      "id": "devforge",
+      "name": "DevForge"
+    },
+    "description": "Cloud Engineer opportunity working with TypeScript, Node.js, AWS on modern product teams.",
+    "seniority": [
+      "lead",
+      "staff"
+    ],
+    "skills": [
+      {
+        "name": "TypeScript",
+        "level": "required"
+      },
+      {
+        "name": "Node.js",
+        "level": "required"
+      },
+      {
+        "name": "AWS",
+        "level": "required"
+      }
+    ],
+    "salary": {
+      "min": 30000,
+      "max": 39000,
+      "currency": "PLN",
+      "period": "month"
+    },
+    "contractTypes": [
+      "b2b"
+    ],
+    "workplace": "remote",
+    "responsibilities": [
+      "Build product features",
+      "Collaborate with design and backend",
+      "Improve frontend quality"
+    ],
+    "requirements": [
+      "Strong TypeScript experience",
+      "Strong Node.js experience",
+      "Strong AWS experience"
+    ],
+    "niceToHave": [
+      "Accessibility",
+      "Performance tuning"
+    ],
+    "benefits": [
+      "Flexible hours",
+      "Learning budget"
+    ],
+    "publishedAt": "2026-07-29T20:15:00.574Z"
+  },
+  {
+    "id": "job-032",
+    "title": "ML Engineer",
+    "company": {
+      "id": "cloudnine",
+      "name": "CloudNine"
+    },
+    "description": "ML Engineer opportunity working with Angular, Nx, AWS on modern product teams.",
+    "seniority": [
+      "junior",
+      "mid"
+    ],
+    "skills": [
+      {
+        "name": "Angular",
+        "level": "required"
+      },
+      {
+        "name": "Nx",
+        "level": "required"
+      },
+      {
+        "name": "AWS",
+        "level": "required"
+      }
+    ],
+    "salary": {
+      "min": 32000,
+      "max": 41500,
+      "currency": "PLN",
+      "period": "month"
+    },
+    "contractTypes": [
+      "b2b"
+    ],
+    "workplace": "hybrid",
+    "location": {
+      "city": "Krakow",
+      "country": "Poland",
+      "latitude": 50.0647,
+      "longitude": 19.945
+    },
+    "responsibilities": [
+      "Build product features",
+      "Collaborate with design and backend",
+      "Improve frontend quality"
+    ],
+    "requirements": [
+      "Strong Angular experience",
+      "Strong Nx experience",
+      "Strong AWS experience"
+    ],
+    "niceToHave": [
+      "Accessibility",
+      "Performance tuning"
+    ],
+    "benefits": [
+      "Flexible hours",
+      "Learning budget"
+    ],
+    "publishedAt": "2026-07-28T20:15:00.574Z"
+  },
+  {
+    "id": "job-033",
+    "title": "Frontend Developer",
+    "company": {
+      "id": "acme",
+      "name": "Acme"
+    },
+    "description": "Frontend Developer opportunity working with Angular, TypeScript, RxJS on modern product teams.",
+    "seniority": [
+      "senior",
+      "lead"
+    ],
+    "skills": [
+      {
+        "name": "Angular",
+        "level": "required"
+      },
+      {
+        "name": "TypeScript",
+        "level": "required"
+      },
+      {
+        "name": "RxJS",
+        "level": "required"
+      }
+    ],
+    "salary": {
+      "min": 18000,
+      "max": 24000,
+      "currency": "PLN",
+      "period": "month"
+    },
+    "contractTypes": [
+      "b2b"
+    ],
+    "workplace": "onsite",
+    "location": {
+      "city": "Wroclaw",
+      "country": "Poland",
+      "latitude": 51.1079,
+      "longitude": 17.0385
+    },
+    "responsibilities": [
+      "Build product features",
+      "Collaborate with design and backend",
+      "Improve frontend quality"
+    ],
+    "requirements": [
+      "Strong Angular experience",
+      "Strong TypeScript experience",
+      "Strong RxJS experience"
+    ],
+    "niceToHave": [
+      "Accessibility",
+      "Performance tuning"
+    ],
+    "benefits": [
+      "Flexible hours",
+      "Learning budget"
+    ],
+    "publishedAt": "2026-07-27T20:15:00.574Z"
+  },
+  {
+    "id": "job-034",
+    "title": "Frontend Tech Lead",
+    "company": {
+      "id": "novatech",
+      "name": "NovaTech"
+    },
+    "description": "Frontend Tech Lead opportunity working with React, TypeScript, Next.js on modern product teams.",
+    "seniority": [
+      "mid",
+      "senior"
+    ],
+    "skills": [
+      {
+        "name": "React",
+        "level": "required"
+      },
+      {
+        "name": "TypeScript",
+        "level": "required"
+      },
+      {
+        "name": "Next.js",
+        "level": "required"
+      }
+    ],
+    "salary": {
+      "min": 20000,
+      "max": 26500,
+      "currency": "PLN",
+      "period": "month"
+    },
+    "contractTypes": [
+      "b2b"
+    ],
+    "workplace": "remote",
+    "responsibilities": [
+      "Build product features",
+      "Collaborate with design and backend",
+      "Improve frontend quality"
+    ],
+    "requirements": [
+      "Strong React experience",
+      "Strong TypeScript experience",
+      "Strong Next.js experience"
+    ],
+    "niceToHave": [
+      "Accessibility",
+      "Performance tuning"
+    ],
+    "benefits": [
+      "Flexible hours",
+      "Learning budget"
+    ],
+    "publishedAt": "2026-07-26T20:15:00.574Z"
+  },
+  {
+    "id": "job-035",
+    "title": "Staff Frontend Engineer",
+    "company": {
+      "id": "blueriver",
+      "name": "BlueRiver"
+    },
+    "description": "Staff Frontend Engineer opportunity working with Vue, TypeScript, Pinia on modern product teams.",
+    "seniority": [
+      "lead",
+      "staff"
+    ],
+    "skills": [
+      {
+        "name": "Vue",
+        "level": "required"
+      },
+      {
+        "name": "TypeScript",
+        "level": "required"
+      },
+      {
+        "name": "Pinia",
+        "level": "required"
+      }
+    ],
+    "salary": {
+      "min": 22000,
+      "max": 29000,
+      "currency": "PLN",
+      "period": "month"
+    },
+    "contractTypes": [
+      "b2b"
+    ],
+    "workplace": "hybrid",
+    "location": {
+      "city": "Poznan",
+      "country": "Poland",
+      "latitude": 52.4064,
+      "longitude": 16.9252
+    },
+    "responsibilities": [
+      "Build product features",
+      "Collaborate with design and backend",
+      "Improve frontend quality"
+    ],
+    "requirements": [
+      "Strong Vue experience",
+      "Strong TypeScript experience",
+      "Strong Pinia experience"
+    ],
+    "niceToHave": [
+      "Accessibility",
+      "Performance tuning"
+    ],
+    "benefits": [
+      "Flexible hours",
+      "Learning budget"
+    ],
+    "publishedAt": "2026-07-25T20:15:00.574Z"
+  },
+  {
+    "id": "job-036",
+    "title": "Senior Frontend Engineer",
+    "company": {
+      "id": "skylabs",
+      "name": "SkyLabs"
+    },
+    "description": "Senior Frontend Engineer opportunity working with Java, Spring, Kafka on modern product teams.",
+    "seniority": [
+      "junior",
+      "mid"
+    ],
+    "skills": [
+      {
+        "name": "Java",
+        "level": "required"
+      },
+      {
+        "name": "Spring",
+        "level": "required"
+      },
+      {
+        "name": "Kafka",
+        "level": "required"
+      }
+    ],
+    "salary": {
+      "min": 24000,
+      "max": 31500,
+      "currency": "PLN",
+      "period": "month"
+    },
+    "contractTypes": [
+      "b2b"
+    ],
+    "workplace": "remote",
+    "responsibilities": [
+      "Build product features",
+      "Collaborate with design and backend",
+      "Improve frontend quality"
+    ],
+    "requirements": [
+      "Strong Java experience",
+      "Strong Spring experience",
+      "Strong Kafka experience"
+    ],
+    "niceToHave": [
+      "Accessibility",
+      "Performance tuning"
+    ],
+    "benefits": [
+      "Flexible hours",
+      "Learning budget"
+    ],
+    "publishedAt": "2026-07-24T20:15:00.574Z"
+  },
+  {
+    "id": "job-037",
+    "title": "Backend Developer",
+    "company": {
+      "id": "polarsoft",
+      "name": "PolarSoft"
+    },
+    "description": "Backend Developer opportunity working with .NET, C#, Azure on modern product teams.",
+    "seniority": [
+      "senior",
+      "lead"
+    ],
+    "skills": [
+      {
+        "name": ".NET",
+        "level": "required"
+      },
+      {
+        "name": "C#",
+        "level": "required"
+      },
+      {
+        "name": "Azure",
+        "level": "required"
+      }
+    ],
+    "salary": {
+      "min": 26000,
+      "max": 34000,
+      "currency": "PLN",
+      "period": "month"
+    },
+    "contractTypes": [
+      "b2b"
+    ],
+    "workplace": "remote",
+    "responsibilities": [
+      "Build product features",
+      "Collaborate with design and backend",
+      "Improve frontend quality"
+    ],
+    "requirements": [
+      "Strong .NET experience",
+      "Strong C# experience",
+      "Strong Azure experience"
+    ],
+    "niceToHave": [
+      "Accessibility",
+      "Performance tuning"
+    ],
+    "benefits": [
+      "Flexible hours",
+      "Learning budget"
+    ],
+    "publishedAt": "2026-07-23T20:15:00.574Z"
+  },
+  {
+    "id": "job-038",
+    "title": "Full Stack Engineer",
+    "company": {
+      "id": "northline",
+      "name": "NorthLine"
+    },
+    "description": "Full Stack Engineer opportunity working with Python, FastAPI, PostgreSQL on modern product teams.",
+    "seniority": [
+      "mid",
+      "senior"
+    ],
+    "skills": [
+      {
+        "name": "Python",
+        "level": "required"
+      },
+      {
+        "name": "FastAPI",
+        "level": "required"
+      },
+      {
+        "name": "PostgreSQL",
+        "level": "required"
+      }
+    ],
+    "salary": {
+      "min": 28000,
+      "max": 36500,
+      "currency": "PLN",
+      "period": "month"
+    },
+    "contractTypes": [
+      "b2b"
+    ],
+    "workplace": "hybrid",
+    "location": {
+      "city": "Krakow",
+      "country": "Poland",
+      "latitude": 50.0647,
+      "longitude": 19.945
+    },
+    "responsibilities": [
+      "Build product features",
+      "Collaborate with design and backend",
+      "Improve frontend quality"
+    ],
+    "requirements": [
+      "Strong Python experience",
+      "Strong FastAPI experience",
+      "Strong PostgreSQL experience"
+    ],
+    "niceToHave": [
+      "Accessibility",
+      "Performance tuning"
+    ],
+    "benefits": [
+      "Flexible hours",
+      "Learning budget"
+    ],
+    "publishedAt": "2026-07-22T20:15:00.574Z"
+  },
+  {
+    "id": "job-039",
+    "title": "Cloud Engineer",
+    "company": {
+      "id": "devforge",
+      "name": "DevForge"
+    },
+    "description": "Cloud Engineer opportunity working with TypeScript, Node.js, AWS on modern product teams.",
+    "seniority": [
+      "lead",
+      "staff"
+    ],
+    "skills": [
+      {
+        "name": "TypeScript",
+        "level": "required"
+      },
+      {
+        "name": "Node.js",
+        "level": "required"
+      },
+      {
+        "name": "AWS",
+        "level": "required"
+      }
+    ],
+    "salary": {
+      "min": 30000,
+      "max": 39000,
+      "currency": "PLN",
+      "period": "month"
+    },
+    "contractTypes": [
+      "b2b"
+    ],
+    "workplace": "onsite",
+    "location": {
+      "city": "Wroclaw",
+      "country": "Poland",
+      "latitude": 51.1079,
+      "longitude": 17.0385
+    },
+    "responsibilities": [
+      "Build product features",
+      "Collaborate with design and backend",
+      "Improve frontend quality"
+    ],
+    "requirements": [
+      "Strong TypeScript experience",
+      "Strong Node.js experience",
+      "Strong AWS experience"
+    ],
+    "niceToHave": [
+      "Accessibility",
+      "Performance tuning"
+    ],
+    "benefits": [
+      "Flexible hours",
+      "Learning budget"
+    ],
+    "publishedAt": "2026-07-21T20:15:00.574Z"
+  },
+  {
+    "id": "job-040",
+    "title": "ML Engineer",
+    "company": {
+      "id": "cloudnine",
+      "name": "CloudNine"
+    },
+    "description": "ML Engineer opportunity working with Angular, Nx, AWS on modern product teams.",
+    "seniority": [
+      "junior",
+      "mid"
+    ],
+    "skills": [
+      {
+        "name": "Angular",
+        "level": "required"
+      },
+      {
+        "name": "Nx",
+        "level": "required"
+      },
+      {
+        "name": "AWS",
+        "level": "required"
+      }
+    ],
+    "salary": {
+      "min": 32000,
+      "max": 41500,
+      "currency": "PLN",
+      "period": "month"
+    },
+    "contractTypes": [
+      "b2b"
+    ],
+    "workplace": "remote",
+    "responsibilities": [
+      "Build product features",
+      "Collaborate with design and backend",
+      "Improve frontend quality"
+    ],
+    "requirements": [
+      "Strong Angular experience",
+      "Strong Nx experience",
+      "Strong AWS experience"
+    ],
+    "niceToHave": [
+      "Accessibility",
+      "Performance tuning"
+    ],
+    "benefits": [
+      "Flexible hours",
+      "Learning budget"
+    ],
+    "publishedAt": "2026-07-20T20:15:00.574Z"
+  }
+]

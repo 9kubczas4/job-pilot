@@ -1,0 +1,77 @@
+@if (auth.loading()) {
+  <div class="profile-menu__loading" aria-label="Loading account" aria-busy="true">
+    <span class="profile-menu__loading-avatar"></span>
+    @if (!compact()) {
+      <span class="profile-menu__loading-label"></span>
+    }
+  </div>
+} @else if (auth.isAuthenticated()) {
+  <div class="profile-menu">
+    <button
+      type="button"
+      class="profile-menu__trigger"
+      [class.is-open]="menuOpen()"
+      [attr.aria-expanded]="menuOpen()"
+      aria-haspopup="menu"
+      [attr.aria-controls]="menuOpen() ? 'profile-menu-panel' : null"
+      (click)="toggleMenu()"
+    >
+      <span class="profile-menu__avatar" aria-hidden="true">{{ userInitials() }}</span>
+      @if (!compact()) {
+        <span class="profile-menu__name">{{ auth.user()?.displayName ?? 'Profile' }}</span>
+        <svg class="profile-menu__chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+          <path
+            d="M7 10 L12 15 L17 10"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            fill="none"
+          />
+        </svg>
+      }
+    </button>
+
+    @if (menuOpen()) {
+      <div id="profile-menu-panel" class="profile-menu__popover" role="menu">
+        <a
+          [routerLink]="links.saved"
+          routerLinkActive="is-active"
+          class="profile-menu__item"
+          role="menuitem"
+          (click)="closeMenu()"
+        >
+          Saved
+        </a>
+        <a
+          [routerLink]="links.applications"
+          routerLinkActive="is-active"
+          class="profile-menu__item"
+          role="menuitem"
+          (click)="closeMenu()"
+        >
+          Applications
+        </a>
+        <a
+          [routerLink]="links.profile"
+          routerLinkActive="is-active"
+          class="profile-menu__item"
+          role="menuitem"
+          (click)="closeMenu()"
+        >
+          Profile
+        </a>
+        <button
+          type="button"
+          class="profile-menu__item profile-menu__item--danger"
+          role="menuitem"
+          (click)="signOut()"
+        >
+          Sign out
+        </button>
+      </div>
+    }
+  </div>
+} @else {
+  <button type="button" class="btn btn-primary profile-menu__sign-in" (click)="signIn()">Sign in</button>
+}

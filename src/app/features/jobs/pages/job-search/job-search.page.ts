@@ -24,6 +24,7 @@ import { AuthPromptDialogComponent } from '@shared/ui/auth-prompt-dialog/auth-pr
 import { AppLogoComponent } from '@shared/ui/app-logo/app-logo.component';
 import { FilterDrawerComponent } from '@shared/ui/filter-drawer/filter-drawer.component';
 import { HeaderSearchComponent } from '@shared/ui/header-search/header-search.component';
+import { ProfileMenuComponent } from '@shared/ui/profile-menu/profile-menu.component';
 import { ToastHostComponent } from '@shared/ui/toast/toast-host.component';
 import { ToastService } from '@shared/ui/toast/toast.service';
 import { SavedJobsStore } from '@features/saved-jobs/state/saved-jobs.store';
@@ -65,6 +66,7 @@ const MOBILE_LAYOUT_QUERY = '(max-width: 60rem)';
     AuthPromptDialogComponent,
     FilterDrawerComponent,
     HeaderSearchComponent,
+    ProfileMenuComponent,
     JobFiltersComponent,
     JobListComponent,
     JobMapComponent,

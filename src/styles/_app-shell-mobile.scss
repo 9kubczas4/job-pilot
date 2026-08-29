@@ -58,19 +58,6 @@
   .app-nav {
     display: none;
   }
-
-  .profile-menu__name,
-  .profile-menu__chevron {
-    display: none;
-  }
-
-  .profile-menu__trigger {
-    padding: var(--space-1);
-  }
-
-  .app-auth-loading__label {
-    display: none;
-  }
 }
 
 @media (max-width: 30rem) {

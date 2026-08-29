@@ -72,6 +72,12 @@
   white-space: nowrap;
 }
 
+.jobs-mobile__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
 .jobs-mobile__filters {
   position: relative;
   display: inline-flex;

@@ -17,10 +17,10 @@
     "@angular/compiler": "^22.1.0",
     "@angular/core": "^22.1.0",
     "@angular/forms": "^22.1.0",
+    "@angular/google-maps": "^22.1.4",
     "@angular/platform-browser": "^22.1.0",
     "@angular/router": "^22.1.0",
     "firebase": "^12.18.0",
-    "maplibre-gl": "^6.6.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zod": "^4.5.1"

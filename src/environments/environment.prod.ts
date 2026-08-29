@@ -10,4 +10,5 @@ export const environment = {
     measurementId: 'G-JK21J3MR22',
   },
   useSeedFallback: false,
+  googleMapsApiKey: 'AIzaSyAMmn3uHY8gw3paGhLRiNXCc0G8i_5O92I',
 };

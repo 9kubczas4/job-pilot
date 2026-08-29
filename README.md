@@ -19,7 +19,7 @@ The agent never receives a `userId` in tool payloads. Identity comes from Fireba
 
 - Angular 22 (standalone, Signals)
 - Firebase Hosting, Firestore, Auth, Storage
-- MapLibre GL JS
+- Google Maps JavaScript API (`@angular/google-maps`)
 - Zod (planned validation layer)
 - Angular experimental WebMCP API
 
@@ -57,6 +57,14 @@ Copy `src/environments/environment.example.ts` values into:
 - `src/environments/environment.prod.ts`
 
 Enable Google Sign-In in Firebase Authentication.
+
+### Configure Google Maps
+
+1. In [Google Cloud Console](https://console.cloud.google.com/), enable **Maps JavaScript API** for your project.
+2. Create an API key (restrict it to your domains for production).
+3. Set `googleMapsApiKey` in `src/environments/environment.ts` and `environment.prod.ts`.
+
+On the hackathon free tier you get **10,000 map loads/month** at no cost. Set a quota limit in GCP if you want a hard cap.
 
 ### Run locally
 

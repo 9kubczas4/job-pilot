@@ -1,33 +1,49 @@
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
-  OnDestroy,
   effect,
+  inject,
   input,
   output,
-  viewChild,
+  signal,
 } from '@angular/core';
-import * as maplibregl from 'maplibre-gl';
-import { Map as MaplibreMap, Marker } from 'maplibre-gl';
+import { GoogleMap } from '@angular/google-maps';
+import { GOOGLE_MAPS_API_KEY } from '@shared/map/google-maps-config';
+import { isGoogleMapsConfigured } from '@shared/map/google-maps-loader';
 import { JobOffer } from '../../domain/job.model';
+
+const DEFAULT_CENTER = { lat: 51.9194, lng: 19.1451 };
+const DEFAULT_ZOOM = 5;
 
 @Component({
   selector: 'app-job-map',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [GoogleMap],
   templateUrl: './job-map.component.html',
   styleUrl: './job-map.component.scss',
 })
-export class JobMapComponent implements AfterViewInit, OnDestroy {
-  private readonly host = viewChild.required<ElementRef<HTMLDivElement>>('mapContainer');
+export class JobMapComponent {
+  private readonly apiKey = inject(GOOGLE_MAPS_API_KEY, { optional: true }) ?? '';
 
   readonly jobs = input<JobOffer[]>([]);
   readonly selectedJobId = input<string | null>(null);
   readonly selectJob = output<string>();
 
-  private map: MaplibreMap | null = null;
-  private markers = new globalThis.Map<string, Marker>();
+  readonly mapsConfigured = isGoogleMapsConfigured(this.apiKey);
+  readonly mapError = signal(false);
+
+  readonly mapOptions: google.maps.MapOptions = {
+    center: DEFAULT_CENTER,
+    zoom: DEFAULT_ZOOM,
+    mapTypeControl: false,
+    streetViewControl: false,
+    fullscreenControl: true,
+    zoomControl: true,
+  };
+
+  private map: google.maps.Map | null = null;
+  private infoWindow: google.maps.InfoWindow | null = null;
+  private readonly markers = new globalThis.Map<string, google.maps.Marker>();
 
   constructor() {
     effect(() => {
@@ -37,22 +53,14 @@ export class JobMapComponent implements AfterViewInit, OnDestroy {
     });
   }
 
-  ngAfterViewInit(): void {
-    this.map = new maplibregl.Map({
-      container: this.host().nativeElement,
-      style: 'https://demotiles.maplibre.org/style.json',
-      center: [19.1451, 51.9194],
-      zoom: 5,
-    });
-
-    this.map!.addControl(new maplibregl.NavigationControl(), 'top-right');
+  onMapReady(map: google.maps.Map): void {
+    this.map = map;
+    this.infoWindow = new google.maps.InfoWindow();
     this.renderMarkers(this.jobs(), this.selectedJobId());
   }
 
-  ngOnDestroy(): void {
-    this.markers.forEach((marker) => marker.remove());
-    this.markers.clear();
-    this.map?.remove();
+  onAuthFailure(): void {
+    this.mapError.set(true);
   }
 
   private renderMarkers(jobs: JobOffer[], selectedId: string | null): void {
@@ -68,39 +76,65 @@ export class JobMapComponent implements AfterViewInit, OnDestroy {
       }
 
       nextIds.add(job.id);
+      const position = { lat: job.location.latitude, lng: job.location.longitude };
       const isSelected = job.id === selectedId;
       let marker = this.markers.get(job.id);
 
       if (!marker) {
-        marker = new maplibregl.Marker({ color: isSelected ? '#2563eb' : '#64748b' })
-          .setLngLat([job.location.longitude, job.location.latitude])
-          .setPopup(new maplibregl.Popup().setText(`${job.title} · ${job.company.name}`))
-          .addTo(this.map);
+        marker = new google.maps.Marker({
+          map: this.map,
+          position,
+          title: `${job.title} · ${job.company.name}`,
+          icon: this.createMarkerIcon(isSelected),
+        });
 
-        marker.getElement().addEventListener('click', () => {
+        marker.addListener('click', () => {
           this.selectJob.emit(job.id);
+          this.infoWindow?.setContent(`<strong>${job.title}</strong><br>${job.company.name}`);
+          this.infoWindow?.open({ map: this.map!, anchor: marker });
         });
 
         this.markers.set(job.id, marker);
       } else {
-        marker.setLngLat([job.location.longitude, job.location.latitude]);
+        marker.setPosition(position);
+        marker.setIcon(this.createMarkerIcon(isSelected));
       }
     }
 
     for (const [jobId, marker] of this.markers.entries()) {
       if (!nextIds.has(jobId)) {
-        marker.remove();
+        marker.setMap(null);
         this.markers.delete(jobId);
       }
     }
 
     const locatedJobs = jobs.filter((job) => job.location);
-    if (locatedJobs.length) {
-      const bounds = new maplibregl.LngLatBounds();
-      locatedJobs.forEach((job) =>
-        bounds.extend([job.location!.longitude, job.location!.latitude]),
-      );
-      this.map.fitBounds(bounds, { padding: 48, maxZoom: 11 });
+    if (!locatedJobs.length) {
+      return;
     }
+
+    const bounds = new google.maps.LatLngBounds();
+    locatedJobs.forEach((job) =>
+      bounds.extend({ lat: job.location!.latitude, lng: job.location!.longitude }),
+    );
+    this.map.fitBounds(bounds, 48);
+
+    google.maps.event.addListenerOnce(this.map, 'idle', () => {
+      const zoom = this.map?.getZoom();
+      if (zoom != null && zoom > 11) {
+        this.map?.setZoom(11);
+      }
+    });
+  }
+
+  private createMarkerIcon(isSelected: boolean): google.maps.Symbol {
+    return {
+      path: google.maps.SymbolPath.CIRCLE,
+      fillColor: isSelected ? '#2563eb' : '#64748b',
+      fillOpacity: 1,
+      strokeColor: '#ffffff',
+      strokeWeight: 2,
+      scale: isSelected ? 9 : 7,
+    };
   }
 }

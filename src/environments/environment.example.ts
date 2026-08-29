@@ -9,4 +9,5 @@ export const environmentExample = {
     appId: 'YOUR_APP_ID',
   },
   useSeedFallback: true,
+  googleMapsApiKey: 'YOUR_GOOGLE_MAPS_API_KEY',
 };

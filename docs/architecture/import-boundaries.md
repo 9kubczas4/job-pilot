@@ -10,41 +10,55 @@ npm run lint
 
 Requires `eslint-import-resolver-typescript` (already in devDependencies) so the plugin can resolve local imports.
 
-Configuration lives in [`eslint.boundaries.config.js`](../eslint.boundaries.config.js).
+Configuration lives in [`eslint.boundaries.config.js`](../../eslint.boundaries.config.js).
+
+## Folder layout
+
+```
+src/app/
+  core/                    # auth, firebase, layout, home page
+    pages/
+  shared/                  # business-agnostic UI kit, map helpers, WebMCP response utils
+  features/{name}/
+    pages/                 # smart page (route target)
+    webmcp/                # agent tools for the feature
+    ui/                    # presentational components
+    domain/                # models and pure business rules
+    data-access/           # repositories (Firestore, HTTP)
+    state/                 # stores and facades
+```
 
 ## Layers
 
 | Layer | Path | May import |
 |-------|------|------------|
-| **domain** | `features/*/domain/` | external packages only |
+| **domain** | `features/*/domain/` | external packages, sibling feature domain |
 | **data-access** | `features/*/data-access/` | domain, core |
 | **state** | `features/*/state/` | domain, data-access, core |
-| **ui** | `features/*/ui/` | domain, state, shared |
-| **page** | `features/*/*.page.ts` | ui, state, domain, shared, core |
-| **core** | `src/app/core/` | shared |
-| **core/webmcp** | `src/app/core/webmcp/` | feature state/domain/data-access, core, shared |
+| **ui** | `features/*/ui/` | domain, state, shared, sibling ui |
+| **page** | `features/*/pages/` | ui, state, domain, shared, core |
+| **webmcp** | `features/*/webmcp/` | state, domain, data-access, shared |
+| **core** | `src/app/core/` (excl. pages) | shared |
+| **core-page** | `src/app/core/pages/` | core, shared |
 | **shared** | `src/app/shared/` | shared, external |
+
+App shell files (`app.ts`, `app.config.ts`, `app.routes.ts`, `main.ts`) may import core, feature pages, feature webmcp, and shared.
+
+Route constants live in `app-paths.ts` and may be imported by pages, UI, and core.
 
 ## Rules in plain language
 
-- **Domain** is pure business logic — no Angular services from other layers, no Firebase.
+- **Domain** is pure business logic — no Angular services from other layers, no Firebase, no UI.
 - **UI** never talks to Firestore directly — it goes through **state**.
-- **Pages** compose UI + state — they don't call repositories.
-- **WebMCP tools** live in **core/webmcp** and inject **state** / **domain** — same model as the UI.
-- **Shared** stays business-agnostic — no `JobOffer`, no feature imports.
-
-## Legacy paths
-
-Until the folder refactor lands, legacy paths are mapped to the same element types:
-
-- `src/app/jobs/ui-*` → `feature-ui`
-- `src/app/*/feature-*` → `feature-page`
-- `src/app/shared/models` → `feature-domain` (migrate out)
-
-Remove legacy patterns from `eslint.boundaries.config.js` after migration.
+- **Pages** compose UI + state — they don't call repositories or register WebMCP tools.
+- **WebMCP tools** live in **`features/*/webmcp/`** and inject **state** / **domain** / **data-access** — the same model as the UI, but without importing UI components.
+- **Core** stays feature-agnostic — no imports from `features/`.
+- **Shared** stays business-agnostic — no feature-specific models (e.g. no `JobOffer` in shared).
 
 ## Adding a new file
 
 1. Place it in the correct layer folder.
-2. If ESLint warns `no-unknown-files`, add a matching element descriptor.
+2. If ESLint warns `no-unknown-files`, add a matching element descriptor in `eslint.boundaries.config.js`.
 3. If ESLint errors on an import, either fix the import or discuss whether the rule should change.
+
+See [ADR-001](../decisions/001-layered-feature-architecture.md) and [ADR-002](../decisions/002-feature-colocated-webmcp-tools.md) for the rationale behind this layout.

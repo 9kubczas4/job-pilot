@@ -17,23 +17,24 @@ The agent never receives a `userId` in tool payloads. Identity comes from Fireba
 
 ## Stack
 
-- Angular 22 (standalone, Signals)
+- Angular 22 (standalone, Signals, static prerender + hydration)
 - Firebase Hosting, Firestore, Auth, Storage
-- Google Maps JavaScript API (`@angular/google-maps`)
-- Zod (planned validation layer)
+- Google Maps JavaScript API (`@angular/google-maps`, marker clustering)
 - Angular experimental WebMCP API
 
 ## WebMCP Tools
 
-| Tool | Scope | Description |
-|------|-------|-------------|
-| `get_profile_schema` | `/profile` | Static profile schema for agents |
-| `get_profile` | global | Read authenticated profile |
-| `update_profile` | `/profile` | Partial profile updates |
-| `search_jobs` | global | Update search criteria and UI |
-| `get_job` | `/jobs/:id` | Read full job offer |
-| `save_job` | `/jobs/:id` | Save job for authenticated user |
-| `apply_to_job` | `/jobs/:id` | Submit minimal application |
+| Tool | Scope | Source |
+|------|-------|--------|
+| `search_jobs` | global | `features/jobs/webmcp/search-jobs.tool.ts` |
+| `get_profile` | `/profile` | `features/profile/webmcp/profile.tools.ts` |
+| `get_profile_schema` | `/profile` | `features/profile/webmcp/profile.tools.ts` |
+| `update_profile` | `/profile` | `features/profile/webmcp/profile.tools.ts` |
+| `get_job` | `/jobs/:id` | `features/jobs/webmcp/job-details.tools.ts` |
+| `save_job` | `/jobs/:id` | `features/jobs/webmcp/job-details.tools.ts` |
+| `apply_to_job` | `/jobs/:id` | `features/jobs/webmcp/job-details.tools.ts` |
+
+Global tools register in `app.config.ts`. Route-scoped tools register as route `providers` in `app.routes.ts`.
 
 ## Getting Started
 
@@ -51,7 +52,7 @@ npm install
 
 ### Configure Firebase
 
-Copy `src/environments/environment.example.ts` values into:
+Copy values from `src/environments/environment.example.ts` into:
 
 - `src/environments/environment.ts`
 - `src/environments/environment.prod.ts`
@@ -62,7 +63,7 @@ Enable Google Sign-In in Firebase Authentication.
 
 1. In [Google Cloud Console](https://console.cloud.google.com/), enable **Maps JavaScript API** for your project.
 2. Create an API key (restrict it to your domains for production).
-3. Set `googleMapsApiKey` in `src/environments/environment.ts` and `environment.prod.ts`.
+3. Set `googleMapsApiKey` in both environment files.
 
 On the hackathon free tier you get **10,000 map loads/month** at no cost. Set a quota limit in GCP if you want a hard cap.
 
@@ -84,12 +85,26 @@ gcloud auth login
 npm run seed:firestore
 ```
 
-Until Firestore is seeded, the app falls back to `src/assets/seed/jobs.json` in development.
+Until Firestore is seeded, the app falls back to `src/assets/seed/jobs.json` when `useSeedFallback: true` in the environment.
 
 ### Build
 
 ```bash
 npm run build
+```
+
+Production build prerenders all routes. Job detail pages (`/jobs/:id`) are generated from seed data — see [ADR-003](docs/decisions/003-static-prerender-for-seo.md).
+
+### Preview production build
+
+```bash
+# Static files only (Firebase Hosting output)
+npm run build
+npm run preview:static
+
+# Express SSR server (local testing)
+npm run build
+npm run serve:ssr:job-pilot
 ```
 
 ### Deploy to Firebase Hosting
@@ -99,15 +114,29 @@ npm run build
 firebase deploy --only hosting,firestore:rules,storage
 ```
 
+Deploy the `dist/job-pilot/browser` output.
+
+## Commands
+
+| Command | Description |
+|---------|-------------|
+| `npm start` | Dev server (`ng serve`) |
+| `npm run build` | Production build with prerender |
+| `npm run preview:static` | Serve static build locally |
+| `npm run serve:ssr:job-pilot` | Run Express SSR server after build |
+| `npm run seed:firestore` | Seed jobs to Firestore (admin) |
+| `npm test` | Unit tests (Vitest) |
+| `npm run lint` | ESLint including import boundaries |
+
 ## Testing with Codex
 
 1. Deploy or run the app in an environment reachable from the ChatGPT desktop in-app browser.
 2. Open the app in that browser.
 3. Sign in with Google for profile, saved jobs, and applications.
 4. In Codex, try:
-   - “Help me complete my profile based on this CV…”
-   - “Find lead frontend jobs, remote or hybrid in Warsaw, minimum 25k PLN.”
-   - “Save this job and apply to the Frontend Tech Lead role.”
+   - "Help me complete my profile based on this CV…"
+   - "Find lead frontend jobs, remote or hybrid in Warsaw, minimum 25k PLN."
+   - "Save this job and apply to the Frontend Tech Lead role."
 
 Expected result: profile updates appear in `/profile`, search updates filters/list/map on `/jobs`, and job cards show Saved/Applied state.
 
@@ -123,22 +152,38 @@ Expected result: profile updates appear in `/profile`, search updates filters/li
 
 ```
 src/app/
-  core/           Auth, Firebase, layout, WebMCP tools
-  shared/         Business-agnostic UI kit and utilities
-  features/       Feature modules (see below)
-docs/architecture/import-boundaries.md
+  core/              Auth, Firebase, layout, home page
+  shared/            Business-agnostic UI kit, map helpers, WebMCP response utils
+  features/          Feature modules (see below)
+  prerender/         Build-time prerender param helpers
+docs/
+  architecture/      Import boundaries
+  decisions/         Architecture Decision Records (ADRs)
+  ideas/             Product intent and scope
 ```
 
 Import boundaries are enforced by ESLint — see [Import Boundaries](docs/architecture/import-boundaries.md).
 
 ```
 features/{name}/
-  {name}.page.ts   Smart page (route target)
-  ui/              Presentational components
-  domain/          Models and pure business rules
-  data-access/     Repositories, Firestore
-  state/           Stores and facades
+  pages/             Smart page (route target)
+  webmcp/            Agent tools for the feature
+  ui/                Presentational components
+  domain/            Models and pure business rules
+  data-access/       Repositories, Firestore
+  state/             Stores and facades
 ```
+
+### Routes
+
+| Path | Feature | Description |
+|------|---------|-------------|
+| `/` | core | Landing / hackathon intro |
+| `/jobs` | jobs | Search, filters, list + map |
+| `/jobs/:id` | jobs | Job detail |
+| `/profile` | profile | Candidate profile CRUD |
+| `/saved` | saved-jobs | Saved jobs list |
+| `/applications` | saved-jobs | Submitted applications |
 
 ## Hackathon Submission Checklist
 
@@ -151,6 +196,8 @@ features/{name}/
 ## Documentation
 
 - Product intent: [`docs/ideas/job-pilot.md`](docs/ideas/job-pilot.md)
+- Architecture decisions: [`docs/decisions/`](docs/decisions/)
+- Import boundaries: [`docs/architecture/import-boundaries.md`](docs/architecture/import-boundaries.md)
 - Angular WebMCP: https://angular.dev/ai/webmcp
 - Challenge details: https://webmcp.devpost.com/
 

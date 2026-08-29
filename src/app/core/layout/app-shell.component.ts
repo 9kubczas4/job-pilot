@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, DestroyRef, ElementRef, inject, PLATFORM_ID, afterNextRender } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, DestroyRef, ElementRef, inject, PLATFORM_ID, afterNextRender, signal, viewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { isPlatformBrowser } from '@angular/common';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
@@ -38,6 +38,9 @@ export class AppShellComponent {
   readonly headerCollapsed = computed(
     () => this.headerUi.headerHidden() && !this.headerUi.filtersOpen(),
   );
+
+  readonly profileMenuOpen = signal(false);
+  private readonly profileMenu = viewChild<ElementRef<HTMLElement>>('profileMenu');
 
   readonly userInitials = computed(() => {
     const name = this.auth.user()?.displayName?.trim();
@@ -87,8 +90,38 @@ export class AppShellComponent {
         takeUntilDestroyed(this.destroyRef),
       )
       .subscribe(() => {
+        this.closeProfileMenu();
         this.headerUi.resetScrollTracking(window.scrollY);
       });
+
+    fromEvent(document, 'click')
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((event) => {
+        if (!this.profileMenuOpen()) {
+          return;
+        }
+
+        const menu = this.profileMenu()?.nativeElement;
+        if (menu && !menu.contains(event.target as Node)) {
+          this.closeProfileMenu();
+        }
+      });
+
+    fromEvent(document, 'keydown')
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((event) => {
+        if (event instanceof KeyboardEvent && event.key === 'Escape') {
+          this.closeProfileMenu();
+        }
+      });
+  }
+
+  toggleProfileMenu(): void {
+    this.profileMenuOpen.update((open) => !open);
+  }
+
+  closeProfileMenu(): void {
+    this.profileMenuOpen.set(false);
   }
 
   signIn(): void {
@@ -96,6 +129,7 @@ export class AppShellComponent {
   }
 
   signOut(): void {
+    this.closeProfileMenu();
     this.auth.signOut();
   }
 }

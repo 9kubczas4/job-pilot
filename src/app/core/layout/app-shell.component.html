@@ -38,19 +38,53 @@
 
       <nav class="app-nav" aria-label="Main">
         <a [routerLink]="links.jobs" routerLinkActive="is-active">Jobs</a>
-        @if (auth.isAuthenticated()) {
-          <a [routerLink]="links.saved" routerLinkActive="is-active">Saved</a>
-          <a [routerLink]="links.profile" routerLinkActive="is-active">Profile</a>
-        }
       </nav>
 
       <div class="app-auth">
         @if (auth.isAuthenticated()) {
-          <span class="app-user" [title]="auth.user()?.email ?? ''">
-            <span class="app-user__avatar" aria-hidden="true">{{ userInitials() }}</span>
-            <span class="app-user__name">{{ auth.user()?.displayName ?? 'Signed in' }}</span>
-          </span>
-          <button type="button" class="btn btn-ghost btn-sm" (click)="signOut()">Sign out</button>
+          <div #profileMenu class="profile-menu">
+            <button
+              type="button"
+              class="profile-menu__trigger"
+              [class.is-open]="profileMenuOpen()"
+              [attr.aria-expanded]="profileMenuOpen()"
+              aria-haspopup="menu"
+              [attr.aria-controls]="profileMenuOpen() ? 'profile-menu-panel' : null"
+              (click)="toggleProfileMenu()"
+            >
+              <span class="profile-menu__avatar" aria-hidden="true">{{ userInitials() }}</span>
+              <span class="profile-menu__name">{{ auth.user()?.displayName ?? 'Profile' }}</span>
+              <svg class="profile-menu__chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                <path d="M7 10 L12 15 L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+              </svg>
+            </button>
+
+            @if (profileMenuOpen()) {
+              <div id="profile-menu-panel" class="profile-menu__popover" role="menu">
+                <a
+                  [routerLink]="links.saved"
+                  routerLinkActive="is-active"
+                  class="profile-menu__item"
+                  role="menuitem"
+                  (click)="closeProfileMenu()"
+                >
+                  Saved
+                </a>
+                <a
+                  [routerLink]="links.profile"
+                  routerLinkActive="is-active"
+                  class="profile-menu__item"
+                  role="menuitem"
+                  (click)="closeProfileMenu()"
+                >
+                  Profile
+                </a>
+                <button type="button" class="profile-menu__item profile-menu__item--danger" role="menuitem" (click)="signOut()">
+                  Sign out
+                </button>
+              </div>
+            }
+          </div>
         } @else {
           <button type="button" class="btn btn-primary btn-sm" (click)="signIn()">Sign in</button>
         }

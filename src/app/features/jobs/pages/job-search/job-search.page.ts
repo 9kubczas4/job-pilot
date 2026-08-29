@@ -37,6 +37,9 @@ export class JobSearchPageComponent implements OnInit {
   private syncingFromHeader = false;
 
   constructor() {
+    this.headerUi.enableFilters();
+    this.destroyRef.onDestroy(() => this.headerUi.disableFilters());
+
     effect(() => {
       if (this.syncingFromRoute || this.syncingFromHeader) {
         return;

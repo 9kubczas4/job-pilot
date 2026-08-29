@@ -24,7 +24,7 @@
     </form>
 
     <div class="app-header__actions">
-      @if (hasFilterPanel()) {
+      @if (headerUi.filtersEnabled()) {
         <button
           type="button"
           class="header-action"
@@ -72,7 +72,7 @@
 
   <app-filter-drawer
     id="app-filter-drawer"
-    [open]="hasFilterPanel() && headerUi.filtersOpen()"
+    [open]="headerUi.filtersEnabled() && headerUi.filtersOpen()"
     (closed)="headerUi.closeFilters()"
   >
     <ng-content select="[filter-panel]" />

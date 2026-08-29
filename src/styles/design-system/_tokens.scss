@@ -79,6 +79,8 @@
   /* Motion */
   --transition-fast: 150ms ease;
   --transition-base: 200ms ease;
+  --transition-drawer: 320ms;
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
 
   /* Z-index */
   --z-sticky: 10;

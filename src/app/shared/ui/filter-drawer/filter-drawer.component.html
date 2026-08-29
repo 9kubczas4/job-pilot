@@ -1,37 +1,42 @@
-@if (open()) {
-  <div class="drawer-root" aria-hidden="false">
-    <button
-      type="button"
-      class="drawer-backdrop"
-      aria-label="Close filters"
-      (click)="requestClose()"
-    ></button>
+<div
+  class="drawer-root"
+  [class.is-open]="open()"
+  [attr.inert]="open() ? null : ''"
+  [attr.aria-hidden]="!open()"
+>
+  <button
+    type="button"
+    class="drawer-backdrop"
+    aria-label="Close filters"
+    tabindex="-1"
+    (click)="requestClose()"
+  ></button>
 
-    <aside
-      #panel
-      class="drawer-panel"
-      role="dialog"
-      aria-modal="true"
-      [attr.aria-label]="title()"
-      tabindex="-1"
-    >
-      <header class="drawer-panel__header">
-        <h2 class="drawer-panel__title">{{ title() }}</h2>
-        <button type="button" class="drawer-panel__close" aria-label="Close filters" (click)="requestClose()">
-          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
-            <path
-              d="M6 6 L18 18 M18 6 L6 18"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-            />
-          </svg>
-        </button>
-      </header>
+  <aside
+    #panel
+    class="drawer-panel"
+    role="dialog"
+    aria-modal="true"
+    [attr.aria-label]="title()"
+    [attr.aria-hidden]="!open()"
+    tabindex="-1"
+  >
+    <header class="drawer-panel__header">
+      <h2 class="drawer-panel__title">{{ title() }}</h2>
+      <button type="button" class="drawer-panel__close" aria-label="Close filters" (click)="requestClose()">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+          <path
+            d="M6 6 L18 18 M18 6 L6 18"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+        </svg>
+      </button>
+    </header>
 
-      <div class="drawer-panel__body">
-        <ng-content />
-      </div>
-    </aside>
-  </div>
-}
+    <div class="drawer-panel__body">
+      <ng-content />
+    </div>
+  </aside>
+</div>

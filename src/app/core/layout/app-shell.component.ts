@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, contentChild, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AppLinks } from '@app/app-paths';
@@ -20,9 +20,6 @@ export class AppShellComponent {
   readonly links = AppLinks;
 
   private readonly router = inject(Router);
-
-  private readonly filterPanel = contentChild('[filter-panel]');
-  readonly hasFilterPanel = computed(() => this.filterPanel() != null);
 
   readonly userInitials = computed(() => {
     const name = this.auth.user()?.displayName?.trim();

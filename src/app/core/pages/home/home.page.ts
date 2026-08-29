@@ -63,27 +63,37 @@ export class HomePageComponent {
     {
       name: 'search_jobs',
       scope: 'global',
-      description: 'Turn natural language and locations into JobSearchCriteria and refresh the board instantly.',
+      description: 'Set query and location, open the job board, and sync search bar, list, and map.',
     },
     {
       name: 'filter_jobs',
       scope: 'global',
-      description: 'Apply structured filters — workplace, seniority, salary, skills, contract type, and sort.',
+      description: 'Set filters and sort, open the job board, and sync filter panel, chips, list, and map.',
+    },
+    {
+      name: 'get_profile',
+      scope: '/profile',
+      description: 'Read the signed-in candidate profile.',
     },
     {
       name: 'update_profile',
       scope: '/profile',
-      description: 'Fill CV fields from uploaded documents with schema-guided partial updates.',
+      description: 'Update profile fields with validation and persist changes to the UI.',
     },
     {
-      name: 'apply_to_job',
+      name: 'get_job',
       scope: '/jobs/:id',
-      description: 'Submit applications for the authenticated user with optional notes.',
+      description: 'Read full details for a single job offer.',
     },
     {
       name: 'save_job',
       scope: '/jobs/:id',
-      description: 'Bookmark offers to a synced saved list across devices.',
+      description: 'Add a job to favourites for the signed-in user.',
+    },
+    {
+      name: 'apply_job',
+      scope: '/jobs/:id',
+      description: 'Submit a job application for the signed-in user.',
     },
   ];
 

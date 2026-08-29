@@ -36,7 +36,7 @@ export function provideJobDetailsWebMcpTools() {
   return provideExperimentalWebMcpTools([
     {
       name: 'get_job',
-      description: 'Return the full job offer for a given job ID.',
+      description: 'Read a single job offer by jobId. Use on /jobs/:id.',
       inputSchema: GET_JOB_SCHEMA,
       execute: async ({ jobId }) => {
         if (typeof jobId !== 'string') {
@@ -51,7 +51,8 @@ export function provideJobDetailsWebMcpTools() {
     },
     {
       name: 'save_job',
-      description: 'Save a job to the authenticated user saved jobs list.',
+      description:
+        'Add a job to favourites for the signed-in user. Same as clicking Save in the UI. Updates the Saved jobs list.',
       inputSchema: SAVE_JOB_SCHEMA,
       execute: async ({ jobId }) => {
         if (typeof jobId !== 'string') {
@@ -67,9 +68,9 @@ export function provideJobDetailsWebMcpTools() {
       },
     },
     {
-      name: 'apply_to_job',
+      name: 'apply_job',
       description:
-        'Submit a minimal job application for the authenticated user. Requires a populated profile.',
+        'Submit a job application for the signed-in user. Requires a populated profile. Shows a toast and updates the Applications list in the UI.',
       inputSchema: APPLY_JOB_SCHEMA,
       execute: async (input) => {
         const { jobId, note } = input as { jobId: string; note?: string };

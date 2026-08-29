@@ -78,14 +78,14 @@
           <div class="landing-terminal__body">
             <p class="landing-terminal__line landing-terminal__line--prompt">
               <span class="landing-terminal__prefix">›</span>
-              search_jobs(&#123; workplace: ["remote", "hybrid"], locations: ["Warsaw"], salaryMin: 25000 &#125;)
+              filter_jobs(&#123; workplace: ["remote", "hybrid"], salaryMin: 25000, sort: "salary-desc" &#125;)
             </p>
             <p class="landing-terminal__line landing-terminal__line--success">
               ✓ 12 jobs matched · filters applied · map synced
             </p>
             <p class="landing-terminal__line landing-terminal__line--prompt">
               <span class="landing-terminal__prefix">›</span>
-              apply_to_job(&#123; jobId: "job-014", note: "Available from October." &#125;)
+              apply_job(&#123; jobId: "job-014", note: "Available from October." &#125;)
             </p>
             <p class="landing-terminal__line landing-terminal__line--success">
               ✓ Application submitted · toast shown · Applications updated

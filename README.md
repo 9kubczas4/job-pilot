@@ -6,7 +6,7 @@ Job Pilot combines a browsing experience with [Angular 22 experimental WebMCP su
 
 ## Why WebMCP
 
-Traditional agents interact with web apps through DOM automation. Job Pilot exposes structured tools (`search_jobs`, `update_profile`, `apply_to_job`, and more) so Codex can:
+Traditional agents interact with web apps through DOM automation. Job Pilot exposes structured tools (`search_jobs`, `filter_jobs`, `update_profile`, `apply_job`, and more) so Codex can:
 
 - read and update the candidate profile
 - translate natural-language intent into `JobSearchCriteria`
@@ -24,15 +24,15 @@ The agent never receives a `userId` in tool payloads. Identity comes from Fireba
 
 ## WebMCP Tools
 
-| Tool | Scope | Source |
-|------|-------|--------|
-| `search_jobs` | global | `features/jobs/webmcp/search-jobs.tool.ts` |
-| `filter_jobs` | global | `features/jobs/webmcp/filter-jobs.tool.ts` |
-| `get_profile` | `/profile` | `features/profile/webmcp/profile.tools.ts` |
-| `update_profile` | `/profile` | `features/profile/pages/profile/profile.page.ts` (Signal Form implicit tool) |
-| `get_job` | `/jobs/:id` | `features/jobs/webmcp/job-details.tools.ts` |
-| `save_job` | `/jobs/:id` | `features/jobs/webmcp/job-details.tools.ts` |
-| `apply_to_job` | `/jobs/:id` | `features/jobs/webmcp/job-details.tools.ts` |
+| Tool | Scope | Purpose |
+|------|-------|---------|
+| `search_jobs` | global | Set query/location and sync job board UI |
+| `filter_jobs` | global | Set filters/sort and sync job board UI |
+| `get_profile` | `/profile` | Read signed-in candidate profile |
+| `update_profile` | `/profile` | Update candidate profile (Signal Form implicit tool) |
+| `get_job` | `/jobs/:id` | Read a single job offer |
+| `save_job` | `/jobs/:id` | Add a job to favourites |
+| `apply_job` | `/jobs/:id` | Submit a job application |
 
 Global tools register in `app.config.ts`. Route-scoped tools register as route `providers` in `app.routes.ts`.
 

@@ -7,7 +7,7 @@ export function provideProfileRouteWebMcpTools() {
   return provideExperimentalWebMcpTools([
     {
       name: 'get_profile',
-      description: 'Read the authenticated candidate profile.',
+      description: 'Read the signed-in candidate profile as JSON. Requires authentication.',
       inputSchema: { type: 'object', properties: {}, additionalProperties: false },
       execute: async () => {
         const profile = await inject(ProfileStore).loadProfile();

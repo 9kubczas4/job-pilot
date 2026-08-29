@@ -10,7 +10,7 @@ export function provideSearchJobsWebMcpTool() {
     {
       name: 'search_jobs',
       description:
-        'Search job offers by free-text query and location. Navigates to the job board and updates the search bar, filters, list, and map in real time. Use filter_jobs for structured filters such as workplace, seniority, and salary.',
+        'Set a free-text query and/or location, open the job board, and refresh the search bar, list, and map. For workplace, seniority, salary, skills, contract, or sort, use filter_jobs.',
       inputSchema: SEARCH_JOBS_SCHEMA,
       execute: async (input) => {
         const result = await inject(JobSearchWebMcpService).applySearchCriteria(

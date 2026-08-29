@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AppShellComponent } from '../../core/layout/app-shell.component';
-import { AuthService } from '../../core/auth/auth.service';
+import { AppShellComponent } from '@core/layout/app-shell.component';
+import { AuthService } from '@core/auth/auth.service';
 import { CandidateProfile } from './domain/profile.model';
 import { ProfileStore } from './state/profile.store';
 

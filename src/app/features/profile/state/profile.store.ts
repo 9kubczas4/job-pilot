@@ -1,5 +1,5 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { AuthService } from '../../../core/auth/auth.service';
+import { AuthService } from '@core/auth/auth.service';
 import { CandidateProfile } from '../domain/profile.model';
 import { ProfileRepository } from '../data-access/profile.repository';
 

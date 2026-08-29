@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { provideExperimentalWebMcpTools } from '@angular/core';
-import { ProfileStore } from '../../../features/profile/state/profile.store';
+import { ProfileStore } from '@features/profile/state/profile.store';
 import { getProfileSchemaPayload } from '../schemas/profile-schema';
 import { toolJson, toolText } from '../utils/tool-response';
 

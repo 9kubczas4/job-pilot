@@ -3,7 +3,7 @@ import {
   SalaryCurrency,
   SeniorityLevel,
   WorkplaceMode,
-} from '../../jobs/domain/job.model';
+} from '@features/jobs/domain/job.model';
 
 export interface CandidateSkill {
   name: string;

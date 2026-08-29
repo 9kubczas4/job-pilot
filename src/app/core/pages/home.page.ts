@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { AppShellComponent } from '../layout/app-shell.component';
-import { AppLinks } from '../../shared/routing/app-paths';
+import { AppShellComponent } from '@core/layout/app-shell.component';
+import { AppLinks } from '@shared/routing/app-paths';
 
 @Component({
   selector: 'app-home-page',

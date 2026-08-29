@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { AppLinks } from '../../shared/routing/app-paths';
-import { AuthService } from '../auth/auth.service';
+import { AppLinks } from '@shared/routing/app-paths';
+import { AuthService } from '@core/auth/auth.service';
 
 @Component({
   selector: 'app-shell',

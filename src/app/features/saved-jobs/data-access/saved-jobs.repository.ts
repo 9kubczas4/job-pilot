@@ -6,8 +6,8 @@ import {
   getDocs,
   setDoc,
 } from 'firebase/firestore';
-import { AuthService } from '../../../core/auth/auth.service';
-import { FIREBASE } from '../../../core/firebase/firebase.providers';
+import { AuthService } from '@core/auth/auth.service';
+import { FIREBASE } from '@core/firebase/firebase.providers';
 import { JobApplication } from '../domain/application.model';
 
 @Injectable({ providedIn: 'root' })

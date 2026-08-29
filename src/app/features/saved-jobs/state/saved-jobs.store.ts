@@ -1,5 +1,5 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
-import { AuthService } from '../../../core/auth/auth.service';
+import { AuthService } from '@core/auth/auth.service';
 import { JobApplication } from '../domain/application.model';
 import { SavedJobsRepository } from '../data-access/saved-jobs.repository';
 

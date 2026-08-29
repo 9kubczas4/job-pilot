@@ -1,47 +1,193 @@
 <app-shell>
-  <section class="hero">
-    <div class="container hero__inner stack stack--lg">
-      <div class="hero__copy stack stack--md">
-        <p class="eyebrow">WebMCP Challenge</p>
-        <h1 class="page-title">A modern job board for humans and agents</h1>
-        <p class="lead">
-          Browse jobs with a clean UI, then let Codex complete your profile, search offers, and apply —
-          all through WebMCP tools that share the same domain model as the interface.
-        </p>
+  <div class="landing">
+    <div class="landing__aurora" aria-hidden="true">
+      <span class="landing__orb landing__orb--1"></span>
+      <span class="landing__orb landing__orb--2"></span>
+      <span class="landing__orb landing__orb--3"></span>
+      <span class="landing__grid"></span>
+    </div>
 
-        <div class="cluster cluster--md hero__actions">
-          <a [routerLink]="links.jobs" class="btn btn-primary">Browse jobs</a>
-          <a [routerLink]="links.profile" class="btn btn-ghost">Open profile</a>
+    <section class="landing-hero">
+      <div class="container landing-hero__inner">
+        <div class="landing-hero__copy">
+          <a
+            class="landing-badge"
+            [href]="challengeUrl"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="landing-badge__dot" aria-hidden="true"></span>
+            OpenAI WebMCP Challenge
+            <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
+              <path
+                d="M5 3h8v8M13 3L3 13"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                fill="none"
+              />
+            </svg>
+          </a>
+
+          <h1 class="landing-hero__title">
+            A job board built for
+            <span class="landing-hero__accent">humans &amp; agents</span>
+          </h1>
+
+          <p class="landing-hero__lead">
+            Browse offers with a polished UI — then let Codex complete your profile, search jobs,
+            save favorites, and apply through WebMCP tools that share the same domain model as the
+            interface.
+          </p>
+
+          <div class="landing-hero__actions">
+            <a [routerLink]="links.jobs" class="landing-btn landing-btn--primary">Browse jobs</a>
+            <a [routerLink]="links.profile" class="landing-btn landing-btn--ghost">Open profile</a>
+            <a
+              class="landing-btn landing-btn--ghost"
+              [href]="webmcpDocsUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Angular WebMCP docs
+            </a>
+          </div>
+
+          <ul class="landing-hero__stats">
+            <li class="landing-stat">
+              <strong>7</strong>
+              <span>WebMCP tools</span>
+            </li>
+            <li class="landing-stat">
+              <strong>1</strong>
+              <span>shared state model</span>
+            </li>
+            <li class="landing-stat">
+              <strong>0</strong>
+              <span>DOM automation</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="landing-terminal" aria-hidden="true">
+          <div class="landing-terminal__chrome">
+            <span></span><span></span><span></span>
+            <p>Codex · job-pilot</p>
+          </div>
+          <div class="landing-terminal__body">
+            <p class="landing-terminal__line landing-terminal__line--prompt">
+              <span class="landing-terminal__prefix">›</span>
+              search_jobs(&#123; workplace: ["remote", "hybrid"], locations: ["Warsaw"], salaryMin: 25000 &#125;)
+            </p>
+            <p class="landing-terminal__line landing-terminal__line--success">
+              ✓ 12 jobs matched · filters applied · map synced
+            </p>
+            <p class="landing-terminal__line landing-terminal__line--prompt">
+              <span class="landing-terminal__prefix">›</span>
+              apply_to_job(&#123; jobId: "job-014", note: "Available from October." &#125;)
+            </p>
+            <p class="landing-terminal__line landing-terminal__line--success">
+              ✓ Application submitted · toast shown · Applications updated
+            </p>
+            <p class="landing-terminal__cursor" aria-hidden="true"></p>
+          </div>
         </div>
       </div>
+    </section>
 
-      <div class="hero__features">
-        <article class="feature-card">
-          <span class="feature-card__icon" aria-hidden="true">⌕</span>
-          <h2 class="feature-card__title">Smart search</h2>
-          <p class="feature-card__text">Filter by role, location, workplace, and salary in real time.</p>
-        </article>
-        <article class="feature-card">
-          <span class="feature-card__icon" aria-hidden="true">◎</span>
-          <h2 class="feature-card__title">Map view</h2>
-          <p class="feature-card__text">Explore openings geographically alongside a rich job list.</p>
-        </article>
-        <article class="feature-card">
-          <span class="feature-card__icon" aria-hidden="true">⚡</span>
-          <h2 class="feature-card__title">Agent-ready</h2>
-          <p class="feature-card__text">Codex tools read and write the same profile and search data.</p>
-        </article>
+    <section class="landing-section" data-reveal>
+      <div class="container">
+        <div class="landing-section__head">
+          <p class="landing-kicker">Why WebMCP</p>
+          <h2 class="landing-section__title">Structured tools, not brittle clicks</h2>
+          <p class="landing-section__lead">
+            Traditional agents scrape the DOM. Job Pilot exposes typed tools so Codex operates on
+            profiles, search criteria, and applications — the same objects your UI already uses.
+          </p>
+        </div>
+
+        <div class="landing-tools">
+          @for (tool of tools; track tool.name) {
+            <article class="landing-tool glass-card">
+              <div class="landing-tool__head">
+                <code class="landing-tool__name">{{ tool.name }}</code>
+                <span class="landing-tool__scope">{{ tool.scope }}</span>
+              </div>
+              <p class="landing-tool__text">{{ tool.description }}</p>
+            </article>
+          }
+        </div>
       </div>
+    </section>
 
-      <article class="panel panel--subtle stack stack--sm">
-        <h2 class="section-title">How to test with Codex</h2>
-        <ol class="hero__steps text-muted">
-          <li>Open this app in the ChatGPT desktop in-app browser.</li>
-          <li>In Codex, ask: “Help me complete my profile based on this CV…”</li>
-          <li>Then ask: “Find lead frontend jobs, remote or hybrid in Warsaw, minimum 25k PLN.”</li>
-          <li>Watch filters, list, and map update in real time.</li>
-        </ol>
-      </article>
-    </div>
-  </section>
+    <section class="landing-section landing-section--features" data-reveal>
+      <div class="container">
+        <div class="landing-section__head landing-section__head--center">
+          <p class="landing-kicker">Product</p>
+          <h2 class="landing-section__title">Everything candidates expect — agent-ready by design</h2>
+        </div>
+
+        <div class="landing-features">
+          @for (feature of features; track feature.title) {
+            <article class="landing-feature glass-card">
+              <span class="landing-feature__icon" aria-hidden="true">{{ feature.icon }}</span>
+              <h3 class="landing-feature__title">{{ feature.title }}</h3>
+              <p class="landing-feature__text">{{ feature.text }}</p>
+            </article>
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="landing-section landing-section--steps" data-reveal>
+      <div class="container">
+        <div class="landing-steps glass-card">
+          <div class="landing-steps__intro">
+            <p class="landing-kicker">Live demo flow</p>
+            <h2 class="landing-section__title">Test with Codex in minutes</h2>
+            <p class="landing-section__lead">
+              Built for the
+              <a [href]="challengeUrl" target="_blank" rel="noopener noreferrer">OpenAI WebMCP Challenge</a>
+              — show judges a real agent driving a real product surface.
+            </p>
+          </div>
+
+          <ol class="landing-steps__list">
+            @for (step of steps; track step.title; let index = $index) {
+              <li class="landing-step">
+                <span class="landing-step__index">{{ index + 1 }}</span>
+                <div>
+                  <h3 class="landing-step__title">{{ step.title }}</h3>
+                  <p class="landing-step__text">{{ step.text }}</p>
+                </div>
+              </li>
+            }
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="landing-cta" data-reveal>
+      <div class="container">
+        <div class="landing-cta__panel glass-card">
+          <h2 class="landing-cta__title">Ready to explore — human or agent?</h2>
+          <p class="landing-cta__text">
+            Start browsing jobs manually, or open the app in ChatGPT and let Codex run the tools.
+          </p>
+          <div class="landing-cta__actions">
+            <a [routerLink]="links.jobs" class="landing-btn landing-btn--primary">Go to jobs</a>
+            <a
+              class="landing-btn landing-btn--ghost"
+              [href]="challengeUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View challenge
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
 </app-shell>

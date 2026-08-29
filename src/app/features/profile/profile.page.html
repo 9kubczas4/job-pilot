@@ -1,0 +1,57 @@
+<app-shell>
+  <section class="container container--narrow page stack stack--lg">
+    <header class="stack stack--sm">
+      <h1 class="section-title section-title--lg">Candidate profile</h1>
+      <p class="text-muted">
+        Human-editable profile backed by the same data exposed to Codex tools.
+      </p>
+    </header>
+
+    @if (!auth.isAuthenticated()) {
+      <p class="text-muted">Sign in to create and edit your profile.</p>
+    } @else {
+      <form class="stack stack--md" (ngSubmit)="save()">
+        <label class="field">
+          Headline
+          <input class="input" [(ngModel)]="draft.headline" name="headline" />
+        </label>
+
+        <label class="field">
+          Years of experience
+          <input
+            class="input"
+            [(ngModel)]="draft.yearsOfExperience"
+            name="yearsOfExperience"
+            type="number"
+          />
+        </label>
+
+        <label class="field">
+          Skills (comma separated)
+          <input class="input" [(ngModel)]="skillsInput" name="skills" />
+        </label>
+
+        <label class="field">
+          Preferred roles (comma separated)
+          <input class="input" [(ngModel)]="rolesInput" name="roles" />
+        </label>
+
+        <label class="field">
+          Preferred locations (comma separated)
+          <input class="input" [(ngModel)]="locationsInput" name="locations" />
+        </label>
+
+        <label class="field">
+          Workplace preferences (remote, hybrid, onsite)
+          <input class="input" [(ngModel)]="workplaceInput" name="workplace" />
+        </label>
+
+        <button type="submit" class="btn btn-primary">Save profile</button>
+      </form>
+
+      @if (message()) {
+        <p class="toast">{{ message() }}</p>
+      }
+    }
+  </section>
+</app-shell>

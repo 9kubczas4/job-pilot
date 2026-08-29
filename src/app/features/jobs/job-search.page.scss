@@ -1,0 +1,15 @@
+:host {
+  display: block;
+}
+
+.search-layout {
+  display: grid;
+  min-height: calc(100vh - var(--header-height) - 5.5rem);
+  grid-template-columns: minmax(var(--sidebar-min), var(--sidebar-max)) 1fr;
+}
+
+@media (max-width: 60rem) {
+  .search-layout {
+    grid-template-columns: 1fr;
+  }
+}

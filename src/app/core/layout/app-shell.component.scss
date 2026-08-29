@@ -1,0 +1,82 @@
+@use '../../shared/styles/button';
+
+:host {
+  display: block;
+}
+
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  background: var(--color-surface);
+}
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  padding: var(--space-4) var(--space-6);
+  border-bottom: 1px solid var(--color-border);
+  background: rgb(255 255 255 / 0.92);
+  backdrop-filter: blur(8px);
+}
+
+.app-brand {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  text-decoration: none;
+}
+
+.app-nav {
+  display: flex;
+  flex: 1;
+  gap: var(--space-4);
+
+  a {
+    color: var(--color-text-muted);
+    font-weight: var(--font-weight-medium);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+
+    &:hover,
+    &.is-active {
+      color: var(--color-primary);
+    }
+  }
+}
+
+.app-auth {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.app-user {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-md);
+}
+
+.app-main {
+  flex: 1;
+}
+
+@media (max-width: 48rem) {
+  .app-header {
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .app-nav {
+    order: 3;
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .app-user {
+    display: none;
+  }
+}

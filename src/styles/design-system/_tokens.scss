@@ -1,0 +1,85 @@
+:root {
+  /* Color — brand & surfaces */
+  --color-primary: #2563eb;
+  --color-primary-hover: #1d4ed8;
+  --color-primary-subtle: #eff6ff;
+  --color-accent: #4338ca;
+  --color-accent-subtle: #eef2ff;
+  --color-success: #047857;
+  --color-success-subtle: #ecfdf5;
+  --color-surface: #f8fafc;
+  --color-surface-elevated: #ffffff;
+  --color-text: #0f172a;
+  --color-text-muted: #64748b;
+  --color-border: #e2e8f0;
+  --color-border-strong: #cbd5e1;
+  --color-chip: #f1f5f9;
+
+  /* Legacy aliases (keep until full migration) */
+  --primary: var(--color-primary);
+  --surface: var(--color-surface);
+  --surface-elevated: var(--color-surface-elevated);
+  --text: var(--color-text);
+  --text-muted: var(--color-text-muted);
+  --border: var(--color-border);
+  --chip-bg: var(--color-chip);
+
+  /* Spacing — 4px scale */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  /* Typography */
+  --font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.8125rem;
+  --font-size-md: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: clamp(1.5rem, 3vw, 2rem);
+  --font-size-3xl: clamp(2rem, 4vw, 3rem);
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.7;
+  --letter-spacing-wide: 0.08em;
+
+  /* Radius */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1rem;
+  --radius-full: 9999px;
+
+  /* Elevation */
+  --shadow-sm: 0 1px 2px rgb(15 23 42 / 0.05);
+  --shadow-md: 0 8px 24px rgb(15 23 42 / 0.08);
+  --shadow-focus: 0 0 0 3px rgb(37 99 235 / 0.25);
+
+  /* Layout */
+  --container-narrow: 45rem;
+  --container-content: 52.5rem;
+  --container-wide: 57.5rem;
+  --header-height: 4rem;
+  --sidebar-min: 20rem;
+  --sidebar-max: 27.5rem;
+  --map-min-height: 26.25rem;
+
+  /* Motion */
+  --transition-fast: 150ms ease;
+  --transition-base: 200ms ease;
+
+  /* Z-index */
+  --z-sticky: 10;
+}

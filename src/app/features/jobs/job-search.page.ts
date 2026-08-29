@@ -18,41 +18,8 @@ import { JobMapComponent } from './ui/job-map.component';
   selector: 'app-job-search-page',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [AppShellComponent, JobFiltersComponent, JobListComponent, JobMapComponent],
-  template: `
-    <app-shell>
-      <app-job-filters />
-
-      <div class="search-layout">
-        <app-job-list
-          [jobs]="store.jobs()"
-          [loading]="store.loading()"
-          [selectedJobId]="store.selectedJobId()"
-          [savedJobIds]="savedJobs.savedJobIds()"
-          [appliedJobIds]="savedJobs.appliedJobIds()"
-          (selectJob)="onSelectJob($event)"
-        />
-
-        <app-job-map
-          [jobs]="store.jobs()"
-          [selectedJobId]="store.selectedJobId()"
-          (selectJob)="onSelectJob($event)"
-        />
-      </div>
-    </app-shell>
-  `,
-  styles: `
-    .search-layout {
-      display: grid;
-      grid-template-columns: minmax(320px, 440px) 1fr;
-      min-height: calc(100vh - 180px);
-    }
-
-    @media (max-width: 960px) {
-      .search-layout {
-        grid-template-columns: 1fr;
-      }
-    }
-  `,
+  templateUrl: './job-search.page.html',
+  styleUrl: './job-search.page.scss',
 })
 export class JobSearchPageComponent implements OnInit {
   readonly store = inject(JobSearchStore);

@@ -1,0 +1,13 @@
+@use '../../../shared/styles/feedback';
+
+:host {
+  display: block;
+}
+
+.job-list {
+  display: flex;
+  overflow: auto;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+}

@@ -1,0 +1,24 @@
+<div class="app-shell">
+  <header class="app-header">
+    <a [routerLink]="links.home" class="app-brand">Job Pilot</a>
+
+    <nav class="app-nav">
+      <a [routerLink]="links.jobs" routerLinkActive="is-active">Jobs</a>
+      <a [routerLink]="links.saved" routerLinkActive="is-active">Saved</a>
+      <a [routerLink]="links.profile" routerLinkActive="is-active">Profile</a>
+    </nav>
+
+    <div class="app-auth">
+      @if (auth.isAuthenticated()) {
+        <span class="app-user">{{ auth.user()?.displayName ?? 'Signed in' }}</span>
+        <button type="button" class="btn btn-ghost" (click)="signOut()">Sign out</button>
+      } @else {
+        <button type="button" class="btn btn-primary" (click)="signIn()">Sign in with Google</button>
+      }
+    </div>
+  </header>
+
+  <main class="app-main">
+    <ng-content />
+  </main>
+</div>

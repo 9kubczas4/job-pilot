@@ -1,0 +1,22 @@
+<section class="job-list">
+  @if (loading()) {
+    <p class="state">Loading jobs…</p>
+  } @else if (!jobs().length) {
+    <p class="state">No jobs match your filters.</p>
+  } @else {
+    @for (job of jobs(); track job.id) {
+      <a
+        [routerLink]="jobLink(job.id)"
+        class="link-plain"
+        (click)="selectJob.emit(job.id)"
+      >
+        <app-job-card
+          [job]="job"
+          [selected]="selectedJobId() === job.id"
+          [saved]="savedJobIds().includes(job.id)"
+          [applied]="appliedJobIds().includes(job.id)"
+        />
+      </a>
+    }
+  }
+</section>

@@ -1,0 +1,61 @@
+<app-shell>
+  @if (store.job(); as currentJob) {
+    <section class="container container--wide page">
+      <a [routerLink]="links.jobs" class="link-back">← Back to search</a>
+
+      <header class="details-header">
+        <div class="stack stack--xs">
+          <p class="text-muted">{{ currentJob.company.name }}</p>
+          <h1 class="section-title section-title--lg">{{ currentJob.title }}</h1>
+          <p class="text-muted">{{ formatWorkplace(currentJob) }}</p>
+          @if (formatSalary(currentJob); as salary) {
+            <p class="details-salary">{{ salary }}</p>
+          }
+        </div>
+
+        <div class="cluster cluster--md">
+          <button type="button" class="btn btn-ghost" (click)="toggleSave()">
+            {{ savedJobs.isSaved(currentJob.id) ? 'Saved' : 'Save job' }}
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            [disabled]="savedJobs.isApplied(currentJob.id)"
+            (click)="apply()"
+          >
+            {{ savedJobs.isApplied(currentJob.id) ? 'Applied' : 'Apply' }}
+          </button>
+        </div>
+      </header>
+
+      @if (toast()) {
+        <p class="toast">{{ toast() }}</p>
+      }
+
+      <article class="details-section stack stack--sm">
+        <h2 class="section-title">Description</h2>
+        <p>{{ currentJob.description }}</p>
+      </article>
+
+      <article class="details-section stack stack--sm">
+        <h2 class="section-title">Requirements</h2>
+        <ul>
+          @for (item of currentJob.requirements; track item) {
+            <li>{{ item }}</li>
+          }
+        </ul>
+      </article>
+
+      <article class="details-section stack stack--sm">
+        <h2 class="section-title">Responsibilities</h2>
+        <ul>
+          @for (item of currentJob.responsibilities; track item) {
+            <li>{{ item }}</li>
+          }
+        </ul>
+      </article>
+    </section>
+  } @else {
+    <p class="state">Loading job details…</p>
+  }
+</app-shell>

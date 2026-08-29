@@ -1,0 +1,44 @@
+<section class="filters-bar">
+  <div class="filters-bar__row">
+    <input
+      class="input"
+      type="search"
+      placeholder="Role, skill or company"
+      [ngModel]="store.criteria().query ?? ''"
+      (ngModelChange)="updateQuery($event)"
+    />
+    <input
+      class="input"
+      type="text"
+      placeholder="Location"
+      [ngModel]="locationValue()"
+      (ngModelChange)="updateLocation($event)"
+    />
+  </div>
+
+  <div class="cluster">
+    @for (option of workplaceOptions; track option) {
+      <button
+        type="button"
+        class="chip-btn"
+        [class.is-active]="isWorkplaceActive(option)"
+        (click)="toggleWorkplace(option)"
+      >
+        {{ option }}
+      </button>
+    }
+    <button type="button" class="chip-btn chip-btn--ghost" (click)="store.clearCriteria()">
+      Clear
+    </button>
+  </div>
+
+  @if (activeChips().length) {
+    <div class="cluster">
+      @for (chip of activeChips(); track chip.key) {
+        <button type="button" class="chip chip--removable" (click)="removeChip(chip.key)">
+          {{ chip.label }} ×
+        </button>
+      }
+    </div>
+  }
+</section>

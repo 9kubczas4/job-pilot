@@ -1,0 +1,19 @@
+<app-shell>
+  <section class="container container--narrow page stack stack--lg">
+    <h1 class="section-title section-title--lg">Saved jobs</h1>
+
+    @if (!auth.isAuthenticated()) {
+      <p class="text-muted">Sign in to view saved jobs.</p>
+    } @else if (!savedJobs().length) {
+      <p class="text-muted">No saved jobs yet.</p>
+    } @else {
+      <div class="stack stack--sm">
+        @for (job of savedJobs(); track job.id) {
+          <a [routerLink]="jobLink(job.id)" class="link-plain">
+            <app-job-card [job]="job" [saved]="true" />
+          </a>
+        }
+      </div>
+    }
+  </section>
+</app-shell>

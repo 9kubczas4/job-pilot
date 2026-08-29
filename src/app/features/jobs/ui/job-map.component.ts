@@ -16,15 +16,8 @@ import { JobOffer } from '../domain/job.model';
 @Component({
   selector: 'app-job-map',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `<div #mapContainer class="map-container"></div>`,
-  styles: `
-    .map-container {
-      width: 100%;
-      height: 100%;
-      min-height: 420px;
-      border-left: 1px solid var(--border);
-    }
-  `,
+  templateUrl: './job-map.component.html',
+  styleUrl: './job-map.component.scss',
 })
 export class JobMapComponent implements AfterViewInit, OnDestroy {
   private readonly host = viewChild.required<ElementRef<HTMLDivElement>>('mapContainer');

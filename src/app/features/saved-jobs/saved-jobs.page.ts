@@ -11,49 +11,8 @@ import { SavedJobsStore } from './state/saved-jobs.store';
   selector: 'app-saved-jobs-page',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [AppShellComponent, JobCardComponent, RouterLink],
-  template: `
-    <app-shell>
-      <section class="saved">
-        <h1>Saved jobs</h1>
-
-        @if (!auth.isAuthenticated()) {
-          <p class="notice">Sign in to view saved jobs.</p>
-        } @else if (!savedJobs().length) {
-          <p class="notice">No saved jobs yet.</p>
-        } @else {
-          <div class="list">
-            @for (job of savedJobs(); track job.id) {
-              <a [routerLink]="jobLink(job.id)">
-                <app-job-card [job]="job" [saved]="true" />
-              </a>
-            }
-          </div>
-        }
-      </section>
-    </app-shell>
-  `,
-  styles: `
-    .saved {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 1.5rem;
-    }
-
-    .notice {
-      color: var(--text-muted);
-    }
-
-    .list {
-      display: grid;
-      gap: 0.75rem;
-      margin-top: 1rem;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-  `,
+  templateUrl: './saved-jobs.page.html',
+  styleUrl: './saved-jobs.page.scss',
 })
 export class SavedJobsPageComponent implements OnInit {
   readonly auth = inject(AuthService);

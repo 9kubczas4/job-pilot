@@ -1,0 +1,25 @@
+<app-shell>
+  <section class="container page-hero stack stack--lg">
+    <p class="eyebrow">WebMCP Challenge</p>
+    <h1 class="page-title">A modern job board for humans and agents</h1>
+    <p class="lead">
+      Browse jobs with a clean UI, then let Codex complete your profile, search offers, and apply —
+      all through WebMCP tools that share the same domain model as the interface.
+    </p>
+
+    <div class="cluster cluster--md">
+      <a [routerLink]="links.jobs" class="btn btn-primary">Browse jobs</a>
+      <a [routerLink]="links.profile" class="btn btn-ghost">Open profile</a>
+    </div>
+
+    <article class="panel stack stack--sm">
+      <h2 class="section-title">How to test with Codex</h2>
+      <ol class="text-muted">
+        <li>Open this app in the ChatGPT desktop in-app browser.</li>
+        <li>In Codex, ask: “Help me complete my profile based on this CV…”</li>
+        <li>Then ask: “Find lead frontend jobs, remote or hybrid in Warsaw, minimum 25k PLN.”</li>
+        <li>Watch filters, list, and map update in real time.</li>
+      </ol>
+    </article>
+  </section>
+</app-shell>

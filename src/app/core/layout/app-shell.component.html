@@ -1,22 +1,82 @@
 <div class="app-shell">
   <header class="app-header">
-    <a [routerLink]="links.home" class="app-brand">Job Pilot</a>
+    <div class="app-header__start">
+      <app-logo [homeLink]="links.home" />
+    </div>
 
-    <nav class="app-nav">
-      <a [routerLink]="links.jobs" routerLinkActive="is-active">Jobs</a>
-      <a [routerLink]="links.saved" routerLinkActive="is-active">Saved</a>
-      <a [routerLink]="links.profile" routerLinkActive="is-active">Profile</a>
-    </nav>
+    <form class="header-search" role="search" (submit)="onSearchSubmit($event)">
+      <label class="visually-hidden" for="header-search-input">Search jobs</label>
+      <svg class="header-search__icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+        <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none" />
+        <path d="M16.5 16.5 L21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      </svg>
+      <input
+        id="header-search-input"
+        class="header-search__input"
+        type="search"
+        name="q"
+        placeholder="Search roles, skills, companies…"
+        autocomplete="off"
+        enterkeyhint="search"
+        [ngModel]="headerUi.searchQuery()"
+        (ngModelChange)="onSearchChange($event)"
+      />
+    </form>
 
-    <div class="app-auth">
-      @if (auth.isAuthenticated()) {
-        <span class="app-user">{{ auth.user()?.displayName ?? 'Signed in' }}</span>
-        <button type="button" class="btn btn-ghost" (click)="signOut()">Sign out</button>
-      } @else {
-        <button type="button" class="btn btn-primary" (click)="signIn()">Sign in with Google</button>
+    <div class="app-header__actions">
+      @if (hasFilterPanel()) {
+        <button
+          type="button"
+          class="header-action"
+          [class.header-action--active]="headerUi.filtersOpen()"
+          [attr.aria-expanded]="headerUi.filtersOpen()"
+          aria-controls="app-filter-drawer"
+          (click)="headerUi.toggleFilters()"
+        >
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+            <path
+              d="M4 6 H20 M7 12 H17 M10 18 H14"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+          </svg>
+          <span>Filters</span>
+          @if (headerUi.activeFilterCount() > 0) {
+            <span class="header-action__badge" aria-label="{{ headerUi.activeFilterCount() }} active filters">
+              {{ headerUi.activeFilterCount() }}
+            </span>
+          }
+        </button>
       }
+
+      <nav class="app-nav" aria-label="Main">
+        <a [routerLink]="links.jobs" routerLinkActive="is-active">Jobs</a>
+        <a [routerLink]="links.saved" routerLinkActive="is-active">Saved</a>
+        <a [routerLink]="links.profile" routerLinkActive="is-active">Profile</a>
+      </nav>
+
+      <div class="app-auth">
+        @if (auth.isAuthenticated()) {
+          <span class="app-user" [title]="auth.user()?.email ?? ''">
+            <span class="app-user__avatar" aria-hidden="true">{{ userInitials() }}</span>
+            <span class="app-user__name">{{ auth.user()?.displayName ?? 'Signed in' }}</span>
+          </span>
+          <button type="button" class="btn btn-ghost btn-sm" (click)="signOut()">Sign out</button>
+        } @else {
+          <button type="button" class="btn btn-primary btn-sm" (click)="signIn()">Sign in</button>
+        }
+      </div>
     </div>
   </header>
+
+  <app-filter-drawer
+    id="app-filter-drawer"
+    [open]="hasFilterPanel() && headerUi.filtersOpen()"
+    (closed)="headerUi.closeFilters()"
+  >
+    <ng-content select="[filter-panel]" />
+  </app-filter-drawer>
 
   <main class="app-main">
     <ng-content />

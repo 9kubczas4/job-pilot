@@ -1,44 +1,48 @@
-<section class="filters-bar">
-  <div class="filters-bar__row">
+<section class="filters-panel stack stack--md">
+  <div class="field">
+    <label for="filter-location">Location</label>
     <input
-      class="input"
-      type="search"
-      placeholder="Role, skill or company"
-      [ngModel]="store.criteria().query ?? ''"
-      (ngModelChange)="updateQuery($event)"
-    />
-    <input
+      id="filter-location"
       class="input"
       type="text"
-      placeholder="Location"
+      name="location"
+      placeholder="City, region or country"
+      autocomplete="address-level2"
       [ngModel]="locationValue()"
       (ngModelChange)="updateLocation($event)"
     />
   </div>
 
-  <div class="cluster">
-    @for (option of workplaceOptions; track option) {
-      <button
-        type="button"
-        class="chip-btn"
-        [class.is-active]="isWorkplaceActive(option)"
-        (click)="toggleWorkplace(option)"
-      >
-        {{ option }}
-      </button>
-    }
-    <button type="button" class="chip-btn chip-btn--ghost" (click)="store.clearCriteria()">
-      Clear
-    </button>
-  </div>
-
-  @if (activeChips().length) {
+  <fieldset class="filters-fieldset">
+    <legend>Workplace</legend>
     <div class="cluster">
-      @for (chip of activeChips(); track chip.key) {
-        <button type="button" class="chip chip--removable" (click)="removeChip(chip.key)">
-          {{ chip.label }} ×
+      @for (option of workplaceOptions; track option) {
+        <button
+          type="button"
+          class="chip-btn"
+          [class.is-active]="isWorkplaceActive(option)"
+          (click)="toggleWorkplace(option)"
+        >
+          {{ option }}
         </button>
       }
     </div>
+  </fieldset>
+
+  @if (activeChips().length) {
+    <div class="field">
+      <span class="field-label">Active filters</span>
+      <div class="cluster">
+        @for (chip of activeChips(); track chip.key) {
+          <button type="button" class="chip chip--removable" (click)="removeChip(chip.key)">
+            {{ chip.label }} ×
+          </button>
+        }
+      </div>
+    </div>
   }
+
+  <div class="filters-panel__footer">
+    <button type="button" class="btn btn-ghost" (click)="store.clearCriteria()">Clear all</button>
+  </div>
 </section>

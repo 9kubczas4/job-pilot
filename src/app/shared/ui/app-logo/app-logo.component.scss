@@ -1,0 +1,38 @@
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--color-text);
+  text-decoration: none;
+  flex-shrink: 0;
+
+  &:hover .logo__mark {
+    transform: scale(1.04);
+  }
+}
+
+.logo__mark {
+  display: block;
+  flex-shrink: 0;
+  transition: transform var(--transition-fast);
+}
+
+.logo__wordmark {
+  display: flex;
+  align-items: baseline;
+  gap: 0.125rem;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.logo__name {
+  color: var(--color-text);
+}
+
+.logo__accent {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

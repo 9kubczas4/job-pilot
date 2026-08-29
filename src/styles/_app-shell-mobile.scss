@@ -1,21 +1,21 @@
 @media (max-width: 64rem) {
-  .app-header {
+  .app-shell .app-header {
     position: fixed;
     inset-inline: 0;
     top: 0;
     z-index: 36;
     gap: var(--space-2);
-    min-height: var(--mobile-toolbar-height, 3.5rem);
-    padding: calc(var(--space-2) + env(safe-area-inset-top, 0px)) var(--space-3) var(--space-2);
+    min-height: 0;
+    padding: env(safe-area-inset-top, 0px) var(--space-3) var(--space-2);
     background: rgb(255 255 255 / 0.94);
     grid-template-columns: auto minmax(0, 1fr) auto;
   }
 
-  .app-header__search {
+  .app-shell .app-header__search {
     display: none;
   }
 
-  .app-header__jobs-link {
+  .app-shell .app-header__jobs-link {
     display: flex;
     grid-column: 2;
     min-width: 0;
@@ -39,29 +39,37 @@
     }
   }
 
-  .app-main {
+  .app-shell .app-main {
     flex: 1;
     margin-top: var(--app-header-size);
     min-height: calc(100dvh - var(--app-header-size));
   }
 
-  .app-header__start {
+  .app-shell .app-header__start {
     grid-column: 1;
   }
 
-  .app-header__actions {
+  .app-shell .app-header__actions {
     grid-column: 3;
     justify-self: end;
     gap: var(--space-2);
   }
 
-  .app-nav {
+  .app-shell .app-nav {
     display: none;
+  }
+
+  .app-shell .page {
+    padding-block: var(--space-4);
+  }
+
+  .app-shell .landing-hero {
+    padding-block-start: var(--space-6);
   }
 }
 
 @media (max-width: 30rem) {
-  .app-header__jobs-link span {
+  .app-shell .app-header__jobs-link span {
     position: absolute;
     overflow: hidden;
     clip-path: inset(50%);
@@ -73,13 +81,13 @@
     border: 0;
   }
 
-  .app-header__jobs-link {
+  .app-shell .app-header__jobs-link {
     justify-content: center;
     width: 2.5rem;
     padding: 0;
   }
 
-  .header-action span:not(.header-action__badge) {
+  .app-shell .header-action span:not(.header-action__badge) {
     position: absolute;
     overflow: hidden;
     clip-path: inset(50%);
@@ -91,7 +99,7 @@
     border: 0;
   }
 
-  .header-action {
+  .app-shell .header-action {
     padding: var(--space-2);
     border-radius: var(--radius-md);
   }

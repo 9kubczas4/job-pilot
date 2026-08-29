@@ -63,7 +63,12 @@ export class HomePageComponent {
     {
       name: 'search_jobs',
       scope: 'global',
-      description: 'Turn natural language into JobSearchCriteria and refresh filters instantly.',
+      description: 'Turn natural language and locations into JobSearchCriteria and refresh the board instantly.',
+    },
+    {
+      name: 'filter_jobs',
+      scope: 'global',
+      description: 'Apply structured filters — workplace, seniority, salary, skills, contract type, and sort.',
     },
     {
       name: 'update_profile',

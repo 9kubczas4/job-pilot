@@ -18,7 +18,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AppLinks } from '@app/app-paths';
 import { AuthService } from '@core/auth/auth.service';
 import { AppShellComponent } from '@core/layout/app-shell.component';
-import { DEFAULT_SEARCH_RADIUS_KM } from '@shared/models/header-search.model';
 import { HeaderUiStore } from '@shared/state/header-ui.store';
 import { AuthPromptDialogComponent } from '@shared/ui/auth-prompt-dialog/auth-prompt-dialog.component';
 import { AppLogoComponent } from '@shared/ui/app-logo/app-logo.component';
@@ -29,9 +28,11 @@ import { ThemeToggleComponent } from '@shared/ui/theme-toggle/theme-toggle.compo
 import { ToastService } from '@shared/ui/toast/toast.service';
 import { SavedJobsStore } from '@features/saved-jobs/state/saved-jobs.store';
 import {
-  buildCityCentersFromJobs,
-  resolveCityCenter,
-} from '../../domain/city-catalog';
+  enrichLocationCriteria,
+  searchLocationEqual,
+  syncHeaderFromCriteria,
+} from '../../domain/job-search-sync.utils';
+import { buildCityCentersFromJobs, resolveCityCenter } from '../../domain/city-catalog';
 import { JobOffer } from '../../domain/job.model';
 import {
   criteriaToQueryParams,
@@ -337,17 +338,6 @@ export class JobSearchPageComponent implements OnInit {
   }
 }
 
-function syncHeaderFromCriteria(
-  headerUi: HeaderUiStore,
-  criteria: JobSearchCriteria,
-): void {
-  headerUi.searchQuery.set(criteria.query ?? '');
-  headerUi.locationQuery.set(criteria.locations?.[0] ?? '');
-  headerUi.locationLat.set(criteria.locationLat);
-  headerUi.locationLng.set(criteria.locationLng);
-  headerUi.radiusKm.set(criteria.radiusKm ?? DEFAULT_SEARCH_RADIUS_KM);
-}
-
 function buildCriteriaPatchFromHeader(
   headerUi: HeaderUiStore,
   jobs: JobOffer[],
@@ -370,36 +360,6 @@ function buildCriteriaPatchFromHeader(
     query: query || undefined,
     ...locationPatch,
   };
-}
-
-function enrichLocationCriteria(
-  criteria: JobSearchCriteria,
-  jobs: JobOffer[],
-): JobSearchCriteria {
-  if (criteria.locationLat != null || !criteria.locations?.[0]) {
-    return criteria;
-  }
-
-  const city = resolveCityCenter(buildCityCentersFromJobs(jobs), criteria.locations[0]);
-  if (!city) {
-    return criteria;
-  }
-
-  return {
-    ...criteria,
-    locationLat: city.latitude,
-    locationLng: city.longitude,
-    radiusKm: criteria.radiusKm ?? DEFAULT_SEARCH_RADIUS_KM,
-  };
-}
-
-function searchLocationEqual(a: JobSearchCriteria, b: JobSearchCriteria): boolean {
-  return (
-    (a.locations?.[0] ?? '') === (b.locations?.[0] ?? '') &&
-    (a.locationLat ?? null) === (b.locationLat ?? null) &&
-    (a.locationLng ?? null) === (b.locationLng ?? null) &&
-    (a.radiusKm ?? null) === (b.radiusKm ?? null)
-  );
 }
 
 function countActiveFilters(criteria: JobSearchCriteria): number {

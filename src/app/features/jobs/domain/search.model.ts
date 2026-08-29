@@ -23,3 +23,15 @@ export interface JobSearchCriteria {
   radiusKm?: number;
   sort?: JobSortOption;
 }
+
+export type JobFilterCriteria = Pick<
+  JobSearchCriteria,
+  | 'roles'
+  | 'skills'
+  | 'seniority'
+  | 'workSchedules'
+  | 'workplace'
+  | 'contracts'
+  | 'salaryMin'
+  | 'sort'
+>;

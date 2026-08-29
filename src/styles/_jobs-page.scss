@@ -1,7 +1,10 @@
 .jobs-page {
   position: relative;
+  display: flex;
+  flex: 1;
+  min-height: 0;
   overflow: hidden;
-  height: 100%;
+  flex-direction: column;
   background: #f4f7ff;
   padding: var(--space-3);
 }
@@ -16,7 +19,8 @@
 .jobs-page__layout {
   position: relative;
   z-index: 1;
-  height: 100%;
+  flex: 1;
+  min-height: 0;
   gap: var(--space-3);
 }
 

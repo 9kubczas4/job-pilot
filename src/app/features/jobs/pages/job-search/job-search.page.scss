@@ -1,13 +1,15 @@
 :host {
-  display: block;
+  display: flex;
   flex: 1;
   min-height: 0;
   overflow: hidden;
+  flex-direction: column;
 }
 
 .search-layout {
   display: grid;
-  height: 100%;
+  flex: 1;
+  min-height: 0;
   grid-template-columns: minmax(var(--sidebar-min), var(--sidebar-max)) 1fr;
   overflow: hidden;
 }

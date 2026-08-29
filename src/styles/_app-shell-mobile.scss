@@ -42,7 +42,8 @@
   .app-shell .app-main {
     flex: 1;
     margin-top: var(--app-header-size);
-    min-height: calc(100dvh - var(--app-header-size));
+    min-height: 0;
+    overflow-y: auto;
   }
 
   .app-shell .app-header__start {

@@ -18,7 +18,9 @@
 
 .app-shell {
   display: flex;
-  min-height: 100vh;
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
   flex-direction: column;
   background: var(--color-surface);
   --app-header-size: 0px;
@@ -140,4 +142,5 @@
   flex: 1;
   min-height: 0;
   flex-direction: column;
+  overflow-y: auto;
 }

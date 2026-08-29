@@ -5,17 +5,15 @@
         <div class="profile-page__empty-icon" aria-hidden="true">U</div>
         <h1 class="profile-page__empty-title">Your profile</h1>
         <p class="profile-page__empty-text">Sign in to create and manage your candidate profile.</p>
-        <button type="button" class="btn btn-primary" (click)="signIn()">Sign in with Google</button>
+        <button mat-flat-button color="primary" type="button" (click)="signIn()">Sign in with Google</button>
       </section>
     } @else if (store.loading() && !store.profile()) {
       <section class="profile-page__empty">
         <p class="state">Loading profile…</p>
       </section>
     } @else {
-      <div class="profile-page__cover" aria-hidden="true"></div>
-
-      <header class="profile-page__header">
-        <div class="profile-page__header-main">
+      <header class="profile-page__hero">
+        <div class="profile-page__hero-main">
           <div
             class="profile-page__avatar-ring"
             [style.--progress]="completeness()"
@@ -24,29 +22,20 @@
             <span class="profile-page__avatar">{{ initials() }}</span>
           </div>
 
-          <div class="profile-page__intro">
+          <div class="profile-page__hero-text">
             <h1 class="profile-page__name">{{ displayName() }}</h1>
-            <p class="profile-page__headline">{{ headlinePreview() }}</p>
-
-            <div class="profile-page__stats">
-              @if (workHistoryCount()) {
-                <span class="profile-page__stat">{{ workHistoryCount() }} roles</span>
-              }
-              @if (skillsCount()) {
-                <span class="profile-page__stat">{{ skillsCount() }} skills</span>
-              }
-              <span class="profile-page__stat">{{ completeness() }}% complete</span>
-            </div>
+            @if (headlinePreview(); as headline) {
+              <p class="profile-page__headline">{{ headline }}</p>
+            }
           </div>
         </div>
 
-        <div class="profile-page__header-actions">
-          @if (dirty()) {
-            <span class="profile-page__unsaved">Unsaved changes</span>
-          }
+        <div class="profile-page__hero-actions">
+          <span class="profile-page__completeness">{{ completeness() }}% complete</span>
           <button
+            mat-flat-button
+            color="primary"
             type="button"
-            class="btn btn-primary profile-page__save-top"
             [disabled]="saving() || !dirty()"
             (click)="save()"
           >
@@ -59,23 +48,21 @@
         <section class="profile-page__block">
           <h2 class="profile-page__block-title">About you</h2>
 
-          <label class="profile-page__field">
-            <span class="profile-page__label">Headline</span>
+          <mat-form-field appearance="outline" class="profile-mat-field">
+            <mat-label>Headline</mat-label>
             <input
-              class="input"
+              matInput
               [(ngModel)]="draft.headline"
               name="headline"
               placeholder="Senior Frontend Engineer · React & TypeScript"
               (ngModelChange)="markDirty()"
             />
-          </label>
+          </mat-form-field>
         </section>
 
         <section class="profile-page__block">
-          <div class="profile-page__block-head">
-            <h2 class="profile-page__block-title">Experience</h2>
-            <p class="profile-page__block-copy">Work history entries, like on your CV.</p>
-          </div>
+          <h2 class="profile-page__block-title">Experience</h2>
+          <p class="profile-page__block-copy">Work history entries, like on your CV.</p>
 
           @if (draft.workHistory.length) {
             <div class="profile-page__work-list">
@@ -83,77 +70,69 @@
                 <article class="profile-page__work-entry">
                   <div class="profile-page__work-entry-head">
                     <h3 class="profile-page__work-entry-title">Role {{ index + 1 }}</h3>
-                    <button type="button" class="profile-page__work-remove" (click)="removeWorkEntry(index)">
-                      Remove
-                    </button>
+                    <button mat-button type="button" (click)="removeWorkEntry(index)">Remove</button>
                   </div>
 
                   <div class="profile-page__fields profile-page__fields--2">
-                    <label class="profile-page__field">
-                      <span class="profile-page__label">Job title</span>
+                    <mat-form-field appearance="outline" class="profile-mat-field">
+                      <mat-label>Job title</mat-label>
                       <input
-                        class="input"
+                        matInput
                         [(ngModel)]="entry.title"
                         [name]="'workTitle' + index"
                         placeholder="Senior Frontend Engineer"
                         (ngModelChange)="markDirty()"
                       />
-                    </label>
+                    </mat-form-field>
 
-                    <label class="profile-page__field">
-                      <span class="profile-page__label">Company</span>
+                    <mat-form-field appearance="outline" class="profile-mat-field">
+                      <mat-label>Company</mat-label>
                       <input
-                        class="input"
+                        matInput
                         [(ngModel)]="entry.company"
                         [name]="'workCompany' + index"
                         placeholder="Acme Inc."
                         (ngModelChange)="markDirty()"
                       />
-                    </label>
+                    </mat-form-field>
                   </div>
 
                   <div class="profile-page__fields profile-page__fields--2">
-                    <div class="profile-page__field">
-                      <app-profile-month-picker
-                        label="Start date"
-                        [(ngModel)]="entry.startDate"
-                        [name]="'workStart' + index"
-                        (ngModelChange)="markDirty()"
-                      />
-                    </div>
+                    <app-profile-month-picker
+                      label="Start date"
+                      [(ngModel)]="entry.startDate"
+                      [name]="'workStart' + index"
+                      (ngModelChange)="markDirty()"
+                    />
 
-                    <div class="profile-page__field">
-                      <app-profile-month-picker
-                        label="End date"
-                        [(ngModel)]="entry.endDate"
-                        [name]="'workEnd' + index"
-                        [disabled]="entry.current ?? false"
-                        (ngModelChange)="markDirty()"
-                      />
-                    </div>
+                    <app-profile-month-picker
+                      label="End date"
+                      [(ngModel)]="entry.endDate"
+                      [name]="'workEnd' + index"
+                      [disabled]="entry.current ?? false"
+                      (ngModelChange)="markDirty()"
+                    />
                   </div>
 
-                  <label class="profile-page__checkbox">
-                    <input
-                      type="checkbox"
-                      [(ngModel)]="entry.current"
-                      [name]="'workCurrent' + index"
-                      (ngModelChange)="toggleWorkCurrent(entry, $event)"
-                    />
+                  <mat-checkbox
+                    [(ngModel)]="entry.current"
+                    [name]="'workCurrent' + index"
+                    (ngModelChange)="toggleWorkCurrent(entry, $event)"
+                  >
                     I currently work here
-                  </label>
+                  </mat-checkbox>
 
-                  <label class="profile-page__field">
-                    <span class="profile-page__label">Description</span>
+                  <mat-form-field appearance="outline" class="profile-mat-field">
+                    <mat-label>Description</mat-label>
                     <textarea
-                      class="input profile-page__textarea"
+                      matInput
                       [(ngModel)]="entry.description"
                       [name]="'workDescription' + index"
                       rows="3"
                       placeholder="Key responsibilities and achievements"
                       (ngModelChange)="markDirty()"
                     ></textarea>
-                  </label>
+                  </mat-form-field>
                 </article>
               }
             </div>
@@ -161,16 +140,12 @@
             <p class="profile-page__hint">No experience entries yet.</p>
           }
 
-          <button type="button" class="btn btn-ghost profile-page__add-entry" (click)="addWorkEntry()">
-            Add experience
-          </button>
+          <button mat-stroked-button type="button" (click)="addWorkEntry()">Add experience</button>
         </section>
 
         <section class="profile-page__block">
-          <div class="profile-page__block-head">
-            <h2 class="profile-page__block-title">Skills</h2>
-            <p class="profile-page__block-copy">Select proficiency level from 1 to 5.</p>
-          </div>
+          <h2 class="profile-page__block-title">Skills</h2>
+          <p class="profile-page__block-copy">Select proficiency level from 1 to 5.</p>
 
           @if (draft.skills.length) {
             <ul class="profile-page__skills">
@@ -187,147 +162,143 @@
           }
 
           <div class="profile-page__skill-add">
-            <input
-              class="input"
-              [ngModel]="newSkillName()"
-              (ngModelChange)="newSkillName.set($event)"
-              name="newSkill"
-              placeholder="Add a skill, press Enter"
-              (keydown.enter)="addSkill(); $event.preventDefault()"
-            />
-            <button type="button" class="btn btn-ghost" (click)="addSkill()">Add</button>
+            <mat-form-field appearance="outline" class="profile-mat-field">
+              <mat-label>Add a skill</mat-label>
+              <input
+                matInput
+                [ngModel]="newSkillName()"
+                (ngModelChange)="newSkillName.set($event)"
+                name="newSkill"
+                placeholder="Press Enter to add"
+                (keydown.enter)="addSkill(); $event.preventDefault()"
+              />
+            </mat-form-field>
+            <button mat-stroked-button type="button" (click)="addSkill()">Add</button>
           </div>
         </section>
 
         <section class="profile-page__block">
-          <div class="profile-page__block-head">
-            <h2 class="profile-page__block-title">Job preferences</h2>
-            <p class="profile-page__block-copy">What roles and locations you are looking for.</p>
-          </div>
+          <h2 class="profile-page__block-title">Job preferences</h2>
+          <p class="profile-page__block-copy">What roles and locations you are looking for.</p>
 
-          <label class="profile-page__field">
-            <span class="profile-page__label">Preferred roles</span>
+          <mat-form-field appearance="outline" class="profile-mat-field">
+            <mat-label>Preferred roles</mat-label>
             <input
-              class="input"
+              matInput
               [(ngModel)]="rolesInput"
               name="roles"
               placeholder="Frontend Developer, Tech Lead"
               (ngModelChange)="markDirty()"
             />
-          </label>
+          </mat-form-field>
 
-          <label class="profile-page__field">
-            <span class="profile-page__label">Preferred locations</span>
+          <mat-form-field appearance="outline" class="profile-mat-field">
+            <mat-label>Preferred locations</mat-label>
             <input
-              class="input"
+              matInput
               [(ngModel)]="locationsInput"
               name="locations"
               placeholder="Warsaw, Remote EU"
               (ngModelChange)="markDirty()"
             />
-          </label>
+          </mat-form-field>
 
           <div class="profile-page__field">
-            <span class="profile-page__label">Seniority</span>
-            <div class="cluster">
+            <span class="profile-page__field-label">Seniority</span>
+            <mat-button-toggle-group
+              multiple
+              hideMultipleSelectionIndicator
+              class="profile-mat-toggle-group"
+              [(ngModel)]="draft.preferredSeniorities"
+              name="seniority"
+              (ngModelChange)="markDirty()"
+            >
               @for (option of seniorityOptions; track option.value) {
-                <button
-                  type="button"
-                  class="chip-btn"
-                  [class.is-active]="isSenioritySelected(option.value)"
-                  (click)="toggleSeniority(option.value)"
-                >
-                  {{ option.label }}
-                </button>
+                <mat-button-toggle [value]="option.value">{{ option.label }}</mat-button-toggle>
               }
-            </div>
+            </mat-button-toggle-group>
           </div>
         </section>
 
         <section class="profile-page__block">
-          <div class="profile-page__block-head">
-            <h2 class="profile-page__block-title">Work setup</h2>
-            <p class="profile-page__block-copy">Workplace and contract preferences.</p>
-          </div>
+          <h2 class="profile-page__block-title">Work setup</h2>
+          <p class="profile-page__block-copy">Workplace and contract preferences.</p>
 
           <div class="profile-page__field">
-            <span class="profile-page__label">Workplace</span>
-            <div class="cluster">
+            <span class="profile-page__field-label">Workplace</span>
+            <mat-button-toggle-group
+              multiple
+              hideMultipleSelectionIndicator
+              class="profile-mat-toggle-group"
+              [(ngModel)]="draft.workplacePreferences"
+              name="workplace"
+              (ngModelChange)="markDirty()"
+            >
               @for (option of workplaceOptions; track option.value) {
-                <button
-                  type="button"
-                  class="chip-btn"
-                  [class.is-active]="isWorkplaceSelected(option.value)"
-                  (click)="toggleWorkplace(option.value)"
-                >
-                  {{ option.label }}
-                </button>
+                <mat-button-toggle [value]="option.value">{{ option.label }}</mat-button-toggle>
               }
-            </div>
+            </mat-button-toggle-group>
           </div>
 
           <div class="profile-page__field">
-            <span class="profile-page__label">Contract type</span>
-            <div class="cluster">
+            <span class="profile-page__field-label">Contract type</span>
+            <mat-button-toggle-group
+              multiple
+              hideMultipleSelectionIndicator
+              class="profile-mat-toggle-group"
+              [(ngModel)]="draft.contractPreferences"
+              name="contract"
+              (ngModelChange)="markDirty()"
+            >
               @for (option of contractOptions; track option.value) {
-                <button
-                  type="button"
-                  class="chip-btn"
-                  [class.is-active]="isContractSelected(option.value)"
-                  (click)="toggleContract(option.value)"
-                >
-                  {{ option.label }}
-                </button>
+                <mat-button-toggle [value]="option.value">{{ option.label }}</mat-button-toggle>
               }
-            </div>
+            </mat-button-toggle-group>
           </div>
         </section>
 
         <section class="profile-page__block profile-page__block--last">
-          <div class="profile-page__block-head">
-            <h2 class="profile-page__block-title">Salary & notes</h2>
-            <p class="profile-page__block-copy">Optional expectations and extra context.</p>
-          </div>
+          <h2 class="profile-page__block-title">Salary & notes</h2>
+          <p class="profile-page__block-copy">Optional expectations and extra context.</p>
 
           <div class="profile-page__fields profile-page__fields--2">
-            <label class="profile-page__field">
-              <span class="profile-page__label">Minimum salary</span>
+            <mat-form-field appearance="outline" class="profile-mat-field">
+              <mat-label>Minimum salary</mat-label>
               <input
-                class="input"
-                [(ngModel)]="draft.salaryExpectation!.min"
-                name="salaryMin"
+                matInput
                 type="number"
                 min="0"
+                [(ngModel)]="draft.salaryExpectation!.min"
+                name="salaryMin"
                 (ngModelChange)="markDirty()"
               />
-            </label>
+            </mat-form-field>
 
-            <label class="profile-page__field">
-              <span class="profile-page__label">Currency</span>
-              <select
-                class="input"
+            <mat-form-field appearance="outline" class="profile-mat-field">
+              <mat-label>Currency</mat-label>
+              <mat-select
                 [(ngModel)]="draft.salaryExpectation!.currency"
                 name="salaryCurrency"
                 (ngModelChange)="markDirty()"
               >
                 @for (option of currencyOptions; track option.value) {
-                  <option [value]="option.value">{{ option.label }}</option>
+                  <mat-option [value]="option.value">{{ option.label }}</mat-option>
                 }
-              </select>
-            </label>
+              </mat-select>
+            </mat-form-field>
           </div>
 
-          <label class="profile-page__field">
-            <span class="profile-page__label">Additional preferences</span>
+          <mat-form-field appearance="outline" class="profile-mat-field">
+            <mat-label>Additional preferences</mat-label>
             <textarea
-              class="input profile-page__textarea"
+              matInput
               [(ngModel)]="draft.preferences"
               name="preferences"
               rows="4"
               placeholder="Availability, notice period, preferred team size…"
               (ngModelChange)="markDirty()"
             ></textarea>
-          </label>
+          </mat-form-field>
 
           <p class="profile-page__meta">
             Last updated:
@@ -339,14 +310,6 @@
           </p>
         </section>
       </form>
-
-      @if (dirty()) {
-        <footer class="profile-page__mobile-bar">
-          <button type="button" class="btn btn-primary" [disabled]="saving()" (click)="save()">
-            {{ saving() ? 'Saving…' : 'Save profile' }}
-          </button>
-        </footer>
-      }
     }
   </div>
 </app-shell>

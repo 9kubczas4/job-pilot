@@ -20,8 +20,8 @@ export const WORKPLACE_OPTIONS: ProfileOption<WorkplaceMode>[] = [
 
 export const CONTRACT_OPTIONS: ProfileOption<ContractType>[] = [
   { value: 'b2b', label: 'B2B' },
-  { value: 'uop', label: 'UoP' },
-  { value: 'uz', label: 'UoZ' },
+  { value: 'uop', label: 'Employment contract' },
+  { value: 'uz', label: 'Contract of mandate' },
   { value: 'internship', label: 'Internship' },
 ];
 

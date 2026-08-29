@@ -38,7 +38,7 @@ const MONTH_DATE_FORMATS = {
     },
   ],
   template: `
-    <mat-form-field appearance="outline" class="profile-month-picker">
+    <mat-form-field appearance="outline" class="profile-mat-field profile-month-picker">
       <mat-label>{{ label() }}</mat-label>
       <input
         matInput
@@ -59,23 +59,6 @@ const MONTH_DATE_FORMATS = {
     :host {
       display: block;
       width: 100%;
-    }
-
-    .profile-month-picker {
-      width: 100%;
-    }
-
-    :host ::ng-deep .profile-month-picker .mat-mdc-form-field-subscript-wrapper {
-      display: none;
-    }
-
-    :host ::ng-deep .profile-month-picker .mat-mdc-text-field-wrapper {
-      min-height: 3rem;
-    }
-
-    :host ::ng-deep .profile-month-picker .mdc-text-field--outlined {
-      border-radius: var(--radius-md);
-      background: var(--color-surface-elevated);
     }
   `,
 })

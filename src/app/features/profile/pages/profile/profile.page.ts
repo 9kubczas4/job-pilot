@@ -9,6 +9,12 @@ import {
 } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { AppShellComponent } from '@core/layout/app-shell.component';
 import { AuthService } from '@core/auth/auth.service';
 import { ToastService } from '@shared/ui/toast/toast.service';
@@ -32,7 +38,19 @@ import { ProfileStore } from '../../state/profile.store';
 @Component({
   selector: 'app-profile-page',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [AppShellComponent, FormsModule, DatePipe, ProfileSkillRowComponent, ProfileMonthPickerComponent],
+  imports: [
+    AppShellComponent,
+    FormsModule,
+    DatePipe,
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    ProfileSkillRowComponent,
+    ProfileMonthPickerComponent,
+  ],
   templateUrl: './profile.page.html',
   styleUrl: './profile.page.scss',
 })
@@ -63,11 +81,7 @@ export class ProfilePageComponent implements OnInit {
   readonly initials = computed(() =>
     profileInitials(this.store.profile(), this.auth.user()?.displayName, this.auth.user()?.email),
   );
-  readonly headlinePreview = computed(
-    () => this.store.profile()?.headline?.trim() || 'Add a headline that describes your focus',
-  );
-  readonly skillsCount = computed(() => this.store.profile()?.skills.length ?? 0);
-  readonly workHistoryCount = computed(() => this.store.profile()?.workHistory.length ?? 0);
+  readonly headlinePreview = computed(() => this.store.profile()?.headline?.trim() || null);
 
   constructor() {
     effect(() => {
@@ -149,42 +163,6 @@ export class ProfilePageComponent implements OnInit {
 
   signIn(): void {
     void this.auth.signInWithGoogle();
-  }
-
-  toggleSeniority(level: CandidateProfile['preferredSeniorities'][number]): void {
-    this.markDirty();
-    const current = this.draft.preferredSeniorities;
-    this.draft.preferredSeniorities = current.includes(level)
-      ? current.filter((item) => item !== level)
-      : [...current, level];
-  }
-
-  toggleWorkplace(mode: CandidateProfile['workplacePreferences'][number]): void {
-    this.markDirty();
-    const current = this.draft.workplacePreferences;
-    this.draft.workplacePreferences = current.includes(mode)
-      ? current.filter((item) => item !== mode)
-      : [...current, mode];
-  }
-
-  toggleContract(type: CandidateProfile['contractPreferences'][number]): void {
-    this.markDirty();
-    const current = this.draft.contractPreferences;
-    this.draft.contractPreferences = current.includes(type)
-      ? current.filter((item) => item !== type)
-      : [...current, type];
-  }
-
-  isSenioritySelected(level: CandidateProfile['preferredSeniorities'][number]): boolean {
-    return this.draft.preferredSeniorities.includes(level);
-  }
-
-  isWorkplaceSelected(mode: CandidateProfile['workplacePreferences'][number]): boolean {
-    return this.draft.workplacePreferences.includes(mode);
-  }
-
-  isContractSelected(type: CandidateProfile['contractPreferences'][number]): boolean {
-    return this.draft.contractPreferences.includes(type);
   }
 
   addSkill(): void {

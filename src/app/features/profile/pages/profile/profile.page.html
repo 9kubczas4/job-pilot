@@ -1,319 +1,360 @@
 <app-shell>
-  <div class="profile-page">
-    @if (auth.loading()) {
-      <section class="profile-page__empty">
-        <p class="state">Loading…</p>
-      </section>
-    } @else if (!auth.isAuthenticated()) {
-      <section class="profile-page__empty">
-        <div class="profile-page__empty-icon" aria-hidden="true">U</div>
-        <h1 class="profile-page__empty-title">Your profile</h1>
-        <p class="profile-page__empty-text">Sign in to create and manage your candidate profile.</p>
-        <button mat-flat-button color="primary" type="button" (click)="signIn()">Sign in with Google</button>
-      </section>
-    } @else if (store.loading() && !store.profile()) {
-      <section class="profile-page__empty">
-        <p class="state">Loading profile…</p>
-      </section>
-    } @else {
-      <header class="profile-page__hero">
-        <div class="profile-page__hero-main">
-          <div
-            class="profile-page__avatar-ring"
-            [style.--progress]="completeness()"
-            [attr.aria-label]="'Profile completeness ' + completeness() + ' percent'"
-          >
-            <span class="profile-page__avatar">{{ initials() }}</span>
-          </div>
+  <div class="profile">
+    <div class="landing__aurora" aria-hidden="true">
+      <span class="landing__orb landing__orb--1"></span>
+      <span class="landing__orb landing__orb--2"></span>
+      <span class="landing__orb landing__orb--3"></span>
+      <span class="landing__grid"></span>
+    </div>
 
-          <div class="profile-page__hero-text">
-            <h1 class="profile-page__name">{{ displayName() }}</h1>
-            @if (headlinePreview(); as headline) {
-              <p class="profile-page__headline">{{ headline }}</p>
-            }
-          </div>
-        </div>
-
-        <div class="profile-page__hero-actions">
-          <span class="profile-page__completeness">{{ completeness() }}% complete</span>
-          <button
-            mat-flat-button
-            color="primary"
-            type="button"
-            [disabled]="saving() || !dirty()"
-            (click)="save()"
-          >
-            {{ saving() ? 'Saving…' : 'Save' }}
-          </button>
-        </div>
-      </header>
-
-      <form class="profile-page__sheet" (ngSubmit)="save()">
-        <section class="profile-page__block">
-          <h2 class="profile-page__block-title">About you</h2>
-
-          <mat-form-field appearance="outline" class="profile-mat-field">
-            <mat-label>Headline</mat-label>
-            <input
-              matInput
-              [(ngModel)]="draft.headline"
-              name="headline"
-              placeholder="Senior Frontend Engineer · React & TypeScript"
-              (ngModelChange)="markDirty()"
-            />
-          </mat-form-field>
+    <div class="container">
+      @if (auth.loading()) {
+        <section class="profile__empty glass-card">
+          <p class="state">Loading…</p>
         </section>
+      } @else if (!auth.isAuthenticated()) {
+        <section class="profile__empty glass-card">
+          <div class="profile__empty-icon" aria-hidden="true">U</div>
+          <h1 class="profile__empty-title">Your profile</h1>
+          <p class="profile__empty-text">Sign in to create and manage your candidate profile.</p>
+          <button class="profile__btn profile__btn--primary" type="button" (click)="signIn()">
+            Sign in with Google
+          </button>
+        </section>
+      } @else if (store.loading() && !store.profile()) {
+        <section class="profile__empty glass-card">
+          <p class="state">Loading profile…</p>
+        </section>
+      } @else {
+        <header class="profile__hero glass-card">
+          <div class="profile__hero-main">
+            <div
+              class="profile__avatar-ring"
+              [style.--progress]="completeness()"
+              [attr.aria-label]="'Profile completeness ' + completeness() + ' percent'"
+            >
+              <span class="profile__avatar">{{ initials() }}</span>
+            </div>
 
-        <section class="profile-page__block">
-          <h2 class="profile-page__block-title">Experience</h2>
-          <p class="profile-page__block-copy">Work history entries, like on your CV.</p>
-
-          @if (draft.workHistory.length) {
-            <div class="profile-page__work-list">
-              @for (entry of draft.workHistory; track $index; let index = $index) {
-                <article class="profile-page__work-entry">
-                  <div class="profile-page__work-entry-head">
-                    <h3 class="profile-page__work-entry-title">Role {{ index + 1 }}</h3>
-                    <button mat-button type="button" (click)="removeWorkEntry(index)">Remove</button>
-                  </div>
-
-                  <div class="profile-page__fields profile-page__fields--2">
-                    <mat-form-field appearance="outline" class="profile-mat-field">
-                      <mat-label>Job title</mat-label>
-                      <input
-                        matInput
-                        [(ngModel)]="entry.title"
-                        [name]="'workTitle' + index"
-                        placeholder="Senior Frontend Engineer"
-                        (ngModelChange)="markDirty()"
-                      />
-                    </mat-form-field>
-
-                    <mat-form-field appearance="outline" class="profile-mat-field">
-                      <mat-label>Company</mat-label>
-                      <input
-                        matInput
-                        [(ngModel)]="entry.company"
-                        [name]="'workCompany' + index"
-                        placeholder="Acme Inc."
-                        (ngModelChange)="markDirty()"
-                      />
-                    </mat-form-field>
-                  </div>
-
-                  <div class="profile-page__fields profile-page__fields--2">
-                    <app-profile-month-picker
-                      label="Start date"
-                      [(ngModel)]="entry.startDate"
-                      [name]="'workStart' + index"
-                      (ngModelChange)="markDirty()"
-                    />
-
-                    <app-profile-month-picker
-                      label="End date"
-                      [(ngModel)]="entry.endDate"
-                      [name]="'workEnd' + index"
-                      [disabled]="entry.current ?? false"
-                      (ngModelChange)="markDirty()"
-                    />
-                  </div>
-
-                  <mat-checkbox
-                    [(ngModel)]="entry.current"
-                    [name]="'workCurrent' + index"
-                    (ngModelChange)="toggleWorkCurrent(entry, $event)"
-                  >
-                    I currently work here
-                  </mat-checkbox>
-
-                  <mat-form-field appearance="outline" class="profile-mat-field">
-                    <mat-label>Description</mat-label>
-                    <textarea
-                      matInput
-                      [(ngModel)]="entry.description"
-                      [name]="'workDescription' + index"
-                      rows="3"
-                      placeholder="Key responsibilities and achievements"
-                      (ngModelChange)="markDirty()"
-                    ></textarea>
-                  </mat-form-field>
-                </article>
+            <div class="profile__hero-text">
+              <span class="profile__badge">
+                <span class="profile__badge-dot" aria-hidden="true"></span>
+                Candidate profile
+              </span>
+              <h1 class="profile__name">
+                <span class="profile__name-accent">{{ displayName() }}</span>
+              </h1>
+              @if (headlinePreview(); as headline) {
+                <p class="profile__headline">{{ headline }}</p>
               }
             </div>
-          } @else {
-            <p class="profile-page__hint">No experience entries yet.</p>
-          }
+          </div>
 
-          <button mat-stroked-button type="button" (click)="addWorkEntry()">Add experience</button>
-        </section>
+          <div class="profile__hero-actions">
+            <div class="profile__completeness">
+              <span class="profile__completeness-value">{{ completeness() }}%</span>
+              <span class="profile__completeness-label">profile complete</span>
+            </div>
+            <button
+              class="profile__btn profile__btn--primary"
+              type="button"
+              [disabled]="saving() || !dirty()"
+              (click)="save()"
+            >
+              {{ saving() ? 'Saving…' : 'Save changes' }}
+            </button>
+          </div>
+        </header>
 
-        <section class="profile-page__block">
-          <h2 class="profile-page__block-title">Skills</h2>
-          <p class="profile-page__block-copy">Select proficiency level from 1 to 5.</p>
+        <form class="profile__form" (ngSubmit)="save()">
+          <section class="profile__section glass-card">
+            <div class="profile__section-head">
+              <h2 class="profile__section-title">About you</h2>
+            </div>
 
-          @if (draft.skills.length) {
-            <ul class="profile-page__skills">
-              @for (skill of draft.skills; track skill.name; let index = $index) {
-                <app-profile-skill-row
-                  [skill]="skill"
-                  (levelChange)="setSkillYears(index, $event)"
-                  (remove)="removeSkill(index)"
-                />
-              }
-            </ul>
-          } @else {
-            <p class="profile-page__hint">No skills added yet.</p>
-          }
-
-          <div class="profile-page__skill-add">
             <mat-form-field appearance="outline" class="profile-mat-field">
-              <mat-label>Add a skill</mat-label>
+              <mat-label>Headline</mat-label>
               <input
                 matInput
-                [ngModel]="newSkillName()"
-                (ngModelChange)="newSkillName.set($event)"
-                name="newSkill"
-                placeholder="Press Enter to add"
-                (keydown.enter)="addSkill(); $event.preventDefault()"
+                [(ngModel)]="draft.headline"
+                name="headline"
+                placeholder="Senior Frontend Engineer · React & TypeScript"
+                (ngModelChange)="markDirty()"
               />
             </mat-form-field>
-            <button mat-stroked-button type="button" (click)="addSkill()">Add</button>
-          </div>
-        </section>
+          </section>
 
-        <section class="profile-page__block">
-          <h2 class="profile-page__block-title">Job preferences</h2>
-          <p class="profile-page__block-copy">What roles and locations you are looking for.</p>
+          <section class="profile__section glass-card">
+            <div class="profile__section-head">
+              <h2 class="profile__section-title">Experience</h2>
+              <p class="profile__section-copy">Work history entries, like on your CV.</p>
+            </div>
 
-          <mat-form-field appearance="outline" class="profile-mat-field">
-            <mat-label>Preferred roles</mat-label>
-            <input
-              matInput
-              [(ngModel)]="rolesInput"
-              name="roles"
-              placeholder="Frontend Developer, Tech Lead"
-              (ngModelChange)="markDirty()"
-            />
-          </mat-form-field>
+            @if (draft.workHistory.length) {
+              <div class="profile__work-list">
+                @for (entry of draft.workHistory; track $index; let index = $index) {
+                  <article class="profile__work-entry">
+                    <div class="profile__work-entry-head">
+                      <h3 class="profile__work-entry-title">Role {{ index + 1 }}</h3>
+                      <button
+                        class="profile__btn profile__btn--text"
+                        type="button"
+                        (click)="removeWorkEntry(index)"
+                      >
+                        Remove
+                      </button>
+                    </div>
 
-          <mat-form-field appearance="outline" class="profile-mat-field">
-            <mat-label>Preferred locations</mat-label>
-            <input
-              matInput
-              [(ngModel)]="locationsInput"
-              name="locations"
-              placeholder="Warsaw, Remote EU"
-              (ngModelChange)="markDirty()"
-            />
-          </mat-form-field>
+                    <div class="profile__fields profile__fields--2">
+                      <mat-form-field appearance="outline" class="profile-mat-field">
+                        <mat-label>Job title</mat-label>
+                        <input
+                          matInput
+                          [(ngModel)]="entry.title"
+                          [name]="'workTitle' + index"
+                          placeholder="Senior Frontend Engineer"
+                          (ngModelChange)="markDirty()"
+                        />
+                      </mat-form-field>
 
-          <div class="profile-page__field">
-            <span class="profile-page__field-label">Seniority</span>
-            <mat-button-toggle-group
-              multiple
-              hideMultipleSelectionIndicator
-              class="profile-mat-toggle-group"
-              [(ngModel)]="draft.preferredSeniorities"
-              name="seniority"
-              (ngModelChange)="markDirty()"
-            >
-              @for (option of seniorityOptions; track option.value) {
-                <mat-button-toggle [value]="option.value">{{ option.label }}</mat-button-toggle>
-              }
-            </mat-button-toggle-group>
-          </div>
-        </section>
+                      <mat-form-field appearance="outline" class="profile-mat-field">
+                        <mat-label>Company</mat-label>
+                        <input
+                          matInput
+                          [(ngModel)]="entry.company"
+                          [name]="'workCompany' + index"
+                          placeholder="Acme Inc."
+                          (ngModelChange)="markDirty()"
+                        />
+                      </mat-form-field>
+                    </div>
 
-        <section class="profile-page__block">
-          <h2 class="profile-page__block-title">Work setup</h2>
-          <p class="profile-page__block-copy">Workplace and contract preferences.</p>
+                    <div class="profile__fields profile__fields--2">
+                      <app-profile-month-picker
+                        label="Start date"
+                        [(ngModel)]="entry.startDate"
+                        [name]="'workStart' + index"
+                        (ngModelChange)="markDirty()"
+                      />
 
-          <div class="profile-page__field">
-            <span class="profile-page__field-label">Workplace</span>
-            <mat-button-toggle-group
-              multiple
-              hideMultipleSelectionIndicator
-              class="profile-mat-toggle-group"
-              [(ngModel)]="draft.workplacePreferences"
-              name="workplace"
-              (ngModelChange)="markDirty()"
-            >
-              @for (option of workplaceOptions; track option.value) {
-                <mat-button-toggle [value]="option.value">{{ option.label }}</mat-button-toggle>
-              }
-            </mat-button-toggle-group>
-          </div>
+                      <app-profile-month-picker
+                        label="End date"
+                        [(ngModel)]="entry.endDate"
+                        [name]="'workEnd' + index"
+                        [disabled]="entry.current ?? false"
+                        (ngModelChange)="markDirty()"
+                      />
+                    </div>
 
-          <div class="profile-page__field">
-            <span class="profile-page__field-label">Contract type</span>
-            <mat-button-toggle-group
-              multiple
-              hideMultipleSelectionIndicator
-              class="profile-mat-toggle-group"
-              [(ngModel)]="draft.contractPreferences"
-              name="contract"
-              (ngModelChange)="markDirty()"
-            >
-              @for (option of contractOptions; track option.value) {
-                <mat-button-toggle [value]="option.value">{{ option.label }}</mat-button-toggle>
-              }
-            </mat-button-toggle-group>
-          </div>
-        </section>
+                    <mat-checkbox
+                      [(ngModel)]="entry.current"
+                      [name]="'workCurrent' + index"
+                      (ngModelChange)="toggleWorkCurrent(entry, $event)"
+                    >
+                      I currently work here
+                    </mat-checkbox>
 
-        <section class="profile-page__block profile-page__block--last">
-          <h2 class="profile-page__block-title">Salary & notes</h2>
-          <p class="profile-page__block-copy">Optional expectations and extra context.</p>
+                    <mat-form-field appearance="outline" class="profile-mat-field">
+                      <mat-label>Description</mat-label>
+                      <textarea
+                        matInput
+                        [(ngModel)]="entry.description"
+                        [name]="'workDescription' + index"
+                        rows="3"
+                        placeholder="Key responsibilities and achievements"
+                        (ngModelChange)="markDirty()"
+                      ></textarea>
+                    </mat-form-field>
+                  </article>
+                }
+              </div>
+            } @else {
+              <p class="profile__hint">No experience entries yet.</p>
+            }
 
-          <div class="profile-page__fields profile-page__fields--2">
+            <button class="profile__btn profile__btn--ghost" type="button" (click)="addWorkEntry()">
+              Add experience
+            </button>
+          </section>
+
+          <section class="profile__section glass-card">
+            <div class="profile__section-head">
+              <h2 class="profile__section-title">Skills</h2>
+              <p class="profile__section-copy">Select proficiency level from 1 to 5.</p>
+            </div>
+
+            @if (draft.skills.length) {
+              <ul class="profile__skills">
+                @for (skill of draft.skills; track skill.name; let index = $index) {
+                  <app-profile-skill-row
+                    [skill]="skill"
+                    (levelChange)="setSkillYears(index, $event)"
+                    (remove)="removeSkill(index)"
+                  />
+                }
+              </ul>
+            } @else {
+              <p class="profile__hint">No skills added yet.</p>
+            }
+
+            <div class="profile__skill-add">
+              <mat-form-field appearance="outline" class="profile-mat-field">
+                <mat-label>Add a skill</mat-label>
+                <input
+                  matInput
+                  [ngModel]="newSkillName()"
+                  (ngModelChange)="newSkillName.set($event)"
+                  name="newSkill"
+                  placeholder="Press Enter to add"
+                  (keydown.enter)="addSkill(); $event.preventDefault()"
+                />
+              </mat-form-field>
+              <button class="profile__btn profile__btn--ghost" type="button" (click)="addSkill()">
+                Add
+              </button>
+            </div>
+          </section>
+
+          <section class="profile__section glass-card">
+            <div class="profile__section-head">
+              <h2 class="profile__section-title">Job preferences</h2>
+              <p class="profile__section-copy">What roles and locations you are looking for.</p>
+            </div>
+
             <mat-form-field appearance="outline" class="profile-mat-field">
-              <mat-label>Minimum salary</mat-label>
+              <mat-label>Preferred roles</mat-label>
               <input
                 matInput
-                type="number"
-                min="0"
-                [(ngModel)]="draft.salaryExpectation!.min"
-                name="salaryMin"
+                [(ngModel)]="rolesInput"
+                name="roles"
+                placeholder="Frontend Developer, Tech Lead"
                 (ngModelChange)="markDirty()"
               />
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="profile-mat-field">
-              <mat-label>Currency</mat-label>
-              <mat-select
-                [(ngModel)]="draft.salaryExpectation!.currency"
-                name="salaryCurrency"
+              <mat-label>Preferred locations</mat-label>
+              <input
+                matInput
+                [(ngModel)]="locationsInput"
+                name="locations"
+                placeholder="Warsaw, Remote EU"
+                (ngModelChange)="markDirty()"
+              />
+            </mat-form-field>
+
+            <div class="profile__field">
+              <span class="profile__field-label">Seniority</span>
+              <mat-button-toggle-group
+                multiple
+                hideMultipleSelectionIndicator
+                class="profile-mat-toggle-group"
+                [(ngModel)]="draft.preferredSeniorities"
+                name="seniority"
                 (ngModelChange)="markDirty()"
               >
-                @for (option of currencyOptions; track option.value) {
-                  <mat-option [value]="option.value">{{ option.label }}</mat-option>
+                @for (option of seniorityOptions; track option.value) {
+                  <mat-button-toggle [value]="option.value">{{ option.label }}</mat-button-toggle>
                 }
-              </mat-select>
+              </mat-button-toggle-group>
+            </div>
+          </section>
+
+          <section class="profile__section glass-card">
+            <div class="profile__section-head">
+              <h2 class="profile__section-title">Work setup</h2>
+              <p class="profile__section-copy">Workplace and contract preferences.</p>
+            </div>
+
+            <div class="profile__field">
+              <span class="profile__field-label">Workplace</span>
+              <mat-button-toggle-group
+                multiple
+                hideMultipleSelectionIndicator
+                class="profile-mat-toggle-group"
+                [(ngModel)]="draft.workplacePreferences"
+                name="workplace"
+                (ngModelChange)="markDirty()"
+              >
+                @for (option of workplaceOptions; track option.value) {
+                  <mat-button-toggle [value]="option.value">{{ option.label }}</mat-button-toggle>
+                }
+              </mat-button-toggle-group>
+            </div>
+
+            <div class="profile__field">
+              <span class="profile__field-label">Contract type</span>
+              <mat-button-toggle-group
+                multiple
+                hideMultipleSelectionIndicator
+                class="profile-mat-toggle-group"
+                [(ngModel)]="draft.contractPreferences"
+                name="contract"
+                (ngModelChange)="markDirty()"
+              >
+                @for (option of contractOptions; track option.value) {
+                  <mat-button-toggle [value]="option.value">{{ option.label }}</mat-button-toggle>
+                }
+              </mat-button-toggle-group>
+            </div>
+          </section>
+
+          <section class="profile__section glass-card">
+            <div class="profile__section-head">
+              <h2 class="profile__section-title">Salary & notes</h2>
+              <p class="profile__section-copy">Optional expectations and extra context.</p>
+            </div>
+
+            <div class="profile__fields profile__fields--2">
+              <mat-form-field appearance="outline" class="profile-mat-field">
+                <mat-label>Minimum salary</mat-label>
+                <input
+                  matInput
+                  type="number"
+                  min="0"
+                  [(ngModel)]="draft.salaryExpectation!.min"
+                  name="salaryMin"
+                  (ngModelChange)="markDirty()"
+                />
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="profile-mat-field">
+                <mat-label>Currency</mat-label>
+                <mat-select
+                  [(ngModel)]="draft.salaryExpectation!.currency"
+                  name="salaryCurrency"
+                  (ngModelChange)="markDirty()"
+                >
+                  @for (option of currencyOptions; track option.value) {
+                    <mat-option [value]="option.value">{{ option.label }}</mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <mat-form-field appearance="outline" class="profile-mat-field">
+              <mat-label>Additional preferences</mat-label>
+              <textarea
+                matInput
+                [(ngModel)]="draft.preferences"
+                name="preferences"
+                rows="4"
+                placeholder="Availability, notice period, preferred team size…"
+                (ngModelChange)="markDirty()"
+              ></textarea>
             </mat-form-field>
-          </div>
 
-          <mat-form-field appearance="outline" class="profile-mat-field">
-            <mat-label>Additional preferences</mat-label>
-            <textarea
-              matInput
-              [(ngModel)]="draft.preferences"
-              name="preferences"
-              rows="4"
-              placeholder="Availability, notice period, preferred team size…"
-              (ngModelChange)="markDirty()"
-            ></textarea>
-          </mat-form-field>
-
-          <p class="profile-page__meta">
-            Last updated:
-            @if (store.profile()?.updatedAt; as updatedAt) {
-              {{ updatedAt | date: 'medium' }}
-            } @else {
-              Not saved yet
-            }
-          </p>
-        </section>
-      </form>
-    }
+            <p class="profile__meta">
+              Last updated:
+              @if (store.profile()?.updatedAt; as updatedAt) {
+                {{ updatedAt | date: 'medium' }}
+              } @else {
+                Not saved yet
+              }
+            </p>
+          </section>
+        </form>
+      }
+    </div>
   </div>
 </app-shell>

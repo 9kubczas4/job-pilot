@@ -8,7 +8,6 @@ import {
 } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -43,7 +42,6 @@ import { ProfileStore } from '../../state/profile.store';
     AppShellComponent,
     FormsModule,
     DatePipe,
-    MatButtonModule,
     MatButtonToggleModule,
     MatCheckboxModule,
     MatFormFieldModule,

@@ -198,14 +198,22 @@
   }
 
   .app-header__start {
+    display: flex;
+    align-items: center;
+    align-self: center;
     grid-column: 1;
+    min-height: var(--control-height-md);
   }
 
   .app-header__actions {
+    display: flex;
+    align-items: center;
+    align-self: center;
     grid-column: 3;
     justify-self: end;
     flex-shrink: 0;
     overflow: visible;
+    min-height: var(--control-height-md);
     gap: var(--space-1);
   }
 

@@ -126,6 +126,13 @@
   background: var(--glass-surface-toolbar);
   backdrop-filter: blur(var(--blur-glass));
   grid-template-columns: auto minmax(0, 1fr) auto;
+
+  > app-logo {
+    display: flex;
+    align-items: center;
+    align-self: center;
+    min-height: var(--control-height-md);
+  }
 }
 
 .jobs-mobile__search {
@@ -165,8 +172,10 @@
 .jobs-mobile__actions {
   display: flex;
   align-items: center;
+  align-self: center;
   flex-shrink: 0;
   overflow: visible;
+  min-height: var(--control-height-md);
   gap: var(--space-1);
 }
 

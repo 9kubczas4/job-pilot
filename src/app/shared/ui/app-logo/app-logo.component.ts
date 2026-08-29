@@ -5,6 +5,9 @@ import { RouterLink } from '@angular/router';
   selector: 'app-logo',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [RouterLink],
+  host: {
+    '[class.logo-host--compact]': 'compact()',
+  },
   templateUrl: './app-logo.component.html',
   styleUrl: './app-logo.component.scss',
 })

@@ -1,3 +1,9 @@
+:host {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
 .logo {
   display: inline-flex;
   align-items: center;
@@ -35,4 +41,16 @@
   background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
   background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+:host(.logo-host--compact) .logo {
+  align-items: center;
+  justify-content: center;
+  width: var(--control-size-md);
+  height: var(--control-size-md);
+}
+
+:host(.logo-host--compact) .logo__mark {
+  width: var(--control-size-md);
+  height: var(--control-size-md);
 }

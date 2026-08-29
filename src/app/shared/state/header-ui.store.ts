@@ -22,6 +22,7 @@ export class HeaderUiStore {
   readonly locationSuggestions = signal<LocationSearchSuggestion[]>([]);
   readonly activeFilterCount = signal(0);
   readonly searchApplyTrigger = signal(0);
+  readonly mobileSearchCloseRequest = signal(0);
   readonly headerHidden = signal(false);
 
   private lastScrollTop = 0;
@@ -31,6 +32,10 @@ export class HeaderUiStore {
 
   applySearch(): void {
     this.searchApplyTrigger.update((value) => value + 1);
+  }
+
+  requestMobileSearchClose(): void {
+    this.mobileSearchCloseRequest.update((value) => value + 1);
   }
 
   openFilters(): void {

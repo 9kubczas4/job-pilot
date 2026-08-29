@@ -34,10 +34,6 @@ import {
 } from '../../domain/city-catalog';
 import { JobOffer } from '../../domain/job.model';
 import {
-  buildJobSearchSuggestions,
-  buildLocationSearchSuggestions,
-} from '../../domain/search-suggestions';
-import {
   criteriaToQueryParams,
   normalizeLocationCriteria,
   queryParamsEqual,
@@ -101,6 +97,7 @@ export class JobSearchPageComponent implements OnInit {
   private readonly syncingFromRoute = signal(false);
   private readonly syncingFromHeader = signal(false);
   private readonly lastAppliedTrigger = signal(0);
+  private mobileCloseRequestSnapshot = 0;
 
   readonly searchSummary = computed(() => {
     const query = this.headerUi.searchQuery().trim();
@@ -181,25 +178,23 @@ export class JobSearchPageComponent implements OnInit {
       this.store.patchSearchCriteria(patch);
       this.syncingFromHeader.set(false);
       this.lastAppliedTrigger.set(trigger);
+    });
 
-      if (this.isMobileLayout()) {
-        this.searchExpanded.set(false);
-        this.sheetSnap.set('peek');
-        this.sheetFocusJobId.set(null);
+    effect(() => {
+      const request = this.headerUi.mobileSearchCloseRequest();
+      if (request === this.mobileCloseRequestSnapshot) {
+        return;
       }
-    });
 
-    effect(() => {
-      const jobs = this.store.allJobs();
-      const query = this.headerUi.searchQuery();
-      this.headerUi.jobSuggestions.set(buildJobSearchSuggestions(jobs, query));
-    });
+      this.mobileCloseRequestSnapshot = request;
 
-    effect(() => {
-      const jobs = this.store.allJobs();
-      const catalog = buildCityCentersFromJobs(jobs);
-      const query = this.headerUi.locationQuery();
-      this.headerUi.locationSuggestions.set(buildLocationSearchSuggestions(catalog, query));
+      if (!this.isMobileLayout()) {
+        return;
+      }
+
+      this.searchExpanded.set(false);
+      this.sheetSnap.set('peek');
+      this.sheetFocusJobId.set(null);
     });
 
     effect(() => {

@@ -13,6 +13,7 @@ import { provideExperimentalWebMcpForms } from '@angular/forms/signals';
 import { routes } from './app.routes';
 import { provideFirebase } from '@core/firebase/firebase.providers';
 import { provideSearchJobsWebMcpTool } from '@features/jobs/webmcp/search-jobs.tool';
+import { SearchCatalogService } from '@features/jobs/data-access/search-catalog.service';
 import { environment } from '@environments/environment';
 import { isGoogleMapsConfigured, loadGoogleMapsApi } from '@shared/map/google-maps-loader';
 import { GOOGLE_MAPS_API_KEY } from '@shared/map/google-maps-config';
@@ -28,6 +29,21 @@ export const appConfig: ApplicationConfig = {
     provideSearchJobsWebMcpTool(),
     provideRouter(routes, withExperimentalAutoCleanupInjectors()),
     { provide: GOOGLE_MAPS_API_KEY, useValue: environment.googleMapsApiKey },
+    {
+      provide: APP_INITIALIZER,
+      multi: true,
+      useFactory: () => {
+        const platformId = inject(PLATFORM_ID);
+
+        return () => {
+          if (!isPlatformBrowser(platformId)) {
+            return Promise.resolve();
+          }
+
+          return inject(SearchCatalogService).preload();
+        };
+      },
+    },
     {
       provide: APP_INITIALIZER,
       multi: true,

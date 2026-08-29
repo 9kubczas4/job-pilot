@@ -36,14 +36,29 @@ export class JobSearchStore {
   }
 
   async loadJobs(): Promise<void> {
-    this.loading.set(true);
-    try {
-      const jobs = await this.jobRepository.getAllJobs();
-      this.allJobs.set(jobs);
-    } finally {
-      this.loading.set(false);
+    if (this.allJobs().length) {
+      return;
     }
+
+    if (this.loadPromise) {
+      return this.loadPromise;
+    }
+
+    this.loading.set(true);
+    this.loadPromise = this.jobRepository
+      .getAllJobs()
+      .then((jobs) => {
+        this.allJobs.set(jobs);
+      })
+      .finally(() => {
+        this.loading.set(false);
+        this.loadPromise = null;
+      });
+
+    return this.loadPromise;
   }
+
+  private loadPromise: Promise<void> | null = null;
 
   applyCriteria(partial: JobSearchCriteria): void {
     this.criteria.update((current) => mergeDefinedCriteria(current, partial));

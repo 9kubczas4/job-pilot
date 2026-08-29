@@ -15,6 +15,7 @@ import {
   SEARCH_RADIUS_OPTIONS_KM,
 } from '@shared/models/header-search.model';
 import { HeaderUiStore } from '@shared/state/header-ui.store';
+import { SearchCatalogService } from '@features/jobs/data-access/search-catalog.service';
 
 const SEARCH_DEBOUNCE_MS = 400;
 
@@ -32,6 +33,8 @@ export class HeaderSearchComponent {
   readonly headerUi = inject(HeaderUiStore);
   readonly radiusOptions = SEARCH_RADIUS_OPTIONS_KM;
 
+  private readonly searchCatalog = inject(SearchCatalogService);
+
   private readonly router = inject(Router);
   private readonly host = inject(ElementRef<HTMLElement>);
   private readonly destroyRef = inject(DestroyRef);
@@ -45,6 +48,7 @@ export class HeaderSearchComponent {
 
   constructor() {
     this.destroyRef.onDestroy(() => this.clearDebounce());
+    void this.searchCatalog.preload();
   }
 
   onJobQueryChange(value: string): void {
@@ -166,6 +170,7 @@ export class HeaderSearchComponent {
 
     if (this.isJobsSearchPage()) {
       this.applySearchOnJobsPage();
+      this.headerUi.requestMobileSearchClose();
       return;
     }
 
@@ -174,6 +179,7 @@ export class HeaderSearchComponent {
       .then((success) => {
         if (success) {
           this.headerUi.applySearch();
+          this.headerUi.requestMobileSearchClose();
         }
       });
   }

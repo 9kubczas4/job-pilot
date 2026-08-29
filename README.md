@@ -115,13 +115,21 @@ Expected result: profile updates appear in `/profile`, search updates filters/li
 
 ```
 src/app/
-  jobs/           Job search, map, details
-  profile/        Candidate profile + profile tools
-  saved-jobs/     Saved jobs feature
-  webmcp/         Shared schemas and tool helpers
-  core/           Auth, Firebase, layout
-  shared/         Models and utilities
-docs/ideas/       Product direction one-pager
+  core/           Auth, Firebase, layout, WebMCP tools
+  shared/         Business-agnostic UI kit and utilities
+  features/       Feature modules (see below)
+docs/architecture/import-boundaries.md
+```
+
+Import boundaries are enforced by ESLint — see [Import Boundaries](docs/architecture/import-boundaries.md).
+
+```
+features/{name}/
+  {name}.page.ts   Smart page (route target)
+  ui/              Presentational components
+  domain/          Models and pure business rules
+  data-access/     Repositories, Firestore
+  state/           Stores and facades
 ```
 
 ## Hackathon Submission Checklist

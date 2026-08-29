@@ -36,15 +36,15 @@ The agent runs in **Codex** (ChatGPT desktop in-app browser). The app exposes to
 
 ### WebMCP Tools (7)
 
-| Tool | Angular implementation | Route |
+| Tool | Angular implementation | Scope |
 |------|------------------------|-------|
-| `get_profile_schema` | `provideExperimentalWebMcpTools` | `/profile` |
-| `get_profile` | `declareExperimentalWebMcpTool` in `ProfileService` | `/profile` |
-| `update_profile` | Signal Form + `experimentalWebMcpTool` | `/profile` |
-| `search_jobs` | `declareExperimentalWebMcpTool` in `JobSearchStore` | `/jobs` |
-| `get_job` | route provider | `/jobs/:id` |
-| `save_job` | route provider / service | `/jobs/:id` |
-| `apply_to_job` | route provider / service | `/jobs/:id` |
+| `get_profile_schema` | `provideExperimentalWebMcpTools` | `core/webmcp/tools/profile.tools.ts` |
+| `get_profile` | `provideExperimentalWebMcpTools` | injects `ProfileStore` |
+| `update_profile` | Signal Form + `experimentalWebMcpTool` or explicit tool | `/profile` route |
+| `search_jobs` | `provideExperimentalWebMcpTools` | injects `JobSearchStore` |
+| `get_job` | route-scoped tools | `/jobs/:id` |
+| `save_job` | route-scoped tools | `/jobs/:id` |
+| `apply_to_job` | route-scoped tools | `/jobs/:id` |
 
 #### `apply_to_job` (minimal)
 
@@ -107,40 +107,81 @@ Codex (ChatGPT browser)
 
 ## Module Structure
 
+Layered features under `features/`, infrastructure in `core/`, business-agnostic code in `shared/`. Import rules are enforced by ESLint — see [`docs/architecture/import-boundaries.md`](../architecture/import-boundaries.md).
+
 ```
 src/app/
-  jobs/
-    domain/
-    data-access/
-    feature-search/
-    feature-details/
-    ui-job-card/
-    ui-job-list/
-    ui-job-map/
-    ui-filters/
-  profile/
-    domain/
-    data-access/
-    feature-profile/
-    feature-cv-upload/
-    ui-profile-form/
-  saved-jobs/
-    domain/
-    data-access/
-    feature-saved-jobs/
-  webmcp/
-    tools/
-    schemas/
-    services/
+  app.config.ts
+  app.routes.ts
+  app.ts
+
   core/
     auth/
     firebase/
     layout/
-  shared/
-    ui/
-    utils/
-    models/
+    pages/                  # home / judge onboarding
+    webmcp/
+      tools/                # get_job, save_job, search_jobs, profile tools, …
+      schemas/              # JSON schemas exposed to agents
+      utils/                # tool-response helpers
+
+  shared/                   # business-agnostic only (no domain models)
+    ui/                     # button, chip, empty-state, …
+    utils/                  # generic helpers (dates, debounce, …)
+
+  features/
+    jobs/
+      job-search.page.ts    # smart page — route target
+      job-details.page.ts
+      ui/
+        job-card.component.ts
+        job-list.component.ts
+        job-map.component.ts
+        job-filters.component.ts
+      domain/
+        job.model.ts
+        search-criteria.model.ts
+        job-matcher.ts        # matchesSearchCriteria, formatSalary, …
+      data-access/
+        job.repository.ts
+      state/
+        job-search.store.ts   # criteria, selection, filtered jobs
+
+    profile/
+      profile.page.ts
+      ui/
+        profile-form.component.ts
+      domain/
+        candidate-profile.model.ts
+      data-access/
+        profile.repository.ts
+      state/
+        profile.store.ts
+
+    saved-jobs/
+      saved-jobs.page.ts
+      domain/
+        saved-job.model.ts
+        application.model.ts
+      data-access/
+        saved-jobs.repository.ts
+      state/
+        saved-jobs.store.ts
 ```
+
+### Import boundaries (summary)
+
+| Layer | May import |
+|-------|------------|
+| `domain` | external packages only |
+| `data-access` | `domain`, `core` |
+| `state` | `domain`, `data-access`, `core` |
+| `ui` | `domain`, `state`, `shared` |
+| `*.page.ts` | `ui`, `state`, `domain`, `shared`, `core` |
+| `core/webmcp` | feature `state` / `domain` / `data-access`, `core`, `shared` |
+| `shared` | `shared`, external |
+
+WebMCP tools live in **`core/webmcp`** and inject feature **stores** — the same state humans mutate through the UI.
 
 ## Open Questions
 

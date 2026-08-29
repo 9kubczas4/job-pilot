@@ -1,18 +1,27 @@
 import {
+  afterNextRender,
   ChangeDetectionStrategy,
   Component,
+  computed,
   DestroyRef,
   effect,
   inject,
   OnInit,
+  PLATFORM_ID,
   signal,
   untracked,
+  viewChild,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AppLinks } from '@app/app-paths';
 import { AppShellComponent } from '@core/layout/app-shell.component';
 import { DEFAULT_SEARCH_RADIUS_KM } from '@shared/models/header-search.model';
 import { HeaderUiStore } from '@shared/state/header-ui.store';
+import { AppLogoComponent } from '@shared/ui/app-logo/app-logo.component';
+import { FilterDrawerComponent } from '@shared/ui/filter-drawer/filter-drawer.component';
+import { HeaderSearchComponent } from '@shared/ui/header-search/header-search.component';
 import { SavedJobsStore } from '@features/saved-jobs/state/saved-jobs.store';
 import {
   buildCityCentersFromJobs,
@@ -34,30 +43,85 @@ import { JobSearchStore } from '../../state/job-search.store';
 import { JobFiltersComponent } from '../../ui/job-filters/job-filters.component';
 import { JobListComponent } from '../../ui/job-list/job-list.component';
 import { JobMapComponent } from '../../ui/job-map/job-map.component';
+import {
+  JobResultsSheetComponent,
+  JobSheetSnap,
+} from '../../ui/job-results-sheet/job-results-sheet.component';
 import { JobSearchCriteria } from '../../domain/search.model';
+
+const MOBILE_LAYOUT_QUERY = '(max-width: 60rem)';
 
 @Component({
   selector: 'app-job-search-page',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [AppShellComponent, JobFiltersComponent, JobListComponent, JobMapComponent],
+  imports: [
+    AppShellComponent,
+    AppLogoComponent,
+    FilterDrawerComponent,
+    HeaderSearchComponent,
+    JobFiltersComponent,
+    JobListComponent,
+    JobMapComponent,
+    JobResultsSheetComponent,
+  ],
   templateUrl: './job-search.page.html',
   styleUrl: './job-search.page.scss',
 })
 export class JobSearchPageComponent implements OnInit {
   readonly store = inject(JobSearchStore);
   readonly savedJobs = inject(SavedJobsStore);
-  private readonly headerUi = inject(HeaderUiStore);
+  readonly headerUi = inject(HeaderUiStore);
+  readonly links = AppLinks;
+
+  readonly isMobileLayout = signal(false);
+  readonly searchExpanded = signal(false);
+  readonly sheetSnap = signal<JobSheetSnap>('peek');
+  readonly sheetFocusJobId = signal<string | null>(null);
+
+  private readonly jobMap = viewChild<JobMapComponent>('jobMap');
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly platformId = inject(PLATFORM_ID);
 
   private readonly syncingFromRoute = signal(false);
   private readonly syncingFromHeader = signal(false);
   private readonly lastAppliedTrigger = signal(0);
 
+  readonly searchSummary = computed(() => {
+    const query = this.headerUi.searchQuery().trim();
+    const location = this.headerUi.locationQuery().trim();
+    const radius = this.headerUi.radiusKm();
+
+    if (query && location) {
+      return `${query} · ${location} · ${radius} km`;
+    }
+    if (query) {
+      return query;
+    }
+    if (location) {
+      return `${location} · ${radius} km`;
+    }
+    return 'Search jobs';
+  });
+
   constructor() {
     this.headerUi.enableFilters();
-    this.destroyRef.onDestroy(() => this.headerUi.disableFilters());
+    this.destroyRef.onDestroy(() => {
+      this.headerUi.disableFilters();
+      this.headerUi.showHeader();
+    });
+
+    if (isPlatformBrowser(this.platformId)) {
+      afterNextRender(() => {
+        const mobileQuery = window.matchMedia(MOBILE_LAYOUT_QUERY);
+        const syncLayout = () => this.isMobileLayout.set(mobileQuery.matches);
+
+        syncLayout();
+        mobileQuery.addEventListener('change', syncLayout);
+        this.destroyRef.onDestroy(() => mobileQuery.removeEventListener('change', syncLayout));
+      });
+    }
 
     effect(() => {
       if (this.syncingFromRoute() || this.syncingFromHeader()) {
@@ -97,6 +161,12 @@ export class JobSearchPageComponent implements OnInit {
       this.store.patchSearchCriteria(patch);
       this.syncingFromHeader.set(false);
       this.lastAppliedTrigger.set(trigger);
+
+      if (this.isMobileLayout()) {
+        this.searchExpanded.set(false);
+        this.sheetSnap.set('peek');
+        this.sheetFocusJobId.set(null);
+      }
     });
 
     effect(() => {
@@ -136,6 +206,16 @@ export class JobSearchPageComponent implements OnInit {
       });
       this.syncingFromHeader.set(false);
     });
+
+    effect(() => {
+      if (!this.isMobileLayout()) {
+        return;
+      }
+
+      // Re-trigger map resize when sheet snap changes (visible map area shifts).
+      this.sheetSnap();
+      queueMicrotask(() => this.jobMap()?.notifyVisible());
+    });
   }
 
   ngOnInit(): void {
@@ -160,6 +240,33 @@ export class JobSearchPageComponent implements OnInit {
 
   onSelectJob(jobId: string): void {
     this.store.selectJob(jobId);
+  }
+
+  onMobileSelectJob(jobId: string): void {
+    this.store.selectJob(jobId);
+    this.sheetFocusJobId.set(jobId);
+    this.sheetSnap.set('peek');
+  }
+
+  onSheetSnapChange(snap: JobSheetSnap): void {
+    this.sheetSnap.set(snap);
+
+    if (snap === 'collapsed') {
+      this.sheetFocusJobId.set(null);
+    }
+  }
+
+  clearSheetFocus(): void {
+    this.sheetFocusJobId.set(null);
+  }
+
+  openSearch(): void {
+    this.searchExpanded.set(true);
+  }
+
+  closeSearch(): void {
+    this.searchExpanded.set(false);
+    this.headerUi.applySearch();
   }
 }
 

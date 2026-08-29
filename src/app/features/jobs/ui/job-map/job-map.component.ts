@@ -43,6 +43,7 @@ export class JobMapComponent {
 
   readonly jobs = input<JobOffer[]>([]);
   readonly selectedJobId = input<string | null>(null);
+  readonly showPopups = input(true);
   readonly selectJob = output<string>();
 
   readonly mapsConfigured = isGoogleMapsConfigured(this.apiKey);
@@ -103,6 +104,14 @@ export class JobMapComponent {
 
   onAuthFailure(): void {
     this.mapError.set(true);
+  }
+
+  notifyVisible(): void {
+    if (!this.map) {
+      return;
+    }
+
+    google.maps.event.trigger(this.map, 'resize');
   }
 
   private syncMap(jobs: JobOffer[], selectedId: string | null): void {
@@ -170,6 +179,11 @@ export class JobMapComponent {
     if (job.location) {
       this.focusOnMarker(job.location);
     }
+
+    if (!this.showPopups()) {
+      return;
+    }
+
     this.openJobPopup(job, marker);
   }
 

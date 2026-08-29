@@ -1,22 +1,105 @@
-<app-shell>
-  <section filter-panel>
-    <app-job-filters />
-  </section>
+@if (isMobileLayout()) {
+  <div class="jobs-mobile">
+    <header class="jobs-mobile__toolbar">
+      <app-logo [compact]="true" [homeLink]="links.home" />
 
-  <div class="search-layout">
-    <app-job-list
+      <button type="button" class="jobs-mobile__search" (click)="openSearch()">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+          <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none" />
+          <path d="M16.5 16.5 L21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+        <span class="jobs-mobile__search-label">{{ searchSummary() }}</span>
+      </button>
+
+      <button
+        type="button"
+        class="jobs-mobile__filters"
+        [class.jobs-mobile__filters--active]="headerUi.filtersOpen()"
+        [attr.aria-expanded]="headerUi.filtersOpen()"
+        aria-controls="jobs-mobile-filter-drawer"
+        (click)="headerUi.toggleFilters()"
+      >
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+          <path
+            d="M4 6 H20 M7 12 H17 M10 18 H14"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+        </svg>
+        @if (headerUi.activeFilterCount() > 0) {
+          <span class="jobs-mobile__filters-badge">{{ headerUi.activeFilterCount() }}</span>
+        }
+      </button>
+    </header>
+
+    @if (searchExpanded()) {
+      <div class="jobs-mobile__search-panel" role="dialog" aria-label="Search jobs">
+        <div class="jobs-mobile__search-panel-inner">
+          <app-header-search />
+          <button type="button" class="jobs-mobile__search-done" (click)="closeSearch()">Done</button>
+        </div>
+      </div>
+    }
+
+    <div class="jobs-mobile__map">
+      <app-job-map
+        #jobMap
+        [jobs]="store.jobs()"
+        [selectedJobId]="store.selectedJobId()"
+        [showPopups]="false"
+        (selectJob)="onMobileSelectJob($event)"
+      />
+    </div>
+
+    <app-job-results-sheet
       [jobs]="store.jobs()"
       [loading]="store.loading()"
       [selectedJobId]="store.selectedJobId()"
       [savedJobIds]="savedJobs.savedJobIds()"
       [appliedJobIds]="savedJobs.appliedJobIds()"
+      [snap]="sheetSnap()"
+      [focusJobId]="sheetFocusJobId()"
+      (snapChange)="onSheetSnapChange($event)"
       (selectJob)="onSelectJob($event)"
+      (clearFocus)="clearSheetFocus()"
     />
 
-    <app-job-map
-      [jobs]="store.jobs()"
-      [selectedJobId]="store.selectedJobId()"
-      (selectJob)="onSelectJob($event)"
-    />
+    <app-filter-drawer
+      id="jobs-mobile-filter-drawer"
+      [open]="headerUi.filtersEnabled() && headerUi.filtersOpen()"
+      (closed)="headerUi.closeFilters()"
+    >
+      <section filter-panel>
+        <app-job-filters />
+      </section>
+    </app-filter-drawer>
   </div>
-</app-shell>
+} @else {
+  <app-shell>
+    <section filter-panel>
+      <app-job-filters />
+    </section>
+
+    <div class="search-layout">
+      <div class="search-layout__panel search-layout__panel--list">
+        <app-job-list
+          [jobs]="store.jobs()"
+          [loading]="store.loading()"
+          [selectedJobId]="store.selectedJobId()"
+          [savedJobIds]="savedJobs.savedJobIds()"
+          [appliedJobIds]="savedJobs.appliedJobIds()"
+          (selectJob)="onSelectJob($event)"
+        />
+      </div>
+
+      <div class="search-layout__panel search-layout__panel--map">
+        <app-job-map
+          [jobs]="store.jobs()"
+          [selectedJobId]="store.selectedJobId()"
+          (selectJob)="onSelectJob($event)"
+        />
+      </div>
+    </div>
+  </app-shell>
+}

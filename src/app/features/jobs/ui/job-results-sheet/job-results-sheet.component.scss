@@ -1,0 +1,148 @@
+:host {
+  display: block;
+  pointer-events: none;
+}
+
+.job-sheet {
+  --sheet-height-collapsed: 3.25rem;
+  --sheet-height-peek: min(24vh, 11rem);
+  --sheet-height-half: 52vh;
+  --sheet-height-full: calc(100dvh - var(--jobs-mobile-toolbar-height, 3.5rem));
+
+  position: fixed;
+  inset: 0;
+  z-index: 35;
+}
+
+.job-sheet__backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: rgb(15 23 42 / 0.28);
+  pointer-events: auto;
+  animation: job-sheet-fade-in 180ms ease;
+}
+
+.job-sheet__panel {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  display: flex;
+  max-height: var(--sheet-height-full);
+  flex-direction: column;
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  background: var(--color-surface-elevated);
+  box-shadow: 0 -10px 40px rgb(15 23 42 / 0.14);
+  pointer-events: auto;
+  touch-action: none;
+  transition: height var(--header-transition);
+}
+
+.job-sheet--dragging .job-sheet__panel {
+  transition: none;
+}
+
+.job-sheet--collapsed:not(.job-sheet--dragging) .job-sheet__panel {
+  height: calc(var(--sheet-height-collapsed) + env(safe-area-inset-bottom, 0px));
+}
+
+.job-sheet--peek:not(.job-sheet--dragging) .job-sheet__panel {
+  height: calc(var(--sheet-height-peek) + env(safe-area-inset-bottom, 0px));
+}
+
+.job-sheet--half:not(.job-sheet--dragging) .job-sheet__panel {
+  height: calc(var(--sheet-height-half) + env(safe-area-inset-bottom, 0px));
+}
+
+.job-sheet--full:not(.job-sheet--dragging) .job-sheet__panel {
+  height: calc(var(--sheet-height-full) + env(safe-area-inset-bottom, 0px));
+}
+
+.job-sheet__handle {
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4) var(--space-2);
+  cursor: grab;
+  user-select: none;
+
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+.job-sheet__grabber {
+  width: 2.5rem;
+  height: 0.25rem;
+  border-radius: var(--radius-full);
+  background: var(--color-border-strong);
+}
+
+.job-sheet__summary {
+  margin: 0;
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+}
+
+.job-sheet__body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 0 var(--space-4) calc(var(--space-4) + env(safe-area-inset-bottom, 0px));
+  overscroll-behavior: contain;
+}
+
+.job-sheet__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.job-sheet__focused {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.job-sheet__back {
+  align-self: flex-start;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--color-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+}
+
+.job-sheet__state,
+.job-sheet__empty {
+  padding: var(--space-4) 0;
+  text-align: center;
+}
+
+.job-sheet__empty-title {
+  margin: 0;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+}
+
+.job-sheet__empty-text {
+  margin: var(--space-2) 0 0;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+@keyframes job-sheet-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

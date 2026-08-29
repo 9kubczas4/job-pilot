@@ -41,8 +41,8 @@
 @media (max-width: 60rem) {
   .map-container,
   .map-placeholder {
-    height: 20rem;
+    height: 100%;
+    min-height: 100%;
     border-inline-start: none;
-    border-top: 1px solid var(--color-border);
   }
 }

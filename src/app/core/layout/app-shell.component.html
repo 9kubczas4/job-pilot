@@ -1,4 +1,7 @@
-<div class="app-shell">
+<div
+  class="app-shell"
+  [class.app-shell--header-hidden]="headerCollapsed()"
+>
   <header class="app-header">
     <div class="app-header__start">
       <app-logo [homeLink]="links.home" />

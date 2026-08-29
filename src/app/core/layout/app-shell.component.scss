@@ -21,6 +21,7 @@
   min-height: 100vh;
   flex-direction: column;
   background: var(--color-surface);
+  --app-header-size: var(--mobile-header-height);
 }
 
 .app-header {
@@ -166,8 +167,33 @@
 
 @media (max-width: 64rem) {
   .app-header {
+    position: fixed;
+    inset-inline: 0;
+    top: 0;
     grid-template-columns: auto 1fr;
     grid-template-rows: auto auto;
+    transform: translate3d(0, 0, 0);
+    transition: transform var(--header-transition);
+    will-change: transform;
+  }
+
+  .app-shell--header-hidden .app-header {
+    transform: translate3d(0, -100%, 0);
+    pointer-events: none;
+  }
+
+  .app-main {
+    flex: 1;
+    margin-top: var(--app-header-size);
+    min-height: calc(100dvh - var(--app-header-size));
+    transition:
+      margin-top var(--header-transition),
+      min-height var(--header-transition);
+  }
+
+  .app-shell--header-hidden .app-main {
+    margin-top: 0;
+    min-height: 100dvh;
   }
 
   .app-header__start {

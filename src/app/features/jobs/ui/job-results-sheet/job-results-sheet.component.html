@@ -1,0 +1,77 @@
+<div
+  class="job-sheet"
+  [class.job-sheet--collapsed]="snap() === 'collapsed'"
+  [class.job-sheet--peek]="snap() === 'peek'"
+  [class.job-sheet--half]="snap() === 'half'"
+  [class.job-sheet--full]="snap() === 'full'"
+  [class.job-sheet--dragging]="isDragging()"
+  [style.--sheet-drag-offset.px]="dragOffsetPx()"
+>
+  @if (snap() === 'half' || snap() === 'full') {
+    <button type="button" class="job-sheet__backdrop" aria-label="Collapse results" (click)="onBackdropClick()"></button>
+  }
+
+  <section
+    class="job-sheet__panel"
+    aria-label="Job results"
+    [style.height.px]="dragHeightPx()"
+  >
+    <header
+      class="job-sheet__handle"
+      (pointerdown)="onHandlePointerDown($event)"
+      (pointermove)="onHandlePointerMove($event)"
+      (pointerup)="onHandlePointerUp($event)"
+      (pointercancel)="onHandlePointerUp($event)"
+      (click)="onHandleClick()"
+    >
+      <span class="job-sheet__grabber" aria-hidden="true"></span>
+      <p class="job-sheet__summary">{{ summaryLabel() }}</p>
+    </header>
+
+    <div class="job-sheet__body">
+      @if (loading()) {
+        <p class="job-sheet__state">Loading jobs…</p>
+      } @else if (!jobs().length) {
+        <div class="job-sheet__empty">
+          <p class="job-sheet__empty-title">No matching jobs</p>
+          <p class="job-sheet__empty-text">Try adjusting your search or filters.</p>
+        </div>
+      } @else if (focusedJob(); as job) {
+        <div class="job-sheet__focused">
+          <button type="button" class="job-sheet__back" (click)="showAllJobs()">
+            ← All {{ jobs().length }} jobs
+          </button>
+          <a
+            [routerLink]="jobLink(job.id)"
+            class="link-plain"
+            (click)="selectJob.emit(job.id)"
+          >
+            <app-job-card
+              [job]="job"
+              [selected]="selectedJobId() === job.id"
+              [saved]="savedJobIds().includes(job.id)"
+              [applied]="appliedJobIds().includes(job.id)"
+            />
+          </a>
+        </div>
+      } @else {
+        <div class="job-sheet__list">
+          @for (job of jobs(); track job.id) {
+            <a
+              [routerLink]="jobLink(job.id)"
+              class="link-plain"
+              (click)="selectJob.emit(job.id)"
+            >
+              <app-job-card
+                [job]="job"
+                [selected]="selectedJobId() === job.id"
+                [saved]="savedJobIds().includes(job.id)"
+                [applied]="appliedJobIds().includes(job.id)"
+              />
+            </a>
+          }
+        </div>
+      }
+    </div>
+  </section>
+</div>

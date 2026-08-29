@@ -4,20 +4,30 @@ import {
   effect,
   inject,
   input,
+  NgZone,
   output,
   signal,
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { GoogleMap } from '@angular/google-maps';
-import { MarkerClusterer } from '@googlemaps/markerclusterer';
+import { Cluster, MarkerClusterer } from '@googlemaps/markerclusterer';
+import { AppLinks } from '@app/app-paths';
 import { GOOGLE_MAPS_API_KEY } from '@shared/map/google-maps-config';
 import { isGoogleMapsConfigured } from '@shared/map/google-maps-loader';
 import { createClusterMarkerIcon, createJobMarkerIcon } from '@shared/map/google-maps-markers';
 import { MONOCHROME_MAP_STYLES } from '@shared/map/google-maps-styles';
-import { JobOffer } from '../../domain/job.model';
-import { buildJobMapPopupHtml } from './job-map-popup';
+import { JobLocation, JobOffer } from '../../domain/job.model';
+import {
+  buildJobMapPopupHtml,
+  JOB_MAP_POPUP_BG,
+  JOB_MAP_POPUP_HOVER_BG,
+} from './job-map-popup';
 
 const DEFAULT_CENTER = { lat: 51.9194, lng: 19.1451 };
 const DEFAULT_ZOOM = 5;
+const MARKER_FOCUS_ZOOM = 13;
+const ZOOM_ANIMATION_MS = 500;
+const CLUSTER_ZOOM_PADDING_PX = 80;
 
 @Component({
   selector: 'app-job-map',
@@ -28,6 +38,8 @@ const DEFAULT_ZOOM = 5;
 })
 export class JobMapComponent {
   private readonly apiKey = inject(GOOGLE_MAPS_API_KEY, { optional: true }) ?? '';
+  private readonly router = inject(Router);
+  private readonly ngZone = inject(NgZone);
 
   readonly jobs = input<JobOffer[]>([]);
   readonly selectedJobId = input<string | null>(null);
@@ -40,6 +52,7 @@ export class JobMapComponent {
     center: DEFAULT_CENTER,
     zoom: DEFAULT_ZOOM,
     styles: MONOCHROME_MAP_STYLES,
+    clickableIcons: false,
     mapTypeControl: false,
     streetViewControl: false,
     fullscreenControl: true,
@@ -52,7 +65,7 @@ export class JobMapComponent {
   private readonly markers = new globalThis.Map<string, google.maps.Marker>();
   private readonly markerJobs = new globalThis.Map<google.maps.Marker, JobOffer>();
   private lastJobIdsKey = '';
-  private lastSelectedJobId: string | null = null;
+  private mapAnimationFrame: number | null = null;
 
   constructor() {
     effect(() => {
@@ -66,10 +79,16 @@ export class JobMapComponent {
     this.map = map;
     this.infoWindow = new google.maps.InfoWindow({
       maxWidth: 320,
+      disableAutoPan: true,
     });
+    map.addListener('click', () => this.closeJobPopup());
     this.clusterer = new MarkerClusterer({
       map,
       markers: [],
+      onClusterClick: (_event, cluster) => {
+        this.closeJobPopup();
+        this.focusOnCluster(cluster);
+      },
       renderer: {
         render: ({ count, position }) =>
           new google.maps.Marker({
@@ -103,11 +122,6 @@ export class JobMapComponent {
       this.fitBoundsToJobs(locatedJobs);
     } else {
       this.updateMarkerSelection(selectedId);
-    }
-
-    if (selectedId !== this.lastSelectedJobId) {
-      this.lastSelectedJobId = selectedId;
-      this.openSelectedJobPopup(selectedId);
     }
   }
 
@@ -153,24 +167,173 @@ export class JobMapComponent {
 
   private onMarkerClick(job: JobOffer, marker: google.maps.Marker): void {
     this.selectJob.emit(job.id);
+    if (job.location) {
+      this.focusOnMarker(job.location);
+    }
     this.openJobPopup(job, marker);
   }
 
-  private openSelectedJobPopup(selectedId: string | null): void {
-    if (!selectedId) {
+  private focusOnMarker(location: JobLocation): void {
+    this.animateTo(
+      { lat: location.latitude, lng: location.longitude },
+      MARKER_FOCUS_ZOOM,
+    );
+  }
+
+  private focusOnCluster(cluster: Cluster): void {
+    const map = this.map;
+    if (!map) {
       return;
     }
 
-    const marker = this.markers.get(selectedId);
-    const job = marker ? this.markerJobs.get(marker) : undefined;
-    if (marker && job) {
-      this.openJobPopup(job, marker);
+    const center = cluster.bounds?.getCenter() ?? cluster.position;
+    const currentZoom = map.getZoom() ?? DEFAULT_ZOOM;
+    const targetZoom = cluster.bounds
+      ? this.getZoomForBounds(cluster.bounds, CLUSTER_ZOOM_PADDING_PX)
+      : currentZoom + 2;
+
+    this.animateTo(
+      { lat: center.lat(), lng: center.lng() },
+      Math.min(Math.max(targetZoom, currentZoom + 1), MARKER_FOCUS_ZOOM),
+    );
+  }
+
+  private getZoomForBounds(bounds: google.maps.LatLngBounds, paddingPx: number): number {
+    const map = this.map;
+    if (!map) {
+      return DEFAULT_ZOOM;
     }
+
+    const ne = bounds.getNorthEast();
+    const sw = bounds.getSouthWest();
+    const mapDiv = map.getDiv();
+    const mapWidth = Math.max(mapDiv.offsetWidth - paddingPx * 2, 1);
+    const mapHeight = Math.max(mapDiv.offsetHeight - paddingPx * 2, 1);
+
+    const latFraction = (this.latRadians(ne.lat()) - this.latRadians(sw.lat())) / Math.PI;
+    const lngDiff = ne.lng() - sw.lng();
+    const lngFraction = ((lngDiff < 0 ? lngDiff + 360 : lngDiff) / 360);
+
+    const latZoom = this.zoomForFraction(mapHeight, latFraction);
+    const lngZoom = this.zoomForFraction(mapWidth, lngFraction);
+
+    return Math.min(latZoom, lngZoom, MARKER_FOCUS_ZOOM);
+  }
+
+  private latRadians(lat: number): number {
+    const sin = Math.sin((lat * Math.PI) / 180);
+    return Math.log((1 + sin) / (1 - sin)) / 2;
+  }
+
+  private zoomForFraction(mapPx: number, fraction: number): number {
+    if (fraction <= 0) {
+      return MARKER_FOCUS_ZOOM;
+    }
+
+    return Math.floor(Math.log(mapPx / 256 / fraction) / Math.LN2);
+  }
+
+  private animateTo(
+    target: google.maps.LatLngLiteral,
+    targetZoom: number,
+    durationMs = ZOOM_ANIMATION_MS,
+  ): void {
+    const map = this.map;
+    if (!map) {
+      return;
+    }
+
+    if (this.mapAnimationFrame != null) {
+      cancelAnimationFrame(this.mapAnimationFrame);
+      this.mapAnimationFrame = null;
+    }
+
+    const startCenter = map.getCenter();
+    if (!startCenter) {
+      return;
+    }
+
+    const startLat = startCenter.lat();
+    const startLng = startCenter.lng();
+    const startZoom = map.getZoom() ?? DEFAULT_ZOOM;
+    const startTime = performance.now();
+
+    const step = (now: number) => {
+      const progress = Math.min((now - startTime) / durationMs, 1);
+      const eased = 1 - (1 - progress) ** 3;
+
+      map.setCenter({
+        lat: startLat + (target.lat - startLat) * eased,
+        lng: startLng + (target.lng - startLng) * eased,
+      });
+      map.setZoom(Math.round(startZoom + (targetZoom - startZoom) * eased));
+
+      if (progress < 1) {
+        this.mapAnimationFrame = requestAnimationFrame(step);
+      } else {
+        this.mapAnimationFrame = null;
+      }
+    };
+
+    this.mapAnimationFrame = requestAnimationFrame(step);
   }
 
   private openJobPopup(job: JobOffer, marker: google.maps.Marker): void {
     this.infoWindow?.setContent(buildJobMapPopupHtml(job));
     this.infoWindow?.open({ map: this.map!, anchor: marker });
+    this.attachPopupNavigation(job);
+  }
+
+  private attachPopupNavigation(job: JobOffer): void {
+    if (!this.infoWindow) {
+      return;
+    }
+
+    google.maps.event.addListenerOnce(this.infoWindow, 'domready', () => {
+      const popup = document.querySelector(`[data-job-map-popup="${job.id}"]`);
+      if (!(popup instanceof HTMLElement)) {
+        return;
+      }
+
+      const infoWindowRoot = popup.closest('.gm-style-iw');
+      const popupTail = this.findInfoWindowTail(popup);
+
+      const setHovered = (hovered: boolean) => {
+        infoWindowRoot?.classList.toggle('job-map-popup--hovered', hovered);
+        popupTail?.classList.toggle('job-map-popup-tail--hovered', hovered);
+        popupTail?.style.setProperty('--job-map-tail-bg', hovered ? JOB_MAP_POPUP_HOVER_BG : JOB_MAP_POPUP_BG);
+        popup.style.backgroundColor = hovered ? JOB_MAP_POPUP_HOVER_BG : JOB_MAP_POPUP_BG;
+      };
+
+      popup.addEventListener('mouseenter', () => setHovered(true));
+      popup.addEventListener('mouseleave', () => setHovered(false));
+
+      popup.addEventListener('click', () => {
+        this.ngZone.run(() => {
+          void this.router.navigate(AppLinks.job(job.id));
+        });
+      });
+
+      popup.addEventListener('keydown', (event) => {
+        if (event instanceof KeyboardEvent && (event.key === 'Enter' || event.key === ' ')) {
+          event.preventDefault();
+          this.ngZone.run(() => {
+            void this.router.navigate(AppLinks.job(job.id));
+          });
+        }
+      });
+    });
+  }
+
+  private closeJobPopup(): void {
+    this.infoWindow?.close();
+  }
+
+  private findInfoWindowTail(popup: HTMLElement): HTMLElement | null {
+    const infoWindow = popup.closest('.gm-style-iw');
+    const anchor = infoWindow?.parentElement;
+    const tail = anchor?.querySelector('.gm-style-iw-tc');
+    return tail instanceof HTMLElement ? tail : null;
   }
 
   private fitBoundsToJobs(locatedJobs: JobOffer[]): void {

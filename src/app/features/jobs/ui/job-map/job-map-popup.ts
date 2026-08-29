@@ -1,6 +1,9 @@
 import { formatSalary, formatWorkplace } from '../../domain/job-formatters';
 import { JobOffer } from '../../domain/job.model';
 
+export const JOB_MAP_POPUP_BG = '#ffffff';
+export const JOB_MAP_POPUP_HOVER_BG = '#eff6ff';
+
 function escapeHtml(value: string): string {
   return value
     .replaceAll('&', '&amp;')
@@ -43,7 +46,13 @@ export function buildJobMapPopupHtml(job: JobOffer): string {
     : '';
 
   return `
-    <article style="font-family:Inter,system-ui,sans-serif;color:#0f172a;min-width:220px;max-width:280px;padding:2px 2px 4px;">
+    <article
+      class="job-map-popup"
+      data-job-map-popup="${escapeHtml(job.id)}"
+      role="link"
+      tabindex="0"
+      aria-label="View ${escapeHtml(job.title)} at ${escapeHtml(job.company.name)}"
+    >
       <div style="display:flex;gap:12px;align-items:flex-start;">
         <div style="flex-shrink:0;width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#eff6ff,#eef2ff);color:#2563eb;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;letter-spacing:0.02em;">
           ${escapeHtml(companyInitials(job.company.name))}
@@ -72,7 +81,5 @@ export function buildJobMapPopupHtml(job: JobOffer): string {
       }
 
       ${skillsHtml}
-
-      <p style="margin:12px 0 0;font-size:11px;color:#2563eb;font-weight:500;">View in list →</p>
     </article>`;
 }

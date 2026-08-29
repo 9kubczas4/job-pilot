@@ -46,30 +46,3 @@
     border-top: 1px solid var(--color-border);
   }
 }
-
-:host ::ng-deep {
-  .gm-style-iw {
-    padding: 0 !important;
-  }
-
-  .gm-style-iw-d {
-    overflow: hidden !important;
-  }
-
-  .gm-style-iw-c {
-    padding: 12px 14px !important;
-    border-radius: var(--radius-lg) !important;
-    box-shadow: var(--shadow-md) !important;
-  }
-
-  .gm-style-iw-chr {
-    height: 28px !important;
-  }
-
-  .gm-ui-hover-effect {
-    top: 2px !important;
-    inset-inline-end: 2px !important;
-    width: 28px !important;
-    height: 28px !important;
-  }
-}

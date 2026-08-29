@@ -1,0 +1,50 @@
+/* Google Maps InfoWindow — rendered outside component encapsulation. */
+.gm-style-iw,
+.gm-style-iw-c,
+.gm-style-iw-d {
+  padding: 0 !important;
+  overflow: visible !important;
+}
+
+.gm-style-iw-c {
+  background: transparent !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: none !important;
+}
+
+.gm-style-iw-chr,
+.gm-ui-hover-effect {
+  display: none !important;
+}
+
+.gm-style-iw-tc {
+  --job-map-tail-bg: #ffffff;
+}
+
+.gm-style-iw-tc::after {
+  background: var(--job-map-tail-bg) !important;
+  box-shadow: var(--shadow-sm);
+  transition: background-color 0.15s ease;
+}
+
+.gm-style-iw-tc.job-map-popup-tail--hovered {
+  --job-map-tail-bg: #eff6ff;
+}
+
+.job-map-popup {
+  font-family: var(--font-family);
+  color: var(--color-text);
+  min-width: 220px;
+  max-width: 280px;
+  padding: 12px 14px;
+  cursor: pointer;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: var(--shadow-md);
+  transition: background-color 0.15s ease;
+}
+
+.job-map-popup--hovered .job-map-popup,
+.job-map-popup:hover {
+  background: #eff6ff;
+}

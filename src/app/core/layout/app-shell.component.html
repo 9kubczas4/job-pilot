@@ -52,8 +52,10 @@
 
       <nav class="app-nav" aria-label="Main">
         <a [routerLink]="links.jobs" routerLinkActive="is-active">Jobs</a>
-        <a [routerLink]="links.saved" routerLinkActive="is-active">Saved</a>
-        <a [routerLink]="links.profile" routerLinkActive="is-active">Profile</a>
+        @if (auth.isAuthenticated()) {
+          <a [routerLink]="links.saved" routerLinkActive="is-active">Saved</a>
+          <a [routerLink]="links.profile" routerLinkActive="is-active">Profile</a>
+        }
       </nav>
 
       <div class="app-auth">

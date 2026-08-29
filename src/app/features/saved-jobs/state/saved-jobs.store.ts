@@ -43,14 +43,36 @@ export class SavedJobsStore {
 
   async saveJob(jobId: string): Promise<void> {
     const userId = this.auth.requireUserId();
-    await this.repository.saveJob(userId, jobId);
-    this.savedJobIds.update((ids) => (ids.includes(jobId) ? ids : [...ids, jobId]));
+    if (this.savedJobIds().includes(jobId)) {
+      return;
+    }
+
+    this.savedJobIds.update((ids) => [...ids, jobId]);
+
+    try {
+      await this.repository.saveJob(userId, jobId);
+    } catch (error) {
+      this.savedJobIds.update((ids) => ids.filter((id) => id !== jobId));
+      throw error;
+    }
   }
 
   async unsaveJob(jobId: string): Promise<void> {
     const userId = this.auth.requireUserId();
-    await this.repository.unsaveJob(userId, jobId);
+    const previous = this.savedJobIds();
+
+    if (!previous.includes(jobId)) {
+      return;
+    }
+
     this.savedJobIds.update((ids) => ids.filter((id) => id !== jobId));
+
+    try {
+      await this.repository.unsaveJob(userId, jobId);
+    } catch (error) {
+      this.savedJobIds.set(previous);
+      throw error;
+    }
   }
 
   async applyToJob(jobId: string, note?: string): Promise<JobApplication> {

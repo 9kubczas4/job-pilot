@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
+import { SaveJobButtonComponent } from '@shared/ui/save-job-button/save-job-button.component';
 import { JobOffer } from '../../domain/job.model';
 import {
   formatSalary,
@@ -11,6 +12,7 @@ import {
 @Component({
   selector: 'app-job-card',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [SaveJobButtonComponent],
   templateUrl: './job-card.component.html',
   styleUrl: './job-card.component.scss',
 })
@@ -37,10 +39,4 @@ export class JobCardComponent {
       .slice(0, 2);
     return parts.map((part) => part[0]?.toUpperCase() ?? '').join('') || '?';
   });
-
-  onSaveClick(event: Event): void {
-    event.preventDefault();
-    event.stopPropagation();
-    this.toggleSave.emit();
-  }
 }

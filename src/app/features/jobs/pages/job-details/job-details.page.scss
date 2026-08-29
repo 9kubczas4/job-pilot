@@ -38,20 +38,6 @@
   padding: var(--space-5);
 }
 
-.job-details__save {
-  position: absolute;
-  inset-block-start: var(--space-4);
-  inset-inline-end: var(--space-4);
-  display: grid;
-  place-items: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-full);
-  color: var(--color-text-muted);
-  cursor: pointer;
-}
-
 .job-details__identity {
   display: flex;
   gap: var(--space-4);

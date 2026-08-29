@@ -19,6 +19,7 @@ import { AuthService } from '@core/auth/auth.service';
 import { AppLinks } from '@app/app-paths';
 import { SavedJobsStore } from '@features/saved-jobs/state/saved-jobs.store';
 import { AuthPromptDialogComponent } from '@shared/ui/auth-prompt-dialog/auth-prompt-dialog.component';
+import { SaveJobButtonComponent } from '@shared/ui/save-job-button/save-job-button.component';
 import {
   formatSalary,
   formatWorkplace,
@@ -46,6 +47,7 @@ type AuthPromptAction = 'save' | 'apply';
     RouterLink,
     AuthPromptDialogComponent,
     ApplyJobDialogComponent,
+    SaveJobButtonComponent,
     JobCardComponent,
     CompetencyChipComponent,
   ],

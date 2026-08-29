@@ -50,17 +50,6 @@
   backdrop-filter: blur(var(--blur-glass-sm));
 }
 
-.job-details__save {
-  border-color: var(--glass-border-strong);
-  background: var(--glass-surface-muted);
-  backdrop-filter: blur(var(--blur-glass-sm));
-
-  &.is-saved {
-    border-color: var(--color-primary-glow);
-    background: var(--color-primary-surface);
-  }
-}
-
 .job-details__logo {
   background: var(--gradient-logo-bg-strong);
   box-shadow: var(--shadow-logo);

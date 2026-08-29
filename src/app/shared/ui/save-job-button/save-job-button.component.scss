@@ -1,0 +1,88 @@
+:host {
+  display: inline-flex;
+}
+
+:host(.save-job-button-host--card) {
+  position: absolute;
+  inset-block-start: var(--space-3);
+  inset-inline-end: var(--space-3);
+}
+
+:host(.save-job-button-host--card.save-job-button-host--compact) {
+  inset-block-start: var(--space-2);
+  inset-inline-end: var(--space-2);
+}
+
+:host(.save-job-button-host--details) {
+  position: absolute;
+  inset-block-start: var(--space-4);
+  inset-inline-end: var(--space-4);
+}
+
+.save-job-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition:
+    color var(--transition-fast),
+    background-color var(--transition-fast),
+    border-color var(--transition-fast);
+
+  &:hover {
+    background: var(--color-chip);
+    color: var(--color-primary);
+  }
+
+  &.is-saved {
+    color: var(--color-primary);
+  }
+}
+
+:host(.save-job-button-host--details) .save-job-button {
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid var(--glass-border-strong, var(--color-border));
+  background: var(--glass-surface-muted, var(--color-surface-elevated));
+  backdrop-filter: blur(var(--blur-glass-sm));
+
+  &.is-saved {
+    border-color: var(--color-primary-glow);
+    background: var(--color-primary-surface);
+  }
+}
+
+.save-job-button__icon {
+  transform-origin: center;
+  transition: transform var(--transition-fast);
+}
+
+.save-job-button.is-pulsing .save-job-button__icon {
+  animation: save-job-heart-pop 420ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes save-job-heart-pop {
+  0% {
+    transform: scale(1);
+  }
+
+  45% {
+    transform: scale(1.35);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .save-job-button.is-pulsing .save-job-button__icon {
+    animation: none;
+  }
+}

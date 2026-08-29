@@ -19,24 +19,11 @@
         <div class="job-details__layout">
           <main class="job-details__main">
             <header class="job-details__hero glass-card">
-              <button
-                type="button"
-                class="job-details__save"
-                [class.is-saved]="savedJobs.isSaved(currentJob.id)"
-                [attr.aria-label]="savedJobs.isSaved(currentJob.id) ? 'Remove from saved jobs' : 'Save job'"
-                [attr.aria-pressed]="savedJobs.isSaved(currentJob.id)"
-                (click)="toggleSave()"
-              >
-                <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
-                  <path
-                    d="M12 20.5s-6.7-4.35-9-8.05C1.5 9.65 2.6 6.5 5.4 5.4c1.75-.7 3.7-.15 4.95 1.25L12 8.5l1.65-1.85c1.25-1.4 3.2-1.95 4.95-1.25 2.8 1.1 3.9 4.25 2.4 7.05-2.3 3.7-9 8.05-9 8.05Z"
-                    [attr.fill]="savedJobs.isSaved(currentJob.id) ? 'currentColor' : 'none'"
-                    stroke="currentColor"
-                    stroke-width="1.75"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </button>
+              <app-save-job-button
+                variant="details"
+                [saved]="savedJobs.isSaved(currentJob.id)"
+                (toggleSave)="toggleSave()"
+              />
 
               <div class="job-details__identity">
                 <span class="job-details__logo" aria-hidden="true">{{ companyInitials(currentJob) }}</span>

@@ -87,40 +87,6 @@
   min-width: 0;
 }
 
-.job-card__save {
-  position: absolute;
-  inset-block-start: var(--space-3);
-  inset-inline-end: var(--space-3);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2rem;
-  height: 2rem;
-  border: none;
-  border-radius: var(--radius-full);
-  background: transparent;
-  color: var(--color-text-muted);
-  cursor: pointer;
-  transition:
-    color var(--transition-fast),
-    background-color var(--transition-fast),
-    transform var(--transition-fast);
-
-  &:hover {
-    background: var(--color-chip);
-    color: var(--color-primary);
-  }
-
-  &.is-saved {
-    color: var(--color-primary);
-  }
-}
-
-.job-card--compact .job-card__save {
-  inset-block-start: var(--space-2);
-  inset-inline-end: var(--space-2);
-}
-
 .job-card__title {
   margin: 0;
   font-size: var(--font-size-sm);

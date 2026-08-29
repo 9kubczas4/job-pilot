@@ -1,24 +1,11 @@
 <article class="job-card" [class.is-selected]="selected()" [class.job-card--compact]="compact()">
   @if (showSaveButton()) {
-    <button
-      type="button"
-      class="job-card__save"
-      [class.is-saved]="saved()"
-      [attr.aria-label]="saved() ? 'Remove from saved jobs' : 'Save job'"
-      [attr.aria-pressed]="saved()"
-      (click)="onSaveClick($event)"
-      (mousedown)="$event.preventDefault()"
-    >
-      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-        <path
-          d="M12 20.5s-6.7-4.35-9-8.05C1.5 9.65 2.6 6.5 5.4 5.4c1.75-.7 3.7-.15 4.95 1.25L12 8.5l1.65-1.85c1.25-1.4 3.2-1.95 4.95-1.25 2.8 1.1 3.9 4.25 2.4 7.05-2.3 3.7-9 8.05-9 8.05Z"
-          [attr.fill]="saved() ? 'currentColor' : 'none'"
-          stroke="currentColor"
-          stroke-width="1.75"
-          stroke-linejoin="round"
-        />
-      </svg>
-    </button>
+    <app-save-job-button
+      [saved]="saved()"
+      [compact]="compact()"
+      variant="card"
+      (toggleSave)="toggleSave.emit()"
+    />
   }
 
   <div class="job-card__header">

@@ -52,7 +52,11 @@ import { CandidateSkill } from '../../domain/profile.model';
     }
 
     .profile-skill__level {
-      flex: 1;
+      flex: 0 0 auto;
+    }
+
+    .profile-skill .mat-mdc-icon-button {
+      margin-inline-start: auto;
     }
   `,
 })

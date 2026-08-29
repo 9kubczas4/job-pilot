@@ -30,6 +30,8 @@ import {
   profileCompleteness,
   profileDisplayName,
   profileInitials,
+  stripUndefinedDeep,
+  validateProfileDraft,
 } from '../../domain/profile.utils';
 import { ProfileMonthPickerComponent } from '../../ui/profile-month-picker/profile-month-picker.component';
 import { ProfileSkillRowComponent } from '../../ui/profile-skill-row/profile-skill-row.component';
@@ -119,43 +121,53 @@ export class ProfilePageComponent implements OnInit {
       return;
     }
 
+    const validationErrors = validateProfileDraft(this.draft);
+    if (validationErrors.length) {
+      this.toast.show(validationErrors[0], 5000);
+      return;
+    }
+
     const googleName = parseDisplayName(this.auth.user()?.displayName);
 
     this.saving.set(true);
     try {
-      const profile = await this.store.updateProfile({
-        firstName: this.draft.firstName?.trim() || googleName.firstName,
-        lastName: this.draft.lastName?.trim() || googleName.lastName,
-        headline: this.draft.headline?.trim() || undefined,
-        workHistory: this.draft.workHistory
-          .filter((entry) => entry.company.trim() || entry.title.trim())
-          .map((entry) => ({
-            company: entry.company.trim(),
-            title: entry.title.trim(),
-            startDate: entry.startDate?.trim() || undefined,
-            endDate: entry.current ? undefined : entry.endDate?.trim() || undefined,
-            current: entry.current ?? false,
-            description: entry.description?.trim() || undefined,
-          })),
-        skills: this.draft.skills
-          .filter((skill) => skill.name.trim())
-          .map((skill) => ({
-            name: skill.name.trim(),
-            years: Math.min(5, Math.max(1, Math.round(skill.years ?? 3))),
-          })),
-        preferredRoles: this.splitCsv(this.rolesInput),
-        preferredSeniorities: this.draft.preferredSeniorities,
-        preferredLocations: this.splitCsv(this.locationsInput),
-        workplacePreferences: this.draft.workplacePreferences,
-        contractPreferences: this.draft.contractPreferences,
-        salaryExpectation: this.draft.salaryExpectation,
-        preferences: this.draft.preferences?.trim() || undefined,
-      });
+      const profile = await this.store.updateProfile(
+        stripUndefinedDeep({
+          firstName: this.draft.firstName?.trim() || googleName.firstName,
+          lastName: this.draft.lastName?.trim() || googleName.lastName,
+          headline: this.draft.headline?.trim() || undefined,
+          workHistory: this.draft.workHistory
+            .filter((entry) => entry.company.trim() || entry.title.trim())
+            .map((entry) => ({
+              company: entry.company.trim(),
+              title: entry.title.trim(),
+              startDate: entry.startDate?.trim() || undefined,
+              endDate: entry.current ? undefined : entry.endDate?.trim() || undefined,
+              current: entry.current ?? false,
+              description: entry.description?.trim() || undefined,
+            })),
+          skills: this.draft.skills
+            .filter((skill) => skill.name.trim())
+            .map((skill) => ({
+              name: skill.name.trim(),
+              years: Math.min(5, Math.max(1, Math.round(skill.years ?? 3))),
+            })),
+          preferredRoles: this.splitCsv(this.rolesInput),
+          preferredSeniorities: this.draft.preferredSeniorities,
+          preferredLocations: this.splitCsv(this.locationsInput),
+          workplacePreferences: this.draft.workplacePreferences,
+          contractPreferences: this.draft.contractPreferences,
+          salaryExpectation: this.draft.salaryExpectation,
+          preferences: this.draft.preferences?.trim() || undefined,
+        }),
+      );
 
       this.applyProfileToDraft(profile);
       this.lastSyncedAt = profile.updatedAt;
       this.dirty.set(false);
       this.toast.show('Profile saved.');
+    } catch {
+      this.toast.show('Could not save profile. Please try again.', 5000);
     } finally {
       this.saving.set(false);
     }

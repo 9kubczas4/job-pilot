@@ -125,3 +125,55 @@ function formatMonthLabel(value?: string): string {
   const date = new Date(Number(year), Number(month) - 1, 1);
   return new Intl.DateTimeFormat(undefined, { month: 'short', year: 'numeric' }).format(date);
 }
+
+export function stripUndefinedDeep<T>(value: T): T {
+  if (Array.isArray(value)) {
+    return value.map((item) => stripUndefinedDeep(item)) as T;
+  }
+
+  if (value !== null && typeof value === 'object') {
+    return Object.fromEntries(
+      Object.entries(value)
+        .filter(([, entry]) => entry !== undefined)
+        .map(([key, entry]) => [key, stripUndefinedDeep(entry)]),
+    ) as T;
+  }
+
+  return value;
+}
+
+export function validateProfileDraft(draft: CandidateProfile): string[] {
+  const errors: string[] = [];
+
+  draft.workHistory.forEach((entry, index) => {
+    const hasCompany = Boolean(entry.company.trim());
+    const hasTitle = Boolean(entry.title.trim());
+
+    if (hasCompany !== hasTitle) {
+      errors.push(`Experience entry ${index + 1}: add both job title and company.`);
+    }
+
+    if ((hasCompany || hasTitle) && !entry.startDate?.trim()) {
+      errors.push(`Experience entry ${index + 1}: add a start date.`);
+    }
+
+    if (!entry.current && entry.endDate?.trim() && entry.startDate?.trim()) {
+      if (entry.endDate < entry.startDate) {
+        errors.push(`Experience entry ${index + 1}: end date must be after start date.`);
+      }
+    }
+  });
+
+  draft.skills.forEach((skill, index) => {
+    if (!skill.name.trim()) {
+      errors.push(`Skill ${index + 1}: name cannot be empty.`);
+    }
+  });
+
+  const salaryMin = draft.salaryExpectation?.min;
+  if (salaryMin != null && salaryMin < 0) {
+    errors.push('Minimum salary cannot be negative.');
+  }
+
+  return errors;
+}

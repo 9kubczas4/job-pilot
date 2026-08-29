@@ -1,6 +1,7 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { AuthService } from '@core/auth/auth.service';
 import { CandidateProfile } from '../domain/profile.model';
+import { stripUndefinedDeep } from '../domain/profile.utils';
 import { ProfileRepository } from '../data-access/profile.repository';
 
 @Injectable({ providedIn: 'root' })
@@ -30,12 +31,12 @@ export class ProfileStore {
   async updateProfile(partial: Partial<CandidateProfile>): Promise<CandidateProfile> {
     const userId = this.auth.requireUserId();
     const current = this.profile() ?? this.repository.emptyProfile(userId);
-    const next: CandidateProfile = {
+    const next = stripUndefinedDeep({
       ...current,
       ...partial,
       id: userId,
       updatedAt: new Date().toISOString(),
-    };
+    });
     await this.repository.saveProfile(next);
     this.profile.set(next);
     return next;

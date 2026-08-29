@@ -3,6 +3,7 @@ import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { AuthService } from '@core/auth/auth.service';
 import { FIREBASE } from '@core/firebase/firebase.providers';
 import { CandidateProfile } from '../domain/profile.model';
+import { stripUndefinedDeep } from '../domain/profile.utils';
 
 @Injectable({ providedIn: 'root' })
 export class ProfileRepository {
@@ -25,11 +26,13 @@ export class ProfileRepository {
 
   async saveProfile(profile: CandidateProfile): Promise<void> {
     const userId = this.auth.requireUserId();
-    await setDoc(doc(this.firebase.firestore, 'profiles', userId), {
+    const payload = stripUndefinedDeep({
       ...this.normalizeProfile(profile),
       id: userId,
       updatedAt: new Date().toISOString(),
     });
+
+    await setDoc(doc(this.firebase.firestore, 'profiles', userId), payload);
   }
 
   emptyProfile(userId: string): CandidateProfile {

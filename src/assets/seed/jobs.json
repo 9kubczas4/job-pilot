@@ -162,8 +162,8 @@
     "location": {
       "city": "Wroclaw",
       "country": "Poland",
-      "latitude": 51.1105,
-      "longitude": 17.0319
+      "latitude": 51.1079,
+      "longitude": 17.0385
     },
     "responsibilities": [
       "Build product features",
@@ -269,10 +269,10 @@
     "createdAt": "2026-08-25T20:15:00.574Z",
     "applicationDeadline": "2026-09-18T20:15:00.574Z",
     "location": {
-      "city": "Berlin",
-      "country": "Germany",
-      "latitude": 52.52,
-      "longitude": 13.405
+      "city": "Gdansk",
+      "country": "Poland",
+      "latitude": 54.352,
+      "longitude": 18.6466
     }
   },
   {
@@ -300,8 +300,8 @@
     "location": {
       "city": "Poznan",
       "country": "Poland",
-      "latitude": 52.4083,
-      "longitude": 16.9337
+      "latitude": 52.4064,
+      "longitude": 16.9252
     },
     "responsibilities": [
       "Build product features",
@@ -407,10 +407,10 @@
     "createdAt": "2026-08-23T20:15:00.574Z",
     "applicationDeadline": "2026-09-18T20:15:00.574Z",
     "location": {
-      "city": "Amsterdam",
-      "country": "Netherlands",
-      "latitude": 52.3676,
-      "longitude": 4.9041
+      "city": "Lodz",
+      "country": "Poland",
+      "latitude": 51.7592,
+      "longitude": 19.456
     }
   },
   {
@@ -476,10 +476,10 @@
     "createdAt": "2026-08-22T20:15:00.574Z",
     "applicationDeadline": "2026-09-18T20:15:00.574Z",
     "location": {
-      "city": "London",
-      "country": "United Kingdom",
-      "latitude": 51.5074,
-      "longitude": -0.1278
+      "city": "Katowice",
+      "country": "Poland",
+      "latitude": 50.2649,
+      "longitude": 19.0238
     }
   },
   {
@@ -505,10 +505,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Krakow",
+      "city": "Lublin",
       "country": "Poland",
-      "latitude": 50.0512,
-      "longitude": 19.9483
+      "latitude": 51.2465,
+      "longitude": 22.5684
     },
     "responsibilities": [
       "Build product features",
@@ -574,10 +574,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Wroclaw",
+      "city": "Szczecin",
       "country": "Poland",
-      "latitude": 51.1149,
-      "longitude": 17.0327
+      "latitude": 53.4285,
+      "longitude": 14.5528
     },
     "responsibilities": [
       "Build product features",
@@ -683,10 +683,10 @@
     "createdAt": "2026-08-19T20:15:00.574Z",
     "applicationDeadline": "2026-09-18T20:15:00.574Z",
     "location": {
-      "city": "Barcelona",
-      "country": "Spain",
-      "latitude": 41.3874,
-      "longitude": 2.1686
+      "city": "Bydgoszcz",
+      "country": "Poland",
+      "latitude": 53.1235,
+      "longitude": 18.0084
     }
   },
   {
@@ -752,10 +752,10 @@
     "createdAt": "2026-08-18T20:15:00.574Z",
     "applicationDeadline": "2026-09-18T20:15:00.574Z",
     "location": {
-      "city": "Milan",
-      "country": "Italy",
-      "latitude": 45.4642,
-      "longitude": 9.19
+      "city": "Bialystok",
+      "country": "Poland",
+      "latitude": 53.1325,
+      "longitude": 23.1688
     }
   },
   {
@@ -781,10 +781,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Katowice",
+      "city": "Rzeszow",
       "country": "Poland",
-      "latitude": 50.2649,
-      "longitude": 19.0238
+      "latitude": 50.0412,
+      "longitude": 21.9991
     },
     "responsibilities": [
       "Build product features",
@@ -890,10 +890,10 @@
     "createdAt": "2026-08-16T20:15:00.574Z",
     "applicationDeadline": "2026-09-18T20:15:00.574Z",
     "location": {
-      "city": "Vienna",
-      "country": "Austria",
-      "latitude": 48.2082,
-      "longitude": 16.3738
+      "city": "Torun",
+      "country": "Poland",
+      "latitude": 53.0138,
+      "longitude": 18.5984
     }
   },
   {
@@ -919,10 +919,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Krakow",
+      "city": "Kielce",
       "country": "Poland",
-      "latitude": 50.0394,
-      "longitude": 19.9594
+      "latitude": 50.8661,
+      "longitude": 20.6286
     },
     "responsibilities": [
       "Build product features",
@@ -988,10 +988,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Wroclaw",
+      "city": "Olsztyn",
       "country": "Poland",
-      "latitude": 51.1278,
-      "longitude": 17.0456
+      "latitude": 53.7784,
+      "longitude": 20.4801
     },
     "responsibilities": [
       "Build product features",
@@ -1097,10 +1097,10 @@
     "createdAt": "2026-08-13T20:15:00.574Z",
     "applicationDeadline": "2026-09-04T20:15:00.574Z",
     "location": {
-      "city": "Lisbon",
-      "country": "Portugal",
-      "latitude": 38.7223,
-      "longitude": -9.1393
+      "city": "Gdynia",
+      "country": "Poland",
+      "latitude": 54.5189,
+      "longitude": 18.5305
     }
   },
   {
@@ -1126,10 +1126,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Poznan",
+      "city": "Sopot",
       "country": "Poland",
-      "latitude": 52.4189,
-      "longitude": 16.9056
+      "latitude": 54.4418,
+      "longitude": 18.5601
     },
     "responsibilities": [
       "Build product features",
@@ -1195,10 +1195,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Katowice",
+      "city": "Gliwice",
       "country": "Poland",
-      "latitude": 50.2789,
-      "longitude": 19.0456
+      "latitude": 50.2945,
+      "longitude": 18.6714
     },
     "responsibilities": [
       "Build product features",
@@ -1304,10 +1304,10 @@
     "createdAt": "2026-08-10T20:15:00.574Z",
     "applicationDeadline": "2026-09-04T20:15:00.574Z",
     "location": {
-      "city": "Austin",
-      "country": "United States",
-      "latitude": 30.2672,
-      "longitude": -97.7431
+      "city": "Zabrze",
+      "country": "Poland",
+      "latitude": 50.3249,
+      "longitude": 18.7857
     }
   },
   {
@@ -1333,10 +1333,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Krakow",
+      "city": "Bielsko-Biala",
       "country": "Poland",
-      "latitude": 50.0847,
-      "longitude": 19.9147
+      "latitude": 49.8224,
+      "longitude": 19.0469
     },
     "responsibilities": [
       "Build product features",
@@ -1442,10 +1442,10 @@
     "createdAt": "2026-08-08T20:15:00.574Z",
     "applicationDeadline": "2026-09-04T20:15:00.574Z",
     "location": {
-      "city": "Boston",
-      "country": "United States",
-      "latitude": 42.3601,
-      "longitude": -71.0589
+      "city": "Czestochowa",
+      "country": "Poland",
+      "latitude": 50.8118,
+      "longitude": 19.1203
     }
   },
   {
@@ -1511,10 +1511,10 @@
     "createdAt": "2026-08-07T20:15:00.574Z",
     "applicationDeadline": "2026-09-04T20:15:00.574Z",
     "location": {
-      "city": "Chicago",
-      "country": "United States",
-      "latitude": 41.8781,
-      "longitude": -87.6298
+      "city": "Radom",
+      "country": "Poland",
+      "latitude": 51.4027,
+      "longitude": 21.1471
     }
   },
   {
@@ -1540,10 +1540,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Poznan",
+      "city": "Sosnowiec",
       "country": "Poland",
-      "latitude": 52.3934,
-      "longitude": 16.9123
+      "latitude": 50.278,
+      "longitude": 19.1344
     },
     "responsibilities": [
       "Build product features",
@@ -1609,10 +1609,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Katowice",
+      "city": "Opole",
       "country": "Poland",
-      "latitude": 50.2234,
-      "longitude": 19.0123
+      "latitude": 50.6751,
+      "longitude": 17.9213
     },
     "responsibilities": [
       "Build product features",
@@ -1718,10 +1718,10 @@
     "createdAt": "2026-08-04T20:15:00.574Z",
     "applicationDeadline": "2026-09-04T20:15:00.574Z",
     "location": {
-      "city": "Los Angeles",
-      "country": "United States",
-      "latitude": 34.0522,
-      "longitude": -118.2437
+      "city": "Gorzow Wielkopolski",
+      "country": "Poland",
+      "latitude": 52.7368,
+      "longitude": 15.2288
     }
   },
   {
@@ -1787,10 +1787,10 @@
     "createdAt": "2026-08-03T20:15:00.574Z",
     "applicationDeadline": "2026-09-04T20:15:00.574Z",
     "location": {
-      "city": "Warsaw",
+      "city": "Plock",
       "country": "Poland",
-      "latitude": 52.2297,
-      "longitude": 21.0122
+      "latitude": 52.5468,
+      "longitude": 19.7064
     }
   },
   {
@@ -1816,10 +1816,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Wroclaw",
+      "city": "Tarnow",
       "country": "Poland",
-      "latitude": 51.0853,
-      "longitude": 17.0128
+      "latitude": 50.0121,
+      "longitude": 20.9858
     },
     "responsibilities": [
       "Build product features",
@@ -1925,10 +1925,10 @@
     "createdAt": "2026-08-01T20:15:00.574Z",
     "applicationDeadline": "2026-09-04T20:15:00.574Z",
     "location": {
-      "city": "Wroclaw",
+      "city": "Kalisz",
       "country": "Poland",
-      "latitude": 51.1079,
-      "longitude": 17.0385
+      "latitude": 51.7617,
+      "longitude": 18.091
     }
   },
   {
@@ -1954,10 +1954,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Poznan",
+      "city": "Legnica",
       "country": "Poland",
-      "latitude": 52.3789,
-      "longitude": 16.8945
+      "latitude": 51.207,
+      "longitude": 16.1619
     },
     "responsibilities": [
       "Build product features",
@@ -2023,10 +2023,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Katowice",
+      "city": "Zielona Gora",
       "country": "Poland",
-      "latitude": 50.2456,
-      "longitude": 19.0567
+      "latitude": 51.9356,
+      "longitude": 15.5064
     },
     "responsibilities": [
       "Build product features",
@@ -2132,10 +2132,10 @@
     "createdAt": "2026-07-29T20:15:00.574Z",
     "applicationDeadline": "2026-08-21T20:15:00.574Z",
     "location": {
-      "city": "Amsterdam",
-      "country": "Netherlands",
-      "latitude": 52.3676,
-      "longitude": 4.9041
+      "city": "Walbrzych",
+      "country": "Poland",
+      "latitude": 50.7714,
+      "longitude": 16.2843
     }
   },
   {
@@ -2161,10 +2161,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Krakow",
+      "city": "Slupsk",
       "country": "Poland",
-      "latitude": 50.0734,
-      "longitude": 20.034
+      "latitude": 54.4641,
+      "longitude": 17.0285
     },
     "responsibilities": [
       "Build product features",
@@ -2230,10 +2230,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Wroclaw",
+      "city": "Koszalin",
       "country": "Poland",
-      "latitude": 51.1456,
-      "longitude": 17.1289
+      "latitude": 54.1944,
+      "longitude": 16.1722
     },
     "responsibilities": [
       "Build product features",
@@ -2339,10 +2339,10 @@
     "createdAt": "2026-07-26T20:15:00.574Z",
     "applicationDeadline": "2026-08-21T20:15:00.574Z",
     "location": {
-      "city": "Paris",
-      "country": "France",
-      "latitude": 48.8566,
-      "longitude": 2.3522
+      "city": "Jelenia Gora",
+      "country": "Poland",
+      "latitude": 50.9045,
+      "longitude": 15.7198
     }
   },
   {
@@ -2368,10 +2368,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Poznan",
+      "city": "Nowy Sacz",
       "country": "Poland",
-      "latitude": 52.4312,
-      "longitude": 16.9456
+      "latitude": 49.6249,
+      "longitude": 20.6915
     },
     "responsibilities": [
       "Build product features",
@@ -2477,10 +2477,10 @@
     "createdAt": "2026-07-24T20:15:00.574Z",
     "applicationDeadline": "2026-08-21T20:15:00.574Z",
     "location": {
-      "city": "Milan",
-      "country": "Italy",
-      "latitude": 45.4642,
-      "longitude": 9.19
+      "city": "Konin",
+      "country": "Poland",
+      "latitude": 52.2231,
+      "longitude": 18.2512
     }
   },
   {
@@ -2546,10 +2546,10 @@
     "createdAt": "2026-07-23T20:15:00.574Z",
     "applicationDeadline": "2026-08-21T20:15:00.574Z",
     "location": {
-      "city": "Prague",
-      "country": "Czech Republic",
-      "latitude": 50.0755,
-      "longitude": 14.4378
+      "city": "Pila",
+      "country": "Poland",
+      "latitude": 53.1514,
+      "longitude": 16.7378
     }
   },
   {
@@ -2575,10 +2575,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Krakow",
+      "city": "Elblag",
       "country": "Poland",
-      "latitude": 50.0986,
-      "longitude": 19.8869
+      "latitude": 54.1561,
+      "longitude": 19.4045
     },
     "responsibilities": [
       "Build product features",
@@ -2644,10 +2644,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Wroclaw",
+      "city": "Grudziadz",
       "country": "Poland",
-      "latitude": 51.1123,
-      "longitude": 16.9789
+      "latitude": 53.4843,
+      "longitude": 18.7536
     },
     "responsibilities": [
       "Build product features",
@@ -2753,10 +2753,10 @@
     "createdAt": "2026-07-20T20:15:00.574Z",
     "applicationDeadline": "2026-08-21T20:15:00.574Z",
     "location": {
-      "city": "Copenhagen",
-      "country": "Denmark",
-      "latitude": 55.6761,
-      "longitude": 12.5683
+      "city": "Rybnik",
+      "country": "Poland",
+      "latitude": 50.1022,
+      "longitude": 18.5464
     }
   },
   {
@@ -2806,10 +2806,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Warsaw",
+      "city": "Tychy",
       "country": "Poland",
-      "latitude": 52.2297,
-      "longitude": 21.0122
+      "latitude": 50.1372,
+      "longitude": 18.9664
     },
     "responsibilities": [
       "Own regional revenue targets",
@@ -2893,10 +2893,10 @@
     "createdAt": "2026-08-20T10:00:00.000Z",
     "applicationDeadline": "2026-09-10T23:59:59.000Z",
     "location": {
-      "city": "New York",
-      "country": "United States",
-      "latitude": 40.7128,
-      "longitude": -74.006
+      "city": "Dabrowa Gornicza",
+      "country": "Poland",
+      "latitude": 50.3219,
+      "longitude": 19.1889
     }
   },
   {
@@ -2921,10 +2921,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Austin",
-      "country": "United States",
-      "latitude": 30.2672,
-      "longitude": -97.7431
+      "city": "Chorzow",
+      "country": "Poland",
+      "latitude": 50.2984,
+      "longitude": 18.9543
     },
     "responsibilities": [
       "Build product features",
@@ -2990,10 +2990,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Seattle",
-      "country": "United States",
-      "latitude": 47.6062,
-      "longitude": -122.3321
+      "city": "Suwalki",
+      "country": "Poland",
+      "latitude": 54.1118,
+      "longitude": 22.9308
     },
     "responsibilities": [
       "Build product features",
@@ -3060,10 +3060,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Boston",
-      "country": "United States",
-      "latitude": 42.3601,
-      "longitude": -71.0589
+      "city": "Zamosc",
+      "country": "Poland",
+      "latitude": 50.7231,
+      "longitude": 23.2519
     },
     "responsibilities": [
       "Build product features",
@@ -3131,10 +3131,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Chicago",
-      "country": "United States",
-      "latitude": 41.8781,
-      "longitude": -87.6298
+      "city": "Leszno",
+      "country": "Poland",
+      "latitude": 51.845,
+      "longitude": 16.5749
     },
     "responsibilities": [
       "Build product features",
@@ -3201,10 +3201,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Denver",
-      "country": "United States",
-      "latitude": 39.7392,
-      "longitude": -104.9903
+      "city": "Krosno",
+      "country": "Poland",
+      "latitude": 49.6833,
+      "longitude": 21.7667
     },
     "responsibilities": [
       "Build product features",
@@ -3271,10 +3271,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Atlanta",
-      "country": "United States",
-      "latitude": 33.749,
-      "longitude": -84.388
+      "city": "Pabianice",
+      "country": "Poland",
+      "latitude": 51.6644,
+      "longitude": 19.3547
     },
     "responsibilities": [
       "Build product features",
@@ -3340,10 +3340,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Los Angeles",
-      "country": "United States",
-      "latitude": 34.0522,
-      "longitude": -118.2437
+      "city": "Mielec",
+      "country": "Poland",
+      "latitude": 50.2871,
+      "longitude": 21.4239
     },
     "responsibilities": [
       "Build product features",
@@ -3410,10 +3410,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Warsaw",
-      "country": "Poland",
-      "latitude": 52.2297,
-      "longitude": 21.0122
+      "city": "New York",
+      "country": "United States",
+      "latitude": 40.7128,
+      "longitude": -74.006
     },
     "responsibilities": [
       "Build product features",
@@ -3481,10 +3481,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Wroclaw",
-      "country": "Poland",
-      "latitude": 51.1079,
-      "longitude": 17.0385
+      "city": "Boston",
+      "country": "United States",
+      "latitude": 42.3601,
+      "longitude": -71.0589
     },
     "responsibilities": [
       "Build product features",
@@ -3551,10 +3551,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Berlin",
-      "country": "Germany",
-      "latitude": 52.52,
-      "longitude": 13.405
+      "city": "Philadelphia",
+      "country": "United States",
+      "latitude": 39.9526,
+      "longitude": -75.1652
     },
     "responsibilities": [
       "Build product features",
@@ -3620,10 +3620,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Munich",
-      "country": "Germany",
-      "latitude": 48.1351,
-      "longitude": 11.582
+      "city": "Washington",
+      "country": "United States",
+      "latitude": 38.9072,
+      "longitude": -77.0369
     },
     "responsibilities": [
       "Build product features",
@@ -3690,10 +3690,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Amsterdam",
-      "country": "Netherlands",
-      "latitude": 52.3676,
-      "longitude": 4.9041
+      "city": "Atlanta",
+      "country": "United States",
+      "latitude": 33.749,
+      "longitude": -84.388
     },
     "responsibilities": [
       "Build product features",
@@ -3760,10 +3760,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "London",
-      "country": "United Kingdom",
-      "latitude": 51.5074,
-      "longitude": -0.1278
+      "city": "Miami",
+      "country": "United States",
+      "latitude": 25.7617,
+      "longitude": -80.1918
     },
     "responsibilities": [
       "Build product features",
@@ -3830,10 +3830,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Dublin",
-      "country": "Ireland",
-      "latitude": 53.3498,
-      "longitude": -6.2603
+      "city": "Charlotte",
+      "country": "United States",
+      "latitude": 35.2271,
+      "longitude": -80.8431
     },
     "responsibilities": [
       "Build product features",
@@ -3900,10 +3900,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Paris",
-      "country": "France",
-      "latitude": 48.8566,
-      "longitude": 2.3522
+      "city": "Raleigh",
+      "country": "United States",
+      "latitude": 35.7796,
+      "longitude": -78.6382
     },
     "responsibilities": [
       "Build product features",
@@ -3970,10 +3970,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Barcelona",
-      "country": "Spain",
-      "latitude": 41.3874,
-      "longitude": 2.1686
+      "city": "Chicago",
+      "country": "United States",
+      "latitude": 41.8781,
+      "longitude": -87.6298
     },
     "responsibilities": [
       "Build product features",
@@ -4040,10 +4040,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Milan",
-      "country": "Italy",
-      "latitude": 45.4642,
-      "longitude": 9.19
+      "city": "Detroit",
+      "country": "United States",
+      "latitude": 42.3314,
+      "longitude": -83.0458
     },
     "responsibilities": [
       "Build product features",
@@ -4109,10 +4109,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Prague",
-      "country": "Czech Republic",
-      "latitude": 50.0755,
-      "longitude": 14.4378
+      "city": "Minneapolis",
+      "country": "United States",
+      "latitude": 44.9778,
+      "longitude": -93.265
     },
     "responsibilities": [
       "Build product features",
@@ -4180,10 +4180,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Vienna",
-      "country": "Austria",
-      "latitude": 48.2082,
-      "longitude": 16.3738
+      "city": "Columbus",
+      "country": "United States",
+      "latitude": 39.9612,
+      "longitude": -82.9988
     },
     "responsibilities": [
       "Build product features",
@@ -4250,10 +4250,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Stockholm",
-      "country": "Sweden",
-      "latitude": 59.3293,
-      "longitude": 18.0686
+      "city": "Indianapolis",
+      "country": "United States",
+      "latitude": 39.7684,
+      "longitude": -86.1581
     },
     "responsibilities": [
       "Build product features",
@@ -4319,10 +4319,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Copenhagen",
-      "country": "Denmark",
-      "latitude": 55.6761,
-      "longitude": 12.5683
+      "city": "Kansas City",
+      "country": "United States",
+      "latitude": 39.0997,
+      "longitude": -94.5786
     },
     "responsibilities": [
       "Build product features",
@@ -4388,10 +4388,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Lisbon",
-      "country": "Portugal",
-      "latitude": 38.7223,
-      "longitude": -9.1393
+      "city": "Austin",
+      "country": "United States",
+      "latitude": 30.2672,
+      "longitude": -97.7431
     },
     "responsibilities": [
       "Build product features",
@@ -4458,10 +4458,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "New York",
+      "city": "Dallas",
       "country": "United States",
-      "latitude": 40.7128,
-      "longitude": -74.006
+      "latitude": 32.7767,
+      "longitude": -96.797
     },
     "responsibilities": [
       "Build product features",
@@ -4529,10 +4529,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "San Francisco",
+      "city": "Houston",
       "country": "United States",
-      "latitude": 37.7749,
-      "longitude": -122.4194
+      "latitude": 29.7604,
+      "longitude": -95.3698
     },
     "responsibilities": [
       "Build product features",
@@ -4599,10 +4599,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Austin",
+      "city": "San Antonio",
       "country": "United States",
-      "latitude": 30.2672,
-      "longitude": -97.7431
+      "latitude": 29.4241,
+      "longitude": -98.4936
     },
     "responsibilities": [
       "Build product features",
@@ -4669,10 +4669,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Seattle",
+      "city": "Nashville",
       "country": "United States",
-      "latitude": 47.6062,
-      "longitude": -122.3321
+      "latitude": 36.1627,
+      "longitude": -86.7816
     },
     "responsibilities": [
       "Build product features",
@@ -4738,10 +4738,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Boston",
+      "city": "Tampa",
       "country": "United States",
-      "latitude": 42.3601,
-      "longitude": -71.0589
+      "latitude": 27.9506,
+      "longitude": -82.4572
     },
     "responsibilities": [
       "Build product features",
@@ -4808,10 +4808,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Chicago",
+      "city": "San Francisco",
       "country": "United States",
-      "latitude": 41.8781,
-      "longitude": -87.6298
+      "latitude": 37.7749,
+      "longitude": -122.4194
     },
     "responsibilities": [
       "Build product features",
@@ -4879,10 +4879,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Denver",
+      "city": "San Jose",
       "country": "United States",
-      "latitude": 39.7392,
-      "longitude": -104.9903
+      "latitude": 37.3382,
+      "longitude": -121.8863
     },
     "responsibilities": [
       "Build product features",
@@ -4949,10 +4949,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Atlanta",
+      "city": "Los Angeles",
       "country": "United States",
-      "latitude": 33.749,
-      "longitude": -84.388
+      "latitude": 34.0522,
+      "longitude": -118.2437
     },
     "responsibilities": [
       "Build product features",
@@ -5018,10 +5018,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Los Angeles",
+      "city": "San Diego",
       "country": "United States",
-      "latitude": 34.0522,
-      "longitude": -118.2437
+      "latitude": 32.7157,
+      "longitude": -117.1611
     },
     "responsibilities": [
       "Build product features",
@@ -5088,10 +5088,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Warsaw",
-      "country": "Poland",
-      "latitude": 52.2297,
-      "longitude": 21.0122
+      "city": "Seattle",
+      "country": "United States",
+      "latitude": 47.6062,
+      "longitude": -122.3321
     },
     "responsibilities": [
       "Build product features",
@@ -5158,10 +5158,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Krakow",
-      "country": "Poland",
-      "latitude": 50.0614,
-      "longitude": 19.9372
+      "city": "Portland",
+      "country": "United States",
+      "latitude": 45.5152,
+      "longitude": -122.6784
     },
     "responsibilities": [
       "Build product features",
@@ -5228,10 +5228,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Berlin",
-      "country": "Germany",
-      "latitude": 52.52,
-      "longitude": 13.405
+      "city": "Denver",
+      "country": "United States",
+      "latitude": 39.7392,
+      "longitude": -104.9903
     },
     "responsibilities": [
       "Build product features",
@@ -5298,10 +5298,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Munich",
-      "country": "Germany",
-      "latitude": 48.1351,
-      "longitude": 11.582
+      "city": "Salt Lake City",
+      "country": "United States",
+      "latitude": 40.7608,
+      "longitude": -111.891
     },
     "responsibilities": [
       "Build product features",
@@ -5368,10 +5368,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Amsterdam",
-      "country": "Netherlands",
-      "latitude": 52.3676,
-      "longitude": 4.9041
+      "city": "Phoenix",
+      "country": "United States",
+      "latitude": 33.4484,
+      "longitude": -112.074
     },
     "responsibilities": [
       "Build product features",
@@ -5438,10 +5438,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "London",
-      "country": "United Kingdom",
-      "latitude": 51.5074,
-      "longitude": -0.1278
+      "city": "Las Vegas",
+      "country": "United States",
+      "latitude": 36.1699,
+      "longitude": -115.1398
     },
     "responsibilities": [
       "Build product features",
@@ -5507,10 +5507,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Dublin",
-      "country": "Ireland",
-      "latitude": 53.3498,
-      "longitude": -6.2603
+      "city": "Pittsburgh",
+      "country": "United States",
+      "latitude": 40.4406,
+      "longitude": -79.9959
     },
     "responsibilities": [
       "Build product features",
@@ -5578,10 +5578,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Paris",
-      "country": "France",
-      "latitude": 48.8566,
-      "longitude": 2.3522
+      "city": "Cleveland",
+      "country": "United States",
+      "latitude": 41.4993,
+      "longitude": -81.6944
     },
     "responsibilities": [
       "Build product features",
@@ -5648,10 +5648,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Barcelona",
-      "country": "Spain",
-      "latitude": 41.3874,
-      "longitude": 2.1686
+      "city": "Milwaukee",
+      "country": "United States",
+      "latitude": 43.0389,
+      "longitude": -87.9065
     },
     "responsibilities": [
       "Build product features",
@@ -5717,10 +5717,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Milan",
-      "country": "Italy",
-      "latitude": 45.4642,
-      "longitude": 9.19
+      "city": "Jacksonville",
+      "country": "United States",
+      "latitude": 30.3322,
+      "longitude": -81.6557
     },
     "responsibilities": [
       "Build product features",
@@ -5786,10 +5786,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Prague",
-      "country": "Czech Republic",
-      "latitude": 50.0755,
-      "longitude": 14.4378
+      "city": "Memphis",
+      "country": "United States",
+      "latitude": 35.1495,
+      "longitude": -90.049
     },
     "responsibilities": [
       "Build product features",
@@ -5856,10 +5856,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Vienna",
-      "country": "Austria",
-      "latitude": 48.2082,
-      "longitude": 16.3738
+      "city": "Louisville",
+      "country": "United States",
+      "latitude": 38.2527,
+      "longitude": -85.7585
     },
     "responsibilities": [
       "Build product features",
@@ -5927,10 +5927,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Stockholm",
-      "country": "Sweden",
-      "latitude": 59.3293,
-      "longitude": 18.0686
+      "city": "Richmond",
+      "country": "United States",
+      "latitude": 37.5407,
+      "longitude": -77.436
     },
     "responsibilities": [
       "Build product features",
@@ -5997,10 +5997,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Copenhagen",
-      "country": "Denmark",
-      "latitude": 55.6761,
-      "longitude": 12.5683
+      "city": "Providence",
+      "country": "United States",
+      "latitude": 41.824,
+      "longitude": -71.4128
     },
     "responsibilities": [
       "Build product features",
@@ -6067,10 +6067,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Lisbon",
-      "country": "Portugal",
-      "latitude": 38.7223,
-      "longitude": -9.1393
+      "city": "Buffalo",
+      "country": "United States",
+      "latitude": 42.8864,
+      "longitude": -78.8784
     },
     "responsibilities": [
       "Build product features",
@@ -6136,10 +6136,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "New York",
+      "city": "Boise",
       "country": "United States",
-      "latitude": 40.7128,
-      "longitude": -74.006
+      "latitude": 43.615,
+      "longitude": -116.2023
     },
     "responsibilities": [
       "Build product features",
@@ -6206,10 +6206,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "San Francisco",
+      "city": "Albuquerque",
       "country": "United States",
-      "latitude": 37.7749,
-      "longitude": -122.4194
+      "latitude": 35.0844,
+      "longitude": -106.6504
     },
     "responsibilities": [
       "Build product features",
@@ -6277,10 +6277,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Austin",
+      "city": "Oklahoma City",
       "country": "United States",
-      "latitude": 30.2672,
-      "longitude": -97.7431
+      "latitude": 35.4676,
+      "longitude": -97.5164
     },
     "responsibilities": [
       "Build product features",
@@ -6347,10 +6347,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Seattle",
+      "city": "New Orleans",
       "country": "United States",
-      "latitude": 47.6062,
-      "longitude": -122.3321
+      "latitude": 29.9511,
+      "longitude": -90.0715
     },
     "responsibilities": [
       "Build product features",
@@ -6416,10 +6416,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Boston",
+      "city": "Orlando",
       "country": "United States",
-      "latitude": 42.3601,
-      "longitude": -71.0589
+      "latitude": 28.5383,
+      "longitude": -81.3792
     },
     "responsibilities": [
       "Build product features",
@@ -6486,10 +6486,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Chicago",
-      "country": "United States",
-      "latitude": 41.8781,
-      "longitude": -87.6298
+      "city": "Warsaw",
+      "country": "Poland",
+      "latitude": 52.253,
+      "longitude": 21.053
     },
     "responsibilities": [
       "Build product features",
@@ -6556,10 +6556,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Denver",
-      "country": "United States",
-      "latitude": 39.7392,
-      "longitude": -104.9903
+      "city": "Krakow",
+      "country": "Poland",
+      "latitude": 50.0697,
+      "longitude": 19.9889
     },
     "responsibilities": [
       "Build product features",
@@ -6626,10 +6626,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Atlanta",
-      "country": "United States",
-      "latitude": 33.749,
-      "longitude": -84.388
+      "city": "Wroclaw",
+      "country": "Poland",
+      "latitude": 51.099,
+      "longitude": 17.0911
     },
     "responsibilities": [
       "Build product features",
@@ -6696,10 +6696,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Los Angeles",
-      "country": "United States",
-      "latitude": 34.0522,
-      "longitude": -118.2437
+      "city": "Gdansk",
+      "country": "Poland",
+      "latitude": 54.3283,
+      "longitude": 18.6888
     },
     "responsibilities": [
       "Build product features",
@@ -6766,10 +6766,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Warsaw",
+      "city": "Poznan",
       "country": "Poland",
-      "latitude": 52.2297,
-      "longitude": 21.0122
+      "latitude": 52.3737,
+      "longitude": 16.9416
     },
     "responsibilities": [
       "Build product features",
@@ -6836,10 +6836,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Krakow",
+      "city": "Lodz",
       "country": "Poland",
-      "latitude": 50.0614,
-      "longitude": 19.9372
+      "latitude": 51.7258,
+      "longitude": 19.4445
     },
     "responsibilities": [
       "Build product features",
@@ -6905,10 +6905,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Wroclaw",
+      "city": "Katowice",
       "country": "Poland",
-      "latitude": 51.1079,
-      "longitude": 17.0385
+      "latitude": 50.2391,
+      "longitude": 18.9887
     },
     "responsibilities": [
       "Build product features",
@@ -6976,10 +6976,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Munich",
-      "country": "Germany",
-      "latitude": 48.1351,
-      "longitude": 11.582
+      "city": "Lublin",
+      "country": "Poland",
+      "latitude": 51.2348,
+      "longitude": 22.5171
     },
     "responsibilities": [
       "Build product features",
@@ -7046,10 +7046,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Amsterdam",
-      "country": "Netherlands",
-      "latitude": 52.3676,
-      "longitude": 4.9041
+      "city": "Szczecin",
+      "country": "Poland",
+      "latitude": 53.4338,
+      "longitude": 14.4961
     },
     "responsibilities": [
       "Build product features",
@@ -7115,10 +7115,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "London",
-      "country": "United Kingdom",
-      "latitude": 51.5074,
-      "longitude": -0.1278
+      "city": "Bydgoszcz",
+      "country": "Poland",
+      "latitude": 53.1445,
+      "longitude": 17.9635
     },
     "responsibilities": [
       "Build product features",
@@ -7184,10 +7184,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Dublin",
-      "country": "Ireland",
-      "latitude": 53.3498,
-      "longitude": -6.2603
+      "city": "Bialystok",
+      "country": "Poland",
+      "latitude": 53.164,
+      "longitude": 23.1465
     },
     "responsibilities": [
       "Build product features",
@@ -7254,10 +7254,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Paris",
-      "country": "France",
-      "latitude": 48.8566,
-      "longitude": 2.3522
+      "city": "Rzeszow",
+      "country": "Poland",
+      "latitude": 50.0752,
+      "longitude": 22.0047
     },
     "responsibilities": [
       "Build product features",
@@ -7325,10 +7325,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Barcelona",
-      "country": "Spain",
-      "latitude": 41.3874,
-      "longitude": 2.1686
+      "city": "Torun",
+      "country": "Poland",
+      "latitude": 53.0418,
+      "longitude": 18.631
     },
     "responsibilities": [
       "Build product features",
@@ -7395,10 +7395,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Milan",
-      "country": "Italy",
-      "latitude": 45.4642,
-      "longitude": 9.19
+      "city": "Kielce",
+      "country": "Poland",
+      "latitude": 50.8811,
+      "longitude": 20.6773
     },
     "responsibilities": [
       "Build product features",
@@ -7465,10 +7465,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Prague",
-      "country": "Czech Republic",
-      "latitude": 50.0755,
-      "longitude": 14.4378
+      "city": "Olsztyn",
+      "country": "Poland",
+      "latitude": 53.7766,
+      "longitude": 20.5379
     },
     "responsibilities": [
       "Build product features",
@@ -7534,10 +7534,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Vienna",
-      "country": "Austria",
-      "latitude": 48.2082,
-      "longitude": 16.3738
+      "city": "Gdynia",
+      "country": "Poland",
+      "latitude": 54.5008,
+      "longitude": 18.5804
     },
     "responsibilities": [
       "Build product features",
@@ -7604,10 +7604,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Stockholm",
-      "country": "Sweden",
-      "latitude": 59.3293,
-      "longitude": 18.0686
+      "city": "Sopot",
+      "country": "Poland",
+      "latitude": 54.4119,
+      "longitude": 18.5886
     },
     "responsibilities": [
       "Build product features",
@@ -7675,10 +7675,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Copenhagen",
-      "country": "Denmark",
-      "latitude": 55.6761,
-      "longitude": 12.5683
+      "city": "Gliwice",
+      "country": "Poland",
+      "latitude": 50.2603,
+      "longitude": 18.6714
     },
     "responsibilities": [
       "Build product features",
@@ -7745,10 +7745,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Lisbon",
-      "country": "Portugal",
-      "latitude": 38.7223,
-      "longitude": -9.1393
+      "city": "Zabrze",
+      "country": "Poland",
+      "latitude": 50.295,
+      "longitude": 18.7598
     },
     "responsibilities": [
       "Build product features",
@@ -7814,10 +7814,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "New York",
-      "country": "United States",
-      "latitude": 40.7128,
-      "longitude": -74.006
+      "city": "Bielsko-Biala",
+      "country": "Poland",
+      "latitude": 49.8043,
+      "longitude": 19.002
     },
     "responsibilities": [
       "Build product features",
@@ -7884,10 +7884,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "San Francisco",
-      "country": "United States",
-      "latitude": 37.7749,
-      "longitude": -122.4194
+      "city": "Czestochowa",
+      "country": "Poland",
+      "latitude": 50.81,
+      "longitude": 19.0663
     },
     "responsibilities": [
       "Build product features",
@@ -7954,10 +7954,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Austin",
-      "country": "United States",
-      "latitude": 30.2672,
-      "longitude": -97.7431
+      "city": "Radom",
+      "country": "Poland",
+      "latitude": 51.4177,
+      "longitude": 21.0978
     },
     "responsibilities": [
       "Build product features",
@@ -8024,10 +8024,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Seattle",
-      "country": "United States",
-      "latitude": 47.6062,
-      "longitude": -122.3321
+      "city": "Sosnowiec",
+      "country": "Poland",
+      "latitude": 50.306,
+      "longitude": 19.1037
     },
     "responsibilities": [
       "Build product features",
@@ -8094,10 +8094,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Boston",
-      "country": "United States",
-      "latitude": 42.3601,
-      "longitude": -71.0589
+      "city": "Opole",
+      "country": "Poland",
+      "latitude": 50.7091,
+      "longitude": 17.9157
     },
     "responsibilities": [
       "Build product features",
@@ -8164,10 +8164,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Chicago",
-      "country": "United States",
-      "latitude": 41.8781,
-      "longitude": -87.6298
+      "city": "Gorzow Wielkopolski",
+      "country": "Poland",
+      "latitude": 52.7683,
+      "longitude": 15.2509
     },
     "responsibilities": [
       "Build product features",
@@ -8234,10 +8234,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Denver",
-      "country": "United States",
-      "latitude": 39.7392,
-      "longitude": -104.9903
+      "city": "Plock",
+      "country": "Poland",
+      "latitude": 52.5678,
+      "longitude": 19.7507
     },
     "responsibilities": [
       "Build product features",
@@ -8303,10 +8303,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Atlanta",
-      "country": "United States",
-      "latitude": 33.749,
-      "longitude": -84.388
+      "city": "Tarnow",
+      "country": "Poland",
+      "latitude": 50.0174,
+      "longitude": 21.0383
     },
     "responsibilities": [
       "Build product features",
@@ -8374,10 +8374,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Los Angeles",
-      "country": "United States",
-      "latitude": 34.0522,
-      "longitude": -118.2437
+      "city": "Kalisz",
+      "country": "Poland",
+      "latitude": 51.75,
+      "longitude": 18.1429
     },
     "responsibilities": [
       "Build product features",
@@ -8444,10 +8444,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Warsaw",
+      "city": "Legnica",
       "country": "Poland",
-      "latitude": 52.2297,
-      "longitude": 21.0122
+      "latitude": 51.1812,
+      "longitude": 16.1977
     },
     "responsibilities": [
       "Build product features",
@@ -8513,10 +8513,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Krakow",
+      "city": "Zielona Gora",
       "country": "Poland",
-      "latitude": 50.0614,
-      "longitude": 19.9372
+      "latitude": 51.9022,
+      "longitude": 15.5179
     },
     "responsibilities": [
       "Build product features",
@@ -8582,10 +8582,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Wroclaw",
+      "city": "Walbrzych",
       "country": "Poland",
-      "latitude": 51.1079,
-      "longitude": 17.0385
+      "latitude": 50.7387,
+      "longitude": 16.2685
     },
     "responsibilities": [
       "Build product features",
@@ -8652,10 +8652,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Berlin",
-      "country": "Germany",
-      "latitude": 52.52,
-      "longitude": 13.405
+      "city": "Slupsk",
+      "country": "Poland",
+      "latitude": 54.4404,
+      "longitude": 16.9862
     },
     "responsibilities": [
       "Build product features",
@@ -8723,10 +8723,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Amsterdam",
-      "country": "Netherlands",
-      "latitude": 52.3676,
-      "longitude": 4.9041
+      "city": "Koszalin",
+      "country": "Poland",
+      "latitude": 54.1855,
+      "longitude": 16.1158
     },
     "responsibilities": [
       "Build product features",
@@ -8793,10 +8793,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "London",
-      "country": "United Kingdom",
-      "latitude": 51.5074,
-      "longitude": -0.1278
+      "city": "Jelenia Gora",
+      "country": "Poland",
+      "latitude": 50.9128,
+      "longitude": 15.6672
     },
     "responsibilities": [
       "Build product features",
@@ -8863,10 +8863,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Dublin",
-      "country": "Ireland",
-      "latitude": 53.3498,
-      "longitude": -6.2603
+      "city": "Nowy Sacz",
+      "country": "Poland",
+      "latitude": 49.6482,
+      "longitude": 20.6529
     },
     "responsibilities": [
       "Build product features",
@@ -8932,10 +8932,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Paris",
-      "country": "France",
-      "latitude": 48.8566,
-      "longitude": 2.3522
+      "city": "Konin",
+      "country": "Poland",
+      "latitude": 52.2556,
+      "longitude": 18.2339
     },
     "responsibilities": [
       "Build product features",
@@ -9002,10 +9002,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Barcelona",
-      "country": "Spain",
-      "latitude": 41.3874,
-      "longitude": 2.1686
+      "city": "Pila",
+      "country": "Poland",
+      "latitude": 53.1849,
+      "longitude": 16.7487
     },
     "responsibilities": [
       "Build product features",
@@ -9073,10 +9073,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Milan",
-      "country": "Italy",
-      "latitude": 45.4642,
-      "longitude": 9.19
+      "city": "Elblag",
+      "country": "Poland",
+      "latitude": 54.1823,
+      "longitude": 19.442
     },
     "responsibilities": [
       "Build product features",
@@ -9143,10 +9143,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Prague",
-      "country": "Czech Republic",
-      "latitude": 50.0755,
-      "longitude": 14.4378
+      "city": "Grudziadz",
+      "country": "Poland",
+      "latitude": 53.4965,
+      "longitude": 18.8072
     },
     "responsibilities": [
       "Build product features",
@@ -9212,10 +9212,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Vienna",
-      "country": "Austria",
-      "latitude": 48.2082,
-      "longitude": 16.3738
+      "city": "Rybnik",
+      "country": "Poland",
+      "latitude": 50.0974,
+      "longitude": 18.5992
     },
     "responsibilities": [
       "Build product features",
@@ -9282,10 +9282,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Stockholm",
-      "country": "Sweden",
-      "latitude": 59.3293,
-      "longitude": 18.0686
+      "city": "Tychy",
+      "country": "Poland",
+      "latitude": 50.1166,
+      "longitude": 19.009
     },
     "responsibilities": [
       "Build product features",
@@ -9352,10 +9352,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Copenhagen",
-      "country": "Denmark",
-      "latitude": 55.6761,
-      "longitude": 12.5683
+      "city": "Dabrowa Gornicza",
+      "country": "Poland",
+      "latitude": 50.2907,
+      "longitude": 19.2107
     },
     "responsibilities": [
       "Build product features",
@@ -9422,10 +9422,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Lisbon",
-      "country": "Portugal",
-      "latitude": 38.7223,
-      "longitude": -9.1393
+      "city": "Chorzow",
+      "country": "Poland",
+      "latitude": 50.2644,
+      "longitude": 18.9496
     },
     "responsibilities": [
       "Build product features",
@@ -9492,10 +9492,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "New York",
-      "country": "United States",
-      "latitude": 40.7128,
-      "longitude": -74.006
+      "city": "Suwalki",
+      "country": "Poland",
+      "latitude": 54.0835,
+      "longitude": 22.8982
     },
     "responsibilities": [
       "Build product features",
@@ -9562,10 +9562,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "San Francisco",
-      "country": "United States",
-      "latitude": 37.7749,
-      "longitude": -122.4194
+      "city": "Zamosc",
+      "country": "Poland",
+      "latitude": 50.7076,
+      "longitude": 23.2038
     },
     "responsibilities": [
       "Build product features",
@@ -9632,10 +9632,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Austin",
-      "country": "United States",
-      "latitude": 30.2672,
-      "longitude": -97.7431
+      "city": "Leszno",
+      "country": "Poland",
+      "latitude": 51.8462,
+      "longitude": 16.5196
     },
     "responsibilities": [
       "Build product features",
@@ -9701,10 +9701,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Seattle",
-      "country": "United States",
-      "latitude": 47.6062,
-      "longitude": -122.3321
+      "city": "Krosno",
+      "country": "Poland",
+      "latitude": 49.7009,
+      "longitude": 21.7214
     },
     "responsibilities": [
       "Build product features",
@@ -9772,10 +9772,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Boston",
-      "country": "United States",
-      "latitude": 42.3601,
-      "longitude": -71.0589
+      "city": "Pabianice",
+      "country": "Poland",
+      "latitude": 51.694,
+      "longitude": 19.3271
     },
     "responsibilities": [
       "Build product features",
@@ -9842,10 +9842,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Chicago",
-      "country": "United States",
-      "latitude": 41.8781,
-      "longitude": -87.6298
+      "city": "Mielec",
+      "country": "Poland",
+      "latitude": 50.3213,
+      "longitude": 21.423
     },
     "responsibilities": [
       "Build product features",
@@ -9911,10 +9911,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Denver",
+      "city": "New York",
       "country": "United States",
-      "latitude": 39.7392,
-      "longitude": -104.9903
+      "latitude": 40.743,
+      "longitude": -73.9848
     },
     "responsibilities": [
       "Build product features",
@@ -9980,10 +9980,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Atlanta",
+      "city": "Boston",
       "country": "United States",
-      "latitude": 33.749,
-      "longitude": -84.388
+      "latitude": 42.3787,
+      "longitude": -71.0201
     },
     "responsibilities": [
       "Build product features",
@@ -10050,10 +10050,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Los Angeles",
+      "city": "Philadelphia",
       "country": "United States",
-      "latitude": 34.0522,
-      "longitude": -118.2437
+      "latitude": 39.955,
+      "longitude": -75.1207
     },
     "responsibilities": [
       "Build product features",
@@ -10121,10 +10121,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Warsaw",
-      "country": "Poland",
-      "latitude": 52.2297,
-      "longitude": 21.0122
+      "city": "Washington",
+      "country": "United States",
+      "latitude": 38.8928,
+      "longitude": -76.9971
     },
     "responsibilities": [
       "Build product features",
@@ -10191,10 +10191,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Krakow",
-      "country": "Poland",
-      "latitude": 50.0614,
-      "longitude": 19.9372
+      "city": "Atlanta",
+      "country": "United States",
+      "latitude": 33.7214,
+      "longitude": -84.3638
     },
     "responsibilities": [
       "Build product features",
@@ -10261,10 +10261,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Wroclaw",
-      "country": "Poland",
-      "latitude": 51.1079,
-      "longitude": 17.0385
+      "city": "Miami",
+      "country": "United States",
+      "latitude": 25.7278,
+      "longitude": -80.1872
     },
     "responsibilities": [
       "Build product features",
@@ -10330,10 +10330,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Berlin",
-      "country": "Germany",
-      "latitude": 52.52,
-      "longitude": 13.405
+      "city": "Charlotte",
+      "country": "United States",
+      "latitude": 35.1954,
+      "longitude": -80.8588
     },
     "responsibilities": [
       "Build product features",
@@ -10400,10 +10400,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Munich",
-      "country": "Germany",
-      "latitude": 48.1351,
-      "longitude": 11.582
+      "city": "Raleigh",
+      "country": "United States",
+      "latitude": 35.7581,
+      "longitude": -78.6709
     },
     "responsibilities": [
       "Build product features",
@@ -10471,10 +10471,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "London",
-      "country": "United Kingdom",
-      "latitude": 51.5074,
-      "longitude": -0.1278
+      "city": "Chicago",
+      "country": "United States",
+      "latitude": 41.8722,
+      "longitude": -87.675
     },
     "responsibilities": [
       "Build product features",
@@ -10541,10 +10541,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Dublin",
-      "country": "Ireland",
-      "latitude": 53.3498,
-      "longitude": -6.2603
+      "city": "Detroit",
+      "country": "United States",
+      "latitude": 42.3425,
+      "longitude": -83.0895
     },
     "responsibilities": [
       "Build product features",
@@ -10610,10 +10610,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Paris",
-      "country": "France",
-      "latitude": 48.8566,
-      "longitude": 2.3522
+      "city": "Minneapolis",
+      "country": "United States",
+      "latitude": 45.0032,
+      "longitude": -93.2973
     },
     "responsibilities": [
       "Build product features",
@@ -10680,10 +10680,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Barcelona",
-      "country": "Spain",
-      "latitude": 41.3874,
-      "longitude": 2.1686
+      "city": "Columbus",
+      "country": "United States",
+      "latitude": 39.9945,
+      "longitude": -83.0088
     },
     "responsibilities": [
       "Build product features",
@@ -10750,10 +10750,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Milan",
-      "country": "Italy",
-      "latitude": 45.4642,
-      "longitude": 9.19
+      "city": "Indianapolis",
+      "country": "United States",
+      "latitude": 39.8012,
+      "longitude": -86.1458
     },
     "responsibilities": [
       "Build product features",
@@ -10820,10 +10820,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Prague",
-      "country": "Czech Republic",
-      "latitude": 50.0755,
-      "longitude": 14.4378
+      "city": "Kansas City",
+      "country": "United States",
+      "latitude": 39.1239,
+      "longitude": -94.5475
     },
     "responsibilities": [
       "Build product features",
@@ -10890,10 +10890,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Vienna",
-      "country": "Austria",
-      "latitude": 48.2082,
-      "longitude": 16.3738
+      "city": "Austin",
+      "country": "United States",
+      "latitude": 30.2766,
+      "longitude": -97.7051
     },
     "responsibilities": [
       "Build product features",
@@ -10960,10 +10960,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Stockholm",
-      "country": "Sweden",
-      "latitude": 59.3293,
-      "longitude": 18.0686
+      "city": "Dallas",
+      "country": "United States",
+      "latitude": 32.769,
+      "longitude": -96.7574
     },
     "responsibilities": [
       "Build product features",
@@ -11030,10 +11030,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Copenhagen",
-      "country": "Denmark",
-      "latitude": 55.6761,
-      "longitude": 12.5683
+      "city": "Houston",
+      "country": "United States",
+      "latitude": 29.7375,
+      "longitude": -95.3406
     },
     "responsibilities": [
       "Build product features",
@@ -11099,10 +11099,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Lisbon",
-      "country": "Portugal",
-      "latitude": 38.7223,
-      "longitude": -9.1393
+      "city": "San Antonio",
+      "country": "United States",
+      "latitude": 29.3918,
+      "longitude": -98.4808
     },
     "responsibilities": [
       "Build product features",
@@ -11170,10 +11170,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "New York",
+      "city": "Nashville",
       "country": "United States",
-      "latitude": 40.7128,
-      "longitude": -74.006
+      "latitude": 36.129,
+      "longitude": -86.7889
     },
     "responsibilities": [
       "Build product features",
@@ -11240,10 +11240,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "San Francisco",
+      "city": "Tampa",
       "country": "United States",
-      "latitude": 37.7749,
-      "longitude": -122.4194
+      "latitude": 27.924,
+      "longitude": -82.4815
     },
     "responsibilities": [
       "Build product features",
@@ -11309,10 +11309,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Austin",
+      "city": "San Francisco",
       "country": "United States",
-      "latitude": 30.2672,
-      "longitude": -97.7431
+      "latitude": 37.7621,
+      "longitude": -122.4595
     },
     "responsibilities": [
       "Build product features",
@@ -11378,10 +11378,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Seattle",
+      "city": "San Jose",
       "country": "United States",
-      "latitude": 47.6062,
-      "longitude": -122.3321
+      "latitude": 37.3424,
+      "longitude": -121.929
     },
     "responsibilities": [
       "Build product features",
@@ -11448,10 +11448,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Boston",
+      "city": "Los Angeles",
       "country": "United States",
-      "latitude": 42.3601,
-      "longitude": -71.0589
+      "latitude": 34.0723,
+      "longitude": -118.2771
     },
     "responsibilities": [
       "Build product features",
@@ -11519,10 +11519,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Chicago",
+      "city": "San Diego",
       "country": "United States",
-      "latitude": 41.8781,
-      "longitude": -87.6298
+      "latitude": 32.7467,
+      "longitude": -117.1783
     },
     "responsibilities": [
       "Build product features",
@@ -11589,10 +11589,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Denver",
+      "city": "Seattle",
       "country": "United States",
-      "latitude": 39.7392,
-      "longitude": -104.9903
+      "latitude": 47.6403,
+      "longitude": -122.3286
     },
     "responsibilities": [
       "Build product features",
@@ -11659,10 +11659,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Atlanta",
+      "city": "Portland",
       "country": "United States",
-      "latitude": 33.749,
-      "longitude": -84.388
+      "latitude": 45.5439,
+      "longitude": -122.6518
     },
     "responsibilities": [
       "Build product features",
@@ -11728,10 +11728,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Los Angeles",
+      "city": "Denver",
       "country": "United States",
-      "latitude": 34.0522,
-      "longitude": -118.2437
+      "latitude": 39.7552,
+      "longitude": -104.9511
     },
     "responsibilities": [
       "Build product features",
@@ -11798,10 +11798,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Warsaw",
-      "country": "Poland",
-      "latitude": 52.2297,
-      "longitude": 21.0122
+      "city": "Salt Lake City",
+      "country": "United States",
+      "latitude": 40.7602,
+      "longitude": -111.8459
     },
     "responsibilities": [
       "Build product features",
@@ -11869,10 +11869,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Krakow",
-      "country": "Poland",
-      "latitude": 50.0614,
-      "longitude": 19.9372
+      "city": "Phoenix",
+      "country": "United States",
+      "latitude": 33.4313,
+      "longitude": -112.0385
     },
     "responsibilities": [
       "Build product features",
@@ -11939,10 +11939,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Wroclaw",
-      "country": "Poland",
-      "latitude": 51.1079,
-      "longitude": 17.0385
+      "city": "Las Vegas",
+      "country": "United States",
+      "latitude": 36.1406,
+      "longitude": -115.118
     },
     "responsibilities": [
       "Build product features",
@@ -12008,10 +12008,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Berlin",
-      "country": "Germany",
-      "latitude": 52.52,
-      "longitude": 13.405
+      "city": "Pittsburgh",
+      "country": "United States",
+      "latitude": 40.4064,
+      "longitude": -79.9943
     },
     "responsibilities": [
       "Build product features",
@@ -12078,10 +12078,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Munich",
-      "country": "Germany",
-      "latitude": 48.1351,
-      "longitude": 11.582
+      "city": "Cleveland",
+      "country": "United States",
+      "latitude": 41.4688,
+      "longitude": -81.7151
     },
     "responsibilities": [
       "Build product features",
@@ -12148,10 +12148,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Amsterdam",
-      "country": "Netherlands",
-      "latitude": 52.3676,
-      "longitude": 4.9041
+      "city": "Milwaukee",
+      "country": "United States",
+      "latitude": 43.0198,
+      "longitude": -87.9453
     },
     "responsibilities": [
       "Build product features",
@@ -12218,10 +12218,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Dublin",
-      "country": "Ireland",
-      "latitude": 53.3498,
-      "longitude": -6.2603
+      "city": "Jacksonville",
+      "country": "United States",
+      "latitude": 30.3292,
+      "longitude": -81.6951
     },
     "responsibilities": [
       "Build product features",
@@ -12288,10 +12288,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Paris",
-      "country": "France",
-      "latitude": 48.8566,
-      "longitude": 2.3522
+      "city": "Memphis",
+      "country": "United States",
+      "latitude": 35.1634,
+      "longitude": -90.0872
     },
     "responsibilities": [
       "Build product features",
@@ -12358,10 +12358,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Barcelona",
-      "country": "Spain",
-      "latitude": 41.3874,
-      "longitude": 2.1686
+      "city": "Louisville",
+      "country": "United States",
+      "latitude": 38.28,
+      "longitude": -85.7847
     },
     "responsibilities": [
       "Build product features",
@@ -12428,10 +12428,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Milan",
-      "country": "Italy",
-      "latitude": 45.4642,
-      "longitude": 9.19
+      "city": "Richmond",
+      "country": "United States",
+      "latitude": 37.5745,
+      "longitude": -77.442
     },
     "responsibilities": [
       "Build product features",
@@ -12497,10 +12497,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Prague",
-      "country": "Czech Republic",
-      "latitude": 50.0755,
-      "longitude": 14.4378
+      "city": "Providence",
+      "country": "United States",
+      "latitude": 41.8559,
+      "longitude": -71.3964
     },
     "responsibilities": [
       "Build product features",
@@ -12568,10 +12568,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Vienna",
-      "country": "Austria",
-      "latitude": 48.2082,
-      "longitude": 16.3738
+      "city": "Buffalo",
+      "country": "United States",
+      "latitude": 42.9084,
+      "longitude": -78.8427
     },
     "responsibilities": [
       "Build product features",
@@ -12638,10 +12638,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Stockholm",
-      "country": "Sweden",
-      "latitude": 59.3293,
-      "longitude": 18.0686
+      "city": "Boise",
+      "country": "United States",
+      "latitude": 43.6215,
+      "longitude": -116.156
     },
     "responsibilities": [
       "Build product features",
@@ -12707,10 +12707,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Copenhagen",
-      "country": "Denmark",
-      "latitude": 55.6761,
-      "longitude": 12.5683
+      "city": "Albuquerque",
+      "country": "United States",
+      "latitude": 35.0738,
+      "longitude": -106.6107
     },
     "responsibilities": [
       "Build product features",
@@ -12776,10 +12776,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Lisbon",
-      "country": "Portugal",
-      "latitude": 38.7223,
-      "longitude": -9.1393
+      "city": "Oklahoma City",
+      "country": "United States",
+      "latitude": 35.4426,
+      "longitude": -97.4878
     },
     "responsibilities": [
       "Build product features",
@@ -12846,10 +12846,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "New York",
+      "city": "New Orleans",
       "country": "United States",
-      "latitude": 40.7128,
-      "longitude": -74.006
+      "latitude": 29.9179,
+      "longitude": -90.062
     },
     "responsibilities": [
       "Build product features",
@@ -12917,10 +12917,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "San Francisco",
+      "city": "Orlando",
       "country": "United States",
-      "latitude": 37.7749,
-      "longitude": -122.4194
+      "latitude": 28.5053,
+      "longitude": -81.3893
     },
     "responsibilities": [
       "Build product features",
@@ -12987,10 +12987,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Austin",
-      "country": "United States",
-      "latitude": 30.2672,
-      "longitude": -97.7431
+      "city": "Warsaw",
+      "country": "Poland",
+      "latitude": 52.2263,
+      "longitude": 21.0913
     },
     "responsibilities": [
       "Build product features",
@@ -13057,10 +13057,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Seattle",
-      "country": "United States",
-      "latitude": 47.6062,
-      "longitude": -122.3321
+      "city": "Krakow",
+      "country": "Poland",
+      "latitude": 50.0349,
+      "longitude": 20.0006
     },
     "responsibilities": [
       "Build product features",
@@ -13126,10 +13126,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Boston",
-      "country": "United States",
-      "latitude": 42.3601,
-      "longitude": -71.0589
+      "city": "Wroclaw",
+      "country": "Poland",
+      "latitude": 51.065,
+      "longitude": 17.0748
     },
     "responsibilities": [
       "Build product features",
@@ -13196,10 +13196,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Chicago",
-      "country": "United States",
-      "latitude": 41.8781,
-      "longitude": -87.6298
+      "city": "Gdansk",
+      "country": "Poland",
+      "latitude": 54.3034,
+      "longitude": 18.6451
     },
     "responsibilities": [
       "Build product features",
@@ -13267,10 +13267,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Denver",
-      "country": "United States",
-      "latitude": 39.7392,
-      "longitude": -104.9903
+      "city": "Poznan",
+      "country": "Poland",
+      "latitude": 52.3643,
+      "longitude": 16.8854
     },
     "responsibilities": [
       "Build product features",
@@ -13337,10 +13337,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Atlanta",
-      "country": "United States",
-      "latitude": 33.749,
-      "longitude": -84.388
+      "city": "Lodz",
+      "country": "Poland",
+      "latitude": 51.7342,
+      "longitude": 19.3888
     },
     "responsibilities": [
       "Build product features",
@@ -13406,10 +13406,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Los Angeles",
-      "country": "United States",
-      "latitude": 34.0522,
-      "longitude": -118.2437
+      "city": "Katowice",
+      "country": "Poland",
+      "latitude": 50.2632,
+      "longitude": 18.9479
     },
     "responsibilities": [
       "Build product features",
@@ -13476,10 +13476,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Warsaw",
+      "city": "Lublin",
       "country": "Poland",
-      "latitude": 52.2297,
-      "longitude": 21.0122
+      "latitude": 51.2685,
+      "longitude": 22.4992
     },
     "responsibilities": [
       "Build product features",
@@ -13546,10 +13546,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Krakow",
+      "city": "Szczecin",
       "country": "Poland",
-      "latitude": 50.0614,
-      "longitude": 19.9372
+      "latitude": 53.4688,
+      "longitude": 14.5072
     },
     "responsibilities": [
       "Build product features",
@@ -13616,10 +13616,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Wroclaw",
+      "city": "Bydgoszcz",
       "country": "Poland",
-      "latitude": 51.1079,
-      "longitude": 17.0385
+      "latitude": 53.1719,
+      "longitude": 18.0013
     },
     "responsibilities": [
       "Build product features",
@@ -13686,10 +13686,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Berlin",
-      "country": "Germany",
-      "latitude": 52.52,
-      "longitude": 13.405
+      "city": "Bialystok",
+      "country": "Poland",
+      "latitude": 53.1769,
+      "longitude": 23.2018
     },
     "responsibilities": [
       "Build product features",
@@ -13756,10 +13756,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Munich",
-      "country": "Germany",
-      "latitude": 48.1351,
-      "longitude": 11.582
+      "city": "Rzeszow",
+      "country": "Poland",
+      "latitude": 50.0704,
+      "longitude": 22.0595
     },
     "responsibilities": [
       "Build product features",
@@ -13826,10 +13826,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Amsterdam",
-      "country": "Netherlands",
-      "latitude": 52.3676,
-      "longitude": 4.9041
+      "city": "Torun",
+      "country": "Poland",
+      "latitude": 53.0205,
+      "longitude": 18.6783
     },
     "responsibilities": [
       "Build product features",
@@ -13895,10 +13895,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "London",
-      "country": "United Kingdom",
-      "latitude": 51.5074,
-      "longitude": -0.1278
+      "city": "Kielce",
+      "country": "Poland",
+      "latitude": 50.8487,
+      "longitude": 20.7004
     },
     "responsibilities": [
       "Build product features",

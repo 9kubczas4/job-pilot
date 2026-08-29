@@ -6,7 +6,6 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AppLinks } from '@app/app-paths';
 import {
@@ -25,7 +24,7 @@ const SEARCH_DEBOUNCE_MS = 400;
   host: {
     '(document:click)': 'onDocumentClick($event)',
   },
-  imports: [FormsModule],
+  imports: [],
   templateUrl: './header-search.component.html',
   styleUrl: './header-search.component.scss',
 })
@@ -39,6 +38,7 @@ export class HeaderSearchComponent {
 
   readonly jobPanelOpen = signal(false);
   readonly locationPanelOpen = signal(false);
+  readonly radiusPanelOpen = signal(false);
 
   private debounceTimer: ReturnType<typeof setTimeout> | null = null;
   private skipLocationCoordReset = false;
@@ -51,6 +51,7 @@ export class HeaderSearchComponent {
     this.headerUi.searchQuery.set(value);
     this.jobPanelOpen.set(value.trim().length >= 2);
     this.locationPanelOpen.set(false);
+    this.radiusPanelOpen.set(false);
     this.scheduleApplySearch();
   }
 
@@ -62,17 +63,30 @@ export class HeaderSearchComponent {
     }
     this.locationPanelOpen.set(true);
     this.jobPanelOpen.set(false);
+    this.radiusPanelOpen.set(false);
     this.scheduleApplySearch();
   }
 
-  onRadiusChange(value: string | number): void {
-    const radius = Number(value);
-    if (Number.isFinite(radius)) {
-      this.headerUi.radiusKm.set(radius);
+  onRadiusChange(value: number): void {
+    if (Number.isFinite(value)) {
+      this.headerUi.radiusKm.set(value);
     } else {
       this.headerUi.radiusKm.set(DEFAULT_SEARCH_RADIUS_KM);
     }
     this.applySearch();
+  }
+
+  toggleRadiusPanel(event: Event): void {
+    event.stopPropagation();
+    const nextOpen = !this.radiusPanelOpen();
+    this.radiusPanelOpen.set(nextOpen);
+    this.jobPanelOpen.set(false);
+    this.locationPanelOpen.set(false);
+  }
+
+  selectRadius(radius: number): void {
+    this.onRadiusChange(radius);
+    this.radiusPanelOpen.set(false);
   }
 
   onJobFocus(): void {
@@ -80,11 +94,13 @@ export class HeaderSearchComponent {
       this.jobPanelOpen.set(true);
     }
     this.locationPanelOpen.set(false);
+    this.radiusPanelOpen.set(false);
   }
 
   onLocationFocus(): void {
     this.locationPanelOpen.set(true);
     this.jobPanelOpen.set(false);
+    this.radiusPanelOpen.set(false);
   }
 
   selectJobSuggestion(suggestion: JobSearchSuggestion): void {
@@ -127,6 +143,7 @@ export class HeaderSearchComponent {
     if (!this.host.nativeElement.contains(event.target as Node)) {
       this.jobPanelOpen.set(false);
       this.locationPanelOpen.set(false);
+      this.radiusPanelOpen.set(false);
     }
   }
 
@@ -145,6 +162,7 @@ export class HeaderSearchComponent {
   private applySearch(): void {
     this.jobPanelOpen.set(false);
     this.locationPanelOpen.set(false);
+    this.radiusPanelOpen.set(false);
 
     if (this.isJobsSearchPage()) {
       this.applySearchOnJobsPage();

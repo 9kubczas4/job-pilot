@@ -93,18 +93,65 @@
       }
     </div>
 
-    <label class="visually-hidden" for="header-search-radius">Radius</label>
-    <select
-      id="header-search-radius"
-      name="radius"
-      class="header-search__radius"
-      [ngModel]="headerUi.radiusKm()"
-      (ngModelChange)="onRadiusChange($event)"
-    >
-      @for (radius of radiusOptions; track radius) {
-        <option [ngValue]="radius">{{ radius }} km</option>
+    <div class="header-search__radius-field">
+      <button
+        type="button"
+        id="header-search-radius"
+        class="header-search__radius"
+        aria-haspopup="listbox"
+        [attr.aria-expanded]="radiusPanelOpen()"
+        aria-controls="header-search-radius-panel"
+        (click)="toggleRadiusPanel($event)"
+      >
+        <svg class="header-search__radius-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+          <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.75" fill="none" />
+          <circle cx="12" cy="12" r="2.5" fill="currentColor" />
+        </svg>
+        <span class="header-search__radius-label">{{ headerUi.radiusKm() }} km</span>
+        <svg class="header-search__radius-chevron" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true">
+          <path
+            d="M3 4.5 L6 7.5 L9 4.5"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            fill="none"
+          />
+        </svg>
+      </button>
+
+      @if (radiusPanelOpen()) {
+        <ul id="header-search-radius-panel" class="header-search__radius-panel" role="listbox" aria-label="Search radius">
+          @for (radius of radiusOptions; track radius) {
+            <li role="presentation">
+              <button
+                type="button"
+                class="header-search__radius-option"
+                role="option"
+                [class.is-active]="headerUi.radiusKm() === radius"
+                [attr.aria-selected]="headerUi.radiusKm() === radius"
+                (mousedown)="$event.preventDefault()"
+                (click)="selectRadius(radius)"
+              >
+                <span>{{ radius }} km</span>
+                @if (headerUi.radiusKm() === radius) {
+                  <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
+                    <path
+                      d="M3.5 8.5 L6.5 11.5 L12.5 4.5"
+                      stroke="currentColor"
+                      stroke-width="1.75"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      fill="none"
+                    />
+                  </svg>
+                }
+              </button>
+            </li>
+          }
+        </ul>
       }
-    </select>
+    </div>
   </div>
 
   <button type="submit" class="header-search__submit" aria-label="Search jobs">

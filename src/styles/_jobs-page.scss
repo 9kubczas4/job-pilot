@@ -256,6 +256,33 @@
   background: var(--glass-surface-toolbar);
   box-shadow: var(--shadow-glass-panel);
   backdrop-filter: blur(var(--blur-glass));
+
+  .header-search__input,
+  .header-search__radius {
+    border-color: var(--glass-border-strong);
+    background: var(--glass-surface-field);
+    backdrop-filter: blur(var(--blur-glass-sm));
+  }
+
+  .header-search__input:hover,
+  .header-search__radius:hover {
+    border-color: var(--color-primary-glow);
+    background: var(--glass-surface-hover);
+  }
+
+  .header-search__radius[aria-expanded='true'],
+  .header-search__radius:focus-visible {
+    border-color: var(--color-primary-glow-strong);
+    background: var(--color-primary-surface);
+    color: var(--color-primary);
+  }
+
+  .header-search__radius-panel {
+    border-color: var(--glass-border-strong);
+    background: var(--glass-surface-toolbar);
+    backdrop-filter: blur(var(--blur-glass));
+    box-shadow: var(--shadow-glass-panel);
+  }
 }
 
 .jobs-mobile__search-done {

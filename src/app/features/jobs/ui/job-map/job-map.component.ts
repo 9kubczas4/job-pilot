@@ -8,9 +8,13 @@ import {
   signal,
 } from '@angular/core';
 import { GoogleMap } from '@angular/google-maps';
+import { MarkerClusterer } from '@googlemaps/markerclusterer';
 import { GOOGLE_MAPS_API_KEY } from '@shared/map/google-maps-config';
 import { isGoogleMapsConfigured } from '@shared/map/google-maps-loader';
+import { createClusterMarkerIcon, createJobMarkerIcon } from '@shared/map/google-maps-markers';
+import { MONOCHROME_MAP_STYLES } from '@shared/map/google-maps-styles';
 import { JobOffer } from '../../domain/job.model';
+import { buildJobMapPopupHtml } from './job-map-popup';
 
 const DEFAULT_CENTER = { lat: 51.9194, lng: 19.1451 };
 const DEFAULT_ZOOM = 5;
@@ -35,6 +39,7 @@ export class JobMapComponent {
   readonly mapOptions: google.maps.MapOptions = {
     center: DEFAULT_CENTER,
     zoom: DEFAULT_ZOOM,
+    styles: MONOCHROME_MAP_STYLES,
     mapTypeControl: false,
     streetViewControl: false,
     fullscreenControl: true,
@@ -43,73 +48,139 @@ export class JobMapComponent {
 
   private map: google.maps.Map | null = null;
   private infoWindow: google.maps.InfoWindow | null = null;
+  private clusterer: MarkerClusterer | null = null;
   private readonly markers = new globalThis.Map<string, google.maps.Marker>();
+  private readonly markerJobs = new globalThis.Map<google.maps.Marker, JobOffer>();
+  private lastJobIdsKey = '';
+  private lastSelectedJobId: string | null = null;
 
   constructor() {
     effect(() => {
       const jobs = this.jobs();
       const selectedId = this.selectedJobId();
-      this.renderMarkers(jobs, selectedId);
+      this.syncMap(jobs, selectedId);
     });
   }
 
   onMapReady(map: google.maps.Map): void {
     this.map = map;
-    this.infoWindow = new google.maps.InfoWindow();
-    this.renderMarkers(this.jobs(), this.selectedJobId());
+    this.infoWindow = new google.maps.InfoWindow({
+      maxWidth: 320,
+    });
+    this.clusterer = new MarkerClusterer({
+      map,
+      markers: [],
+      renderer: {
+        render: ({ count, position }) =>
+          new google.maps.Marker({
+            position,
+            icon: createClusterMarkerIcon(count),
+            zIndex: 1000 + count,
+          }),
+      },
+    });
+    this.syncMap(this.jobs(), this.selectedJobId());
   }
 
   onAuthFailure(): void {
     this.mapError.set(true);
   }
 
-  private renderMarkers(jobs: JobOffer[], selectedId: string | null): void {
-    if (!this.map) {
+  private syncMap(jobs: JobOffer[], selectedId: string | null): void {
+    if (!this.map || !this.clusterer) {
       return;
     }
 
-    const nextIds = new Set<string>();
-
-    for (const job of jobs) {
-      if (!job.location) {
-        continue;
-      }
-
-      nextIds.add(job.id);
-      const position = { lat: job.location.latitude, lng: job.location.longitude };
-      const isSelected = job.id === selectedId;
-      let marker = this.markers.get(job.id);
-
-      if (!marker) {
-        marker = new google.maps.Marker({
-          map: this.map,
-          position,
-          title: `${job.title} · ${job.company.name}`,
-          icon: this.createMarkerIcon(isSelected),
-        });
-
-        marker.addListener('click', () => {
-          this.selectJob.emit(job.id);
-          this.infoWindow?.setContent(`<strong>${job.title}</strong><br>${job.company.name}`);
-          this.infoWindow?.open({ map: this.map!, anchor: marker });
-        });
-
-        this.markers.set(job.id, marker);
-      } else {
-        marker.setPosition(position);
-        marker.setIcon(this.createMarkerIcon(isSelected));
-      }
-    }
-
-    for (const [jobId, marker] of this.markers.entries()) {
-      if (!nextIds.has(jobId)) {
-        marker.setMap(null);
-        this.markers.delete(jobId);
-      }
-    }
-
     const locatedJobs = jobs.filter((job) => job.location);
-    if (!locatedJobs.length) {
+    const jobIdsKey = locatedJobs
+      .map((job) => job.id)
+      .sort()
+      .join(',');
+
+    if (jobIdsKey !== this.lastJobIdsKey) {
+      this.lastJobIdsKey = jobIdsKey;
+      this.rebuildMarkers(locatedJobs, selectedId);
+      this.fitBoundsToJobs(locatedJobs);
+    } else {
+      this.updateMarkerSelection(selectedId);
+    }
+
+    if (selectedId !== this.lastSelectedJobId) {
+      this.lastSelectedJobId = selectedId;
+      this.openSelectedJobPopup(selectedId);
+    }
+  }
+
+  private rebuildMarkers(locatedJobs: JobOffer[], selectedId: string | null): void {
+    this.clusterer?.clearMarkers();
+
+    for (const marker of this.markers.values()) {
+      marker.setMap(null);
+    }
+
+    this.markers.clear();
+    this.markerJobs.clear();
+
+    const nextMarkers: google.maps.Marker[] = [];
+
+    for (const job of locatedJobs) {
+      const position = { lat: job.location!.latitude, lng: job.location!.longitude };
+      const isSelected = job.id === selectedId;
+      const marker = new google.maps.Marker({
+        position,
+        icon: createJobMarkerIcon(isSelected),
+        title: `${job.title} · ${job.company.name}`,
+        zIndex: isSelected ? 2 : 1,
+      });
+
+      marker.addListener('click', () => this.onMarkerClick(job, marker));
+
+      this.markers.set(job.id, marker);
+      this.markerJobs.set(marker, job);
+      nextMarkers.push(marker);
+    }
+
+    this.clusterer?.addMarkers(nextMarkers);
+  }
+
+  private updateMarkerSelection(selectedId: string | null): void {
+    for (const [jobId, marker] of this.markers.entries()) {
+      const isSelected = jobId === selectedId;
+      marker.setIcon(createJobMarkerIcon(isSelected));
+      marker.setZIndex(isSelected ? 2 : 1);
+    }
+  }
+
+  private onMarkerClick(job: JobOffer, marker: google.maps.Marker): void {
+    this.selectJob.emit(job.id);
+    this.openJobPopup(job, marker);
+    this.resetMapView();
+  }
+
+  private openSelectedJobPopup(selectedId: string | null): void {
+    if (!selectedId) {
+      return;
+    }
+
+    const marker = this.markers.get(selectedId);
+    const job = marker ? this.markerJobs.get(marker) : undefined;
+    if (marker && job) {
+      this.openJobPopup(job, marker);
+    }
+  }
+
+  private openJobPopup(job: JobOffer, marker: google.maps.Marker): void {
+    this.infoWindow?.setContent(buildJobMapPopupHtml(job));
+    this.infoWindow?.open({ map: this.map!, anchor: marker });
+  }
+
+  private resetMapView(): void {
+    this.map?.setCenter(DEFAULT_CENTER);
+    this.map?.setZoom(DEFAULT_ZOOM);
+  }
+
+  private fitBoundsToJobs(locatedJobs: JobOffer[]): void {
+    if (!this.map || !locatedJobs.length) {
       return;
     }
 
@@ -125,16 +196,5 @@ export class JobMapComponent {
         this.map?.setZoom(11);
       }
     });
-  }
-
-  private createMarkerIcon(isSelected: boolean): google.maps.Symbol {
-    return {
-      path: google.maps.SymbolPath.CIRCLE,
-      fillColor: isSelected ? '#2563eb' : '#64748b',
-      fillOpacity: 1,
-      strokeColor: '#ffffff',
-      strokeWeight: 2,
-      scale: isSelected ? 9 : 7,
-    };
   }
 }

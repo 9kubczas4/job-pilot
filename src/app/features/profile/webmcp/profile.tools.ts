@@ -2,7 +2,6 @@ import { inject } from '@angular/core';
 import { provideExperimentalWebMcpTools } from '@angular/core';
 import { toolJson, toolText } from '@shared/webmcp/tool-response';
 import { ProfileStore } from '../state/profile.store';
-import { getProfileSchemaPayload } from './profile-schema';
 
 export function provideProfileRouteWebMcpTools() {
   return provideExperimentalWebMcpTools([
@@ -16,84 +15,6 @@ export function provideProfileRouteWebMcpTools() {
           return toolText('Authentication required to read profile.');
         }
         return toolJson(profile);
-      },
-    },
-    {
-      name: 'get_profile_schema',
-      description:
-        'Return the candidate profile schema so agents know which fields can be filled in.',
-      inputSchema: { type: 'object', properties: {}, additionalProperties: false },
-      execute: () => toolJson(getProfileSchemaPayload()),
-    },
-    {
-      name: 'update_profile',
-      description:
-        'Update selected candidate profile fields for the authenticated user. Partial updates are supported.',
-      inputSchema: {
-        type: 'object',
-        properties: {
-          firstName: { type: 'string' },
-          lastName: { type: 'string' },
-          headline: { type: 'string' },
-          workHistory: {
-            type: 'array',
-            items: {
-              type: 'object',
-              properties: {
-                company: { type: 'string' },
-                title: { type: 'string' },
-                startDate: { type: 'string', description: 'YYYY-MM' },
-                endDate: { type: 'string', description: 'YYYY-MM' },
-                current: { type: 'boolean' },
-                description: { type: 'string' },
-              },
-              required: ['company', 'title'],
-            },
-          },
-          skills: {
-            type: 'array',
-            items: {
-              type: 'object',
-              properties: {
-                name: { type: 'string' },
-                years: { type: 'number' },
-              },
-              required: ['name'],
-            },
-          },
-          preferredRoles: { type: 'array', items: { type: 'string' } },
-          preferredSeniorities: {
-            type: 'array',
-            items: { type: 'string', enum: ['junior', 'regular', 'senior', 'expert'] },
-          },
-          preferredLocations: { type: 'array', items: { type: 'string' } },
-          workplacePreferences: {
-            type: 'array',
-            items: { type: 'string', enum: ['remote', 'hybrid', 'onsite'] },
-          },
-          contractPreferences: {
-            type: 'array',
-            items: { type: 'string', enum: ['b2b', 'employment', 'service-contract', 'internship'] },
-          },
-          salaryExpectation: {
-            type: 'object',
-            properties: {
-              min: { type: 'number' },
-              currency: { type: 'string', enum: ['PLN', 'EUR', 'USD'] },
-            },
-          },
-          preferences: { type: 'string' },
-        },
-        additionalProperties: false,
-      },
-      execute: async (input) => {
-        try {
-          const profile = await inject(ProfileStore).updateProfile(input);
-          return toolJson(profile);
-        } catch (error) {
-          const message = error instanceof Error ? error.message : 'Profile update failed.';
-          return toolText(message);
-        }
       },
     },
   ]);

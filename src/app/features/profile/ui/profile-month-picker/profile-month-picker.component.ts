@@ -1,11 +1,5 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  forwardRef,
-  input,
-  signal,
-} from '@angular/core';
-import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, effect, input, model, signal } from '@angular/core';
+import { FormValueControl } from '@angular/forms/signals';
 import { MatDatepicker, MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -27,27 +21,22 @@ const MONTH_DATE_FORMATS = {
 @Component({
   selector: 'app-profile-month-picker',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatDatepickerModule],
+  imports: [MatFormFieldModule, MatInputModule, MatDatepickerModule],
   providers: [
     provideNativeDateAdapter(),
     { provide: MAT_DATE_FORMATS, useValue: MONTH_DATE_FORMATS },
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => ProfileMonthPickerComponent),
-      multi: true,
-    },
   ],
   template: `
     <mat-form-field appearance="outline" class="profile-mat-field profile-month-picker">
       <mat-label>{{ label() }}</mat-label>
       <input
         matInput
-        [ngModel]="selectedDate()"
-        (ngModelChange)="onDateInput($event)"
         [matDatepicker]="picker"
         [matDatepickerFilter]="dateFilter"
         [max]="maxDate"
-        [disabled]="isDisabled()"
+        [disabled]="disabled()"
+        [value]="selectedDate()"
+        (dateChange)="onDateInput($event.value)"
       />
       <mat-datepicker-toggle matIconSuffix [for]="picker" />
       <mat-datepicker
@@ -64,32 +53,26 @@ const MONTH_DATE_FORMATS = {
     }
   `,
 })
-export class ProfileMonthPickerComponent implements ControlValueAccessor {
+export class ProfileMonthPickerComponent implements FormValueControl<string> {
   readonly label = input.required<string>();
+
+  readonly value = model<string>('');
+  readonly disabled = input(false);
 
   readonly maxDate = startOfCurrentMonth();
   readonly dateFilter = (date: Date | null): boolean => !date || !isFutureMonth(date);
 
   readonly selectedDate = signal<Date | null>(null);
-  readonly isDisabled = signal(false);
 
-  private onChange: (value: string | undefined) => void = () => undefined;
-  private onTouched: () => void = () => undefined;
-
-  writeValue(value: string | undefined): void {
-    this.selectedDate.set(parseMonthValue(value));
+  constructor() {
+    effect(() => {
+      this.selectedDate.set(parseMonthValue(this.value()));
+    });
   }
 
-  registerOnChange(fn: (value: string | undefined) => void): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: () => void): void {
-    this.onTouched = fn;
-  }
-
-  setDisabledState(isDisabled: boolean): void {
-    this.isDisabled.set(isDisabled);
+  onMonthSelected(value: Date, picker: MatDatepicker<Date>): void {
+    picker.close();
+    this.onDateInput(value);
   }
 
   onDateInput(value: Date | null): void {
@@ -98,12 +81,6 @@ export class ProfileMonthPickerComponent implements ControlValueAccessor {
     }
 
     this.selectedDate.set(value);
-    this.onChange(formatMonthValue(value));
-    this.onTouched();
-  }
-
-  onMonthSelected(value: Date, picker: MatDatepicker<Date>): void {
-    picker.close();
-    this.onDateInput(value);
+    this.value.set(formatMonthValue(value) ?? '');
   }
 }

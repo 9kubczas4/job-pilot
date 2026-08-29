@@ -58,7 +58,7 @@
             <button
               class="profile__btn profile__btn--primary"
               type="button"
-              [disabled]="saving() || !dirty()"
+              [disabled]="saving() || !profileForm().dirty()"
               (click)="save()"
             >
               {{ saving() ? 'Saving…' : 'Save changes' }}
@@ -76,10 +76,8 @@
               <mat-label>Headline</mat-label>
               <input
                 matInput
-                [(ngModel)]="draft.headline"
-                name="headline"
+                [formField]="profileForm.headline"
                 placeholder="Senior Frontend Engineer · React & TypeScript"
-                (ngModelChange)="markDirty()"
               />
             </mat-form-field>
           </section>
@@ -90,9 +88,9 @@
               <p class="profile__section-copy">Work history entries, like on your CV.</p>
             </div>
 
-            @if (draft.workHistory.length) {
+            @if (profileModel().workHistory.length) {
               <div class="profile__work-list">
-                @for (entry of draft.workHistory; track $index; let index = $index) {
+                @for (entry of profileForm.workHistory; track $index; let index = $index) {
                   <article class="profile__work-entry">
                     <div class="profile__work-entry-head">
                       <h3 class="profile__work-entry-title">Role {{ index + 1 }}</h3>
@@ -110,47 +108,24 @@
                         <mat-label>Job title</mat-label>
                         <input
                           matInput
-                          [(ngModel)]="entry.title"
-                          [name]="'workTitle' + index"
+                          [formField]="entry.title"
                           placeholder="Senior Frontend Engineer"
-                          (ngModelChange)="markDirty()"
                         />
                       </mat-form-field>
 
                       <mat-form-field appearance="outline" class="profile-mat-field">
                         <mat-label>Company</mat-label>
-                        <input
-                          matInput
-                          [(ngModel)]="entry.company"
-                          [name]="'workCompany' + index"
-                          placeholder="Acme Inc."
-                          (ngModelChange)="markDirty()"
-                        />
+                        <input matInput [formField]="entry.company" placeholder="Acme Inc." />
                       </mat-form-field>
                     </div>
 
                     <div class="profile__fields profile__fields--2">
-                      <app-profile-month-picker
-                        label="Start date"
-                        [(ngModel)]="entry.startDate"
-                        [name]="'workStart' + index"
-                        (ngModelChange)="markDirty()"
-                      />
+                      <app-profile-month-picker label="Start date" [formField]="entry.startDate" />
 
-                      <app-profile-month-picker
-                        label="End date"
-                        [(ngModel)]="entry.endDate"
-                        [name]="'workEnd' + index"
-                        [disabled]="entry.current ?? false"
-                        (ngModelChange)="markDirty()"
-                      />
+                      <app-profile-month-picker label="End date" [formField]="entry.endDate" />
                     </div>
 
-                    <mat-checkbox
-                      [(ngModel)]="entry.current"
-                      [name]="'workCurrent' + index"
-                      (ngModelChange)="toggleWorkCurrent(entry, $event)"
-                    >
+                    <mat-checkbox [formField]="entry.current">
                       I currently work here
                     </mat-checkbox>
 
@@ -158,11 +133,9 @@
                       <mat-label>Description</mat-label>
                       <textarea
                         matInput
-                        [(ngModel)]="entry.description"
-                        [name]="'workDescription' + index"
+                        [formField]="entry.description"
                         rows="3"
                         placeholder="Key responsibilities and achievements"
-                        (ngModelChange)="markDirty()"
                       ></textarea>
                     </mat-form-field>
                   </article>
@@ -183,9 +156,9 @@
               <p class="profile__section-copy">Select proficiency level from 1 to 5.</p>
             </div>
 
-            @if (draft.skills.length) {
+            @if (profileModel().skills.length) {
               <ul class="profile__skills">
-                @for (skill of draft.skills; track skill.name; let index = $index) {
+                @for (skill of profileModel().skills; track skill.name; let index = $index) {
                   <app-profile-skill-row
                     [skill]="skill"
                     (levelChange)="setSkillYears(index, $event)"
@@ -202,9 +175,8 @@
                 <mat-label>Add a skill</mat-label>
                 <input
                   matInput
-                  [ngModel]="newSkillName()"
-                  (ngModelChange)="newSkillName.set($event)"
-                  name="newSkill"
+                  [value]="newSkillName()"
+                  (input)="newSkillName.set($any($event.target).value)"
                   placeholder="Press Enter to add"
                   (keydown.enter)="addSkill(); $event.preventDefault()"
                 />
@@ -225,10 +197,8 @@
               <mat-label>Preferred roles</mat-label>
               <input
                 matInput
-                [(ngModel)]="rolesInput"
-                name="roles"
+                [formField]="profileForm.preferredRoles"
                 placeholder="Frontend Developer, Tech Lead"
-                (ngModelChange)="markDirty()"
               />
             </mat-form-field>
 
@@ -236,10 +206,8 @@
               <mat-label>Preferred locations</mat-label>
               <input
                 matInput
-                [(ngModel)]="locationsInput"
-                name="locations"
+                [formField]="profileForm.preferredLocations"
                 placeholder="Warsaw, Remote EU"
-                (ngModelChange)="markDirty()"
               />
             </mat-form-field>
 
@@ -249,9 +217,8 @@
                 multiple
                 hideMultipleSelectionIndicator
                 class="profile-mat-toggle-group"
-                [(ngModel)]="draft.preferredSeniorities"
-                name="seniority"
-                (ngModelChange)="markDirty()"
+                [value]="profileForm.preferredSeniorities().value()"
+                (change)="profileForm.preferredSeniorities().value.set($event.value)"
               >
                 @for (option of seniorityOptions; track option.value) {
                   <mat-button-toggle [value]="option.value">{{ option.label }}</mat-button-toggle>
@@ -272,9 +239,8 @@
                 multiple
                 hideMultipleSelectionIndicator
                 class="profile-mat-toggle-group"
-                [(ngModel)]="draft.workplacePreferences"
-                name="workplace"
-                (ngModelChange)="markDirty()"
+                [value]="profileForm.workplacePreferences().value()"
+                (change)="profileForm.workplacePreferences().value.set($event.value)"
               >
                 @for (option of workplaceOptions; track option.value) {
                   <mat-button-toggle [value]="option.value">{{ option.label }}</mat-button-toggle>
@@ -288,9 +254,8 @@
                 multiple
                 hideMultipleSelectionIndicator
                 class="profile-mat-toggle-group"
-                [(ngModel)]="draft.contractPreferences"
-                name="contract"
-                (ngModelChange)="markDirty()"
+                [value]="profileForm.contractPreferences().value()"
+                (change)="profileForm.contractPreferences().value.set($event.value)"
               >
                 @for (option of contractOptions; track option.value) {
                   <mat-button-toggle [value]="option.value" [title]="option.title ?? ''">
@@ -310,22 +275,14 @@
             <div class="profile__fields profile__fields--2">
               <mat-form-field appearance="outline" class="profile-mat-field">
                 <mat-label>Minimum salary</mat-label>
-                <input
-                  matInput
-                  type="number"
-                  min="0"
-                  [(ngModel)]="draft.salaryExpectation!.min"
-                  name="salaryMin"
-                  (ngModelChange)="markDirty()"
-                />
+                <input matInput type="number" [formField]="profileForm.salaryExpectation.min" />
               </mat-form-field>
 
               <mat-form-field appearance="outline" class="profile-mat-field">
                 <mat-label>Currency</mat-label>
                 <mat-select
-                  [(ngModel)]="draft.salaryExpectation!.currency"
-                  name="salaryCurrency"
-                  (ngModelChange)="markDirty()"
+                  [value]="profileForm.salaryExpectation.currency().value()"
+                  (valueChange)="profileForm.salaryExpectation.currency().value.set($event)"
                 >
                   @for (option of currencyOptions; track option.value) {
                     <mat-option [value]="option.value">{{ option.label }}</mat-option>
@@ -338,11 +295,9 @@
               <mat-label>Additional preferences</mat-label>
               <textarea
                 matInput
-                [(ngModel)]="draft.preferences"
-                name="preferences"
+                [formField]="profileForm.preferences"
                 rows="4"
                 placeholder="Availability, notice period, preferred team size…"
-                (ngModelChange)="markDirty()"
               ></textarea>
             </mat-form-field>
 

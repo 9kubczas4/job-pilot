@@ -28,8 +28,7 @@ The agent never receives a `userId` in tool payloads. Identity comes from Fireba
 |------|-------|--------|
 | `search_jobs` | global | `features/jobs/webmcp/search-jobs.tool.ts` |
 | `get_profile` | `/profile` | `features/profile/webmcp/profile.tools.ts` |
-| `get_profile_schema` | `/profile` | `features/profile/webmcp/profile.tools.ts` |
-| `update_profile` | `/profile` | `features/profile/webmcp/profile.tools.ts` |
+| `update_profile` | `/profile` | `features/profile/pages/profile/profile.page.ts` (Signal Form implicit tool) |
 | `get_job` | `/jobs/:id` | `features/jobs/webmcp/job-details.tools.ts` |
 | `save_job` | `/jobs/:id` | `features/jobs/webmcp/job-details.tools.ts` |
 | `apply_to_job` | `/jobs/:id` | `features/jobs/webmcp/job-details.tools.ts` |

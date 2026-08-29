@@ -1,4 +1,4 @@
-import { CandidateProfile } from './profile.model';
+import { CandidateProfile, ProfileFormModel } from './profile.model';
 import { isFutureMonthValue } from './month-date.utils';
 
 const COMPLETENESS_FIELDS: Array<(profile: CandidateProfile) => boolean> = [
@@ -141,6 +141,81 @@ export function stripUndefinedDeep<T>(value: T): T {
   }
 
   return value;
+}
+
+export function profileToFormModel(
+  profile: CandidateProfile,
+  googleName: { firstName?: string; lastName?: string },
+): ProfileFormModel {
+  return {
+    firstName: profile.firstName?.trim() || googleName.firstName || '',
+    lastName: profile.lastName?.trim() || googleName.lastName || '',
+    headline: profile.headline?.trim() || '',
+    workHistory: (profile.workHistory ?? []).map((entry) => ({
+      company: entry.company ?? '',
+      title: entry.title ?? '',
+      startDate: entry.startDate ?? '',
+      endDate: entry.endDate ?? '',
+      current: entry.current ?? false,
+      description: entry.description ?? '',
+    })),
+    skills: profile.skills.map((skill) => ({ ...skill })),
+    preferredRoles: profile.preferredRoles.join(', '),
+    preferredLocations: profile.preferredLocations.join(', '),
+    preferredSeniorities: [...profile.preferredSeniorities],
+    workplacePreferences: [...profile.workplacePreferences],
+    contractPreferences: [...profile.contractPreferences],
+    salaryExpectation: profile.salaryExpectation
+      ? { min: profile.salaryExpectation.min ?? 0, currency: profile.salaryExpectation.currency }
+      : { min: 0, currency: 'PLN' },
+    preferences: profile.preferences?.trim() || '',
+  };
+}
+
+export function formModelToCandidateProfile(
+  formValue: ProfileFormModel,
+  googleName: { firstName?: string; lastName?: string },
+): CandidateProfile {
+  return {
+    id: '',
+    firstName: formValue.firstName?.trim() || googleName.firstName,
+    lastName: formValue.lastName?.trim() || googleName.lastName,
+    headline: formValue.headline?.trim() || undefined,
+    workHistory: formValue.workHistory
+      .filter((entry) => entry.company.trim() || entry.title.trim())
+      .map((entry) => ({
+        company: entry.company.trim(),
+        title: entry.title.trim(),
+        startDate: entry.startDate?.trim() || undefined,
+        endDate: entry.current ? undefined : entry.endDate?.trim() || undefined,
+        current: entry.current ?? false,
+        description: entry.description?.trim() || undefined,
+      })),
+    skills: formValue.skills
+      .filter((skill) => skill.name.trim())
+      .map((skill) => ({
+        name: skill.name.trim(),
+        years: Math.min(5, Math.max(1, Math.round(skill.years ?? 3))),
+      })),
+    preferredRoles: splitCsv(formValue.preferredRoles),
+    preferredSeniorities: formValue.preferredSeniorities,
+    preferredLocations: splitCsv(formValue.preferredLocations),
+    workplacePreferences: formValue.workplacePreferences,
+    contractPreferences: formValue.contractPreferences,
+    salaryExpectation: {
+      min: formValue.salaryExpectation.min || undefined,
+      currency: formValue.salaryExpectation.currency,
+    },
+    preferences: formValue.preferences?.trim() || undefined,
+    updatedAt: new Date().toISOString(),
+  };
+}
+
+function splitCsv(value: string): string[] {
+  return value
+    .split(',')
+    .map((item) => item.trim())
+    .filter(Boolean);
 }
 
 export function validateProfileDraft(draft: CandidateProfile): string[] {

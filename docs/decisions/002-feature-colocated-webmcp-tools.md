@@ -19,7 +19,8 @@ Colocate WebMCP tools inside each feature at `features/{name}/webmcp/`:
 | Tool(s) | Location | Registration |
 |---------|----------|--------------|
 | `search_jobs` | `features/jobs/webmcp/search-jobs.tool.ts` | `app.config.ts` (global) |
-| `get_profile`, `get_profile_schema`, `update_profile` | `features/profile/webmcp/profile.tools.ts` | Route provider on `/profile` |
+| `get_profile` | `features/profile/webmcp/profile.tools.ts` | Route provider on `/profile` |
+| `update_profile` | `features/profile/pages/profile/profile.page.ts` | Signal Form implicit tool on `/profile` |
 | `get_job`, `save_job`, `apply_to_job` | `features/jobs/webmcp/job-details.tools.ts` | Route provider on `/jobs/:id` |
 
 Shared response helpers (`toolJson`, `toolText`) live in `shared/webmcp/tool-response.ts`.

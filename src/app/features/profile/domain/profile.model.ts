@@ -19,6 +19,15 @@ export interface WorkExperienceEntry {
   description?: string;
 }
 
+export interface WorkExperienceFormEntry {
+  company: string;
+  title: string;
+  startDate: string;
+  endDate: string;
+  current: boolean;
+  description: string;
+}
+
 export interface SalaryExpectation {
   min?: number;
   currency: SalaryCurrency;
@@ -41,10 +50,46 @@ export interface CandidateProfile {
   updatedAt: string;
 }
 
-export function createEmptyWorkEntry(): WorkExperienceEntry {
+export function createEmptyWorkEntry(): WorkExperienceFormEntry {
   return {
     company: '',
     title: '',
+    startDate: '',
+    endDate: '',
     current: false,
+    description: '',
+  };
+}
+
+/** Editable profile fields bound to the profile Signal Form. */
+export interface ProfileFormModel {
+  firstName: string;
+  lastName: string;
+  headline: string;
+  workHistory: WorkExperienceFormEntry[];
+  skills: CandidateSkill[];
+  preferredRoles: string;
+  preferredLocations: string;
+  preferredSeniorities: SeniorityLevel[];
+  workplacePreferences: WorkplaceMode[];
+  contractPreferences: ContractType[];
+  salaryExpectation: { min: number; currency: SalaryCurrency };
+  preferences: string;
+}
+
+export function createEmptyProfileFormModel(): ProfileFormModel {
+  return {
+    firstName: '',
+    lastName: '',
+    headline: '',
+    workHistory: [createEmptyWorkEntry()],
+    skills: [{ name: '', years: 3 }],
+    preferredRoles: '',
+    preferredLocations: '',
+    preferredSeniorities: ['junior'],
+    workplacePreferences: ['remote'],
+    contractPreferences: ['b2b'],
+    salaryExpectation: { min: 0, currency: 'PLN' },
+    preferences: '',
   };
 }

@@ -34,14 +34,13 @@ The agent runs in **Codex** (ChatGPT desktop in-app browser). The app exposes to
 - Modern, clean UI
 - Static prerender for all routes; job detail pages pre-generated at build time
 
-### WebMCP Tools (7, implemented)
+### WebMCP Tools (6, implemented)
 
 | Tool | Registration | Source |
 |------|--------------|--------|
 | `search_jobs` | Global (`app.config.ts`) | `features/jobs/webmcp/search-jobs.tool.ts` |
 | `get_profile` | Route `/profile` | `features/profile/webmcp/profile.tools.ts` |
-| `get_profile_schema` | Route `/profile` | `features/profile/webmcp/profile.tools.ts` |
-| `update_profile` | Route `/profile` | `features/profile/webmcp/profile.tools.ts` |
+| `update_profile` | Route `/profile` | `features/profile/pages/profile/profile.page.ts` (Signal Form implicit tool) |
 | `get_job` | Route `/jobs/:id` | `features/jobs/webmcp/job-details.tools.ts` |
 | `save_job` | Route `/jobs/:id` | `features/jobs/webmcp/job-details.tools.ts` |
 | `apply_to_job` | Route `/jobs/:id` | `features/jobs/webmcp/job-details.tools.ts` |
@@ -73,7 +72,7 @@ The agent runs in **Codex** (ChatGPT desktop in-app browser). The app exposes to
 ### Hero demo flow
 
 1. Job board looks like a real product
-2. Codex: complete profile from CV → `get_profile_schema` → `update_profile`
+2. Codex: complete profile from CV → `update_profile` (schema inferred from Signal Form)
 3. Codex: *"Find lead frontend jobs, remote/hybrid Warsaw, 25k+"* → `search_jobs` → **UI reacts live**
 4. `get_job` → `save_job` → `apply_to_job`
 
@@ -180,7 +179,6 @@ src/app/
       pages/profile/
       webmcp/
         profile.tools.ts
-        profile-schema.ts
       ui/
         profile-skill-row/
         profile-month-picker/

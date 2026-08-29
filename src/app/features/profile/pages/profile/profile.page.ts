@@ -7,12 +7,12 @@ import {
   signal,
 } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { disabled, form, FormField, submit, applyEach } from '@angular/forms/signals';
 import { AppShellComponent } from '@core/layout/app-shell.component';
 import { enableAppShellPageScroll } from '@core/layout/enable-app-shell-page-scroll';
 import { AuthService } from '@core/auth/auth.service';
@@ -23,12 +23,18 @@ import {
   SENIORITY_OPTIONS,
   WORKPLACE_OPTIONS,
 } from '../../domain/profile-options';
-import { CandidateProfile, createEmptyWorkEntry, WorkExperienceEntry } from '../../domain/profile.model';
 import {
+  createEmptyProfileFormModel,
+  createEmptyWorkEntry,
+  ProfileFormModel,
+} from '../../domain/profile.model';
+import {
+  formModelToCandidateProfile,
   parseDisplayName,
   profileCompleteness,
   profileDisplayName,
   profileInitials,
+  profileToFormModel,
   stripUndefinedDeep,
   validateProfileDraft,
 } from '../../domain/profile.utils';
@@ -41,8 +47,8 @@ import { ProfileStore } from '../../state/profile.store';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     AppShellComponent,
-    FormsModule,
     DatePipe,
+    FormField,
     MatButtonToggleModule,
     MatCheckboxModule,
     MatFormFieldModule,
@@ -65,23 +71,51 @@ export class ProfilePageComponent {
   readonly currencyOptions = SALARY_CURRENCY_OPTIONS;
 
   readonly saving = signal(false);
-  readonly dirty = signal(false);
   readonly newSkillName = signal('');
 
-  draft: CandidateProfile = this.emptyDraft();
-  rolesInput = '';
-  locationsInput = '';
+  readonly profileModel = signal<ProfileFormModel>(createEmptyProfileFormModel());
+
+  readonly profileForm = form(
+    this.profileModel,
+    (field) => {
+      applyEach(field.workHistory, (entry) => {
+        disabled(entry.endDate, ({ valueOf }) => valueOf(entry.current));
+      });
+    },
+    {
+      experimentalWebMcpTool: {
+        name: 'update_profile',
+        description:
+          'Update the authenticated candidate profile. Validates the form and persists changes.',
+      },
+      submission: {
+        action: async () => {
+          await this.submitProfile(this.profileModel());
+        },
+      },
+    },
+  );
 
   private lastSyncedAt: string | null = null;
 
-  readonly completeness = computed(() => profileCompleteness(this.store.profile()));
+  readonly completeness = computed(() =>
+    profileCompleteness(formModelToCandidateProfile(this.profileModel(), this.googleName())),
+  );
   readonly displayName = computed(() =>
-    profileDisplayName(this.store.profile(), 'Your profile', this.auth.user()?.displayName),
+    profileDisplayName(
+      formModelToCandidateProfile(this.profileModel(), this.googleName()),
+      'Your profile',
+      this.auth.user()?.displayName,
+    ),
   );
   readonly initials = computed(() =>
-    profileInitials(this.store.profile(), this.auth.user()?.displayName, this.auth.user()?.email),
+    profileInitials(
+      formModelToCandidateProfile(this.profileModel(), this.googleName()),
+      this.auth.user()?.displayName,
+      this.auth.user()?.email,
+    ),
   );
-  readonly headlinePreview = computed(() => this.store.profile()?.headline?.trim() || null);
+  readonly headlinePreview = computed(() => this.profileModel().headline.trim() || null);
 
   constructor() {
     enableAppShellPageScroll();
@@ -96,14 +130,14 @@ export class ProfilePageComponent {
           return;
         }
 
-        this.applyProfileToDraft(profile);
+        this.applyProfileToForm(profile);
         this.lastSyncedAt = profile.updatedAt;
       });
     });
 
     effect(() => {
       const profile = this.store.profile();
-      if (!profile || this.dirty()) {
+      if (!profile || this.profileForm().dirty()) {
         return;
       }
 
@@ -111,13 +145,9 @@ export class ProfilePageComponent {
         return;
       }
 
-      this.applyProfileToDraft(profile);
+      this.applyProfileToForm(profile);
       this.lastSyncedAt = profile.updatedAt;
     });
-  }
-
-  markDirty(): void {
-    this.dirty.set(true);
   }
 
   async save(): Promise<void> {
@@ -125,53 +155,17 @@ export class ProfilePageComponent {
       return;
     }
 
-    const validationErrors = validateProfileDraft(this.draft);
-    if (validationErrors.length) {
-      this.toast.show(validationErrors[0], 5000);
-      return;
-    }
-
-    const googleName = parseDisplayName(this.auth.user()?.displayName);
-
     this.saving.set(true);
     try {
-      const profile = await this.store.updateProfile(
-        stripUndefinedDeep({
-          firstName: this.draft.firstName?.trim() || googleName.firstName,
-          lastName: this.draft.lastName?.trim() || googleName.lastName,
-          headline: this.draft.headline?.trim() || undefined,
-          workHistory: this.draft.workHistory
-            .filter((entry) => entry.company.trim() || entry.title.trim())
-            .map((entry) => ({
-              company: entry.company.trim(),
-              title: entry.title.trim(),
-              startDate: entry.startDate?.trim() || undefined,
-              endDate: entry.current ? undefined : entry.endDate?.trim() || undefined,
-              current: entry.current ?? false,
-              description: entry.description?.trim() || undefined,
-            })),
-          skills: this.draft.skills
-            .filter((skill) => skill.name.trim())
-            .map((skill) => ({
-              name: skill.name.trim(),
-              years: Math.min(5, Math.max(1, Math.round(skill.years ?? 3))),
-            })),
-          preferredRoles: this.splitCsv(this.rolesInput),
-          preferredSeniorities: this.draft.preferredSeniorities,
-          preferredLocations: this.splitCsv(this.locationsInput),
-          workplacePreferences: this.draft.workplacePreferences,
-          contractPreferences: this.draft.contractPreferences,
-          salaryExpectation: this.draft.salaryExpectation,
-          preferences: this.draft.preferences?.trim() || undefined,
-        }),
-      );
-
-      this.applyProfileToDraft(profile);
-      this.lastSyncedAt = profile.updatedAt;
-      this.dirty.set(false);
+      await submit(this.profileForm, async () => {
+        await this.submitProfile(this.profileModel());
+      });
+      this.profileForm().reset();
       this.toast.show('Profile saved.');
-    } catch {
-      this.toast.show('Could not save profile. Please try again.', 5000);
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message : 'Could not save profile. Please try again.';
+      this.toast.show(message, 5000);
     } finally {
       this.saving.set(false);
     }
@@ -187,80 +181,77 @@ export class ProfilePageComponent {
       return;
     }
 
-    this.markDirty();
-    this.draft.skills = [...this.draft.skills, { name, years: 3 }];
+    this.profileModel.update((model) => ({
+      ...model,
+      skills: [...model.skills, { name, years: 3 }],
+    }));
     this.newSkillName.set('');
   }
 
   removeSkill(index: number): void {
-    this.markDirty();
-    this.draft.skills = this.draft.skills.filter((_, itemIndex) => itemIndex !== index);
+    this.profileModel.update((model) => ({
+      ...model,
+      skills: model.skills.filter((_, itemIndex) => itemIndex !== index),
+    }));
   }
 
   setSkillYears(index: number, years: number): void {
-    this.markDirty();
-    this.draft.skills = this.draft.skills.map((skill, itemIndex) =>
-      itemIndex === index ? { ...skill, years } : skill,
-    );
+    this.profileModel.update((model) => ({
+      ...model,
+      skills: model.skills.map((skill, itemIndex) =>
+        itemIndex === index ? { ...skill, years } : skill,
+      ),
+    }));
   }
 
   addWorkEntry(): void {
-    this.markDirty();
-    this.draft.workHistory = [...this.draft.workHistory, createEmptyWorkEntry()];
+    this.profileModel.update((model) => ({
+      ...model,
+      workHistory: [...model.workHistory, createEmptyWorkEntry()],
+    }));
   }
 
   removeWorkEntry(index: number): void {
-    this.markDirty();
-    this.draft.workHistory = this.draft.workHistory.filter((_, itemIndex) => itemIndex !== index);
+    this.profileModel.update((model) => ({
+      ...model,
+      workHistory: model.workHistory.filter((_, itemIndex) => itemIndex !== index),
+    }));
   }
 
-  toggleWorkCurrent(entry: WorkExperienceEntry, current: boolean): void {
-    this.markDirty();
-    entry.current = current;
-    if (current) {
-      entry.endDate = undefined;
+  private async submitProfile(formValue: ProfileFormModel): Promise<void> {
+    const draft = formModelToCandidateProfile(formValue, this.googleName());
+    const validationErrors = validateProfileDraft(draft);
+    if (validationErrors.length) {
+      throw new Error(validationErrors[0]);
     }
+
+    const profile = await this.store.updateProfile(
+      stripUndefinedDeep({
+        firstName: draft.firstName,
+        lastName: draft.lastName,
+        headline: draft.headline,
+        workHistory: draft.workHistory,
+        skills: draft.skills,
+        preferredRoles: draft.preferredRoles,
+        preferredSeniorities: draft.preferredSeniorities,
+        preferredLocations: draft.preferredLocations,
+        workplacePreferences: draft.workplacePreferences,
+        contractPreferences: draft.contractPreferences,
+        salaryExpectation: draft.salaryExpectation,
+        preferences: draft.preferences,
+      }),
+    );
+
+    this.applyProfileToForm(profile);
+    this.lastSyncedAt = profile.updatedAt;
   }
 
-  private applyProfileToDraft(profile: CandidateProfile): void {
-    const googleName = parseDisplayName(this.auth.user()?.displayName);
-
-    this.draft = {
-      ...profile,
-      firstName: profile.firstName?.trim() || googleName.firstName,
-      lastName: profile.lastName?.trim() || googleName.lastName,
-      workHistory: (profile.workHistory ?? []).map((entry) => ({ ...entry })),
-      skills: profile.skills.map((skill) => ({ ...skill })),
-      preferredSeniorities: [...profile.preferredSeniorities],
-      workplacePreferences: [...profile.workplacePreferences],
-      contractPreferences: [...profile.contractPreferences],
-      salaryExpectation: profile.salaryExpectation
-        ? { ...profile.salaryExpectation }
-        : { currency: 'PLN' },
-    };
-    this.rolesInput = profile.preferredRoles.join(', ');
-    this.locationsInput = profile.preferredLocations.join(', ');
+  private applyProfileToForm(profile: Parameters<typeof profileToFormModel>[0]): void {
+    this.profileModel.set(profileToFormModel(profile, this.googleName()));
+    this.profileForm().reset();
   }
 
-  private splitCsv(value: string): string[] {
-    return value
-      .split(',')
-      .map((item) => item.trim())
-      .filter(Boolean);
-  }
-
-  private emptyDraft(): CandidateProfile {
-    return {
-      id: '',
-      workHistory: [],
-      skills: [],
-      preferredRoles: [],
-      preferredSeniorities: [],
-      preferredLocations: [],
-      workplacePreferences: [],
-      contractPreferences: [],
-      salaryExpectation: { currency: 'PLN' },
-      updatedAt: new Date().toISOString(),
-    };
+  private googleName() {
+    return parseDisplayName(this.auth.user()?.displayName);
   }
 }

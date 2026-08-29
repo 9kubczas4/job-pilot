@@ -1,0 +1,19 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+html {
+  @include mat.theme(
+    (
+      color: (
+        theme-type: light,
+        primary: mat.$azure-palette,
+      ),
+      typography: (
+        brand-family: var(--font-family),
+        plain-family: var(--font-family),
+      ),
+      density: 0,
+    )
+  );
+}

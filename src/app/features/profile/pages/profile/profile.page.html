@@ -1,70 +1,352 @@
 <app-shell>
-  <section class="container container--narrow page stack stack--lg">
-    <header class="page-header">
-      <h1 class="page-header__title">Candidate profile</h1>
-      <p class="page-header__subtitle">
-        Human-editable profile backed by the same data exposed to Codex tools.
-      </p>
-    </header>
-
+  <div class="profile-page">
     @if (!auth.isAuthenticated()) {
-      <div class="empty-state">
-        <p class="empty-state__title">Sign in to manage your profile</p>
-        <p class="empty-state__text">Create and edit your candidate profile after signing in.</p>
-      </div>
+      <section class="profile-page__empty">
+        <div class="profile-page__empty-icon" aria-hidden="true">U</div>
+        <h1 class="profile-page__empty-title">Your profile</h1>
+        <p class="profile-page__empty-text">Sign in to create and manage your candidate profile.</p>
+        <button type="button" class="btn btn-primary" (click)="signIn()">Sign in with Google</button>
+      </section>
+    } @else if (store.loading() && !store.profile()) {
+      <section class="profile-page__empty">
+        <p class="state">Loading profile…</p>
+      </section>
     } @else {
-      <form class="profile-form panel stack stack--lg" (ngSubmit)="save()">
-        <section class="profile-form__section stack stack--md">
-          <h2 class="profile-form__heading">Basics</h2>
+      <div class="profile-page__cover" aria-hidden="true"></div>
 
-          <label class="field">
-            Headline
-            <input class="input" [(ngModel)]="draft.headline" name="headline" />
-          </label>
+      <header class="profile-page__header">
+        <div class="profile-page__header-main">
+          <div
+            class="profile-page__avatar-ring"
+            [style.--progress]="completeness()"
+            [attr.aria-label]="'Profile completeness ' + completeness() + ' percent'"
+          >
+            <span class="profile-page__avatar">{{ initials() }}</span>
+          </div>
 
-          <label class="field">
-            Years of experience
+          <div class="profile-page__intro">
+            <h1 class="profile-page__name">{{ displayName() }}</h1>
+            <p class="profile-page__headline">{{ headlinePreview() }}</p>
+
+            <div class="profile-page__stats">
+              @if (workHistoryCount()) {
+                <span class="profile-page__stat">{{ workHistoryCount() }} roles</span>
+              }
+              @if (skillsCount()) {
+                <span class="profile-page__stat">{{ skillsCount() }} skills</span>
+              }
+              <span class="profile-page__stat">{{ completeness() }}% complete</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="profile-page__header-actions">
+          @if (dirty()) {
+            <span class="profile-page__unsaved">Unsaved changes</span>
+          }
+          <button
+            type="button"
+            class="btn btn-primary profile-page__save-top"
+            [disabled]="saving() || !dirty()"
+            (click)="save()"
+          >
+            {{ saving() ? 'Saving…' : 'Save' }}
+          </button>
+        </div>
+      </header>
+
+      <form class="profile-page__sheet" (ngSubmit)="save()">
+        <section class="profile-page__block">
+          <h2 class="profile-page__block-title">About you</h2>
+
+          <label class="profile-page__field">
+            <span class="profile-page__label">Headline</span>
             <input
               class="input"
-              [(ngModel)]="draft.yearsOfExperience"
-              name="yearsOfExperience"
-              type="number"
+              [(ngModel)]="draft.headline"
+              name="headline"
+              placeholder="Senior Frontend Engineer · React & TypeScript"
+              (ngModelChange)="markDirty()"
             />
           </label>
         </section>
 
-        <section class="profile-form__section stack stack--md">
-          <h2 class="profile-form__heading">Preferences</h2>
+        <section class="profile-page__block">
+          <div class="profile-page__block-head">
+            <h2 class="profile-page__block-title">Experience</h2>
+            <p class="profile-page__block-copy">Work history entries, like on your CV.</p>
+          </div>
 
-          <label class="field">
-            Skills (comma separated)
-            <input class="input" [(ngModel)]="skillsInput" name="skills" />
-          </label>
+          @if (draft.workHistory.length) {
+            <div class="profile-page__work-list">
+              @for (entry of draft.workHistory; track $index; let index = $index) {
+                <article class="profile-page__work-entry">
+                  <div class="profile-page__work-entry-head">
+                    <h3 class="profile-page__work-entry-title">Role {{ index + 1 }}</h3>
+                    <button type="button" class="profile-page__work-remove" (click)="removeWorkEntry(index)">
+                      Remove
+                    </button>
+                  </div>
 
-          <label class="field">
-            Preferred roles (comma separated)
-            <input class="input" [(ngModel)]="rolesInput" name="roles" />
-          </label>
+                  <div class="profile-page__fields profile-page__fields--2">
+                    <label class="profile-page__field">
+                      <span class="profile-page__label">Job title</span>
+                      <input
+                        class="input"
+                        [(ngModel)]="entry.title"
+                        [name]="'workTitle' + index"
+                        placeholder="Senior Frontend Engineer"
+                        (ngModelChange)="markDirty()"
+                      />
+                    </label>
 
-          <label class="field">
-            Preferred locations (comma separated)
-            <input class="input" [(ngModel)]="locationsInput" name="locations" />
-          </label>
+                    <label class="profile-page__field">
+                      <span class="profile-page__label">Company</span>
+                      <input
+                        class="input"
+                        [(ngModel)]="entry.company"
+                        [name]="'workCompany' + index"
+                        placeholder="Acme Inc."
+                        (ngModelChange)="markDirty()"
+                      />
+                    </label>
+                  </div>
 
-          <label class="field">
-            Workplace preferences (remote, hybrid, onsite)
-            <input class="input" [(ngModel)]="workplaceInput" name="workplace" />
-          </label>
+                  <div class="profile-page__fields profile-page__fields--2">
+                    <div class="profile-page__field">
+                      <app-profile-month-picker
+                        label="Start date"
+                        [(ngModel)]="entry.startDate"
+                        [name]="'workStart' + index"
+                        (ngModelChange)="markDirty()"
+                      />
+                    </div>
+
+                    <div class="profile-page__field">
+                      <app-profile-month-picker
+                        label="End date"
+                        [(ngModel)]="entry.endDate"
+                        [name]="'workEnd' + index"
+                        [disabled]="entry.current ?? false"
+                        (ngModelChange)="markDirty()"
+                      />
+                    </div>
+                  </div>
+
+                  <label class="profile-page__checkbox">
+                    <input
+                      type="checkbox"
+                      [(ngModel)]="entry.current"
+                      [name]="'workCurrent' + index"
+                      (ngModelChange)="toggleWorkCurrent(entry, $event)"
+                    />
+                    I currently work here
+                  </label>
+
+                  <label class="profile-page__field">
+                    <span class="profile-page__label">Description</span>
+                    <textarea
+                      class="input profile-page__textarea"
+                      [(ngModel)]="entry.description"
+                      [name]="'workDescription' + index"
+                      rows="3"
+                      placeholder="Key responsibilities and achievements"
+                      (ngModelChange)="markDirty()"
+                    ></textarea>
+                  </label>
+                </article>
+              }
+            </div>
+          } @else {
+            <p class="profile-page__hint">No experience entries yet.</p>
+          }
+
+          <button type="button" class="btn btn-ghost profile-page__add-entry" (click)="addWorkEntry()">
+            Add experience
+          </button>
         </section>
 
-        <div class="profile-form__footer">
-          <button type="submit" class="btn btn-primary">Save profile</button>
-        </div>
+        <section class="profile-page__block">
+          <div class="profile-page__block-head">
+            <h2 class="profile-page__block-title">Skills</h2>
+            <p class="profile-page__block-copy">Select proficiency level from 1 to 5.</p>
+          </div>
+
+          @if (draft.skills.length) {
+            <ul class="profile-page__skills">
+              @for (skill of draft.skills; track skill.name; let index = $index) {
+                <app-profile-skill-row
+                  [skill]="skill"
+                  (levelChange)="setSkillYears(index, $event)"
+                  (remove)="removeSkill(index)"
+                />
+              }
+            </ul>
+          } @else {
+            <p class="profile-page__hint">No skills added yet.</p>
+          }
+
+          <div class="profile-page__skill-add">
+            <input
+              class="input"
+              [ngModel]="newSkillName()"
+              (ngModelChange)="newSkillName.set($event)"
+              name="newSkill"
+              placeholder="Add a skill, press Enter"
+              (keydown.enter)="addSkill(); $event.preventDefault()"
+            />
+            <button type="button" class="btn btn-ghost" (click)="addSkill()">Add</button>
+          </div>
+        </section>
+
+        <section class="profile-page__block">
+          <div class="profile-page__block-head">
+            <h2 class="profile-page__block-title">Job preferences</h2>
+            <p class="profile-page__block-copy">What roles and locations you are looking for.</p>
+          </div>
+
+          <label class="profile-page__field">
+            <span class="profile-page__label">Preferred roles</span>
+            <input
+              class="input"
+              [(ngModel)]="rolesInput"
+              name="roles"
+              placeholder="Frontend Developer, Tech Lead"
+              (ngModelChange)="markDirty()"
+            />
+          </label>
+
+          <label class="profile-page__field">
+            <span class="profile-page__label">Preferred locations</span>
+            <input
+              class="input"
+              [(ngModel)]="locationsInput"
+              name="locations"
+              placeholder="Warsaw, Remote EU"
+              (ngModelChange)="markDirty()"
+            />
+          </label>
+
+          <div class="profile-page__field">
+            <span class="profile-page__label">Seniority</span>
+            <div class="cluster">
+              @for (option of seniorityOptions; track option.value) {
+                <button
+                  type="button"
+                  class="chip-btn"
+                  [class.is-active]="isSenioritySelected(option.value)"
+                  (click)="toggleSeniority(option.value)"
+                >
+                  {{ option.label }}
+                </button>
+              }
+            </div>
+          </div>
+        </section>
+
+        <section class="profile-page__block">
+          <div class="profile-page__block-head">
+            <h2 class="profile-page__block-title">Work setup</h2>
+            <p class="profile-page__block-copy">Workplace and contract preferences.</p>
+          </div>
+
+          <div class="profile-page__field">
+            <span class="profile-page__label">Workplace</span>
+            <div class="cluster">
+              @for (option of workplaceOptions; track option.value) {
+                <button
+                  type="button"
+                  class="chip-btn"
+                  [class.is-active]="isWorkplaceSelected(option.value)"
+                  (click)="toggleWorkplace(option.value)"
+                >
+                  {{ option.label }}
+                </button>
+              }
+            </div>
+          </div>
+
+          <div class="profile-page__field">
+            <span class="profile-page__label">Contract type</span>
+            <div class="cluster">
+              @for (option of contractOptions; track option.value) {
+                <button
+                  type="button"
+                  class="chip-btn"
+                  [class.is-active]="isContractSelected(option.value)"
+                  (click)="toggleContract(option.value)"
+                >
+                  {{ option.label }}
+                </button>
+              }
+            </div>
+          </div>
+        </section>
+
+        <section class="profile-page__block profile-page__block--last">
+          <div class="profile-page__block-head">
+            <h2 class="profile-page__block-title">Salary & notes</h2>
+            <p class="profile-page__block-copy">Optional expectations and extra context.</p>
+          </div>
+
+          <div class="profile-page__fields profile-page__fields--2">
+            <label class="profile-page__field">
+              <span class="profile-page__label">Minimum salary</span>
+              <input
+                class="input"
+                [(ngModel)]="draft.salaryExpectation!.min"
+                name="salaryMin"
+                type="number"
+                min="0"
+                (ngModelChange)="markDirty()"
+              />
+            </label>
+
+            <label class="profile-page__field">
+              <span class="profile-page__label">Currency</span>
+              <select
+                class="input"
+                [(ngModel)]="draft.salaryExpectation!.currency"
+                name="salaryCurrency"
+                (ngModelChange)="markDirty()"
+              >
+                @for (option of currencyOptions; track option.value) {
+                  <option [value]="option.value">{{ option.label }}</option>
+                }
+              </select>
+            </label>
+          </div>
+
+          <label class="profile-page__field">
+            <span class="profile-page__label">Additional preferences</span>
+            <textarea
+              class="input profile-page__textarea"
+              [(ngModel)]="draft.preferences"
+              name="preferences"
+              rows="4"
+              placeholder="Availability, notice period, preferred team size…"
+              (ngModelChange)="markDirty()"
+            ></textarea>
+          </label>
+
+          <p class="profile-page__meta">
+            Last updated:
+            @if (store.profile()?.updatedAt; as updatedAt) {
+              {{ updatedAt | date: 'medium' }}
+            } @else {
+              Not saved yet
+            }
+          </p>
+        </section>
       </form>
 
-      @if (message()) {
-        <p class="toast">{{ message() }}</p>
+      @if (dirty()) {
+        <footer class="profile-page__mobile-bar">
+          <button type="button" class="btn btn-primary" [disabled]="saving()" (click)="save()">
+            {{ saving() ? 'Saving…' : 'Save profile' }}
+          </button>
+        </footer>
       }
     }
-  </section>
+  </div>
 </app-shell>

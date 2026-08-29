@@ -10,6 +10,15 @@ export interface CandidateSkill {
   years?: number;
 }
 
+export interface WorkExperienceEntry {
+  company: string;
+  title: string;
+  startDate?: string;
+  endDate?: string;
+  current?: boolean;
+  description?: string;
+}
+
 export interface SalaryExpectation {
   min?: number;
   currency: SalaryCurrency;
@@ -20,7 +29,7 @@ export interface CandidateProfile {
   firstName?: string;
   lastName?: string;
   headline?: string;
-  yearsOfExperience?: number;
+  workHistory: WorkExperienceEntry[];
   skills: CandidateSkill[];
   preferredRoles: string[];
   preferredSeniorities: SeniorityLevel[];
@@ -29,6 +38,13 @@ export interface CandidateProfile {
   contractPreferences: ContractType[];
   salaryExpectation?: SalaryExpectation;
   preferences?: string;
-  cvFileUrl?: string;
   updatedAt: string;
+}
+
+export function createEmptyWorkEntry(): WorkExperienceEntry {
+  return {
+    company: '',
+    title: '',
+    current: false,
+  };
 }

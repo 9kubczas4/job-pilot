@@ -20,13 +20,13 @@ export class ProfileRepository {
       return this.emptyProfile(userId);
     }
 
-    return snapshot.data() as CandidateProfile;
+    return this.normalizeProfile(snapshot.data() as CandidateProfile);
   }
 
   async saveProfile(profile: CandidateProfile): Promise<void> {
     const userId = this.auth.requireUserId();
     await setDoc(doc(this.firebase.firestore, 'profiles', userId), {
-      ...profile,
+      ...this.normalizeProfile(profile),
       id: userId,
       updatedAt: new Date().toISOString(),
     });
@@ -35,6 +35,7 @@ export class ProfileRepository {
   emptyProfile(userId: string): CandidateProfile {
     return {
       id: userId,
+      workHistory: [],
       skills: [],
       preferredRoles: [],
       preferredSeniorities: [],
@@ -42,6 +43,19 @@ export class ProfileRepository {
       workplacePreferences: [],
       contractPreferences: [],
       updatedAt: new Date().toISOString(),
+    };
+  }
+
+  private normalizeProfile(profile: CandidateProfile): CandidateProfile {
+    return {
+      ...profile,
+      workHistory: profile.workHistory ?? [],
+      skills: profile.skills ?? [],
+      preferredRoles: profile.preferredRoles ?? [],
+      preferredSeniorities: profile.preferredSeniorities ?? [],
+      preferredLocations: profile.preferredLocations ?? [],
+      workplacePreferences: profile.workplacePreferences ?? [],
+      contractPreferences: profile.contractPreferences ?? [],
     };
   }
 }

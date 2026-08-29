@@ -2,7 +2,18 @@ export const PROFILE_SCHEMA_FIELDS = {
   firstName: { type: 'string', required: false },
   lastName: { type: 'string', required: false },
   headline: { type: 'string', required: false },
-  yearsOfExperience: { type: 'number', required: false },
+  workHistory: {
+    type: 'array',
+    items: {
+      company: 'string',
+      title: 'string',
+      startDate: 'string',
+      endDate: 'string',
+      current: 'boolean',
+      description: 'string',
+    },
+    required: false,
+  },
   skills: { type: 'array', items: { name: 'string', years: 'number' }, required: false },
   preferredRoles: { type: 'array', items: 'string', required: false },
   preferredSeniorities: {
@@ -30,5 +41,9 @@ export const PROFILE_SCHEMA_FIELDS = {
 } as const;
 
 export function getProfileSchemaPayload() {
-  return { fields: PROFILE_SCHEMA_FIELDS };
+  return {
+    fields: PROFILE_SCHEMA_FIELDS,
+    agentInstructions:
+      'Read the user CV externally (file upload in Codex). Call get_profile_schema, map CV content to fields, then call update_profile with a partial payload. Supported mappings: name → firstName/lastName, title → headline, employment history → workHistory[], skills → skills[], target roles → preferredRoles[], seniority → preferredSeniorities[], locations → preferredLocations[], remote preference → workplacePreferences[], contract type → contractPreferences[], salary notes → salaryExpectation, extra notes → preferences.',
+  };
 }

@@ -1,4 +1,5 @@
 import { ApplicationConfig, APP_INITIALIZER, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient } from '@angular/common/http';
 import { provideRouter, withExperimentalAutoCleanupInjectors } from '@angular/router';
 import { provideExperimentalWebMcpForms } from '@angular/forms/signals';
@@ -12,6 +13,7 @@ import { GOOGLE_MAPS_API_KEY } from '@shared/map/google-maps-config';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
+    provideAnimationsAsync(),
     provideHttpClient(),
     provideFirebase(),
     provideExperimentalWebMcpForms(),

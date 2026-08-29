@@ -35,7 +35,21 @@ export function provideProfileRouteWebMcpTools() {
           firstName: { type: 'string' },
           lastName: { type: 'string' },
           headline: { type: 'string' },
-          yearsOfExperience: { type: 'number' },
+          workHistory: {
+            type: 'array',
+            items: {
+              type: 'object',
+              properties: {
+                company: { type: 'string' },
+                title: { type: 'string' },
+                startDate: { type: 'string', description: 'YYYY-MM' },
+                endDate: { type: 'string', description: 'YYYY-MM' },
+                current: { type: 'boolean' },
+                description: { type: 'string' },
+              },
+              required: ['company', 'title'],
+            },
+          },
           skills: {
             type: 'array',
             items: {

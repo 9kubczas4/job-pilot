@@ -1,52 +1,55 @@
-<article class="job-card" [class.is-selected]="selected()">
-  <div class="job-card__top">
+<article class="job-card" [class.is-selected]="selected()" [class.job-card--compact]="compact()">
+  @if (showSaveButton()) {
+    <button
+      type="button"
+      class="job-card__save"
+      [class.is-saved]="saved()"
+      [attr.aria-label]="saved() ? 'Remove from saved jobs' : 'Save job'"
+      [attr.aria-pressed]="saved()"
+      (click)="onSaveClick($event)"
+      (mousedown)="$event.preventDefault()"
+    >
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+        <path
+          d="M12 20.5s-6.7-4.35-9-8.05C1.5 9.65 2.6 6.5 5.4 5.4c1.75-.7 3.7-.15 4.95 1.25L12 8.5l1.65-1.85c1.25-1.4 3.2-1.95 4.95-1.25 2.8 1.1 3.9 4.25 2.4 7.05-2.3 3.7-9 8.05-9 8.05Z"
+          [attr.fill]="saved() ? 'currentColor' : 'none'"
+          stroke="currentColor"
+          stroke-width="1.75"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </button>
+  }
+
+  <div class="job-card__header">
     <span class="job-card__logo" aria-hidden="true">{{ companyInitials() }}</span>
 
     <div class="job-card__intro">
       <h3 class="job-card__title">{{ job().title }}</h3>
       <p class="job-card__company">{{ job().company.name }}</p>
     </div>
-
-    @if (saved() || applied()) {
-      <div class="job-card__badges">
-        @if (saved()) {
-          <span class="badge">Saved</span>
-        }
-        @if (applied()) {
-          <span class="badge badge--success">Applied</span>
-        }
-      </div>
-    }
   </div>
 
-  <div class="job-card__meta">
-    <span class="job-card__location">{{ formatWorkplace(job()) }}</span>
-    @if (formatSalary(job()); as salary) {
-      <span class="job-card__salary">{{ salary }}</span>
-    }
-  </div>
-
-  <div class="job-card__tags">
-    <span class="chip chip--muted">{{ formatSeniority(job().seniority) }}</span>
-    <span class="chip chip--muted">{{ formatWorkSchedules(job().workSchedules) }}</span>
-    <span class="chip chip--muted">{{ formatContractTypes(job().contractTypes) }}</span>
-  </div>
-
-  <div class="job-card__dates">
-    <span>Posted {{ formatJobDate(job().createdAt) }}</span>
-    @if (job().applicationDeadline; as deadline) {
-      <span>{{ formatApplicationDeadline(deadline) }}</span>
-    }
-  </div>
-
-  @if (job().competencies.length) {
-    <div class="job-card__competencies">
-      @for (competency of job().competencies.slice(0, 4); track competency.name) {
-        <span class="chip">{{ formatCompetency(competency) }}</span>
-      }
-      @if (job().competencies.length > 4) {
-        <span class="chip chip--muted">+{{ job().competencies.length - 4 }}</span>
-      }
-    </div>
+  @if (formatSalary(job()); as salary) {
+    <p class="job-card__salary">{{ salary }}</p>
   }
+
+  <div class="job-card__facts">
+    @if (applied()) {
+      <span class="job-card__fact job-card__fact--applied">Applied</span>
+    }
+    @if (job().location?.city; as city) {
+      <span class="job-card__fact">{{ city }}</span>
+    }
+    <span class="job-card__fact">{{ formatWorkplaceMode(job().workplace) }}</span>
+    @for (level of job().seniority.slice(0, compact() ? 1 : 2); track level) {
+      <span class="job-card__fact">{{ formatSeniorityLevel(level) }}</span>
+    }
+    @for (schedule of job().workSchedules.slice(0, 1); track schedule) {
+      <span class="job-card__fact">{{ formatWorkSchedule(schedule) }}</span>
+    }
+    @for (contract of job().contractTypes.slice(0, compact() ? 1 : 2); track contract) {
+      <span class="job-card__fact">{{ formatContractType(contract) }}</span>
+    }
+  </div>
 </article>

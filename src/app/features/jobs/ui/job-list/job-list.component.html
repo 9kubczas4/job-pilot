@@ -26,9 +26,11 @@
           >
             <app-job-card
               [job]="job"
+              [compact]="true"
               [selected]="selectedJobId() === job.id"
               [saved]="savedJobIds().includes(job.id)"
               [applied]="appliedJobIds().includes(job.id)"
+              (toggleSave)="toggleSave.emit(job.id)"
             />
           </a>
         }

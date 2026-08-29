@@ -62,6 +62,7 @@
       [focusJobId]="sheetFocusJobId()"
       (snapChange)="onSheetSnapChange($event)"
       (selectJob)="onSelectJob($event)"
+      (toggleSave)="onToggleSaveJob($event)"
       (clearFocus)="clearSheetFocus()"
     />
 
@@ -90,6 +91,7 @@
           [savedJobIds]="savedJobs.savedJobIds()"
           [appliedJobIds]="savedJobs.appliedJobIds()"
           (selectJob)="onSelectJob($event)"
+          (toggleSave)="onToggleSaveJob($event)"
         />
       </div>
 

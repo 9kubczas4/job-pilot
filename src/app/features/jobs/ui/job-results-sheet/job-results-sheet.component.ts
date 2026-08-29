@@ -35,6 +35,7 @@ export class JobResultsSheetComponent {
 
   readonly snapChange = output<JobSheetSnap>();
   readonly selectJob = output<string>();
+  readonly toggleSave = output<string>();
   readonly clearFocus = output<void>();
 
   private readonly host = inject(ElementRef<HTMLElement>);

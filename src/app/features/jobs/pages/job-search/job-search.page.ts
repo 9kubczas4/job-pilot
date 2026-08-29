@@ -16,6 +16,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppLinks } from '@app/app-paths';
+import { AuthService } from '@core/auth/auth.service';
 import { AppShellComponent } from '@core/layout/app-shell.component';
 import { DEFAULT_SEARCH_RADIUS_KM } from '@shared/models/header-search.model';
 import { HeaderUiStore } from '@shared/state/header-ui.store';
@@ -71,6 +72,7 @@ export class JobSearchPageComponent implements OnInit {
   readonly store = inject(JobSearchStore);
   readonly savedJobs = inject(SavedJobsStore);
   readonly headerUi = inject(HeaderUiStore);
+  readonly auth = inject(AuthService);
   readonly links = AppLinks;
 
   readonly isMobileLayout = signal(false);
@@ -247,6 +249,19 @@ export class JobSearchPageComponent implements OnInit {
 
   onSelectJob(jobId: string): void {
     this.store.selectJob(jobId);
+  }
+
+  onToggleSaveJob(jobId: string): void {
+    if (!this.auth.isAuthenticated()) {
+      return;
+    }
+
+    if (this.savedJobs.isSaved(jobId)) {
+      void this.savedJobs.unsaveJob(jobId);
+      return;
+    }
+
+    void this.savedJobs.saveJob(jobId);
   }
 
   onMobileSelectJob(jobId: string): void {

@@ -28,9 +28,16 @@ const CONTRACT_LABELS: Record<ContractType, string> = {
 };
 
 const WORKPLACE_LABELS: Record<WorkplaceMode, string> = {
-  remote: 'remote',
+  remote: 'Remote',
   hybrid: 'Hybrid',
   onsite: 'Onsite',
+};
+
+const CONTRACT_SHORT_LABELS: Record<ContractType, string> = {
+  uop: 'UoP',
+  b2b: 'B2B',
+  uz: 'UoZ',
+  internship: 'Internship',
 };
 
 export function formatTagLabel(value: string): string {
@@ -70,6 +77,18 @@ export function formatWorkSchedules(schedules: WorkSchedule[]): string {
 
 export function formatContractTypes(contracts: ContractType[]): string {
   return contracts.map((type) => CONTRACT_LABELS[type] ?? type.toUpperCase()).join(' · ');
+}
+
+export function formatContractType(contract: ContractType): string {
+  return CONTRACT_SHORT_LABELS[contract] ?? contract.toUpperCase();
+}
+
+export function formatSeniorityLevel(level: SeniorityLevel): string {
+  return SENIORITY_LABELS[level] ?? formatTagLabel(level);
+}
+
+export function formatWorkSchedule(schedule: WorkSchedule): string {
+  return WORK_SCHEDULE_LABELS[schedule] ?? schedule;
 }
 
 export function formatCompetency(competency: JobCompetency): string {

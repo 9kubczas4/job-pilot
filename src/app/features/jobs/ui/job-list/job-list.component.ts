@@ -32,6 +32,7 @@ export class JobListComponent {
   readonly savedJobIds = input<string[]>([]);
   readonly appliedJobIds = input<string[]>([]);
   readonly selectJob = output<string>();
+  readonly toggleSave = output<string>();
 
   readonly jobLink = AppLinks.job;
 

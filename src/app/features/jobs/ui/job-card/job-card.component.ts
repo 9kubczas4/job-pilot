@@ -1,6 +1,12 @@
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
 import { JobOffer } from '../../domain/job.model';
-import { formatSalary, formatWorkplace, formatSeniority, formatWorkSchedules, formatContractTypes, formatCompetency, formatJobDate, formatApplicationDeadline } from '../../domain/job-formatters';
+import {
+  formatSalary,
+  formatWorkplaceMode,
+  formatSeniorityLevel,
+  formatWorkSchedule,
+  formatContractType,
+} from '../../domain/job-formatters';
 
 @Component({
   selector: 'app-job-card',
@@ -13,15 +19,16 @@ export class JobCardComponent {
   readonly selected = input(false);
   readonly saved = input(false);
   readonly applied = input(false);
+  readonly compact = input(false);
+  readonly showSaveButton = input(true);
+
+  readonly toggleSave = output<void>();
 
   readonly formatSalary = formatSalary;
-  readonly formatWorkplace = formatWorkplace;
-  readonly formatSeniority = formatSeniority;
-  readonly formatWorkSchedules = formatWorkSchedules;
-  readonly formatContractTypes = formatContractTypes;
-  readonly formatCompetency = formatCompetency;
-  readonly formatJobDate = formatJobDate;
-  readonly formatApplicationDeadline = formatApplicationDeadline;
+  readonly formatWorkplaceMode = formatWorkplaceMode;
+  readonly formatSeniorityLevel = formatSeniorityLevel;
+  readonly formatWorkSchedule = formatWorkSchedule;
+  readonly formatContractType = formatContractType;
 
   readonly companyInitials = computed(() => {
     const parts = this.job()
@@ -30,4 +37,10 @@ export class JobCardComponent {
       .slice(0, 2);
     return parts.map((part) => part[0]?.toUpperCase() ?? '').join('') || '?';
   });
+
+  onSaveClick(event: Event): void {
+    event.preventDefault();
+    event.stopPropagation();
+    this.toggleSave.emit();
+  }
 }

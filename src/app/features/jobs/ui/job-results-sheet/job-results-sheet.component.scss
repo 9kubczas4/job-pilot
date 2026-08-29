@@ -96,6 +96,12 @@
   overscroll-behavior: contain;
 }
 
+.job-sheet__sort {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 0 var(--space-3);
+}
+
 .job-sheet__list {
   display: flex;
   flex-direction: column;

@@ -39,7 +39,7 @@ import {
   normalizeLocationCriteria,
   queryParamsEqual,
   queryParamsToCriteria,
-  routeSearchCriteriaEqual,
+  routeCriteriaEqual,
 } from '../../domain/search-url.utils';
 import { JobSearchStore } from '../../state/job-search.store';
 import { JobFiltersComponent } from '../../ui/job-filters/job-filters.component';
@@ -242,12 +242,12 @@ export class JobSearchPageComponent implements OnInit {
       Object.fromEntries(params.keys.map((key) => [key, params.get(key) ?? undefined])),
     );
 
-    if (routeSearchCriteriaEqual(this.store.criteria(), routeCriteria)) {
+    if (routeCriteriaEqual(this.store.criteria(), routeCriteria)) {
       return;
     }
 
     this.syncingFromRoute.set(true);
-    this.store.applyRouteSearchCriteria(routeCriteria);
+    this.store.setCriteriaFromRoute(routeCriteria);
     syncHeaderFromCriteria(this.headerUi, this.store.criteria());
     this.syncingFromRoute.set(false);
   }
@@ -407,6 +407,9 @@ function countActiveFilters(criteria: JobSearchCriteria): number {
   }
   if (criteria.contracts?.length) {
     count += criteria.contracts.length;
+  }
+  if (criteria.workSchedules?.length) {
+    count += criteria.workSchedules.length;
   }
   if (criteria.salaryMin != null) {
     count += 1;

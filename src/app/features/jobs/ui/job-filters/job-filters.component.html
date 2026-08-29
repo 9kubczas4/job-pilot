@@ -15,6 +15,88 @@
     </div>
   </fieldset>
 
+  <fieldset class="filters-fieldset">
+    <legend>Seniority</legend>
+    <div class="cluster">
+      @for (option of seniorityOptions; track option.value) {
+        <button
+          type="button"
+          class="chip-btn"
+          [class.is-active]="isSeniorityActive(option.value)"
+          (click)="toggleSeniority(option.value)"
+        >
+          {{ option.label }}
+        </button>
+      }
+    </div>
+  </fieldset>
+
+  <fieldset class="filters-fieldset">
+    <legend>Contract</legend>
+    <div class="cluster">
+      @for (option of contractOptions; track option.value) {
+        <button
+          type="button"
+          class="chip-btn"
+          [class.is-active]="isContractActive(option.value)"
+          (click)="toggleContract(option.value)"
+        >
+          {{ option.label }}
+        </button>
+      }
+    </div>
+  </fieldset>
+
+  <fieldset class="filters-fieldset">
+    <legend>Schedule</legend>
+    <div class="cluster">
+      @for (option of scheduleOptions; track option.value) {
+        <button
+          type="button"
+          class="chip-btn"
+          [class.is-active]="isScheduleActive(option.value)"
+          (click)="toggleSchedule(option.value)"
+        >
+          {{ option.label }}
+        </button>
+      }
+    </div>
+  </fieldset>
+
+  <fieldset class="filters-fieldset">
+    <legend>Minimum salary (PLN / mo)</legend>
+    <div class="cluster">
+      @for (option of salaryMinOptions; track option.value) {
+        <button
+          type="button"
+          class="chip-btn"
+          [class.is-active]="isSalaryMinActive(option.value)"
+          (click)="toggleSalaryMin(option.value)"
+        >
+          {{ option.label }}
+        </button>
+      }
+    </div>
+  </fieldset>
+
+  @if (topSkills().length) {
+    <fieldset class="filters-fieldset">
+      <legend>Skills</legend>
+      <div class="cluster">
+        @for (skill of topSkills(); track skill) {
+          <button
+            type="button"
+            class="chip-btn chip-btn--ghost"
+            [class.is-active]="isSkillActive(skill)"
+            (click)="toggleSkill(skill)"
+          >
+            {{ formatTagLabel(skill) }}
+          </button>
+        }
+      </div>
+    </fieldset>
+  }
+
   @if (activeChips().length) {
     <div class="field">
       <span class="field-label">Active filters</span>

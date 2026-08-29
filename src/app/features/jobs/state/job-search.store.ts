@@ -1,6 +1,7 @@
 import { computed, effect, inject, Injectable, signal } from '@angular/core';
 import { JobOffer, MapBounds } from '../domain/job.model';
 import { matchesSearchCriteria } from '../domain/job-matcher';
+import { sortJobs } from '../domain/job-sort.utils';
 import { searchCriteriaFieldsEqual } from '../domain/search-url.utils';
 import { JobSearchCriteria } from '../domain/search.model';
 import { JobRepository } from '../data-access/job.repository';
@@ -17,7 +18,8 @@ export class JobSearchStore {
 
   readonly jobs = computed(() => {
     const criteria = this.criteria();
-    return this.allJobs().filter((job) => matchesSearchCriteria(job, criteria));
+    const filtered = this.allJobs().filter((job) => matchesSearchCriteria(job, criteria));
+    return sortJobs(filtered, criteria.sort, criteria);
   });
 
   constructor() {
@@ -85,6 +87,23 @@ export class JobSearchStore {
 
   clearCriteria(): void {
     this.criteria.set({});
+  }
+
+  setCriteriaFromRoute(route: JobSearchCriteria): void {
+    this.criteria.set({
+      query: route.query,
+      locations: route.locations,
+      locationLat: route.locationLat,
+      locationLng: route.locationLng,
+      radiusKm: route.radiusKm,
+      workplace: route.workplace,
+      seniority: route.seniority,
+      skills: route.skills,
+      contracts: route.contracts,
+      workSchedules: route.workSchedules,
+      salaryMin: route.salaryMin,
+      sort: route.sort,
+    });
   }
 
   selectJob(jobId: string | null): void {

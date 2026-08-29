@@ -11,6 +11,7 @@ import {
 import { RouterLink } from '@angular/router';
 import { AppLinks } from '@app/app-paths';
 import { JobCardComponent } from '../job-card/job-card.component';
+import { JobSortMenuComponent } from '../job-sort-menu/job-sort-menu.component';
 import { JobOffer } from '../../domain/job.model';
 
 export type JobSheetSnap = 'collapsed' | 'peek' | 'half' | 'full';
@@ -20,7 +21,7 @@ const COLLAPSED_HEIGHT_PX = 52;
 @Component({
   selector: 'app-job-results-sheet',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [JobCardComponent, RouterLink],
+  imports: [JobCardComponent, JobSortMenuComponent, RouterLink],
   templateUrl: './job-results-sheet.component.html',
   styleUrl: './job-results-sheet.component.scss',
 })

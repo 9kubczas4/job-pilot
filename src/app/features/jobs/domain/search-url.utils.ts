@@ -31,8 +31,14 @@ export function criteriaToQueryParams(criteria: JobSearchCriteria): Record<strin
   if (criteria.contracts?.length) {
     params['contracts'] = criteria.contracts.join(',');
   }
+  if (criteria.workSchedules?.length) {
+    params['schedules'] = criteria.workSchedules.join(',');
+  }
   if (criteria.salaryMin != null) {
     params['salaryMin'] = String(criteria.salaryMin);
+  }
+  if (criteria.sort && criteria.sort !== 'newest') {
+    params['sort'] = criteria.sort;
   }
 
   return params;
@@ -58,7 +64,9 @@ export function queryParamsToCriteria(params: Record<string, string | undefined>
     seniority: splitParam(params['seniority']) as JobSearchCriteria['seniority'],
     skills: splitParam(params['skills']),
     contracts: splitParam(params['contracts']) as JobSearchCriteria['contracts'],
+    workSchedules: splitParam(params['schedules']) as JobSearchCriteria['workSchedules'],
     salaryMin: params['salaryMin'] ? Number(params['salaryMin']) : undefined,
+    sort: parseSortParam(params['sort']),
   };
 }
 
@@ -128,6 +136,44 @@ export function searchCriteriaFieldsEqual(
   >,
 ): boolean {
   return routeSearchCriteriaEqual(a as JobSearchCriteria, b);
+}
+
+export function routeCriteriaEqual(a: JobSearchCriteria, b: JobSearchCriteria): boolean {
+  return serializeCriteria(a) === serializeCriteria(b);
+}
+
+function parseSortParam(value: string | undefined): JobSearchCriteria['sort'] {
+  const allowed: NonNullable<JobSearchCriteria['sort']>[] = [
+    'newest',
+    'oldest',
+    'salary-desc',
+    'salary-asc',
+    'deadline',
+    'distance',
+  ];
+
+  if (value && allowed.includes(value as NonNullable<JobSearchCriteria['sort']>)) {
+    return value as NonNullable<JobSearchCriteria['sort']>;
+  }
+
+  return undefined;
+}
+
+function serializeCriteria(criteria: JobSearchCriteria): string {
+  return JSON.stringify({
+    query: criteria.query ?? '',
+    locations: criteria.locations ?? [],
+    locationLat: criteria.locationLat ?? null,
+    locationLng: criteria.locationLng ?? null,
+    radiusKm: criteria.radiusKm ?? null,
+    workplace: criteria.workplace ?? [],
+    seniority: criteria.seniority ?? [],
+    skills: criteria.skills ?? [],
+    contracts: criteria.contracts ?? [],
+    workSchedules: criteria.workSchedules ?? [],
+    salaryMin: criteria.salaryMin ?? null,
+    sort: criteria.sort ?? 'newest',
+  });
 }
 
 function serializeQueryParams(

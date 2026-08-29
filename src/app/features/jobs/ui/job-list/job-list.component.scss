@@ -23,6 +23,13 @@
   background: var(--color-surface-elevated);
 }
 
+.job-list__header-main {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
 .job-list__title {
   margin: 0;
   font-size: var(--font-size-lg);

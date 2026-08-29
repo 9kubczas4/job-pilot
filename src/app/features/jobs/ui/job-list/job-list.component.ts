@@ -16,12 +16,13 @@ import { fromEvent } from 'rxjs';
 import { AppLinks } from '@app/app-paths';
 import { HeaderUiStore } from '@shared/state/header-ui.store';
 import { JobCardComponent } from '../job-card/job-card.component';
+import { JobSortMenuComponent } from '../job-sort-menu/job-sort-menu.component';
 import { JobOffer } from '../../domain/job.model';
 
 @Component({
   selector: 'app-job-list',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [JobCardComponent, RouterLink],
+  imports: [JobCardComponent, JobSortMenuComponent, RouterLink],
   templateUrl: './job-list.component.html',
   styleUrl: './job-list.component.scss',
 })

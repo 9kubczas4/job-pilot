@@ -1,5 +1,13 @@
 import { ContractType, SeniorityLevel, WorkSchedule, WorkplaceMode } from './job.model';
 
+export type JobSortOption =
+  | 'newest'
+  | 'oldest'
+  | 'salary-desc'
+  | 'salary-asc'
+  | 'deadline'
+  | 'distance';
+
 export interface JobSearchCriteria {
   query?: string;
   roles?: string[];
@@ -13,4 +21,5 @@ export interface JobSearchCriteria {
   contracts?: ContractType[];
   salaryMin?: number;
   radiusKm?: number;
+  sort?: JobSortOption;
 }

@@ -15,18 +15,8 @@
   position: absolute;
   inset: 0;
   border: 0;
-  background: rgb(15 23 42 / 0.45);
-  opacity: 0;
-  backdrop-filter: blur(0);
+  background: transparent;
   cursor: pointer;
-  transition:
-    opacity var(--transition-drawer) var(--ease-drawer),
-    backdrop-filter var(--transition-drawer) var(--ease-drawer);
-}
-
-.drawer-root.is-open .drawer-backdrop {
-  opacity: 1;
-  backdrop-filter: blur(4px);
 }
 
 .drawer-panel {
@@ -92,12 +82,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .drawer-backdrop,
   .drawer-panel {
     transition: none;
-  }
-
-  .drawer-root.is-open .drawer-backdrop {
-    backdrop-filter: none;
   }
 }

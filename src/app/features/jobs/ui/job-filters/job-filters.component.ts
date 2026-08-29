@@ -1,7 +1,37 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { HeaderUiStore } from '@shared/state/header-ui.store';
-import { formatWorkplaceMode, formatTagLabel } from '../../domain/job-formatters';
+import {
+  CONTRACT_OPTIONS,
+  SENIORITY_OPTIONS,
+} from '@features/profile/domain/profile-options';
+import {
+  extractTopSkills,
+  isArrayCriteriaActive,
+  toggleArrayCriteria,
+} from '../../domain/job-filter.utils';
+import {
+  formatContractType,
+  formatSeniorityLevel,
+  formatTagLabel,
+  formatWorkplaceMode,
+  formatWorkSchedule,
+} from '../../domain/job-formatters';
+import { ContractType, SeniorityLevel, WorkSchedule, WorkplaceMode } from '../../domain/job.model';
 import { JobSearchStore } from '../../state/job-search.store';
+
+const WORK_SCHEDULE_OPTIONS = [
+  { value: 'full-time' as const, label: 'Full-time' },
+  { value: 'part-time' as const, label: 'Part-time' },
+  { value: 'freelance' as const, label: 'Freelance' },
+];
+
+const SALARY_MIN_OPTIONS = [
+  { value: 8000, label: '8k+' },
+  { value: 12000, label: '12k+' },
+  { value: 16000, label: '16k+' },
+  { value: 20000, label: '20k+' },
+  { value: 25000, label: '25k+' },
+];
 
 @Component({
   selector: 'app-job-filters',
@@ -13,23 +43,84 @@ import { JobSearchStore } from '../../state/job-search.store';
 export class JobFiltersComponent {
   readonly store = inject(JobSearchStore);
   private readonly headerUi = inject(HeaderUiStore);
+
   readonly workplaceOptions = ['remote', 'hybrid', 'onsite'] as const;
+  readonly seniorityOptions = SENIORITY_OPTIONS;
+  readonly contractOptions = CONTRACT_OPTIONS;
+  readonly scheduleOptions = WORK_SCHEDULE_OPTIONS;
+  readonly salaryMinOptions = SALARY_MIN_OPTIONS;
+
+  readonly topSkills = computed(() => extractTopSkills(this.store.allJobs()));
 
   readonly formatWorkplaceMode = formatWorkplaceMode;
+  readonly formatSeniorityLevel = formatSeniorityLevel;
+  readonly formatContractType = formatContractType;
+  readonly formatWorkSchedule = formatWorkSchedule;
+  readonly formatTagLabel = formatTagLabel;
 
-  isWorkplaceActive(option: (typeof this.workplaceOptions)[number]): boolean {
-    return this.store.criteria().workplace?.includes(option) ?? false;
+  isWorkplaceActive(option: WorkplaceMode): boolean {
+    return isArrayCriteriaActive(this.store.criteria().workplace, option);
   }
 
-  toggleWorkplace(option: (typeof this.workplaceOptions)[number]): void {
-    const current = new Set(this.store.criteria().workplace ?? []);
-    if (current.has(option)) {
-      current.delete(option);
-    } else {
-      current.add(option);
-    }
+  toggleWorkplace(option: WorkplaceMode): void {
+    const criteria = this.store.criteria();
     this.store.patchCriteria({
-      workplace: current.size ? [...current] : undefined,
+      workplace: toggleArrayCriteria(criteria.workplace, option),
+    });
+  }
+
+  isSeniorityActive(option: SeniorityLevel): boolean {
+    return isArrayCriteriaActive(this.store.criteria().seniority, option);
+  }
+
+  toggleSeniority(option: SeniorityLevel): void {
+    const criteria = this.store.criteria();
+    this.store.patchCriteria({
+      seniority: toggleArrayCriteria(criteria.seniority, option),
+    });
+  }
+
+  isContractActive(option: ContractType): boolean {
+    return isArrayCriteriaActive(this.store.criteria().contracts, option);
+  }
+
+  toggleContract(option: ContractType): void {
+    const criteria = this.store.criteria();
+    this.store.patchCriteria({
+      contracts: toggleArrayCriteria(criteria.contracts, option),
+    });
+  }
+
+  isScheduleActive(option: WorkSchedule): boolean {
+    return isArrayCriteriaActive(this.store.criteria().workSchedules, option);
+  }
+
+  toggleSchedule(option: WorkSchedule): void {
+    const criteria = this.store.criteria();
+    this.store.patchCriteria({
+      workSchedules: toggleArrayCriteria(criteria.workSchedules, option),
+    });
+  }
+
+  isSkillActive(skill: string): boolean {
+    return isArrayCriteriaActive(this.store.criteria().skills, skill);
+  }
+
+  toggleSkill(skill: string): void {
+    const criteria = this.store.criteria();
+    this.store.patchCriteria({
+      skills: toggleArrayCriteria(criteria.skills, skill),
+    });
+  }
+
+  isSalaryMinActive(value: number): boolean {
+    return this.store.criteria().salaryMin === value;
+  }
+
+  toggleSalaryMin(value: number): void {
+    const current = this.store.criteria().salaryMin;
+    this.store.patchCriteria({
+      salaryMin: current === value ? undefined : value,
     });
   }
 
@@ -51,9 +142,24 @@ export class JobFiltersComponent {
     criteria.workplace?.forEach((mode) =>
       chips.push({ key: `workplace:${mode}`, label: formatWorkplaceMode(mode) }),
     );
+    criteria.seniority?.forEach((level) =>
+      chips.push({ key: `seniority:${level}`, label: formatSeniorityLevel(level) }),
+    );
+    criteria.contracts?.forEach((contract) =>
+      chips.push({ key: `contract:${contract}`, label: formatContractType(contract) }),
+    );
+    criteria.workSchedules?.forEach((schedule) =>
+      chips.push({ key: `schedule:${schedule}`, label: formatWorkSchedule(schedule) }),
+    );
     criteria.skills?.forEach((skill) =>
       chips.push({ key: `skill:${skill}`, label: formatTagLabel(skill) }),
     );
+    if (criteria.salaryMin != null) {
+      chips.push({
+        key: 'salaryMin',
+        label: `From ${Math.round(criteria.salaryMin / 1000)}k PLN`,
+      });
+    }
 
     return chips;
   }
@@ -78,12 +184,34 @@ export class JobFiltersComponent {
       return;
     }
 
+    if (key === 'salaryMin') {
+      this.store.patchCriteria({ salaryMin: undefined });
+      return;
+    }
+
     const [type, value] = key.split(':');
     const criteria = this.store.criteria();
 
     if (type === 'workplace') {
       this.store.patchCriteria({
         workplace: criteria.workplace?.filter((item) => item !== value) as typeof criteria.workplace,
+      });
+    }
+    if (type === 'seniority') {
+      this.store.patchCriteria({
+        seniority: criteria.seniority?.filter((item) => item !== value) as typeof criteria.seniority,
+      });
+    }
+    if (type === 'contract') {
+      this.store.patchCriteria({
+        contracts: criteria.contracts?.filter((item) => item !== value) as typeof criteria.contracts,
+      });
+    }
+    if (type === 'schedule') {
+      this.store.patchCriteria({
+        workSchedules: criteria.workSchedules?.filter(
+          (item) => item !== value,
+        ) as typeof criteria.workSchedules,
       });
     }
     if (type === 'skill') {

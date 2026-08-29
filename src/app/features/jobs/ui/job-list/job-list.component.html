@@ -1,9 +1,15 @@
 <section class="job-list">
   <header class="job-list__header">
-    <div>
-      <h2 class="job-list__title">Offers</h2>
+    <div class="job-list__header-main">
+      <div>
+        <h2 class="job-list__title">Offers</h2>
+        @if (!loading() && jobs().length) {
+          <p class="job-list__subtitle">{{ jobs().length }} matching {{ jobs().length === 1 ? 'job' : 'jobs' }}</p>
+        }
+      </div>
+
       @if (!loading() && jobs().length) {
-        <p class="job-list__subtitle">{{ jobs().length }} matching {{ jobs().length === 1 ? 'job' : 'jobs' }}</p>
+        <app-job-sort-menu />
       }
     </div>
   </header>

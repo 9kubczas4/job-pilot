@@ -57,6 +57,12 @@
           </a>
         </div>
       } @else {
+        @if (jobs().length) {
+          <div class="job-sheet__sort" (click)="$event.stopPropagation()">
+            <app-job-sort-menu />
+          </div>
+        }
+
         <div class="job-sheet__list">
           @for (job of jobs(); track job.id) {
             <a

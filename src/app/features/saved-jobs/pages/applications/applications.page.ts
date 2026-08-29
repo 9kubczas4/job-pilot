@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, effect, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AppShellComponent } from '@core/layout/app-shell.component';
+import { enableAppShellPageScroll } from '@core/layout/enable-app-shell-page-scroll';
 import { AuthService } from '@core/auth/auth.service';
 import { AppLinks } from '@app/app-paths';
 import { JobOffer } from '@features/jobs/domain/job.model';
@@ -45,6 +46,7 @@ export class ApplicationsPageComponent {
   readonly formatAppliedDate = formatJobDate;
 
   constructor() {
+    enableAppShellPageScroll();
     this.searchStore.loadJobs();
 
     effect(() => {

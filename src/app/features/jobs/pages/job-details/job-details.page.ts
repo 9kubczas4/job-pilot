@@ -1,9 +1,20 @@
-import { ChangeDetectionStrategy, Component, computed, DestroyRef, effect, inject, PLATFORM_ID, signal, untracked } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  DestroyRef,
+  effect,
+  inject,
+  PLATFORM_ID,
+  signal,
+  untracked,
+} from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { map } from 'rxjs';
 import { AppShellComponent } from '@core/layout/app-shell.component';
+import { enableAppShellPageScroll } from '@core/layout/enable-app-shell-page-scroll';
 import { AuthService } from '@core/auth/auth.service';
 import { AppLinks } from '@app/app-paths';
 import { SavedJobsStore } from '@features/saved-jobs/state/saved-jobs.store';
@@ -83,10 +94,7 @@ export class JobDetailsPageComponent {
   );
 
   constructor() {
-    if (isPlatformBrowser(this.platformId)) {
-      document.body.classList.add('page-scroll-y');
-      this.destroyRef.onDestroy(() => document.body.classList.remove('page-scroll-y'));
-    }
+    enableAppShellPageScroll();
 
     effect(() => {
       if (this.auth.loading() || !this.auth.isAuthenticated()) {

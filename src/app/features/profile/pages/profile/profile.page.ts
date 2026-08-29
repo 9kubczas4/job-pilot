@@ -14,6 +14,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { AppShellComponent } from '@core/layout/app-shell.component';
+import { enableAppShellPageScroll } from '@core/layout/enable-app-shell-page-scroll';
 import { AuthService } from '@core/auth/auth.service';
 import { ToastService } from '@shared/ui/toast/toast.service';
 import {
@@ -83,6 +84,8 @@ export class ProfilePageComponent {
   readonly headlinePreview = computed(() => this.store.profile()?.headline?.trim() || null);
 
   constructor() {
+    enableAppShellPageScroll();
+
     effect(() => {
       if (this.auth.loading() || !this.auth.isAuthenticated()) {
         return;

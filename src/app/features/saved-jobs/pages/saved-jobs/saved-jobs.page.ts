@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, effect, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AppShellComponent } from '@core/layout/app-shell.component';
+import { enableAppShellPageScroll } from '@core/layout/enable-app-shell-page-scroll';
 import { AuthService } from '@core/auth/auth.service';
 import { ToastService } from '@shared/ui/toast/toast.service';
 import { AppLinks } from '@app/app-paths';
@@ -30,6 +31,7 @@ export class SavedJobsPageComponent {
   readonly links = AppLinks;
 
   constructor() {
+    enableAppShellPageScroll();
     this.searchStore.loadJobs();
 
     effect(() => {

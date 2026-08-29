@@ -9,14 +9,19 @@ export const routes: Routes = [
   },
   {
     path: 'jobs',
-    loadComponent: () =>
-      import('./features/jobs/job-search.page').then((m) => m.JobSearchPageComponent),
-  },
-  {
-    path: 'jobs/:id',
-    loadComponent: () =>
-      import('./features/jobs/job-details.page').then((m) => m.JobDetailsPageComponent),
-    providers: [provideJobDetailsWebMcpTools()],
+    children: [
+      {
+        path: '',
+        loadComponent: () =>
+          import('./features/jobs/job-search.page').then((m) => m.JobSearchPageComponent),
+      },
+      {
+        path: ':id',
+        loadComponent: () =>
+          import('./features/jobs/job-details.page').then((m) => m.JobDetailsPageComponent),
+        providers: [provideJobDetailsWebMcpTools()],
+      },
+    ],
   },
   {
     path: 'profile',

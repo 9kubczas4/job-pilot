@@ -8,6 +8,7 @@ import {
 } from 'firebase/firestore';
 import { firstValueFrom } from 'rxjs';
 import { FIREBASE } from '@core/firebase/firebase.providers';
+import { normalizeJobOffer } from '../domain/job-normalizer';
 import { JobOffer } from '../domain/job.model';
 import { environment } from '@environments/environment';
 
@@ -22,7 +23,9 @@ export class JobRepository {
     try {
       const snapshot = await getDocs(collection(this.firebase.firestore, 'jobs'));
       if (!snapshot.empty) {
-        return snapshot.docs.map((item) => ({ id: item.id, ...item.data() }) as JobOffer);
+        return snapshot.docs.map((item) =>
+          normalizeJobOffer({ id: item.id, ...item.data() }),
+        );
       }
     } catch {
       // Fall back to local seed when Firestore is unavailable.
@@ -35,7 +38,7 @@ export class JobRepository {
     try {
       const snapshot = await getDoc(doc(this.firebase.firestore, 'jobs', jobId));
       if (snapshot.exists()) {
-        return { id: snapshot.id, ...snapshot.data() } as JobOffer;
+        return normalizeJobOffer({ id: snapshot.id, ...snapshot.data() });
       }
     } catch {
       // Fall back to local seed when Firestore is unavailable.
@@ -51,8 +54,9 @@ export class JobRepository {
     }
 
     if (environment.useSeedFallback) {
-      this.seedCache = await firstValueFrom(
-        this.http.get<JobOffer[]>('/assets/seed/jobs.json'),
+      const raw = await firstValueFrom(this.http.get<Record<string, unknown>[]>('/assets/seed/jobs.json'));
+      this.seedCache = raw.map((job) =>
+        normalizeJobOffer(job as Record<string, unknown> & { id: string }),
       );
       return this.seedCache;
     }

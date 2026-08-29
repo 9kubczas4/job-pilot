@@ -16,7 +16,14 @@ export const SEARCH_JOBS_SCHEMA = {
       type: 'array',
       items: {
         type: 'string',
-        enum: ['junior', 'mid', 'senior', 'lead', 'staff'],
+        enum: ['junior', 'regular', 'senior', 'expert'],
+      },
+    },
+    workSchedules: {
+      type: 'array',
+      items: {
+        type: 'string',
+        enum: ['full-time', 'part-time', 'freelance'],
       },
     },
     locations: {

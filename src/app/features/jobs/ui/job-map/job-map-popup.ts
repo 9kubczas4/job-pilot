@@ -1,4 +1,11 @@
-import { formatSalary, formatWorkplace } from '../../domain/job-formatters';
+import {
+  formatSalary,
+  formatWorkplace,
+  formatSeniority,
+  formatContractTypes,
+  formatWorkSchedules,
+  formatCompetency,
+} from '../../domain/job-formatters';
 import { JobOffer } from '../../domain/job.model';
 
 export const JOB_MAP_POPUP_BG = '#ffffff';
@@ -18,28 +25,25 @@ function companyInitials(name: string): string {
   return parts.map((part) => part[0]?.toUpperCase() ?? '').join('') || '?';
 }
 
-function formatSeniority(levels: JobOffer['seniority']): string {
-  return levels.map((level) => level.charAt(0).toUpperCase() + level.slice(1)).join(' · ');
-}
-
 export function buildJobMapPopupHtml(job: JobOffer): string {
   const salary = formatSalary(job);
   const workplace = formatWorkplace(job);
-  const skills = job.skills.slice(0, 3).map((skill) => skill.name);
-  const extraSkills = job.skills.length - skills.length;
-  const contracts = job.contractTypes.map((type) => type.toUpperCase()).join(' · ');
+  const competencies = job.competencies.slice(0, 3).map((competency) => formatCompetency(competency));
+  const extraCompetencies = job.competencies.length - competencies.length;
+  const contracts = formatContractTypes(job.contractTypes);
+  const schedules = formatWorkSchedules(job.workSchedules);
 
-  const skillsHtml = skills.length
+  const competenciesHtml = competencies.length
     ? `<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;">
-        ${skills
+        ${competencies
           .map(
-            (skill) =>
-              `<span style="padding:3px 8px;border-radius:999px;background:#f1f5f9;color:#475569;font-size:11px;font-weight:500;">${escapeHtml(skill)}</span>`,
+            (competency) =>
+              `<span style="padding:3px 8px;border-radius:999px;background:#f1f5f9;color:#475569;font-size:11px;font-weight:500;">${escapeHtml(competency)}</span>`,
           )
           .join('')}
         ${
-          extraSkills > 0
-            ? `<span style="padding:3px 8px;border-radius:999px;background:#f8fafc;color:#94a3b8;font-size:11px;font-weight:500;">+${extraSkills}</span>`
+          extraCompetencies > 0
+            ? `<span style="padding:3px 8px;border-radius:999px;background:#f8fafc;color:#94a3b8;font-size:11px;font-weight:500;">+${extraCompetencies}</span>`
             : ''
         }
       </div>`
@@ -76,10 +80,10 @@ export function buildJobMapPopupHtml(job: JobOffer): string {
 
       ${
         contracts
-          ? `<p style="margin:6px 0 0;font-size:11px;color:#94a3b8;">${escapeHtml(contracts)}</p>`
+          ? `<p style="margin:6px 0 0;font-size:11px;color:#94a3b8;">${escapeHtml(contracts)} · ${escapeHtml(schedules)}</p>`
           : ''
       }
 
-      ${skillsHtml}
+      ${competenciesHtml}
     </article>`;
 }

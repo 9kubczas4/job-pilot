@@ -1,4 +1,4 @@
-import { ContractType, SeniorityLevel, WorkplaceMode } from './job.model';
+import { ContractType, SeniorityLevel, WorkSchedule, WorkplaceMode } from './job.model';
 
 export interface JobSearchCriteria {
   query?: string;
@@ -9,6 +9,7 @@ export interface JobSearchCriteria {
   locationLat?: number;
   locationLng?: number;
   workplace?: WorkplaceMode[];
+  workSchedules?: WorkSchedule[];
   contracts?: ContractType[];
   salaryMin?: number;
   radiusKm?: number;

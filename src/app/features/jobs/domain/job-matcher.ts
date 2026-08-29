@@ -10,9 +10,10 @@ export function matchesSearchCriteria(job: JobOffer, criteria: JobSearchCriteria
       job.title,
       job.company.name,
       job.description,
-      ...job.skills.map((skill) => skill.name),
+      ...job.competencies.map((competency) => competency.name),
       ...job.seniority,
       ...job.contractTypes,
+      ...job.workSchedules,
       job.workplace,
     ]
       .join(' ')
@@ -31,8 +32,8 @@ export function matchesSearchCriteria(job: JobOffer, criteria: JobSearchCriteria
   }
 
   if (criteria.skills?.length) {
-    const jobSkills = job.skills.map((skill) => skill.name.toLowerCase());
-    if (!criteria.skills.every((skill) => jobSkills.includes(skill.toLowerCase()))) {
+    const jobCompetencies = job.competencies.map((competency) => competency.name.toLowerCase());
+    if (!criteria.skills.every((skill) => jobCompetencies.includes(skill.toLowerCase()))) {
       return false;
     }
   }
@@ -67,6 +68,12 @@ export function matchesSearchCriteria(job: JobOffer, criteria: JobSearchCriteria
 
   if (criteria.workplace?.length) {
     if (!criteria.workplace.includes(job.workplace)) {
+      return false;
+    }
+  }
+
+  if (criteria.workSchedules?.length) {
+    if (!criteria.workSchedules.some((schedule) => job.workSchedules.includes(schedule))) {
       return false;
     }
   }

@@ -26,13 +26,26 @@
     }
   </div>
 
-  @if (job().skills.length) {
-    <div class="job-card__skills">
-      @for (skill of job().skills.slice(0, 4); track skill.name) {
-        <span class="chip">{{ skill.name }}</span>
+  <div class="job-card__tags">
+    <span class="chip chip--muted">{{ formatSeniority(job().seniority) }}</span>
+    <span class="chip chip--muted">{{ formatWorkSchedules(job().workSchedules) }}</span>
+    <span class="chip chip--muted">{{ formatContractTypes(job().contractTypes) }}</span>
+  </div>
+
+  <div class="job-card__dates">
+    <span>Posted {{ formatJobDate(job().createdAt) }}</span>
+    @if (job().applicationDeadline; as deadline) {
+      <span>{{ formatApplicationDeadline(deadline) }}</span>
+    }
+  </div>
+
+  @if (job().competencies.length) {
+    <div class="job-card__competencies">
+      @for (competency of job().competencies.slice(0, 4); track competency.name) {
+        <span class="chip">{{ formatCompetency(competency) }}</span>
       }
-      @if (job().skills.length > 4) {
-        <span class="chip chip--muted">+{{ job().skills.length - 4 }}</span>
+      @if (job().competencies.length > 4) {
+        <span class="chip chip--muted">+{{ job().competencies.length - 4 }}</span>
       }
     </div>
   }

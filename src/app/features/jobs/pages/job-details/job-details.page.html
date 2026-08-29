@@ -17,7 +17,19 @@
           <div class="details-hero__chips cluster">
             <span class="chip">{{ currentJob.workplace }}</span>
             @for (level of currentJob.seniority; track level) {
-              <span class="chip">{{ level }}</span>
+              <span class="chip">{{ formatSeniority([level]) }}</span>
+            }
+            @for (schedule of currentJob.workSchedules; track schedule) {
+              <span class="chip">{{ formatWorkSchedules([schedule]) }}</span>
+            }
+            @for (contract of currentJob.contractTypes; track contract) {
+              <span class="chip">{{ formatContractTypes([contract]) }}</span>
+            }
+          </div>
+          <div class="details-hero__dates">
+            <span>Posted {{ formatJobDate(currentJob.createdAt) }}</span>
+            @if (currentJob.applicationDeadline; as deadline) {
+              <span>{{ formatApplicationDeadline(deadline) }}</span>
             }
           </div>
         </div>
@@ -46,6 +58,27 @@
           <h2 class="section-title">Description</h2>
           <p class="details-section__body">{{ currentJob.description }}</p>
         </article>
+
+        @if (currentJob.competencies.length) {
+          <article class="details-section panel stack stack--sm">
+            <h2 class="section-title">Required competencies</h2>
+            <ul class="competency-list">
+              @for (competency of currentJob.competencies; track competency.name) {
+                <li class="competency-list__item">
+                  <span class="competency-list__name">{{ competency.name }}</span>
+                  <span class="competency-list__level">{{ formatCompetency(competency) }}</span>
+                  <meter
+                    class="competency-list__meter"
+                    [min]="0"
+                    [max]="competency.scale ?? 5"
+                    [value]="competency.level"
+                    [attr.aria-label]="formatCompetency(competency)"
+                  ></meter>
+                </li>
+              }
+            </ul>
+          </article>
+        }
 
         <article class="details-section panel stack stack--sm">
           <h2 class="section-title">Requirements</h2>

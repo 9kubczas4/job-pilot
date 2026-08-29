@@ -42,8 +42,8 @@ export function buildJobSearchSuggestions(jobs: JobOffer[], query: string): JobS
     addSuggestion('title', job.title, job.title, job.company.name);
     addSuggestion('company', job.company.name, job.company.name, 'Company');
 
-    for (const skill of job.skills) {
-      addSuggestion('skill', skill.name, skill.name, 'Skill');
+    for (const competency of job.competencies) {
+      addSuggestion('skill', competency.name, competency.name, 'Competency');
     }
   }
 

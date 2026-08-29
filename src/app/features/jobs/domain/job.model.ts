@@ -1,9 +1,9 @@
-export type SeniorityLevel = 'junior' | 'mid' | 'senior' | 'lead' | 'staff';
-export type ContractType = 'b2b' | 'uop' | 'uz' | 'internship';
+export type SeniorityLevel = 'junior' | 'regular' | 'senior' | 'expert';
+export type ContractType = 'uop' | 'b2b' | 'uz' | 'internship';
+export type WorkSchedule = 'full-time' | 'part-time' | 'freelance';
 export type WorkplaceMode = 'remote' | 'hybrid' | 'onsite';
 export type SalaryCurrency = 'PLN' | 'EUR' | 'USD';
 export type SalaryPeriod = 'month' | 'year';
-export type SkillLevel = 'required' | 'nice-to-have';
 
 export interface CompanySummary {
   id: string;
@@ -11,9 +11,13 @@ export interface CompanySummary {
   logoUrl?: string;
 }
 
-export interface JobSkill {
+/** Generic domain proficiency — works for IT skills, tools, languages, etc. */
+export interface JobCompetency {
   name: string;
-  level: SkillLevel;
+  /** Required level on a 1–5 scale (or up to `scale`). */
+  level: number;
+  /** Maximum level on the scale; defaults to 5. */
+  scale?: number;
 }
 
 export interface JobLocation {
@@ -36,8 +40,9 @@ export interface JobOffer {
   company: CompanySummary;
   description: string;
   seniority: SeniorityLevel[];
-  skills: JobSkill[];
+  competencies: JobCompetency[];
   salary?: JobSalary;
+  workSchedules: WorkSchedule[];
   contractTypes: ContractType[];
   workplace: WorkplaceMode;
   location?: JobLocation;
@@ -45,7 +50,8 @@ export interface JobOffer {
   requirements: string[];
   niceToHave?: string[];
   benefits?: string[];
-  publishedAt: string;
+  createdAt: string;
+  applicationDeadline?: string;
 }
 
 export interface MapBounds {

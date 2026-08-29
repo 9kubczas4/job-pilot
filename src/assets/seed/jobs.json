@@ -9,21 +9,7 @@
     "description": "Frontend Developer opportunity working with Angular, TypeScript, RxJS on modern product teams.",
     "seniority": [
       "senior",
-      "lead"
-    ],
-    "skills": [
-      {
-        "name": "Angular",
-        "level": "required"
-      },
-      {
-        "name": "TypeScript",
-        "level": "required"
-      },
-      {
-        "name": "RxJS",
-        "level": "required"
-      }
+      "expert"
     ],
     "salary": {
       "min": 18000,
@@ -53,7 +39,28 @@
       "Flexible hours",
       "Learning budget"
     ],
-    "publishedAt": "2026-08-28T20:15:00.573Z"
+    "competencies": [
+      {
+        "name": "Angular",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "TypeScript",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "RxJS",
+        "level": 4,
+        "scale": 5
+      }
+    ],
+    "workSchedules": [
+      "full-time"
+    ],
+    "createdAt": "2026-08-28T20:15:00.573Z",
+    "applicationDeadline": "2026-09-18T20:15:00.573Z"
   },
   {
     "id": "job-002",
@@ -64,22 +71,8 @@
     },
     "description": "Frontend Tech Lead opportunity working with React, TypeScript, Next.js on modern product teams.",
     "seniority": [
-      "mid",
+      "regular",
       "senior"
-    ],
-    "skills": [
-      {
-        "name": "React",
-        "level": "required"
-      },
-      {
-        "name": "TypeScript",
-        "level": "required"
-      },
-      {
-        "name": "Next.js",
-        "level": "required"
-      }
     ],
     "salary": {
       "min": 20000,
@@ -115,7 +108,28 @@
       "Flexible hours",
       "Learning budget"
     ],
-    "publishedAt": "2026-08-27T20:15:00.574Z"
+    "competencies": [
+      {
+        "name": "React",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "TypeScript",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "Next.js",
+        "level": 4,
+        "scale": 5
+      }
+    ],
+    "workSchedules": [
+      "part-time"
+    ],
+    "createdAt": "2026-08-27T20:15:00.574Z",
+    "applicationDeadline": "2026-09-18T20:15:00.574Z"
   },
   {
     "id": "job-003",
@@ -126,22 +140,8 @@
     },
     "description": "Staff Frontend Engineer opportunity working with Vue, TypeScript, Pinia on modern product teams.",
     "seniority": [
-      "lead",
-      "staff"
-    ],
-    "skills": [
-      {
-        "name": "Vue",
-        "level": "required"
-      },
-      {
-        "name": "TypeScript",
-        "level": "required"
-      },
-      {
-        "name": "Pinia",
-        "level": "required"
-      }
+      "expert",
+      "expert"
     ],
     "salary": {
       "min": 22000,
@@ -177,7 +177,28 @@
       "Flexible hours",
       "Learning budget"
     ],
-    "publishedAt": "2026-08-26T20:15:00.574Z"
+    "competencies": [
+      {
+        "name": "Vue",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "TypeScript",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "Pinia",
+        "level": 4,
+        "scale": 5
+      }
+    ],
+    "workSchedules": [
+      "freelance"
+    ],
+    "createdAt": "2026-08-26T20:15:00.574Z",
+    "applicationDeadline": "2026-09-18T20:15:00.574Z"
   },
   {
     "id": "job-004",
@@ -189,21 +210,7 @@
     "description": "Senior Frontend Engineer opportunity working with Java, Spring, Kafka on modern product teams.",
     "seniority": [
       "junior",
-      "mid"
-    ],
-    "skills": [
-      {
-        "name": "Java",
-        "level": "required"
-      },
-      {
-        "name": "Spring",
-        "level": "required"
-      },
-      {
-        "name": "Kafka",
-        "level": "required"
-      }
+      "regular"
     ],
     "salary": {
       "min": 24000,
@@ -233,7 +240,28 @@
       "Flexible hours",
       "Learning budget"
     ],
-    "publishedAt": "2026-08-25T20:15:00.574Z"
+    "competencies": [
+      {
+        "name": "Java",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "Spring",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "Kafka",
+        "level": 4,
+        "scale": 5
+      }
+    ],
+    "workSchedules": [
+      "full-time"
+    ],
+    "createdAt": "2026-08-25T20:15:00.574Z",
+    "applicationDeadline": "2026-09-18T20:15:00.574Z"
   },
   {
     "id": "job-005",
@@ -245,21 +273,7 @@
     "description": "Backend Developer opportunity working with .NET, C#, Azure on modern product teams.",
     "seniority": [
       "senior",
-      "lead"
-    ],
-    "skills": [
-      {
-        "name": ".NET",
-        "level": "required"
-      },
-      {
-        "name": "C#",
-        "level": "required"
-      },
-      {
-        "name": "Azure",
-        "level": "required"
-      }
+      "expert"
     ],
     "salary": {
       "min": 26000,
@@ -295,7 +309,28 @@
       "Flexible hours",
       "Learning budget"
     ],
-    "publishedAt": "2026-08-24T20:15:00.574Z"
+    "competencies": [
+      {
+        "name": ".NET",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "C#",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "Azure",
+        "level": 4,
+        "scale": 5
+      }
+    ],
+    "workSchedules": [
+      "part-time"
+    ],
+    "createdAt": "2026-08-24T20:15:00.574Z",
+    "applicationDeadline": "2026-09-18T20:15:00.574Z"
   },
   {
     "id": "job-006",
@@ -306,22 +341,8 @@
     },
     "description": "Full Stack Engineer opportunity working with Python, FastAPI, PostgreSQL on modern product teams.",
     "seniority": [
-      "mid",
+      "regular",
       "senior"
-    ],
-    "skills": [
-      {
-        "name": "Python",
-        "level": "required"
-      },
-      {
-        "name": "FastAPI",
-        "level": "required"
-      },
-      {
-        "name": "PostgreSQL",
-        "level": "required"
-      }
     ],
     "salary": {
       "min": 28000,
@@ -351,7 +372,28 @@
       "Flexible hours",
       "Learning budget"
     ],
-    "publishedAt": "2026-08-23T20:15:00.574Z"
+    "competencies": [
+      {
+        "name": "Python",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "FastAPI",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "PostgreSQL",
+        "level": 4,
+        "scale": 5
+      }
+    ],
+    "workSchedules": [
+      "freelance"
+    ],
+    "createdAt": "2026-08-23T20:15:00.574Z",
+    "applicationDeadline": "2026-09-18T20:15:00.574Z"
   },
   {
     "id": "job-007",
@@ -362,22 +404,8 @@
     },
     "description": "Cloud Engineer opportunity working with TypeScript, Node.js, AWS on modern product teams.",
     "seniority": [
-      "lead",
-      "staff"
-    ],
-    "skills": [
-      {
-        "name": "TypeScript",
-        "level": "required"
-      },
-      {
-        "name": "Node.js",
-        "level": "required"
-      },
-      {
-        "name": "AWS",
-        "level": "required"
-      }
+      "expert",
+      "expert"
     ],
     "salary": {
       "min": 30000,
@@ -407,7 +435,28 @@
       "Flexible hours",
       "Learning budget"
     ],
-    "publishedAt": "2026-08-22T20:15:00.574Z"
+    "competencies": [
+      {
+        "name": "TypeScript",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "Node.js",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "AWS",
+        "level": 4,
+        "scale": 5
+      }
+    ],
+    "workSchedules": [
+      "full-time"
+    ],
+    "createdAt": "2026-08-22T20:15:00.574Z",
+    "applicationDeadline": "2026-09-18T20:15:00.574Z"
   },
   {
     "id": "job-008",
@@ -419,21 +468,7 @@
     "description": "ML Engineer opportunity working with Angular, Nx, AWS on modern product teams.",
     "seniority": [
       "junior",
-      "mid"
-    ],
-    "skills": [
-      {
-        "name": "Angular",
-        "level": "required"
-      },
-      {
-        "name": "Nx",
-        "level": "required"
-      },
-      {
-        "name": "AWS",
-        "level": "required"
-      }
+      "regular"
     ],
     "salary": {
       "min": 32000,
@@ -469,7 +504,28 @@
       "Flexible hours",
       "Learning budget"
     ],
-    "publishedAt": "2026-08-21T20:15:00.574Z"
+    "competencies": [
+      {
+        "name": "Angular",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "Nx",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "AWS",
+        "level": 4,
+        "scale": 5
+      }
+    ],
+    "workSchedules": [
+      "part-time"
+    ],
+    "createdAt": "2026-08-21T20:15:00.574Z",
+    "applicationDeadline": "2026-09-18T20:15:00.574Z"
   },
   {
     "id": "job-009",
@@ -481,21 +537,7 @@
     "description": "Frontend Developer opportunity working with Angular, TypeScript, RxJS on modern product teams.",
     "seniority": [
       "senior",
-      "lead"
-    ],
-    "skills": [
-      {
-        "name": "Angular",
-        "level": "required"
-      },
-      {
-        "name": "TypeScript",
-        "level": "required"
-      },
-      {
-        "name": "RxJS",
-        "level": "required"
-      }
+      "expert"
     ],
     "salary": {
       "min": 18000,
@@ -531,7 +573,28 @@
       "Flexible hours",
       "Learning budget"
     ],
-    "publishedAt": "2026-08-20T20:15:00.574Z"
+    "competencies": [
+      {
+        "name": "Angular",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "TypeScript",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "RxJS",
+        "level": 4,
+        "scale": 5
+      }
+    ],
+    "workSchedules": [
+      "freelance"
+    ],
+    "createdAt": "2026-08-20T20:15:00.574Z",
+    "applicationDeadline": "2026-09-18T20:15:00.574Z"
   },
   {
     "id": "job-010",
@@ -542,22 +605,8 @@
     },
     "description": "Frontend Tech Lead opportunity working with React, TypeScript, Next.js on modern product teams.",
     "seniority": [
-      "mid",
+      "regular",
       "senior"
-    ],
-    "skills": [
-      {
-        "name": "React",
-        "level": "required"
-      },
-      {
-        "name": "TypeScript",
-        "level": "required"
-      },
-      {
-        "name": "Next.js",
-        "level": "required"
-      }
     ],
     "salary": {
       "min": 20000,
@@ -587,7 +636,28 @@
       "Flexible hours",
       "Learning budget"
     ],
-    "publishedAt": "2026-08-19T20:15:00.574Z"
+    "competencies": [
+      {
+        "name": "React",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "TypeScript",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "Next.js",
+        "level": 4,
+        "scale": 5
+      }
+    ],
+    "workSchedules": [
+      "full-time"
+    ],
+    "createdAt": "2026-08-19T20:15:00.574Z",
+    "applicationDeadline": "2026-09-18T20:15:00.574Z"
   },
   {
     "id": "job-011",
@@ -598,22 +668,8 @@
     },
     "description": "Staff Frontend Engineer opportunity working with Vue, TypeScript, Pinia on modern product teams.",
     "seniority": [
-      "lead",
-      "staff"
-    ],
-    "skills": [
-      {
-        "name": "Vue",
-        "level": "required"
-      },
-      {
-        "name": "TypeScript",
-        "level": "required"
-      },
-      {
-        "name": "Pinia",
-        "level": "required"
-      }
+      "expert",
+      "expert"
     ],
     "salary": {
       "min": 22000,
@@ -643,7 +699,28 @@
       "Flexible hours",
       "Learning budget"
     ],
-    "publishedAt": "2026-08-18T20:15:00.574Z"
+    "competencies": [
+      {
+        "name": "Vue",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "TypeScript",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "Pinia",
+        "level": 4,
+        "scale": 5
+      }
+    ],
+    "workSchedules": [
+      "part-time"
+    ],
+    "createdAt": "2026-08-18T20:15:00.574Z",
+    "applicationDeadline": "2026-09-18T20:15:00.574Z"
   },
   {
     "id": "job-012",
@@ -655,21 +732,7 @@
     "description": "Senior Frontend Engineer opportunity working with Java, Spring, Kafka on modern product teams.",
     "seniority": [
       "junior",
-      "mid"
-    ],
-    "skills": [
-      {
-        "name": "Java",
-        "level": "required"
-      },
-      {
-        "name": "Spring",
-        "level": "required"
-      },
-      {
-        "name": "Kafka",
-        "level": "required"
-      }
+      "regular"
     ],
     "salary": {
       "min": 24000,
@@ -705,7 +768,28 @@
       "Flexible hours",
       "Learning budget"
     ],
-    "publishedAt": "2026-08-17T20:15:00.574Z"
+    "competencies": [
+      {
+        "name": "Java",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "Spring",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "Kafka",
+        "level": 4,
+        "scale": 5
+      }
+    ],
+    "workSchedules": [
+      "freelance"
+    ],
+    "createdAt": "2026-08-17T20:15:00.574Z",
+    "applicationDeadline": "2026-09-18T20:15:00.574Z"
   },
   {
     "id": "job-013",
@@ -717,21 +801,7 @@
     "description": "Backend Developer opportunity working with .NET, C#, Azure on modern product teams.",
     "seniority": [
       "senior",
-      "lead"
-    ],
-    "skills": [
-      {
-        "name": ".NET",
-        "level": "required"
-      },
-      {
-        "name": "C#",
-        "level": "required"
-      },
-      {
-        "name": "Azure",
-        "level": "required"
-      }
+      "expert"
     ],
     "salary": {
       "min": 26000,
@@ -761,7 +831,28 @@
       "Flexible hours",
       "Learning budget"
     ],
-    "publishedAt": "2026-08-16T20:15:00.574Z"
+    "competencies": [
+      {
+        "name": ".NET",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "C#",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "Azure",
+        "level": 4,
+        "scale": 5
+      }
+    ],
+    "workSchedules": [
+      "full-time"
+    ],
+    "createdAt": "2026-08-16T20:15:00.574Z",
+    "applicationDeadline": "2026-09-18T20:15:00.574Z"
   },
   {
     "id": "job-014",
@@ -772,22 +863,8 @@
     },
     "description": "Full Stack Engineer opportunity working with Python, FastAPI, PostgreSQL on modern product teams.",
     "seniority": [
-      "mid",
+      "regular",
       "senior"
-    ],
-    "skills": [
-      {
-        "name": "Python",
-        "level": "required"
-      },
-      {
-        "name": "FastAPI",
-        "level": "required"
-      },
-      {
-        "name": "PostgreSQL",
-        "level": "required"
-      }
     ],
     "salary": {
       "min": 28000,
@@ -823,7 +900,28 @@
       "Flexible hours",
       "Learning budget"
     ],
-    "publishedAt": "2026-08-15T20:15:00.574Z"
+    "competencies": [
+      {
+        "name": "Python",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "FastAPI",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "PostgreSQL",
+        "level": 4,
+        "scale": 5
+      }
+    ],
+    "workSchedules": [
+      "part-time"
+    ],
+    "createdAt": "2026-08-15T20:15:00.574Z",
+    "applicationDeadline": "2026-09-18T20:15:00.574Z"
   },
   {
     "id": "job-015",
@@ -834,22 +932,8 @@
     },
     "description": "Cloud Engineer opportunity working with TypeScript, Node.js, AWS on modern product teams.",
     "seniority": [
-      "lead",
-      "staff"
-    ],
-    "skills": [
-      {
-        "name": "TypeScript",
-        "level": "required"
-      },
-      {
-        "name": "Node.js",
-        "level": "required"
-      },
-      {
-        "name": "AWS",
-        "level": "required"
-      }
+      "expert",
+      "expert"
     ],
     "salary": {
       "min": 30000,
@@ -885,7 +969,28 @@
       "Flexible hours",
       "Learning budget"
     ],
-    "publishedAt": "2026-08-14T20:15:00.574Z"
+    "competencies": [
+      {
+        "name": "TypeScript",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "Node.js",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "AWS",
+        "level": 4,
+        "scale": 5
+      }
+    ],
+    "workSchedules": [
+      "freelance"
+    ],
+    "createdAt": "2026-08-14T20:15:00.574Z",
+    "applicationDeadline": "2026-09-04T20:15:00.574Z"
   },
   {
     "id": "job-016",
@@ -897,21 +1002,7 @@
     "description": "ML Engineer opportunity working with Angular, Nx, AWS on modern product teams.",
     "seniority": [
       "junior",
-      "mid"
-    ],
-    "skills": [
-      {
-        "name": "Angular",
-        "level": "required"
-      },
-      {
-        "name": "Nx",
-        "level": "required"
-      },
-      {
-        "name": "AWS",
-        "level": "required"
-      }
+      "regular"
     ],
     "salary": {
       "min": 32000,
@@ -941,7 +1032,28 @@
       "Flexible hours",
       "Learning budget"
     ],
-    "publishedAt": "2026-08-13T20:15:00.574Z"
+    "competencies": [
+      {
+        "name": "Angular",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "Nx",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "AWS",
+        "level": 4,
+        "scale": 5
+      }
+    ],
+    "workSchedules": [
+      "full-time"
+    ],
+    "createdAt": "2026-08-13T20:15:00.574Z",
+    "applicationDeadline": "2026-09-04T20:15:00.574Z"
   },
   {
     "id": "job-017",
@@ -953,21 +1065,7 @@
     "description": "Frontend Developer opportunity working with Angular, TypeScript, RxJS on modern product teams.",
     "seniority": [
       "senior",
-      "lead"
-    ],
-    "skills": [
-      {
-        "name": "Angular",
-        "level": "required"
-      },
-      {
-        "name": "TypeScript",
-        "level": "required"
-      },
-      {
-        "name": "RxJS",
-        "level": "required"
-      }
+      "expert"
     ],
     "salary": {
       "min": 18000,
@@ -1003,7 +1101,28 @@
       "Flexible hours",
       "Learning budget"
     ],
-    "publishedAt": "2026-08-12T20:15:00.574Z"
+    "competencies": [
+      {
+        "name": "Angular",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "TypeScript",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "RxJS",
+        "level": 4,
+        "scale": 5
+      }
+    ],
+    "workSchedules": [
+      "part-time"
+    ],
+    "createdAt": "2026-08-12T20:15:00.574Z",
+    "applicationDeadline": "2026-09-04T20:15:00.574Z"
   },
   {
     "id": "job-018",
@@ -1014,22 +1133,8 @@
     },
     "description": "Frontend Tech Lead opportunity working with React, TypeScript, Next.js on modern product teams.",
     "seniority": [
-      "mid",
+      "regular",
       "senior"
-    ],
-    "skills": [
-      {
-        "name": "React",
-        "level": "required"
-      },
-      {
-        "name": "TypeScript",
-        "level": "required"
-      },
-      {
-        "name": "Next.js",
-        "level": "required"
-      }
     ],
     "salary": {
       "min": 20000,
@@ -1065,7 +1170,28 @@
       "Flexible hours",
       "Learning budget"
     ],
-    "publishedAt": "2026-08-11T20:15:00.574Z"
+    "competencies": [
+      {
+        "name": "React",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "TypeScript",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "Next.js",
+        "level": 4,
+        "scale": 5
+      }
+    ],
+    "workSchedules": [
+      "freelance"
+    ],
+    "createdAt": "2026-08-11T20:15:00.574Z",
+    "applicationDeadline": "2026-09-04T20:15:00.574Z"
   },
   {
     "id": "job-019",
@@ -1076,22 +1202,8 @@
     },
     "description": "Staff Frontend Engineer opportunity working with Vue, TypeScript, Pinia on modern product teams.",
     "seniority": [
-      "lead",
-      "staff"
-    ],
-    "skills": [
-      {
-        "name": "Vue",
-        "level": "required"
-      },
-      {
-        "name": "TypeScript",
-        "level": "required"
-      },
-      {
-        "name": "Pinia",
-        "level": "required"
-      }
+      "expert",
+      "expert"
     ],
     "salary": {
       "min": 22000,
@@ -1121,7 +1233,28 @@
       "Flexible hours",
       "Learning budget"
     ],
-    "publishedAt": "2026-08-10T20:15:00.574Z"
+    "competencies": [
+      {
+        "name": "Vue",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "TypeScript",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "Pinia",
+        "level": 4,
+        "scale": 5
+      }
+    ],
+    "workSchedules": [
+      "full-time"
+    ],
+    "createdAt": "2026-08-10T20:15:00.574Z",
+    "applicationDeadline": "2026-09-04T20:15:00.574Z"
   },
   {
     "id": "job-020",
@@ -1133,21 +1266,7 @@
     "description": "Senior Frontend Engineer opportunity working with Java, Spring, Kafka on modern product teams.",
     "seniority": [
       "junior",
-      "mid"
-    ],
-    "skills": [
-      {
-        "name": "Java",
-        "level": "required"
-      },
-      {
-        "name": "Spring",
-        "level": "required"
-      },
-      {
-        "name": "Kafka",
-        "level": "required"
-      }
+      "regular"
     ],
     "salary": {
       "min": 24000,
@@ -1183,7 +1302,28 @@
       "Flexible hours",
       "Learning budget"
     ],
-    "publishedAt": "2026-08-09T20:15:00.574Z"
+    "competencies": [
+      {
+        "name": "Java",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "Spring",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "Kafka",
+        "level": 4,
+        "scale": 5
+      }
+    ],
+    "workSchedules": [
+      "part-time"
+    ],
+    "createdAt": "2026-08-09T20:15:00.574Z",
+    "applicationDeadline": "2026-09-04T20:15:00.574Z"
   },
   {
     "id": "job-021",
@@ -1195,21 +1335,7 @@
     "description": "Backend Developer opportunity working with .NET, C#, Azure on modern product teams.",
     "seniority": [
       "senior",
-      "lead"
-    ],
-    "skills": [
-      {
-        "name": ".NET",
-        "level": "required"
-      },
-      {
-        "name": "C#",
-        "level": "required"
-      },
-      {
-        "name": "Azure",
-        "level": "required"
-      }
+      "expert"
     ],
     "salary": {
       "min": 26000,
@@ -1239,7 +1365,28 @@
       "Flexible hours",
       "Learning budget"
     ],
-    "publishedAt": "2026-08-08T20:15:00.574Z"
+    "competencies": [
+      {
+        "name": ".NET",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "C#",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "Azure",
+        "level": 4,
+        "scale": 5
+      }
+    ],
+    "workSchedules": [
+      "freelance"
+    ],
+    "createdAt": "2026-08-08T20:15:00.574Z",
+    "applicationDeadline": "2026-09-04T20:15:00.574Z"
   },
   {
     "id": "job-022",
@@ -1250,22 +1397,8 @@
     },
     "description": "Full Stack Engineer opportunity working with Python, FastAPI, PostgreSQL on modern product teams.",
     "seniority": [
-      "mid",
+      "regular",
       "senior"
-    ],
-    "skills": [
-      {
-        "name": "Python",
-        "level": "required"
-      },
-      {
-        "name": "FastAPI",
-        "level": "required"
-      },
-      {
-        "name": "PostgreSQL",
-        "level": "required"
-      }
     ],
     "salary": {
       "min": 28000,
@@ -1295,7 +1428,28 @@
       "Flexible hours",
       "Learning budget"
     ],
-    "publishedAt": "2026-08-07T20:15:00.574Z"
+    "competencies": [
+      {
+        "name": "Python",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "FastAPI",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "PostgreSQL",
+        "level": 4,
+        "scale": 5
+      }
+    ],
+    "workSchedules": [
+      "full-time"
+    ],
+    "createdAt": "2026-08-07T20:15:00.574Z",
+    "applicationDeadline": "2026-09-04T20:15:00.574Z"
   },
   {
     "id": "job-023",
@@ -1306,22 +1460,8 @@
     },
     "description": "Cloud Engineer opportunity working with TypeScript, Node.js, AWS on modern product teams.",
     "seniority": [
-      "lead",
-      "staff"
-    ],
-    "skills": [
-      {
-        "name": "TypeScript",
-        "level": "required"
-      },
-      {
-        "name": "Node.js",
-        "level": "required"
-      },
-      {
-        "name": "AWS",
-        "level": "required"
-      }
+      "expert",
+      "expert"
     ],
     "salary": {
       "min": 30000,
@@ -1357,7 +1497,28 @@
       "Flexible hours",
       "Learning budget"
     ],
-    "publishedAt": "2026-08-06T20:15:00.574Z"
+    "competencies": [
+      {
+        "name": "TypeScript",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "Node.js",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "AWS",
+        "level": 4,
+        "scale": 5
+      }
+    ],
+    "workSchedules": [
+      "part-time"
+    ],
+    "createdAt": "2026-08-06T20:15:00.574Z",
+    "applicationDeadline": "2026-09-04T20:15:00.574Z"
   },
   {
     "id": "job-024",
@@ -1369,21 +1530,7 @@
     "description": "ML Engineer opportunity working with Angular, Nx, AWS on modern product teams.",
     "seniority": [
       "junior",
-      "mid"
-    ],
-    "skills": [
-      {
-        "name": "Angular",
-        "level": "required"
-      },
-      {
-        "name": "Nx",
-        "level": "required"
-      },
-      {
-        "name": "AWS",
-        "level": "required"
-      }
+      "regular"
     ],
     "salary": {
       "min": 32000,
@@ -1419,7 +1566,28 @@
       "Flexible hours",
       "Learning budget"
     ],
-    "publishedAt": "2026-08-05T20:15:00.574Z"
+    "competencies": [
+      {
+        "name": "Angular",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "Nx",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "AWS",
+        "level": 4,
+        "scale": 5
+      }
+    ],
+    "workSchedules": [
+      "freelance"
+    ],
+    "createdAt": "2026-08-05T20:15:00.574Z",
+    "applicationDeadline": "2026-09-04T20:15:00.574Z"
   },
   {
     "id": "job-025",
@@ -1431,21 +1599,7 @@
     "description": "Frontend Developer opportunity working with Angular, TypeScript, RxJS on modern product teams.",
     "seniority": [
       "senior",
-      "lead"
-    ],
-    "skills": [
-      {
-        "name": "Angular",
-        "level": "required"
-      },
-      {
-        "name": "TypeScript",
-        "level": "required"
-      },
-      {
-        "name": "RxJS",
-        "level": "required"
-      }
+      "expert"
     ],
     "salary": {
       "min": 18000,
@@ -1475,7 +1629,28 @@
       "Flexible hours",
       "Learning budget"
     ],
-    "publishedAt": "2026-08-04T20:15:00.574Z"
+    "competencies": [
+      {
+        "name": "Angular",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "TypeScript",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "RxJS",
+        "level": 4,
+        "scale": 5
+      }
+    ],
+    "workSchedules": [
+      "full-time"
+    ],
+    "createdAt": "2026-08-04T20:15:00.574Z",
+    "applicationDeadline": "2026-09-04T20:15:00.574Z"
   },
   {
     "id": "job-026",
@@ -1486,22 +1661,8 @@
     },
     "description": "Frontend Tech Lead opportunity working with React, TypeScript, Next.js on modern product teams.",
     "seniority": [
-      "mid",
+      "regular",
       "senior"
-    ],
-    "skills": [
-      {
-        "name": "React",
-        "level": "required"
-      },
-      {
-        "name": "TypeScript",
-        "level": "required"
-      },
-      {
-        "name": "Next.js",
-        "level": "required"
-      }
     ],
     "salary": {
       "min": 20000,
@@ -1531,7 +1692,28 @@
       "Flexible hours",
       "Learning budget"
     ],
-    "publishedAt": "2026-08-03T20:15:00.574Z"
+    "competencies": [
+      {
+        "name": "React",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "TypeScript",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "Next.js",
+        "level": 4,
+        "scale": 5
+      }
+    ],
+    "workSchedules": [
+      "part-time"
+    ],
+    "createdAt": "2026-08-03T20:15:00.574Z",
+    "applicationDeadline": "2026-09-04T20:15:00.574Z"
   },
   {
     "id": "job-027",
@@ -1542,22 +1724,8 @@
     },
     "description": "Staff Frontend Engineer opportunity working with Vue, TypeScript, Pinia on modern product teams.",
     "seniority": [
-      "lead",
-      "staff"
-    ],
-    "skills": [
-      {
-        "name": "Vue",
-        "level": "required"
-      },
-      {
-        "name": "TypeScript",
-        "level": "required"
-      },
-      {
-        "name": "Pinia",
-        "level": "required"
-      }
+      "expert",
+      "expert"
     ],
     "salary": {
       "min": 22000,
@@ -1593,7 +1761,28 @@
       "Flexible hours",
       "Learning budget"
     ],
-    "publishedAt": "2026-08-02T20:15:00.574Z"
+    "competencies": [
+      {
+        "name": "Vue",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "TypeScript",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "Pinia",
+        "level": 4,
+        "scale": 5
+      }
+    ],
+    "workSchedules": [
+      "freelance"
+    ],
+    "createdAt": "2026-08-02T20:15:00.574Z",
+    "applicationDeadline": "2026-09-04T20:15:00.574Z"
   },
   {
     "id": "job-028",
@@ -1605,21 +1794,7 @@
     "description": "Senior Frontend Engineer opportunity working with Java, Spring, Kafka on modern product teams.",
     "seniority": [
       "junior",
-      "mid"
-    ],
-    "skills": [
-      {
-        "name": "Java",
-        "level": "required"
-      },
-      {
-        "name": "Spring",
-        "level": "required"
-      },
-      {
-        "name": "Kafka",
-        "level": "required"
-      }
+      "regular"
     ],
     "salary": {
       "min": 24000,
@@ -1649,7 +1824,28 @@
       "Flexible hours",
       "Learning budget"
     ],
-    "publishedAt": "2026-08-01T20:15:00.574Z"
+    "competencies": [
+      {
+        "name": "Java",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "Spring",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "Kafka",
+        "level": 4,
+        "scale": 5
+      }
+    ],
+    "workSchedules": [
+      "full-time"
+    ],
+    "createdAt": "2026-08-01T20:15:00.574Z",
+    "applicationDeadline": "2026-09-04T20:15:00.574Z"
   },
   {
     "id": "job-029",
@@ -1661,21 +1857,7 @@
     "description": "Backend Developer opportunity working with .NET, C#, Azure on modern product teams.",
     "seniority": [
       "senior",
-      "lead"
-    ],
-    "skills": [
-      {
-        "name": ".NET",
-        "level": "required"
-      },
-      {
-        "name": "C#",
-        "level": "required"
-      },
-      {
-        "name": "Azure",
-        "level": "required"
-      }
+      "expert"
     ],
     "salary": {
       "min": 26000,
@@ -1711,7 +1893,28 @@
       "Flexible hours",
       "Learning budget"
     ],
-    "publishedAt": "2026-07-31T20:15:00.574Z"
+    "competencies": [
+      {
+        "name": ".NET",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "C#",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "Azure",
+        "level": 4,
+        "scale": 5
+      }
+    ],
+    "workSchedules": [
+      "part-time"
+    ],
+    "createdAt": "2026-07-31T20:15:00.574Z",
+    "applicationDeadline": "2026-08-21T20:15:00.574Z"
   },
   {
     "id": "job-030",
@@ -1722,22 +1925,8 @@
     },
     "description": "Full Stack Engineer opportunity working with Python, FastAPI, PostgreSQL on modern product teams.",
     "seniority": [
-      "mid",
+      "regular",
       "senior"
-    ],
-    "skills": [
-      {
-        "name": "Python",
-        "level": "required"
-      },
-      {
-        "name": "FastAPI",
-        "level": "required"
-      },
-      {
-        "name": "PostgreSQL",
-        "level": "required"
-      }
     ],
     "salary": {
       "min": 28000,
@@ -1773,7 +1962,28 @@
       "Flexible hours",
       "Learning budget"
     ],
-    "publishedAt": "2026-07-30T20:15:00.574Z"
+    "competencies": [
+      {
+        "name": "Python",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "FastAPI",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "PostgreSQL",
+        "level": 4,
+        "scale": 5
+      }
+    ],
+    "workSchedules": [
+      "freelance"
+    ],
+    "createdAt": "2026-07-30T20:15:00.574Z",
+    "applicationDeadline": "2026-08-21T20:15:00.574Z"
   },
   {
     "id": "job-031",
@@ -1784,22 +1994,8 @@
     },
     "description": "Cloud Engineer opportunity working with TypeScript, Node.js, AWS on modern product teams.",
     "seniority": [
-      "lead",
-      "staff"
-    ],
-    "skills": [
-      {
-        "name": "TypeScript",
-        "level": "required"
-      },
-      {
-        "name": "Node.js",
-        "level": "required"
-      },
-      {
-        "name": "AWS",
-        "level": "required"
-      }
+      "expert",
+      "expert"
     ],
     "salary": {
       "min": 30000,
@@ -1829,7 +2025,28 @@
       "Flexible hours",
       "Learning budget"
     ],
-    "publishedAt": "2026-07-29T20:15:00.574Z"
+    "competencies": [
+      {
+        "name": "TypeScript",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "Node.js",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "AWS",
+        "level": 4,
+        "scale": 5
+      }
+    ],
+    "workSchedules": [
+      "full-time"
+    ],
+    "createdAt": "2026-07-29T20:15:00.574Z",
+    "applicationDeadline": "2026-08-21T20:15:00.574Z"
   },
   {
     "id": "job-032",
@@ -1841,21 +2058,7 @@
     "description": "ML Engineer opportunity working with Angular, Nx, AWS on modern product teams.",
     "seniority": [
       "junior",
-      "mid"
-    ],
-    "skills": [
-      {
-        "name": "Angular",
-        "level": "required"
-      },
-      {
-        "name": "Nx",
-        "level": "required"
-      },
-      {
-        "name": "AWS",
-        "level": "required"
-      }
+      "regular"
     ],
     "salary": {
       "min": 32000,
@@ -1891,7 +2094,28 @@
       "Flexible hours",
       "Learning budget"
     ],
-    "publishedAt": "2026-07-28T20:15:00.574Z"
+    "competencies": [
+      {
+        "name": "Angular",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "Nx",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "AWS",
+        "level": 4,
+        "scale": 5
+      }
+    ],
+    "workSchedules": [
+      "part-time"
+    ],
+    "createdAt": "2026-07-28T20:15:00.574Z",
+    "applicationDeadline": "2026-08-21T20:15:00.574Z"
   },
   {
     "id": "job-033",
@@ -1903,21 +2127,7 @@
     "description": "Frontend Developer opportunity working with Angular, TypeScript, RxJS on modern product teams.",
     "seniority": [
       "senior",
-      "lead"
-    ],
-    "skills": [
-      {
-        "name": "Angular",
-        "level": "required"
-      },
-      {
-        "name": "TypeScript",
-        "level": "required"
-      },
-      {
-        "name": "RxJS",
-        "level": "required"
-      }
+      "expert"
     ],
     "salary": {
       "min": 18000,
@@ -1953,7 +2163,28 @@
       "Flexible hours",
       "Learning budget"
     ],
-    "publishedAt": "2026-07-27T20:15:00.574Z"
+    "competencies": [
+      {
+        "name": "Angular",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "TypeScript",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "RxJS",
+        "level": 4,
+        "scale": 5
+      }
+    ],
+    "workSchedules": [
+      "freelance"
+    ],
+    "createdAt": "2026-07-27T20:15:00.574Z",
+    "applicationDeadline": "2026-08-21T20:15:00.574Z"
   },
   {
     "id": "job-034",
@@ -1964,22 +2195,8 @@
     },
     "description": "Frontend Tech Lead opportunity working with React, TypeScript, Next.js on modern product teams.",
     "seniority": [
-      "mid",
+      "regular",
       "senior"
-    ],
-    "skills": [
-      {
-        "name": "React",
-        "level": "required"
-      },
-      {
-        "name": "TypeScript",
-        "level": "required"
-      },
-      {
-        "name": "Next.js",
-        "level": "required"
-      }
     ],
     "salary": {
       "min": 20000,
@@ -2009,7 +2226,28 @@
       "Flexible hours",
       "Learning budget"
     ],
-    "publishedAt": "2026-07-26T20:15:00.574Z"
+    "competencies": [
+      {
+        "name": "React",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "TypeScript",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "Next.js",
+        "level": 4,
+        "scale": 5
+      }
+    ],
+    "workSchedules": [
+      "full-time"
+    ],
+    "createdAt": "2026-07-26T20:15:00.574Z",
+    "applicationDeadline": "2026-08-21T20:15:00.574Z"
   },
   {
     "id": "job-035",
@@ -2020,22 +2258,8 @@
     },
     "description": "Staff Frontend Engineer opportunity working with Vue, TypeScript, Pinia on modern product teams.",
     "seniority": [
-      "lead",
-      "staff"
-    ],
-    "skills": [
-      {
-        "name": "Vue",
-        "level": "required"
-      },
-      {
-        "name": "TypeScript",
-        "level": "required"
-      },
-      {
-        "name": "Pinia",
-        "level": "required"
-      }
+      "expert",
+      "expert"
     ],
     "salary": {
       "min": 22000,
@@ -2071,7 +2295,28 @@
       "Flexible hours",
       "Learning budget"
     ],
-    "publishedAt": "2026-07-25T20:15:00.574Z"
+    "competencies": [
+      {
+        "name": "Vue",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "TypeScript",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "Pinia",
+        "level": 4,
+        "scale": 5
+      }
+    ],
+    "workSchedules": [
+      "part-time"
+    ],
+    "createdAt": "2026-07-25T20:15:00.574Z",
+    "applicationDeadline": "2026-08-21T20:15:00.574Z"
   },
   {
     "id": "job-036",
@@ -2083,21 +2328,7 @@
     "description": "Senior Frontend Engineer opportunity working with Java, Spring, Kafka on modern product teams.",
     "seniority": [
       "junior",
-      "mid"
-    ],
-    "skills": [
-      {
-        "name": "Java",
-        "level": "required"
-      },
-      {
-        "name": "Spring",
-        "level": "required"
-      },
-      {
-        "name": "Kafka",
-        "level": "required"
-      }
+      "regular"
     ],
     "salary": {
       "min": 24000,
@@ -2127,7 +2358,28 @@
       "Flexible hours",
       "Learning budget"
     ],
-    "publishedAt": "2026-07-24T20:15:00.574Z"
+    "competencies": [
+      {
+        "name": "Java",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "Spring",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "Kafka",
+        "level": 4,
+        "scale": 5
+      }
+    ],
+    "workSchedules": [
+      "freelance"
+    ],
+    "createdAt": "2026-07-24T20:15:00.574Z",
+    "applicationDeadline": "2026-08-21T20:15:00.574Z"
   },
   {
     "id": "job-037",
@@ -2139,21 +2391,7 @@
     "description": "Backend Developer opportunity working with .NET, C#, Azure on modern product teams.",
     "seniority": [
       "senior",
-      "lead"
-    ],
-    "skills": [
-      {
-        "name": ".NET",
-        "level": "required"
-      },
-      {
-        "name": "C#",
-        "level": "required"
-      },
-      {
-        "name": "Azure",
-        "level": "required"
-      }
+      "expert"
     ],
     "salary": {
       "min": 26000,
@@ -2183,7 +2421,28 @@
       "Flexible hours",
       "Learning budget"
     ],
-    "publishedAt": "2026-07-23T20:15:00.574Z"
+    "competencies": [
+      {
+        "name": ".NET",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "C#",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "Azure",
+        "level": 4,
+        "scale": 5
+      }
+    ],
+    "workSchedules": [
+      "full-time"
+    ],
+    "createdAt": "2026-07-23T20:15:00.574Z",
+    "applicationDeadline": "2026-08-21T20:15:00.574Z"
   },
   {
     "id": "job-038",
@@ -2194,22 +2453,8 @@
     },
     "description": "Full Stack Engineer opportunity working with Python, FastAPI, PostgreSQL on modern product teams.",
     "seniority": [
-      "mid",
+      "regular",
       "senior"
-    ],
-    "skills": [
-      {
-        "name": "Python",
-        "level": "required"
-      },
-      {
-        "name": "FastAPI",
-        "level": "required"
-      },
-      {
-        "name": "PostgreSQL",
-        "level": "required"
-      }
     ],
     "salary": {
       "min": 28000,
@@ -2245,7 +2490,28 @@
       "Flexible hours",
       "Learning budget"
     ],
-    "publishedAt": "2026-07-22T20:15:00.574Z"
+    "competencies": [
+      {
+        "name": "Python",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "FastAPI",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "PostgreSQL",
+        "level": 4,
+        "scale": 5
+      }
+    ],
+    "workSchedules": [
+      "part-time"
+    ],
+    "createdAt": "2026-07-22T20:15:00.574Z",
+    "applicationDeadline": "2026-08-21T20:15:00.574Z"
   },
   {
     "id": "job-039",
@@ -2256,22 +2522,8 @@
     },
     "description": "Cloud Engineer opportunity working with TypeScript, Node.js, AWS on modern product teams.",
     "seniority": [
-      "lead",
-      "staff"
-    ],
-    "skills": [
-      {
-        "name": "TypeScript",
-        "level": "required"
-      },
-      {
-        "name": "Node.js",
-        "level": "required"
-      },
-      {
-        "name": "AWS",
-        "level": "required"
-      }
+      "expert",
+      "expert"
     ],
     "salary": {
       "min": 30000,
@@ -2307,7 +2559,28 @@
       "Flexible hours",
       "Learning budget"
     ],
-    "publishedAt": "2026-07-21T20:15:00.574Z"
+    "competencies": [
+      {
+        "name": "TypeScript",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "Node.js",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "AWS",
+        "level": 4,
+        "scale": 5
+      }
+    ],
+    "workSchedules": [
+      "freelance"
+    ],
+    "createdAt": "2026-07-21T20:15:00.574Z",
+    "applicationDeadline": "2026-08-21T20:15:00.574Z"
   },
   {
     "id": "job-040",
@@ -2319,21 +2592,7 @@
     "description": "ML Engineer opportunity working with Angular, Nx, AWS on modern product teams.",
     "seniority": [
       "junior",
-      "mid"
-    ],
-    "skills": [
-      {
-        "name": "Angular",
-        "level": "required"
-      },
-      {
-        "name": "Nx",
-        "level": "required"
-      },
-      {
-        "name": "AWS",
-        "level": "required"
-      }
+      "regular"
     ],
     "salary": {
       "min": 32000,
@@ -2363,6 +2622,161 @@
       "Flexible hours",
       "Learning budget"
     ],
-    "publishedAt": "2026-07-20T20:15:00.574Z"
+    "competencies": [
+      {
+        "name": "Angular",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "Nx",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "AWS",
+        "level": 4,
+        "scale": 5
+      }
+    ],
+    "workSchedules": [
+      "full-time"
+    ],
+    "createdAt": "2026-07-20T20:15:00.574Z",
+    "applicationDeadline": "2026-08-21T20:15:00.574Z"
+  },
+  {
+    "id": "job-041",
+    "title": "Regional Sales Manager",
+    "company": {
+      "id": "retailplus",
+      "name": "RetailPlus"
+    },
+    "description": "Lead regional sales teams, grow key accounts, and coordinate go-to-market plans across retail partners.",
+    "seniority": [
+      "senior"
+    ],
+    "competencies": [
+      {
+        "name": "Sales",
+        "level": 5,
+        "scale": 5
+      },
+      {
+        "name": "CRM",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "Negotiation",
+        "level": 5,
+        "scale": 5
+      },
+      {
+        "name": "Team leadership",
+        "level": 4,
+        "scale": 5
+      }
+    ],
+    "salary": {
+      "min": 12000,
+      "max": 18000,
+      "currency": "PLN",
+      "period": "month"
+    },
+    "workSchedules": [
+      "full-time"
+    ],
+    "contractTypes": [
+      "uop"
+    ],
+    "workplace": "hybrid",
+    "location": {
+      "city": "Warsaw",
+      "country": "Poland",
+      "latitude": 52.2297,
+      "longitude": 21.0122
+    },
+    "responsibilities": [
+      "Own regional revenue targets",
+      "Coach account executives",
+      "Report pipeline health to leadership"
+    ],
+    "requirements": [
+      "5+ years in B2B sales",
+      "Experience with CRM tooling",
+      "Strong stakeholder management"
+    ],
+    "benefits": [
+      "Company car",
+      "Medical package"
+    ],
+    "createdAt": "2026-08-25T10:00:00.000Z",
+    "applicationDeadline": "2026-09-20T23:59:59.000Z"
+  },
+  {
+    "id": "job-042",
+    "title": "Marketing Specialist",
+    "company": {
+      "id": "brandwave",
+      "name": "BrandWave"
+    },
+    "description": "Plan and execute multi-channel campaigns, analyze performance, and support brand growth initiatives.",
+    "seniority": [
+      "regular"
+    ],
+    "competencies": [
+      {
+        "name": "Content marketing",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "Google Analytics",
+        "level": 3,
+        "scale": 5
+      },
+      {
+        "name": "Social media",
+        "level": 4,
+        "scale": 5
+      },
+      {
+        "name": "Copywriting",
+        "level": 4,
+        "scale": 5
+      }
+    ],
+    "salary": {
+      "min": 7000,
+      "max": 10000,
+      "currency": "PLN",
+      "period": "month"
+    },
+    "workSchedules": [
+      "part-time",
+      "freelance"
+    ],
+    "contractTypes": [
+      "b2b",
+      "uz"
+    ],
+    "workplace": "remote",
+    "responsibilities": [
+      "Prepare campaign briefs",
+      "Coordinate with design and sales",
+      "Track KPIs and optimize channels"
+    ],
+    "requirements": [
+      "2+ years in digital marketing",
+      "Portfolio of campaign work",
+      "Strong written communication"
+    ],
+    "benefits": [
+      "Remote-first",
+      "Training budget"
+    ],
+    "createdAt": "2026-08-20T10:00:00.000Z",
+    "applicationDeadline": "2026-09-10T23:59:59.000Z"
   }
 ]

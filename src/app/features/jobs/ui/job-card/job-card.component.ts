@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { JobOffer } from '../../domain/job.model';
-import { formatSalary, formatWorkplace } from '../../domain/job-formatters';
+import { formatSalary, formatWorkplace, formatSeniority, formatWorkSchedules, formatContractTypes, formatCompetency, formatJobDate, formatApplicationDeadline } from '../../domain/job-formatters';
 
 @Component({
   selector: 'app-job-card',
@@ -16,6 +16,12 @@ export class JobCardComponent {
 
   readonly formatSalary = formatSalary;
   readonly formatWorkplace = formatWorkplace;
+  readonly formatSeniority = formatSeniority;
+  readonly formatWorkSchedules = formatWorkSchedules;
+  readonly formatContractTypes = formatContractTypes;
+  readonly formatCompetency = formatCompetency;
+  readonly formatJobDate = formatJobDate;
+  readonly formatApplicationDeadline = formatApplicationDeadline;
 
   readonly companyInitials = computed(() => {
     const parts = this.job()

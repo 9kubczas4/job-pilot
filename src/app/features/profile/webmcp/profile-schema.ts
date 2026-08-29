@@ -7,7 +7,7 @@ export const PROFILE_SCHEMA_FIELDS = {
   preferredRoles: { type: 'array', items: 'string', required: false },
   preferredSeniorities: {
     type: 'array',
-    allowed: ['junior', 'mid', 'senior', 'lead', 'staff'],
+    allowed: ['junior', 'regular', 'senior', 'expert'],
     required: false,
   },
   preferredLocations: { type: 'array', items: 'string', required: false },

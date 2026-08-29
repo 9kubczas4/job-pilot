@@ -4,7 +4,16 @@ import { AppShellComponent } from '@core/layout/app-shell.component';
 import { AuthService } from '@core/auth/auth.service';
 import { AppLinks } from '@app/app-paths';
 import { SavedJobsStore } from '@features/saved-jobs/state/saved-jobs.store';
-import { formatSalary, formatWorkplace } from '../../domain/job-formatters';
+import {
+  formatSalary,
+  formatWorkplace,
+  formatSeniority,
+  formatWorkSchedules,
+  formatContractTypes,
+  formatCompetency,
+  formatJobDate,
+  formatApplicationDeadline,
+} from '../../domain/job-formatters';
 import { JobOffer } from '../../domain/job.model';
 import { JobDetailsStore } from '../../state/job-details.store';
 
@@ -26,6 +35,12 @@ export class JobDetailsPageComponent implements OnInit {
 
   readonly formatSalary = formatSalary;
   readonly formatWorkplace = formatWorkplace;
+  readonly formatSeniority = formatSeniority;
+  readonly formatWorkSchedules = formatWorkSchedules;
+  readonly formatContractTypes = formatContractTypes;
+  readonly formatCompetency = formatCompetency;
+  readonly formatJobDate = formatJobDate;
+  readonly formatApplicationDeadline = formatApplicationDeadline;
 
   ngOnInit(): void {
     this.savedJobs.loadUserData();

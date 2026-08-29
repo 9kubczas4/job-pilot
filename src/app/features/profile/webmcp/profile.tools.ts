@@ -50,7 +50,7 @@ export function provideProfileRouteWebMcpTools() {
           preferredRoles: { type: 'array', items: { type: 'string' } },
           preferredSeniorities: {
             type: 'array',
-            items: { type: 'string', enum: ['junior', 'mid', 'senior', 'lead', 'staff'] },
+            items: { type: 'string', enum: ['junior', 'regular', 'senior', 'expert'] },
           },
           preferredLocations: { type: 'array', items: { type: 'string' } },
           workplacePreferences: {

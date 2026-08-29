@@ -16,5 +16,5 @@ export interface LocationSearchSuggestion {
   longitude: number;
 }
 
-export const SEARCH_RADIUS_OPTIONS_KM = [10, 25, 50, 100] as const;
+export const SEARCH_RADIUS_OPTIONS_KM = [10, 25, 50, 100, 200] as const;
 export const DEFAULT_SEARCH_RADIUS_KM = 25;

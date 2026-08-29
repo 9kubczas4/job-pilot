@@ -5,7 +5,7 @@ import { AuthService } from '@core/auth/auth.service';
 import { AppLinks } from '@app/app-paths';
 import { JobCardComponent } from '@features/jobs/ui/job-card/job-card.component';
 import { JobSearchStore } from '@features/jobs/state/job-search.store';
-import { SavedJobsStore } from './state/saved-jobs.store';
+import { SavedJobsStore } from '../../state/saved-jobs.store';
 
 @Component({
   selector: 'app-saved-jobs-page',

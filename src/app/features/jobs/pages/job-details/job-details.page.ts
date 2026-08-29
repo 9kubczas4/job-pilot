@@ -4,8 +4,8 @@ import { AppShellComponent } from '@core/layout/app-shell.component';
 import { AuthService } from '@core/auth/auth.service';
 import { AppLinks } from '@app/app-paths';
 import { SavedJobsStore } from '@features/saved-jobs/state/saved-jobs.store';
-import { formatSalary, formatWorkplace } from './domain/job-formatters';
-import { JobDetailsStore } from './state/job-details.store';
+import { formatSalary, formatWorkplace } from '../../domain/job-formatters';
+import { JobDetailsStore } from '../../state/job-details.store';
 
 @Component({
   selector: 'app-job-details-page',

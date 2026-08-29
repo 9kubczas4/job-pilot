@@ -4,7 +4,7 @@
 //   src/app/core/              - infra (auth, firebase, layout)
 //   src/app/shared/            - business-agnostic utilities and UI kit
 //   src/app/features/{name}/
-//     {name}.page.ts           - smart page (feature root)
+//     pages/                   - smart page (route target)
 //     webmcp/                  - agent tools for the feature
 //     ui/                      - presentational components
 //     domain/                  - models and pure business rules
@@ -12,8 +12,9 @@
 //     state/                   - client state (stores)
 
 const boundariesElements = [
-  // --- Core ---
-  { type: 'core', pattern: 'src/app/core', partialMatch: false },
+  // --- Core (most specific first) ---
+  { type: 'core-page', pattern: 'src/app/core/pages', partialMatch: true },
+  { type: 'core', pattern: 'src/app/core', partialMatch: true },
 
   // --- Shared ---
   { type: 'shared', pattern: 'src/app/shared', partialMatch: false },
@@ -24,9 +25,7 @@ const boundariesElements = [
   { type: 'feature-domain', pattern: 'src/app/features/*/domain', partialMatch: false },
   { type: 'feature-data-access', pattern: 'src/app/features/*/data-access', partialMatch: false },
   { type: 'feature-state', pattern: 'src/app/features/*/state', partialMatch: false },
-  { type: 'feature-page', pattern: 'src/app/features/jobs', partialMatch: true },
-  { type: 'feature-page', pattern: 'src/app/features/profile', partialMatch: true },
-  { type: 'feature-page', pattern: 'src/app/features/saved-jobs', partialMatch: true },
+  { type: 'feature-page', pattern: 'src/app/features/*/pages', partialMatch: true },
 ];
 
 const boundariesFiles = [
@@ -136,6 +135,19 @@ const boundariesPolicies = [
     message: 'UI may depend on domain, state, and shared — never data-access directly.',
   },
 
+  // --- Core pages ---
+  {
+    from: { element: { type: 'core-page' } },
+    allow: {
+      to: {
+        element: {
+          types: ['core', 'shared'],
+        },
+      },
+    },
+    message: 'Core pages compose layout and shared utilities.',
+  },
+
   // --- Feature pages (smart components) ---
   {
     from: { element: { type: 'feature-page' } },
@@ -188,7 +200,7 @@ const boundariesPolicies = [
     },
   },
   {
-    from: { element: { types: ['feature-page', 'feature-ui', 'core'] } },
+    from: { element: { types: ['feature-page', 'feature-ui', 'core', 'core-page'] } },
     allow: {
       to: { file: { categories: 'app-routing' } },
     },
@@ -206,7 +218,7 @@ const boundariesPolicies = [
     allow: {
       to: {
         element: {
-          types: ['core', 'feature-page', 'feature-webmcp', 'shared'],
+          types: ['core', 'core-page', 'feature-page', 'feature-webmcp', 'shared'],
         },
       },
     },
@@ -226,6 +238,7 @@ const boundariesPolicies = [
         element: {
           types: [
             'core',
+            'core-page',
             'feature-page',
             'feature-webmcp',
             'feature-ui',

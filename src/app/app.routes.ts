@@ -6,7 +6,7 @@ import { RoutePaths } from '@app/app-paths';
 export const routes: Routes = [
   {
     path: RoutePaths.home,
-    loadComponent: () => import('@core/pages/home.page').then((m) => m.HomePageComponent),
+    loadComponent: () => import('@core/pages/home/home.page').then((m) => m.HomePageComponent),
   },
   {
     path: RoutePaths.jobs,
@@ -14,12 +14,12 @@ export const routes: Routes = [
       {
         path: RoutePaths.home,
         loadComponent: () =>
-          import('@features/jobs/job-search.page').then((m) => m.JobSearchPageComponent),
+          import('@features/jobs/pages/job-search/job-search.page').then((m) => m.JobSearchPageComponent),
       },
       {
         path: RoutePaths.jobId,
         loadComponent: () =>
-          import('@features/jobs/job-details.page').then((m) => m.JobDetailsPageComponent),
+          import('@features/jobs/pages/job-details/job-details.page').then((m) => m.JobDetailsPageComponent),
         providers: [provideJobDetailsWebMcpTools()],
       },
     ],
@@ -27,13 +27,13 @@ export const routes: Routes = [
   {
     path: RoutePaths.profile,
     loadComponent: () =>
-      import('@features/profile/profile.page').then((m) => m.ProfilePageComponent),
+      import('@features/profile/pages/profile/profile.page').then((m) => m.ProfilePageComponent),
     providers: [provideProfileRouteWebMcpTools()],
   },
   {
     path: RoutePaths.saved,
     loadComponent: () =>
-      import('@features/saved-jobs/saved-jobs.page').then((m) => m.SavedJobsPageComponent),
+      import('@features/saved-jobs/pages/saved-jobs/saved-jobs.page').then((m) => m.SavedJobsPageComponent),
   },
   {
     path: RoutePaths.wildcard,

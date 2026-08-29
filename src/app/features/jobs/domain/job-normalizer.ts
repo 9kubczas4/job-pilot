@@ -1,11 +1,6 @@
-import {
-  ContractType,
-  JobOffer,
-  SeniorityLevel,
-  WorkSchedule,
-  WorkplaceMode,
-} from './job.model';
+import { normalizeContractTypes } from './contract-type.utils';
 import { normalizeCompetencies } from './job-competency.utils';
+import { JobOffer, SeniorityLevel, WorkSchedule, WorkplaceMode } from './job.model';
 
 const LEGACY_SENIORITY: Record<string, SeniorityLevel> = {
   mid: 'regular',
@@ -66,10 +61,3 @@ function normalizeWorkSchedules(value: unknown): WorkSchedule[] {
   return ['full-time'];
 }
 
-function normalizeContractTypes(value: unknown): ContractType[] {
-  if (Array.isArray(value) && value.length) {
-    return value as ContractType[];
-  }
-
-  return ['b2b'];
-}

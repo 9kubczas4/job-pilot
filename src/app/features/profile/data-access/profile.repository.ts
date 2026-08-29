@@ -2,6 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { AuthService } from '@core/auth/auth.service';
 import { FIREBASE } from '@core/firebase/firebase.providers';
+import { normalizeContractTypes } from '@features/jobs/domain/contract-type.utils';
 import { CandidateProfile } from '../domain/profile.model';
 import { stripUndefinedDeep } from '../domain/profile.utils';
 
@@ -58,7 +59,7 @@ export class ProfileRepository {
       preferredSeniorities: profile.preferredSeniorities ?? [],
       preferredLocations: profile.preferredLocations ?? [],
       workplacePreferences: profile.workplacePreferences ?? [],
-      contractPreferences: profile.contractPreferences ?? [],
+      contractPreferences: normalizeContractTypes(profile.contractPreferences, []),
     };
   }
 }

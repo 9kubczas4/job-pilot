@@ -21,10 +21,10 @@ const WORK_SCHEDULE_LABELS: Record<WorkSchedule, string> = {
 };
 
 const CONTRACT_LABELS: Record<ContractType, string> = {
-  uop: 'Employment (UoP)',
   b2b: 'B2B',
-  uz: 'Contract of mandate',
+  employment: 'Employment',
   internship: 'Internship',
+  'service-contract': 'Service contract',
 };
 
 const WORKPLACE_LABELS: Record<WorkplaceMode, string> = {
@@ -34,10 +34,10 @@ const WORKPLACE_LABELS: Record<WorkplaceMode, string> = {
 };
 
 const CONTRACT_SHORT_LABELS: Record<ContractType, string> = {
-  uop: 'UoP',
   b2b: 'B2B',
-  uz: 'UoZ',
+  employment: 'Employment',
   internship: 'Internship',
+  'service-contract': 'Service contract',
 };
 
 export function formatTagLabel(value: string): string {

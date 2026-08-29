@@ -34,12 +34,12 @@ const migrated = jobs.map((job, index) => {
     contractTypes:
       job.contractTypes ??
       (index % 4 === 0
-        ? ['uop']
+        ? ['employment']
         : index % 4 === 1
           ? ['b2b']
           : index % 4 === 2
-            ? ['b2b', 'uop']
-            : ['uz']),
+            ? ['b2b', 'employment']
+            : ['service-contract']),
     createdAt,
     applicationDeadline: job.applicationDeadline ?? deadline.toISOString(),
   };
@@ -63,7 +63,7 @@ if (!existingIds.has('job-041')) {
     ],
     salary: { min: 12000, max: 18000, currency: 'PLN', period: 'month' },
     workSchedules: ['full-time'],
-    contractTypes: ['uop'],
+    contractTypes: ['employment'],
     workplace: 'hybrid',
     location: {
       city: 'Warsaw',
@@ -103,7 +103,7 @@ if (!existingIds.has('job-042')) {
     ],
     salary: { min: 7000, max: 10000, currency: 'PLN', period: 'month' },
     workSchedules: ['part-time', 'freelance'],
-    contractTypes: ['b2b', 'uz'],
+    contractTypes: ['b2b', 'service-contract'],
     workplace: 'remote',
     responsibilities: [
       'Prepare campaign briefs',

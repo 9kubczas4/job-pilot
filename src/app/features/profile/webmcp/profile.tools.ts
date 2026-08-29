@@ -73,7 +73,7 @@ export function provideProfileRouteWebMcpTools() {
           },
           contractPreferences: {
             type: 'array',
-            items: { type: 'string', enum: ['b2b', 'uop', 'uz', 'internship'] },
+            items: { type: 'string', enum: ['b2b', 'employment', 'service-contract', 'internship'] },
           },
           salaryExpectation: {
             type: 'object',

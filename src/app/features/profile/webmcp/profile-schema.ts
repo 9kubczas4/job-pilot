@@ -29,7 +29,7 @@ export const PROFILE_SCHEMA_FIELDS = {
   },
   contractPreferences: {
     type: 'array',
-    allowed: ['b2b', 'uop', 'uz', 'internship'],
+    allowed: ['b2b', 'employment', 'service-contract', 'internship'],
     required: false,
   },
   salaryExpectation: {

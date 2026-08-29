@@ -1,5 +1,7 @@
 import { DEFAULT_SEARCH_RADIUS_KM } from '@shared/models/header-search.model';
+import { normalizeContractType } from './contract-type.utils';
 import { JobSearchCriteria } from './search.model';
+import { ContractType } from './job.model';
 
 export function criteriaToQueryParams(criteria: JobSearchCriteria): Record<string, string> {
   const params: Record<string, string> = {};
@@ -63,7 +65,7 @@ export function queryParamsToCriteria(params: Record<string, string | undefined>
     workplace: splitParam(params['workplace']) as JobSearchCriteria['workplace'],
     seniority: splitParam(params['seniority']) as JobSearchCriteria['seniority'],
     skills: splitParam(params['skills']),
-    contracts: splitParam(params['contracts']) as JobSearchCriteria['contracts'],
+    contracts: splitContractParam(params['contracts']),
     workSchedules: splitParam(params['schedules']) as JobSearchCriteria['workSchedules'],
     salaryMin: params['salaryMin'] ? Number(params['salaryMin']) : undefined,
     sort: parseSortParam(params['sort']),
@@ -100,6 +102,19 @@ function splitParam(value: string | undefined): string[] | undefined {
   }
   const items = value.split(',').map((item) => item.trim()).filter(Boolean);
   return items.length ? items : undefined;
+}
+
+function splitContractParam(value: string | undefined): ContractType[] | undefined {
+  const items = splitParam(value);
+  if (!items) {
+    return undefined;
+  }
+
+  const normalized = items
+    .map((item) => normalizeContractType(item))
+    .filter((item): item is ContractType => item !== null);
+
+  return normalized.length ? normalized : undefined;
 }
 
 export function queryParamsEqual(

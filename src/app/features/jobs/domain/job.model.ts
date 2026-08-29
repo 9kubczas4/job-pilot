@@ -1,5 +1,5 @@
 export type SeniorityLevel = 'junior' | 'regular' | 'senior' | 'expert';
-export type ContractType = 'uop' | 'b2b' | 'uz' | 'internship';
+export type ContractType = 'b2b' | 'employment' | 'internship' | 'service-contract';
 export type WorkSchedule = 'full-time' | 'part-time' | 'freelance';
 export type WorkplaceMode = 'remote' | 'hybrid' | 'onsite';
 export type SalaryCurrency = 'PLN' | 'EUR' | 'USD';

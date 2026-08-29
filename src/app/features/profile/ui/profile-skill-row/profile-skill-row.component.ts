@@ -34,29 +34,36 @@ import { CandidateSkill } from '../../domain/profile.model';
     }
 
     .profile-skill {
-      display: flex;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto auto;
       align-items: center;
-      gap: var(--space-3);
-      padding: var(--space-3);
+      gap: var(--space-2);
+      padding: var(--space-2) var(--space-3);
       border: 1px solid var(--color-border);
       border-radius: var(--radius-lg);
       background: var(--color-surface);
     }
 
     .profile-skill__name {
-      min-width: 5rem;
+      min-width: 0;
+      overflow: hidden;
       color: var(--color-text);
       font-size: var(--font-size-sm);
       font-weight: var(--font-weight-semibold);
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .profile-skill__level {
-      flex: 0 0 auto;
+      width: fit-content;
+      max-width: 100%;
     }
 
     .profile-skill .mat-mdc-icon-button {
-      margin-inline-start: auto;
+      flex-shrink: 0;
+      width: 2rem;
+      height: 2rem;
+      padding: 0;
     }
   `,
 })

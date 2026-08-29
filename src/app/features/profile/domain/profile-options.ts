@@ -3,6 +3,7 @@ import { ContractType, SalaryCurrency, SeniorityLevel, WorkplaceMode } from '@fe
 export interface ProfileOption<T extends string = string> {
   value: T;
   label: string;
+  title?: string;
 }
 
 export const SENIORITY_OPTIONS: ProfileOption<SeniorityLevel>[] = [
@@ -19,9 +20,9 @@ export const WORKPLACE_OPTIONS: ProfileOption<WorkplaceMode>[] = [
 ];
 
 export const CONTRACT_OPTIONS: ProfileOption<ContractType>[] = [
-  { value: 'b2b', label: 'B2B' },
-  { value: 'uop', label: 'Employment contract' },
-  { value: 'uz', label: 'Contract of mandate' },
+  { value: 'b2b', label: 'B2B', title: 'Business-to-business contract' },
+  { value: 'employment', label: 'Employment', title: 'Employment contract' },
+  { value: 'service-contract', label: 'Service contract', title: 'Contract for services (mandate)' },
   { value: 'internship', label: 'Internship' },
 ];
 

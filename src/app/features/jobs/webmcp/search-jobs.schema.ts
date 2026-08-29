@@ -42,7 +42,7 @@ export const SEARCH_JOBS_SCHEMA = {
       type: 'array',
       items: {
         type: 'string',
-        enum: ['b2b', 'uop', 'uz', 'internship'],
+        enum: ['b2b', 'employment', 'service-contract', 'internship'],
       },
     },
     salaryMin: { type: 'number', description: 'Minimum salary in the job currency.' },

@@ -14,6 +14,7 @@ import { routes } from './app.routes';
 import { provideFirebase } from '@core/firebase/firebase.providers';
 import { provideSearchJobsWebMcpTool } from '@features/jobs/webmcp/search-jobs.tool';
 import { provideFilterJobsWebMcpTool } from '@features/jobs/webmcp/filter-jobs.tool';
+import { provideGetProfileWebMcpTool } from '@features/profile/webmcp/profile.tools';
 import { SearchCatalogService } from '@features/jobs/data-access/search-catalog.service';
 import { environment } from '@environments/environment';
 import { isGoogleMapsConfigured, loadGoogleMapsApi } from '@shared/map/google-maps-loader';
@@ -29,6 +30,7 @@ export const appConfig: ApplicationConfig = {
     provideExperimentalWebMcpForms(),
     provideSearchJobsWebMcpTool(),
     provideFilterJobsWebMcpTool(),
+    provideGetProfileWebMcpTool(),
     provideRouter(routes, withExperimentalAutoCleanupInjectors()),
     { provide: GOOGLE_MAPS_API_KEY, useValue: environment.googleMapsApiKey },
     {

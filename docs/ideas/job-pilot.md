@@ -40,7 +40,7 @@ The agent runs in **Codex** (ChatGPT desktop in-app browser). The app exposes to
 |------|--------------|--------|
 | `search_jobs` | Global (`app.config.ts`) | `features/jobs/webmcp/search-jobs.tool.ts` |
 | `filter_jobs` | Global (`app.config.ts`) | `features/jobs/webmcp/filter-jobs.tool.ts` |
-| `get_profile` | Route `/profile` | `features/profile/webmcp/profile.tools.ts` |
+| `get_profile` | Global (`app.config.ts`) | `features/profile/webmcp/profile.tools.ts` |
 | `update_profile` | Route `/profile` | `features/profile/pages/profile/profile.page.ts` (Signal Form implicit tool) |
 | `get_job` | Route `/jobs/:id` | `features/jobs/webmcp/job-details.tools.ts` |
 | `save_job` | Route `/jobs/:id` | `features/jobs/webmcp/job-details.tools.ts` |

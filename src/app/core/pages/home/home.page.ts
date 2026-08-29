@@ -72,8 +72,9 @@ export class HomePageComponent {
     },
     {
       name: 'get_profile',
-      scope: '/profile',
-      description: 'Read the signed-in candidate profile.',
+      scope: 'global',
+      description:
+        'Read headline, experience, skills, and preferences for the signed-in user from any page.',
     },
     {
       name: 'update_profile',

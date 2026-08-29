@@ -28,7 +28,7 @@ The agent never receives a `userId` in tool payloads. Identity comes from Fireba
 |------|-------|---------|
 | `search_jobs` | global | Set query/location and sync job board UI |
 | `filter_jobs` | global | Set filters/sort and sync job board UI |
-| `get_profile` | `/profile` | Read signed-in candidate profile |
+| `get_profile` | global | Read candidate profile (headline, experience, skills, preferences) |
 | `update_profile` | `/profile` | Update candidate profile (Signal Form implicit tool) |
 | `get_job` | `/jobs/:id` | Read a single job offer |
 | `save_job` | `/jobs/:id` | Add a job to favourites |

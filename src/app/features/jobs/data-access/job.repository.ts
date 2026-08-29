@@ -9,7 +9,7 @@ import {
 import { firstValueFrom } from 'rxjs';
 import { FIREBASE } from '@core/firebase/firebase.providers';
 import { JobOffer } from '../domain/job.model';
-import { environment } from '../../../../environments/environment';
+import { environment } from '@environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class JobRepository {

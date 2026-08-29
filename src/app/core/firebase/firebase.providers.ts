@@ -3,7 +3,7 @@ import { FirebaseApp, initializeApp } from 'firebase/app';
 import { Auth, getAuth } from 'firebase/auth';
 import { Firestore, getFirestore } from 'firebase/firestore';
 import { FirebaseStorage, getStorage } from 'firebase/storage';
-import { environment } from '../../../environments/environment';
+import { environment } from '@environments/environment';
 
 export interface FirebaseServices {
   app: FirebaseApp;

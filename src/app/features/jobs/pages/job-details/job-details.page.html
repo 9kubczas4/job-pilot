@@ -1,198 +1,207 @@
 <app-shell>
   @if (store.job(); as currentJob) {
     <div class="job-details">
-      <a [routerLink]="links.jobs" class="job-details__back">
-        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
-          <path d="M15 6 L9 12 L15 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
-        </svg>
-        Back to search
-      </a>
+      <div class="landing__aurora" aria-hidden="true">
+        <span class="landing__orb landing__orb--1"></span>
+        <span class="landing__orb landing__orb--2"></span>
+        <span class="landing__orb landing__orb--3"></span>
+        <span class="landing__grid"></span>
+      </div>
 
-      <div class="job-details__layout">
-        <main class="job-details__main">
-          <header class="job-details__hero">
-            <button
-              type="button"
-              class="job-details__save"
-              [class.is-saved]="savedJobs.isSaved(currentJob.id)"
-              [attr.aria-label]="savedJobs.isSaved(currentJob.id) ? 'Remove from saved jobs' : 'Save job'"
-              [attr.aria-pressed]="savedJobs.isSaved(currentJob.id)"
-              (click)="toggleSave()"
-            >
-              <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
-                <path
-                  d="M12 20.5s-6.7-4.35-9-8.05C1.5 9.65 2.6 6.5 5.4 5.4c1.75-.7 3.7-.15 4.95 1.25L12 8.5l1.65-1.85c1.25-1.4 3.2-1.95 4.95-1.25 2.8 1.1 3.9 4.25 2.4 7.05-2.3 3.7-9 8.05-9 8.05Z"
-                  [attr.fill]="savedJobs.isSaved(currentJob.id) ? 'currentColor' : 'none'"
-                  stroke="currentColor"
-                  stroke-width="1.75"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </button>
+      <div class="container">
+        <a [routerLink]="links.jobs" class="link-back">
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+            <path d="M15 6 L9 12 L15 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+          </svg>
+          Back to search
+        </a>
 
-            <div class="job-details__identity">
-              <span class="job-details__logo" aria-hidden="true">{{ companyInitials(currentJob) }}</span>
+        <div class="job-details__layout">
+          <main class="job-details__main">
+            <header class="job-details__hero glass-card">
+              <button
+                type="button"
+                class="job-details__save"
+                [class.is-saved]="savedJobs.isSaved(currentJob.id)"
+                [attr.aria-label]="savedJobs.isSaved(currentJob.id) ? 'Remove from saved jobs' : 'Save job'"
+                [attr.aria-pressed]="savedJobs.isSaved(currentJob.id)"
+                (click)="toggleSave()"
+              >
+                <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                  <path
+                    d="M12 20.5s-6.7-4.35-9-8.05C1.5 9.65 2.6 6.5 5.4 5.4c1.75-.7 3.7-.15 4.95 1.25L12 8.5l1.65-1.85c1.25-1.4 3.2-1.95 4.95-1.25 2.8 1.1 3.9 4.25 2.4 7.05-2.3 3.7-9 8.05-9 8.05Z"
+                    [attr.fill]="savedJobs.isSaved(currentJob.id) ? 'currentColor' : 'none'"
+                    stroke="currentColor"
+                    stroke-width="1.75"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </button>
 
-              <div class="job-details__intro">
-                <p class="job-details__company">{{ currentJob.company.name }}</p>
-                <h1 class="job-details__title">{{ currentJob.title }}</h1>
-                <p class="job-details__location">{{ formatWorkplace(currentJob) }}</p>
+              <div class="job-details__identity">
+                <span class="job-details__logo" aria-hidden="true">{{ companyInitials(currentJob) }}</span>
+
+                <div class="job-details__intro">
+                  <p class="job-details__company">{{ currentJob.company.name }}</p>
+                  <h1 class="job-details__title">{{ currentJob.title }}</h1>
+                  <p class="job-details__location">{{ formatWorkplace(currentJob) }}</p>
+                </div>
               </div>
+
+              @if (formatSalary(currentJob); as salary) {
+                <p class="job-details__salary job-details__salary--inline">{{ salary }}</p>
+              }
+
+              <div class="job-details__facts">
+                <span class="job-details__fact">{{ formatWorkplaceMode(currentJob.workplace) }}</span>
+                @for (level of currentJob.seniority; track level) {
+                  <span class="job-details__fact">{{ formatSeniorityLevel(level) }}</span>
+                }
+                @for (schedule of currentJob.workSchedules; track schedule) {
+                  <span class="job-details__fact">{{ formatWorkSchedule(schedule) }}</span>
+                }
+                @for (contract of currentJob.contractTypes; track contract) {
+                  <span class="job-details__fact">{{ formatContractType(contract) }}</span>
+                }
+              </div>
+            </header>
+
+            <section class="job-details__section glass-card">
+              <h2 class="job-details__section-title">About the role</h2>
+              <p class="job-details__copy">{{ currentJob.description }}</p>
+
+              @if (currentJob.competencies.length) {
+                <div class="job-details__competencies">
+                  <span class="job-details__competencies-label">Competencies</span>
+                  <div class="job-details__competency-list">
+                    @for (competency of currentJob.competencies; track competency.name) {
+                      <app-competency-chip [competency]="competency" />
+                    }
+                  </div>
+                </div>
+              }
+            </section>
+
+            <div class="job-details__columns">
+              <section class="job-details__section glass-card">
+                <h2 class="job-details__section-title">Requirements</h2>
+                <ul class="job-details__list">
+                  @for (item of currentJob.requirements; track item) {
+                    <li>{{ item }}</li>
+                  }
+                </ul>
+              </section>
+
+              <section class="job-details__section glass-card">
+                <h2 class="job-details__section-title">Responsibilities</h2>
+                <ul class="job-details__list">
+                  @for (item of currentJob.responsibilities; track item) {
+                    <li>{{ item }}</li>
+                  }
+                </ul>
+              </section>
             </div>
 
-            @if (formatSalary(currentJob); as salary) {
-              <p class="job-details__salary job-details__salary--inline">{{ salary }}</p>
+            @if (currentJob.benefits?.length) {
+              <section class="job-details__section glass-card">
+                <h2 class="job-details__section-title">Benefits</h2>
+                <ul class="job-details__list job-details__list--benefits">
+                  @for (item of currentJob.benefits; track item) {
+                    <li>{{ item }}</li>
+                  }
+                </ul>
+              </section>
             }
 
-            <div class="job-details__facts">
-              <span class="job-details__fact">{{ formatWorkplaceMode(currentJob.workplace) }}</span>
-              @for (level of currentJob.seniority; track level) {
-                <span class="job-details__fact">{{ formatSeniorityLevel(level) }}</span>
-              }
-              @for (schedule of currentJob.workSchedules; track schedule) {
-                <span class="job-details__fact">{{ formatWorkSchedule(schedule) }}</span>
-              }
-              @for (contract of currentJob.contractTypes; track contract) {
-                <span class="job-details__fact">{{ formatContractType(contract) }}</span>
-              }
-            </div>
-          </header>
+            @if (currentJob.niceToHave?.length) {
+              <section class="job-details__section glass-card">
+                <h2 class="job-details__section-title">Nice to have</h2>
+                <ul class="job-details__list job-details__list--muted">
+                  @for (item of currentJob.niceToHave; track item) {
+                    <li>{{ item }}</li>
+                  }
+                </ul>
+              </section>
+            }
 
-          <section class="job-details__section">
-            <h2 class="job-details__section-title">About the role</h2>
-            <p class="job-details__copy">{{ currentJob.description }}</p>
-
-            @if (currentJob.competencies.length) {
-              <div class="job-details__competencies">
-                <span class="job-details__competencies-label">Competencies</span>
-                <div class="job-details__competency-list">
-                  @for (competency of currentJob.competencies; track competency.name) {
-                    <app-competency-chip [competency]="competency" />
+            @if (store.similarJobs().length) {
+              <section class="job-details__section job-details__section--similar glass-card">
+                <h2 class="job-details__section-title">Similar offers</h2>
+                <div class="job-details__similar-list">
+                  @for (job of store.similarJobs(); track job.id) {
+                    <a [routerLink]="links.job(job.id)" class="link-plain">
+                      <app-job-card [job]="job" [compact]="true" [showSaveButton]="false" />
+                    </a>
                   }
                 </div>
-              </div>
+              </section>
             }
-          </section>
+          </main>
 
-          <div class="job-details__columns">
-            <section class="job-details__section">
-              <h2 class="job-details__section-title">Requirements</h2>
-              <ul class="job-details__list">
-                @for (item of currentJob.requirements; track item) {
-                  <li>{{ item }}</li>
-                }
-              </ul>
-            </section>
+          <aside class="job-details__aside">
+            <div class="job-details__action-card glass-card">
+              @if (formatSalary(currentJob); as salary) {
+                <p class="job-details__action-salary">{{ salary }}</p>
+              }
 
-            <section class="job-details__section">
-              <h2 class="job-details__section-title">Responsibilities</h2>
-              <ul class="job-details__list">
-                @for (item of currentJob.responsibilities; track item) {
-                  <li>{{ item }}</li>
-                }
-              </ul>
-            </section>
-          </div>
-
-          @if (currentJob.benefits?.length) {
-            <section class="job-details__section">
-              <h2 class="job-details__section-title">Benefits</h2>
-              <ul class="job-details__list job-details__list--benefits">
-                @for (item of currentJob.benefits; track item) {
-                  <li>{{ item }}</li>
-                }
-              </ul>
-            </section>
-          }
-
-          @if (currentJob.niceToHave?.length) {
-            <section class="job-details__section">
-              <h2 class="job-details__section-title">Nice to have</h2>
-              <ul class="job-details__list job-details__list--muted">
-                @for (item of currentJob.niceToHave; track item) {
-                  <li>{{ item }}</li>
-                }
-              </ul>
-            </section>
-          }
-
-          @if (store.similarJobs().length) {
-            <section class="job-details__section job-details__section--similar">
-              <h2 class="job-details__section-title">Similar offers</h2>
-              <div class="job-details__similar-list">
-                @for (job of store.similarJobs(); track job.id) {
-                  <a [routerLink]="links.job(job.id)" class="link-plain">
-                    <app-job-card [job]="job" [compact]="true" [showSaveButton]="false" />
-                  </a>
-                }
-              </div>
-            </section>
-          }
-        </main>
-
-        <aside class="job-details__aside">
-          <div class="job-details__action-card">
-            @if (formatSalary(currentJob); as salary) {
-              <p class="job-details__action-salary">{{ salary }}</p>
-            }
-
-            <dl class="job-details__meta">
-              <div class="job-details__meta-row">
-                <dt>Posted</dt>
-                <dd>{{ formatJobDate(currentJob.createdAt) }}</dd>
-              </div>
-              @if (currentJob.applicationDeadline; as deadline) {
+              <dl class="job-details__meta">
                 <div class="job-details__meta-row">
-                  <dt>Deadline</dt>
-                  <dd>{{ formatApplicationDeadline(deadline) }}</dd>
+                  <dt>Posted</dt>
+                  <dd>{{ formatJobDate(currentJob.createdAt) }}</dd>
+                </div>
+                @if (currentJob.applicationDeadline; as deadline) {
+                  <div class="job-details__meta-row">
+                    <dt>Deadline</dt>
+                    <dd>{{ formatApplicationDeadline(deadline) }}</dd>
+                  </div>
+                }
+                @if (currentJob.location; as location) {
+                  <div class="job-details__meta-row">
+                    <dt>Location</dt>
+                    <dd>{{ location.city }}, {{ location.country }}</dd>
+                  </div>
+                }
+              </dl>
+
+              @if (savedJobs.isApplied(currentJob.id)) {
+                <div class="status-banner--success" role="status">
+                  <p class="status-banner--success__title">Application submitted</p>
+                  <p class="status-banner--success__copy">The recruiter has received your profile for this role.</p>
                 </div>
               }
-              @if (currentJob.location; as location) {
-                <div class="job-details__meta-row">
-                  <dt>Location</dt>
-                  <dd>{{ location.city }}, {{ location.country }}</dd>
-                </div>
-              }
-            </dl>
 
-            @if (savedJobs.isApplied(currentJob.id)) {
-              <div class="status-banner--success" role="status">
-                <p class="status-banner--success__title">Application submitted</p>
-                <p class="status-banner--success__copy">The recruiter has received your profile for this role.</p>
-              </div>
-            }
-
-            <button
-              type="button"
-              class="btn job-details__apply"
-              [class.btn-primary]="!savedJobs.isApplied(currentJob.id)"
-              [class.btn--applied]="savedJobs.isApplied(currentJob.id)"
-              [disabled]="savedJobs.isApplied(currentJob.id) || applying()"
-              (click)="apply()"
-            >
-              @if (applying()) {
-                Submitting…
-              } @else if (savedJobs.isApplied(currentJob.id)) {
-                Applied
-              } @else {
-                Apply now
-              }
-            </button>
-          </div>
-
-          @if (store.similarJobs().length) {
-            <section class="job-details__similar-aside">
-              <h2 class="job-details__similar-title">Similar offers</h2>
-              <div class="job-details__similar-list">
-                @for (job of store.similarJobs(); track job.id) {
-                  <a [routerLink]="links.job(job.id)" class="link-plain">
-                    <app-job-card [job]="job" [compact]="true" [showSaveButton]="false" />
-                  </a>
+              <button
+                type="button"
+                class="btn job-details__apply"
+                [class.btn-primary]="!savedJobs.isApplied(currentJob.id)"
+                [class.btn--applied]="savedJobs.isApplied(currentJob.id)"
+                [disabled]="savedJobs.isApplied(currentJob.id) || applying()"
+                (click)="apply()"
+              >
+                @if (applying()) {
+                  Submitting…
+                } @else if (savedJobs.isApplied(currentJob.id)) {
+                  Applied
+                } @else {
+                  Apply now
                 }
-              </div>
-            </section>
-          }
-        </aside>
+              </button>
+            </div>
+
+            @if (store.similarJobs().length) {
+              <section class="job-details__similar-aside glass-card">
+                <h2 class="job-details__similar-title">Similar offers</h2>
+                <div class="job-details__similar-list">
+                  @for (job of store.similarJobs(); track job.id) {
+                    <a [routerLink]="links.job(job.id)" class="link-plain">
+                      <app-job-card [job]="job" [compact]="true" [showSaveButton]="false" />
+                    </a>
+                  }
+                </div>
+              </section>
+            }
+          </aside>
+        </div>
       </div>
 
       <footer class="job-details__mobile-bar">
@@ -216,76 +225,61 @@
     </div>
   } @else {
     <div class="job-details job-details--loading" aria-busy="true" aria-label="Loading job details">
-      <div class="job-details__skeleton job-details__skeleton--back" aria-hidden="true"></div>
+      <div class="landing__aurora" aria-hidden="true">
+        <span class="landing__orb landing__orb--1"></span>
+        <span class="landing__orb landing__orb--2"></span>
+        <span class="landing__orb landing__orb--3"></span>
+        <span class="landing__grid"></span>
+      </div>
 
-      <div class="job-details__layout">
-        <main class="job-details__main">
-          <header class="job-details__hero">
-            <div class="job-details__identity">
-              <span class="job-details__skeleton job-details__skeleton--logo"></span>
+      <div class="container">
+        <span class="skeleton job-details__skel-back" aria-hidden="true"></span>
 
-              <div class="job-details__skeleton-group">
-                <span class="job-details__skeleton job-details__skeleton--line job-details__skeleton--short"></span>
-                <span class="job-details__skeleton job-details__skeleton--line job-details__skeleton--title"></span>
-                <span class="job-details__skeleton job-details__skeleton--line job-details__skeleton--medium"></span>
-              </div>
-            </div>
+        <div class="job-details__layout">
+          <main class="job-details__main">
+            <header class="job-details__hero glass-card">
+              <div class="job-details__identity">
+                <span class="skeleton job-details__skel-logo"></span>
 
-            <div class="job-details__skeleton-chips">
-              <span class="job-details__skeleton job-details__skeleton--chip"></span>
-              <span class="job-details__skeleton job-details__skeleton--chip"></span>
-              <span class="job-details__skeleton job-details__skeleton--chip"></span>
-              <span class="job-details__skeleton job-details__skeleton--chip"></span>
-            </div>
-          </header>
-
-          <section class="job-details__section">
-            <span class="job-details__skeleton job-details__skeleton--line job-details__skeleton--heading"></span>
-            <div class="job-details__skeleton-lines">
-              <span class="job-details__skeleton job-details__skeleton--line"></span>
-              <span class="job-details__skeleton job-details__skeleton--line"></span>
-              <span class="job-details__skeleton job-details__skeleton--line job-details__skeleton--medium"></span>
-              <span class="job-details__skeleton job-details__skeleton--line job-details__skeleton--short"></span>
-            </div>
-          </section>
-
-          <div class="job-details__columns">
-            <section class="job-details__section">
-              <span class="job-details__skeleton job-details__skeleton--line job-details__skeleton--heading"></span>
-              <div class="job-details__skeleton-list">
-                @for (row of skeletonListRows; track row) {
-                  <span class="job-details__skeleton job-details__skeleton--list-item"></span>
-                }
-              </div>
-            </section>
-
-            <section class="job-details__section">
-              <span class="job-details__skeleton job-details__skeleton--line job-details__skeleton--heading"></span>
-              <div class="job-details__skeleton-list">
-                @for (row of skeletonListRows; track row) {
-                  <span class="job-details__skeleton job-details__skeleton--list-item"></span>
-                }
-              </div>
-            </section>
-          </div>
-        </main>
-
-        <aside class="job-details__aside">
-          <div class="job-details__action-card">
-            <span class="job-details__skeleton job-details__skeleton--line job-details__skeleton--salary"></span>
-
-            <div class="job-details__skeleton-meta">
-              @for (row of skeletonMetaRows; track row) {
-                <div class="job-details__skeleton-meta-row">
-                  <span class="job-details__skeleton job-details__skeleton--line job-details__skeleton--meta-label"></span>
-                  <span class="job-details__skeleton job-details__skeleton--line job-details__skeleton--meta-value"></span>
+                <div class="job-details__skel-stack job-details__skel-stack--tight">
+                  <span class="skeleton job-details__skel-line job-details__skel-line--xs"></span>
+                  <span class="skeleton job-details__skel-line job-details__skel-line--title"></span>
+                  <span class="skeleton job-details__skel-line job-details__skel-line--md"></span>
                 </div>
+              </div>
+
+              <div class="job-details__skel-chips">
+                <span class="skeleton job-details__skel-chip"></span>
+                <span class="skeleton job-details__skel-chip"></span>
+                <span class="skeleton job-details__skel-chip"></span>
+                <span class="skeleton job-details__skel-chip"></span>
+              </div>
+            </header>
+
+            <section class="job-details__section glass-card">
+              <span class="skeleton job-details__skel-line job-details__skel-line--heading"></span>
+              <div class="job-details__skel-stack">
+                <span class="skeleton job-details__skel-line"></span>
+                <span class="skeleton job-details__skel-line"></span>
+                <span class="skeleton job-details__skel-line job-details__skel-line--md"></span>
+                <span class="skeleton job-details__skel-line job-details__skel-line--xs"></span>
+              </div>
+            </section>
+
+            <div class="job-details__columns">
+              @for (column of skeletonColumns; track column) {
+                <section class="job-details__section glass-card">
+                  <span class="skeleton job-details__skel-line job-details__skel-line--heading"></span>
+                  <div class="job-details__skel-stack job-details__skel-stack--list">
+                    @for (row of skeletonListRows; track row) {
+                      <span class="skeleton job-details__skel-line"></span>
+                    }
+                  </div>
+                </section>
               }
             </div>
-
-            <span class="job-details__skeleton job-details__skeleton--button"></span>
-          </div>
-        </aside>
+          </main>
+        </div>
       </div>
     </div>
   }

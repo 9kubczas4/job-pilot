@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, PLATFORM_ID, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, DestroyRef, effect, inject, PLATFORM_ID, signal, untracked } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
@@ -44,7 +44,7 @@ type AuthPromptAction = 'save' | 'apply';
 export class JobDetailsPageComponent {
   private readonly route = inject(ActivatedRoute);
   private readonly platformId = inject(PLATFORM_ID);
-  private readonly host = inject(ElementRef<HTMLElement>);
+  private readonly destroyRef = inject(DestroyRef);
   readonly store = inject(JobDetailsStore);
   readonly savedJobs = inject(SavedJobsStore);
   readonly auth = inject(AuthService);
@@ -56,7 +56,7 @@ export class JobDetailsPageComponent {
   readonly applying = signal(false);
   readonly links = AppLinks;
   readonly skeletonListRows = [0, 1, 2, 3];
-  readonly skeletonMetaRows = [0, 1, 2];
+  readonly skeletonColumns = [0, 1];
 
   readonly formatSalary = formatSalary;
   readonly formatWorkplace = formatWorkplace;
@@ -83,6 +83,11 @@ export class JobDetailsPageComponent {
   );
 
   constructor() {
+    if (isPlatformBrowser(this.platformId)) {
+      document.body.classList.add('page-scroll-y');
+      this.destroyRef.onDestroy(() => document.body.classList.remove('page-scroll-y'));
+    }
+
     effect(() => {
       if (this.auth.loading() || !this.auth.isAuthenticated()) {
         return;
@@ -97,9 +102,12 @@ export class JobDetailsPageComponent {
         return;
       }
 
-      this.authPromptOpen.set(false);
-      this.applyDialogOpen.set(false);
-      void this.store.loadJob(jobId);
+      untracked(() => {
+        this.authPromptOpen.set(false);
+        this.applyDialogOpen.set(false);
+        void this.store.loadJob(jobId);
+      });
+
       this.scrollToTop();
     });
   }
@@ -202,12 +210,6 @@ export class JobDetailsPageComponent {
 
   private scrollToTop(): void {
     if (!isPlatformBrowser(this.platformId)) {
-      return;
-    }
-
-    const scrollContainer = this.host.nativeElement.closest('app-shell')?.querySelector('.app-main');
-    if (scrollContainer instanceof HTMLElement) {
-      scrollContainer.scrollTo({ top: 0 });
       return;
     }
 

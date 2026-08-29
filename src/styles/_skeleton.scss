@@ -1,0 +1,104 @@
+.skeleton {
+  display: block;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(
+    90deg,
+    var(--color-chip) 0%,
+    rgb(226 232 240 / 0.9) 50%,
+    var(--color-chip) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.2s ease-in-out infinite;
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+  }
+}
+
+.job-details--loading {
+  .job-details__skel-back {
+    width: 8.5rem;
+    height: 2.25rem;
+    margin-bottom: var(--space-4);
+    border-radius: var(--radius-full);
+  }
+
+  .job-details__skel-stack {
+    display: grid;
+    gap: var(--space-3);
+    min-width: 0;
+
+    &--tight {
+      flex: 1;
+      gap: var(--space-2);
+    }
+
+    &--list .job-details__skel-line:nth-child(2) {
+      width: 92%;
+    }
+
+    &--list .job-details__skel-line:nth-child(3) {
+      width: 84%;
+    }
+
+    &--list .job-details__skel-line:nth-child(4) {
+      width: 76%;
+    }
+  }
+
+  .job-details__skel-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .job-details__skel-logo {
+    flex-shrink: 0;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: var(--radius-lg);
+  }
+
+  .job-details__skel-line {
+    height: 0.875rem;
+    width: 100%;
+
+    &--xs {
+      width: 32%;
+    }
+
+    &--md {
+      width: 58%;
+    }
+
+    &--title {
+      height: 1.625rem;
+      width: 78%;
+      border-radius: var(--radius-md);
+    }
+
+    &--heading {
+      width: 38%;
+      height: 1rem;
+      margin-bottom: var(--space-1);
+    }
+  }
+
+  .job-details__skel-chip {
+    width: 5.5rem;
+    height: 1.625rem;
+    border-radius: var(--radius-full);
+  }
+}

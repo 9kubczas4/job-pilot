@@ -46,6 +46,18 @@
     overflow-y: auto;
   }
 
+  body.page-scroll-y .app-shell {
+    height: auto;
+    min-height: 100dvh;
+    overflow: visible;
+  }
+
+  body.page-scroll-y .app-main {
+    flex: none;
+    min-height: auto;
+    overflow: visible;
+  }
+
   .app-shell .app-header__start {
     grid-column: 1;
   }
@@ -103,5 +115,23 @@
   .app-shell .header-action {
     padding: var(--space-2);
     border-radius: var(--radius-md);
+  }
+}
+
+body.page-scroll-y {
+  .app-shell {
+    height: auto;
+    min-height: 100dvh;
+    overflow: visible;
+  }
+
+  .app-main {
+    flex: none;
+    min-height: auto;
+    overflow: visible;
+  }
+
+  .job-details {
+    overflow: visible;
   }
 }

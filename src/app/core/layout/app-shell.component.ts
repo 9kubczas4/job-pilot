@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { AppLinks } from '../../shared/routing/app-paths';
 import { AuthService } from '../auth/auth.service';
 
 @Component({
@@ -9,12 +10,12 @@ import { AuthService } from '../auth/auth.service';
   template: `
     <div class="app-shell">
       <header class="app-header">
-        <a routerLink="/" class="brand">Job Pilot</a>
+        <a [routerLink]="links.home" class="brand">Job Pilot</a>
 
         <nav class="nav">
-          <a routerLink="/jobs" routerLinkActive="active">Jobs</a>
-          <a routerLink="/saved" routerLinkActive="active">Saved</a>
-          <a routerLink="/profile" routerLinkActive="active">Profile</a>
+          <a [routerLink]="links.jobs" routerLinkActive="active">Jobs</a>
+          <a [routerLink]="links.saved" routerLinkActive="active">Saved</a>
+          <a [routerLink]="links.profile" routerLinkActive="active">Profile</a>
         </nav>
 
         <div class="auth">
@@ -94,6 +95,7 @@ import { AuthService } from '../auth/auth.service';
 })
 export class AppShellComponent {
   readonly auth = inject(AuthService);
+  readonly links = AppLinks;
 
   signIn(): void {
     void this.auth.signInWithGoogle();

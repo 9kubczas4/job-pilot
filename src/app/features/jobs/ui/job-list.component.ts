@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { AppLinks } from '../../../shared/routing/app-paths';
 import { JobCardComponent } from './job-card.component';
 import { JobOffer } from '../domain/job.model';
 
@@ -16,7 +17,7 @@ import { JobOffer } from '../domain/job.model';
       } @else {
         @for (job of jobs(); track job.id) {
           <a
-            [routerLink]="['/jobs', job.id]"
+            [routerLink]="jobLink(job.id)"
             class="job-link"
             (click)="selectJob.emit(job.id)"
           >
@@ -65,4 +66,6 @@ export class JobListComponent {
   readonly savedJobIds = input<string[]>([]);
   readonly appliedJobIds = input<string[]>([]);
   readonly selectJob = output<string>();
+
+  readonly jobLink = AppLinks.job;
 }

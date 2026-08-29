@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { AppShellComponent } from '../../core/layout/app-shell.component';
+import { AppShellComponent } from '../layout/app-shell.component';
+import { AppLinks } from '../../shared/routing/app-paths';
 
 @Component({
   selector: 'app-home-page',
@@ -17,8 +18,8 @@ import { AppShellComponent } from '../../core/layout/app-shell.component';
         </p>
 
         <div class="actions">
-          <a routerLink="/jobs" class="btn btn-primary">Browse jobs</a>
-          <a routerLink="/profile" class="btn btn-ghost">Open profile</a>
+          <a [routerLink]="links.jobs" class="btn btn-primary">Browse jobs</a>
+          <a [routerLink]="links.profile" class="btn btn-ghost">Open profile</a>
         </div>
 
         <article class="panel">
@@ -80,4 +81,6 @@ import { AppShellComponent } from '../../core/layout/app-shell.component';
     }
   `,
 })
-export class HomePageComponent {}
+export class HomePageComponent {
+  readonly links = AppLinks;
+}

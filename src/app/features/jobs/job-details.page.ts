@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@ang
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { AppShellComponent } from '../../core/layout/app-shell.component';
 import { AuthService } from '../../core/auth/auth.service';
+import { AppLinks } from '../../shared/routing/app-paths';
 import { SavedJobsStore } from '../saved-jobs/state/saved-jobs.store';
 import { formatSalary, formatWorkplace } from './domain/job-formatters';
 import { JobDetailsStore } from './state/job-details.store';
@@ -14,7 +15,7 @@ import { JobDetailsStore } from './state/job-details.store';
     <app-shell>
       @if (store.job(); as currentJob) {
       <section class="details">
-        <a routerLink="/jobs" class="back">← Back to search</a>
+        <a [routerLink]="links.jobs" class="back">← Back to search</a>
 
         <header>
           <div>
@@ -139,6 +140,7 @@ export class JobDetailsPageComponent implements OnInit {
   readonly auth = inject(AuthService);
 
   readonly toast = signal<string | null>(null);
+  readonly links = AppLinks;
 
   readonly formatSalary = formatSalary;
   readonly formatWorkplace = formatWorkplace;

@@ -13,6 +13,7 @@ import {
   formatCompetency,
   formatJobDate,
   formatApplicationDeadline,
+  formatWorkplaceMode,
 } from '../../domain/job-formatters';
 import { JobOffer } from '../../domain/job.model';
 import { JobDetailsStore } from '../../state/job-details.store';
@@ -41,6 +42,7 @@ export class JobDetailsPageComponent implements OnInit {
   readonly formatCompetency = formatCompetency;
   readonly formatJobDate = formatJobDate;
   readonly formatApplicationDeadline = formatApplicationDeadline;
+  readonly formatWorkplaceMode = formatWorkplaceMode;
 
   ngOnInit(): void {
     this.savedJobs.loadUserData();

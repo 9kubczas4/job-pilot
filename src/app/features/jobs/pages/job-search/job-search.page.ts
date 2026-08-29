@@ -107,6 +107,9 @@ export class JobSearchPageComponent implements OnInit {
 
   constructor() {
     this.headerUi.enableFilters();
+    this.applyRouteCriteria(this.route.snapshot.queryParamMap);
+    this.lastAppliedTrigger.set(this.headerUi.searchApplyTrigger());
+
     this.destroyRef.onDestroy(() => {
       this.headerUi.disableFilters();
       this.headerUi.showHeader();
@@ -220,22 +223,26 @@ export class JobSearchPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParamMap.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((params) => {
-      const routeCriteria = queryParamsToCriteria(
-        Object.fromEntries(params.keys.map((key) => [key, params.get(key) ?? undefined])),
-      );
-
-      if (routeSearchCriteriaEqual(this.store.criteria(), routeCriteria)) {
-        return;
-      }
-
-      this.syncingFromRoute.set(true);
-      this.store.applyRouteSearchCriteria(routeCriteria);
-      syncHeaderFromCriteria(this.headerUi, this.store.criteria());
-      this.syncingFromRoute.set(false);
+      this.applyRouteCriteria(params);
     });
 
     this.store.loadJobs();
     this.savedJobs.loadUserData();
+  }
+
+  private applyRouteCriteria(params: { keys: string[]; get: (key: string) => string | null }): void {
+    const routeCriteria = queryParamsToCriteria(
+      Object.fromEntries(params.keys.map((key) => [key, params.get(key) ?? undefined])),
+    );
+
+    if (routeSearchCriteriaEqual(this.store.criteria(), routeCriteria)) {
+      return;
+    }
+
+    this.syncingFromRoute.set(true);
+    this.store.applyRouteSearchCriteria(routeCriteria);
+    syncHeaderFromCriteria(this.headerUi, this.store.criteria());
+    this.syncingFromRoute.set(false);
   }
 
   onSelectJob(jobId: string): void {

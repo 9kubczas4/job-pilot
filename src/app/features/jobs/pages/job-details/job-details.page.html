@@ -15,7 +15,7 @@
             <p class="details-hero__salary">{{ salary }}</p>
           }
           <div class="details-hero__chips cluster">
-            <span class="chip">{{ currentJob.workplace }}</span>
+            <span class="chip">{{ formatWorkplaceMode(currentJob.workplace) }}</span>
             @for (level of currentJob.seniority; track level) {
               <span class="chip">{{ formatSeniority([level]) }}</span>
             }

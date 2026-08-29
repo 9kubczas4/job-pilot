@@ -4,6 +4,7 @@ import {
   JobOffer,
   SeniorityLevel,
   WorkSchedule,
+  WorkplaceMode,
 } from './job.model';
 
 const SENIORITY_LABELS: Record<SeniorityLevel, string> = {
@@ -26,6 +27,24 @@ const CONTRACT_LABELS: Record<ContractType, string> = {
   internship: 'Internship',
 };
 
+const WORKPLACE_LABELS: Record<WorkplaceMode, string> = {
+  remote: 'remote',
+  hybrid: 'Hybrid',
+  onsite: 'Onsite',
+};
+
+export function formatTagLabel(value: string): string {
+  if (!value) {
+    return value;
+  }
+
+  return value.charAt(0).toUpperCase() + value.slice(1);
+}
+
+export function formatWorkplaceMode(mode: WorkplaceMode): string {
+  return WORKPLACE_LABELS[mode] ?? formatTagLabel(mode);
+}
+
 export function formatSalary(job: JobOffer): string | null {
   if (!job.salary) {
     return null;
@@ -37,7 +56,7 @@ export function formatSalary(job: JobOffer): string | null {
 
 export function formatWorkplace(job: JobOffer): string {
   const city = job.location?.city;
-  const workplace = job.workplace.charAt(0).toUpperCase() + job.workplace.slice(1);
+  const workplace = formatWorkplaceMode(job.workplace);
   return city ? `${city} · ${workplace}` : workplace;
 }
 
@@ -55,7 +74,7 @@ export function formatContractTypes(contracts: ContractType[]): string {
 
 export function formatCompetency(competency: JobCompetency): string {
   const scale = competency.scale ?? 5;
-  return `${competency.name} ${competency.level}/${scale}`;
+  return `${formatTagLabel(competency.name)} ${competency.level}/${scale}`;
 }
 
 export function formatJobDate(isoDate: string): string {

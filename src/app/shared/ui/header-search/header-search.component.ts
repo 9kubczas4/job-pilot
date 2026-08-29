@@ -133,7 +133,7 @@ export class HeaderSearchComponent {
   readonly defaultRadius = DEFAULT_SEARCH_RADIUS_KM;
 
   private scheduleApplySearch(): void {
-    if (!this.isJobsRoute()) {
+    if (!this.isJobsSearchPage()) {
       return;
     }
 
@@ -145,12 +145,18 @@ export class HeaderSearchComponent {
     this.jobPanelOpen.set(false);
     this.locationPanelOpen.set(false);
 
-    if (this.isJobsRoute()) {
+    if (this.isJobsSearchPage()) {
       this.applySearchOnJobsPage();
       return;
     }
 
-    void this.router.navigate(this.links.jobs, { queryParams: this.buildQueryParams() });
+    void this.router
+      .navigate(this.links.jobs, { queryParams: this.buildQueryParams() })
+      .then((success) => {
+        if (success) {
+          this.headerUi.applySearch();
+        }
+      });
   }
 
   private applySearchOnJobsPage(): void {
@@ -188,7 +194,8 @@ export class HeaderSearchComponent {
     }
   }
 
-  private isJobsRoute(): boolean {
-    return this.router.url.startsWith('/jobs');
+  private isJobsSearchPage(): boolean {
+    const path = this.router.url.split('?')[0]?.split('#')[0] ?? '';
+    return path === '/jobs' || path === '/jobs/';
   }
 }

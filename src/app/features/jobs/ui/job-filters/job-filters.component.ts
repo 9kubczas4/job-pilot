@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { HeaderUiStore } from '@shared/state/header-ui.store';
+import { formatWorkplaceMode, formatTagLabel } from '../../domain/job-formatters';
 import { JobSearchStore } from '../../state/job-search.store';
 
 @Component({
@@ -13,6 +14,8 @@ export class JobFiltersComponent {
   readonly store = inject(JobSearchStore);
   private readonly headerUi = inject(HeaderUiStore);
   readonly workplaceOptions = ['remote', 'hybrid', 'onsite'] as const;
+
+  readonly formatWorkplaceMode = formatWorkplaceMode;
 
   isWorkplaceActive(option: (typeof this.workplaceOptions)[number]): boolean {
     return this.store.criteria().workplace?.includes(option) ?? false;
@@ -46,10 +49,10 @@ export class JobFiltersComponent {
       chips.push({ key: 'location', label });
     }
     criteria.workplace?.forEach((mode) =>
-      chips.push({ key: `workplace:${mode}`, label: mode }),
+      chips.push({ key: `workplace:${mode}`, label: formatWorkplaceMode(mode) }),
     );
     criteria.skills?.forEach((skill) =>
-      chips.push({ key: `skill:${skill}`, label: skill }),
+      chips.push({ key: `skill:${skill}`, label: formatTagLabel(skill) }),
     );
 
     return chips;

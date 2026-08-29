@@ -119,6 +119,15 @@ export class JobSearchPageComponent implements OnInit {
 
   readonly sortOptions = computed(() => availableSortOptions(this.store.criteria()));
   readonly currentSort = computed(() => this.store.criteria().sort ?? DEFAULT_JOB_SORT);
+  readonly searchMapCenter = computed(() => {
+    const { locationLat, locationLng } = this.store.criteria();
+    if (locationLat == null || locationLng == null) {
+      return null;
+    }
+
+    return { lat: locationLat, lng: locationLng };
+  });
+  readonly searchMapRadiusKm = computed(() => this.store.criteria().radiusKm);
 
   constructor() {
     this.headerUi.enableFilters();

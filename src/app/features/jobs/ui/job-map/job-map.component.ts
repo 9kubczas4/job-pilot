@@ -16,6 +16,7 @@ import { ResolvedTheme, ThemeService } from '@core/theme/theme.service';
 import { GOOGLE_MAPS_API_KEY } from '@shared/map/google-maps-config';
 import { isGoogleMapsConfigured } from '@shared/map/google-maps-loader';
 import { createClusterMarkerIcon, createJobMarkerIcon } from '@shared/map/google-maps-markers';
+import { DEFAULT_SEARCH_RADIUS_KM } from '@shared/models/header-search.model';
 import { getMapStylesForTheme } from '@shared/map/google-maps-styles';
 import { JobLocation, JobOffer } from '../../domain/job.model';
 import {
@@ -43,6 +44,8 @@ export class JobMapComponent {
 
   readonly jobs = input<JobOffer[]>([]);
   readonly selectedJobId = input<string | null>(null);
+  readonly searchCenter = input<google.maps.LatLngLiteral | null>(null);
+  readonly searchRadiusKm = input<number | undefined>(undefined);
   readonly showPopups = input(true);
   readonly selectJob = output<string>();
 
@@ -58,6 +61,7 @@ export class JobMapComponent {
   private readonly markers = new globalThis.Map<string, google.maps.Marker>();
   private readonly markerJobs = new globalThis.Map<google.maps.Marker, JobOffer>();
   private lastJobIdsKey = '';
+  private lastSearchCenterKey = '';
   private mapAnimationFrame: number | null = null;
 
   constructor() {
@@ -72,7 +76,9 @@ export class JobMapComponent {
     effect(() => {
       const jobs = this.jobs();
       const selectedId = this.selectedJobId();
-      this.syncMap(jobs, selectedId);
+      const searchCenter = this.searchCenter();
+      const searchRadiusKm = this.searchRadiusKm();
+      this.syncMap(jobs, selectedId, searchCenter, searchRadiusKm);
     });
   }
 
@@ -100,7 +106,12 @@ export class JobMapComponent {
           }),
       },
     });
-    this.syncMap(this.jobs(), this.selectedJobId());
+    this.syncMap(
+      this.jobs(),
+      this.selectedJobId(),
+      this.searchCenter(),
+      this.searchRadiusKm(),
+    );
   }
 
   onAuthFailure(): void {
@@ -115,7 +126,12 @@ export class JobMapComponent {
     google.maps.event.trigger(this.map, 'resize');
   }
 
-  private syncMap(jobs: JobOffer[], selectedId: string | null): void {
+  private syncMap(
+    jobs: JobOffer[],
+    selectedId: string | null,
+    searchCenter: google.maps.LatLngLiteral | null,
+    searchRadiusKm: number | undefined,
+  ): void {
     if (!this.map || !this.clusterer) {
       return;
     }
@@ -125,13 +141,29 @@ export class JobMapComponent {
       .map((job) => job.id)
       .sort()
       .join(',');
+    const searchCenterKey = searchCenter
+      ? `${searchCenter.lat},${searchCenter.lng},${searchRadiusKm ?? DEFAULT_SEARCH_RADIUS_KM}`
+      : '';
 
-    if (jobIdsKey !== this.lastJobIdsKey) {
+    const jobsChanged = jobIdsKey !== this.lastJobIdsKey;
+    const searchCenterChanged = searchCenterKey !== this.lastSearchCenterKey;
+
+    if (jobsChanged) {
       this.lastJobIdsKey = jobIdsKey;
       this.rebuildMarkers(locatedJobs, selectedId);
-      this.fitBoundsToJobs(locatedJobs);
     } else {
       this.updateMarkerSelection(selectedId);
+    }
+
+    if (jobsChanged || searchCenterChanged) {
+      this.lastSearchCenterKey = searchCenterKey;
+      if (locatedJobs.length) {
+        this.fitBoundsToJobs(locatedJobs);
+      } else if (searchCenter) {
+        this.focusOnSearchCenter(searchCenter, searchRadiusKm);
+      } else {
+        this.resetToDefaultView();
+      }
     }
   }
 
@@ -191,7 +223,13 @@ export class JobMapComponent {
 
     this.closeJobPopup();
     this.lastJobIdsKey = '';
-    this.syncMap(this.jobs(), this.selectedJobId());
+    this.lastSearchCenterKey = '';
+    this.syncMap(
+      this.jobs(),
+      this.selectedJobId(),
+      this.searchCenter(),
+      this.searchRadiusKm(),
+    );
   }
 
   private getMapThemeOptions(theme: ResolvedTheme): Pick<
@@ -225,6 +263,33 @@ export class JobMapComponent {
       { lat: location.latitude, lng: location.longitude },
       MARKER_FOCUS_ZOOM,
     );
+  }
+
+  private focusOnSearchCenter(
+    center: google.maps.LatLngLiteral,
+    radiusKm: number | undefined,
+  ): void {
+    this.animateTo(center, this.zoomForRadiusKm(radiusKm ?? DEFAULT_SEARCH_RADIUS_KM));
+  }
+
+  private resetToDefaultView(): void {
+    this.animateTo(DEFAULT_CENTER, DEFAULT_ZOOM);
+  }
+
+  private zoomForRadiusKm(radiusKm: number): number {
+    if (radiusKm <= 10) {
+      return 12;
+    }
+    if (radiusKm <= 25) {
+      return 11;
+    }
+    if (radiusKm <= 50) {
+      return 10;
+    }
+    if (radiusKm <= 100) {
+      return 9;
+    }
+    return 8;
   }
 
   private focusOnCluster(cluster: Cluster): void {

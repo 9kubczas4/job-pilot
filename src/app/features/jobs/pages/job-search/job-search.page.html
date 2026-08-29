@@ -60,6 +60,8 @@
         #jobMap
         [jobs]="store.jobs()"
         [selectedJobId]="store.selectedJobId()"
+        [searchCenter]="searchMapCenter()"
+        [searchRadiusKm]="searchMapRadiusKm()"
         [showPopups]="false"
         (selectJob)="onMobileSelectJob($event)"
       />
@@ -126,6 +128,8 @@
           <app-job-map
             [jobs]="store.jobs()"
             [selectedJobId]="store.selectedJobId()"
+            [searchCenter]="searchMapCenter()"
+            [searchRadiusKm]="searchMapRadiusKm()"
             (selectJob)="onSelectJob($event)"
           />
         </div>

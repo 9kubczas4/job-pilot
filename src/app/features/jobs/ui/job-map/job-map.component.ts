@@ -16,7 +16,7 @@ import { ResolvedTheme, ThemeService } from '@core/theme/theme.service';
 import { GOOGLE_MAPS_API_KEY } from '@shared/map/google-maps-config';
 import { isGoogleMapsConfigured } from '@shared/map/google-maps-loader';
 import { createClusterMarkerIcon, createJobMarkerIcon } from '@shared/map/google-maps-markers';
-import { getMapStylesForTheme, LIGHT_MAP_STYLES } from '@shared/map/google-maps-styles';
+import { getMapStylesForTheme } from '@shared/map/google-maps-styles';
 import { JobLocation, JobOffer } from '../../domain/job.model';
 import {
   buildJobMapPopupHtml,
@@ -49,17 +49,7 @@ export class JobMapComponent {
 
   readonly mapsConfigured = isGoogleMapsConfigured(this.apiKey);
   readonly mapError = signal(false);
-
-  readonly mapOptions: google.maps.MapOptions = {
-    center: DEFAULT_CENTER,
-    zoom: DEFAULT_ZOOM,
-    styles: LIGHT_MAP_STYLES,
-    clickableIcons: false,
-    mapTypeControl: false,
-    streetViewControl: false,
-    fullscreenControl: true,
-    zoomControl: true,
-  };
+  readonly mapOptions: google.maps.MapOptions;
 
   private mapTheme: ResolvedTheme = 'light';
 
@@ -73,6 +63,7 @@ export class JobMapComponent {
 
   constructor() {
     this.mapTheme = this.theme.resolved();
+    this.mapOptions = this.buildMapOptions(this.mapTheme);
 
     effect(() => {
       const theme = this.theme.resolved();
@@ -402,5 +393,22 @@ export class JobMapComponent {
         this.map?.setZoom(11);
       }
     });
+  }
+
+  private buildMapOptions(theme: ResolvedTheme): google.maps.MapOptions {
+    const isDark = theme === 'dark';
+
+    return {
+      center: DEFAULT_CENTER,
+      zoom: DEFAULT_ZOOM,
+      styles: getMapStylesForTheme(theme),
+      colorScheme: isDark ? 'DARK' : 'LIGHT',
+      backgroundColor: isDark ? '#0a1020' : '#f1f5f9',
+      clickableIcons: false,
+      mapTypeControl: false,
+      streetViewControl: false,
+      fullscreenControl: true,
+      zoomControl: true,
+    };
   }
 }

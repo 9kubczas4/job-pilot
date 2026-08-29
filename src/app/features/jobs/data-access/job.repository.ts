@@ -1,4 +1,5 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { isPlatformServer } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import {
   collection,
@@ -16,10 +17,15 @@ import { environment } from '@environments/environment';
 export class JobRepository {
   private readonly firebase = inject(FIREBASE);
   private readonly http = inject(HttpClient);
+  private readonly platformId = inject(PLATFORM_ID);
 
   private seedCache: JobOffer[] | null = null;
 
   async getAllJobs(): Promise<JobOffer[]> {
+    if (isPlatformServer(this.platformId)) {
+      return this.loadSeedJobs(true);
+    }
+
     try {
       const snapshot = await getDocs(collection(this.firebase.firestore, 'jobs'));
       if (!snapshot.empty) {
@@ -35,6 +41,11 @@ export class JobRepository {
   }
 
   async getJobById(jobId: string): Promise<JobOffer | null> {
+    if (isPlatformServer(this.platformId)) {
+      const jobs = await this.loadSeedJobs(true);
+      return jobs.find((job) => job.id === jobId) ?? null;
+    }
+
     try {
       const snapshot = await getDoc(doc(this.firebase.firestore, 'jobs', jobId));
       if (snapshot.exists()) {
@@ -48,19 +59,19 @@ export class JobRepository {
     return jobs.find((job) => job.id === jobId) ?? null;
   }
 
-  private async loadSeedJobs(): Promise<JobOffer[]> {
+  private async loadSeedJobs(force = false): Promise<JobOffer[]> {
     if (this.seedCache) {
       return this.seedCache;
     }
 
-    if (environment.useSeedFallback) {
-      const raw = await firstValueFrom(this.http.get<Record<string, unknown>[]>('/assets/seed/jobs.json'));
-      this.seedCache = raw.map((job) =>
-        normalizeJobOffer(job as Record<string, unknown> & { id: string }),
-      );
-      return this.seedCache;
+    if (!force && !environment.useSeedFallback) {
+      return [];
     }
 
-    return [];
+    const raw = await firstValueFrom(this.http.get<Record<string, unknown>[]>('/assets/seed/jobs.json'));
+    this.seedCache = raw.map((job) =>
+      normalizeJobOffer(job as Record<string, unknown> & { id: string }),
+    );
+    return this.seedCache;
   }
 }

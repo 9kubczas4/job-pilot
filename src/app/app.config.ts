@@ -1,6 +1,13 @@
-import { ApplicationConfig, APP_INITIALIZER, provideBrowserGlobalErrorListeners } from '@angular/core';
+import {
+  ApplicationConfig,
+  APP_INITIALIZER,
+  inject,
+  PLATFORM_ID,
+  provideBrowserGlobalErrorListeners,
+} from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideRouter, withExperimentalAutoCleanupInjectors } from '@angular/router';
 import { provideExperimentalWebMcpForms } from '@angular/forms/signals';
 import { routes } from './app.routes';
@@ -9,12 +16,13 @@ import { provideSearchJobsWebMcpTool } from '@features/jobs/webmcp/search-jobs.t
 import { environment } from '@environments/environment';
 import { isGoogleMapsConfigured, loadGoogleMapsApi } from '@shared/map/google-maps-loader';
 import { GOOGLE_MAPS_API_KEY } from '@shared/map/google-maps-config';
+import { provideClientHydration, withHttpTransferCacheOptions } from '@angular/platform-browser';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideAnimationsAsync(),
-    provideHttpClient(),
+    provideHttpClient(withFetch()),
     provideFirebase(),
     provideExperimentalWebMcpForms(),
     provideSearchJobsWebMcpTool(),
@@ -23,12 +31,22 @@ export const appConfig: ApplicationConfig = {
     {
       provide: APP_INITIALIZER,
       multi: true,
-      useFactory: () => () => {
-        if (!isGoogleMapsConfigured(environment.googleMapsApiKey)) {
-          return Promise.resolve();
-        }
-        return loadGoogleMapsApi(environment.googleMapsApiKey);
+      useFactory: () => {
+        const platformId = inject(PLATFORM_ID);
+
+        return () => {
+          if (!isPlatformBrowser(platformId) || !isGoogleMapsConfigured(environment.googleMapsApiKey)) {
+            return Promise.resolve();
+          }
+
+          return loadGoogleMapsApi(environment.googleMapsApiKey);
+        };
       },
     },
+    provideClientHydration(
+      withHttpTransferCacheOptions({
+        includeRequestsWithAuthHeaders: true,
+      }),
+    ),
   ],
 };

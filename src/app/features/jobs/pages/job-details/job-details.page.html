@@ -215,8 +215,78 @@
       </footer>
     </div>
   } @else {
-    <div class="job-details job-details--loading">
-      <p class="state">Loading job details…</p>
+    <div class="job-details job-details--loading" aria-busy="true" aria-label="Loading job details">
+      <div class="job-details__skeleton job-details__skeleton--back" aria-hidden="true"></div>
+
+      <div class="job-details__layout">
+        <main class="job-details__main">
+          <header class="job-details__hero">
+            <div class="job-details__identity">
+              <span class="job-details__skeleton job-details__skeleton--logo"></span>
+
+              <div class="job-details__skeleton-group">
+                <span class="job-details__skeleton job-details__skeleton--line job-details__skeleton--short"></span>
+                <span class="job-details__skeleton job-details__skeleton--line job-details__skeleton--title"></span>
+                <span class="job-details__skeleton job-details__skeleton--line job-details__skeleton--medium"></span>
+              </div>
+            </div>
+
+            <div class="job-details__skeleton-chips">
+              <span class="job-details__skeleton job-details__skeleton--chip"></span>
+              <span class="job-details__skeleton job-details__skeleton--chip"></span>
+              <span class="job-details__skeleton job-details__skeleton--chip"></span>
+              <span class="job-details__skeleton job-details__skeleton--chip"></span>
+            </div>
+          </header>
+
+          <section class="job-details__section">
+            <span class="job-details__skeleton job-details__skeleton--line job-details__skeleton--heading"></span>
+            <div class="job-details__skeleton-lines">
+              <span class="job-details__skeleton job-details__skeleton--line"></span>
+              <span class="job-details__skeleton job-details__skeleton--line"></span>
+              <span class="job-details__skeleton job-details__skeleton--line job-details__skeleton--medium"></span>
+              <span class="job-details__skeleton job-details__skeleton--line job-details__skeleton--short"></span>
+            </div>
+          </section>
+
+          <div class="job-details__columns">
+            <section class="job-details__section">
+              <span class="job-details__skeleton job-details__skeleton--line job-details__skeleton--heading"></span>
+              <div class="job-details__skeleton-list">
+                @for (row of skeletonListRows; track row) {
+                  <span class="job-details__skeleton job-details__skeleton--list-item"></span>
+                }
+              </div>
+            </section>
+
+            <section class="job-details__section">
+              <span class="job-details__skeleton job-details__skeleton--line job-details__skeleton--heading"></span>
+              <div class="job-details__skeleton-list">
+                @for (row of skeletonListRows; track row) {
+                  <span class="job-details__skeleton job-details__skeleton--list-item"></span>
+                }
+              </div>
+            </section>
+          </div>
+        </main>
+
+        <aside class="job-details__aside">
+          <div class="job-details__action-card">
+            <span class="job-details__skeleton job-details__skeleton--line job-details__skeleton--salary"></span>
+
+            <div class="job-details__skeleton-meta">
+              @for (row of skeletonMetaRows; track row) {
+                <div class="job-details__skeleton-meta-row">
+                  <span class="job-details__skeleton job-details__skeleton--line job-details__skeleton--meta-label"></span>
+                  <span class="job-details__skeleton job-details__skeleton--line job-details__skeleton--meta-value"></span>
+                </div>
+              }
+            </div>
+
+            <span class="job-details__skeleton job-details__skeleton--button"></span>
+          </div>
+        </aside>
+      </div>
     </div>
   }
 </app-shell>

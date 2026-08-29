@@ -292,6 +292,156 @@
   backdrop-filter: blur(12px);
 }
 
+@mixin job-details-skeleton-block {
+  display: block;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(
+    90deg,
+    var(--color-chip) 0%,
+    rgb(226 232 240 / 0.9) 50%,
+    var(--color-chip) 100%
+  );
+  background-size: 200% 100%;
+  animation: job-details-shimmer 1.2s ease-in-out infinite;
+}
+
+.job-details--loading {
+  .job-details__skeleton {
+    @include job-details-skeleton-block;
+  }
+}
+
+.job-details__skeleton--back {
+  width: 8.5rem;
+  height: 2.25rem;
+  margin-bottom: var(--space-4);
+  border-radius: var(--radius-full);
+}
+
+.job-details__skeleton-group,
+.job-details__skeleton-lines,
+.job-details__skeleton-list,
+.job-details__skeleton-meta {
+  display: grid;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.job-details__skeleton-group {
+  flex: 1;
+  gap: var(--space-2);
+}
+
+.job-details__skeleton-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.job-details__skeleton--logo {
+  flex-shrink: 0;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: var(--radius-lg);
+}
+
+.job-details__skeleton--line {
+  height: 0.875rem;
+  width: 100%;
+}
+
+.job-details__skeleton--short {
+  width: 32%;
+}
+
+.job-details__skeleton--medium {
+  width: 58%;
+}
+
+.job-details__skeleton--title {
+  height: 1.625rem;
+  width: 78%;
+  border-radius: var(--radius-md);
+}
+
+.job-details__skeleton--heading {
+  width: 38%;
+  height: 1rem;
+  margin-bottom: var(--space-1);
+}
+
+.job-details__skeleton--chip {
+  width: 5.5rem;
+  height: 1.625rem;
+  border-radius: var(--radius-full);
+}
+
+.job-details__skeleton--list-item {
+  height: 0.875rem;
+  width: 100%;
+
+  &:nth-child(2) {
+    width: 92%;
+  }
+
+  &:nth-child(3) {
+    width: 84%;
+  }
+
+  &:nth-child(4) {
+    width: 76%;
+  }
+}
+
+.job-details__skeleton-list {
+  gap: var(--space-3);
+  padding-inline-start: var(--space-2);
+}
+
+.job-details__skeleton-meta-row {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.job-details__skeleton--meta-label {
+  width: 28%;
+  height: 0.75rem;
+}
+
+.job-details__skeleton--meta-value {
+  width: 62%;
+  height: 0.875rem;
+}
+
+.job-details__skeleton--salary {
+  width: 55%;
+  height: 1.5rem;
+  border-radius: var(--radius-md);
+}
+
+.job-details__skeleton--button {
+  height: 2.75rem;
+  width: 100%;
+  margin-top: var(--space-1);
+  border-radius: var(--radius-md);
+}
+
+@keyframes job-details-shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .job-details--loading .job-details__skeleton {
+    animation: none;
+  }
+}
+
 @media (min-width: 56rem) {
   .job-details {
     --pad: var(--space-6);

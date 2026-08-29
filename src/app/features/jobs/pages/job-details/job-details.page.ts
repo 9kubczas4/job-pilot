@@ -55,6 +55,8 @@ export class JobDetailsPageComponent {
   readonly applyDialogOpen = signal(false);
   readonly applying = signal(false);
   readonly links = AppLinks;
+  readonly skeletonListRows = [0, 1, 2, 3];
+  readonly skeletonMetaRows = [0, 1, 2];
 
   readonly formatSalary = formatSalary;
   readonly formatWorkplace = formatWorkplace;

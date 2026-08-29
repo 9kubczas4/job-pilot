@@ -19,7 +19,7 @@ const boundariesElements = [
   { type: 'shared', pattern: 'src/app/shared', partialMatch: false },
 
   // --- Features (most specific first) ---
-  { type: 'feature-ui', pattern: 'src/app/features/*/ui', partialMatch: false },
+  { type: 'feature-ui', pattern: 'src/app/features/*/ui', partialMatch: true },
   { type: 'feature-domain', pattern: 'src/app/features/*/domain', partialMatch: false },
   { type: 'feature-data-access', pattern: 'src/app/features/*/data-access', partialMatch: false },
   { type: 'feature-state', pattern: 'src/app/features/*/state', partialMatch: false },

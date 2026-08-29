@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { AppLinks } from '../../../shared/routing/app-paths';
-import { JobCardComponent } from './job-card.component';
-import { JobOffer } from '../domain/job.model';
+import { AppLinks } from '../../../../shared/routing/app-paths';
+import { JobCardComponent } from '../job-card/job-card.component';
+import { JobOffer } from '../../domain/job.model';
 
 @Component({
   selector: 'app-job-list',

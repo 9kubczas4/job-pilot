@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import * as maplibregl from 'maplibre-gl';
 import { Map as MaplibreMap, Marker } from 'maplibre-gl';
-import { JobOffer } from '../domain/job.model';
+import { JobOffer } from '../../domain/job.model';
 
 @Component({
   selector: 'app-job-map',

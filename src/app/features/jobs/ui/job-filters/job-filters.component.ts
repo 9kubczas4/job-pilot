@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { JobSearchStore } from '../state/job-search.store';
+import { JobSearchStore } from '../../state/job-search.store';
 
 @Component({
   selector: 'app-job-filters',

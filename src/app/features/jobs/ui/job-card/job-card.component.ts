@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { JobOffer } from '../domain/job.model';
-import { formatSalary, formatWorkplace } from '../domain/job-formatters';
+import { JobOffer } from '../../domain/job.model';
+import { formatSalary, formatWorkplace } from '../../domain/job-formatters';
 
 @Component({
   selector: 'app-job-card',

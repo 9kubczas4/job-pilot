@@ -10,9 +10,9 @@ import { AppShellComponent } from '../../core/layout/app-shell.component';
 import { SavedJobsStore } from '../saved-jobs/state/saved-jobs.store';
 import { criteriaToQueryParams, queryParamsToCriteria } from './domain/search-url.utils';
 import { JobSearchStore } from './state/job-search.store';
-import { JobFiltersComponent } from './ui/job-filters.component';
-import { JobListComponent } from './ui/job-list.component';
-import { JobMapComponent } from './ui/job-map.component';
+import { JobFiltersComponent } from './ui/job-filters/job-filters.component';
+import { JobListComponent } from './ui/job-list/job-list.component';
+import { JobMapComponent } from './ui/job-map/job-map.component';
 
 @Component({
   selector: 'app-job-search-page',

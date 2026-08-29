@@ -3,7 +3,7 @@ import { RouterLink } from '@angular/router';
 import { AppShellComponent } from '../../core/layout/app-shell.component';
 import { AuthService } from '../../core/auth/auth.service';
 import { AppLinks } from '../../shared/routing/app-paths';
-import { JobCardComponent } from '../jobs/ui/job-card.component';
+import { JobCardComponent } from '../jobs/ui/job-card/job-card.component';
 import { JobSearchStore } from '../jobs/state/job-search.store';
 import { SavedJobsStore } from './state/saved-jobs.store';
 

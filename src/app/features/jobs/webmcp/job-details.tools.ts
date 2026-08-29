@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { provideExperimentalWebMcpTools } from '@angular/core';
 import { SavedJobsStore } from '@features/saved-jobs/state/saved-jobs.store';
-import { toolJson, toolText } from '@shared/webmcp/tool-response';
+import { toolJson, toolText } from '@core/webmcp/tool-response';
 import { JobRepository } from '../data-access/job.repository';
 
 const GET_JOB_SCHEMA = {

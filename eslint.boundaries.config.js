@@ -167,7 +167,7 @@ const boundariesPolicies = [
     allow: {
       to: {
         element: {
-          types: ['feature-state', 'feature-domain', 'feature-data-access', 'shared'],
+          types: ['feature-state', 'feature-domain', 'feature-data-access', 'shared', 'core'],
         },
       },
     },

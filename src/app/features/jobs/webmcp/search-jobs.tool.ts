@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { provideExperimentalWebMcpTools } from '@angular/core';
-import { toolJson } from '@shared/webmcp/tool-response';
+import { toolJson } from '@core/webmcp/tool-response';
 import { JobSearchWebMcpService } from './job-search-webmcp.service';
 import { JobSearchInput } from './webmcp-criteria.utils';
 import { SEARCH_JOBS_SCHEMA } from './search-jobs.schema';

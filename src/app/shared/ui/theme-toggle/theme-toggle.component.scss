@@ -1,5 +1,6 @@
 :host {
   display: inline-flex;
+  flex-shrink: 0;
 }
 
 .theme-toggle {
@@ -16,6 +17,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  box-sizing: border-box;
   width: 2rem;
   height: 2rem;
   border: 0;
@@ -38,4 +40,24 @@
     color: var(--color-primary);
     box-shadow: var(--shadow-sm);
   }
+
+  &--solo {
+    width: var(--control-size-md);
+    height: var(--control-size-md);
+    flex-shrink: 0;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface-elevated);
+    color: var(--color-text-muted);
+
+    &:hover {
+      border-color: var(--color-border-strong);
+      color: var(--color-text);
+      background: var(--color-surface);
+    }
+  }
+}
+
+:host(.theme-toggle-host--compact) .theme-toggle__button--solo {
+  width: var(--control-size-md);
+  height: var(--control-size-md);
 }

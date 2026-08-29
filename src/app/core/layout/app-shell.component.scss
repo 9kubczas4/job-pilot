@@ -1,4 +1,5 @@
 @use 'styles/button';
+@use 'styles/app-shell-mobile' as shell-mobile;
 
 :host {
   display: block;
@@ -57,6 +58,7 @@
 .app-header__actions {
   display: flex;
   align-items: center;
+  flex-shrink: 0;
   gap: var(--space-4);
 }
 
@@ -135,6 +137,7 @@
 .app-auth {
   display: flex;
   align-items: center;
+  flex-shrink: 0;
   gap: var(--space-2);
 }
 
@@ -144,4 +147,120 @@
   min-height: 0;
   flex-direction: column;
   overflow-y: auto;
+}
+
+@media (max-width: 64rem) {
+  .app-header {
+    position: fixed;
+    inset-inline: 0;
+    top: 0;
+    z-index: var(--z-mobile-toolbar);
+    gap: var(--space-2);
+    min-height: calc(var(--control-height-md) + var(--space-2) + env(safe-area-inset-top, 0px));
+    overflow: visible;
+    background: var(--glass-surface-shell);
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    @include shell-mobile.mobile-toolbar-padding;
+  }
+
+  .app-header__search {
+    display: none;
+  }
+
+  .app-header__jobs-link {
+    display: flex;
+    grid-column: 2;
+    min-width: 0;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: var(--control-height-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    padding: 0 var(--space-3);
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    text-decoration: none;
+
+    span {
+      overflow: hidden;
+      min-width: 0;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  .app-main {
+    flex: 1;
+    margin-top: var(--app-header-size);
+    min-height: 0;
+    overflow-y: auto;
+  }
+
+  .app-header__start {
+    grid-column: 1;
+  }
+
+  .app-header__actions {
+    grid-column: 3;
+    justify-self: end;
+    flex-shrink: 0;
+    overflow: visible;
+    gap: var(--space-1);
+  }
+
+  .app-auth {
+    gap: var(--space-1);
+  }
+
+  .app-nav {
+    display: none;
+  }
+}
+
+@media (max-width: 48rem) {
+  .app-header__jobs-link span {
+    position: absolute;
+    overflow: hidden;
+    clip-path: inset(50%);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .app-header__jobs-link {
+    justify-content: center;
+    width: var(--control-size-md);
+    padding: 0;
+  }
+}
+
+@media (max-width: 30rem) {
+  .app-header {
+    gap: var(--space-1);
+    padding-inline:
+      max(var(--space-2), env(safe-area-inset-left, 0px))
+      max(var(--space-2), env(safe-area-inset-right, 0px));
+  }
+
+  .header-action span:not(.header-action__badge) {
+    position: absolute;
+    overflow: hidden;
+    clip-path: inset(50%);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .header-action {
+    padding: var(--space-2);
+    border-radius: var(--radius-md);
+  }
 }

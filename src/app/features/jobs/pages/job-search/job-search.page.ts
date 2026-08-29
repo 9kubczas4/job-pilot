@@ -24,6 +24,8 @@ import { AuthPromptDialogComponent } from '@shared/ui/auth-prompt-dialog/auth-pr
 import { AppLogoComponent } from '@shared/ui/app-logo/app-logo.component';
 import { FilterDrawerComponent } from '@shared/ui/filter-drawer/filter-drawer.component';
 import { HeaderSearchComponent } from '@shared/ui/header-search/header-search.component';
+import { ToastHostComponent } from '@shared/ui/toast/toast-host.component';
+import { ToastService } from '@shared/ui/toast/toast.service';
 import { SavedJobsStore } from '@features/saved-jobs/state/saved-jobs.store';
 import {
   buildCityCentersFromJobs,
@@ -67,6 +69,7 @@ const MOBILE_LAYOUT_QUERY = '(max-width: 60rem)';
     JobListComponent,
     JobMapComponent,
     JobResultsSheetComponent,
+    ToastHostComponent,
   ],
   templateUrl: './job-search.page.html',
   styleUrl: './job-search.page.scss',
@@ -77,6 +80,7 @@ export class JobSearchPageComponent implements OnInit {
   readonly headerUi = inject(HeaderUiStore);
   readonly auth = inject(AuthService);
   readonly links = AppLinks;
+  private readonly toast = inject(ToastService);
 
   readonly isMobileLayout = signal(false);
   readonly searchExpanded = signal(false);
@@ -276,10 +280,12 @@ export class JobSearchPageComponent implements OnInit {
 
     if (this.savedJobs.isSaved(jobId)) {
       void this.savedJobs.unsaveJob(jobId);
+      this.toast.show('Removed from saved jobs.');
       return;
     }
 
     void this.savedJobs.saveJob(jobId);
+    this.toast.show('Job saved.');
   }
 
   closeAuthPrompt(): void {
@@ -300,6 +306,7 @@ export class JobSearchPageComponent implements OnInit {
       }
 
       await this.savedJobs.saveJob(jobId);
+      this.toast.show('Job saved.');
     } catch {
       // User dismissed the provider popup or sign-in failed.
     }

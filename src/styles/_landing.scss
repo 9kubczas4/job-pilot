@@ -125,15 +125,18 @@
   font-size: clamp(2.25rem, 5vw, 3.75rem);
   font-weight: var(--font-weight-bold);
   letter-spacing: -0.03em;
-  line-height: 1.05;
+  line-height: 1.12;
 }
 
 .landing-hero__accent {
   display: block;
+  padding-block-end: 0.08em;
   background: linear-gradient(120deg, #2563eb 0%, #7c3aed 45%, #06b6d4 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
   color: transparent;
   animation: landing-shimmer 8s linear infinite;
 }

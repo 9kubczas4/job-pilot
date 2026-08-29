@@ -2,22 +2,20 @@
 
 ## Problem Statement
 
-**How might we demonstrate that a web application can be natively shared by humans and AI agents (Codex)—where natural-language intent instantly updates UI state—without DOM scraping and without a separate backend?**
+**How might we demonstrate that a web application can be natively shared by humans and AI agents (Codex)-where natural-language intent instantly updates UI state-without DOM scraping and without a separate backend?**
 
 ## Recommended Direction
 
-**Codex-Native Job Board** — a modern job board (Just Join IT–inspired UX) with a WebMCP layer powered by the [Angular 22 experimental WebMCP API](https://angular.dev/ai/webmcp).
+**Codex-Native Job Board** - a modern job board with a WebMCP layer powered by the [Angular 22 experimental WebMCP API](https://angular.dev/ai/webmcp).
 
-The agent runs in **Codex** (ChatGPT desktop in-app browser). The app exposes tools and reacts through shared state (`JobSearchStore`, profile Signal Form). Humans and agents operate on the same domain model—filters, list, map, profile.
+The agent runs in **Codex** (ChatGPT desktop in-app browser). The app exposes tools and reacts through shared state (`JobSearchStore`, profile Signal Form). Humans and agents operate on the same domain model-filters, list, map, profile.
 
-**Hackathon:** [WebMCP Challenge](https://webmcp.devpost.com/) — deadline **September 3, 2026**. Judging criteria (equal weight): WebMCP Leverage (tie-breaker), Execution, Impact, Creativity & Ambition.
-
-**Demo deliverable:** <3 min split-screen video (Codex + app) plus a live URL for judges.
+**Hackathon:** [WebMCP Challenge](https://webmcp.devpost.com/) - deadline **September 3, 2026**. Judging criteria (equal weight): WebMCP Leverage (tie-breaker), Execution, Impact, Creativity & Ambition.
 
 ## Key Assumptions to Validate
 
-- [ ] Codex discovers and invokes tools when the app is open in the ChatGPT in-app browser — **test on Day 1**
-- [ ] `search_jobs` visually updates filters, chips, list, and map — **test before recording video**
+- [ ] Codex discovers and invokes tools when the app is open in the ChatGPT in-app browser - **test on Day 1**
+- [ ] `search_jobs` visually updates filters, chips, list, and map - **test before recording video**
 - [x] 42 seeded jobs are enough for a realistic map and filter demo
 - [ ] Angular experimental WebMCP APIs are stable enough for the hackathon
 
@@ -33,7 +31,7 @@ The agent runs in **Codex** (ChatGPT desktop in-app browser). The app exposes to
 - Saved jobs
 - Applications list (`/applications`)
 - Google Sign-In (anonymous job browsing allowed)
-- Modern, clean UI (Just Join IT–inspired)
+- Modern, clean UI
 - Static prerender for all routes; job detail pages pre-generated at build time
 
 ### WebMCP Tools (7, implemented)
@@ -121,7 +119,7 @@ Codex (ChatGPT browser)
 
 ## Module Structure
 
-Layered features under `features/`, infrastructure in `core/`, business-agnostic code in `shared/`. Import rules are enforced by ESLint — see [`docs/architecture/import-boundaries.md`](../architecture/import-boundaries.md) and [ADR-001](../decisions/001-layered-feature-architecture.md).
+Layered features under `features/`, infrastructure in `core/`, business-agnostic code in `shared/`. Import rules are enforced by ESLint - see [`docs/architecture/import-boundaries.md`](../architecture/import-boundaries.md) and [ADR-001](../decisions/001-layered-feature-architecture.md).
 
 ```
 src/app/
@@ -229,7 +227,7 @@ src/app/
 
 - Firebase project ID / existing Firebase setup?
 - License: MIT?
-- Production name: **Job Pilot** — confirmed
+- Production name: **Job Pilot** - confirmed
 
 ## Timeline (until Sep 3)
 

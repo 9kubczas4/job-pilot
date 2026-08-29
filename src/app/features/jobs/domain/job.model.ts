@@ -11,7 +11,7 @@ export interface CompanySummary {
   logoUrl?: string;
 }
 
-/** Generic domain proficiency — works for IT skills, tools, languages, etc. */
+/** Generic domain proficiency - works for IT skills, tools, languages, etc. */
 export interface JobCompetency {
   name: string;
   /** Required level on a 1–5 scale (or up to `scale`). */

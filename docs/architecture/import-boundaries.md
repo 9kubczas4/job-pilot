@@ -48,12 +48,12 @@ Route constants live in `app-paths.ts` and may be imported by pages, UI, and cor
 
 ## Rules in plain language
 
-- **Domain** is pure business logic — no Angular services from other layers, no Firebase, no UI.
-- **UI** never talks to Firestore directly — it goes through **state**.
-- **Pages** compose UI + state — they don't call repositories or register WebMCP tools.
-- **WebMCP tools** live in **`features/*/webmcp/`** and inject **state** / **domain** / **data-access** — the same model as the UI, but without importing UI components.
-- **Core** stays feature-agnostic — no imports from `features/`.
-- **Shared** stays business-agnostic — no feature-specific models (e.g. no `JobOffer` in shared).
+- **Domain** is pure business logic - no Angular services from other layers, no Firebase, no UI.
+- **UI** never talks to Firestore directly - it goes through **state**.
+- **Pages** compose UI + state - they don't call repositories or register WebMCP tools.
+- **WebMCP tools** live in **`features/*/webmcp/`** and inject **state** / **domain** / **data-access** - the same model as the UI, but without importing UI components.
+- **Core** stays feature-agnostic - no imports from `features/`.
+- **Shared** stays business-agnostic - no feature-specific models (e.g. no `JobOffer` in shared).
 
 ## Adding a new file
 

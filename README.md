@@ -2,7 +2,7 @@
 
 A modern job board for humans and AI agents, built for the [OpenAI WebMCP Challenge](https://webmcp.devpost.com/).
 
-Job Pilot combines a Just Join IT–inspired browsing experience with [Angular 22 experimental WebMCP support](https://angular.dev/ai/webmcp). Humans browse, filter, and inspect jobs in the browser. Codex completes profiles, searches offers, saves jobs, and applies — all through tools that operate on the same domain model as the UI.
+Job Pilot combines a browsing experience with [Angular 22 experimental WebMCP support](https://angular.dev/ai/webmcp). Humans browse, filter, and inspect jobs in the browser. Codex completes profiles, searches offers, saves jobs, and applies - all through tools that operate on the same domain model as the UI.
 
 ## Why WebMCP
 
@@ -93,7 +93,7 @@ Until Firestore is seeded, the app falls back to `src/assets/seed/jobs.json` whe
 npm run build
 ```
 
-Production build prerenders all routes. Job detail pages (`/jobs/:id`) are generated from seed data — see [ADR-003](docs/decisions/003-static-prerender-for-seo.md).
+Production build prerenders all routes. Job detail pages (`/jobs/:id`) are generated from seed data - see [ADR-003](docs/decisions/003-static-prerender-for-seo.md).
 
 ### Preview production build
 
@@ -162,7 +162,7 @@ docs/
   ideas/             Product intent and scope
 ```
 
-Import boundaries are enforced by ESLint — see [Import Boundaries](docs/architecture/import-boundaries.md).
+Import boundaries are enforced by ESLint - see [Import Boundaries](docs/architecture/import-boundaries.md).
 
 ```
 features/{name}/
@@ -203,4 +203,4 @@ features/{name}/
 
 ## License
 
-MIT — see [`LICENSE`](LICENSE).
+MIT - see [`LICENSE`](LICENSE).

@@ -50,6 +50,6 @@ Static-only preview (no Express): `npm run build && npm run preview:static`
 ## Consequences
 
 - Build time scales with number of seeded jobs (currently 42 prerendered detail pages)
-- Server-side data comes from seed JSON, not Firestore — prerendered HTML reflects seed data
+- Server-side data comes from seed JSON, not Firestore - prerendered HTML reflects seed data
 - After hydration, the browser fetches live Firestore data and reconciles
 - `firebase` and Google Maps initialization must guard against server platform (`isPlatformBrowser`, `isPlatformServer`)

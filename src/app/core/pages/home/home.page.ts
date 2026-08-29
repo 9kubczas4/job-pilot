@@ -45,17 +45,17 @@ export class HomePageComponent {
     {
       icon: '⌕',
       title: 'Smart search',
-      text: 'Filter by role, location, workplace, salary, and skills — list and map stay in sync.',
+      text: 'Filter by role, location, workplace, salary, and skills - list and map stay in sync.',
     },
     {
       icon: '◎',
       title: 'Map-first UX',
-      text: 'Explore openings geographically with a Just Join IT–inspired split view on desktop.',
+      text: 'Explore openings geographically with a split view on desktop.',
     },
     {
       icon: '⚡',
       title: 'Agent-native',
-      text: 'Codex calls structured tools that read and write the same state as the UI — no DOM scraping.',
+      text: 'Codex calls structured tools that read and write the same state as the UI - no DOM scraping.',
     },
   ];
 

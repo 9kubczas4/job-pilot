@@ -29,7 +29,7 @@ Organize each feature under `src/app/features/{name}/` with five layers:
 
 Infrastructure lives in `core/` (auth, Firebase, layout). Business-agnostic code lives in `shared/`.
 
-Enforce import rules with `eslint-plugin-boundaries` — configuration in `eslint.boundaries.config.js`.
+Enforce import rules with `eslint-plugin-boundaries` - configuration in `eslint.boundaries.config.js`.
 
 ## Alternatives Considered
 
@@ -50,7 +50,7 @@ Enforce import rules with `eslint-plugin-boundaries` — configuration in `eslin
 
 ## Consequences
 
-- Every new file has an obvious home — reduces "where does this go?" debates
+- Every new file has an obvious home - reduces "where does this go?" debates
 - Domain logic is testable without Angular TestBed
 - Cross-feature domain imports are allowed (e.g. profile enums used by job filters) but limited to `domain/` ↔ `domain/`
 - ESLint must be run (`npm run lint`) to catch boundary violations at CI time

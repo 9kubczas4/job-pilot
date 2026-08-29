@@ -42,4 +42,4 @@ Route-scoped tools use `providers: [provideXxxWebMcpTools()]` on the matching ro
 
 - Adding a new tool means adding a file in the relevant feature's `webmcp/` folder
 - `eslint-plugin-boundaries` treats `feature-webmcp` as its own layer with explicit allow-list
-- Tool discovery requires scanning `features/*/webmcp/` rather than one central directory — mitigated by the tools table in README
+- Tool discovery requires scanning `features/*/webmcp/` rather than one central directory - mitigated by the tools table in README

@@ -132,7 +132,7 @@ const boundariesPolicies = [
     allow: {
       to: { element: { types: ['feature-domain', 'feature-state', 'shared'] } },
     },
-    message: 'UI may depend on domain, state, and shared — never data-access directly.',
+    message: 'UI may depend on domain, state, and shared - never data-access directly.',
   },
 
   // --- Core pages ---
@@ -158,7 +158,7 @@ const boundariesPolicies = [
         },
       },
     },
-    message: 'Pages compose UI and state — not data-access or WebMCP tools.',
+    message: 'Pages compose UI and state - not data-access or WebMCP tools.',
   },
 
   // --- Feature WebMCP ---
@@ -171,7 +171,7 @@ const boundariesPolicies = [
         },
       },
     },
-    message: 'WebMCP tools orchestrate state/domain — not UI.',
+    message: 'WebMCP tools orchestrate state/domain - not UI.',
   },
 
   // --- Core ---
@@ -189,7 +189,7 @@ const boundariesPolicies = [
     allow: {
       to: { element: { type: 'shared' } },
     },
-    message: 'Shared is business-agnostic — no feature or core imports.',
+    message: 'Shared is business-agnostic - no feature or core imports.',
   },
 
   // App routing constants

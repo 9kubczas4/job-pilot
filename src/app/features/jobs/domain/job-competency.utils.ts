@@ -2,7 +2,7 @@ import { JobCompetency } from './job.model';
 
 export const DEFAULT_COMPETENCY_SCALE = 5;
 
-/** Legacy importance labels mapped to a numeric scale — no skill-name lookups. */
+/** Legacy importance labels mapped to a numeric scale - no skill-name lookups. */
 export const LEGACY_IMPORTANCE_LEVELS = {
   required: 4,
   'nice-to-have': 2,

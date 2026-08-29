@@ -42,6 +42,6 @@ Map helpers live in `shared/map/` because they are rendering infrastructure, not
 ## Consequences
 
 - Production requires a restricted Google Maps API key (domain-restricted)
-- Map does not render during prerender/SSR — the component guards on browser platform
+- Map does not render during prerender/SSR - the component guards on browser platform
 - Free tier: 10,000 map loads/month; set GCP quota limits for safety
 - `@angular/google-maps` and marker clusterer add to bundle size (~budget: 1.5 MB warning in `angular.json`)

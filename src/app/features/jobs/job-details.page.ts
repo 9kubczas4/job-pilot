@@ -27,13 +27,13 @@ export class JobDetailsPageComponent implements OnInit {
   readonly formatWorkplace = formatWorkplace;
 
   ngOnInit(): void {
-    void this.savedJobs.loadUserData();
+    this.savedJobs.loadUserData();
     const jobId = this.route.snapshot.paramMap.get('id');
     if (!jobId) {
       return;
     }
 
-    void this.store.loadJob(jobId);
+    this.store.loadJob(jobId);
   }
 
   toggleSave(): void {
@@ -48,12 +48,12 @@ export class JobDetailsPageComponent implements OnInit {
     }
 
     if (this.savedJobs.isSaved(job.id)) {
-      void this.savedJobs.unsaveJob(job.id);
+      this.savedJobs.unsaveJob(job.id);
       this.toast.set('Removed from saved jobs.');
       return;
     }
 
-    void this.savedJobs.saveJob(job.id);
+    this.savedJobs.saveJob(job.id);
     this.toast.set('Job saved.');
   }
 
@@ -68,7 +68,7 @@ export class JobDetailsPageComponent implements OnInit {
       return;
     }
 
-    void this.savedJobs.applyToJob(job.id).then(() => {
+    this.savedJobs.applyToJob(job.id).then(() => {
       this.toast.set(`Application submitted for ${job.title}.`);
     });
   }

@@ -35,7 +35,7 @@ export class JobSearchPageComponent implements OnInit {
         return;
       }
       const params = criteriaToQueryParams(this.store.criteria());
-      void this.router.navigate([], {
+      this.router.navigate([], {
         relativeTo: this.route,
         queryParams: params,
         replaceUrl: true,
@@ -52,8 +52,8 @@ export class JobSearchPageComponent implements OnInit {
       this.syncingFromRoute = false;
     });
 
-    void this.store.loadJobs();
-    void this.savedJobs.loadUserData();
+    this.store.loadJobs();
+    this.savedJobs.loadUserData();
   }
 
   onSelectJob(jobId: string): void {

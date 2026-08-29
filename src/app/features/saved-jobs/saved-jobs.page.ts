@@ -27,7 +27,7 @@ export class SavedJobsPageComponent implements OnInit {
   readonly jobLink = AppLinks.job;
 
   ngOnInit(): void {
-    void this.searchStore.loadJobs();
-    void this.savedJobsStore.loadUserData();
+    this.searchStore.loadJobs();
+    this.savedJobsStore.loadUserData();
   }
 }

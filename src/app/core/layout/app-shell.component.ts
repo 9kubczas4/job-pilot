@@ -15,10 +15,10 @@ export class AppShellComponent {
   readonly links = AppLinks;
 
   signIn(): void {
-    void this.auth.signInWithGoogle();
+    this.auth.signInWithGoogle();
   }
 
   signOut(): void {
-    void this.auth.signOut();
+    this.auth.signOut();
   }
 }

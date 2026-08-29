@@ -24,7 +24,7 @@ export class ProfilePageComponent implements OnInit {
   readonly message = signal<string | null>(null);
 
   ngOnInit(): void {
-    void this.profileStore.loadProfile().then((profile) => {
+    this.profileStore.loadProfile().then((profile) => {
       if (!profile) {
         return;
       }
@@ -37,7 +37,7 @@ export class ProfilePageComponent implements OnInit {
   }
 
   save(): void {
-    void this.profileStore
+    this.profileStore
       .updateProfile({
         headline: this.draft.headline,
         yearsOfExperience: this.draft.yearsOfExperience,

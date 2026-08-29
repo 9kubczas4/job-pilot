@@ -24,7 +24,11 @@
       <div class="saved-list stack stack--sm">
         @for (job of savedJobs(); track job.id) {
           <a [routerLink]="jobLink(job.id)" class="link-plain">
-            <app-job-card [job]="job" [saved]="true" />
+            <app-job-card
+              [job]="job"
+              [saved]="savedJobsStore.isSaved(job.id)"
+              (toggleSave)="onToggleSave(job.id)"
+            />
           </a>
         }
       </div>

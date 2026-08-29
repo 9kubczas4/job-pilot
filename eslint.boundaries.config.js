@@ -1,24 +1,25 @@
 // Architectural import boundaries for Job Pilot.
 //
 // Layout:
-//   src/app/core/              - infra (auth, firebase, layout, webmcp)
+//   src/app/core/              - infra (auth, firebase, layout)
 //   src/app/shared/            - business-agnostic utilities and UI kit
 //   src/app/features/{name}/
 //     {name}.page.ts           - smart page (feature root)
+//     webmcp/                  - agent tools for the feature
 //     ui/                      - presentational components
 //     domain/                  - models and pure business rules
 //     data-access/             - persistence (Firestore, HTTP)
 //     state/                   - client state (stores)
 
 const boundariesElements = [
-  // --- Core (most specific first) ---
-  { type: 'core-webmcp', pattern: 'src/app/core/webmcp', partialMatch: false },
+  // --- Core ---
   { type: 'core', pattern: 'src/app/core', partialMatch: false },
 
   // --- Shared ---
   { type: 'shared', pattern: 'src/app/shared', partialMatch: false },
 
   // --- Features (most specific first) ---
+  { type: 'feature-webmcp', pattern: 'src/app/features/*/webmcp', partialMatch: true },
   { type: 'feature-ui', pattern: 'src/app/features/*/ui', partialMatch: true },
   { type: 'feature-domain', pattern: 'src/app/features/*/domain', partialMatch: false },
   { type: 'feature-data-access', pattern: 'src/app/features/*/data-access', partialMatch: false },
@@ -76,12 +77,12 @@ const boundariesPolicies = [
     },
   },
 
-  // Core WebMCP internal imports
+  // WebMCP tools internal imports
   {
     allow: {
       dependency: { relationship: { to: 'internal' } },
-      from: { element: { type: 'core-webmcp' } },
-      to: { element: { type: 'core-webmcp' } },
+      from: { element: { type: 'feature-webmcp' } },
+      to: { element: { type: 'feature-webmcp' } },
     },
   },
 
@@ -98,7 +99,6 @@ const boundariesPolicies = [
               'feature-data-access',
               'feature-page',
               'core',
-              'core-webmcp',
               'shared',
             ],
           },
@@ -148,20 +148,20 @@ const boundariesPolicies = [
     message: 'Pages compose UI and state — not data-access or WebMCP tools.',
   },
 
-  // --- Core WebMCP ---
+  // --- Feature WebMCP ---
   {
-    from: { element: { type: 'core-webmcp' } },
+    from: { element: { type: 'feature-webmcp' } },
     allow: {
       to: {
         element: {
-          types: ['feature-state', 'feature-domain', 'feature-data-access', 'core', 'shared'],
+          types: ['feature-state', 'feature-domain', 'feature-data-access', 'shared'],
         },
       },
     },
     message: 'WebMCP tools orchestrate state/domain — not UI.',
   },
 
-  // --- Core (non-webmcp) ---
+  // --- Core ---
   {
     from: { element: { type: 'core' } },
     allow: {
@@ -191,7 +191,7 @@ const boundariesPolicies = [
     allow: {
       to: {
         element: {
-          types: ['core', 'core-webmcp', 'feature-page', 'shared'],
+          types: ['core', 'feature-page', 'feature-webmcp', 'shared'],
         },
       },
     },
@@ -211,8 +211,8 @@ const boundariesPolicies = [
         element: {
           types: [
             'core',
-            'core-webmcp',
             'feature-page',
+            'feature-webmcp',
             'feature-ui',
             'feature-state',
             'feature-domain',

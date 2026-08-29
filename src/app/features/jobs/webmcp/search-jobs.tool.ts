@@ -1,9 +1,9 @@
 import { inject } from '@angular/core';
 import { provideExperimentalWebMcpTools } from '@angular/core';
-import { JobSearchStore } from '@features/jobs/state/job-search.store';
-import { JobSearchCriteria } from '@features/jobs/domain/search.model';
-import { SEARCH_JOBS_SCHEMA } from '../schemas/search-jobs.schema';
-import { toolJson } from '../utils/tool-response';
+import { toolJson } from '@shared/webmcp/tool-response';
+import { JobSearchCriteria } from '../domain/search.model';
+import { JobSearchStore } from '../state/job-search.store';
+import { SEARCH_JOBS_SCHEMA } from './search-jobs.schema';
 
 export function provideSearchJobsWebMcpTool() {
   return provideExperimentalWebMcpTools([

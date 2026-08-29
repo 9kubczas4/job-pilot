@@ -1,4 +1,5 @@
 import { CandidateProfile } from './profile.model';
+import { isFutureMonthValue } from './month-date.utils';
 
 const COMPLETENESS_FIELDS: Array<(profile: CandidateProfile) => boolean> = [
   (profile) => Boolean(profile.firstName?.trim()),
@@ -155,6 +156,14 @@ export function validateProfileDraft(draft: CandidateProfile): string[] {
 
     if ((hasCompany || hasTitle) && !entry.startDate?.trim()) {
       errors.push(`Experience entry ${index + 1}: add a start date.`);
+    }
+
+    if (isFutureMonthValue(entry.startDate)) {
+      errors.push(`Experience entry ${index + 1}: start date cannot be in the future.`);
+    }
+
+    if (isFutureMonthValue(entry.endDate)) {
+      errors.push(`Experience entry ${index + 1}: end date cannot be in the future.`);
     }
 
     if (!entry.current && entry.endDate?.trim() && entry.startDate?.trim()) {

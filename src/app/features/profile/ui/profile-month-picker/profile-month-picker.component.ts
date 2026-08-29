@@ -10,7 +10,7 @@ import { MatDatepicker, MatDatepickerModule } from '@angular/material/datepicker
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MAT_DATE_FORMATS, provideNativeDateAdapter } from '@angular/material/core';
-import { formatMonthValue, parseMonthValue } from '../../domain/month-date.utils';
+import { formatMonthValue, isFutureMonth, parseMonthValue, startOfCurrentMonth } from '../../domain/month-date.utils';
 
 const MONTH_DATE_FORMATS = {
   parse: {
@@ -45,6 +45,8 @@ const MONTH_DATE_FORMATS = {
         [ngModel]="selectedDate()"
         (ngModelChange)="onDateInput($event)"
         [matDatepicker]="picker"
+        [matDatepickerFilter]="dateFilter"
+        [max]="maxDate"
         [disabled]="isDisabled()"
       />
       <mat-datepicker-toggle matIconSuffix [for]="picker" />
@@ -64,6 +66,9 @@ const MONTH_DATE_FORMATS = {
 })
 export class ProfileMonthPickerComponent implements ControlValueAccessor {
   readonly label = input.required<string>();
+
+  readonly maxDate = startOfCurrentMonth();
+  readonly dateFilter = (date: Date | null): boolean => !date || !isFutureMonth(date);
 
   readonly selectedDate = signal<Date | null>(null);
   readonly isDisabled = signal(false);
@@ -88,6 +93,10 @@ export class ProfileMonthPickerComponent implements ControlValueAccessor {
   }
 
   onDateInput(value: Date | null): void {
+    if (value && isFutureMonth(value)) {
+      return;
+    }
+
     this.selectedDate.set(value);
     this.onChange(formatMonthValue(value));
     this.onTouched();

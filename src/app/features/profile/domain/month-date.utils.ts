@@ -23,3 +23,18 @@ export function formatMonthValue(date: Date | null | undefined): string | undefi
   const month = String(date.getMonth() + 1).padStart(2, '0');
   return `${year}-${month}`;
 }
+
+export function startOfCurrentMonth(): Date {
+  const now = new Date();
+  return new Date(now.getFullYear(), now.getMonth(), 1);
+}
+
+export function isFutureMonth(date: Date): boolean {
+  const candidate = new Date(date.getFullYear(), date.getMonth(), 1);
+  return candidate.getTime() > startOfCurrentMonth().getTime();
+}
+
+export function isFutureMonthValue(value?: string): boolean {
+  const date = parseMonthValue(value);
+  return date ? isFutureMonth(date) : false;
+}

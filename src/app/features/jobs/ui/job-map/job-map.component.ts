@@ -79,7 +79,7 @@ export class JobMapComponent {
 
   onMapReady(map: google.maps.Map): void {
     this.map = map;
-    map.setOptions({ styles: getMapStylesForTheme(this.mapTheme) });
+    map.setOptions(this.getMapThemeOptions(this.mapTheme));
     this.infoWindow = new google.maps.InfoWindow({
       maxWidth: 320,
       disableAutoPan: true,
@@ -184,7 +184,7 @@ export class JobMapComponent {
       return;
     }
 
-    this.map.setOptions({ styles: getMapStylesForTheme(theme) });
+    this.map.setOptions(this.getMapThemeOptions(theme));
 
     if (!themeChanged || !this.clusterer) {
       return;
@@ -193,6 +193,19 @@ export class JobMapComponent {
     this.closeJobPopup();
     this.lastJobIdsKey = '';
     this.syncMap(this.jobs(), this.selectedJobId());
+  }
+
+  private getMapThemeOptions(theme: ResolvedTheme): Pick<
+    google.maps.MapOptions,
+    'styles' | 'colorScheme' | 'backgroundColor'
+  > {
+    const isDark = theme === 'dark';
+
+    return {
+      styles: getMapStylesForTheme(theme),
+      colorScheme: isDark ? 'DARK' : 'LIGHT',
+      backgroundColor: isDark ? '#0a1020' : '#f1f5f9',
+    };
   }
 
   private onMarkerClick(job: JobOffer, marker: google.maps.Marker): void {
@@ -396,14 +409,10 @@ export class JobMapComponent {
   }
 
   private buildMapOptions(theme: ResolvedTheme): google.maps.MapOptions {
-    const isDark = theme === 'dark';
-
     return {
       center: DEFAULT_CENTER,
       zoom: DEFAULT_ZOOM,
-      styles: getMapStylesForTheme(theme),
-      colorScheme: isDark ? 'DARK' : 'LIGHT',
-      backgroundColor: isDark ? '#0a1020' : '#f1f5f9',
+      ...this.getMapThemeOptions(theme),
       clickableIcons: false,
       mapTypeControl: false,
       streetViewControl: false,

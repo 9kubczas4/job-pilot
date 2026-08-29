@@ -1,12 +1,42 @@
 /* Google Maps default controls - rendered outside Angular encapsulation. */
+@mixin map-control-buttons {
+  .gm-control-active,
+  .gm-fullscreen-control,
+  .gmnoprint button.gm-control-active {
+    background-color: var(--color-surface-elevated) !important;
+    box-shadow: var(--shadow-sm) !important;
+  }
+}
+
+[data-theme='light'] {
+  .gm-style {
+    @include map-control-buttons;
+
+    .gm-control-active img,
+    .gmnoprint button.gm-control-active img,
+    .gm-fullscreen-control img {
+      filter: none;
+    }
+
+    button[title='Keyboard shortcuts'],
+    button[title='Map Data'] {
+      color: var(--color-text-muted) !important;
+    }
+
+    .gm-style-cc,
+    .gm-style-cc span,
+    .gm-style-cc a,
+    .gm-style-mtc,
+    .gm-style-mtc span,
+    .gm-style-mtc a {
+      color: var(--color-text-muted) !important;
+    }
+  }
+}
+
 [data-theme='dark'] {
   .gm-style {
-    .gm-control-active,
-    .gm-fullscreen-control,
-    .gmnoprint button.gm-control-active {
-      background-color: var(--color-surface-elevated) !important;
-      box-shadow: var(--shadow-sm) !important;
-    }
+    @include map-control-buttons;
 
     .gm-control-active img,
     .gmnoprint button.gm-control-active img,

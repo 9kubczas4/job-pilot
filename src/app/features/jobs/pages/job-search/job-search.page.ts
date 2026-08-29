@@ -317,7 +317,7 @@ export class JobSearchPageComponent implements OnInit {
   onMobileSelectJob(jobId: string): void {
     this.store.selectJob(jobId);
     this.sheetFocusJobId.set(jobId);
-    this.sheetSnap.set('peek');
+    this.sheetSnap.set('half');
   }
 
   onSheetSnapChange(snap: JobSheetSnap): void {

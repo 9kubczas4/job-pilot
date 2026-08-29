@@ -18,7 +18,7 @@
 }
 
 .gm-style-iw-tc {
-  --job-map-tail-bg: #ffffff;
+  --job-map-tail-bg: var(--color-surface-elevated);
 }
 
 .gm-style-iw-tc::after {
@@ -28,7 +28,7 @@
 }
 
 .gm-style-iw-tc.job-map-popup-tail--hovered {
-  --job-map-tail-bg: #eff6ff;
+  --job-map-tail-bg: var(--color-primary-subtle);
 }
 
 .job-map-popup {
@@ -39,12 +39,101 @@
   padding: 12px 14px;
   cursor: pointer;
   border-radius: 12px;
-  background: #ffffff;
+  background: var(--color-surface-elevated);
   box-shadow: var(--shadow-md);
   transition: background-color 0.15s ease;
 }
 
 .job-map-popup--hovered .job-map-popup,
 .job-map-popup:hover {
-  background: #eff6ff;
+  background: var(--color-primary-subtle);
+}
+
+.job-map-popup__identity {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.job-map-popup__logo {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--gradient-logo-bg-strong);
+  color: var(--color-primary);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.job-map-popup__intro {
+  min-width: 0;
+  flex: 1;
+}
+
+.job-map-popup__title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.job-map-popup__company {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.job-map-popup__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.job-map-popup__badge {
+  padding: 4px 8px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-surface);
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+.job-map-popup__salary {
+  margin: 10px 0 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-success);
+}
+
+.job-map-popup__meta {
+  margin: 6px 0 0;
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+.job-map-popup__competencies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.job-map-popup__chip {
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: var(--color-chip);
+  color: var(--color-text-muted);
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.job-map-popup__chip--muted {
+  background: var(--color-surface);
+  color: var(--color-text-muted);
 }

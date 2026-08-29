@@ -10,6 +10,7 @@ import { FilterDrawerComponent } from '@shared/ui/filter-drawer/filter-drawer.co
 import { ToastHostComponent } from '@shared/ui/toast/toast-host.component';
 import { HeaderSearchComponent } from '@shared/ui/header-search/header-search.component';
 import { ProfileMenuComponent } from '@shared/ui/profile-menu/profile-menu.component';
+import { ThemeToggleComponent } from '@shared/ui/theme-toggle/theme-toggle.component';
 
 const MOBILE_SHELL_QUERY = '(max-width: 64rem)';
 
@@ -23,6 +24,7 @@ const MOBILE_SHELL_QUERY = '(max-width: 64rem)';
     FilterDrawerComponent,
     HeaderSearchComponent,
     ProfileMenuComponent,
+    ThemeToggleComponent,
     ToastHostComponent,
   ],
   templateUrl: './app-shell.component.html',

@@ -12,15 +12,15 @@ import { Router } from '@angular/router';
 import { GoogleMap } from '@angular/google-maps';
 import { Cluster, MarkerClusterer } from '@googlemaps/markerclusterer';
 import { AppLinks } from '@app/app-paths';
+import { ResolvedTheme, ThemeService } from '@core/theme/theme.service';
 import { GOOGLE_MAPS_API_KEY } from '@shared/map/google-maps-config';
 import { isGoogleMapsConfigured } from '@shared/map/google-maps-loader';
 import { createClusterMarkerIcon, createJobMarkerIcon } from '@shared/map/google-maps-markers';
-import { MONOCHROME_MAP_STYLES } from '@shared/map/google-maps-styles';
+import { getMapStylesForTheme, LIGHT_MAP_STYLES } from '@shared/map/google-maps-styles';
 import { JobLocation, JobOffer } from '../../domain/job.model';
 import {
   buildJobMapPopupHtml,
-  JOB_MAP_POPUP_BG,
-  JOB_MAP_POPUP_HOVER_BG,
+  getJobMapPopupColors,
 } from './job-map-popup';
 
 const DEFAULT_CENTER = { lat: 51.9194, lng: 19.1451 };
@@ -40,6 +40,7 @@ export class JobMapComponent {
   private readonly apiKey = inject(GOOGLE_MAPS_API_KEY, { optional: true }) ?? '';
   private readonly router = inject(Router);
   private readonly ngZone = inject(NgZone);
+  private readonly theme = inject(ThemeService);
 
   readonly jobs = input<JobOffer[]>([]);
   readonly selectedJobId = input<string | null>(null);
@@ -52,13 +53,15 @@ export class JobMapComponent {
   readonly mapOptions: google.maps.MapOptions = {
     center: DEFAULT_CENTER,
     zoom: DEFAULT_ZOOM,
-    styles: MONOCHROME_MAP_STYLES,
+    styles: LIGHT_MAP_STYLES,
     clickableIcons: false,
     mapTypeControl: false,
     streetViewControl: false,
     fullscreenControl: true,
     zoomControl: true,
   };
+
+  private mapTheme: ResolvedTheme = 'light';
 
   private map: google.maps.Map | null = null;
   private infoWindow: google.maps.InfoWindow | null = null;
@@ -69,6 +72,13 @@ export class JobMapComponent {
   private mapAnimationFrame: number | null = null;
 
   constructor() {
+    this.mapTheme = this.theme.resolved();
+
+    effect(() => {
+      const theme = this.theme.resolved();
+      this.applyMapTheme(theme);
+    });
+
     effect(() => {
       const jobs = this.jobs();
       const selectedId = this.selectedJobId();
@@ -78,6 +88,7 @@ export class JobMapComponent {
 
   onMapReady(map: google.maps.Map): void {
     this.map = map;
+    map.setOptions({ styles: getMapStylesForTheme(this.mapTheme) });
     this.infoWindow = new google.maps.InfoWindow({
       maxWidth: 320,
       disableAutoPan: true,
@@ -94,7 +105,7 @@ export class JobMapComponent {
         render: ({ count, position }) =>
           new google.maps.Marker({
             position,
-            icon: createClusterMarkerIcon(count),
+            icon: createClusterMarkerIcon(count, this.mapTheme),
             zIndex: 1000 + count,
           }),
       },
@@ -151,7 +162,7 @@ export class JobMapComponent {
       const isSelected = job.id === selectedId;
       const marker = new google.maps.Marker({
         position,
-        icon: createJobMarkerIcon(isSelected),
+        icon: createJobMarkerIcon(isSelected, this.mapTheme),
         title: `${job.title} · ${job.company.name}`,
         zIndex: isSelected ? 2 : 1,
       });
@@ -169,9 +180,28 @@ export class JobMapComponent {
   private updateMarkerSelection(selectedId: string | null): void {
     for (const [jobId, marker] of this.markers.entries()) {
       const isSelected = jobId === selectedId;
-      marker.setIcon(createJobMarkerIcon(isSelected));
+      marker.setIcon(createJobMarkerIcon(isSelected, this.mapTheme));
       marker.setZIndex(isSelected ? 2 : 1);
     }
+  }
+
+  private applyMapTheme(theme: ResolvedTheme): void {
+    const themeChanged = this.mapTheme !== theme;
+    this.mapTheme = theme;
+
+    if (!this.map) {
+      return;
+    }
+
+    this.map.setOptions({ styles: getMapStylesForTheme(theme) });
+
+    if (!themeChanged || !this.clusterer) {
+      return;
+    }
+
+    this.closeJobPopup();
+    this.lastJobIdsKey = '';
+    this.syncMap(this.jobs(), this.selectedJobId());
   }
 
   private onMarkerClick(job: JobOffer, marker: google.maps.Marker): void {
@@ -312,11 +342,16 @@ export class JobMapComponent {
       const infoWindowRoot = popup.closest('.gm-style-iw');
       const popupTail = this.findInfoWindowTail(popup);
 
+      const popupColors = getJobMapPopupColors();
+
       const setHovered = (hovered: boolean) => {
         infoWindowRoot?.classList.toggle('job-map-popup--hovered', hovered);
         popupTail?.classList.toggle('job-map-popup-tail--hovered', hovered);
-        popupTail?.style.setProperty('--job-map-tail-bg', hovered ? JOB_MAP_POPUP_HOVER_BG : JOB_MAP_POPUP_BG);
-        popup.style.backgroundColor = hovered ? JOB_MAP_POPUP_HOVER_BG : JOB_MAP_POPUP_BG;
+        popupTail?.style.setProperty(
+          '--job-map-tail-bg',
+          hovered ? popupColors.hoverBg : popupColors.bg,
+        );
+        popup.style.backgroundColor = hovered ? popupColors.hoverBg : popupColors.bg;
       };
 
       popup.addEventListener('mouseenter', () => setHovered(true));

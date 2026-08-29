@@ -3,11 +3,28 @@
 
 @include mat.core();
 
-html {
+html,
+html[data-theme='light'] {
   @include mat.theme(
     (
       color: (
         theme-type: light,
+        primary: mat.$azure-palette,
+      ),
+      typography: (
+        brand-family: var(--font-family),
+        plain-family: var(--font-family),
+      ),
+      density: 0,
+    )
+  );
+}
+
+html[data-theme='dark'] {
+  @include mat.theme(
+    (
+      color: (
+        theme-type: dark,
         primary: mat.$azure-palette,
       ),
       typography: (

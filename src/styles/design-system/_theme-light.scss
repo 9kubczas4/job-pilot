@@ -1,0 +1,114 @@
+@mixin colors {
+  --color-primary: #2563eb;
+  --color-primary-hover: #1d4ed8;
+  --color-primary-subtle: #eff6ff;
+  --color-accent: #4338ca;
+  --color-accent-subtle: #eef2ff;
+  --color-success: #047857;
+  --color-success-subtle: #ecfdf5;
+  --color-surface: #f8fafc;
+  --color-surface-elevated: #ffffff;
+  --color-text: #0f172a;
+  --color-text-muted: #64748b;
+  --color-border: #e2e8f0;
+  --color-border-strong: #cbd5e1;
+  --color-chip: #f1f5f9;
+  --color-page-bg: #f4f7ff;
+  --color-on-primary: #ffffff;
+  --color-brand-violet: #7c3aed;
+  --color-brand-cyan: #06b6d4;
+  --color-brand-indigo: #4f46e5;
+  --color-brand-emerald: #22c55e;
+  --color-success-emphasis: #059669;
+  --color-slate-muted: rgb(148 163 184 / 0.45);
+  --color-slate-track: rgb(148 163 184 / 0.28);
+  --color-overlay: rgb(15 23 42 / 0.28);
+  --color-overlay-heavy: rgb(15 23 42 / 0.82);
+  --color-success-border: rgb(4 120 87 / 0.2);
+  --color-success-glow: rgb(34 197 94 / 0.7);
+  --color-success-glow-strong: rgb(34 197 94 / 0.8);
+
+  --glass-border: rgb(255 255 255 / 0.55);
+  --glass-border-strong: rgb(255 255 255 / 0.65);
+  --glass-border-faint: rgb(255 255 255 / 0.45);
+  --glass-surface: rgb(255 255 255 / 0.42);
+  --glass-surface-subtle: rgb(255 255 255 / 0.35);
+  --glass-surface-muted: rgb(255 255 255 / 0.45);
+  --glass-surface-faint: rgb(255 255 255 / 0.22);
+  --glass-surface-light: rgb(255 255 255 / 0.28);
+  --glass-surface-hover: rgb(255 255 255 / 0.5);
+  --glass-surface-raised: rgb(255 255 255 / 0.55);
+  --glass-surface-toolbar: rgb(255 255 255 / 0.72);
+  --glass-surface-sheet: rgb(255 255 255 / 0.78);
+  --glass-surface-selected: rgb(255 255 255 / 0.62);
+  --glass-surface-field: rgb(255 255 255 / 0.55);
+  --glass-surface-shell: rgb(255 255 255 / 0.94);
+  --glass-surface-header: rgb(255 255 255 / 0.88);
+  --glass-highlight-inset: rgb(255 255 255 / 0.65);
+  --glass-highlight-inset-soft: rgb(255 255 255 / 0.5);
+  --glass-divider: rgb(255 255 255 / 0.45);
+  --glass-divider-faint: rgb(255 255 255 / 0.4);
+
+  --color-primary-glow: rgb(37 99 235 / 0.35);
+  --color-primary-glow-strong: rgb(37 99 235 / 0.45);
+  --color-primary-surface: rgb(37 99 235 / 0.12);
+  --color-primary-surface-subtle: rgb(37 99 235 / 0.1);
+  --color-primary-surface-faint: rgb(37 99 235 / 0.08);
+
+  --color-violet-surface: rgb(124 58 237 / 0.15);
+  --color-violet-surface-subtle: rgb(124 58 237 / 0.12);
+  --color-violet-surface-faint: rgb(124 58 237 / 0.06);
+
+  --gradient-text: linear-gradient(
+    120deg,
+    var(--color-primary) 0%,
+    var(--color-brand-violet) 55%,
+    var(--color-brand-cyan) 100%
+  );
+  --gradient-text-short: linear-gradient(120deg, var(--color-primary), var(--color-brand-violet));
+  --gradient-button: linear-gradient(135deg, var(--color-primary), var(--color-brand-indigo));
+  --gradient-avatar: linear-gradient(135deg, var(--color-primary), var(--color-brand-violet));
+  --gradient-badge-live: linear-gradient(135deg, var(--color-brand-emerald), var(--color-brand-cyan));
+  --gradient-logo-bg: linear-gradient(135deg, rgb(37 99 235 / 0.14), var(--color-violet-surface-subtle));
+  --gradient-logo-bg-strong: linear-gradient(135deg, rgb(37 99 235 / 0.15), var(--color-violet-surface));
+
+  --shadow-glass-card:
+    0 1px 0 var(--glass-highlight-inset) inset,
+    0 20px 50px var(--color-primary-surface-faint);
+  --shadow-glass-card-hover:
+    0 1px 0 var(--glass-highlight-inset-soft) inset,
+    0 12px 28px var(--color-primary-surface-subtle);
+  --shadow-glass-card-selected:
+    0 1px 0 var(--glass-highlight-inset) inset,
+    0 12px 28px var(--color-primary-surface-subtle);
+  --shadow-glass-card-lifted:
+    0 1px 0 var(--glass-highlight-inset) inset,
+    0 24px 48px var(--color-primary-surface-subtle);
+  --shadow-glass-panel:
+    0 1px 0 var(--glass-highlight-inset) inset,
+    0 20px 50px rgb(37 99 235 / 0.12);
+  --shadow-glass-sheet:
+    0 -10px 40px var(--color-primary-surface-subtle),
+    0 1px 0 var(--glass-highlight-inset) inset;
+  --shadow-glass-sheet-soft: 0 -10px 40px var(--color-primary-surface-faint);
+  --shadow-btn-primary: 0 10px 24px rgb(37 99 235 / 0.26);
+  --shadow-btn-primary-hover: 0 14px 32px rgb(37 99 235 / 0.32);
+  --shadow-btn-primary-sm: 0 10px 24px rgb(37 99 235 / 0.24);
+  --shadow-btn-primary-lg: 0 12px 28px rgb(37 99 235 / 0.28);
+  --shadow-btn-primary-lg-hover: 0 16px 36px rgb(37 99 235 / 0.34);
+  --shadow-avatar-ring: 0 16px 40px rgb(37 99 235 / 0.18);
+  --shadow-avatar-icon: 0 16px 40px rgb(37 99 235 / 0.24);
+  --shadow-logo: 0 8px 24px rgb(37 99 235 / 0.12);
+  --shadow-interactive-sm: 0 8px 20px var(--color-primary-surface-faint);
+  --shadow-interactive-md: 0 8px 24px var(--color-primary-surface-subtle);
+  --shadow-badge-live: 0 0 10px var(--color-success-glow);
+  --shadow-badge-live-strong: 0 0 12px var(--color-success-glow-strong);
+  --shadow-inset-ring: 0 0 0 1px var(--glass-border-strong) inset;
+  --shadow-glass-inset-soft: 0 1px 0 var(--glass-highlight-inset-soft) inset;
+
+  --shadow-sm: 0 1px 2px rgb(15 23 42 / 0.05);
+  --shadow-md: 0 8px 24px rgb(15 23 42 / 0.08);
+  --shadow-focus: 0 0 0 3px rgb(37 99 235 / 0.25);
+
+  --color-skeleton-shine: rgb(226 232 240 / 0.9);
+}

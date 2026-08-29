@@ -33,7 +33,7 @@ export function matchesSearchCriteria(job: JobOffer, criteria: JobSearchCriteria
 
   if (criteria.skills?.length) {
     const jobCompetencies = job.competencies.map((competency) => competency.name.toLowerCase());
-    if (!criteria.skills.every((skill) => jobCompetencies.includes(skill.toLowerCase()))) {
+    if (!criteria.skills.some((skill) => jobCompetencies.includes(skill.toLowerCase()))) {
       return false;
     }
   }
@@ -84,7 +84,11 @@ export function matchesSearchCriteria(job: JobOffer, criteria: JobSearchCriteria
     }
   }
 
-  if (criteria.salaryMin != null && job.salary) {
+  if (criteria.salaryMin != null) {
+    if (!job.salary || job.salary.currency !== 'USD') {
+      return false;
+    }
+
     if (job.salary.max < criteria.salaryMin) {
       return false;
     }

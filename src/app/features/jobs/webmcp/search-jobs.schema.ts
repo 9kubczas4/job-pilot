@@ -1,52 +1,28 @@
+import {
+  DEFAULT_SEARCH_RADIUS_KM,
+  SEARCH_RADIUS_OPTIONS_KM,
+} from '@shared/models/header-search.model';
+
 export const SEARCH_JOBS_SCHEMA = {
   type: 'object',
   properties: {
-    query: { type: 'string', description: 'Free-text search across title, company, skills.' },
-    roles: {
-      type: 'array',
-      items: { type: 'string' },
-      description: 'Preferred role titles.',
-    },
-    skills: {
-      type: 'array',
-      items: { type: 'string' },
-      description: 'Required skills.',
-    },
-    seniority: {
-      type: 'array',
-      items: {
-        type: 'string',
-        enum: ['junior', 'regular', 'senior', 'expert'],
-      },
-    },
-    workSchedules: {
-      type: 'array',
-      items: {
-        type: 'string',
-        enum: ['full-time', 'part-time', 'freelance'],
-      },
+    query: {
+      type: 'string',
+      description:
+        'Free-text search across title, company, description, and skills. Omit or pass an empty string to clear.',
     },
     locations: {
       type: 'array',
       items: { type: 'string' },
-      description: 'City names such as Warsaw or Krakow.',
+      maxItems: 1,
+      description:
+        'Exactly one city name used as the geographic search center (for example Warsaw). Extra entries are ignored. Omit to clear location search.',
     },
-    workplace: {
-      type: 'array',
-      items: {
-        type: 'string',
-        enum: ['remote', 'hybrid', 'onsite'],
-      },
+    radiusKm: {
+      type: 'number',
+      enum: [...SEARCH_RADIUS_OPTIONS_KM],
+      description: `Search radius in kilometers around the city center. Defaults to ${DEFAULT_SEARCH_RADIUS_KM} when a location is set. Requires locations.`,
     },
-    contracts: {
-      type: 'array',
-      items: {
-        type: 'string',
-        enum: ['b2b', 'employment', 'service-contract', 'internship'],
-      },
-    },
-    salaryMin: { type: 'number', description: 'Minimum salary in the job currency.' },
-    radiusKm: { type: 'number' },
   },
   additionalProperties: false,
 } as const;

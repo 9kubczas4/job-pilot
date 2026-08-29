@@ -63,12 +63,14 @@ export class HomePageComponent {
     {
       name: 'search_jobs',
       scope: 'global',
-      description: 'Set query and location, open the job board, and sync search bar, list, and map.',
+      description:
+        'Replace text, location, and radius; preserve structured filters. Use filter_jobs to refine.',
     },
     {
       name: 'filter_jobs',
       scope: 'global',
-      description: 'Set filters and sort, open the job board, and sync filter panel, chips, list, and map.',
+      description:
+        'Update structured filters and sort; preserve text and location. Array values match with OR.',
     },
     {
       name: 'get_profile',
@@ -89,12 +91,12 @@ export class HomePageComponent {
     {
       name: 'save_job',
       scope: '/jobs',
-      description: 'Add a job to favourites for the signed-in user.',
+      description: 'Add a job to favourites. Idempotent for already saved jobs.',
     },
     {
       name: 'apply_job',
       scope: '/jobs',
-      description: 'Submit a job application for the signed-in user.',
+      description: 'Submit a real, potentially irreversible job application.',
     },
   ];
 

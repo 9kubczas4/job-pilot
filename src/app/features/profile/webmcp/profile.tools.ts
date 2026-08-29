@@ -15,7 +15,7 @@ export function provideGetProfileWebMcpTool() {
         if (!profile) {
           return toolText('Authentication required to read profile.');
         }
-        return toolJson(profile);
+        return toolJson({ success: true, changed: false, profile });
       },
     },
   ]);

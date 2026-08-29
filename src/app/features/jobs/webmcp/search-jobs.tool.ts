@@ -1,8 +1,8 @@
 import { inject } from '@angular/core';
 import { provideExperimentalWebMcpTools } from '@angular/core';
 import { toolJson } from '@shared/webmcp/tool-response';
-import { JobSearchCriteria } from '../domain/search.model';
 import { JobSearchWebMcpService } from './job-search-webmcp.service';
+import { JobSearchInput } from './webmcp-criteria.utils';
 import { SEARCH_JOBS_SCHEMA } from './search-jobs.schema';
 
 export function provideSearchJobsWebMcpTool() {
@@ -10,11 +10,11 @@ export function provideSearchJobsWebMcpTool() {
     {
       name: 'search_jobs',
       description:
-        'Set a free-text query and/or location, open the job board, and refresh the search bar, list, and map. For workplace, seniority, salary, skills, contract, or sort, use filter_jobs.',
+        'Start a new job search. Replaces the current text, location, and radius criteria while preserving structured filters from filter_jobs. Use exactly one city as the geographic center. Call filter_jobs after this to refine or sort results. Returns success, whether criteria changed, the applied criteria, and matching job IDs.',
       inputSchema: SEARCH_JOBS_SCHEMA,
       execute: async (input) => {
         const result = await inject(JobSearchWebMcpService).applySearchCriteria(
-          input as JobSearchCriteria,
+          input as JobSearchInput,
         );
         return toolJson(result);
       },

@@ -5,7 +5,7 @@
   min-height: 0;
   overflow: hidden;
   flex-direction: column;
-  background: #f4f7ff;
+  background: var(--color-page-bg);
   padding: var(--space-3);
 }
 
@@ -26,13 +26,11 @@
 
 .jobs-page .search-layout__panel {
   overflow: hidden;
-  border: 1px solid rgb(255 255 255 / 0.55);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-xl);
-  background: rgb(255 255 255 / 0.42);
-  box-shadow:
-    0 1px 0 rgb(255 255 255 / 0.65) inset,
-    0 20px 50px rgb(37 99 235 / 0.08);
-  backdrop-filter: blur(18px);
+  background: var(--glass-surface);
+  box-shadow: var(--shadow-glass-card);
+  backdrop-filter: blur(var(--blur-glass));
 }
 
 .jobs-page .job-list {
@@ -41,13 +39,13 @@
 }
 
 .jobs-page .job-list__header {
-  border-bottom: 1px solid rgb(255 255 255 / 0.45);
-  background: rgb(255 255 255 / 0.22);
-  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--glass-divider);
+  background: var(--glass-surface-faint);
+  backdrop-filter: blur(var(--blur-glass-sm));
 }
 
 .jobs-page .job-list__title {
-  background: linear-gradient(120deg, #2563eb 0%, #7c3aed 55%, #06b6d4 100%);
+  background: var(--gradient-text);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -62,25 +60,21 @@
 }
 
 .jobs-page .job-card {
-  border-color: rgb(255 255 255 / 0.55);
-  background: rgb(255 255 255 / 0.42);
-  backdrop-filter: blur(12px);
-  box-shadow: 0 1px 0 rgb(255 255 255 / 0.5) inset;
+  border-color: var(--glass-border);
+  background: var(--glass-surface);
+  backdrop-filter: blur(var(--blur-glass-md));
+  box-shadow: var(--shadow-glass-inset-soft);
 
   &:hover {
-    border-color: rgb(37 99 235 / 0.35);
-    box-shadow:
-      0 1px 0 rgb(255 255 255 / 0.5) inset,
-      0 12px 28px rgb(37 99 235 / 0.1);
+    border-color: var(--color-primary-glow);
+    box-shadow: var(--shadow-glass-card-hover);
   }
 }
 
 .jobs-page .job-card.is-selected {
-  border-color: rgb(37 99 235 / 0.45);
-  background: rgb(255 255 255 / 0.62);
-  box-shadow:
-    0 1px 0 rgb(255 255 255 / 0.65) inset,
-    0 12px 28px rgb(37 99 235 / 0.12);
+  border-color: var(--color-primary-glow-strong);
+  background: var(--glass-surface-selected);
+  box-shadow: var(--shadow-glass-card-selected);
 }
 
 .jobs-page .map-container,
@@ -91,9 +85,9 @@
 
 .jobs-page .sort-menu__trigger,
 .jobs-page .sort-menu__panel {
-  border-color: rgb(255 255 255 / 0.55);
-  background: rgb(255 255 255 / 0.55);
-  backdrop-filter: blur(10px);
+  border-color: var(--glass-border);
+  background: var(--glass-surface-raised);
+  backdrop-filter: blur(var(--blur-glass-sm));
 }
 
 .jobs-mobile {
@@ -102,7 +96,7 @@
   position: relative;
   overflow: hidden;
   height: 100dvh;
-  background: #f4f7ff;
+  background: var(--color-page-bg);
 }
 
 .jobs-mobile__aurora {
@@ -114,7 +108,7 @@
 
 .jobs-mobile__toolbar {
   position: fixed;
-  z-index: 36;
+  z-index: var(--z-mobile-toolbar);
   inset-inline: 0;
   top: 0;
   display: grid;
@@ -122,9 +116,9 @@
   gap: var(--space-2);
   min-height: 0;
   padding: env(safe-area-inset-top, 0px) var(--space-3) var(--space-2);
-  border-bottom: 1px solid rgb(255 255 255 / 0.55);
-  background: rgb(255 255 255 / 0.72);
-  backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--glass-border);
+  background: var(--glass-surface-toolbar);
+  backdrop-filter: blur(var(--blur-glass));
   grid-template-columns: auto minmax(0, 1fr) auto;
 }
 
@@ -133,12 +127,12 @@
   min-width: 0;
   align-items: center;
   gap: var(--space-2);
-  min-height: 2.5rem;
-  border: 1px solid rgb(255 255 255 / 0.65);
+  min-height: var(--control-height-md);
+  border: 1px solid var(--glass-border-strong);
   border-radius: var(--radius-full);
   padding: 0 var(--space-3);
-  background: rgb(255 255 255 / 0.45);
-  backdrop-filter: blur(10px);
+  background: var(--glass-surface-muted);
+  backdrop-filter: blur(var(--blur-glass-sm));
   color: var(--color-text-muted);
   cursor: pointer;
   text-align: start;
@@ -147,8 +141,8 @@
     box-shadow var(--transition-fast);
 
   &:hover {
-    border-color: rgb(37 99 235 / 0.35);
-    box-shadow: 0 8px 20px rgb(37 99 235 / 0.08);
+    border-color: var(--color-primary-glow);
+    box-shadow: var(--shadow-interactive-sm);
   }
 }
 
@@ -173,12 +167,12 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  border: 1px solid rgb(255 255 255 / 0.65);
+  width: var(--control-size-md);
+  height: var(--control-size-md);
+  border: 1px solid var(--glass-border-strong);
   border-radius: var(--radius-full);
-  background: rgb(255 255 255 / 0.45);
-  backdrop-filter: blur(10px);
+  background: var(--glass-surface-muted);
+  backdrop-filter: blur(var(--blur-glass-sm));
   color: var(--color-text);
   cursor: pointer;
   transition:
@@ -186,16 +180,16 @@
     background-color var(--transition-fast);
 
   &--active {
-    border-color: rgb(37 99 235 / 0.45);
-    background: rgb(37 99 235 / 0.12);
+    border-color: var(--color-primary-glow-strong);
+    background: var(--color-primary-surface);
     color: var(--color-primary);
   }
 }
 
 .jobs-mobile__filters-badge {
   position: absolute;
-  inset-block-start: -0.25rem;
-  inset-inline-end: -0.25rem;
+  inset-block-start: calc(var(--space-1) * -1);
+  inset-inline-end: calc(var(--space-1) * -1);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -203,15 +197,15 @@
   height: 1.125rem;
   border-radius: var(--radius-full);
   padding-inline: 0.2rem;
-  background: linear-gradient(135deg, #2563eb, #4f46e5);
-  color: #fff;
-  font-size: 0.625rem;
+  background: var(--gradient-button);
+  color: var(--color-on-primary);
+  font-size: var(--font-size-2xs);
   font-weight: var(--font-weight-semibold);
 }
 
 .jobs-mobile__search-panel {
   position: fixed;
-  z-index: 45;
+  z-index: var(--z-mobile-overlay);
   inset: 0;
   display: flex;
   align-items: flex-start;
@@ -220,8 +214,8 @@
     calc(var(--jobs-mobile-toolbar-height) + var(--space-2))
     var(--space-3)
     var(--space-3);
-  background: rgb(15 23 42 / 0.28);
-  backdrop-filter: blur(4px);
+  background: var(--color-overlay);
+  backdrop-filter: blur(var(--blur-overlay));
 }
 
 .jobs-mobile__search-panel-inner {
@@ -229,14 +223,12 @@
   width: min(100%, 40rem);
   flex-direction: column;
   gap: var(--space-3);
-  border: 1px solid rgb(255 255 255 / 0.55);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-xl);
   padding: var(--space-4);
-  background: rgb(255 255 255 / 0.72);
-  box-shadow:
-    0 1px 0 rgb(255 255 255 / 0.65) inset,
-    0 20px 50px rgb(37 99 235 / 0.12);
-  backdrop-filter: blur(18px);
+  background: var(--glass-surface-toolbar);
+  box-shadow: var(--shadow-glass-panel);
+  backdrop-filter: blur(var(--blur-glass));
 }
 
 .jobs-mobile__search-done {
@@ -244,12 +236,12 @@
   border: 0;
   border-radius: var(--radius-full);
   padding: var(--space-2) var(--space-4);
-  background: linear-gradient(135deg, #2563eb, #4f46e5);
-  color: #fff;
+  background: var(--gradient-button);
+  color: var(--color-on-primary);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
   cursor: pointer;
-  box-shadow: 0 10px 24px rgb(37 99 235 / 0.24);
+  box-shadow: var(--shadow-btn-primary-sm);
 }
 
 .jobs-mobile__map {
@@ -264,29 +256,27 @@
 }
 
 .jobs-mobile .job-sheet__panel {
-  border: 1px solid rgb(255 255 255 / 0.55);
-  background: rgb(255 255 255 / 0.78);
-  box-shadow:
-    0 -10px 40px rgb(37 99 235 / 0.1),
-    0 1px 0 rgb(255 255 255 / 0.65) inset;
-  backdrop-filter: blur(18px);
+  border: 1px solid var(--glass-border);
+  background: var(--glass-surface-sheet);
+  box-shadow: var(--shadow-glass-sheet);
+  backdrop-filter: blur(var(--blur-glass));
 }
 
 .jobs-mobile .job-sheet__grabber {
-  background: rgb(148 163 184 / 0.45);
+  background: var(--color-slate-muted);
 }
 
 .jobs-mobile .job-card {
-  border-color: rgb(255 255 255 / 0.55);
-  background: rgb(255 255 255 / 0.42);
-  backdrop-filter: blur(12px);
+  border-color: var(--glass-border);
+  background: var(--glass-surface);
+  backdrop-filter: blur(var(--blur-glass-md));
 }
 
 .jobs-mobile .sort-menu__trigger,
 .jobs-mobile .sort-menu__panel {
-  border-color: rgb(255 255 255 / 0.55);
-  background: rgb(255 255 255 / 0.55);
-  backdrop-filter: blur(10px);
+  border-color: var(--glass-border);
+  background: var(--glass-surface-raised);
+  backdrop-filter: blur(var(--blur-glass-sm));
 }
 
 @media (max-width: 60rem) {

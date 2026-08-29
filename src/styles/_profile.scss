@@ -2,13 +2,13 @@
   position: relative;
   overflow: clip;
   min-height: calc(100dvh - var(--app-header-size, 0px));
-  background: #f4f7ff;
-  padding-inline: clamp(var(--space-4), 5vw, var(--space-8));
-  padding-block: var(--space-6) var(--space-10);
+  background: var(--color-page-bg);
+  padding-inline: var(--page-padding-inline);
+  padding-block: var(--page-padding-block);
 
   .container {
     width: 100%;
-    max-width: 42rem;
+    max-width: var(--container-profile);
     margin-inline: auto;
     padding-inline: 0;
   }
@@ -42,12 +42,10 @@
   height: 5rem;
   border-radius: var(--radius-full);
   background: conic-gradient(
-    #2563eb calc(var(--progress) * 1%),
-    rgb(148 163 184 / 0.28) 0
+    var(--color-primary) calc(var(--progress) * 1%),
+    var(--color-slate-track) 0
   );
-  box-shadow:
-    0 0 0 1px rgb(255 255 255 / 0.65) inset,
-    0 16px 40px rgb(37 99 235 / 0.18);
+  box-shadow: var(--shadow-inset-ring), var(--shadow-avatar-ring);
 }
 
 .profile__avatar {
@@ -56,8 +54,8 @@
   width: calc(100% - 6px);
   height: calc(100% - 6px);
   border-radius: var(--radius-full);
-  background: linear-gradient(135deg, #2563eb, #7c3aed);
-  color: #fff;
+  background: var(--gradient-avatar);
+  color: var(--color-on-primary);
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-bold);
   letter-spacing: -0.02em;
@@ -74,11 +72,11 @@
   width: fit-content;
   align-items: center;
   gap: var(--space-2);
-  border: 1px solid rgb(255 255 255 / 0.65);
+  border: 1px solid var(--glass-border-strong);
   border-radius: var(--radius-full);
   padding: var(--space-1) var(--space-3);
-  background: rgb(255 255 255 / 0.45);
-  backdrop-filter: blur(10px);
+  background: var(--glass-surface-muted);
+  backdrop-filter: blur(var(--blur-glass-sm));
   color: var(--color-text-muted);
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-medium);
@@ -88,8 +86,8 @@
   width: 0.45rem;
   height: 0.45rem;
   border-radius: 50%;
-  background: linear-gradient(135deg, #22c55e, #06b6d4);
-  box-shadow: 0 0 10px rgb(34 197 94 / 0.7);
+  background: var(--gradient-badge-live);
+  box-shadow: var(--shadow-badge-live);
 }
 
 .profile__name {
@@ -101,7 +99,7 @@
 }
 
 .profile__name-accent {
-  background: linear-gradient(120deg, #2563eb 0%, #7c3aed 55%, #06b6d4 100%);
+  background: var(--gradient-text);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -125,7 +123,7 @@
   justify-content: space-between;
   gap: var(--space-3);
   padding-top: var(--space-2);
-  border-top: 1px solid rgb(255 255 255 / 0.45);
+  border-top: 1px solid var(--glass-divider);
 }
 
 .profile__completeness {
@@ -137,7 +135,7 @@
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-bold);
   line-height: 1;
-  background: linear-gradient(120deg, #2563eb, #7c3aed);
+  background: var(--gradient-text-short);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -207,10 +205,10 @@
   display: grid;
   gap: var(--space-4);
   padding: var(--space-4);
-  border: 1px solid rgb(255 255 255 / 0.55);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
-  background: rgb(255 255 255 / 0.28);
-  backdrop-filter: blur(10px);
+  background: var(--glass-surface-light);
+  backdrop-filter: blur(var(--blur-glass-sm));
 }
 
 .profile__work-entry-head {
@@ -243,7 +241,7 @@
 
 .profile__meta {
   padding-top: var(--space-2);
-  border-top: 1px solid rgb(255 255 255 / 0.4);
+  border-top: 1px solid var(--glass-divider-faint);
   font-size: var(--font-size-xs);
 }
 
@@ -261,9 +259,9 @@
   width: 4.5rem;
   height: 4.5rem;
   border-radius: var(--radius-full);
-  background: linear-gradient(135deg, #2563eb, #7c3aed);
-  box-shadow: 0 16px 40px rgb(37 99 235 / 0.24);
-  color: #fff;
+  background: var(--gradient-avatar);
+  box-shadow: var(--shadow-avatar-icon);
+  color: var(--color-on-primary);
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-bold);
 }
@@ -279,7 +277,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 2.5rem;
+  min-height: var(--control-height-md);
   border-radius: var(--radius-full);
   padding-inline: var(--space-5);
   border: 1px solid transparent;
@@ -294,13 +292,13 @@
     opacity var(--transition-base);
 
   &--primary {
-    background: linear-gradient(135deg, #2563eb, #4f46e5);
-    color: #fff;
-    box-shadow: 0 10px 24px rgb(37 99 235 / 0.26);
+    background: var(--gradient-button);
+    color: var(--color-on-primary);
+    box-shadow: var(--shadow-btn-primary);
 
     &:hover:not(:disabled) {
       transform: translateY(-1px);
-      box-shadow: 0 14px 32px rgb(37 99 235 / 0.32);
+      box-shadow: var(--shadow-btn-primary-hover);
     }
 
     &:disabled {
@@ -311,13 +309,13 @@
   }
 
   &--ghost {
-    border-color: rgb(255 255 255 / 0.65);
-    background: rgb(255 255 255 / 0.35);
-    backdrop-filter: blur(10px);
+    border-color: var(--glass-border-strong);
+    background: var(--glass-surface-subtle);
+    backdrop-filter: blur(var(--blur-glass-sm));
     color: var(--color-text);
 
     &:hover {
-      border-color: rgb(37 99 235 / 0.35);
+      border-color: var(--color-primary-glow);
       transform: translateY(-1px);
     }
   }
@@ -338,23 +336,23 @@
 
 .profile .profile-mat-field .mdc-text-field--outlined {
   border-radius: var(--radius-lg);
-  background: rgb(255 255 255 / 0.55);
+  background: var(--glass-surface-field);
 }
 
 .profile .profile-mat-toggle-group .mat-button-toggle-checked {
-  background: rgb(37 99 235 / 0.12);
-  color: #2563eb;
+  background: var(--color-primary-surface);
+  color: var(--color-primary);
 }
 
 .profile .profile-skill {
-  border-color: rgb(255 255 255 / 0.55);
-  background: rgb(255 255 255 / 0.28);
-  backdrop-filter: blur(10px);
+  border-color: var(--glass-border);
+  background: var(--glass-surface-light);
+  backdrop-filter: blur(var(--blur-glass-sm));
 }
 
 @media (max-width: 40rem) {
   .profile {
-    padding-block: var(--space-4) var(--space-8);
+    padding-block: var(--page-padding-block-compact);
   }
 
   .profile__hero {

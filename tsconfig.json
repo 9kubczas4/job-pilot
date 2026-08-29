@@ -11,6 +11,7 @@
     "isolatedModules": true,
     "experimentalDecorators": true,
     "importHelpers": true,
+    "moduleResolution": "bundler",
     "target": "ES2022",
     "module": "preserve"
   },

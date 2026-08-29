@@ -154,7 +154,6 @@ export class JobMapComponent {
   private onMarkerClick(job: JobOffer, marker: google.maps.Marker): void {
     this.selectJob.emit(job.id);
     this.openJobPopup(job, marker);
-    this.resetMapView();
   }
 
   private openSelectedJobPopup(selectedId: string | null): void {
@@ -172,11 +171,6 @@ export class JobMapComponent {
   private openJobPopup(job: JobOffer, marker: google.maps.Marker): void {
     this.infoWindow?.setContent(buildJobMapPopupHtml(job));
     this.infoWindow?.open({ map: this.map!, anchor: marker });
-  }
-
-  private resetMapView(): void {
-    this.map?.setCenter(DEFAULT_CENTER);
-    this.map?.setZoom(DEFAULT_ZOOM);
   }
 
   private fitBoundsToJobs(locatedJobs: JobOffer[]): void {

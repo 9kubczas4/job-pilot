@@ -23,7 +23,7 @@
 }
 
 .jobs-mobile {
-  --jobs-mobile-toolbar-height: 3.5rem;
+  --jobs-mobile-toolbar-height: var(--mobile-toolbar-height, 3.5rem);
 
   position: relative;
   overflow: hidden;

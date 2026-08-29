@@ -21,7 +21,7 @@
   min-height: 100vh;
   flex-direction: column;
   background: var(--color-surface);
-  --app-header-size: var(--mobile-header-height);
+  --app-header-size: var(--mobile-toolbar-height, 3.5rem);
 }
 
 .app-header {
@@ -37,6 +37,14 @@
   background: rgb(255 255 255 / 0.88);
   backdrop-filter: blur(12px);
   grid-template-columns: auto minmax(12rem, 1fr) auto;
+}
+
+.app-header__search {
+  min-width: 0;
+}
+
+.app-header__jobs-link {
+  display: none;
 }
 
 .app-header__start {
@@ -294,80 +302,4 @@
 
 .app-main {
   flex: 1;
-}
-
-@media (max-width: 64rem) {
-  .app-header {
-    position: fixed;
-    inset-inline: 0;
-    top: 0;
-    grid-template-columns: auto 1fr;
-    grid-template-rows: auto auto;
-    transform: translate3d(0, 0, 0);
-    transition: transform var(--header-transition);
-    will-change: transform;
-  }
-
-  .app-shell--header-hidden .app-header {
-    transform: translate3d(0, -100%, 0);
-    pointer-events: none;
-  }
-
-  .app-main {
-    flex: 1;
-    margin-top: var(--app-header-size);
-    min-height: calc(100dvh - var(--app-header-size));
-    transition:
-      margin-top var(--header-transition),
-      min-height var(--header-transition);
-  }
-
-  .app-shell--header-hidden .app-main {
-    margin-top: 0;
-    min-height: 100dvh;
-  }
-
-  .app-header__start {
-    grid-column: 1;
-  }
-
-  .app-header__actions {
-    grid-column: 2;
-    justify-self: end;
-  }
-
-  .app-header app-header-search {
-    grid-column: 1 / -1;
-  }
-
-  .app-nav {
-    display: none;
-  }
-}
-
-@media (max-width: 30rem) {
-  .app-header {
-    padding: var(--space-3) var(--space-4);
-  }
-
-  .header-action span:not(.header-action__badge) {
-    position: absolute;
-    overflow: hidden;
-    clip-path: inset(50%);
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    padding: 0;
-    white-space: nowrap;
-    border: 0;
-  }
-
-  .header-action {
-    padding: var(--space-2);
-    border-radius: var(--radius-md);
-  }
-
-  .profile-menu__name {
-    display: none;
-  }
 }

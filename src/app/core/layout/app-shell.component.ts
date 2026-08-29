@@ -11,6 +11,8 @@ import { FilterDrawerComponent } from '@shared/ui/filter-drawer/filter-drawer.co
 import { ToastHostComponent } from '@shared/ui/toast/toast-host.component';
 import { HeaderSearchComponent } from '@shared/ui/header-search/header-search.component';
 
+const MOBILE_SHELL_QUERY = '(max-width: 64rem)';
+
 @Component({
   selector: 'app-shell',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -29,15 +31,12 @@ export class AppShellComponent {
   readonly auth = inject(AuthService);
   readonly headerUi = inject(HeaderUiStore);
   readonly links = AppLinks;
+  readonly isMobileLayout = signal(false);
 
   private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
   private readonly platformId = inject(PLATFORM_ID);
   private readonly host = inject(ElementRef<HTMLElement>);
-
-  readonly headerCollapsed = computed(
-    () => this.headerUi.headerHidden() && !this.headerUi.filtersOpen(),
-  );
 
   readonly profileMenuOpen = signal(false);
   private readonly profileMenu = viewChild<ElementRef<HTMLElement>>('profileMenu');
@@ -70,19 +69,14 @@ export class AppShellComponent {
         observer.observe(header);
         this.destroyRef.onDestroy(() => observer.disconnect());
       }
+
+      const mobileQuery = window.matchMedia(MOBILE_SHELL_QUERY);
+      const syncLayout = () => this.isMobileLayout.set(mobileQuery.matches);
+
+      syncLayout();
+      mobileQuery.addEventListener('change', syncLayout);
+      this.destroyRef.onDestroy(() => mobileQuery.removeEventListener('change', syncLayout));
     });
-
-    const mobileQuery = window.matchMedia('(max-width: 64rem)');
-
-    fromEvent(window, 'scroll', { passive: true })
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(() => {
-        if (!mobileQuery.matches) {
-          return;
-        }
-
-        this.headerUi.reportScrollPosition(window.scrollY);
-      });
 
     this.router.events
       .pipe(
@@ -91,7 +85,7 @@ export class AppShellComponent {
       )
       .subscribe(() => {
         this.closeProfileMenu();
-        this.headerUi.resetScrollTracking(window.scrollY);
+        this.headerUi.showHeader();
       });
 
     fromEvent(document, 'click')

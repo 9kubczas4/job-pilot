@@ -36,7 +36,7 @@ export function provideJobDetailsWebMcpTools() {
   return provideExperimentalWebMcpTools([
     {
       name: 'get_job',
-      description: 'Read a single job offer by jobId. Use on /jobs/:id.',
+      description: 'Read a single job offer by jobId.',
       inputSchema: GET_JOB_SCHEMA,
       execute: async ({ jobId }) => {
         if (typeof jobId !== 'string') {
@@ -52,7 +52,7 @@ export function provideJobDetailsWebMcpTools() {
     {
       name: 'save_job',
       description:
-        'Add a job to favourites for the signed-in user. Same as clicking Save in the UI. Updates the Saved jobs list.',
+        'Add a job to favorites. Same as clicking Save in the UI. Works on the job list and job details pages.',
       inputSchema: SAVE_JOB_SCHEMA,
       execute: async ({ jobId }) => {
         if (typeof jobId !== 'string') {

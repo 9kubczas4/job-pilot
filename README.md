@@ -30,9 +30,9 @@ The agent never receives a `userId` in tool payloads. Identity comes from Fireba
 | `filter_jobs` | global | Set filters/sort and sync job board UI |
 | `get_profile` | global | Read candidate profile (headline, experience, skills, preferences) |
 | `update_profile` | `/profile` | Update candidate profile (Signal Form implicit tool) |
-| `get_job` | `/jobs/:id` | Read a single job offer |
-| `save_job` | `/jobs/:id` | Add a job to favourites |
-| `apply_job` | `/jobs/:id` | Submit a job application |
+| `get_job` | `/jobs` | Read a single job offer |
+| `save_job` | `/jobs` | Add a job to favourites |
+| `apply_job` | `/jobs` | Submit a job application |
 
 Global tools register in `app.config.ts`. Route-scoped tools register as route `providers` in `app.routes.ts`.
 

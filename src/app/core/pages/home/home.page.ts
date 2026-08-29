@@ -83,17 +83,17 @@ export class HomePageComponent {
     },
     {
       name: 'get_job',
-      scope: '/jobs/:id',
+      scope: '/jobs',
       description: 'Read full details for a single job offer.',
     },
     {
       name: 'save_job',
-      scope: '/jobs/:id',
+      scope: '/jobs',
       description: 'Add a job to favourites for the signed-in user.',
     },
     {
       name: 'apply_job',
-      scope: '/jobs/:id',
+      scope: '/jobs',
       description: 'Submit a job application for the signed-in user.',
     },
   ];

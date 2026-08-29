@@ -9,6 +9,7 @@ export const routes: Routes = [
   },
   {
     path: RoutePaths.jobs,
+    providers: [provideJobDetailsWebMcpTools()],
     children: [
       {
         path: RoutePaths.home,
@@ -19,7 +20,6 @@ export const routes: Routes = [
         path: RoutePaths.jobId,
         loadComponent: () =>
           import('@features/jobs/pages/job-details/job-details.page').then((m) => m.JobDetailsPageComponent),
-        providers: [provideJobDetailsWebMcpTools()],
       },
     ],
   },

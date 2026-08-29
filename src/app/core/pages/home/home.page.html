@@ -1,25 +1,47 @@
 <app-shell>
-  <section class="container page-hero stack stack--lg">
-    <p class="eyebrow">WebMCP Challenge</p>
-    <h1 class="page-title">A modern job board for humans and agents</h1>
-    <p class="lead">
-      Browse jobs with a clean UI, then let Codex complete your profile, search offers, and apply —
-      all through WebMCP tools that share the same domain model as the interface.
-    </p>
+  <section class="hero">
+    <div class="container hero__inner stack stack--lg">
+      <div class="hero__copy stack stack--md">
+        <p class="eyebrow">WebMCP Challenge</p>
+        <h1 class="page-title">A modern job board for humans and agents</h1>
+        <p class="lead">
+          Browse jobs with a clean UI, then let Codex complete your profile, search offers, and apply —
+          all through WebMCP tools that share the same domain model as the interface.
+        </p>
 
-    <div class="cluster cluster--md">
-      <a [routerLink]="links.jobs" class="btn btn-primary">Browse jobs</a>
-      <a [routerLink]="links.profile" class="btn btn-ghost">Open profile</a>
+        <div class="cluster cluster--md hero__actions">
+          <a [routerLink]="links.jobs" class="btn btn-primary">Browse jobs</a>
+          <a [routerLink]="links.profile" class="btn btn-ghost">Open profile</a>
+        </div>
+      </div>
+
+      <div class="hero__features">
+        <article class="feature-card">
+          <span class="feature-card__icon" aria-hidden="true">⌕</span>
+          <h2 class="feature-card__title">Smart search</h2>
+          <p class="feature-card__text">Filter by role, location, workplace, and salary in real time.</p>
+        </article>
+        <article class="feature-card">
+          <span class="feature-card__icon" aria-hidden="true">◎</span>
+          <h2 class="feature-card__title">Map view</h2>
+          <p class="feature-card__text">Explore openings geographically alongside a rich job list.</p>
+        </article>
+        <article class="feature-card">
+          <span class="feature-card__icon" aria-hidden="true">⚡</span>
+          <h2 class="feature-card__title">Agent-ready</h2>
+          <p class="feature-card__text">Codex tools read and write the same profile and search data.</p>
+        </article>
+      </div>
+
+      <article class="panel panel--subtle stack stack--sm">
+        <h2 class="section-title">How to test with Codex</h2>
+        <ol class="hero__steps text-muted">
+          <li>Open this app in the ChatGPT desktop in-app browser.</li>
+          <li>In Codex, ask: “Help me complete my profile based on this CV…”</li>
+          <li>Then ask: “Find lead frontend jobs, remote or hybrid in Warsaw, minimum 25k PLN.”</li>
+          <li>Watch filters, list, and map update in real time.</li>
+        </ol>
+      </article>
     </div>
-
-    <article class="panel stack stack--sm">
-      <h2 class="section-title">How to test with Codex</h2>
-      <ol class="text-muted">
-        <li>Open this app in the ChatGPT desktop in-app browser.</li>
-        <li>In Codex, ask: “Help me complete my profile based on this CV…”</li>
-        <li>Then ask: “Find lead frontend jobs, remote or hybrid in Warsaw, minimum 25k PLN.”</li>
-        <li>Watch filters, list, and map update in real time.</li>
-      </ol>
-    </article>
   </section>
 </app-shell>

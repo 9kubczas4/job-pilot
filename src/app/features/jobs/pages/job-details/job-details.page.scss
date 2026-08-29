@@ -1,37 +1,103 @@
 @use 'styles/layout';
 @use 'styles/button';
 @use 'styles/feedback';
+@use 'styles/chip';
 
 :host {
   display: block;
 }
 
-.details-header {
+.details-hero {
   display: flex;
+  align-items: flex-start;
   justify-content: space-between;
-  gap: var(--space-4);
+  gap: var(--space-6);
   margin-bottom: var(--space-6);
 }
 
-.details-section {
-  margin-top: var(--space-6);
-
-  ul {
-    margin: 0;
-    padding-left: var(--space-5);
-    color: var(--color-text-muted);
-    line-height: var(--line-height-relaxed);
-  }
+.details-hero__main {
+  flex: 1;
+  min-width: 0;
 }
 
-.details-salary {
+.details-hero__logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--color-primary-subtle), var(--color-accent-subtle));
+  color: var(--color-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+}
+
+.details-hero__company {
   margin: 0;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.details-hero__title {
+  margin: 0;
+  font-size: var(--font-size-2xl);
+  line-height: var(--line-height-tight);
+}
+
+.details-hero__meta {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.details-hero__salary {
+  margin: 0;
+  font-size: var(--font-size-lg);
   font-weight: var(--font-weight-semibold);
 }
 
+.details-hero__chips {
+  gap: var(--space-2);
+}
+
+.details-hero__actions {
+  flex-shrink: 0;
+}
+
+.details-grid {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.details-section__body {
+  margin: 0;
+  color: var(--color-text-muted);
+  line-height: var(--line-height-relaxed);
+}
+
+.details-list {
+  margin: 0;
+  padding-left: var(--space-5);
+  color: var(--color-text-muted);
+  line-height: var(--line-height-relaxed);
+}
+
+.toast {
+  margin-bottom: var(--space-4);
+}
+
 @media (max-width: 48rem) {
-  .details-header {
+  .details-hero {
     flex-direction: column;
     align-items: stretch;
+  }
+
+  .details-hero__actions {
+    width: 100%;
+
+    .btn {
+      flex: 1;
+    }
   }
 }

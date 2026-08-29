@@ -3,17 +3,26 @@
     <section class="container container--wide page">
       <a [routerLink]="links.jobs" class="link-back">← Back to search</a>
 
-      <header class="details-header">
-        <div class="stack stack--xs">
-          <p class="text-muted">{{ currentJob.company.name }}</p>
-          <h1 class="section-title section-title--lg">{{ currentJob.title }}</h1>
-          <p class="text-muted">{{ formatWorkplace(currentJob) }}</p>
+      <header class="details-hero panel">
+        <div class="details-hero__main stack stack--sm">
+          <span class="details-hero__logo" aria-hidden="true">{{ companyInitials(currentJob) }}</span>
+          <div class="stack stack--xs">
+            <p class="details-hero__company">{{ currentJob.company.name }}</p>
+            <h1 class="details-hero__title">{{ currentJob.title }}</h1>
+            <p class="details-hero__meta">{{ formatWorkplace(currentJob) }}</p>
+          </div>
           @if (formatSalary(currentJob); as salary) {
-            <p class="details-salary">{{ salary }}</p>
+            <p class="details-hero__salary">{{ salary }}</p>
           }
+          <div class="details-hero__chips cluster">
+            <span class="chip">{{ currentJob.workplace }}</span>
+            @for (level of currentJob.seniority; track level) {
+              <span class="chip">{{ level }}</span>
+            }
+          </div>
         </div>
 
-        <div class="cluster cluster--md">
+        <div class="details-hero__actions cluster cluster--md">
           <button type="button" class="btn btn-ghost" (click)="toggleSave()">
             {{ savedJobs.isSaved(currentJob.id) ? 'Saved' : 'Save job' }}
           </button>
@@ -32,28 +41,30 @@
         <p class="toast">{{ toast() }}</p>
       }
 
-      <article class="details-section stack stack--sm">
-        <h2 class="section-title">Description</h2>
-        <p>{{ currentJob.description }}</p>
-      </article>
+      <div class="details-grid">
+        <article class="details-section panel stack stack--sm">
+          <h2 class="section-title">Description</h2>
+          <p class="details-section__body">{{ currentJob.description }}</p>
+        </article>
 
-      <article class="details-section stack stack--sm">
-        <h2 class="section-title">Requirements</h2>
-        <ul>
-          @for (item of currentJob.requirements; track item) {
-            <li>{{ item }}</li>
-          }
-        </ul>
-      </article>
+        <article class="details-section panel stack stack--sm">
+          <h2 class="section-title">Requirements</h2>
+          <ul class="details-list">
+            @for (item of currentJob.requirements; track item) {
+              <li>{{ item }}</li>
+            }
+          </ul>
+        </article>
 
-      <article class="details-section stack stack--sm">
-        <h2 class="section-title">Responsibilities</h2>
-        <ul>
-          @for (item of currentJob.responsibilities; track item) {
-            <li>{{ item }}</li>
-          }
-        </ul>
-      </article>
+        <article class="details-section panel stack stack--sm">
+          <h2 class="section-title">Responsibilities</h2>
+          <ul class="details-list">
+            @for (item of currentJob.responsibilities; track item) {
+              <li>{{ item }}</li>
+            }
+          </ul>
+        </article>
+      </div>
     </section>
   } @else {
     <p class="state">Loading job details…</p>

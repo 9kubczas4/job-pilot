@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { JobOffer } from '../../domain/job.model';
 import { formatSalary, formatWorkplace } from '../../domain/job-formatters';
 
@@ -16,4 +16,12 @@ export class JobCardComponent {
 
   readonly formatSalary = formatSalary;
   readonly formatWorkplace = formatWorkplace;
+
+  readonly companyInitials = computed(() => {
+    const parts = this.job()
+      .company.name.split(/\s+/)
+      .filter(Boolean)
+      .slice(0, 2);
+    return parts.map((part) => part[0]?.toUpperCase() ?? '').join('') || '?';
+  });
 }

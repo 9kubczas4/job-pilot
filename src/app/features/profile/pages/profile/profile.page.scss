@@ -6,3 +6,25 @@
 :host {
   display: block;
 }
+
+.profile-form__section {
+  padding-bottom: var(--space-5);
+  border-bottom: 1px solid var(--color-border);
+
+  &:last-of-type {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+}
+
+.profile-form__heading {
+  margin: 0;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+}
+
+.profile-form__footer {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: var(--space-2);
+}

@@ -1,13 +1,57 @@
 @use 'styles/feedback';
+@use 'styles/layout';
 
 :host {
   display: block;
+  height: 100%;
+  min-height: 0;
 }
 
 .job-list {
   display: flex;
-  overflow: auto;
+  height: 100%;
+  min-height: 0;
+  flex-direction: column;
+  border-inline-end: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.job-list__header {
+  flex-shrink: 0;
+  padding: var(--space-5) var(--space-5) var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface-elevated);
+}
+
+.job-list__title {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+}
+
+.job-list__subtitle {
+  margin: var(--space-1) 0 0;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.job-list__body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: var(--space-4);
+}
+
+.job-list__items {
+  display: flex;
   flex-direction: column;
   gap: var(--space-3);
-  padding: var(--space-4);
+}
+
+@media (max-width: 60rem) {
+  .job-list {
+    border-inline-end: none;
+    border-bottom: 1px solid var(--color-border);
+  }
 }

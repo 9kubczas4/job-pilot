@@ -1,27 +1,39 @@
-<article class="card" [class.is-selected]="selected()">
-  <div class="job-card__header">
-    <div>
+<article class="job-card" [class.is-selected]="selected()">
+  <div class="job-card__top">
+    <span class="job-card__logo" aria-hidden="true">{{ companyInitials() }}</span>
+
+    <div class="job-card__intro">
       <h3 class="job-card__title">{{ job().title }}</h3>
       <p class="job-card__company">{{ job().company.name }}</p>
     </div>
-    <div class="job-card__badges cluster">
-      @if (saved()) {
-        <span class="badge">Saved</span>
-      }
-      @if (applied()) {
-        <span class="badge badge--success">Applied</span>
-      }
-    </div>
-  </div>
 
-  <p class="job-card__meta">{{ formatWorkplace(job()) }}</p>
-  @if (formatSalary(job()); as salary) {
-    <p class="job-card__salary">{{ salary }}</p>
-  }
-
-  <div class="cluster job-card__skills">
-    @for (skill of job().skills.slice(0, 4); track skill.name) {
-      <span class="chip">{{ skill.name }}</span>
+    @if (saved() || applied()) {
+      <div class="job-card__badges">
+        @if (saved()) {
+          <span class="badge">Saved</span>
+        }
+        @if (applied()) {
+          <span class="badge badge--success">Applied</span>
+        }
+      </div>
     }
   </div>
+
+  <div class="job-card__meta">
+    <span class="job-card__location">{{ formatWorkplace(job()) }}</span>
+    @if (formatSalary(job()); as salary) {
+      <span class="job-card__salary">{{ salary }}</span>
+    }
+  </div>
+
+  @if (job().skills.length) {
+    <div class="job-card__skills">
+      @for (skill of job().skills.slice(0, 4); track skill.name) {
+        <span class="chip">{{ skill.name }}</span>
+      }
+      @if (job().skills.length > 4) {
+        <span class="chip chip--muted">+{{ job().skills.length - 4 }}</span>
+      }
+    </div>
+  }
 </article>

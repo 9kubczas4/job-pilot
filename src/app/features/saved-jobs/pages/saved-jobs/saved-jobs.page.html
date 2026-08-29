@@ -1,13 +1,23 @@
 <app-shell>
   <section class="container container--narrow page stack stack--lg">
-    <h1 class="section-title section-title--lg">Saved jobs</h1>
+    <header class="page-header">
+      <h1 class="page-header__title">Saved jobs</h1>
+      <p class="page-header__subtitle">Keep track of roles you want to revisit or apply to later.</p>
+    </header>
 
     @if (!auth.isAuthenticated()) {
-      <p class="text-muted">Sign in to view saved jobs.</p>
+      <div class="empty-state">
+        <p class="empty-state__title">Sign in to view saved jobs</p>
+        <p class="empty-state__text">Your saved listings will appear here once you are signed in.</p>
+      </div>
     } @else if (!savedJobs().length) {
-      <p class="text-muted">No saved jobs yet.</p>
+      <div class="empty-state">
+        <p class="empty-state__title">No saved jobs yet</p>
+        <p class="empty-state__text">Browse offers and save the ones that match your goals.</p>
+        <a [routerLink]="links.jobs" class="btn btn-primary">Browse jobs</a>
+      </div>
     } @else {
-      <div class="stack stack--sm">
+      <div class="saved-list stack stack--sm">
         @for (job of savedJobs(); track job.id) {
           <a [routerLink]="jobLink(job.id)" class="link-plain">
             <app-job-card [job]="job" [saved]="true" />

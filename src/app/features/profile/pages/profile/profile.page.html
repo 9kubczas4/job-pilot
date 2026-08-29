@@ -1,52 +1,65 @@
 <app-shell>
   <section class="container container--narrow page stack stack--lg">
-    <header class="stack stack--sm">
-      <h1 class="section-title section-title--lg">Candidate profile</h1>
-      <p class="text-muted">
+    <header class="page-header">
+      <h1 class="page-header__title">Candidate profile</h1>
+      <p class="page-header__subtitle">
         Human-editable profile backed by the same data exposed to Codex tools.
       </p>
     </header>
 
     @if (!auth.isAuthenticated()) {
-      <p class="text-muted">Sign in to create and edit your profile.</p>
+      <div class="empty-state">
+        <p class="empty-state__title">Sign in to manage your profile</p>
+        <p class="empty-state__text">Create and edit your candidate profile after signing in.</p>
+      </div>
     } @else {
-      <form class="stack stack--md" (ngSubmit)="save()">
-        <label class="field">
-          Headline
-          <input class="input" [(ngModel)]="draft.headline" name="headline" />
-        </label>
+      <form class="profile-form panel stack stack--lg" (ngSubmit)="save()">
+        <section class="profile-form__section stack stack--md">
+          <h2 class="profile-form__heading">Basics</h2>
 
-        <label class="field">
-          Years of experience
-          <input
-            class="input"
-            [(ngModel)]="draft.yearsOfExperience"
-            name="yearsOfExperience"
-            type="number"
-          />
-        </label>
+          <label class="field">
+            Headline
+            <input class="input" [(ngModel)]="draft.headline" name="headline" />
+          </label>
 
-        <label class="field">
-          Skills (comma separated)
-          <input class="input" [(ngModel)]="skillsInput" name="skills" />
-        </label>
+          <label class="field">
+            Years of experience
+            <input
+              class="input"
+              [(ngModel)]="draft.yearsOfExperience"
+              name="yearsOfExperience"
+              type="number"
+            />
+          </label>
+        </section>
 
-        <label class="field">
-          Preferred roles (comma separated)
-          <input class="input" [(ngModel)]="rolesInput" name="roles" />
-        </label>
+        <section class="profile-form__section stack stack--md">
+          <h2 class="profile-form__heading">Preferences</h2>
 
-        <label class="field">
-          Preferred locations (comma separated)
-          <input class="input" [(ngModel)]="locationsInput" name="locations" />
-        </label>
+          <label class="field">
+            Skills (comma separated)
+            <input class="input" [(ngModel)]="skillsInput" name="skills" />
+          </label>
 
-        <label class="field">
-          Workplace preferences (remote, hybrid, onsite)
-          <input class="input" [(ngModel)]="workplaceInput" name="workplace" />
-        </label>
+          <label class="field">
+            Preferred roles (comma separated)
+            <input class="input" [(ngModel)]="rolesInput" name="roles" />
+          </label>
 
-        <button type="submit" class="btn btn-primary">Save profile</button>
+          <label class="field">
+            Preferred locations (comma separated)
+            <input class="input" [(ngModel)]="locationsInput" name="locations" />
+          </label>
+
+          <label class="field">
+            Workplace preferences (remote, hybrid, onsite)
+            <input class="input" [(ngModel)]="workplaceInput" name="workplace" />
+          </label>
+        </section>
+
+        <div class="profile-form__footer">
+          <button type="submit" class="btn btn-primary">Save profile</button>
+        </div>
       </form>
 
       @if (message()) {

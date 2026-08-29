@@ -1,22 +1,38 @@
 <section class="job-list">
-  @if (loading()) {
-    <p class="state">Loading jobs…</p>
-  } @else if (!jobs().length) {
-    <p class="state">No jobs match your filters.</p>
-  } @else {
-    @for (job of jobs(); track job.id) {
-      <a
-        [routerLink]="jobLink(job.id)"
-        class="link-plain"
-        (click)="selectJob.emit(job.id)"
-      >
-        <app-job-card
-          [job]="job"
-          [selected]="selectedJobId() === job.id"
-          [saved]="savedJobIds().includes(job.id)"
-          [applied]="appliedJobIds().includes(job.id)"
-        />
-      </a>
+  <header class="job-list__header">
+    <div>
+      <h2 class="job-list__title">Offers</h2>
+      @if (!loading() && jobs().length) {
+        <p class="job-list__subtitle">{{ jobs().length }} matching {{ jobs().length === 1 ? 'job' : 'jobs' }}</p>
+      }
+    </div>
+  </header>
+
+  <div class="job-list__body">
+    @if (loading()) {
+      <p class="state">Loading jobs…</p>
+    } @else if (!jobs().length) {
+      <div class="empty-state">
+        <p class="empty-state__title">No matching jobs</p>
+        <p class="empty-state__text">Try adjusting your search or filters to discover more opportunities.</p>
+      </div>
+    } @else {
+      <div class="job-list__items">
+        @for (job of jobs(); track job.id) {
+          <a
+            [routerLink]="jobLink(job.id)"
+            class="link-plain"
+            (click)="selectJob.emit(job.id)"
+          >
+            <app-job-card
+              [job]="job"
+              [selected]="selectedJobId() === job.id"
+              [saved]="savedJobIds().includes(job.id)"
+              [applied]="appliedJobIds().includes(job.id)"
+            />
+          </a>
+        }
+      </div>
     }
-  }
+  </div>
 </section>

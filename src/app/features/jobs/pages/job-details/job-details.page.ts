@@ -5,6 +5,7 @@ import { AuthService } from '@core/auth/auth.service';
 import { AppLinks } from '@app/app-paths';
 import { SavedJobsStore } from '@features/saved-jobs/state/saved-jobs.store';
 import { formatSalary, formatWorkplace } from '../../domain/job-formatters';
+import { JobOffer } from '../../domain/job.model';
 import { JobDetailsStore } from '../../state/job-details.store';
 
 @Component({
@@ -71,5 +72,10 @@ export class JobDetailsPageComponent implements OnInit {
     this.savedJobs.applyToJob(job.id).then(() => {
       this.toast.set(`Application submitted for ${job.title}.`);
     });
+  }
+
+  companyInitials(job: JobOffer): string {
+    const parts = job.company.name.split(/\s+/).filter(Boolean).slice(0, 2);
+    return parts.map((part) => part[0]?.toUpperCase() ?? '').join('') || '?';
   }
 }

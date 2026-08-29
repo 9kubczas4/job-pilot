@@ -1,6 +1,11 @@
 @use 'styles/layout';
 @use 'styles/feedback';
+@use 'styles/button';
 
 :host {
   display: block;
+}
+
+.saved-list {
+  gap: var(--space-3);
 }

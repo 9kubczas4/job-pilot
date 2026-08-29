@@ -1,37 +1,69 @@
 <app-shell>
-  <section class="container container--narrow page stack stack--lg">
-    <header class="page-header">
-      <h1 class="page-header__title">Saved jobs</h1>
-      <p class="page-header__subtitle">Keep track of roles you want to revisit or apply to later.</p>
-    </header>
+  <div class="account-page">
+    <div class="landing__aurora" aria-hidden="true">
+      <span class="landing__orb landing__orb--1"></span>
+      <span class="landing__orb landing__orb--2"></span>
+      <span class="landing__orb landing__orb--3"></span>
+      <span class="landing__grid"></span>
+    </div>
 
-    @if (auth.loading()) {
-      <div class="empty-state">
-        <p class="empty-state__title">Loading…</p>
-      </div>
-    } @else if (!auth.isAuthenticated()) {
-      <div class="empty-state">
-        <p class="empty-state__title">Sign in to view saved jobs</p>
-        <p class="empty-state__text">Your saved listings will appear here once you are signed in.</p>
-      </div>
-    } @else if (!savedJobs().length) {
-      <div class="empty-state">
-        <p class="empty-state__title">No saved jobs yet</p>
-        <p class="empty-state__text">Browse offers and save the ones that match your goals.</p>
-        <a [routerLink]="links.jobs" class="btn btn-primary">Browse jobs</a>
-      </div>
-    } @else {
-      <div class="saved-list stack stack--sm">
-        @for (job of savedJobs(); track job.id) {
-          <a [routerLink]="jobLink(job.id)" class="link-plain">
-            <app-job-card
-              [job]="job"
-              [saved]="savedJobsStore.isSaved(job.id)"
-              (toggleSave)="onToggleSave(job.id)"
-            />
-          </a>
+    <div class="container">
+      <header class="account-page__hero glass-card">
+        <span class="account-page__badge">
+          <span class="account-page__badge-dot" aria-hidden="true"></span>
+          Your shortlist
+        </span>
+        <h1 class="account-page__title">
+          <span class="account-page__title-accent">Saved jobs</span>
+        </h1>
+        <p class="account-page__subtitle">
+          Keep track of roles you want to revisit or apply to later.
+        </p>
+        @if (auth.isAuthenticated() && savedJobs().length) {
+          <p class="account-page__stat">
+            <strong>{{ savedJobs().length }}</strong>
+            <span>{{ savedJobs().length === 1 ? 'saved role' : 'saved roles' }}</span>
+          </p>
         }
-      </div>
-    }
-  </section>
+      </header>
+
+      @if (auth.loading()) {
+        <section class="account-page__empty glass-card">
+          <p class="account-page__empty-text">Loading…</p>
+        </section>
+      } @else if (!auth.isAuthenticated()) {
+        <section class="account-page__empty glass-card">
+          <div class="account-page__empty-icon" aria-hidden="true">★</div>
+          <h2 class="account-page__empty-title">Sign in to view saved jobs</h2>
+          <p class="account-page__empty-text">
+            Your saved listings will appear here once you are signed in.
+          </p>
+          <button class="account-page__btn account-page__btn--primary" type="button" (click)="signIn()">
+            Sign in with Google
+          </button>
+        </section>
+      } @else if (!savedJobs().length) {
+        <section class="account-page__empty glass-card">
+          <div class="account-page__empty-icon" aria-hidden="true">★</div>
+          <h2 class="account-page__empty-title">No saved jobs yet</h2>
+          <p class="account-page__empty-text">Browse offers and save the ones that match your goals.</p>
+          <a [routerLink]="links.jobs" class="account-page__btn account-page__btn--primary">Browse jobs</a>
+        </section>
+      } @else {
+        <section class="account-page__panel glass-card">
+          <div class="account-page__list">
+            @for (job of savedJobs(); track job.id) {
+              <a [routerLink]="jobLink(job.id)" class="link-plain">
+                <app-job-card
+                  [job]="job"
+                  [saved]="savedJobsStore.isSaved(job.id)"
+                  (toggleSave)="onToggleSave(job.id)"
+                />
+              </a>
+            }
+          </div>
+        </section>
+      }
+    </div>
+  </div>
 </app-shell>

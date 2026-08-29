@@ -45,4 +45,8 @@ export class SavedJobsPageComponent {
     await this.savedJobsStore.unsaveJob(jobId);
     this.toast.show('Removed from saved jobs.');
   }
+
+  signIn(): void {
+    void this.auth.signInWithGoogle();
+  }
 }

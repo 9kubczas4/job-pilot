@@ -1,44 +1,76 @@
 <app-shell>
-  <section class="container container--narrow page stack stack--lg">
-    <header class="page-header">
-      <h1 class="page-header__title">Applications</h1>
-      <p class="page-header__subtitle">Roles you have already applied to.</p>
-    </header>
+  <div class="account-page">
+    <div class="landing__aurora" aria-hidden="true">
+      <span class="landing__orb landing__orb--1"></span>
+      <span class="landing__orb landing__orb--2"></span>
+      <span class="landing__orb landing__orb--3"></span>
+      <span class="landing__grid"></span>
+    </div>
 
-    @if (auth.loading()) {
-      <div class="empty-state">
-        <p class="empty-state__title">Loading…</p>
-      </div>
-    } @else if (!auth.isAuthenticated()) {
-      <div class="empty-state">
-        <p class="empty-state__title">Sign in to view applications</p>
-        <p class="empty-state__text">Your submitted applications will appear here once you are signed in.</p>
-      </div>
-    } @else if (!appliedJobs().length) {
-      <div class="empty-state">
-        <p class="empty-state__title">No applications yet</p>
-        <p class="empty-state__text">Apply to roles that match your profile and track them here.</p>
-        <a [routerLink]="links.jobs" class="btn btn-primary">Browse jobs</a>
-      </div>
-    } @else {
-      <div class="applications-list stack stack--sm">
-        @for (entry of appliedJobs(); track entry.application.jobId) {
-          <article class="applications-list__item">
-            <a [routerLink]="jobLink(entry.job.id)" class="link-plain">
-              <app-job-card [job]="entry.job" [applied]="true" [showSaveButton]="false" />
-            </a>
-
-            <div class="applications-list__meta">
-              <p class="applications-list__date">
-                Applied {{ formatAppliedDate(entry.application.appliedAt) }}
-              </p>
-              @if (entry.application.note) {
-                <p class="applications-list__note">{{ entry.application.note }}</p>
-              }
-            </div>
-          </article>
+    <div class="container">
+      <header class="account-page__hero glass-card">
+        <span class="account-page__badge">
+          <span class="account-page__badge-dot" aria-hidden="true"></span>
+          Application tracker
+        </span>
+        <h1 class="account-page__title">
+          <span class="account-page__title-accent">Applications</span>
+        </h1>
+        <p class="account-page__subtitle">Roles you have already applied to.</p>
+        @if (auth.isAuthenticated() && appliedJobs().length) {
+          <p class="account-page__stat">
+            <strong>{{ appliedJobs().length }}</strong>
+            <span>{{ appliedJobs().length === 1 ? 'application' : 'applications' }}</span>
+          </p>
         }
-      </div>
-    }
-  </section>
+      </header>
+
+      @if (auth.loading()) {
+        <section class="account-page__empty glass-card">
+          <p class="account-page__empty-text">Loading…</p>
+        </section>
+      } @else if (!auth.isAuthenticated()) {
+        <section class="account-page__empty glass-card">
+          <div class="account-page__empty-icon" aria-hidden="true">✓</div>
+          <h2 class="account-page__empty-title">Sign in to view applications</h2>
+          <p class="account-page__empty-text">
+            Your submitted applications will appear here once you are signed in.
+          </p>
+          <button class="account-page__btn account-page__btn--primary" type="button" (click)="signIn()">
+            Sign in with Google
+          </button>
+        </section>
+      } @else if (!appliedJobs().length) {
+        <section class="account-page__empty glass-card">
+          <div class="account-page__empty-icon" aria-hidden="true">✓</div>
+          <h2 class="account-page__empty-title">No applications yet</h2>
+          <p class="account-page__empty-text">
+            Apply to roles that match your profile and track them here.
+          </p>
+          <a [routerLink]="links.jobs" class="account-page__btn account-page__btn--primary">Browse jobs</a>
+        </section>
+      } @else {
+        <section class="account-page__panel glass-card">
+          <div class="account-page__list">
+            @for (entry of appliedJobs(); track entry.application.jobId) {
+              <article class="account-page__item">
+                <a [routerLink]="jobLink(entry.job.id)" class="link-plain">
+                  <app-job-card [job]="entry.job" [applied]="true" [showSaveButton]="false" />
+                </a>
+
+                <div class="account-page__item-meta">
+                  <p class="account-page__item-date">
+                    Applied {{ formatAppliedDate(entry.application.appliedAt) }}
+                  </p>
+                  @if (entry.application.note) {
+                    <p class="account-page__item-note">{{ entry.application.note }}</p>
+                  }
+                </div>
+              </article>
+            }
+          </div>
+        </section>
+      }
+    </div>
+  </div>
 </app-shell>

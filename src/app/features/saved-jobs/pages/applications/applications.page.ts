@@ -55,4 +55,8 @@ export class ApplicationsPageComponent {
       void this.savedJobsStore.loadUserData();
     });
   }
+
+  signIn(): void {
+    void this.auth.signInWithGoogle();
+  }
 }

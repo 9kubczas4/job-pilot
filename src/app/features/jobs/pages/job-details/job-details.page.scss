@@ -268,7 +268,7 @@
     flex-direction: column;
     gap: var(--space-4);
     position: sticky;
-    top: calc(var(--app-header-size, var(--header-height)) + var(--space-4));
+    top: calc(var(--mobile-header-offset) + var(--space-4));
   }
 
   .job-details__section--similar {

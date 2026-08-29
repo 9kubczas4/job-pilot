@@ -24,7 +24,6 @@
   overflow: hidden;
   flex-direction: column;
   background: var(--color-surface);
-  --app-header-size: 0px;
 }
 
 .app-header {
@@ -193,8 +192,8 @@
 
   .app-main {
     flex: 1;
-    margin-top: var(--app-header-size);
     min-height: 0;
+    margin-top: 0;
     overflow-y: auto;
   }
 

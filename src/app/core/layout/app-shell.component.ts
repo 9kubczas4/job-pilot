@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, inject, PLATFORM_ID, afterNextRender, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, PLATFORM_ID, afterNextRender, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { isPlatformBrowser } from '@angular/common';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
@@ -38,7 +38,6 @@ export class AppShellComponent {
   private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
   private readonly platformId = inject(PLATFORM_ID);
-  private readonly host = inject(ElementRef<HTMLElement>);
 
   constructor() {
     if (!isPlatformBrowser(this.platformId)) {
@@ -46,20 +45,6 @@ export class AppShellComponent {
     }
 
     afterNextRender(() => {
-      const shell = this.host.nativeElement;
-      const header = shell.querySelector('.app-header');
-
-      if (header instanceof HTMLElement) {
-        const syncHeaderSize = () => {
-          shell.style.setProperty('--app-header-size', `${header.offsetHeight}px`);
-        };
-
-        syncHeaderSize();
-        const observer = new ResizeObserver(syncHeaderSize);
-        observer.observe(header);
-        this.destroyRef.onDestroy(() => observer.disconnect());
-      }
-
       const mobileQuery = window.matchMedia(MOBILE_SHELL_QUERY);
       const syncLayout = () => this.isMobileLayout.set(mobileQuery.matches);
 

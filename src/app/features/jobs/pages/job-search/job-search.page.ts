@@ -5,7 +5,6 @@ import {
   computed,
   DestroyRef,
   effect,
-  ElementRef,
   inject,
   OnInit,
   PLATFORM_ID,
@@ -100,7 +99,6 @@ export class JobSearchPageComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly destroyRef = inject(DestroyRef);
   private readonly platformId = inject(PLATFORM_ID);
-  private readonly host = inject(ElementRef<HTMLElement>);
 
   private readonly syncingFromRoute = signal(false);
   private readonly syncingFromHeader = signal(false);
@@ -144,21 +142,6 @@ export class JobSearchPageComponent implements OnInit {
         syncLayout();
         mobileQuery.addEventListener('change', syncLayout);
         this.destroyRef.onDestroy(() => mobileQuery.removeEventListener('change', syncLayout));
-
-        const toolbar = this.host.nativeElement.querySelector('.jobs-mobile__toolbar');
-        if (toolbar instanceof HTMLElement) {
-          const syncToolbarHeight = () => {
-            this.host.nativeElement.style.setProperty(
-              '--jobs-mobile-toolbar-height',
-              `${toolbar.offsetHeight}px`,
-            );
-          };
-
-          syncToolbarHeight();
-          const observer = new ResizeObserver(syncToolbarHeight);
-          observer.observe(toolbar);
-          this.destroyRef.onDestroy(() => observer.disconnect());
-        }
       });
     }
 

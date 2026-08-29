@@ -7,7 +7,7 @@
   --sheet-height-collapsed: 3.25rem;
   --sheet-height-peek: min(24vh, 11rem);
   --sheet-height-half: 52vh;
-  --sheet-height-full: calc(100dvh - var(--jobs-mobile-toolbar-height, 3.5rem));
+  --sheet-height-full: calc(100dvh - var(--mobile-header-offset));
 
   position: fixed;
   inset: 0;

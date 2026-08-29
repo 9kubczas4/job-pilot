@@ -1,7 +1,7 @@
 .profile {
   position: relative;
   overflow: clip;
-  min-height: calc(100dvh - var(--app-header-size, 0px));
+  min-height: calc(100dvh - var(--mobile-header-offset));
   background: var(--color-page-bg);
   padding-inline: var(--page-padding-inline);
   padding-block: var(--page-padding-block);
@@ -351,10 +351,6 @@
 }
 
 @media (max-width: 40rem) {
-  .profile {
-    padding-block: var(--page-padding-block-compact);
-  }
-
   .profile__hero {
     padding: var(--space-5);
   }

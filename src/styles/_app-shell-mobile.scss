@@ -10,6 +10,11 @@
 }
 
 @media (max-width: 64rem) {
+  body .app-shell .app-main {
+    padding-top: var(--mobile-header-offset);
+    padding-bottom: var(--app-main-mobile-gap-bottom);
+  }
+
   body.page-scroll-y .app-shell {
     height: auto;
     min-height: 100dvh;
@@ -24,10 +29,6 @@
 
   .app-shell .page {
     padding-block: var(--space-4);
-  }
-
-  .app-shell .landing-hero {
-    padding-block-start: var(--space-6);
   }
 }
 

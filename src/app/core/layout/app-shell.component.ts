@@ -8,6 +8,7 @@ import { AuthService } from '@core/auth/auth.service';
 import { HeaderUiStore } from '@shared/state/header-ui.store';
 import { AppLogoComponent } from '@shared/ui/app-logo/app-logo.component';
 import { FilterDrawerComponent } from '@shared/ui/filter-drawer/filter-drawer.component';
+import { ToastHostComponent } from '@shared/ui/toast/toast-host.component';
 import { HeaderSearchComponent } from '@shared/ui/header-search/header-search.component';
 
 @Component({
@@ -19,6 +20,7 @@ import { HeaderSearchComponent } from '@shared/ui/header-search/header-search.co
     AppLogoComponent,
     FilterDrawerComponent,
     HeaderSearchComponent,
+    ToastHostComponent,
   ],
   templateUrl: './app-shell.component.html',
   styleUrl: './app-shell.component.scss',

@@ -20,6 +20,7 @@ import { AuthService } from '@core/auth/auth.service';
 import { AppShellComponent } from '@core/layout/app-shell.component';
 import { DEFAULT_SEARCH_RADIUS_KM } from '@shared/models/header-search.model';
 import { HeaderUiStore } from '@shared/state/header-ui.store';
+import { AuthPromptDialogComponent } from '@shared/ui/auth-prompt-dialog/auth-prompt-dialog.component';
 import { AppLogoComponent } from '@shared/ui/app-logo/app-logo.component';
 import { FilterDrawerComponent } from '@shared/ui/filter-drawer/filter-drawer.component';
 import { HeaderSearchComponent } from '@shared/ui/header-search/header-search.component';
@@ -58,6 +59,7 @@ const MOBILE_LAYOUT_QUERY = '(max-width: 60rem)';
   imports: [
     AppShellComponent,
     AppLogoComponent,
+    AuthPromptDialogComponent,
     FilterDrawerComponent,
     HeaderSearchComponent,
     JobFiltersComponent,
@@ -79,6 +81,9 @@ export class JobSearchPageComponent implements OnInit {
   readonly searchExpanded = signal(false);
   readonly sheetSnap = signal<JobSheetSnap>('peek');
   readonly sheetFocusJobId = signal<string | null>(null);
+  readonly authPromptOpen = signal(false);
+
+  private pendingSaveJobId: string | null = null;
 
   private readonly jobMap = viewChild<JobMapComponent>('jobMap');
   private readonly router = inject(Router);
@@ -253,6 +258,8 @@ export class JobSearchPageComponent implements OnInit {
 
   onToggleSaveJob(jobId: string): void {
     if (!this.auth.isAuthenticated()) {
+      this.pendingSaveJobId = jobId;
+      this.authPromptOpen.set(true);
       return;
     }
 
@@ -262,6 +269,29 @@ export class JobSearchPageComponent implements OnInit {
     }
 
     void this.savedJobs.saveJob(jobId);
+  }
+
+  closeAuthPrompt(): void {
+    this.authPromptOpen.set(false);
+    this.pendingSaveJobId = null;
+  }
+
+  async confirmAuthPrompt(): Promise<void> {
+    try {
+      await this.auth.signInWithGoogle();
+      this.authPromptOpen.set(false);
+
+      const jobId = this.pendingSaveJobId;
+      this.pendingSaveJobId = null;
+
+      if (!jobId || this.savedJobs.isSaved(jobId)) {
+        return;
+      }
+
+      await this.savedJobs.saveJob(jobId);
+    } catch {
+      // User dismissed the provider popup or sign-in failed.
+    }
   }
 
   onMobileSelectJob(jobId: string): void {

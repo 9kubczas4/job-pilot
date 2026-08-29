@@ -1,0 +1,36 @@
+<div
+  class="auth-dialog-root"
+  [class.is-open]="open()"
+  [attr.inert]="open() ? null : ''"
+  [attr.aria-hidden]="!open()"
+>
+  <button
+    type="button"
+    class="auth-dialog-backdrop"
+    aria-label="Close dialog"
+    tabindex="-1"
+    (click)="requestClose()"
+  ></button>
+
+  <div
+    #dialog
+    class="auth-dialog"
+    role="dialog"
+    aria-modal="true"
+    [attr.aria-labelledby]="open() ? 'auth-dialog-title' : null"
+    [attr.aria-describedby]="open() ? 'auth-dialog-message' : null"
+    tabindex="-1"
+  >
+    <h2 id="auth-dialog-title" class="auth-dialog__title">{{ title() }}</h2>
+    <p id="auth-dialog-message" class="auth-dialog__message">{{ message() }}</p>
+
+    <div class="auth-dialog__actions">
+      <button type="button" class="btn btn-ghost" (click)="requestClose()">
+        {{ cancelLabel() }}
+      </button>
+      <button type="button" class="btn btn-primary" (click)="onConfirm()">
+        {{ confirmLabel() }}
+      </button>
+    </div>
+  </div>
+</div>

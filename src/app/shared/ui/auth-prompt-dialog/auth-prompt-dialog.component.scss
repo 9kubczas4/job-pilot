@@ -1,0 +1,81 @@
+@use 'styles/button';
+
+.auth-dialog-root {
+  position: fixed;
+  inset: 0;
+  z-index: calc(var(--z-drawer) + 1);
+  display: grid;
+  place-items: center;
+  padding: var(--space-4);
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.auth-dialog-root.is-open {
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.auth-dialog-backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: rgb(15 23 42 / 0.45);
+  opacity: 0;
+  backdrop-filter: blur(0);
+  cursor: pointer;
+  transition:
+    opacity var(--transition-fast),
+    backdrop-filter var(--transition-fast);
+}
+
+.auth-dialog-root.is-open .auth-dialog-backdrop {
+  opacity: 1;
+  backdrop-filter: blur(4px);
+}
+
+.auth-dialog {
+  position: relative;
+  width: min(100%, 24rem);
+  padding: var(--space-5);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface-elevated);
+  box-shadow: var(--shadow-md);
+  outline: none;
+  opacity: 0;
+  transform: translateY(0.5rem) scale(0.98);
+  transition:
+    opacity var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.auth-dialog-root.is-open .auth-dialog {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.auth-dialog__title {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+}
+
+.auth-dialog__message {
+  margin: var(--space-3) 0 0;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-relaxed);
+}
+
+.auth-dialog__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-2);
+  margin-top: var(--space-5);
+}
+
+.auth-dialog__actions .btn {
+  min-width: 6rem;
+}

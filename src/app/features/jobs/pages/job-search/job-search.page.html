@@ -105,3 +105,11 @@
     </div>
   </app-shell>
 }
+
+<app-auth-prompt-dialog
+  [open]="authPromptOpen()"
+  title="Sign in to save jobs"
+  message="Sign in to add offers to your saved list and access them from any device."
+  (closed)="closeAuthPrompt()"
+  (confirmed)="confirmAuthPrompt()"
+/>

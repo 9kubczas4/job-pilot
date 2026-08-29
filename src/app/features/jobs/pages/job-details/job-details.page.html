@@ -1,105 +1,207 @@
 <app-shell>
   @if (store.job(); as currentJob) {
-    <section class="container container--wide page">
-      <a [routerLink]="links.jobs" class="link-back">← Back to search</a>
+    <div class="job-details">
+      <a [routerLink]="links.jobs" class="job-details__back">
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+          <path d="M15 6 L9 12 L15 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+        </svg>
+        Back to search
+      </a>
 
-      <header class="details-hero panel">
-        <div class="details-hero__main stack stack--sm">
-          <span class="details-hero__logo" aria-hidden="true">{{ companyInitials(currentJob) }}</span>
-          <div class="stack stack--xs">
-            <p class="details-hero__company">{{ currentJob.company.name }}</p>
-            <h1 class="details-hero__title">{{ currentJob.title }}</h1>
-            <p class="details-hero__meta">{{ formatWorkplace(currentJob) }}</p>
-          </div>
-          @if (formatSalary(currentJob); as salary) {
-            <p class="details-hero__salary">{{ salary }}</p>
-          }
-          <div class="details-hero__chips cluster">
-            <span class="chip">{{ formatWorkplaceMode(currentJob.workplace) }}</span>
-            @for (level of currentJob.seniority; track level) {
-              <span class="chip">{{ formatSeniority([level]) }}</span>
+      <div class="job-details__layout">
+        <main class="job-details__main">
+          <header class="job-details__hero">
+            <button
+              type="button"
+              class="job-details__save"
+              [class.is-saved]="savedJobs.isSaved(currentJob.id)"
+              [attr.aria-label]="savedJobs.isSaved(currentJob.id) ? 'Remove from saved jobs' : 'Save job'"
+              [attr.aria-pressed]="savedJobs.isSaved(currentJob.id)"
+              (click)="toggleSave()"
+            >
+              <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                <path
+                  d="M12 20.5s-6.7-4.35-9-8.05C1.5 9.65 2.6 6.5 5.4 5.4c1.75-.7 3.7-.15 4.95 1.25L12 8.5l1.65-1.85c1.25-1.4 3.2-1.95 4.95-1.25 2.8 1.1 3.9 4.25 2.4 7.05-2.3 3.7-9 8.05-9 8.05Z"
+                  [attr.fill]="savedJobs.isSaved(currentJob.id) ? 'currentColor' : 'none'"
+                  stroke="currentColor"
+                  stroke-width="1.75"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+
+            <div class="job-details__identity">
+              <span class="job-details__logo" aria-hidden="true">{{ companyInitials(currentJob) }}</span>
+
+              <div class="job-details__intro">
+                <p class="job-details__company">{{ currentJob.company.name }}</p>
+                <h1 class="job-details__title">{{ currentJob.title }}</h1>
+                <p class="job-details__location">{{ formatWorkplace(currentJob) }}</p>
+              </div>
+            </div>
+
+            @if (formatSalary(currentJob); as salary) {
+              <p class="job-details__salary job-details__salary--inline">{{ salary }}</p>
             }
-            @for (schedule of currentJob.workSchedules; track schedule) {
-              <span class="chip">{{ formatWorkSchedules([schedule]) }}</span>
-            }
-            @for (contract of currentJob.contractTypes; track contract) {
-              <span class="chip">{{ formatContractTypes([contract]) }}</span>
-            }
-          </div>
-          <div class="details-hero__dates">
-            <span>Posted {{ formatJobDate(currentJob.createdAt) }}</span>
-            @if (currentJob.applicationDeadline; as deadline) {
-              <span>{{ formatApplicationDeadline(deadline) }}</span>
-            }
-          </div>
-        </div>
 
-        <div class="details-hero__actions cluster cluster--md">
-          <button type="button" class="btn btn-ghost" (click)="toggleSave()">
-            {{ savedJobs.isSaved(currentJob.id) ? 'Saved' : 'Save job' }}
-          </button>
-          <button
-            type="button"
-            class="btn btn-primary"
-            [disabled]="savedJobs.isApplied(currentJob.id)"
-            (click)="apply()"
-          >
-            {{ savedJobs.isApplied(currentJob.id) ? 'Applied' : 'Apply' }}
-          </button>
-        </div>
-      </header>
-
-      @if (toast()) {
-        <p class="toast">{{ toast() }}</p>
-      }
-
-      <div class="details-grid">
-        <article class="details-section panel stack stack--sm">
-          <h2 class="section-title">Description</h2>
-          <p class="details-section__body">{{ currentJob.description }}</p>
-        </article>
-
-        @if (currentJob.competencies.length) {
-          <article class="details-section panel stack stack--sm">
-            <h2 class="section-title">Required competencies</h2>
-            <ul class="competency-list">
-              @for (competency of currentJob.competencies; track competency.name) {
-                <li class="competency-list__item">
-                  <span class="competency-list__name">{{ competency.name }}</span>
-                  <span class="competency-list__level">{{ formatCompetency(competency) }}</span>
-                  <meter
-                    class="competency-list__meter"
-                    [min]="0"
-                    [max]="competency.scale ?? 5"
-                    [value]="competency.level"
-                    [attr.aria-label]="formatCompetency(competency)"
-                  ></meter>
-                </li>
+            <div class="job-details__facts">
+              <span class="job-details__fact">{{ formatWorkplaceMode(currentJob.workplace) }}</span>
+              @for (level of currentJob.seniority; track level) {
+                <span class="job-details__fact">{{ formatSeniorityLevel(level) }}</span>
               }
-            </ul>
-          </article>
-        }
+              @for (schedule of currentJob.workSchedules; track schedule) {
+                <span class="job-details__fact">{{ formatWorkSchedule(schedule) }}</span>
+              }
+              @for (contract of currentJob.contractTypes; track contract) {
+                <span class="job-details__fact">{{ formatContractType(contract) }}</span>
+              }
+            </div>
+          </header>
 
-        <article class="details-section panel stack stack--sm">
-          <h2 class="section-title">Requirements</h2>
-          <ul class="details-list">
-            @for (item of currentJob.requirements; track item) {
-              <li>{{ item }}</li>
-            }
-          </ul>
-        </article>
+          <section class="job-details__section">
+            <h2 class="job-details__section-title">About the role</h2>
+            <p class="job-details__copy">{{ currentJob.description }}</p>
 
-        <article class="details-section panel stack stack--sm">
-          <h2 class="section-title">Responsibilities</h2>
-          <ul class="details-list">
-            @for (item of currentJob.responsibilities; track item) {
-              <li>{{ item }}</li>
+            @if (currentJob.competencies.length) {
+              <div class="job-details__competencies">
+                <span class="job-details__competencies-label">Competencies</span>
+                <div class="job-details__competency-list">
+                  @for (competency of currentJob.competencies; track competency.name) {
+                    <app-competency-chip [competency]="competency" />
+                  }
+                </div>
+              </div>
             }
-          </ul>
-        </article>
+          </section>
+
+          <div class="job-details__columns">
+            <section class="job-details__section">
+              <h2 class="job-details__section-title">Requirements</h2>
+              <ul class="job-details__list">
+                @for (item of currentJob.requirements; track item) {
+                  <li>{{ item }}</li>
+                }
+              </ul>
+            </section>
+
+            <section class="job-details__section">
+              <h2 class="job-details__section-title">Responsibilities</h2>
+              <ul class="job-details__list">
+                @for (item of currentJob.responsibilities; track item) {
+                  <li>{{ item }}</li>
+                }
+              </ul>
+            </section>
+          </div>
+
+          @if (currentJob.benefits?.length) {
+            <section class="job-details__section">
+              <h2 class="job-details__section-title">Benefits</h2>
+              <ul class="job-details__list job-details__list--benefits">
+                @for (item of currentJob.benefits; track item) {
+                  <li>{{ item }}</li>
+                }
+              </ul>
+            </section>
+          }
+
+          @if (currentJob.niceToHave?.length) {
+            <section class="job-details__section">
+              <h2 class="job-details__section-title">Nice to have</h2>
+              <ul class="job-details__list job-details__list--muted">
+                @for (item of currentJob.niceToHave; track item) {
+                  <li>{{ item }}</li>
+                }
+              </ul>
+            </section>
+          }
+
+          @if (store.similarJobs().length) {
+            <section class="job-details__section job-details__section--similar">
+              <h2 class="job-details__section-title">Similar offers</h2>
+              <div class="job-details__similar-list">
+                @for (job of store.similarJobs(); track job.id) {
+                  <a [routerLink]="links.job(job.id)" class="link-plain">
+                    <app-job-card [job]="job" [compact]="true" [showSaveButton]="false" />
+                  </a>
+                }
+              </div>
+            </section>
+          }
+        </main>
+
+        <aside class="job-details__aside">
+          <div class="job-details__action-card">
+            @if (formatSalary(currentJob); as salary) {
+              <p class="job-details__action-salary">{{ salary }}</p>
+            }
+
+            <dl class="job-details__meta">
+              <div class="job-details__meta-row">
+                <dt>Posted</dt>
+                <dd>{{ formatJobDate(currentJob.createdAt) }}</dd>
+              </div>
+              @if (currentJob.applicationDeadline; as deadline) {
+                <div class="job-details__meta-row">
+                  <dt>Deadline</dt>
+                  <dd>{{ formatApplicationDeadline(deadline) }}</dd>
+                </div>
+              }
+              @if (currentJob.location; as location) {
+                <div class="job-details__meta-row">
+                  <dt>Location</dt>
+                  <dd>{{ location.city }}, {{ location.country }}</dd>
+                </div>
+              }
+            </dl>
+
+            <button
+              type="button"
+              class="btn btn-primary job-details__apply"
+              [disabled]="savedJobs.isApplied(currentJob.id)"
+              (click)="apply()"
+            >
+              {{ savedJobs.isApplied(currentJob.id) ? 'Applied' : 'Apply now' }}
+            </button>
+          </div>
+
+          @if (store.similarJobs().length) {
+            <section class="job-details__similar-aside">
+              <h2 class="job-details__similar-title">Similar offers</h2>
+              <div class="job-details__similar-list">
+                @for (job of store.similarJobs(); track job.id) {
+                  <a [routerLink]="links.job(job.id)" class="link-plain">
+                    <app-job-card [job]="job" [compact]="true" [showSaveButton]="false" />
+                  </a>
+                }
+              </div>
+            </section>
+          }
+        </aside>
       </div>
-    </section>
+
+      <footer class="job-details__mobile-bar">
+        <button
+          type="button"
+          class="btn btn-primary"
+          [disabled]="savedJobs.isApplied(currentJob.id)"
+          (click)="apply()"
+        >
+          {{ savedJobs.isApplied(currentJob.id) ? 'Applied' : 'Apply now' }}
+        </button>
+      </footer>
+    </div>
   } @else {
-    <p class="state">Loading job details…</p>
+    <div class="job-details job-details--loading">
+      <p class="state">Loading job details…</p>
+    </div>
   }
 </app-shell>
+
+<app-auth-prompt-dialog
+  [open]="authPromptOpen()"
+  [title]="authPromptTitle()"
+  [message]="authPromptMessage()"
+  (closed)="closeAuthPrompt()"
+  (confirmed)="confirmAuthPrompt()"
+/>

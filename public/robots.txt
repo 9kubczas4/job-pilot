@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Allow: /jobs
+Disallow: /profile
+Disallow: /saved
+Disallow: /applications
+
+Sitemap: https://job-pilot-1e4ee.web.app/sitemap.xml

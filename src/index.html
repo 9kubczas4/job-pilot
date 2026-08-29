@@ -2,10 +2,49 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>JobPilot</title>
+    <title>Job Pilot - Job board for humans &amp; AI agents</title>
     <base href="/" />
+    <meta
+      name="description"
+      content="Browse tech jobs on a map, filter by role and location, and let AI agents search, save, and apply through WebMCP tools that share the same data as the UI."
+    />
+    <meta
+      name="keywords"
+      content="job board, tech jobs, remote jobs, WebMCP, AI agents, job search, Angular, Codex"
+    />
+    <meta name="author" content="Job Pilot" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f4f7ff" />
+    <meta name="application-name" content="Job Pilot" />
+    <meta name="apple-mobile-web-app-title" content="Job Pilot" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="canonical" href="https://job-pilot-1e4ee.web.app/" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="apple-touch-icon" href="favicon.ico" />
+
+  <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Job Pilot" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="Job Pilot — Job board for humans &amp; AI agents" />
+    <meta
+      property="og:description"
+      content="Browse tech jobs on a map, filter by role and location, and let AI agents search, save, and apply through WebMCP tools."
+    />
+    <meta property="og:url" content="https://job-pilot-1e4ee.web.app/" />
+
+  <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Job Pilot — Job board for humans &amp; AI agents" />
+    <meta
+      name="twitter:description"
+      content="Browse tech jobs on a map, filter by role and location, and let AI agents search, save, and apply through WebMCP tools."
+    />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -13,6 +52,45 @@
       rel="stylesheet"
     />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://job-pilot-1e4ee.web.app/#website",
+            "url": "https://job-pilot-1e4ee.web.app/",
+            "name": "Job Pilot",
+            "description": "A job board for humans and AI agents with map search, saved jobs, and WebMCP tools.",
+            "inLanguage": "en",
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": {
+                "@type": "EntryPoint",
+                "urlTemplate": "https://job-pilot-1e4ee.web.app/jobs?q={search_term_string}"
+              },
+              "query-input": "required name=search_term_string"
+            }
+          },
+          {
+            "@type": "WebApplication",
+            "@id": "https://job-pilot-1e4ee.web.app/#app",
+            "name": "Job Pilot",
+            "url": "https://job-pilot-1e4ee.web.app/",
+            "applicationCategory": "BusinessApplication",
+            "operatingSystem": "Web",
+            "description": "Browse and filter tech job offers with a map-first UI and agent-native WebMCP tools.",
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD"
+            }
+          }
+        ]
+      }
+    </script>
+
     <script>
       (function () {
         var storageKey = 'job-pilot-theme';
@@ -25,10 +103,24 @@
         var theme = prefersDark ? 'dark' : 'light';
         document.documentElement.dataset.theme = theme;
         document.documentElement.style.colorScheme = theme;
+
+        var themeColor = document.querySelector('meta[name="theme-color"]');
+        if (themeColor) {
+          themeColor.setAttribute('content', prefersDark ? '#0a1020' : '#f4f7ff');
+        }
       })();
     </script>
   </head>
   <body>
     <app-root></app-root>
+    <noscript>
+      <div style="max-width: 40rem; margin: 2rem auto; padding: 0 1rem; font-family: system-ui, sans-serif; line-height: 1.5">
+        <h1>Job Pilot</h1>
+        <p>
+          Job Pilot needs JavaScript to run the interactive job board and map. Enable JavaScript or
+          <a href="/jobs">open the job search page</a> after reloading.
+        </p>
+      </div>
+    </noscript>
   </body>
 </html>

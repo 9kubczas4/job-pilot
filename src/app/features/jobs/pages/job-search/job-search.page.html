@@ -1,5 +1,12 @@
 @if (isMobileLayout()) {
   <div class="jobs-mobile">
+    <div class="jobs-mobile__aurora landing__aurora" aria-hidden="true">
+      <span class="landing__orb landing__orb--1"></span>
+      <span class="landing__orb landing__orb--2"></span>
+      <span class="landing__orb landing__orb--3"></span>
+      <span class="landing__grid"></span>
+    </div>
+
     <header class="jobs-mobile__toolbar">
       <app-logo [compact]="true" [homeLink]="links.home" />
 
@@ -89,28 +96,37 @@
       <app-job-filters />
     </section>
 
-    <div class="search-layout">
-      <div class="search-layout__panel search-layout__panel--list">
-        <app-job-list
-          [jobs]="store.jobs()"
-          [loading]="store.loading()"
-          [selectedJobId]="store.selectedJobId()"
-          [savedJobIds]="savedJobs.savedJobIds()"
-          [appliedJobIds]="savedJobs.appliedJobIds()"
-          [sortOptions]="sortOptions()"
-          [sort]="currentSort()"
-          (selectJob)="onSelectJob($event)"
-          (toggleSave)="onToggleSaveJob($event)"
-          (sortChange)="onSortChange($event)"
-        />
+    <div class="jobs-page">
+      <div class="jobs-page__aurora landing__aurora" aria-hidden="true">
+        <span class="landing__orb landing__orb--1"></span>
+        <span class="landing__orb landing__orb--2"></span>
+        <span class="landing__orb landing__orb--3"></span>
+        <span class="landing__grid"></span>
       </div>
 
-      <div class="search-layout__panel search-layout__panel--map">
-        <app-job-map
-          [jobs]="store.jobs()"
-          [selectedJobId]="store.selectedJobId()"
-          (selectJob)="onSelectJob($event)"
-        />
+      <div class="search-layout jobs-page__layout">
+        <div class="search-layout__panel search-layout__panel--list">
+          <app-job-list
+            [jobs]="store.jobs()"
+            [loading]="store.loading()"
+            [selectedJobId]="store.selectedJobId()"
+            [savedJobIds]="savedJobs.savedJobIds()"
+            [appliedJobIds]="savedJobs.appliedJobIds()"
+            [sortOptions]="sortOptions()"
+            [sort]="currentSort()"
+            (selectJob)="onSelectJob($event)"
+            (toggleSave)="onToggleSaveJob($event)"
+            (sortChange)="onSortChange($event)"
+          />
+        </div>
+
+        <div class="search-layout__panel search-layout__panel--map">
+          <app-job-map
+            [jobs]="store.jobs()"
+            [selectedJobId]="store.selectedJobId()"
+            (selectJob)="onSelectJob($event)"
+          />
+        </div>
       </div>
     </div>
   </app-shell>

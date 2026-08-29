@@ -1,6 +1,10 @@
 <app-shell>
   <div class="profile-page">
-    @if (!auth.isAuthenticated()) {
+    @if (auth.loading()) {
+      <section class="profile-page__empty">
+        <p class="state">Loading…</p>
+      </section>
+    } @else if (!auth.isAuthenticated()) {
       <section class="profile-page__empty">
         <div class="profile-page__empty-icon" aria-hidden="true">U</div>
         <h1 class="profile-page__empty-title">Your profile</h1>

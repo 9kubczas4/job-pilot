@@ -4,7 +4,6 @@ import {
   computed,
   effect,
   inject,
-  OnInit,
   signal,
 } from '@angular/core';
 import { DatePipe } from '@angular/common';
@@ -56,7 +55,7 @@ import { ProfileStore } from '../../state/profile.store';
   templateUrl: './profile.page.html',
   styleUrl: './profile.page.scss',
 })
-export class ProfilePageComponent implements OnInit {
+export class ProfilePageComponent {
   readonly auth = inject(AuthService);
   readonly store = inject(ProfileStore);
   private readonly toast = inject(ToastService);
@@ -87,23 +86,27 @@ export class ProfilePageComponent implements OnInit {
 
   constructor() {
     effect(() => {
+      if (this.auth.loading() || !this.auth.isAuthenticated()) {
+        return;
+      }
+
+      void this.store.loadProfile().then((profile) => {
+        if (!profile) {
+          return;
+        }
+
+        this.applyProfileToDraft(profile);
+        this.lastSyncedAt = profile.updatedAt;
+      });
+    });
+
+    effect(() => {
       const profile = this.store.profile();
       if (!profile || this.dirty()) {
         return;
       }
 
       if (profile.updatedAt === this.lastSyncedAt) {
-        return;
-      }
-
-      this.applyProfileToDraft(profile);
-      this.lastSyncedAt = profile.updatedAt;
-    });
-  }
-
-  ngOnInit(): void {
-    void this.store.loadProfile().then((profile) => {
-      if (!profile) {
         return;
       }
 

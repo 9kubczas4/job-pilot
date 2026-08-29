@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AppShellComponent } from '@core/layout/app-shell.component';
 import { AuthService } from '@core/auth/auth.service';
@@ -14,7 +14,7 @@ import { SavedJobsStore } from '../../state/saved-jobs.store';
   templateUrl: './saved-jobs.page.html',
   styleUrl: './saved-jobs.page.scss',
 })
-export class SavedJobsPageComponent implements OnInit {
+export class SavedJobsPageComponent {
   readonly auth = inject(AuthService);
   private readonly savedJobsStore = inject(SavedJobsStore);
   private readonly searchStore = inject(JobSearchStore);
@@ -27,8 +27,15 @@ export class SavedJobsPageComponent implements OnInit {
   readonly jobLink = AppLinks.job;
   readonly links = AppLinks;
 
-  ngOnInit(): void {
+  constructor() {
     this.searchStore.loadJobs();
-    this.savedJobsStore.loadUserData();
+
+    effect(() => {
+      if (this.auth.loading() || !this.auth.isAuthenticated()) {
+        return;
+      }
+
+      void this.savedJobsStore.loadUserData();
+    });
   }
 }

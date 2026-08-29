@@ -5,7 +5,11 @@
       <p class="page-header__subtitle">Keep track of roles you want to revisit or apply to later.</p>
     </header>
 
-    @if (!auth.isAuthenticated()) {
+    @if (auth.loading()) {
+      <div class="empty-state">
+        <p class="empty-state__title">Loading…</p>
+      </div>
+    } @else if (!auth.isAuthenticated()) {
       <div class="empty-state">
         <p class="empty-state__title">Sign in to view saved jobs</p>
         <p class="empty-state__text">Your saved listings will appear here once you are signed in.</p>

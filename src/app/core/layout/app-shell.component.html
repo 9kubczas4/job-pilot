@@ -41,7 +41,12 @@
       </nav>
 
       <div class="app-auth">
-        @if (auth.isAuthenticated()) {
+        @if (auth.loading()) {
+          <div class="app-auth-loading" aria-label="Loading account" aria-busy="true">
+            <span class="app-auth-loading__avatar"></span>
+            <span class="app-auth-loading__label"></span>
+          </div>
+        } @else if (auth.isAuthenticated()) {
           <div #profileMenu class="profile-menu">
             <button
               type="button"

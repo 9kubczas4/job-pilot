@@ -4,15 +4,15 @@ import {
   computed,
   ElementRef,
   inject,
+  input,
+  output,
   signal,
 } from '@angular/core';
-import {
-  DEFAULT_JOB_SORT,
-  availableSortOptions,
-  JOB_SORT_OPTIONS,
-} from '../../domain/job-sort.utils';
-import { JobSortOption } from '../../domain/search.model';
-import { JobSearchStore } from '../../state/job-search.store';
+
+export interface SortMenuOption {
+  value: string;
+  label: string;
+}
 
 @Component({
   selector: 'app-job-sort-menu',
@@ -24,26 +24,28 @@ import { JobSearchStore } from '../../state/job-search.store';
   styleUrl: './job-sort-menu.component.scss',
 })
 export class JobSortMenuComponent {
-  private readonly store = inject(JobSearchStore);
+  readonly options = input.required<SortMenuOption[]>();
+  readonly value = input.required<string>();
+
+  readonly sortChange = output<string>();
+
   private readonly host = inject(ElementRef<HTMLElement>);
 
   readonly panelOpen = signal(false);
-  readonly sortOptions = computed(() => availableSortOptions(this.store.criteria()));
-  readonly currentSort = computed(() => this.store.criteria().sort ?? DEFAULT_JOB_SORT);
-  readonly currentLabel = computed(() => {
-    const sort = this.currentSort();
-    return JOB_SORT_OPTIONS.find((option) => option.value === sort)?.label ?? 'Newest first';
-  });
+  readonly currentLabel = computed(
+    () =>
+      this.options().find((option) => option.value === this.value())?.label ??
+      this.options()[0]?.label ??
+      '',
+  );
 
   togglePanel(event: Event): void {
     event.stopPropagation();
     this.panelOpen.update((open) => !open);
   }
 
-  selectSort(value: JobSortOption): void {
-    this.store.patchCriteria({
-      sort: value === DEFAULT_JOB_SORT ? undefined : value,
-    });
+  selectSort(value: string): void {
+    this.sortChange.emit(value);
     this.panelOpen.set(false);
   }
 

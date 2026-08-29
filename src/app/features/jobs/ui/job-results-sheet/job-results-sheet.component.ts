@@ -11,7 +11,7 @@ import {
 import { RouterLink } from '@angular/router';
 import { AppLinks } from '@app/app-paths';
 import { JobCardComponent } from '../job-card/job-card.component';
-import { JobSortMenuComponent } from '../job-sort-menu/job-sort-menu.component';
+import { JobSortMenuComponent, SortMenuOption } from '../job-sort-menu/job-sort-menu.component';
 import { JobOffer } from '../../domain/job.model';
 
 export type JobSheetSnap = 'collapsed' | 'peek' | 'half' | 'full';
@@ -33,11 +33,14 @@ export class JobResultsSheetComponent {
   readonly appliedJobIds = input<string[]>([]);
   readonly snap = input<JobSheetSnap>('peek');
   readonly focusJobId = input<string | null>(null);
+  readonly sortOptions = input<SortMenuOption[]>([]);
+  readonly sort = input('newest');
 
   readonly snapChange = output<JobSheetSnap>();
   readonly selectJob = output<string>();
   readonly toggleSave = output<string>();
   readonly clearFocus = output<void>();
+  readonly sortChange = output<string>();
 
   private readonly host = inject(ElementRef<HTMLElement>);
 

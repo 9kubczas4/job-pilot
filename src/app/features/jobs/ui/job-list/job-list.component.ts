@@ -16,7 +16,7 @@ import { fromEvent } from 'rxjs';
 import { AppLinks } from '@app/app-paths';
 import { HeaderUiStore } from '@shared/state/header-ui.store';
 import { JobCardComponent } from '../job-card/job-card.component';
-import { JobSortMenuComponent } from '../job-sort-menu/job-sort-menu.component';
+import { JobSortMenuComponent, SortMenuOption } from '../job-sort-menu/job-sort-menu.component';
 import { JobOffer } from '../../domain/job.model';
 
 @Component({
@@ -32,8 +32,11 @@ export class JobListComponent {
   readonly selectedJobId = input<string | null>(null);
   readonly savedJobIds = input<string[]>([]);
   readonly appliedJobIds = input<string[]>([]);
+  readonly sortOptions = input<SortMenuOption[]>([]);
+  readonly sort = input('newest');
   readonly selectJob = output<string>();
   readonly toggleSave = output<string>();
+  readonly sortChange = output<string>();
 
   readonly jobLink = AppLinks.job;
 

@@ -8,8 +8,12 @@
         }
       </div>
 
-      @if (!loading() && jobs().length) {
-        <app-job-sort-menu />
+      @if (!loading() && jobs().length && sortOptions().length) {
+        <app-job-sort-menu
+          [options]="sortOptions()"
+          [value]="sort()"
+          (sortChange)="sortChange.emit($event)"
+        />
       }
     </div>
   </header>

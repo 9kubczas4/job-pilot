@@ -58,11 +58,14 @@
       [selectedJobId]="store.selectedJobId()"
       [savedJobIds]="savedJobs.savedJobIds()"
       [appliedJobIds]="savedJobs.appliedJobIds()"
+      [sortOptions]="sortOptions()"
+      [sort]="currentSort()"
       [snap]="sheetSnap()"
       [focusJobId]="sheetFocusJobId()"
       (snapChange)="onSheetSnapChange($event)"
       (selectJob)="onSelectJob($event)"
       (toggleSave)="onToggleSaveJob($event)"
+      (sortChange)="onSortChange($event)"
       (clearFocus)="clearSheetFocus()"
     />
 
@@ -90,8 +93,11 @@
           [selectedJobId]="store.selectedJobId()"
           [savedJobIds]="savedJobs.savedJobIds()"
           [appliedJobIds]="savedJobs.appliedJobIds()"
+          [sortOptions]="sortOptions()"
+          [sort]="currentSort()"
           (selectJob)="onSelectJob($event)"
           (toggleSave)="onToggleSaveJob($event)"
+          (sortChange)="onSortChange($event)"
         />
       </div>
 

@@ -49,7 +49,8 @@ import {
   JobResultsSheetComponent,
   JobSheetSnap,
 } from '../../ui/job-results-sheet/job-results-sheet.component';
-import { JobSearchCriteria } from '../../domain/search.model';
+import { JobSearchCriteria, JobSortOption } from '../../domain/search.model';
+import { DEFAULT_JOB_SORT, availableSortOptions } from '../../domain/job-sort.utils';
 
 const MOBILE_LAYOUT_QUERY = '(max-width: 60rem)';
 
@@ -111,6 +112,9 @@ export class JobSearchPageComponent implements OnInit {
     }
     return 'Search jobs';
   });
+
+  readonly sortOptions = computed(() => availableSortOptions(this.store.criteria()));
+  readonly currentSort = computed(() => this.store.criteria().sort ?? DEFAULT_JOB_SORT);
 
   constructor() {
     this.headerUi.enableFilters();
@@ -254,6 +258,13 @@ export class JobSearchPageComponent implements OnInit {
 
   onSelectJob(jobId: string): void {
     this.store.selectJob(jobId);
+  }
+
+  onSortChange(sort: string): void {
+    const value = sort as JobSortOption;
+    this.store.patchCriteria({
+      sort: value === DEFAULT_JOB_SORT ? undefined : value,
+    });
   }
 
   onToggleSaveJob(jobId: string): void {

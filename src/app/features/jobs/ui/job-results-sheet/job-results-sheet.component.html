@@ -57,9 +57,13 @@
           </a>
         </div>
       } @else {
-        @if (jobs().length) {
+        @if (jobs().length && sortOptions().length) {
           <div class="job-sheet__sort" (click)="$event.stopPropagation()">
-            <app-job-sort-menu />
+            <app-job-sort-menu
+              [options]="sortOptions()"
+              [value]="sort()"
+              (sortChange)="sortChange.emit($event)"
+            />
           </div>
         }
 

@@ -1,5 +1,11 @@
 :host {
   display: block;
+  position: relative;
+  z-index: 0;
+}
+
+:host(:has(.sort-menu__trigger[aria-expanded='true'])) {
+  z-index: 2;
 }
 
 .sort-menu {
@@ -69,7 +75,7 @@
   position: absolute;
   inset-inline-end: 0;
   top: calc(100% + var(--space-2));
-  z-index: calc(var(--z-sticky) + 2);
+  z-index: 1;
   min-width: 12.5rem;
   margin: 0;
   padding: var(--space-2);

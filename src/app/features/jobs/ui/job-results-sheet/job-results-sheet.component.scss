@@ -97,6 +97,8 @@
 }
 
 .job-sheet__sort {
+  position: relative;
+  z-index: 1;
   display: flex;
   justify-content: flex-end;
   padding: 0 0 var(--space-3);

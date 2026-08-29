@@ -17,6 +17,8 @@
 }
 
 .job-list__header {
+  position: relative;
+  z-index: 1;
   flex-shrink: 0;
   padding: var(--space-5) var(--space-5) var(--space-4);
   border-bottom: 1px solid var(--color-border);

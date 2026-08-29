@@ -1,7 +1,7 @@
-@use '../../shared/styles/layout';
-@use '../../shared/styles/form';
-@use '../../shared/styles/button';
-@use '../../shared/styles/feedback';
+@use 'styles/layout';
+@use 'styles/form';
+@use 'styles/button';
+@use 'styles/feedback';
 
 :host {
   display: block;

@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { provideProfileRouteWebMcpTools } from '@features/profile/webmcp/profile.tools';
 import { provideJobDetailsWebMcpTools } from '@features/jobs/webmcp/job-details.tools';
-import { RoutePaths } from '@shared/routing/app-paths';
+import { RoutePaths } from '@app/app-paths';
 
 export const routes: Routes = [
   {

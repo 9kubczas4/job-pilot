@@ -20,7 +20,6 @@ import { getMapStylesForTheme } from '@shared/map/google-maps-styles';
 import { JobLocation, JobOffer } from '../../domain/job.model';
 import {
   buildJobMapPopupHtml,
-  getJobMapPopupColors,
 } from './job-map-popup';
 
 const DEFAULT_CENTER = { lat: 51.9194, lng: 19.1451 };
@@ -346,16 +345,9 @@ export class JobMapComponent {
       const infoWindowRoot = popup.closest('.gm-style-iw');
       const popupTail = this.findInfoWindowTail(popup);
 
-      const popupColors = getJobMapPopupColors();
-
       const setHovered = (hovered: boolean) => {
         infoWindowRoot?.classList.toggle('job-map-popup--hovered', hovered);
         popupTail?.classList.toggle('job-map-popup-tail--hovered', hovered);
-        popupTail?.style.setProperty(
-          '--job-map-tail-bg',
-          hovered ? popupColors.hoverBg : popupColors.bg,
-        );
-        popup.style.backgroundColor = hovered ? popupColors.hoverBg : popupColors.bg;
       };
 
       popup.addEventListener('mouseenter', () => setHovered(true));

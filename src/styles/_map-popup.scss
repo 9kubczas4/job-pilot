@@ -28,7 +28,7 @@
 }
 
 .gm-style-iw-tc.job-map-popup-tail--hovered {
-  --job-map-tail-bg: var(--color-primary-subtle);
+  --job-map-tail-bg: var(--color-map-popup-hover);
 }
 
 .job-map-popup {
@@ -44,9 +44,9 @@
   transition: background-color 0.15s ease;
 }
 
-.job-map-popup--hovered .job-map-popup,
+.gm-style-iw.job-map-popup--hovered .job-map-popup,
 .job-map-popup:hover {
-  background: var(--color-primary-subtle);
+  background: var(--color-map-popup-hover);
 }
 
 .job-map-popup__identity {

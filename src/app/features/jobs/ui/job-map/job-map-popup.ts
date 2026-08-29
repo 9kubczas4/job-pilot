@@ -8,19 +8,6 @@ import {
 } from '../../domain/job-formatters';
 import { JobOffer } from '../../domain/job.model';
 
-export function getJobMapPopupColors(): { bg: string; hoverBg: string } {
-  if (typeof document === 'undefined') {
-    return { bg: '#ffffff', hoverBg: '#eff6ff' };
-  }
-
-  const styles = getComputedStyle(document.documentElement);
-
-  return {
-    bg: styles.getPropertyValue('--color-surface-elevated').trim() || '#ffffff',
-    hoverBg: styles.getPropertyValue('--color-primary-subtle').trim() || '#eff6ff',
-  };
-}
-
 function escapeHtml(value: string): string {
   return value
     .replaceAll('&', '&amp;')

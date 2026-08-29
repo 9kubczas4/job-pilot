@@ -21,6 +21,10 @@ export class JobDetailsStore {
   });
 
   async loadJob(jobId: string): Promise<void> {
+    if (this.job()?.id !== jobId) {
+      this.job.set(null);
+    }
+
     this.loading.set(true);
     try {
       const [job, allJobs] = await Promise.all([

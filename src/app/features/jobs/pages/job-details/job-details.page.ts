@@ -1,5 +1,8 @@
-import { ChangeDetectionStrategy, Component, computed, effect, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, PLATFORM_ID, signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { map } from 'rxjs';
 import { AppShellComponent } from '@core/layout/app-shell.component';
 import { AuthService } from '@core/auth/auth.service';
 import { AppLinks } from '@app/app-paths';
@@ -40,6 +43,8 @@ type AuthPromptAction = 'save' | 'apply';
 })
 export class JobDetailsPageComponent {
   private readonly route = inject(ActivatedRoute);
+  private readonly platformId = inject(PLATFORM_ID);
+  private readonly host = inject(ElementRef<HTMLElement>);
   readonly store = inject(JobDetailsStore);
   readonly savedJobs = inject(SavedJobsStore);
   readonly auth = inject(AuthService);
@@ -70,6 +75,11 @@ export class JobDetailsPageComponent {
       : 'Sign in to add offers to your saved list and access them from any device.',
   );
 
+  private readonly routeJobId = toSignal(
+    this.route.paramMap.pipe(map((params) => params.get('id'))),
+    { initialValue: this.route.snapshot.paramMap.get('id') },
+  );
+
   constructor() {
     effect(() => {
       if (this.auth.loading() || !this.auth.isAuthenticated()) {
@@ -79,10 +89,17 @@ export class JobDetailsPageComponent {
       void this.savedJobs.loadUserData();
     });
 
-    const jobId = this.route.snapshot.paramMap.get('id');
-    if (jobId) {
-      this.store.loadJob(jobId);
-    }
+    effect(() => {
+      const jobId = this.routeJobId();
+      if (!jobId) {
+        return;
+      }
+
+      this.authPromptOpen.set(false);
+      this.applyDialogOpen.set(false);
+      void this.store.loadJob(jobId);
+      this.scrollToTop();
+    });
   }
 
   toggleSave(): void {
@@ -179,5 +196,19 @@ export class JobDetailsPageComponent {
   companyInitials(job: JobOffer): string {
     const parts = job.company.name.split(/\s+/).filter(Boolean).slice(0, 2);
     return parts.map((part) => part[0]?.toUpperCase() ?? '').join('') || '?';
+  }
+
+  private scrollToTop(): void {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
+    const scrollContainer = this.host.nativeElement.closest('app-shell')?.querySelector('.app-main');
+    if (scrollContainer instanceof HTMLElement) {
+      scrollContainer.scrollTo({ top: 0 });
+      return;
+    }
+
+    window.scrollTo({ top: 0 });
   }
 }

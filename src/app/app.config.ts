@@ -4,6 +4,7 @@ import { provideRouter, withExperimentalAutoCleanupInjectors } from '@angular/ro
 import { provideExperimentalWebMcpForms } from '@angular/forms/signals';
 import { routes } from './app.routes';
 import { provideFirebase } from './core/firebase/firebase.providers';
+import { provideSearchJobsWebMcpTool } from './core/webmcp/tools/search-jobs.tool';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -11,6 +12,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideFirebase(),
     provideExperimentalWebMcpForms(),
+    provideSearchJobsWebMcpTool(),
     provideRouter(routes, withExperimentalAutoCleanupInjectors()),
   ],
 };

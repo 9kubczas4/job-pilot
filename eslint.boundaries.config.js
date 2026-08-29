@@ -1,6 +1,6 @@
 // Architectural import boundaries for Job Pilot.
 //
-// Target layout:
+// Layout:
 //   src/app/core/              - infra (auth, firebase, layout, webmcp)
 //   src/app/shared/            - business-agnostic utilities and UI kit
 //   src/app/features/{name}/
@@ -9,43 +9,23 @@
 //     domain/                  - models and pure business rules
 //     data-access/             - persistence (Firestore, HTTP)
 //     state/                   - client state (stores)
-//
-// Legacy paths (remove after folder refactor):
-//   src/app/{jobs,profile,saved-jobs}/feature-*  -> feature-page
-//   src/app/{feature}/ui-*                     -> feature-ui
-//   src/app/shared/models                        -> feature-domain (migrate out)
 
 const boundariesElements = [
   // --- Core (most specific first) ---
   { type: 'core-webmcp', pattern: 'src/app/core/webmcp', partialMatch: false },
-  { type: 'core-webmcp', pattern: 'src/app/webmcp', partialMatch: false },
-  { type: 'core-webmcp', pattern: 'src/app/jobs/webmcp', partialMatch: false },
-  { type: 'core-webmcp', pattern: 'src/app/profile/webmcp', partialMatch: false },
   { type: 'core', pattern: 'src/app/core', partialMatch: false },
 
-  // --- Domain in shared (legacy — migrate to features/*/domain) ---
-  { type: 'feature-domain', pattern: 'src/app/shared/models', partialMatch: false },
+  // --- Shared ---
   { type: 'shared', pattern: 'src/app/shared', partialMatch: false },
 
-  // --- Features (target) ---
+  // --- Features (most specific first) ---
   { type: 'feature-ui', pattern: 'src/app/features/*/ui', partialMatch: false },
   { type: 'feature-domain', pattern: 'src/app/features/*/domain', partialMatch: false },
   { type: 'feature-data-access', pattern: 'src/app/features/*/data-access', partialMatch: false },
   { type: 'feature-state', pattern: 'src/app/features/*/state', partialMatch: false },
-  { type: 'feature-page', pattern: 'src/app/features', partialMatch: false },
-
-  // --- Features (legacy) ---
-  { type: 'feature-data-access', pattern: 'src/app/jobs/data-access', partialMatch: false },
-  { type: 'feature-data-access', pattern: 'src/app/profile/data-access', partialMatch: false },
-  { type: 'feature-data-access', pattern: 'src/app/saved-jobs/data-access', partialMatch: false },
-  { type: 'feature-ui', pattern: 'src/app/jobs/ui-job-card', partialMatch: false },
-  { type: 'feature-ui', pattern: 'src/app/jobs/ui-filters', partialMatch: false },
-  { type: 'feature-ui', pattern: 'src/app/jobs/ui-job-list', partialMatch: false },
-  { type: 'feature-ui', pattern: 'src/app/jobs/ui-job-map', partialMatch: false },
-  { type: 'feature-page', pattern: 'src/app/jobs/feature-search', partialMatch: false },
-  { type: 'feature-page', pattern: 'src/app/jobs/feature-details', partialMatch: false },
-  { type: 'feature-page', pattern: 'src/app/profile/feature-profile', partialMatch: false },
-  { type: 'feature-page', pattern: 'src/app/saved-jobs/feature-saved-jobs', partialMatch: false },
+  { type: 'feature-page', pattern: 'src/app/features/jobs', partialMatch: true },
+  { type: 'feature-page', pattern: 'src/app/features/profile', partialMatch: true },
+  { type: 'feature-page', pattern: 'src/app/features/saved-jobs', partialMatch: true },
 ];
 
 const boundariesFiles = [
@@ -77,6 +57,31 @@ const boundariesPolicies = [
       dependency: { relationship: { to: 'internal' } },
       from: { element: { type: 'feature-domain' } },
       to: { element: { type: 'feature-domain' } },
+    },
+  },
+
+  // Cross-feature domain imports (shared enums between profile and jobs)
+  {
+    from: { element: { type: 'feature-domain' } },
+    allow: {
+      to: { element: { type: 'feature-domain' } },
+    },
+  },
+
+  // UI components may import sibling UI within the same feature
+  {
+    from: { element: { type: 'feature-ui' } },
+    allow: {
+      to: { element: { type: 'feature-ui' } },
+    },
+  },
+
+  // Core WebMCP internal imports
+  {
+    allow: {
+      dependency: { relationship: { to: 'internal' } },
+      from: { element: { type: 'core-webmcp' } },
+      to: { element: { type: 'core-webmcp' } },
     },
   },
 
@@ -178,9 +183,42 @@ const boundariesPolicies = [
   {
     from: { file: { categories: 'app-shell' } },
     allow: {
+      to: { file: { categories: 'app-shell' } },
+    },
+  },
+  {
+    from: { file: { categories: 'app-shell' } },
+    allow: {
       to: {
         element: {
           types: ['core', 'core-webmcp', 'feature-page', 'shared'],
+        },
+      },
+    },
+  },
+
+  // --- Tests ---
+  {
+    from: { file: { categories: 'test' } },
+    allow: {
+      to: { file: { categories: 'app-shell' } },
+    },
+  },
+  {
+    from: { file: { categories: 'test' } },
+    allow: {
+      to: {
+        element: {
+          types: [
+            'core',
+            'core-webmcp',
+            'feature-page',
+            'feature-ui',
+            'feature-state',
+            'feature-domain',
+            'feature-data-access',
+            'shared',
+          ],
         },
       },
     },

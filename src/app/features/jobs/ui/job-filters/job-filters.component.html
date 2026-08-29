@@ -1,18 +1,4 @@
 <section class="filters-panel">
-  <div class="field">
-    <label for="filter-location">Location</label>
-    <input
-      id="filter-location"
-      class="input"
-      type="text"
-      name="location"
-      placeholder="City, region or country"
-      autocomplete="address-level2"
-      [ngModel]="locationValue()"
-      (ngModelChange)="updateLocation($event)"
-    />
-  </div>
-
   <fieldset class="filters-fieldset">
     <legend>Workplace</legend>
     <div class="cluster">

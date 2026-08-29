@@ -6,6 +6,8 @@ export interface JobSearchCriteria {
   skills?: string[];
   seniority?: SeniorityLevel[];
   locations?: string[];
+  locationLat?: number;
+  locationLng?: number;
   workplace?: WorkplaceMode[];
   contracts?: ContractType[];
   salaryMin?: number;

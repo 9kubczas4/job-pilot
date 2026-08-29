@@ -1,18 +1,24 @@
+import { haversineDistanceKm } from './geo.utils';
 import { JobOffer } from './job.model';
 import { JobSearchCriteria } from './search.model';
 
 export function matchesSearchCriteria(job: JobOffer, criteria: JobSearchCriteria): boolean {
   const query = criteria.query?.trim().toLowerCase();
   if (query) {
+    const tokens = query.split(/\s+/).filter(Boolean);
     const haystack = [
       job.title,
       job.company.name,
       job.description,
-      ...job.skills.map((s) => s.name),
+      ...job.skills.map((skill) => skill.name),
+      ...job.seniority,
+      ...job.contractTypes,
+      job.workplace,
     ]
       .join(' ')
       .toLowerCase();
-    if (!haystack.includes(query)) {
+
+    if (!tokens.every((token) => haystack.includes(token))) {
       return false;
     }
   }
@@ -25,7 +31,7 @@ export function matchesSearchCriteria(job: JobOffer, criteria: JobSearchCriteria
   }
 
   if (criteria.skills?.length) {
-    const jobSkills = job.skills.map((s) => s.name.toLowerCase());
+    const jobSkills = job.skills.map((skill) => skill.name.toLowerCase());
     if (!criteria.skills.every((skill) => jobSkills.includes(skill.toLowerCase()))) {
       return false;
     }
@@ -37,7 +43,22 @@ export function matchesSearchCriteria(job: JobOffer, criteria: JobSearchCriteria
     }
   }
 
-  if (criteria.locations?.length) {
+  if (criteria.locationLat != null && criteria.locationLng != null && criteria.radiusKm != null) {
+    if (!job.location) {
+      return false;
+    }
+
+    const distanceKm = haversineDistanceKm(
+      criteria.locationLat,
+      criteria.locationLng,
+      job.location.latitude,
+      job.location.longitude,
+    );
+
+    if (distanceKm > criteria.radiusKm) {
+      return false;
+    }
+  } else if (criteria.locations?.length) {
     const city = job.location?.city.toLowerCase() ?? '';
     if (!criteria.locations.some((location) => city.includes(location.toLowerCase()))) {
       return false;

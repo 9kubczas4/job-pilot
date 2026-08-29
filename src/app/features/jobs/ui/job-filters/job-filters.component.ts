@@ -1,29 +1,18 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { HeaderUiStore } from '@shared/state/header-ui.store';
 import { JobSearchStore } from '../../state/job-search.store';
 
 @Component({
   selector: 'app-job-filters',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [FormsModule],
+  imports: [],
   templateUrl: './job-filters.component.html',
   styleUrl: './job-filters.component.scss',
 })
 export class JobFiltersComponent {
   readonly store = inject(JobSearchStore);
+  private readonly headerUi = inject(HeaderUiStore);
   readonly workplaceOptions = ['remote', 'hybrid', 'onsite'] as const;
-
-  locationValue(): string {
-    return this.store.criteria().locations?.[0] ?? '';
-  }
-
-  updateQuery(value: string): void {
-    this.store.patchCriteria({ query: value || undefined });
-  }
-
-  updateLocation(value: string): void {
-    this.store.patchCriteria({ locations: value ? [value] : undefined });
-  }
 
   isWorkplaceActive(option: (typeof this.workplaceOptions)[number]): boolean {
     return this.store.criteria().workplace?.includes(option) ?? false;
@@ -48,9 +37,14 @@ export class JobFiltersComponent {
     if (criteria.query) {
       chips.push({ key: 'query', label: criteria.query });
     }
-    criteria.locations?.forEach((location) =>
-      chips.push({ key: `location:${location}`, label: location }),
-    );
+    if (criteria.locations?.length) {
+      const radius = criteria.radiusKm;
+      const label =
+        radius != null && criteria.locationLat != null
+          ? `${criteria.locations[0]} · ${radius} km`
+          : criteria.locations[0];
+      chips.push({ key: 'location', label });
+    }
     criteria.workplace?.forEach((mode) =>
       chips.push({ key: `workplace:${mode}`, label: mode }),
     );
@@ -64,17 +58,26 @@ export class JobFiltersComponent {
   removeChip(key: string): void {
     if (key === 'query') {
       this.store.patchCriteria({ query: undefined });
+      this.headerUi.searchQuery.set('');
+      return;
+    }
+
+    if (key === 'location') {
+      this.store.patchCriteria({
+        locations: undefined,
+        locationLat: undefined,
+        locationLng: undefined,
+        radiusKm: undefined,
+      });
+      this.headerUi.locationQuery.set('');
+      this.headerUi.locationLat.set(undefined);
+      this.headerUi.locationLng.set(undefined);
       return;
     }
 
     const [type, value] = key.split(':');
     const criteria = this.store.criteria();
 
-    if (type === 'location') {
-      this.store.patchCriteria({
-        locations: criteria.locations?.filter((item) => item !== value),
-      });
-    }
     if (type === 'workplace') {
       this.store.patchCriteria({
         workplace: criteria.workplace?.filter((item) => item !== value) as typeof criteria.workplace,

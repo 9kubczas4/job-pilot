@@ -3,7 +3,6 @@ import {
   Component,
   DestroyRef,
   ElementRef,
-  HostListener,
   inject,
   signal,
 } from '@angular/core';
@@ -23,6 +22,9 @@ const SEARCH_DEBOUNCE_MS = 400;
 @Component({
   selector: 'app-header-search',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '(document:click)': 'onDocumentClick($event)',
+  },
   imports: [FormsModule],
   templateUrl: './header-search.component.html',
   styleUrl: './header-search.component.scss',
@@ -121,7 +123,6 @@ export class HeaderSearchComponent {
     }
   }
 
-  @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent): void {
     if (!this.host.nativeElement.contains(event.target as Node)) {
       this.jobPanelOpen.set(false);

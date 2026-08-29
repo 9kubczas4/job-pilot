@@ -10,23 +10,27 @@ export class SavedJobsStore {
 
   readonly savedJobIds = signal<string[]>([]);
   readonly appliedJobIds = signal<string[]>([]);
+  readonly applications = signal<JobApplication[]>([]);
 
   readonly savedCount = computed(() => this.savedJobIds().length);
+  readonly applicationsCount = computed(() => this.applications().length);
 
   async loadUserData(): Promise<void> {
     const userId = this.auth.userId();
     if (!userId) {
       this.savedJobIds.set([]);
       this.appliedJobIds.set([]);
+      this.applications.set([]);
       return;
     }
 
-    const [savedIds, appliedIds] = await Promise.all([
+    const [savedIds, applications] = await Promise.all([
       this.repository.loadSavedJobIds(userId),
-      this.repository.loadAppliedJobIds(userId),
+      this.repository.loadApplications(userId),
     ]);
     this.savedJobIds.set(savedIds);
-    this.appliedJobIds.set(appliedIds);
+    this.applications.set(applications);
+    this.appliedJobIds.set(applications.map((application) => application.jobId));
   }
 
   isSaved(jobId: string): boolean {
@@ -53,6 +57,10 @@ export class SavedJobsStore {
     const userId = this.auth.requireUserId();
     const application = await this.repository.applyToJob(userId, jobId, note);
     this.appliedJobIds.update((ids) => (ids.includes(jobId) ? ids : [...ids, jobId]));
+    this.applications.update((items) => {
+      const next = items.filter((item) => item.jobId !== jobId);
+      return [...next, application];
+    });
     return application;
   }
 }

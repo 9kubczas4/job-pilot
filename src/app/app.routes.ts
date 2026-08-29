@@ -36,6 +36,13 @@ export const routes: Routes = [
       import('@features/saved-jobs/pages/saved-jobs/saved-jobs.page').then((m) => m.SavedJobsPageComponent),
   },
   {
+    path: RoutePaths.applications,
+    loadComponent: () =>
+      import('@features/saved-jobs/pages/applications/applications.page').then(
+        (m) => m.ApplicationsPageComponent,
+      ),
+  },
+  {
     path: RoutePaths.wildcard,
     redirectTo: RoutePaths.home,
   },

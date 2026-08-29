@@ -76,6 +76,15 @@
                   Saved
                 </a>
                 <a
+                  [routerLink]="links.applications"
+                  routerLinkActive="is-active"
+                  class="profile-menu__item"
+                  role="menuitem"
+                  (click)="closeProfileMenu()"
+                >
+                  Applications
+                </a>
+                <a
                   [routerLink]="links.profile"
                   routerLinkActive="is-active"
                   class="profile-menu__item"

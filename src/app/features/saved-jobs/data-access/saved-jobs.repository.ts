@@ -22,11 +22,16 @@ export class SavedJobsRepository {
     return snapshot.docs.map((item) => item.id);
   }
 
-  async loadAppliedJobIds(userId: string): Promise<string[]> {
+  async loadApplications(userId: string): Promise<JobApplication[]> {
     const snapshot = await getDocs(
       collection(this.firebase.firestore, 'users', userId, 'applications'),
     );
-    return snapshot.docs.map((item) => item.id);
+    return snapshot.docs.map((item) => item.data() as JobApplication);
+  }
+
+  async loadAppliedJobIds(userId: string): Promise<string[]> {
+    const applications = await this.loadApplications(userId);
+    return applications.map((application) => application.jobId);
   }
 
   async saveJob(userId: string, jobId: string): Promise<void> {

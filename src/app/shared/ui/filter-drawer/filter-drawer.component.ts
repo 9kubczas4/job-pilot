@@ -3,7 +3,6 @@ import {
   Component,
   effect,
   ElementRef,
-  HostListener,
   input,
   output,
   viewChild,
@@ -12,6 +11,9 @@ import {
 @Component({
   selector: 'app-filter-drawer',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '(document:keydown.escape)': 'onEscape()',
+  },
   templateUrl: './filter-drawer.component.html',
   styleUrl: './filter-drawer.component.scss',
 })
@@ -33,7 +35,6 @@ export class FilterDrawerComponent {
     });
   }
 
-  @HostListener('document:keydown.escape')
   onEscape(): void {
     if (this.open()) {
       this.requestClose();

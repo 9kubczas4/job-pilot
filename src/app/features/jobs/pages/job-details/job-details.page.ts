@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, OnInit, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { AppShellComponent } from '@core/layout/app-shell.component';
 import { AuthService } from '@core/auth/auth.service';
@@ -19,6 +19,7 @@ import { JobOffer } from '../../domain/job.model';
 import { ToastService } from '@shared/ui/toast/toast.service';
 import { JobCardComponent } from '../../ui/job-card/job-card.component';
 import { CompetencyChipComponent } from '../../ui/competency-chip/competency-chip.component';
+import { ApplyJobDialogComponent } from '../../ui/apply-job-dialog/apply-job-dialog.component';
 import { JobDetailsStore } from '../../state/job-details.store';
 
 type AuthPromptAction = 'save' | 'apply';
@@ -26,18 +27,28 @@ type AuthPromptAction = 'save' | 'apply';
 @Component({
   selector: 'app-job-details-page',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [AppShellComponent, RouterLink, AuthPromptDialogComponent, JobCardComponent, CompetencyChipComponent],
+  imports: [
+    AppShellComponent,
+    RouterLink,
+    AuthPromptDialogComponent,
+    ApplyJobDialogComponent,
+    JobCardComponent,
+    CompetencyChipComponent,
+  ],
   templateUrl: './job-details.page.html',
   styleUrl: './job-details.page.scss',
 })
-export class JobDetailsPageComponent implements OnInit {
+export class JobDetailsPageComponent {
   private readonly route = inject(ActivatedRoute);
   readonly store = inject(JobDetailsStore);
   readonly savedJobs = inject(SavedJobsStore);
   readonly auth = inject(AuthService);
   private readonly toast = inject(ToastService);
+
   readonly authPromptOpen = signal(false);
   readonly authPromptAction = signal<AuthPromptAction>('save');
+  readonly applyDialogOpen = signal(false);
+  readonly applying = signal(false);
   readonly links = AppLinks;
 
   readonly formatSalary = formatSalary;
@@ -59,14 +70,19 @@ export class JobDetailsPageComponent implements OnInit {
       : 'Sign in to add offers to your saved list and access them from any device.',
   );
 
-  ngOnInit(): void {
-    this.savedJobs.loadUserData();
-    const jobId = this.route.snapshot.paramMap.get('id');
-    if (!jobId) {
-      return;
-    }
+  constructor() {
+    effect(() => {
+      if (this.auth.loading() || !this.auth.isAuthenticated()) {
+        return;
+      }
 
-    this.store.loadJob(jobId);
+      void this.savedJobs.loadUserData();
+    });
+
+    const jobId = this.route.snapshot.paramMap.get('id');
+    if (jobId) {
+      this.store.loadJob(jobId);
+    }
   }
 
   toggleSave(): void {
@@ -93,7 +109,7 @@ export class JobDetailsPageComponent implements OnInit {
 
   apply(): void {
     const job = this.store.job();
-    if (!job) {
+    if (!job || this.savedJobs.isApplied(job.id)) {
       return;
     }
 
@@ -103,9 +119,29 @@ export class JobDetailsPageComponent implements OnInit {
       return;
     }
 
-    void this.savedJobs.applyToJob(job.id).then(() => {
+    this.applyDialogOpen.set(true);
+  }
+
+  closeApplyDialog(): void {
+    this.applyDialogOpen.set(false);
+  }
+
+  async submitApplication(note?: string): Promise<void> {
+    const job = this.store.job();
+    if (!job || this.applying() || this.savedJobs.isApplied(job.id)) {
+      return;
+    }
+
+    this.applying.set(true);
+    try {
+      await this.savedJobs.applyToJob(job.id, note);
+      this.applyDialogOpen.set(false);
       this.toast.show(`Application submitted for ${job.title}.`);
-    });
+    } catch {
+      this.toast.show('Could not submit application. Please try again.', 5000);
+    } finally {
+      this.applying.set(false);
+    }
   }
 
   closeAuthPrompt(): void {
@@ -133,8 +169,7 @@ export class JobDetailsPageComponent implements OnInit {
       }
 
       if (!this.savedJobs.isApplied(job.id)) {
-        await this.savedJobs.applyToJob(job.id);
-        this.toast.show(`Application submitted for ${job.title}.`);
+        this.applyDialogOpen.set(true);
       }
     } catch {
       // User dismissed the provider popup or sign-in failed.

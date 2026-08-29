@@ -1,0 +1,120 @@
+@use 'styles/button';
+@use 'styles/form';
+
+.apply-dialog-root {
+  position: fixed;
+  inset: 0;
+  z-index: calc(var(--z-drawer) + 1);
+  display: grid;
+  place-items: center;
+  padding: var(--space-4);
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.apply-dialog-root.is-open {
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.apply-dialog-backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: rgb(15 23 42 / 0.45);
+  opacity: 0;
+  backdrop-filter: blur(0);
+  cursor: pointer;
+  transition:
+    opacity var(--transition-fast),
+    backdrop-filter var(--transition-fast);
+}
+
+.apply-dialog-root.is-open .apply-dialog-backdrop {
+  opacity: 1;
+  backdrop-filter: blur(4px);
+}
+
+.apply-dialog {
+  position: relative;
+  width: min(100%, 28rem);
+  padding: var(--space-5);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface-elevated);
+  box-shadow: var(--shadow-md);
+  outline: none;
+  opacity: 0;
+  transform: translateY(0.5rem) scale(0.98);
+  transition:
+    opacity var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.apply-dialog-root.is-open .apply-dialog {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.apply-dialog__title {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+}
+
+.apply-dialog__job {
+  margin-top: var(--space-3);
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+}
+
+.apply-dialog__job-title {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+.apply-dialog__job-company {
+  margin: var(--space-1) 0 0;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.apply-dialog__message {
+  margin: var(--space-4) 0 0;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-relaxed);
+}
+
+.apply-dialog__field {
+  display: grid;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+
+.apply-dialog__label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+}
+
+.apply-dialog__note {
+  min-height: 6rem;
+  resize: vertical;
+}
+
+.apply-dialog__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-2);
+  margin-top: var(--space-5);
+}
+
+.apply-dialog__actions .btn {
+  min-width: 6rem;
+}

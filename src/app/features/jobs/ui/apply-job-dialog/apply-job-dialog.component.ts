@@ -5,27 +5,29 @@ import {
   ElementRef,
   input,
   output,
+  signal,
   viewChild,
 } from '@angular/core';
 
 @Component({
-  selector: 'app-auth-prompt-dialog',
+  selector: 'app-apply-job-dialog',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '(document:keydown.escape)': 'onEscape()',
   },
-  templateUrl: './auth-prompt-dialog.component.html',
-  styleUrl: './auth-prompt-dialog.component.scss',
+  templateUrl: './apply-job-dialog.component.html',
+  styleUrl: './apply-job-dialog.component.scss',
 })
-export class AuthPromptDialogComponent {
+export class ApplyJobDialogComponent {
   readonly open = input(false);
-  readonly title = input('Sign in required');
-  readonly message = input('Sign in to save jobs and access your saved offers.');
-  readonly confirmLabel = input('Sign in');
-  readonly cancelLabel = input('Cancel');
+  readonly jobTitle = input('');
+  readonly companyName = input('');
+  readonly submitting = input(false);
 
   readonly closed = output<void>();
-  readonly confirmed = output<void>();
+  readonly confirmed = output<string | undefined>();
+
+  readonly note = signal('');
 
   private readonly dialogRef = viewChild<ElementRef<HTMLElement>>('dialog');
   private previouslyFocused: HTMLElement | null = null;
@@ -34,24 +36,42 @@ export class AuthPromptDialogComponent {
     effect(() => {
       if (this.open()) {
         this.onOpen();
-      } else {
-        this.onClose();
+        return;
       }
+
+      this.onClose();
+      this.note.set('');
     });
   }
 
   onEscape(): void {
-    if (this.open()) {
+    if (this.open() && !this.submitting()) {
       this.requestClose();
     }
   }
 
+  onNoteInput(event: Event): void {
+    const target = event.target;
+    if (target instanceof HTMLTextAreaElement) {
+      this.note.set(target.value);
+    }
+  }
+
   requestClose(): void {
+    if (this.submitting()) {
+      return;
+    }
+
     this.closed.emit();
   }
 
   onConfirm(): void {
-    this.confirmed.emit();
+    if (this.submitting()) {
+      return;
+    }
+
+    const value = this.note().trim();
+    this.confirmed.emit(value || undefined);
   }
 
   private onOpen(): void {

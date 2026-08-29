@@ -155,13 +155,28 @@
               }
             </dl>
 
+            @if (savedJobs.isApplied(currentJob.id)) {
+              <div class="status-banner--success" role="status">
+                <p class="status-banner--success__title">Application submitted</p>
+                <p class="status-banner--success__copy">The recruiter has received your profile for this role.</p>
+              </div>
+            }
+
             <button
               type="button"
-              class="btn btn-primary job-details__apply"
-              [disabled]="savedJobs.isApplied(currentJob.id)"
+              class="btn job-details__apply"
+              [class.btn-primary]="!savedJobs.isApplied(currentJob.id)"
+              [class.btn--applied]="savedJobs.isApplied(currentJob.id)"
+              [disabled]="savedJobs.isApplied(currentJob.id) || applying()"
               (click)="apply()"
             >
-              {{ savedJobs.isApplied(currentJob.id) ? 'Applied' : 'Apply now' }}
+              @if (applying()) {
+                Submitting…
+              } @else if (savedJobs.isApplied(currentJob.id)) {
+                Applied
+              } @else {
+                Apply now
+              }
             </button>
           </div>
 
@@ -183,11 +198,19 @@
       <footer class="job-details__mobile-bar">
         <button
           type="button"
-          class="btn btn-primary"
-          [disabled]="savedJobs.isApplied(currentJob.id)"
+          class="btn job-details__apply"
+          [class.btn-primary]="!savedJobs.isApplied(currentJob.id)"
+          [class.btn--applied]="savedJobs.isApplied(currentJob.id)"
+          [disabled]="savedJobs.isApplied(currentJob.id) || applying()"
           (click)="apply()"
         >
-          {{ savedJobs.isApplied(currentJob.id) ? 'Applied' : 'Apply now' }}
+          @if (applying()) {
+            Submitting…
+          } @else if (savedJobs.isApplied(currentJob.id)) {
+            Applied
+          } @else {
+            Apply now
+          }
         </button>
       </footer>
     </div>
@@ -205,3 +228,14 @@
   (closed)="closeAuthPrompt()"
   (confirmed)="confirmAuthPrompt()"
 />
+
+@if (store.job(); as currentJob) {
+  <app-apply-job-dialog
+    [open]="applyDialogOpen()"
+    [jobTitle]="currentJob.title"
+    [companyName]="currentJob.company.name"
+    [submitting]="applying()"
+    (closed)="closeApplyDialog()"
+    (confirmed)="submitApplication($event)"
+  />
+}

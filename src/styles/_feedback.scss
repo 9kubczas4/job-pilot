@@ -14,6 +14,35 @@
   text-align: center;
 }
 
+.status-banner--success {
+  display: grid;
+  gap: var(--space-1);
+  padding: var(--space-3);
+  border: 1px solid rgb(4 120 87 / 0.2);
+  border-radius: var(--radius-lg);
+  background: var(--color-success-subtle);
+}
+
+.status-banner--success__title {
+  margin: 0;
+  color: var(--color-success);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+.status-banner--success__copy {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+}
+
+.btn--applied {
+  border-color: var(--color-success);
+  background: var(--color-success-subtle);
+  color: var(--color-success);
+  cursor: default;
+}
+
 .link-back {
   display: inline-flex;
   align-items: center;

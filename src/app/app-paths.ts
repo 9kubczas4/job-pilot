@@ -5,6 +5,7 @@ export const RoutePaths = {
   jobId: ':id',
   profile: 'profile',
   saved: 'saved',
+  applications: 'applications',
   wildcard: '**',
 } as const;
 
@@ -15,4 +16,5 @@ export const AppLinks = {
   job: (id: string) => ['/', RoutePaths.jobs, id] as const,
   profile: ['/', RoutePaths.profile] as const,
   saved: ['/', RoutePaths.saved] as const,
+  applications: ['/', RoutePaths.applications] as const,
 };

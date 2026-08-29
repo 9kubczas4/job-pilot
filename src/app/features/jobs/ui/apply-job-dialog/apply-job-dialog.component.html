@@ -1,0 +1,56 @@
+<div
+  class="apply-dialog-root"
+  [class.is-open]="open()"
+  [attr.inert]="open() ? null : ''"
+  [attr.aria-hidden]="!open()"
+>
+  <button
+    type="button"
+    class="apply-dialog-backdrop"
+    aria-label="Close dialog"
+    tabindex="-1"
+    [disabled]="submitting()"
+    (click)="requestClose()"
+  ></button>
+
+  <div
+    #dialog
+    class="apply-dialog"
+    role="dialog"
+    aria-modal="true"
+    [attr.aria-labelledby]="open() ? 'apply-dialog-title' : null"
+    tabindex="-1"
+  >
+    <h2 id="apply-dialog-title" class="apply-dialog__title">Apply for this role</h2>
+
+    <div class="apply-dialog__job">
+      <p class="apply-dialog__job-title">{{ jobTitle() }}</p>
+      <p class="apply-dialog__job-company">{{ companyName() }}</p>
+    </div>
+
+    <p class="apply-dialog__message">
+      Your profile will be shared with the recruiter. You can add an optional note below.
+    </p>
+
+    <label class="apply-dialog__field">
+      <span class="apply-dialog__label">Message (optional)</span>
+      <textarea
+        class="apply-dialog__note input"
+        rows="4"
+        [disabled]="submitting()"
+        [value]="note()"
+        placeholder="Why you're a great fit, availability, notice period…"
+        (input)="onNoteInput($event)"
+      ></textarea>
+    </label>
+
+    <div class="apply-dialog__actions">
+      <button type="button" class="btn btn-ghost" [disabled]="submitting()" (click)="requestClose()">
+        Cancel
+      </button>
+      <button type="button" class="btn btn-primary" [disabled]="submitting()" (click)="onConfirm()">
+        {{ submitting() ? 'Submitting…' : 'Submit application' }}
+      </button>
+    </div>
+  </div>
+</div>

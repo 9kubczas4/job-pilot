@@ -9,6 +9,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "seed:firestore": "node scripts/seed-firestore.mjs",
+    "seed:jobs": "node scripts/expand-jobs-seed.mjs",
     "lint": "ng lint",
     "serve:ssr:job-pilot": "node dist/job-pilot/server/server.mjs"
   },

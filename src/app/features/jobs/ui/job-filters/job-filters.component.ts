@@ -26,11 +26,11 @@ const WORK_SCHEDULE_OPTIONS = [
 ];
 
 const SALARY_MIN_OPTIONS = [
+  { value: 4000, label: '4k+' },
+  { value: 6000, label: '6k+' },
   { value: 8000, label: '8k+' },
+  { value: 10000, label: '10k+' },
   { value: 12000, label: '12k+' },
-  { value: 16000, label: '16k+' },
-  { value: 20000, label: '20k+' },
-  { value: 25000, label: '25k+' },
 ];
 
 @Component({
@@ -157,7 +157,7 @@ export class JobFiltersComponent {
     if (criteria.salaryMin != null) {
       chips.push({
         key: 'salaryMin',
-        label: `From ${Math.round(criteria.salaryMin / 1000)}k PLN`,
+        label: `From ${Math.round(criteria.salaryMin / 1000)}k USD`,
       });
     }
 

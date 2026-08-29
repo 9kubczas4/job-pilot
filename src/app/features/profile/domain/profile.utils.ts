@@ -167,7 +167,7 @@ export function profileToFormModel(
     contractPreferences: [...profile.contractPreferences],
     salaryExpectation: profile.salaryExpectation
       ? { min: profile.salaryExpectation.min ?? 0, currency: profile.salaryExpectation.currency }
-      : { min: 0, currency: 'PLN' },
+      : { min: 0, currency: 'USD' },
     preferences: profile.preferences?.trim() || '',
   };
 }

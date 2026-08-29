@@ -27,7 +27,7 @@ export const CONTRACT_OPTIONS: ProfileOption<ContractType>[] = [
 ];
 
 export const SALARY_CURRENCY_OPTIONS: ProfileOption<SalaryCurrency>[] = [
-  { value: 'PLN', label: 'PLN' },
-  { value: 'EUR', label: 'EUR' },
   { value: 'USD', label: 'USD' },
+  { value: 'EUR', label: 'EUR' },
+  { value: 'PLN', label: 'PLN' },
 ];

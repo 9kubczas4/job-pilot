@@ -60,7 +60,7 @@ The agent runs in **Codex** (ChatGPT desktop in-app browser). The app exposes to
 - Google Maps JavaScript API with marker clustering
 - `provideRouter(routes, withExperimentalAutoCleanupInjectors())`
 - `provideExperimentalWebMcpForms()` for profile
-- Seed: 42 jobs in `src/assets/seed/jobs.json`, Firestore seed script available
+- Seed: 200 jobs in `src/assets/seed/jobs.json`, Firestore seed script available
 
 ### Hackathon submission
 
@@ -96,7 +96,7 @@ The agent runs in **Codex** (ChatGPT desktop in-app browser). The app exposes to
 | CSR only | Static prerender + hydration | [ADR-003](../decisions/003-static-prerender-for-seo.md) |
 | Tools in `core/webmcp/` | Tools in `features/*/webmcp/` | [ADR-002](../decisions/002-feature-colocated-webmcp-tools.md) |
 | No applications screen | `/applications` page added | Scope expansion during implementation |
-| 80–120 seeded jobs | 42 jobs in seed JSON | Sufficient for demo; expandable via seed script |
+| 80–120 seeded jobs | 200 jobs in seed JSON | Sufficient for demo; expandable via `scripts/expand-jobs-seed.mjs` |
 | Zod validation layer | Not yet integrated | Dependency present; validation uses JSON schemas in tool definitions |
 
 ## Architecture

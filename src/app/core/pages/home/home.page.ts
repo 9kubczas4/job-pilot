@@ -108,7 +108,7 @@ export class HomePageComponent {
     },
     {
       title: 'Search in plain language',
-      text: 'Try: “Find senior frontend jobs, remote or hybrid in Warsaw, minimum 25k PLN.”',
+      text: 'Try: “Find senior frontend jobs, remote or hybrid in Warsaw, minimum $8k USD.”',
     },
     {
       title: 'Watch the UI react',

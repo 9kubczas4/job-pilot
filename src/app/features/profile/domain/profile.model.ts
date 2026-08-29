@@ -89,7 +89,7 @@ export function createEmptyProfileFormModel(): ProfileFormModel {
     preferredSeniorities: ['junior'],
     workplacePreferences: ['remote'],
     contractPreferences: ['b2b'],
-    salaryExpectation: { min: 0, currency: 'PLN' },
+    salaryExpectation: { min: 0, currency: 'USD' },
     preferences: '',
   };
 }

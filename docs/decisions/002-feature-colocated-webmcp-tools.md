@@ -8,7 +8,7 @@ Accepted
 
 ## Context
 
-Job Pilot exposes seven WebMCP tools so Codex can search jobs, manage profiles, and apply to offers. Early planning placed all tools in `core/webmcp/tools/`, but as features matured it became clear that tools are tightly coupled to feature stores and repositories.
+Job Pilot exposes eight WebMCP tools so Codex can search jobs, manage profiles, and apply to offers. Early planning placed all tools in `core/webmcp/tools/`, but as features matured it became clear that tools are tightly coupled to feature stores and repositories.
 
 Tools must share the same state as the UI (`JobSearchStore`, `ProfileStore`, `SavedJobsStore`) without creating circular imports or violating layer boundaries.
 
@@ -18,11 +18,13 @@ Colocate WebMCP tools inside each feature at `features/{name}/webmcp/`:
 
 | Tool(s) | Location | Registration |
 |---------|----------|--------------|
-| `search_jobs` | `features/jobs/webmcp/search-jobs.tool.ts` | `app.config.ts` (global) |
-| `filter_jobs` | `features/jobs/webmcp/filter-jobs.tool.ts` | `app.config.ts` (global) |
+| `search_jobs` | `features/jobs/webmcp/tools/search-jobs/search-jobs.tool.ts` | `app.config.ts` (global) |
+| `filter_jobs` | `features/jobs/webmcp/tools/filter-jobs/filter-jobs.tool.ts` | `app.config.ts` (global) |
 | `get_profile` | `features/profile/webmcp/profile.tools.ts` | `app.config.ts` (global) |
 | `update_profile` | `features/profile/pages/profile/profile.page.ts` | Signal Form implicit tool on `/profile` |
-| `get_job`, `save_job`, `apply_job` | `features/jobs/webmcp/job-details.tools.ts` | Route provider on `/jobs` |
+| `get_job` | `features/jobs/webmcp/job-details.tools.ts` | Route provider on `/jobs` |
+| `save_job`, `unsave_job` | `features/jobs/webmcp/tools/saved-jobs/saved-jobs.tool.ts` | Route provider on `/jobs` |
+| `apply_job` | `features/jobs/webmcp/tools/apply-job/apply-job.tool.ts` | Route provider on `/jobs` |
 
 Shared response helpers (`toolJson`, `toolText`) live in `core/webmcp/tool-response.ts`.
 

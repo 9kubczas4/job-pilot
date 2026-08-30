@@ -1,8 +1,8 @@
 import {
   ApplicationConfig,
-  APP_INITIALIZER,
   inject,
   PLATFORM_ID,
+  provideAppInitializer,
   provideBrowserGlobalErrorListeners,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
@@ -34,21 +34,15 @@ export const appConfig: ApplicationConfig = {
     provideSearchCatalogPreload(),
     provideRouter(routes, withExperimentalAutoCleanupInjectors()),
     { provide: GOOGLE_MAPS_API_KEY, useValue: environment.googleMapsApiKey },
-    {
-      provide: APP_INITIALIZER,
-      multi: true,
-      useFactory: () => {
-        const platformId = inject(PLATFORM_ID);
+    provideAppInitializer((): void | Promise<void> => {
+      const platformId = inject(PLATFORM_ID);
 
-        return () => {
-          if (!isPlatformBrowser(platformId) || !isGoogleMapsConfigured(environment.googleMapsApiKey)) {
-            return Promise.resolve();
-          }
+      if (!isPlatformBrowser(platformId) || !isGoogleMapsConfigured(environment.googleMapsApiKey)) {
+        return;
+      }
 
-          return loadGoogleMapsApi(environment.googleMapsApiKey);
-        };
-      },
-    },
+      return loadGoogleMapsApi(environment.googleMapsApiKey);
+    }),
     provideClientHydration(
       withHttpTransferCacheOptions({
         includeRequestsWithAuthHeaders: true,

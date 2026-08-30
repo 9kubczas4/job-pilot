@@ -1,29 +1,15 @@
-import {
-  APP_INITIALIZER,
-  inject,
-  makeEnvironmentProviders,
-  PLATFORM_ID,
-  type EnvironmentProviders,
-} from '@angular/core';
+import { inject, PLATFORM_ID, provideAppInitializer, type EnvironmentProviders } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { SearchCatalogService } from '../state/search-catalog.service';
 
 export function provideSearchCatalogPreload(): EnvironmentProviders {
-  return makeEnvironmentProviders([
-    {
-      provide: APP_INITIALIZER,
-      multi: true,
-      useFactory: () => {
-        const platformId = inject(PLATFORM_ID);
+  return provideAppInitializer((): void | Promise<void> => {
+    const platformId = inject(PLATFORM_ID);
 
-        return () => {
-          if (!isPlatformBrowser(platformId)) {
-            return Promise.resolve();
-          }
+    if (!isPlatformBrowser(platformId)) {
+      return;
+    }
 
-          return inject(SearchCatalogService).preload();
-        };
-      },
-    },
-  ]);
+    return inject(SearchCatalogService).preload();
+  });
 }

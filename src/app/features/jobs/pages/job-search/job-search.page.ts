@@ -168,7 +168,7 @@ export class JobSearchPageComponent implements OnInit {
         return;
       }
 
-      void this.router.navigate([], {
+      this.router.navigate([], {
         relativeTo: this.route,
         queryParams: params,
         replaceUrl: true,
@@ -295,12 +295,12 @@ export class JobSearchPageComponent implements OnInit {
     }
 
     if (this.savedJobs.isSaved(jobId)) {
-      void this.savedJobs.unsaveJob(jobId);
+      this.savedJobs.unsaveJob(jobId);
       this.toast.show('Removed from saved jobs.');
       return;
     }
 
-    void this.savedJobs.saveJob(jobId);
+    this.savedJobs.saveJob(jobId);
     this.toast.show('Job saved.');
   }
 

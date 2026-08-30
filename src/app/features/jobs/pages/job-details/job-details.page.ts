@@ -107,8 +107,8 @@ export class JobDetailsPageComponent {
         return;
       }
 
-      void this.savedJobs.loadSavedJobs();
-      void this.jobApplications.loadApplications();
+      this.savedJobs.loadSavedJobs();
+      this.jobApplications.loadApplications();
     });
 
     effect(() => {
@@ -120,7 +120,7 @@ export class JobDetailsPageComponent {
       untracked(() => {
         this.authPromptOpen.set(false);
         this.applyDialogOpen.set(false);
-        void this.store.loadJob(jobId);
+        this.store.loadJob(jobId);
       });
 
       this.scrollToTop();
@@ -140,12 +140,12 @@ export class JobDetailsPageComponent {
     }
 
     if (this.savedJobs.isSaved(job.id)) {
-      void this.savedJobs.unsaveJob(job.id);
+      this.savedJobs.unsaveJob(job.id);
       this.toast.show('Removed from saved jobs.');
       return;
     }
 
-    void this.savedJobs.saveJob(job.id);
+    this.savedJobs.saveJob(job.id);
     this.toast.show('Job saved.');
   }
 

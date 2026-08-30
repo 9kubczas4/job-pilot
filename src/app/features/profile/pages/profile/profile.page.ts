@@ -125,7 +125,7 @@ export class ProfilePageComponent {
         return;
       }
 
-      void this.store.loadProfile().then((profile) => {
+      this.store.loadProfile().then((profile) => {
         if (!profile) {
           return;
         }
@@ -172,7 +172,7 @@ export class ProfilePageComponent {
   }
 
   signIn(): void {
-    void this.auth.signInWithGoogle();
+    this.auth.signInWithGoogle();
   }
 
   addSkill(): void {

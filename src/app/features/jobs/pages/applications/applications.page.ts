@@ -55,11 +55,11 @@ export class ApplicationsPageComponent {
         return;
       }
 
-      void this.applicationsStore.loadApplications();
+      this.applicationsStore.loadApplications();
     });
   }
 
   signIn(): void {
-    void this.auth.signInWithGoogle();
+    this.auth.signInWithGoogle();
   }
 }

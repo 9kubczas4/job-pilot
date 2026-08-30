@@ -420,7 +420,7 @@ export class JobMapComponent {
 
       popup.addEventListener('click', () => {
         this.ngZone.run(() => {
-          void this.router.navigate(AppLinks.job(job.id));
+          this.router.navigate(AppLinks.job(job.id));
         });
       });
 
@@ -428,7 +428,7 @@ export class JobMapComponent {
         if (event instanceof KeyboardEvent && (event.key === 'Enter' || event.key === ' ')) {
           event.preventDefault();
           this.ngZone.run(() => {
-            void this.router.navigate(AppLinks.job(job.id));
+            this.router.navigate(AppLinks.job(job.id));
           });
         }
       });

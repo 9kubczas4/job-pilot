@@ -40,7 +40,7 @@ export class SavedJobsPageComponent {
         return;
       }
 
-      void this.savedJobsStore.loadSavedJobs();
+      this.savedJobsStore.loadSavedJobs();
     });
   }
 
@@ -50,6 +50,6 @@ export class SavedJobsPageComponent {
   }
 
   signIn(): void {
-    void this.auth.signInWithGoogle();
+    this.auth.signInWithGoogle();
   }
 }

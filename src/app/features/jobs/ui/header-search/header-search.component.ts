@@ -171,7 +171,7 @@ export class HeaderSearchComponent {
       return;
     }
 
-    void this.router
+    this.router
       .navigate(this.jobsLink(), { queryParams: this.buildQueryParams() })
       .then((success) => {
         if (success) {

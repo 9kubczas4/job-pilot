@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { provideJobDetailsWebMcpTools } from '@features/jobs/webmcp/job-details.tools';
-import { provideSaveJobWebMcpTool } from '@features/jobs/webmcp/tools/save-job/save-job.tool';
+import { provideSavedJobsWebMcpTools } from '@features/jobs/webmcp/tools/saved-jobs/saved-jobs.tool';
 import { provideApplyJobWebMcpTool } from '@features/jobs/webmcp/tools/apply-job/apply-job.tool';
 import { RoutePaths } from '@core/app-paths';
 
@@ -14,7 +14,7 @@ export const routes: Routes = [
     path: RoutePaths.jobs,
     providers: [
       provideJobDetailsWebMcpTools(),
-      provideSaveJobWebMcpTool(),
+      provideSavedJobsWebMcpTools(),
       provideApplyJobWebMcpTool(),
     ],
     children: [

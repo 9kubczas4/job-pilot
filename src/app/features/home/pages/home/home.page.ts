@@ -94,6 +94,11 @@ export class HomePageComponent {
       description: 'Add a job to favourites. Idempotent for already saved jobs.',
     },
     {
+      name: 'unsave_job',
+      scope: '/jobs',
+      description: 'Remove a job from favourites. Idempotent for jobs that are not saved.',
+    },
+    {
       name: 'apply_job',
       scope: '/jobs',
       description: 'Submit a real, potentially irreversible job application.',

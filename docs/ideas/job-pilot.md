@@ -34,17 +34,18 @@ The agent runs in **Codex** (ChatGPT desktop in-app browser). The app exposes to
 - Modern, clean UI
 - Static prerender for all routes; job detail pages pre-generated at build time
 
-### WebMCP Tools (7, implemented)
+### WebMCP Tools (8, implemented)
 
 | Tool | Registration | Source |
 |------|--------------|--------|
-| `search_jobs` | Global (`app.config.ts`) | `features/jobs/webmcp/search-jobs.tool.ts` |
-| `filter_jobs` | Global (`app.config.ts`) | `features/jobs/webmcp/filter-jobs.tool.ts` |
+| `search_jobs` | Global (`app.config.ts`) | `features/jobs/webmcp/tools/search-jobs/search-jobs.tool.ts` |
+| `filter_jobs` | Global (`app.config.ts`) | `features/jobs/webmcp/tools/filter-jobs/filter-jobs.tool.ts` |
 | `get_profile` | Global (`app.config.ts`) | `features/profile/webmcp/profile.tools.ts` |
 | `update_profile` | Route `/profile` | `features/profile/pages/profile/profile.page.ts` (Signal Form implicit tool) |
 | `get_job` | Route `/jobs` | `features/jobs/webmcp/job-details.tools.ts` |
-| `save_job` | Route `/jobs` | `features/jobs/webmcp/job-details.tools.ts` |
-| `apply_job` | Route `/jobs` | `features/jobs/webmcp/job-details.tools.ts` |
+| `save_job` | Route `/jobs` | `features/jobs/webmcp/tools/saved-jobs/saved-jobs.tool.ts` |
+| `unsave_job` | Route `/jobs` | `features/jobs/webmcp/tools/saved-jobs/saved-jobs.tool.ts` |
+| `apply_job` | Route `/jobs` | `features/jobs/webmcp/tools/apply-job/apply-job.tool.ts` |
 
 #### `apply_job` (minimal)
 
@@ -75,7 +76,7 @@ The agent runs in **Codex** (ChatGPT desktop in-app browser). The app exposes to
 1. Job board looks like a real product
 2. Codex: complete profile from CV → `update_profile` (schema inferred from Signal Form)
 3. Codex: *"Find lead frontend jobs, remote/hybrid Warsaw, 25k+"* → `search_jobs` → **UI reacts live**
-4. `get_job` → `save_job` → `apply_job`
+4. `get_job` → `save_job` → `unsave_job` or `apply_job`
 
 ## Not Doing (and Why)
 
@@ -234,5 +235,5 @@ src/app/
 |-------|------|--------|
 | 1. Foundation | Angular, Firebase, auth, seed jobs, list + filters + URL routing | Done |
 | 2. Map + Profile | Google Maps + sync, profile CRUD, saved jobs | Done |
-| 3. WebMCP | 7 tools, SearchStore integration, security rules | Done |
+| 3. WebMCP | 8 tools, SearchStore integration, security rules | Done |
 | 4. Polish + Submit | UI polish, prerender, video, README, license, deploy | In progress |

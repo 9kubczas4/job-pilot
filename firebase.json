@@ -1,6 +1,7 @@
 {
   "hosting": {
     "public": "dist/job-pilot/browser",
+    "trailingSlash": false,
     "ignore": [
       "firebase.json",
       "**/.*",

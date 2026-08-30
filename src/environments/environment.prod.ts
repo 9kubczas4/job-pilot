@@ -11,4 +11,5 @@ export const environment = {
   },
   useSeedFallback: false,
   googleMapsApiKey: 'AIzaSyAMmn3uHY8gw3paGhLRiNXCc0G8i_5O92I',
+  siteUrl: 'https://job-pilot-1e4ee.web.app',
 };

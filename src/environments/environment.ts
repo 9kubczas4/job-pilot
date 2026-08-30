@@ -11,4 +11,5 @@ export const environment = {
   },
   useSeedFallback: true,
   googleMapsApiKey: 'AIzaSyAMmn3uHY8gw3paGhLRiNXCc0G8i_5O92I',
+  siteUrl: 'http://localhost:4200',
 };

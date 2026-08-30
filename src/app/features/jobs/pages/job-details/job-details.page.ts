@@ -16,7 +16,10 @@ import { map } from 'rxjs';
 import { AppShellComponent } from '@core/layout/app-shell.component';
 import { enableAppShellPageScroll } from '@core/layout/enable-app-shell-page-scroll';
 import { AuthService } from '@core/infrastructure/auth/auth.service';
+import { PageSeoService } from '@core/infrastructure/seo/page-seo.service';
 import { AppLinks } from '@core/app-paths';
+import { environment } from '@environments/environment';
+import { buildJobSeoMetadata } from '@features/jobs/domain/job-seo.utils';
 import { SavedJobsStore } from '@features/jobs/state/saved-jobs.store';
 import { JobApplicationsStore } from '@features/jobs/state/job-applications.store';
 import { AuthPromptDialogComponent } from '@features/jobs/ui/auth-prompt-dialog/auth-prompt-dialog.component';
@@ -66,6 +69,7 @@ export class JobDetailsPageComponent {
   readonly jobApplications = inject(JobApplicationsStore);
   readonly auth = inject(AuthService);
   private readonly toast = inject(ToastService);
+  private readonly pageSeo = inject(PageSeoService);
 
   readonly authPromptOpen = signal(false);
   readonly authPromptAction = signal<AuthPromptAction>('save');
@@ -101,6 +105,7 @@ export class JobDetailsPageComponent {
 
   constructor() {
     enableAppShellPageScroll();
+    this.destroyRef.onDestroy(() => this.pageSeo.restoreDefaults());
 
     effect(() => {
       if (this.auth.loading() || !this.auth.isAuthenticated()) {
@@ -124,6 +129,16 @@ export class JobDetailsPageComponent {
       });
 
       this.scrollToTop();
+    });
+
+    effect(() => {
+      const job = this.store.job();
+      const jobId = this.routeJobId();
+      if (!job || !jobId || job.id !== jobId) {
+        return;
+      }
+
+      this.pageSeo.apply(buildJobSeoMetadata(job, environment.siteUrl));
     });
   }
 

@@ -10,4 +10,5 @@ export const environmentExample = {
   },
   useSeedFallback: true,
   googleMapsApiKey: 'YOUR_GOOGLE_MAPS_API_KEY',
+  siteUrl: 'https://YOUR_PROJECT.web.app',
 };

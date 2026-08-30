@@ -14,13 +14,14 @@
 const boundariesElements = [
   // --- Core (most specific first) ---
   { type: 'core-page', pattern: 'src/app/core/pages', partialMatch: true },
+  { type: 'core-webmcp', pattern: 'src/app/core/webmcp', partialMatch: true },
   { type: 'core', pattern: 'src/app/core', partialMatch: true },
 
   // --- Shared ---
   { type: 'shared', pattern: 'src/app/shared', partialMatch: false },
 
   // --- Features (most specific first) ---
-  { type: 'feature-webmcp', pattern: 'src/app/features/*/webmcp', partialMatch: true },
+  { type: 'feature-webmcp', pattern: 'src/app/features/*/webmcp/**', partialMatch: false },
   { type: 'feature-ui', pattern: 'src/app/features/*/ui', partialMatch: true },
   { type: 'feature-domain', pattern: 'src/app/features/*/domain', partialMatch: false },
   { type: 'feature-data-access', pattern: 'src/app/features/*/data-access', partialMatch: false },
@@ -33,6 +34,7 @@ const boundariesFiles = [
   { category: 'app-shell', pattern: 'src/app/app.config.ts' },
   { category: 'app-shell', pattern: 'src/app/app.routes.ts' },
   { category: 'app-shell', pattern: 'src/main.ts' },
+  { category: 'core-webmcp', pattern: 'src/app/core/webmcp/**' },
   { category: 'test', pattern: '**/*.spec.ts' },
 ];
 
@@ -164,13 +166,35 @@ const boundariesPolicies = [
   {
     from: { element: { type: 'feature-webmcp' } },
     allow: {
+      to: { file: { categories: 'core-webmcp' } },
+    },
+  },
+  {
+    from: { element: { type: 'feature-webmcp' } },
+    allow: {
       to: {
         element: {
-          types: ['feature-state', 'feature-domain', 'feature-data-access', 'shared', 'core'],
+          types: [
+            'feature-state',
+            'feature-domain',
+            'feature-data-access',
+            'shared',
+            'core',
+            'core-webmcp',
+          ],
         },
       },
     },
-    message: 'WebMCP tools orchestrate state/domain - not UI.',
+    message: 'WebMCP tools orchestrate state/domain/core helpers - not UI.',
+  },
+
+  // --- Core WebMCP helpers ---
+  {
+    from: { element: { type: 'core-webmcp' } },
+    allow: {
+      to: { element: { types: ['shared'] } },
+    },
+    message: 'Core WebMCP helpers stay business-agnostic.',
   },
 
   // --- Core ---

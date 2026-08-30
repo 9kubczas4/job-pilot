@@ -37,7 +37,7 @@ src/app/
 | **state** | `features/*/state/` | domain, data-access, core |
 | **ui** | `features/*/ui/` | domain, state, shared, core, sibling ui |
 | **page** | `features/*/pages/` | ui, state, domain, shared, core |
-| **webmcp** | `features/*/webmcp/` | state, domain, data-access, shared |
+| **webmcp** | `features/*/webmcp/` | state, domain, data-access, shared, core |
 | **core** | `src/app/core/` (excl. pages) | shared |
 | **core-page** | `src/app/core/pages/` | core, shared |
 | **shared** | `src/app/shared/` | shared, external |

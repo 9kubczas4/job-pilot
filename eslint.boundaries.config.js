@@ -48,6 +48,7 @@ const boundariesFiles = [
   { category: 'app-shell', pattern: 'src/server.ts' },
   { category: 'app-shell', pattern: 'src/app/prerender/**' },
   { category: 'core-webmcp', pattern: 'src/app/core/webmcp/**' },
+  { category: 'test', pattern: 'src/test-setup.ts' },
   { category: 'test', pattern: '**/*.spec.ts' },
 ];
 
@@ -247,6 +248,12 @@ const boundariesPolicies = [
   },
 
   // --- Tests ---
+  {
+    from: { file: { categories: 'test' } },
+    allow: {
+      to: { file: { categories: 'test' } },
+    },
+  },
   {
     from: { file: { categories: 'test' } },
     allow: {

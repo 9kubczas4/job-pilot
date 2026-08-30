@@ -6,8 +6,7 @@ import {
   provideBrowserGlobalErrorListeners,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import { provideRouter, withExperimentalAutoCleanupInjectors } from '@angular/router';
 import { provideExperimentalWebMcpForms } from '@angular/forms/signals';
 import { routes } from './app.routes';
@@ -24,8 +23,7 @@ import { provideClientHydration, withHttpTransferCacheOptions } from '@angular/p
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideAnimationsAsync(),
-    provideHttpClient(withFetch()),
+    provideHttpClient(),
     provideFirebase(),
     provideExperimentalWebMcpForms(),
     provideSearchJobsWebMcpTool(),

@@ -1,8 +1,6 @@
 import { Routes } from '@angular/router';
-import { provideJobDetailsWebMcpTools } from '@features/jobs/webmcp/job-details.tools';
-import { provideSavedJobsWebMcpTools } from '@features/jobs/webmcp/tools/saved-jobs/saved-jobs.tool';
-import { provideApplyJobWebMcpTool } from '@features/jobs/webmcp/tools/apply-job/apply-job.tool';
 import { RoutePaths } from '@core/app-paths';
+import { provideUpdateProfileWebMcpTool } from '@features/profile/webmcp/profile.tools';
 
 export const routes: Routes = [
   {
@@ -12,16 +10,13 @@ export const routes: Routes = [
   },
   {
     path: RoutePaths.jobs,
-    providers: [
-      provideJobDetailsWebMcpTools(),
-      provideSavedJobsWebMcpTools(),
-      provideApplyJobWebMcpTool(),
-    ],
     children: [
       {
         path: RoutePaths.home,
         loadComponent: () =>
-          import('@features/jobs/pages/job-search/job-search.page').then((m) => m.JobSearchPageComponent),
+          import('@features/jobs/pages/job-search/job-search.page').then(
+            (m) => m.JobSearchPageComponent,
+          ),
       },
       {
         path: RoutePaths.saved,
@@ -40,12 +35,15 @@ export const routes: Routes = [
       {
         path: RoutePaths.jobId,
         loadComponent: () =>
-          import('@features/jobs/pages/job-details/job-details.page').then((m) => m.JobDetailsPageComponent),
+          import('@features/jobs/pages/job-details/job-details.page').then(
+            (m) => m.JobDetailsPageComponent,
+          ),
       },
     ],
   },
   {
     path: RoutePaths.profile,
+    providers: [provideUpdateProfileWebMcpTool()],
     loadComponent: () =>
       import('@features/profile/pages/profile/profile.page').then((m) => m.ProfilePageComponent),
   },

@@ -1,57 +1,42 @@
 import { inject } from '@angular/core';
-import { provideExperimentalWebMcpTools } from '@angular/core';
-import { toolJson, toolText } from '@core/infrastructure/webmcp/tool-response';
+import { AuthService } from '@core/infrastructure/auth/auth.service';
+import { toolFailure, toolSuccess } from '@core/infrastructure/webmcp/tool-response';
+import {
+  defineZodWebMcpTool,
+  provideZodWebMcpTools,
+} from '@core/infrastructure/webmcp/zod-webmcp-tool';
 import { JobApplicationsStore } from '@features/jobs/state/job-applications.store';
-import { APPLY_JOB_SCHEMA } from './apply-job.schema';
+import { APPLY_JOB_INPUT_SCHEMA } from './apply-job.schema';
+
+export const APPLY_JOB_WEBMCP_TOOL = defineZodWebMcpTool({
+  name: 'apply_job',
+  description:
+    'Submit a real job application for the signed-in user and add it to Applications. Use this tool instead of interacting with the page UI or DOM. This action may not be reversible, so call it only after the user has clearly chosen a job. Requires sign-in. It is idempotent: an existing application is returned without creating a duplicate. Returns success, changed, and the complete application record.',
+  inputSchema: APPLY_JOB_INPUT_SCHEMA,
+  execute: async ({ jobId, note }) => {
+    if (!inject(AuthService).isAuthenticated()) {
+      return toolFailure('UNAUTHENTICATED', 'Sign in before applying to a job.');
+    }
+
+    const applications = inject(JobApplicationsStore);
+    await applications.loadApplications();
+    const existing = applications.applications().find((application) => application.jobId === jobId);
+
+    if (existing) {
+      return toolSuccess({
+        changed: false,
+        application: { ...existing, status: 'applied' },
+      });
+    }
+
+    const application = await applications.applyToJob(jobId, note || undefined);
+    return toolSuccess({
+      changed: true,
+      application: { ...application, status: 'applied' },
+    });
+  },
+});
 
 export function provideApplyJobWebMcpTool() {
-  return provideExperimentalWebMcpTools([
-    {
-      name: 'apply_job',
-      description:
-        'Submit a real job application for the signed-in user. Creates an entry in Applications and may not be reversible. Requires sign-in. Idempotent: applying to a job that is already applied returns the existing application without creating a duplicate. Returns success, whether a new application was created, jobId, appliedAt, optional note, and status: applied.',
-      inputSchema: APPLY_JOB_SCHEMA,
-      execute: async (input) => {
-        const { jobId, note } = input as { jobId: string; note?: string };
-        if (typeof jobId !== 'string') {
-          return toolText('jobId must be a string.');
-        }
-
-        const applications = inject(JobApplicationsStore);
-        try {
-          await applications.loadApplications();
-          const existing = applications
-            .applications()
-            .find((application) => application.jobId === jobId);
-          if (existing) {
-            return toolJson({
-              success: true,
-              changed: false,
-              jobId: existing.jobId,
-              appliedAt: existing.appliedAt,
-              note: existing.note,
-              status: 'applied',
-            });
-          }
-
-          const application = await applications.applyToJob(
-            jobId,
-            typeof note === 'string' ? note : undefined,
-          );
-
-          return toolJson({
-            success: true,
-            changed: true,
-            jobId: application.jobId,
-            appliedAt: application.appliedAt,
-            note: application.note,
-            status: 'applied',
-          });
-        } catch (error) {
-          const message = error instanceof Error ? error.message : 'Application failed.';
-          return toolText(message);
-        }
-      },
-    },
-  ]);
+  return provideZodWebMcpTools([APPLY_JOB_WEBMCP_TOOL]);
 }

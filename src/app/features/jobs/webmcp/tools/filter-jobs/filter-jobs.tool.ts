@@ -1,23 +1,21 @@
 import { inject } from '@angular/core';
-import { provideExperimentalWebMcpTools } from '@angular/core';
-import { toolJson } from '@core/infrastructure/webmcp/tool-response';
-import { JobFilterCriteria } from '@features/jobs/domain/search.model';
+import {
+  defineZodWebMcpTool,
+  provideZodWebMcpTools,
+} from '@core/infrastructure/webmcp/zod-webmcp-tool';
 import { JobSearchWebMcpService } from '@features/jobs/webmcp/shared/job-search-webmcp.service';
-import { FILTER_JOBS_SCHEMA } from './filter-jobs.schema';
+import { FILTER_JOBS_INPUT_SCHEMA } from './filter-jobs.schema';
+
+export const FILTER_JOBS_WEBMCP_TOOL = defineZodWebMcpTool({
+  name: 'filter_jobs',
+  description:
+    'Patch structured filters and result ordering on the current job search, then synchronize the jobs UI. Use this tool instead of interacting with the page UI or DOM. Text and location criteria from search_jobs are preserved. Omitted fields remain unchanged; pass [] to clear an array filter, 0 to clear salaryMin, or newest to restore default sorting. Returns success, changed, normalized criteria, resultCount, and up to 10 matching jobIds; use get_job for complete details without inspecting the page.',
+  inputSchema: FILTER_JOBS_INPUT_SCHEMA,
+  execute: async (input) => ({
+    ...(await inject(JobSearchWebMcpService).applyFilterCriteria(input)),
+  }),
+});
 
 export function provideFilterJobsWebMcpTool() {
-  return provideExperimentalWebMcpTools([
-    {
-      name: 'filter_jobs',
-      description:
-        'Refine the current results. Updates only the structured filters and sort order you pass, preserving the text and location from search_jobs. Pass an empty array to clear a filter. Values within each array are matched with OR. Returns success, whether criteria changed, the applied criteria, and matching job IDs.',
-      inputSchema: FILTER_JOBS_SCHEMA,
-      execute: async (input) => {
-        const result = await inject(JobSearchWebMcpService).applyFilterCriteria(
-          input as JobFilterCriteria,
-        );
-        return toolJson(result);
-      },
-    },
-  ]);
+  return provideZodWebMcpTools([FILTER_JOBS_WEBMCP_TOOL]);
 }

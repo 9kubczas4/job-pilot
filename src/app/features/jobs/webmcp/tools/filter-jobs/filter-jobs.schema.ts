@@ -1,61 +1,56 @@
-export const FILTER_JOBS_SCHEMA = {
-  type: 'object',
-  properties: {
-    roles: {
-      type: 'array',
-      items: { type: 'string' },
+import { z } from 'zod';
+
+const keywordList = (description: string) =>
+  z.array(z.string().trim().min(1).max(100)).max(20).optional().meta({ description });
+
+export const FILTER_JOBS_INPUT_SCHEMA = z.strictObject({
+  roles: keywordList(
+    'Role-title keywords. A job matches when its title contains any value (OR). Pass [] to clear this filter.',
+  ),
+  skills: keywordList(
+    'Skill names. A job matches when it lists any value (OR). Pass [] to clear this filter.',
+  ),
+  seniority: z
+    .array(z.enum(['junior', 'regular', 'senior', 'expert']))
+    .max(4)
+    .optional()
+    .meta({
       description:
-        'Role title keywords. A job matches when its title contains any listed role (OR). Pass [] to clear.',
-    },
-    skills: {
-      type: 'array',
-      items: { type: 'string' },
+        'Seniority levels matched with OR. Allowed values: junior, regular, senior, expert. Pass [] to clear this filter.',
+    }),
+  workSchedules: z
+    .array(z.enum(['full-time', 'part-time', 'freelance']))
+    .max(3)
+    .optional()
+    .meta({
       description:
-        'Skill names. A job matches when it lists any listed skill (OR). Pass [] to clear.',
-    },
-    seniority: {
-      type: 'array',
-      items: {
-        type: 'string',
-        enum: ['junior', 'regular', 'senior', 'expert'],
-      },
-      description: 'Seniority levels. A job matches any listed level (OR). Pass [] to clear.',
-    },
-    workSchedules: {
-      type: 'array',
-      items: {
-        type: 'string',
-        enum: ['full-time', 'part-time', 'freelance'],
-      },
-      description: 'Work schedules. A job matches any listed schedule (OR). Pass [] to clear.',
-    },
-    workplace: {
-      type: 'array',
-      items: {
-        type: 'string',
-        enum: ['remote', 'hybrid', 'onsite'],
-      },
-      description: 'Workplace modes. A job matches any listed mode (OR). Pass [] to clear.',
-    },
-    contracts: {
-      type: 'array',
-      items: {
-        type: 'string',
-        enum: ['b2b', 'employment', 'service-contract', 'internship'],
-      },
-      description: 'Contract types. A job matches any listed type (OR). Pass [] to clear.',
-    },
-    salaryMin: {
-      type: 'number',
+        'Work schedules matched with OR. Allowed values: full-time, part-time, freelance. Pass [] to clear this filter.',
+    }),
+  workplace: z
+    .array(z.enum(['remote', 'hybrid', 'onsite']))
+    .max(3)
+    .optional()
+    .meta({
       description:
-        'Minimum monthly gross salary in USD. Only USD offers are compared; other currencies are excluded when this filter is set. Omit to clear.',
-    },
-    sort: {
-      type: 'string',
-      enum: ['newest', 'oldest', 'salary-desc', 'salary-asc', 'deadline', 'distance'],
+        'Workplace modes matched with OR. Allowed values: remote, hybrid, onsite. Pass [] to clear this filter.',
+    }),
+  contracts: z
+    .array(z.enum(['b2b', 'employment', 'service-contract', 'internship']))
+    .max(4)
+    .optional()
+    .meta({
       description:
-        'Result ordering. distance requires a location from search_jobs. Pass newest to reset default ordering.',
-    },
-  },
-  additionalProperties: false,
-} as const;
+        'Contract types matched with OR. Allowed values: b2b, employment, service-contract, internship. Pass [] to clear this filter.',
+    }),
+  salaryMin: z.number().finite().nonnegative().optional().meta({
+    description:
+      'Minimum monthly gross salary in USD. Offers in other currencies are excluded while this filter is active. Omit to preserve the current value; pass 0 to clear it.',
+  }),
+  sort: z
+    .enum(['newest', 'oldest', 'salary-desc', 'salary-asc', 'deadline', 'distance'])
+    .optional()
+    .meta({
+      description:
+        'Result ordering. Allowed values: newest, oldest, salary-desc, salary-asc, deadline, distance. distance needs a location from search_jobs; newest restores the default.',
+    }),
+});

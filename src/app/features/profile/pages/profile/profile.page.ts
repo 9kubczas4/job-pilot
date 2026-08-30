@@ -85,11 +85,6 @@ export class ProfilePageComponent {
       });
     },
     {
-      experimentalWebMcpTool: {
-        name: 'update_profile',
-        description:
-          'Update the signed-in candidate profile. Validates input, persists changes, and refreshes the profile UI. Available on /profile only.',
-      },
       submission: {
         action: async () => {
           await this.submitProfile(this.profileModel());

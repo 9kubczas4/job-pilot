@@ -8,13 +8,18 @@ import {
 import { isPlatformBrowser } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
 import { provideRouter, withExperimentalAutoCleanupInjectors } from '@angular/router';
-import { provideExperimentalWebMcpForms } from '@angular/forms/signals';
 import { routes } from './app.routes';
 import { provideFirebase } from '@core/infrastructure/firebase/firebase.providers';
 import { provideSearchJobsWebMcpTool } from '@features/jobs/webmcp/tools/search-jobs/search-jobs.tool';
 import { provideFilterJobsWebMcpTool } from '@features/jobs/webmcp/tools/filter-jobs/filter-jobs.tool';
 import { provideGetProfileWebMcpTool } from '@features/profile/webmcp/profile.tools';
-import { provideSearchCatalogPreload, provideJobsHeaderSearch } from '@features/jobs/webmcp/search-catalog.bootstrap';
+import { provideGetJobWebMcpTool } from '@features/jobs/webmcp/tools/get-job/get-job.tool';
+import { provideSavedJobsWebMcpTools } from '@features/jobs/webmcp/tools/saved-jobs/saved-jobs.tool';
+import { provideApplyJobWebMcpTool } from '@features/jobs/webmcp/tools/apply-job/apply-job.tool';
+import {
+  provideSearchCatalogPreload,
+  provideJobsHeaderSearch,
+} from '@features/jobs/webmcp/search-catalog.bootstrap';
 import { environment } from '@environments/environment';
 import { isGoogleMapsConfigured, loadGoogleMapsApi } from '@shared/map/google-maps-loader';
 import { GOOGLE_MAPS_API_KEY } from '@shared/map/google-maps-config';
@@ -25,10 +30,12 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideHttpClient(),
     provideFirebase(),
-    provideExperimentalWebMcpForms(),
     provideSearchJobsWebMcpTool(),
     provideFilterJobsWebMcpTool(),
     provideGetProfileWebMcpTool(),
+    provideGetJobWebMcpTool(),
+    provideSavedJobsWebMcpTools(),
+    provideApplyJobWebMcpTool(),
     provideSearchCatalogPreload(),
     ...provideJobsHeaderSearch(),
     provideRouter(routes, withExperimentalAutoCleanupInjectors()),

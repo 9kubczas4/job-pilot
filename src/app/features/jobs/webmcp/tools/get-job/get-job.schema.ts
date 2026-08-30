@@ -1,8 +1,7 @@
-export const GET_JOB_SCHEMA = {
-  type: 'object',
-  properties: {
-    jobId: { type: 'string', description: 'The job identifier.' },
-  },
-  required: ['jobId'],
-  additionalProperties: false,
-} as const;
+import { z } from 'zod';
+
+export const GET_JOB_INPUT_SCHEMA = z.strictObject({
+  jobId: z.string().trim().min(1).max(128).meta({
+    description: 'The unique job identifier returned by search_jobs (for example, job-001).',
+  }),
+});

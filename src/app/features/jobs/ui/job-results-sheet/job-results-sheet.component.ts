@@ -100,7 +100,6 @@ export class JobResultsSheetComponent {
   private dragStartY = 0;
   private dragStartHeight = 0;
   private dragSnap: JobSheetSnap = 'peek';
-  private pointerMoved = false;
 
   onHandlePointerDown(event: PointerEvent): void {
     if (event.button !== 0) {
@@ -118,7 +117,6 @@ export class JobResultsSheetComponent {
     this.dragStartHeight = this.snapHeightPx(this.dragSnap);
     this.dragOffsetPx.set(0);
     this.dragHeightPx.set(this.dragStartHeight);
-    this.pointerMoved = false;
     this.isDragging.set(true);
   }
 
@@ -128,9 +126,6 @@ export class JobResultsSheetComponent {
     }
 
     const delta = this.dragStartY - event.clientY;
-    if (Math.abs(delta) > 4) {
-      this.pointerMoved = true;
-    }
     const maxHeight = this.maxSheetHeight();
     const nextHeight = clamp(this.dragStartHeight + delta, COLLAPSED_HEIGHT_PX, maxHeight);
     this.dragHeightPx.set(nextHeight);
@@ -155,20 +150,6 @@ export class JobResultsSheetComponent {
     this.dragHeightPx.set(null);
   }
 
-  onHandleClick(): void {
-    if (this.pointerMoved) {
-      this.pointerMoved = false;
-      return;
-    }
-
-    this.snapChange.emit(this.nextSnap(this.snap()));
-  }
-
-  onHandleKeyboardActivate(event: Event): void {
-    event.preventDefault();
-    this.onHandleClick();
-  }
-
   onBackdropClick(): void {
     this.snapChange.emit('peek');
     this.clearFocus.emit();
@@ -177,12 +158,6 @@ export class JobResultsSheetComponent {
   showAllJobs(): void {
     this.clearFocus.emit();
     this.snapChange.emit('half');
-  }
-
-  private nextSnap(current: JobSheetSnap): JobSheetSnap {
-    const order: JobSheetSnap[] = ['collapsed', 'peek', 'half', 'full'];
-    const index = order.indexOf(current);
-    return order[(index + 1) % order.length] ?? 'peek';
   }
 
   private nearestSnap(visibleHeightPx: number): JobSheetSnap {

@@ -18,16 +18,11 @@
   >
     <header
       class="job-sheet__handle"
-      role="button"
-      tabindex="0"
       [attr.aria-label]="summaryLabel()"
       (pointerdown)="onHandlePointerDown($event)"
       (pointermove)="onHandlePointerMove($event)"
       (pointerup)="onHandlePointerUp($event)"
       (pointercancel)="onHandlePointerUp($event)"
-      (click)="onHandleClick()"
-      (keydown.enter)="onHandleClick()"
-      (keydown.space)="onHandleKeyboardActivate($event)"
     >
       <span class="job-sheet__grabber" aria-hidden="true"></span>
       <p class="job-sheet__summary">{{ summaryLabel() }}</p>

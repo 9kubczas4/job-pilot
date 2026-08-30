@@ -19,7 +19,7 @@ import { AuthService } from '@core/infrastructure/auth/auth.service';
 import { AppLinks } from '@core/app-paths';
 import { SavedJobsStore } from '@features/jobs/state/saved-jobs.store';
 import { JobApplicationsStore } from '@features/jobs/state/job-applications.store';
-import { AuthPromptDialogComponent } from '@shared/ui/auth-prompt-dialog/auth-prompt-dialog.component';
+import { AuthPromptDialogComponent } from '../../ui/auth-prompt-dialog/auth-prompt-dialog.component';
 import { JobHeaderSearchComponent } from '../../ui/job-header-search/job-header-search.component';
 import { SaveJobButtonComponent } from '../../ui/save-job-button/save-job-button.component';
 import {

@@ -19,7 +19,7 @@ import { AppLinks, AppProfileMenuLinks } from '@core/app-paths';
 import { AuthService } from '@core/infrastructure/auth/auth.service';
 import { AppShellComponent } from '@core/layout/app-shell.component';
 import { HeaderUiStore } from '../../state/header-ui.store';
-import { AuthPromptDialogComponent } from '@shared/ui/auth-prompt-dialog/auth-prompt-dialog.component';
+import { AuthPromptDialogComponent } from '../../ui/auth-prompt-dialog/auth-prompt-dialog.component';
 import { LogoComponent } from '@shared/ui/logo/logo.component';
 import { FilterDrawerComponent } from '@shared/ui/filter-drawer/filter-drawer.component';
 import { JobFilterDrawerComponent } from '../../ui/job-filter-drawer/job-filter-drawer.component';

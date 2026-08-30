@@ -1,16 +1,14 @@
 import { inject, Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { AppLinks } from '@core/app-paths';
 import { DEFAULT_SEARCH_RADIUS_KM } from '@features/jobs/domain/header-search.model';
 import { JobSearchToolResult } from './job-search-tool-result.model';
-import { HeaderUiStore } from '@features/jobs/state/header-ui.store';
+import { HeaderSearchPageSupport } from '@features/jobs/state/header-search-page.support';
 import { buildCityCentersFromJobs, resolveCityCenter } from '@features/jobs/domain/city-catalog';
 import {
   enrichLocationCriteria,
   searchLocationEqual,
 } from '@features/jobs/domain/job-search-sync.utils';
 import { JobFilterCriteria } from '@features/jobs/domain/search.model';
-import { criteriaToQueryParams } from '@features/jobs/domain/search-url.utils';
 import { JobSearchStore } from '@features/jobs/state/job-search.store';
 import {
   filterFieldsChanged,
@@ -22,8 +20,7 @@ import {
 @Injectable({ providedIn: 'root' })
 export class JobSearchWebMcpService {
   private readonly store = inject(JobSearchStore);
-  private readonly headerUi = inject(HeaderUiStore);
-  private readonly router = inject(Router);
+  private readonly headerSearch = inject(HeaderSearchPageSupport);
 
   async applySearchCriteria(input: JobSearchInput): Promise<JobSearchToolResult> {
     await this.store.loadJobs();
@@ -74,12 +71,7 @@ export class JobSearchWebMcpService {
 
   private async syncUiAndNavigate(changed: () => boolean): Promise<JobSearchToolResult> {
     this.enrichStoredLocationIfNeeded();
-    this.headerUi.syncFromCriteria(this.store.criteria());
-
-    await this.router.navigate(AppLinks.jobs, {
-      queryParams: criteriaToQueryParams(this.store.criteria()),
-      replaceUrl: true,
-    });
+    await this.headerSearch.submitCriteria(this.store.criteria(), AppLinks.jobs);
 
     return {
       success: true,

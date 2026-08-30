@@ -4,6 +4,8 @@ import {
   buildHeaderSearchQueryParams,
   DEFAULT_SEARCH_RADIUS_KM,
 } from '@features/jobs/domain/header-search.model';
+import { criteriaToQueryParams } from '@features/jobs/domain/search-url.utils';
+import { JobSearchCriteria } from '@features/jobs/domain/search.model';
 import { HeaderUiStore } from './header-ui.store';
 import { SearchCatalogService } from './search-catalog.service';
 
@@ -66,14 +68,18 @@ export class HeaderSearchPageSupport {
       return;
     }
 
-    this.router
-      .navigate(jobsLink, { queryParams: this.buildQueryParams() })
-      .then((success) => {
-        if (success) {
-          this.headerUi.applySearch();
-          this.headerUi.requestMobileSearchClose();
-        }
-      });
+    void this.navigateAndNotify(jobsLink, this.buildQueryParams());
+  }
+
+  async submitCriteria(
+    criteria: JobSearchCriteria,
+    jobsLink: readonly string[],
+  ): Promise<boolean> {
+    void this.catalog.ensureCatalogLoaded();
+    this.clearDebounce();
+    this.headerUi.syncFromCriteria(criteria);
+
+    return this.navigateAndNotify(jobsLink, criteriaToQueryParams(criteria));
   }
 
   private scheduleApplySearch(jobsLink: readonly string[], onJobsSearchPage: boolean): void {
@@ -96,6 +102,19 @@ export class HeaderSearchPageSupport {
       locationLng: this.headerUi.locationLng(),
       radiusKm: this.headerUi.radiusKm(),
     });
+  }
+
+  private async navigateAndNotify(
+    jobsLink: readonly string[],
+    queryParams: Record<string, string>,
+  ): Promise<boolean> {
+    const success = await this.router.navigate(jobsLink, { queryParams });
+    if (success) {
+      this.headerUi.applySearch();
+      this.headerUi.requestMobileSearchClose();
+    }
+
+    return success;
   }
 
   private clearDebounce(): void {

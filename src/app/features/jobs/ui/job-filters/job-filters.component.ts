@@ -1,9 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { HeaderUiStore } from '../../state/header-ui.store';
-import {
-  CONTRACT_OPTIONS,
-  SENIORITY_OPTIONS,
-} from '@features/profile/domain/profile-options';
+import { CONTRACT_OPTIONS, SENIORITY_OPTIONS } from '../../domain/job-options';
 import {
   extractTopSkills,
   isArrayCriteriaActive,

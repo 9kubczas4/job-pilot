@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { provideJobDetailsWebMcpTools } from '@features/jobs/webmcp/job-details.tools';
-import { provideSaveJobWebMcpTool } from '@features/jobs/saved-jobs/webmcp/tools/save-job/save-job.tool';
-import { provideApplyJobWebMcpTool } from '@features/jobs/applications/webmcp/tools/apply-job/apply-job.tool';
+import { provideSaveJobWebMcpTool } from '@features/jobs/webmcp/tools/save-job/save-job.tool';
+import { provideApplyJobWebMcpTool } from '@features/jobs/webmcp/tools/apply-job/apply-job.tool';
 import { RoutePaths } from '@core/app-paths';
 
 export const routes: Routes = [
@@ -26,14 +26,14 @@ export const routes: Routes = [
       {
         path: RoutePaths.saved,
         loadComponent: () =>
-          import('@features/jobs/saved-jobs/pages/saved-jobs/saved-jobs.page').then(
+          import('@features/jobs/pages/saved-jobs/saved-jobs.page').then(
             (m) => m.SavedJobsPageComponent,
           ),
       },
       {
         path: RoutePaths.applications,
         loadComponent: () =>
-          import('@features/jobs/applications/pages/applications/applications.page').then(
+          import('@features/jobs/pages/applications/applications.page').then(
             (m) => m.ApplicationsPageComponent,
           ),
       },

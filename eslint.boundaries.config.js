@@ -1,40 +1,51 @@
 // Architectural import boundaries for Job Pilot.
 //
-// Layout:
-//   src/app/core/              - infra (auth, firebase, layout)
-//   src/app/shared/            - business-agnostic utilities and UI kit
-//   src/app/features/{name}/
-//     pages/                   - smart page (route target)
-//     webmcp/                  - agent tools for the feature
-//     ui/                      - presentational components
-//     domain/                  - models and pure business rules
-//     data-access/             - persistence (Firestore, HTTP)
-//     state/                   - client state (stores)
-//     {subfeature}/            - optional nested slice (e.g. jobs/saved-jobs)
+// Every route-level feature lives directly under `features/{name}`. A feature
+// may import its own layers. Cross-feature dependencies are denied unless an
+// explicit consumer -> owner policy is listed below.
 
 const boundariesElements = [
-  // --- Core (most specific first) ---
   { type: 'core-page', pattern: 'src/app/core/pages', partialMatch: true },
   { type: 'core-webmcp', pattern: 'src/app/core/webmcp', partialMatch: true },
   { type: 'core', pattern: 'src/app/core', partialMatch: true },
-
-  // --- Shared ---
   { type: 'shared', pattern: 'src/app/shared', partialMatch: false },
 
-  // --- Subfeatures (e.g. jobs/saved-jobs, jobs/applications) ---
-  { type: 'feature-webmcp', pattern: 'src/app/features/*/*/webmcp/**', partialMatch: false },
-  { type: 'feature-domain', pattern: 'src/app/features/*/*/domain', partialMatch: false },
-  { type: 'feature-data-access', pattern: 'src/app/features/*/*/data-access', partialMatch: false },
-  { type: 'feature-state', pattern: 'src/app/features/*/*/state', partialMatch: false },
-  { type: 'feature-page', pattern: 'src/app/features/*/*/pages', partialMatch: true },
-
-  // --- Features (top-level layers) ---
-  { type: 'feature-webmcp', pattern: 'src/app/features/*/webmcp/**', partialMatch: false },
-  { type: 'feature-ui', pattern: 'src/app/features/*/ui', partialMatch: true },
-  { type: 'feature-domain', pattern: 'src/app/features/*/domain', partialMatch: false },
-  { type: 'feature-data-access', pattern: 'src/app/features/*/data-access', partialMatch: false },
-  { type: 'feature-state', pattern: 'src/app/features/*/state', partialMatch: false },
-  { type: 'feature-page', pattern: 'src/app/features/*/pages', partialMatch: true },
+  {
+    type: 'feature-webmcp',
+    pattern: 'src/app/features/*/webmcp',
+    capture: ['feature'],
+    partialMatch: false,
+  },
+  {
+    type: 'feature-ui',
+    pattern: 'src/app/features/*/ui',
+    capture: ['feature'],
+    partialMatch: false,
+  },
+  {
+    type: 'feature-domain',
+    pattern: 'src/app/features/*/domain',
+    capture: ['feature'],
+    partialMatch: false,
+  },
+  {
+    type: 'feature-data-access',
+    pattern: 'src/app/features/*/data-access',
+    capture: ['feature'],
+    partialMatch: false,
+  },
+  {
+    type: 'feature-state',
+    pattern: 'src/app/features/*/state',
+    capture: ['feature'],
+    partialMatch: false,
+  },
+  {
+    type: 'feature-page',
+    pattern: 'src/app/features/*/pages',
+    capture: ['feature'],
+    partialMatch: false,
+  },
 ];
 
 const boundariesFiles = [
@@ -52,189 +63,147 @@ const boundariesFiles = [
   { category: 'test', pattern: '**/*.spec.ts' },
 ];
 
+const sameFeature = {
+  feature: '{{from.element.captured.feature}}',
+};
+
+const ownedByJobs = {
+  feature: 'jobs',
+};
+
 const boundariesPolicies = [
-  // External packages
-  {
-    allow: {
-      to: { module: { origin: 'external' } },
-    },
-  },
+  { allow: { to: { module: { origin: 'external' } } } },
+  { allow: { to: { module: { origin: 'core' } } } },
 
-  // Node.js built-ins
-  {
-    allow: {
-      to: { module: { origin: 'core' } },
-    },
-  },
-
-  // Relative imports within the same element (e.g. domain helpers)
-  {
-    allow: {
-      dependency: { relationship: { to: 'internal' } },
-      from: { element: { type: 'feature-domain' } },
-      to: { element: { type: 'feature-domain' } },
-    },
-  },
-
-  // Cross-feature domain imports (shared enums between profile and jobs)
+  // A feature can depend on its own layers according to the direction below.
   {
     from: { element: { type: 'feature-domain' } },
     allow: {
-      to: { element: { type: 'feature-domain' } },
+      to: { element: { type: 'feature-domain', captured: sameFeature } },
     },
+    message: 'Domain may only import domain code owned by the same feature.',
   },
-
-  // UI components may import sibling UI within the same feature
-  {
-    from: { element: { type: 'feature-ui' } },
-    allow: {
-      to: { element: { type: 'feature-ui' } },
-    },
-  },
-
-  // WebMCP tools internal imports
-  {
-    allow: {
-      dependency: { relationship: { to: 'internal' } },
-      from: { element: { type: 'feature-webmcp' } },
-      to: { element: { type: 'feature-webmcp' } },
-    },
-  },
-
-  // --- Domain: pure TS, no app layers ---
-  {
-    from: { element: { type: 'feature-domain' } },
-    disallow: {
-      to: {
-        element: {
-          types: {
-            anyOf: [
-              'feature-ui',
-              'feature-state',
-              'feature-data-access',
-              'feature-page',
-              'core',
-              'shared',
-            ],
-          },
-        },
-      },
-    },
-    message: 'Domain must stay free of UI, state, persistence, and infrastructure imports.',
-  },
-
-  // --- Data access ---
   {
     from: { element: { type: 'feature-data-access' } },
     allow: {
-      to: { element: { types: ['feature-domain', 'core'] } },
+      to: { element: { type: 'feature-domain', captured: sameFeature } },
     },
-    message: 'Data-access may only depend on domain and core.',
+    message: 'Data-access may only depend on domain owned by the same feature and core.',
   },
-
-  // --- State ---
+  {
+    from: { element: { type: 'feature-data-access' } },
+    allow: { to: { element: { type: 'core' } } },
+  },
   {
     from: { element: { type: 'feature-state' } },
     allow: {
-      to: { element: { types: ['feature-domain', 'feature-data-access', 'core'] } },
-    },
-    message: 'State may depend on domain, data-access, and core.',
-  },
-
-  // --- UI ---
-  {
-    from: { element: { type: 'feature-ui' } },
-    allow: {
-      to: { element: { types: ['feature-domain', 'feature-state', 'shared', 'core'] } },
-    },
-    message: 'UI may depend on domain, state, shared, and core routing constants - never data-access directly.',
-  },
-
-  // --- Core pages ---
-  {
-    from: { element: { type: 'core-page' } },
-    allow: {
       to: {
         element: {
-          types: ['core', 'shared'],
+          types: ['feature-domain', 'feature-data-access'],
+          captured: sameFeature,
         },
       },
     },
-    message: 'Core pages compose layout and shared utilities.',
+    message: 'State may only use domain and data-access owned by the same feature.',
   },
-
-  // --- Feature pages (smart components) ---
+  {
+    from: { element: { type: 'feature-state' } },
+    allow: { to: { element: { type: 'core' } } },
+  },
+  {
+    from: { element: { type: 'feature-ui' } },
+    allow: {
+      to: {
+        element: {
+          types: ['feature-ui', 'feature-domain', 'feature-state'],
+          captured: sameFeature,
+        },
+      },
+    },
+    message: 'UI may only use UI, domain, and state owned by the same feature.',
+  },
+  {
+    from: { element: { type: 'feature-ui' } },
+    allow: { to: { element: { types: ['shared', 'core'] } } },
+  },
   {
     from: { element: { type: 'feature-page' } },
     allow: {
       to: {
         element: {
-          types: ['feature-ui', 'feature-state', 'feature-domain', 'shared', 'core'],
+          types: ['feature-ui', 'feature-state', 'feature-domain'],
+          captured: sameFeature,
         },
       },
     },
-    message: 'Pages compose UI and state - not data-access or WebMCP tools.',
+    message: 'Pages may compose layers owned by the same feature, not persistence or WebMCP.',
   },
-
-  // --- Feature WebMCP ---
   {
-    from: { element: { type: 'feature-webmcp' } },
-    allow: {
-      to: { file: { categories: 'core-webmcp' } },
-    },
+    from: { element: { type: 'feature-page' } },
+    allow: { to: { element: { types: ['shared', 'core'] } } },
   },
   {
     from: { element: { type: 'feature-webmcp' } },
     allow: {
       to: {
         element: {
-          types: [
-            'feature-state',
-            'feature-domain',
-            'feature-data-access',
-            'shared',
-            'core',
-            'core-webmcp',
-          ],
+          types: ['feature-webmcp', 'feature-state', 'feature-domain', 'feature-data-access'],
+          captured: sameFeature,
         },
       },
     },
-    message: 'WebMCP tools orchestrate state/domain/core helpers - not UI.',
+    message: 'WebMCP may orchestrate layers owned by the same feature, never UI.',
+  },
+  {
+    from: { element: { type: 'feature-webmcp' } },
+    allow: { to: { element: { types: ['shared', 'core', 'core-webmcp'] } } },
+  },
+  {
+    from: { element: { type: 'feature-webmcp' } },
+    allow: { to: { file: { categories: 'core-webmcp' } } },
   },
 
-  // --- Core WebMCP helpers ---
+  // Profile reuses the jobs taxonomy and search header as explicit public capabilities.
+  {
+    from: {
+      element: {
+        types: ['feature-domain', 'feature-data-access'],
+        captured: { feature: 'profile' },
+      },
+    },
+    allow: {
+      to: { element: { type: 'feature-domain', captured: ownedByJobs } },
+    },
+  },
+  {
+    from: {
+      element: { type: 'feature-page', captured: { feature: 'profile' } },
+    },
+    allow: {
+      to: { element: { types: ['feature-domain', 'feature-ui'], captured: ownedByJobs } },
+    },
+  },
+
+  {
+    from: { element: { type: 'core-page' } },
+    allow: { to: { element: { types: ['core', 'shared'] } } },
+  },
   {
     from: { element: { type: 'core-webmcp' } },
-    allow: {
-      to: { element: { types: ['shared'] } },
-    },
-    message: 'Core WebMCP helpers stay business-agnostic.',
+    allow: { to: { element: { type: 'shared' } } },
   },
-
-  // --- Core ---
   {
     from: { element: { type: 'core' } },
-    allow: {
-      to: { element: { types: ['shared'] } },
-    },
-    message: 'Core infra must not depend on features.',
+    allow: { to: { element: { type: 'shared' } } },
   },
-
-  // --- Shared ---
   {
     from: { element: { type: 'shared' } },
-    allow: {
-      to: { element: { type: 'shared' } },
-    },
-    message: 'Shared is business-agnostic - no feature or core imports.',
+    allow: { to: { element: { type: 'shared' } } },
   },
 
-  // --- App shell ---
   {
     from: { file: { categories: 'app-shell' } },
-    allow: {
-      to: { file: { categories: 'app-shell' } },
-    },
+    allow: { to: { file: { categories: 'app-shell' } } },
   },
   {
     from: { file: { categories: 'app-shell' } },
@@ -247,18 +216,9 @@ const boundariesPolicies = [
     },
   },
 
-  // --- Tests ---
   {
     from: { file: { categories: 'test' } },
-    allow: {
-      to: { file: { categories: 'test' } },
-    },
-  },
-  {
-    from: { file: { categories: 'test' } },
-    allow: {
-      to: { file: { categories: 'app-shell' } },
-    },
+    allow: { to: { file: { categories: ['test', 'app-shell'] } } },
   },
   {
     from: { file: { categories: 'test' } },

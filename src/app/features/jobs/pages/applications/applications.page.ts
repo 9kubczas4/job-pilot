@@ -9,8 +9,8 @@ import { formatJobDate } from '@features/jobs/domain/job-formatters';
 import { JobHeaderSearchComponent } from '@features/jobs/ui/job-header-search/job-header-search.component';
 import { JobCardComponent } from '@features/jobs/ui/job-card/job-card.component';
 import { JobSearchStore } from '@features/jobs/state/job-search.store';
-import { JobApplication } from '../../domain/job-application.model';
-import { JobApplicationsStore } from '../../state/job-applications.store';
+import { JobApplication } from '@features/jobs/domain/job-application.model';
+import { JobApplicationsStore } from '@features/jobs/state/job-applications.store';
 
 interface AppliedJobEntry {
   job: JobOffer;

@@ -29,8 +29,8 @@ import { JobHeaderSearchComponent } from '../../ui/job-header-search/job-header-
 import { ProfileMenuComponent } from '@shared/ui/profile-menu/profile-menu.component';
 import { ThemeToggleComponent } from '@core/layout/theme-toggle/theme-toggle.component';
 import { ToastService } from '@shared/ui/toast/toast.service';
-import { SavedJobsStore } from '@features/jobs/saved-jobs/state/saved-jobs.store';
-import { JobApplicationsStore } from '@features/jobs/applications/state/job-applications.store';
+import { SavedJobsStore } from '@features/jobs/state/saved-jobs.store';
+import { JobApplicationsStore } from '@features/jobs/state/job-applications.store';
 import {
   enrichLocationCriteria,
   searchLocationEqual,

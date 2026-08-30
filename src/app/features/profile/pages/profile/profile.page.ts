@@ -22,7 +22,7 @@ import {
   SALARY_CURRENCY_OPTIONS,
   SENIORITY_OPTIONS,
   WORKPLACE_OPTIONS,
-} from '../../domain/profile-options';
+} from '@features/jobs/domain/job-options';
 import {
   createEmptyProfileFormModel,
   createEmptyWorkEntry,

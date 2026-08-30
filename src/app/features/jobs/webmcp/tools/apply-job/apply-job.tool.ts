@@ -20,7 +20,9 @@ export function provideApplyJobWebMcpTool() {
         const applications = inject(JobApplicationsStore);
         try {
           await applications.loadApplications();
-          const existing = applications.applications().find((application) => application.jobId === jobId);
+          const existing = applications
+            .applications()
+            .find((application) => application.jobId === jobId);
           if (existing) {
             return toolJson({
               success: true,

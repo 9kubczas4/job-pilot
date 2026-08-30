@@ -20,10 +20,7 @@ export class JobApplicationsRepository {
       appliedAt: new Date().toISOString(),
       note,
     };
-    await setDoc(
-      doc(this.firebase.firestore, 'users', userId, 'applications', jobId),
-      application,
-    );
+    await setDoc(doc(this.firebase.firestore, 'users', userId, 'applications', jobId), application);
     return application;
   }
 }

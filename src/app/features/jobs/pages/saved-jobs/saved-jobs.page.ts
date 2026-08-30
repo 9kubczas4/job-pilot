@@ -8,7 +8,7 @@ import { AppLinks } from '@core/app-paths';
 import { JobHeaderSearchComponent } from '@features/jobs/ui/job-header-search/job-header-search.component';
 import { JobCardComponent } from '@features/jobs/ui/job-card/job-card.component';
 import { JobSearchStore } from '@features/jobs/state/job-search.store';
-import { SavedJobsStore } from '../../state/saved-jobs.store';
+import { SavedJobsStore } from '@features/jobs/state/saved-jobs.store';
 
 @Component({
   selector: 'app-saved-jobs-page',

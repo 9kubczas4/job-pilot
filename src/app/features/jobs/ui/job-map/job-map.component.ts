@@ -15,6 +15,7 @@ import { AppLinks } from '@core/app-paths';
 import { ResolvedTheme, ThemeService } from '@core/infrastructure/theme/theme.service';
 import { GOOGLE_MAPS_API_KEY } from '@shared/map/google-maps-config';
 import { getMapDefaultView } from '@shared/map/map-default-region';
+import { resolveMapResultsViewport, type MapGeoBounds } from '@shared/map/map-results-viewport';
 import { isGoogleMapsConfigured } from '@shared/map/google-maps-loader';
 import { createClusterMarkerIcon, createJobMarkerIcon } from '@shared/map/google-maps-markers';
 import { UserMapRegionService } from '@shared/map/user-map-region.service';
@@ -47,6 +48,7 @@ export class JobMapComponent {
   readonly selectedJobId = input<string | null>(null);
   readonly searchCenter = input<google.maps.LatLngLiteral | null>(null);
   readonly searchRadiusKm = input<number | undefined>(undefined);
+  readonly fitResultsToViewport = input(false);
   readonly showPopups = input(true);
   readonly selectJob = output<string>();
 
@@ -63,6 +65,7 @@ export class JobMapComponent {
   private readonly markerJobs = new globalThis.Map<google.maps.Marker, JobOffer>();
   private lastJobIdsKey = '';
   private lastSearchCenterKey = '';
+  private lastViewportKey = '';
   private mapAnimationFrame: number | null = null;
 
   constructor() {
@@ -80,7 +83,8 @@ export class JobMapComponent {
       const selectedId = this.selectedJobId();
       const searchCenter = this.searchCenter();
       const searchRadiusKm = this.searchRadiusKm();
-      this.syncMap(jobs, selectedId, searchCenter, searchRadiusKm);
+      const fitResultsToViewport = this.fitResultsToViewport();
+      this.syncMap(jobs, selectedId, searchCenter, searchRadiusKm, fitResultsToViewport);
     });
 
     effect(() => {
@@ -89,7 +93,7 @@ export class JobMapComponent {
         return;
       }
 
-      if (this.shouldUseDefaultRegionView(this.searchCenter())) {
+      if (this.shouldUseDefaultRegionView(this.searchCenter(), this.fitResultsToViewport())) {
         this.resetToDefaultView();
       }
     });
@@ -124,6 +128,7 @@ export class JobMapComponent {
       this.selectedJobId(),
       this.searchCenter(),
       this.searchRadiusKm(),
+      this.fitResultsToViewport(),
     );
   }
 
@@ -144,6 +149,7 @@ export class JobMapComponent {
     selectedId: string | null,
     searchCenter: google.maps.LatLngLiteral | null,
     searchRadiusKm: number | undefined,
+    fitResultsToViewport: boolean,
   ): void {
     if (!this.map || !this.clusterer) {
       return;
@@ -157,9 +163,11 @@ export class JobMapComponent {
     const searchCenterKey = searchCenter
       ? `${searchCenter.lat},${searchCenter.lng},${searchRadiusKm ?? DEFAULT_SEARCH_RADIUS_KM}`
       : '';
+    const viewportKey = fitResultsToViewport ? `fit:${jobIdsKey}` : searchCenterKey;
 
     const jobsChanged = jobIdsKey !== this.lastJobIdsKey;
     const searchCenterChanged = searchCenterKey !== this.lastSearchCenterKey;
+    const viewportChanged = viewportKey !== this.lastViewportKey;
 
     if (jobsChanged) {
       this.lastJobIdsKey = jobIdsKey;
@@ -168,14 +176,43 @@ export class JobMapComponent {
       this.updateMarkerSelection(selectedId);
     }
 
-    if (jobsChanged || searchCenterChanged) {
+    if (jobsChanged || searchCenterChanged || viewportChanged) {
       this.lastSearchCenterKey = searchCenterKey;
-      if (searchCenter) {
-        this.focusOnSearchCenter(searchCenter, searchRadiusKm);
-      } else {
-        this.resetToDefaultView();
+      this.lastViewportKey = viewportKey;
+      this.applyResultsViewport(locatedJobs, searchCenter, searchRadiusKm, fitResultsToViewport);
+    }
+  }
+
+  private applyResultsViewport(
+    locatedJobs: JobOffer[],
+    searchCenter: google.maps.LatLngLiteral | null,
+    searchRadiusKm: number | undefined,
+    fitResultsToViewport: boolean,
+  ): void {
+    if (fitResultsToViewport && locatedJobs.length) {
+      const locations = locatedJobs.map((job) => ({
+        lat: job.location!.latitude,
+        lng: job.location!.longitude,
+      }));
+      const viewport = resolveMapResultsViewport(locations);
+
+      if (viewport.kind === 'world') {
+        this.applyMapView(viewport.center, viewport.zoom);
+        return;
+      }
+
+      if (viewport.kind === 'bounds') {
+        this.fitBoundsToViewport(viewport.bounds);
+        return;
       }
     }
+
+    if (searchCenter) {
+      this.focusOnSearchCenter(searchCenter, searchRadiusKm);
+      return;
+    }
+
+    this.resetToDefaultView();
   }
 
   private rebuildMarkers(locatedJobs: JobOffer[], selectedId: string | null): void {
@@ -235,11 +272,13 @@ export class JobMapComponent {
     this.closeJobPopup();
     this.lastJobIdsKey = '';
     this.lastSearchCenterKey = '';
+    this.lastViewportKey = '';
     this.syncMap(
       this.jobs(),
       this.selectedJobId(),
       this.searchCenter(),
       this.searchRadiusKm(),
+      this.fitResultsToViewport(),
     );
   }
 
@@ -469,8 +508,11 @@ export class JobMapComponent {
     });
   }
 
-  private shouldUseDefaultRegionView(searchCenter: google.maps.LatLngLiteral | null): boolean {
-    return !searchCenter;
+  private shouldUseDefaultRegionView(
+    searchCenter: google.maps.LatLngLiteral | null,
+    fitResultsToViewport: boolean,
+  ): boolean {
+    return !searchCenter && !fitResultsToViewport;
   }
 
   private closeJobPopup(): void {
@@ -484,16 +526,16 @@ export class JobMapComponent {
     return tail instanceof HTMLElement ? tail : null;
   }
 
-  private fitBoundsToJobs(locatedJobs: JobOffer[]): void {
-    if (!this.map || !locatedJobs.length) {
+  private fitBoundsToViewport(bounds: MapGeoBounds, paddingPx = 48): void {
+    if (!this.map) {
       return;
     }
 
-    const bounds = new google.maps.LatLngBounds();
-    locatedJobs.forEach((job) =>
-      bounds.extend({ lat: job.location!.latitude, lng: job.location!.longitude }),
+    const googleBounds = new google.maps.LatLngBounds(
+      { lat: bounds.south, lng: bounds.west },
+      { lat: bounds.north, lng: bounds.east },
     );
-    this.map.fitBounds(bounds, 48);
+    this.map.fitBounds(googleBounds, paddingPx);
 
     google.maps.event.addListenerOnce(this.map, 'idle', () => {
       const zoom = this.map?.getZoom();

@@ -70,6 +70,7 @@
         [selectedJobId]="store.selectedJobId()"
         [searchCenter]="searchMapCenter()"
         [searchRadiusKm]="searchMapRadiusKm()"
+        [fitResultsToViewport]="fitMapToResults()"
         [showPopups]="false"
         (selectJob)="onMobileSelectJob($event)"
       />
@@ -166,6 +167,7 @@
             [selectedJobId]="store.selectedJobId()"
             [searchCenter]="searchMapCenter()"
             [searchRadiusKm]="searchMapRadiusKm()"
+            [fitResultsToViewport]="fitMapToResults()"
             (selectJob)="onSelectJob($event)"
           />
         </div>

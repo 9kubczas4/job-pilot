@@ -55,6 +55,7 @@ import { JobSearchCriteria, JobSortOption } from '@features/jobs/domain/search.m
 import { DEFAULT_JOB_SORT, availableSortOptions } from '@features/jobs/domain/job-sort.utils';
 import { extractTopSkills } from '@features/jobs/domain/job-filter.utils';
 import { DEFAULT_SEARCH_RADIUS_KM } from '@features/jobs/domain/header-search.model';
+import { hasActiveSearchOrFilter } from '@features/jobs/domain/search-active.utils';
 
 const MOBILE_LAYOUT_QUERY = '(max-width: 60rem)';
 
@@ -136,6 +137,7 @@ export class JobSearchPageComponent implements OnInit {
     return { lat: locationLat, lng: locationLng };
   });
   readonly searchMapRadiusKm = computed(() => this.store.criteria().radiusKm);
+  readonly fitMapToResults = computed(() => hasActiveSearchOrFilter(this.store.criteria()));
   readonly filterTopSkills = computed(() => extractTopSkills(this.store.allJobs()));
 
   constructor() {

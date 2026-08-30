@@ -20,6 +20,11 @@ export const EUROPE_MAP_DEFAULT_VIEW: MapDefaultView = {
   zoom: 4,
 };
 
+export const WORLD_MAP_VIEW: MapDefaultView = {
+  center: { lat: 25, lng: 0 },
+  zoom: 2,
+};
+
 const EUROPE_BOUNDS = {
   north: 71,
   south: 35,

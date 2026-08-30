@@ -71,57 +71,38 @@ export class JobFixedSizeVirtualScrollStrategy implements VirtualScrollStrategy 
   }
 
   private updateRenderedRange(): void {
-    if (!this.viewport) {
+    if (!this.viewport || this.itemSize <= 0) {
       return;
     }
 
-    const renderedRange = this.viewport.getRenderedRange();
-    const newRange = {
-      start: renderedRange.start,
-      end: renderedRange.end,
-    };
     const viewportSize = this.viewport.getViewportSize();
+    const effectiveViewportSize =
+      viewportSize > 0 ? viewportSize : this.itemSize * 4;
+
     const dataLength = this.viewport.getDataLength();
+    if (dataLength === 0) {
+      this.viewport.setRenderedRange({ start: 0, end: 0 });
+      this.viewport.setRenderedContentOffset(0);
+      this.scrolledIndexChangeSubject.next(0);
+      return;
+    }
+
     const scrollOffset = this.viewport.measureScrollOffset();
-    let firstVisibleIndex = this.itemSize > 0 ? scrollOffset / this.itemSize : 0;
+    const firstVisibleIndex = Math.max(0, Math.floor(scrollOffset / this.itemSize));
+    const visibleCount = Math.ceil(effectiveViewportSize / this.itemSize);
+    const bufferCount = Math.ceil(this.maxBufferPx / this.itemSize);
 
-    if (newRange.end > dataLength) {
-      const maxVisibleItems = Math.ceil(viewportSize / this.itemSize);
-      const newVisibleIndex = Math.max(0, Math.min(firstVisibleIndex, dataLength - maxVisibleItems));
+    let start = Math.max(0, firstVisibleIndex - bufferCount);
+    let end = Math.min(dataLength, firstVisibleIndex + visibleCount + bufferCount);
 
-      if (firstVisibleIndex !== newVisibleIndex) {
-        firstVisibleIndex = newVisibleIndex;
-        newRange.start = Math.floor(firstVisibleIndex);
-      }
-
-      newRange.end = Math.max(0, Math.min(dataLength, newRange.start + maxVisibleItems));
+    const minRenderedCount = visibleCount + bufferCount;
+    if (end - start < minRenderedCount) {
+      start = Math.max(0, end - minRenderedCount);
+      end = Math.min(dataLength, start + minRenderedCount);
     }
 
-    const startBuffer = scrollOffset - newRange.start * this.itemSize;
-
-    if (startBuffer < this.minBufferPx && newRange.start !== 0) {
-      const expandStart = Math.ceil((this.maxBufferPx - startBuffer) / this.itemSize);
-      newRange.start = Math.max(0, newRange.start - expandStart);
-      newRange.end = Math.min(
-        dataLength,
-        Math.ceil(firstVisibleIndex + (viewportSize + this.minBufferPx) / this.itemSize),
-      );
-    } else {
-      const endBuffer =
-        this.leadingGap + newRange.end * this.itemSize - (scrollOffset + viewportSize);
-
-      if (endBuffer < this.minBufferPx && newRange.end !== dataLength) {
-        const expandEnd = Math.ceil((this.maxBufferPx - endBuffer) / this.itemSize);
-
-        if (expandEnd > 0) {
-          newRange.end = Math.min(dataLength, newRange.end + expandEnd);
-          newRange.start = Math.max(0, Math.floor(firstVisibleIndex - this.minBufferPx / this.itemSize));
-        }
-      }
-    }
-
-    this.viewport.setRenderedRange(newRange);
-    this.viewport.setRenderedContentOffset(Math.round(this.itemSize * newRange.start));
-    this.scrolledIndexChangeSubject.next(Math.floor(firstVisibleIndex));
+    this.viewport.setRenderedRange({ start, end });
+    this.viewport.setRenderedContentOffset(start * this.itemSize);
+    this.scrolledIndexChangeSubject.next(firstVisibleIndex);
   }
 }

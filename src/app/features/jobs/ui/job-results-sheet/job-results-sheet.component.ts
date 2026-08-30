@@ -113,13 +113,13 @@ export class JobResultsSheetComponent {
     }
 
     handle.setPointerCapture(event.pointerId);
-    this.isDragging.set(true);
     this.dragStartY = event.clientY;
-    this.dragStartHeight = this.measureVisibleHeight();
     this.dragSnap = this.snap();
+    this.dragStartHeight = this.snapHeightPx(this.dragSnap);
     this.dragOffsetPx.set(0);
-    this.dragHeightPx.set(null);
+    this.dragHeightPx.set(this.dragStartHeight);
     this.pointerMoved = false;
+    this.isDragging.set(true);
   }
 
   onHandlePointerMove(event: PointerEvent): void {
@@ -147,11 +147,12 @@ export class JobResultsSheetComponent {
       handle.releasePointerCapture(event.pointerId);
     }
 
-    this.isDragging.set(false);
     const visibleHeight = this.dragStartHeight + (this.dragStartY - event.clientY);
+    const nextSnap = this.nearestSnap(visibleHeight);
+    this.snapChange.emit(nextSnap);
+    this.isDragging.set(false);
     this.dragOffsetPx.set(0);
     this.dragHeightPx.set(null);
-    this.snapChange.emit(this.nearestSnap(visibleHeight));
   }
 
   onHandleClick(): void {
@@ -218,10 +219,6 @@ export class JobResultsSheetComponent {
       default:
         return COLLAPSED_HEIGHT_PX;
     }
-  }
-
-  private measureVisibleHeight(): number {
-    return this.snapHeightPx(this.snap()) + this.dragOffsetPx();
   }
 
   private maxSheetHeight(): number {

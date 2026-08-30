@@ -41,6 +41,18 @@ export class JobVirtualScrollPlaceholdersDirective {
       let settleTimer: ReturnType<typeof setTimeout> | undefined;
       let hideTimer: ReturnType<typeof setTimeout> | undefined;
 
+      const refreshViewport = (): void => {
+        this.viewport.checkViewportSize();
+      };
+
+      refreshViewport();
+
+      if (typeof ResizeObserver !== 'undefined') {
+        const resizeObserver = new ResizeObserver(refreshViewport);
+        resizeObserver.observe(this.viewport.elementRef.nativeElement);
+        this.destroyRef.onDestroy(() => resizeObserver.disconnect());
+      }
+
       merge(
         this.viewport.elementScrolled(),
         fromEvent(this.viewport.elementRef.nativeElement, 'scroll'),

@@ -42,19 +42,19 @@
   transition: none;
 }
 
-.job-sheet--collapsed:not(.job-sheet--dragging) .job-sheet__panel {
+.job-sheet--collapsed .job-sheet__panel {
   height: calc(var(--sheet-height-collapsed) + env(safe-area-inset-bottom, 0px));
 }
 
-.job-sheet--peek:not(.job-sheet--dragging) .job-sheet__panel {
+.job-sheet--peek .job-sheet__panel {
   height: calc(var(--sheet-height-peek) + env(safe-area-inset-bottom, 0px));
 }
 
-.job-sheet--half:not(.job-sheet--dragging) .job-sheet__panel {
+.job-sheet--half .job-sheet__panel {
   height: calc(var(--sheet-height-half) + env(safe-area-inset-bottom, 0px));
 }
 
-.job-sheet--full:not(.job-sheet--dragging) .job-sheet__panel {
+.job-sheet--full .job-sheet__panel {
   height: calc(var(--sheet-height-full) + env(safe-area-inset-bottom, 0px));
 }
 

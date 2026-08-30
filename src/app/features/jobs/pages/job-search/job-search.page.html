@@ -105,7 +105,13 @@
 } @else {
   <app-shell>
     <app-job-header-search header-search />
-    <app-job-header-filters header-actions />
+    <app-job-header-filters
+      header-actions
+      [enabled]="headerUi.filtersEnabled()"
+      [open]="headerUi.filtersOpen()"
+      [activeCount]="headerUi.activeFilterCount()"
+      (toggleFilters)="headerUi.toggleFilters()"
+    />
 
     <app-job-filter-drawer
       filter-drawer

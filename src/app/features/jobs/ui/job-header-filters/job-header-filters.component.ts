@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { HeaderUiStore } from '@features/jobs/state/header-ui.store';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 
 @Component({
   selector: 'app-job-header-filters',
@@ -8,14 +7,14 @@ import { HeaderUiStore } from '@features/jobs/state/header-ui.store';
     headerActions: '',
   },
   template: `
-    @if (headerUi.filtersEnabled()) {
+    @if (enabled()) {
       <button
         type="button"
         class="header-action"
-        [class.header-action--active]="headerUi.filtersOpen()"
-        [attr.aria-expanded]="headerUi.filtersOpen()"
+        [class.header-action--active]="open()"
+        [attr.aria-expanded]="open()"
         aria-controls="app-filter-drawer"
-        (click)="headerUi.toggleFilters()"
+        (click)="toggleFilters.emit()"
       >
         <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
           <path
@@ -26,9 +25,9 @@ import { HeaderUiStore } from '@features/jobs/state/header-ui.store';
           />
         </svg>
         <span>Filters</span>
-        @if (headerUi.activeFilterCount() > 0) {
-          <span class="header-action__badge" aria-label="{{ headerUi.activeFilterCount() }} active filters">
-            {{ headerUi.activeFilterCount() }}
+        @if (activeCount() > 0) {
+          <span class="header-action__badge" aria-label="{{ activeCount() }} active filters">
+            {{ activeCount() }}
           </span>
         }
       </button>
@@ -37,5 +36,8 @@ import { HeaderUiStore } from '@features/jobs/state/header-ui.store';
   styleUrl: './job-header-filters.component.scss',
 })
 export class JobHeaderFiltersComponent {
-  readonly headerUi = inject(HeaderUiStore);
+  readonly enabled = input(false);
+  readonly open = input(false);
+  readonly activeCount = input(0);
+  readonly toggleFilters = output<void>();
 }

@@ -10,7 +10,6 @@
     <button
       type="button"
       class="profile-menu__trigger"
-      [class.is-open]="menuOpen()"
       [attr.aria-expanded]="menuOpen()"
       aria-haspopup="menu"
       [attr.aria-controls]="menuOpen() ? 'profile-menu-panel' : null"

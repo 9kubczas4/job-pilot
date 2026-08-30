@@ -1,6 +1,5 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { FilterDrawerComponent } from '@shared/ui/filter-drawer/filter-drawer.component';
-import { HeaderUiStore } from '@features/jobs/state/header-ui.store';
 
 @Component({
   selector: 'app-job-filter-drawer',
@@ -12,13 +11,14 @@ import { HeaderUiStore } from '@features/jobs/state/header-ui.store';
   template: `
     <app-filter-drawer
       id="app-filter-drawer"
-      [open]="headerUi.filtersEnabled() && headerUi.filtersOpen()"
-      (closed)="headerUi.closeFilters()"
+      [open]="open()"
+      (closed)="closed.emit()"
     >
       <ng-content select="[filter-panel]" />
     </app-filter-drawer>
   `,
 })
 export class JobFilterDrawerComponent {
-  readonly headerUi = inject(HeaderUiStore);
+  readonly open = input(false);
+  readonly closed = output<void>();
 }

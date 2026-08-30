@@ -107,7 +107,11 @@
     <app-job-header-search header-search />
     <app-job-header-filters header-actions />
 
-    <app-job-filter-drawer filter-drawer>
+    <app-job-filter-drawer
+      filter-drawer
+      [open]="headerUi.filtersEnabled() && headerUi.filtersOpen()"
+      (closed)="headerUi.closeFilters()"
+    >
       <section filter-panel>
         <app-job-filters />
       </section>

@@ -244,7 +244,7 @@ function enrichJob(job, index, assignLocation) {
   const contractTypes = job.contractTypes?.length ? job.contractTypes : uniqueContractTypes(index);
   const primaryContract = contractTypes[0];
   const [salaryMin, salaryMax] = resolveSalaryBand(template, location, seniority, primaryContract, index);
-  const roleContent = buildRoleContent(template, company, workplace, index);
+  const roleContent = buildRoleContent(template, company, workplace, location, index);
 
   return {
     ...job,
@@ -282,7 +282,7 @@ function buildJob(id, template, index, assignLocation) {
     contractTypes[0],
     index,
   );
-  const roleContent = buildRoleContent(template, company, workplace, index);
+  const roleContent = buildRoleContent(template, company, workplace, location, index);
   const createdAt = new Date('2026-07-01T08:00:00.000Z');
   createdAt.setDate(createdAt.getDate() + (index % 45));
   const deadline = new Date(createdAt);

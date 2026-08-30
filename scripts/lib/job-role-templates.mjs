@@ -1,3 +1,9 @@
+import {
+  DESCRIPTION_INTROS,
+  ROLE_DESCRIPTION_ANGLES,
+  WORKPLACE_LABELS,
+} from './job-role-contexts.mjs';
+
 /** Role-specific copy and salary bands (monthly gross USD). */
 export const ROLE_TEMPLATES = [
   {
@@ -712,6 +718,57 @@ export function pick(array, index) {
   return array[index % array.length];
 }
 
+export function hashSeed(...parts) {
+  let hash = 2166136261;
+  for (const part of parts) {
+    const value = String(part ?? '');
+    for (let i = 0; i < value.length; i += 1) {
+      hash ^= value.charCodeAt(i);
+      hash = Math.imul(hash, 16777619);
+    }
+  }
+  return hash >>> 0;
+}
+
+export function pickRotatedSubset(array, count, seed) {
+  if (array.length === 0 || count <= 0) {
+    return [];
+  }
+
+  const targetCount = Math.min(count, array.length);
+  const start = seed % array.length;
+  const step = 1 + (Math.floor(seed / array.length) % Math.max(1, array.length - 1));
+  const items = [];
+  const used = new Set();
+
+  for (let i = 0; items.length < targetCount && i < array.length * 2; i += 1) {
+    const item = array[(start + i * step) % array.length];
+    if (used.has(item)) {
+      continue;
+    }
+    used.add(item);
+    items.push(item);
+  }
+
+  return items;
+}
+
+function buildDescriptionPool(template) {
+  const extra = ROLE_DESCRIPTION_ANGLES[template.title] ?? [];
+  return [...template.descriptions, ...extra];
+}
+
+function buildDescription(template, company, workplace, location, index) {
+  const pool = buildDescriptionPool(template);
+  const body = pick(pool, hashSeed(template.title, index, 'description'));
+  const intro = DESCRIPTION_INTROS[hashSeed(template.title, index, 'intro') % DESCRIPTION_INTROS.length];
+  const titleLower = template.title.toLowerCase();
+  const city = location?.city ?? 'regional';
+  const workplaceLabel = WORKPLACE_LABELS[workplace] ?? workplace;
+
+  return `${intro({ company, titleLower, city, workplaceLabel })} ${body}`;
+}
+
 export function roundSalary(value) {
   return Math.round(value / 100) * 100;
 }
@@ -744,28 +801,32 @@ export function resolveSalaryBand(template, location, seniority, contractType, i
   return [Math.min(min, max - 500), Math.max(max, min + 500)];
 }
 
-export function buildRoleContent(template, company, workplace, index) {
-  const description = pick(template.descriptions, index).replace(
-    /^/,
-    `${company.name} is hiring a ${template.title.toLowerCase()}. `,
+export function buildRoleContent(template, company, workplace, location, index) {
+  const description = buildDescription(template, company, workplace, location, index);
+  const contentSeed = hashSeed(template.title, index, company.id ?? company.name, 'content');
+
+  const responsibilityCount = 3 + (contentSeed % 3);
+  const responsibilities = pickRotatedSubset(
+    template.responsibilities,
+    Math.min(responsibilityCount, template.responsibilities.length),
+    hashSeed(contentSeed, 'responsibilities'),
   );
 
-  const responsibilityCount = Math.min(4 + (index % 2), template.responsibilities.length);
-  const responsibilities = [];
-  const usedResponsibilities = new Set();
-  for (let i = 0; responsibilities.length < responsibilityCount; i += 1) {
-    const item = pick(template.responsibilities, index + i);
-    if (usedResponsibilities.has(item)) {
-      continue;
-    }
-    usedResponsibilities.add(item);
-    responsibilities.push(item);
-  }
+  const requirementCount = 3 + ((contentSeed >> 3) % 3);
+  const requirements = pickRotatedSubset(
+    template.requirements,
+    Math.min(requirementCount, template.requirements.length),
+    hashSeed(contentSeed, 'requirements'),
+  );
 
-  const requirements = template.requirements.slice(0, 4 + (index % 2));
-  const niceToHave = template.niceToHave.slice(0, 3 + (index % 2));
+  const niceToHaveCount = 2 + ((contentSeed >> 6) % 3);
+  const niceToHave = pickRotatedSubset(
+    template.niceToHave,
+    Math.min(niceToHaveCount, template.niceToHave.length),
+    hashSeed(contentSeed, 'niceToHave'),
+  );
 
-  const baseBenefits = pick(template.benefits, index);
+  const baseBenefits = pick(template.benefits, hashSeed(contentSeed, 'benefits'));
   const workplaceBenefit =
     workplace === 'remote'
       ? 'Remote work stipend (internet & co-working)'

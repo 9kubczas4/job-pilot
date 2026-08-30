@@ -13,7 +13,7 @@ export class JobSearchStore {
   readonly criteria = signal<JobSearchCriteria>({});
   readonly allJobs = signal<JobOffer[]>([]);
   readonly selectedJobId = signal<string | null>(null);
-  readonly loading = signal(false);
+  readonly loading = signal(true);
   readonly mapBounds = signal<MapBounds | null>(null);
 
   readonly jobs = computed(() => {
@@ -37,6 +37,7 @@ export class JobSearchStore {
 
   async loadJobs(): Promise<void> {
     if (this.allJobs().length) {
+      this.loading.set(false);
       return;
     }
 

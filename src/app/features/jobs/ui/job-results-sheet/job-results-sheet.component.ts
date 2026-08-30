@@ -8,9 +8,21 @@ import {
   output,
   signal,
 } from '@angular/core';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { RouterLink } from '@angular/router';
 import { AppLinks } from '@core/app-paths';
 import { JobCardComponent } from '@features/jobs/ui/job-card/job-card.component';
+import { JobCardSkeletonComponent } from '@features/jobs/ui/job-card-skeleton/job-card-skeleton.component';
+import { JobVirtualScrollPlaceholdersDirective } from '@features/jobs/ui/job-virtual-scroll/job-virtual-scroll-placeholders.directive';
+import { JobVirtualScrollStrategyDirective } from '@features/jobs/ui/job-virtual-scroll/job-virtual-scroll-strategy.directive';
+import {
+  JOB_VIRTUAL_SCROLL_ITEM_GAP_PX,
+  JOB_VIRTUAL_SCROLL_ITEM_SIZE_PX,
+  JOB_VIRTUAL_SCROLL_LIST_INSET_TOP_PX,
+  JOB_VIRTUAL_SCROLL_MAX_BUFFER_PX,
+  JOB_VIRTUAL_SCROLL_MIN_BUFFER_PX,
+} from '@features/jobs/ui/job-virtual-scroll/job-virtual-scroll.constants';
+import { JOB_VIRTUAL_SCROLL_LOADING_JOBS } from '@features/jobs/ui/job-virtual-scroll/job-virtual-scroll-loading-jobs';
 import { JobSortMenuComponent, SortMenuOption } from '@features/jobs/ui/job-sort-menu/job-sort-menu.component';
 import { JobOffer } from '@features/jobs/domain/job.model';
 
@@ -21,7 +33,15 @@ const COLLAPSED_HEIGHT_PX = 52;
 @Component({
   selector: 'app-job-results-sheet',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [JobCardComponent, JobSortMenuComponent, RouterLink],
+  imports: [
+    JobCardComponent,
+    JobCardSkeletonComponent,
+    JobSortMenuComponent,
+    JobVirtualScrollPlaceholdersDirective,
+    JobVirtualScrollStrategyDirective,
+    RouterLink,
+    ScrollingModule,
+  ],
   templateUrl: './job-results-sheet.component.html',
   styleUrl: './job-results-sheet.component.scss',
 })
@@ -45,9 +65,17 @@ export class JobResultsSheetComponent {
   private readonly host = inject(ElementRef<HTMLElement>);
 
   readonly jobLink = AppLinks.job;
+  readonly trackJob = (_index: number, job: JobOffer): string => job.id;
   readonly dragOffsetPx = signal(0);
   readonly dragHeightPx = signal<number | null>(null);
   readonly isDragging = signal(false);
+  readonly scrollPlaceholdersActive = signal(false);
+  readonly listJobs = computed(() => (this.loading() ? JOB_VIRTUAL_SCROLL_LOADING_JOBS : this.jobs()));
+  readonly virtualScrollItemSize = JOB_VIRTUAL_SCROLL_ITEM_SIZE_PX;
+  readonly virtualScrollItemGap = JOB_VIRTUAL_SCROLL_ITEM_GAP_PX;
+  readonly virtualScrollListInsetTop = JOB_VIRTUAL_SCROLL_LIST_INSET_TOP_PX;
+  readonly virtualScrollMinBufferPx = JOB_VIRTUAL_SCROLL_MIN_BUFFER_PX;
+  readonly virtualScrollMaxBufferPx = JOB_VIRTUAL_SCROLL_MAX_BUFFER_PX;
 
   readonly focusedJob = computed(() => {
     const focusId = this.focusJobId();

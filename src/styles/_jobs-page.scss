@@ -51,8 +51,21 @@
   color: transparent;
 }
 
-.jobs-page .job-list__body {
+.jobs-page .job-list__body:not(.job-list__viewport) {
   padding: var(--space-4);
+}
+
+.jobs-page .job-list__viewport {
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.jobs-page .job-list__viewport .cdk-virtual-scroll-content-wrapper {
+  max-width: 100%;
+}
+
+.jobs-page .job-list__item {
+  padding-inline: var(--space-4);
 }
 
 .jobs-page .job-list__items {

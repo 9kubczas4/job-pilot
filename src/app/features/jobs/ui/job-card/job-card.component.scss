@@ -4,6 +4,54 @@
   display: block;
 }
 
+:host(.job-card--virtualized) {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  height: 100%;
+}
+
+:host(.job-card--virtualized) .job-card {
+  gap: var(--space-1);
+  height: 100%;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  justify-content: center;
+  padding-block: var(--space-2);
+  padding-inline: var(--space-2) calc(var(--space-2) + 1.75rem);
+
+  &::before {
+    inset-block: var(--space-2);
+  }
+}
+
+:host(.job-card--virtualized) .job-card__header {
+  gap: var(--space-2);
+}
+
+:host(.job-card--virtualized) .job-card__logo {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+:host(.job-card--virtualized) .job-card__title,
+:host(.job-card--virtualized) .job-card__company,
+:host(.job-card--virtualized) .job-card__salary {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+:host(.job-card--virtualized) .job-card__salary {
+  font-size: var(--font-size-xs);
+}
+
+:host(.job-card--virtualized) .job-card__facts {
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+
 .job-card {
   display: flex;
   flex-direction: column;
@@ -34,10 +82,12 @@
 }
 
 .job-card--compact {
+  box-sizing: border-box;
   gap: var(--space-2);
   padding: var(--space-3);
   padding-inline-end: calc(var(--space-3) + 1.75rem);
   border-radius: var(--radius-md);
+  overflow: hidden;
 }
 
 :host-context(a:hover) .job-card,

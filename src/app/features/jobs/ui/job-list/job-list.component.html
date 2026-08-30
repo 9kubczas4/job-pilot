@@ -18,33 +18,64 @@
     </div>
   </header>
 
-  <div class="job-list__body">
-    @if (loading()) {
-      <p class="state">Loading jobs…</p>
-    } @else if (!jobs().length) {
+  @if (!loading() && !jobs().length) {
+    <div class="job-list__body">
       <div class="empty-state">
         <p class="empty-state__title">No matching jobs</p>
         <p class="empty-state__text">Try adjusting your search or filters to discover more opportunities.</p>
       </div>
-    } @else {
-      <div class="job-list__items">
-        @for (job of jobs(); track job.id) {
+    </div>
+  } @else {
+    <cdk-virtual-scroll-viewport
+      class="job-list__body job-list__viewport"
+      appJobVirtualScrollStrategy
+      appJobVirtualScrollPlaceholders
+      [jobVirtualScrollItemSize]="virtualScrollItemSize"
+      [jobVirtualScrollItemGap]="virtualScrollItemGap"
+      [jobVirtualScrollMinBufferPx]="virtualScrollMinBufferPx"
+      [jobVirtualScrollMaxBufferPx]="virtualScrollMaxBufferPx"
+      [jobVirtualScrollInsetTop]="virtualScrollListInsetTop"
+      (activeChange)="scrollPlaceholdersActive.set($event)"
+      [style.--job-virtual-scroll-item-size.px]="virtualScrollItemSize"
+      [style.--job-virtual-scroll-item-gap.px]="virtualScrollItemGap"
+      role="list"
+      tabindex="0"
+      [attr.aria-label]="loading() ? 'Loading job offers' : 'Job offers'"
+      [attr.aria-busy]="loading() || scrollPlaceholdersActive()"
+    >
+      <div
+        *cdkVirtualFor="let job of listJobs(); trackBy: trackJob; let index = index"
+        class="job-list__item"
+        [style.margin-top.px]="index === 0 ? virtualScrollItemGap : null"
+        [class.job-list__item--placeholder]="loading() || scrollPlaceholdersActive()"
+        role="listitem"
+      >
+        @if (loading()) {
+          <div class="job-list__loading-slot">
+            <app-job-card-skeleton />
+          </div>
+        } @else {
           <a
             [routerLink]="jobLink(job.id)"
-            class="link-plain"
+            class="link-plain job-list__link"
             (click)="selectJob.emit(job.id)"
           >
-            <app-job-card
-              [job]="job"
-              [compact]="true"
-              [selected]="selectedJobId() === job.id"
-              [saved]="savedJobIds().includes(job.id)"
-              [applied]="appliedJobIds().includes(job.id)"
-              (toggleSave)="toggleSave.emit(job.id)"
-            />
+            <app-job-card-skeleton class="job-list__slot-skeleton" />
+
+            @if (!scrollPlaceholdersActive()) {
+              <app-job-card
+                class="job-list__slot-card job-card--virtualized"
+                [job]="job"
+                [compact]="true"
+                [selected]="selectedJobId() === job.id"
+                [saved]="savedJobIds().includes(job.id)"
+                [applied]="appliedJobIds().includes(job.id)"
+                (toggleSave)="toggleSave.emit(job.id)"
+              />
+            }
           </a>
         }
       </div>
-    }
-  </div>
+    </cdk-virtual-scroll-viewport>
+  }
 </section>

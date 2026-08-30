@@ -1,0 +1,74 @@
+:host {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  height: 100%;
+}
+
+.job-card-skeleton {
+  display: flex;
+  box-sizing: border-box;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-1);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding-block: var(--space-2);
+  padding-inline: var(--space-2) calc(var(--space-2) + 1.75rem);
+  background: var(--color-surface-elevated);
+}
+
+.job-card-skeleton__header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+
+.job-card-skeleton__logo {
+  flex-shrink: 0;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: var(--radius-md);
+}
+
+.job-card-skeleton__intro {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.job-card-skeleton__line {
+  height: 0.625rem;
+  width: 100%;
+
+  &--title {
+    width: 72%;
+    height: 0.75rem;
+  }
+
+  &--company {
+    width: 46%;
+  }
+
+  &--salary {
+    width: 34%;
+    height: 0.625rem;
+  }
+}
+
+.job-card-skeleton__facts {
+  display: flex;
+  gap: var(--space-1);
+  overflow: hidden;
+}
+
+.job-card-skeleton__chip {
+  flex-shrink: 0;
+  width: 3.25rem;
+  height: 1.125rem;
+  border-radius: var(--radius-full);
+}

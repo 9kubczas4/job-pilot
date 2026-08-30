@@ -5,12 +5,16 @@
   display: block;
   height: 100%;
   min-height: 0;
+  min-width: 0;
+  overflow-x: hidden;
 }
 
 .job-list {
   display: flex;
   height: 100%;
   min-height: 0;
+  min-width: 0;
+  overflow-x: hidden;
   flex-direction: column;
   border-inline-end: 1px solid var(--color-border);
   background: var(--color-surface);
@@ -48,14 +52,67 @@
 .job-list__body {
   flex: 1;
   min-height: 0;
+  min-width: 0;
+  overflow-x: hidden;
   overflow-y: auto;
   padding: var(--space-3);
 }
 
-.job-list__items {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
+.job-list__viewport {
+  --job-virtual-scroll-item-size: 118px;
+  --job-virtual-scroll-item-gap: 8px;
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+  overflow-x: hidden;
+  contain: layout style paint;
+  overscroll-behavior: contain;
+}
+
+.job-list__viewport .cdk-virtual-scroll-content-wrapper {
+  display: flow-root;
+}
+
+.job-list__item {
+  width: 100%;
+  max-width: 100%;
+  height: var(--job-virtual-scroll-item-size);
+  box-sizing: border-box;
+  padding-inline: var(--space-3);
+}
+
+.job-list__loading {
+  padding: 0;
+}
+
+.job-list__loading-slot {
+  height: calc(var(--job-virtual-scroll-item-size) - var(--job-virtual-scroll-item-gap));
+}
+
+.job-list__link {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-width: 0;
+  height: calc(var(--job-virtual-scroll-item-size) - var(--job-virtual-scroll-item-gap));
+}
+
+.job-list__slot-skeleton,
+.job-list__slot-card {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  height: 100%;
+}
+
+.job-list__slot-card {
+  position: absolute;
+  inset: 0;
+}
+
+.job-list__item--placeholder .job-list__link {
+  pointer-events: none;
 }
 
 @media (max-width: 60rem) {

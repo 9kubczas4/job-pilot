@@ -89,9 +89,11 @@
 }
 
 .job-sheet__body {
+  display: flex;
   flex: 1;
   min-height: 0;
-  overflow-y: auto;
+  overflow: hidden;
+  flex-direction: column;
   padding: 0 var(--space-4) calc(var(--space-4) + env(safe-area-inset-bottom, 0px));
   overscroll-behavior: contain;
 }
@@ -104,14 +106,65 @@
   padding: 0 0 var(--space-3);
 }
 
-.job-sheet__list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
+.job-sheet__viewport {
+  --job-virtual-scroll-item-size: 118px;
+  --job-virtual-scroll-item-gap: 8px;
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  padding: 0;
+  contain: layout style paint;
+  overscroll-behavior: contain;
+}
+
+.job-sheet__viewport .cdk-virtual-scroll-content-wrapper {
+  display: flow-root;
+}
+
+.job-sheet__item {
+  height: var(--job-virtual-scroll-item-size);
+  box-sizing: border-box;
+}
+
+.job-sheet__loading {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.job-sheet__loading-slot {
+  height: calc(var(--job-virtual-scroll-item-size) - var(--job-virtual-scroll-item-gap));
+}
+
+.job-sheet__link {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-width: 0;
+  height: calc(var(--job-virtual-scroll-item-size) - var(--job-virtual-scroll-item-gap));
+}
+
+.job-sheet__slot-skeleton,
+.job-sheet__slot-card {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  height: 100%;
+}
+
+.job-sheet__slot-card {
+  position: absolute;
+  inset: 0;
+}
+
+.job-sheet__item--placeholder .job-sheet__link {
+  pointer-events: none;
 }
 
 .job-sheet__focused {
   display: flex;
+  overflow-y: auto;
   flex-direction: column;
   gap: var(--space-3);
 }

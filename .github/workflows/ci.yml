@@ -1,0 +1,119 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  FIREBASE_PROJECT_ID: job-pilot-1e4ee
+
+jobs:
+  verify:
+    name: Lint, test & build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      # Firestore emulator runs on the JVM.
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - run: npm ci
+
+      - name: Lint (includes architecture import boundaries)
+        run: npm run lint
+
+      - name: Unit tests
+        run: npm test
+
+      - name: Firestore rules tests
+        run: npm run test:firestore-rules
+
+      - name: Production build
+        run: npm run build
+
+      - name: Upload build output
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-build
+          path: dist/job-pilot/browser
+          retention-days: 7
+
+  deploy:
+    name: Deploy to Firebase
+    needs: verify
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: production
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download build output
+        uses: actions/download-artifact@v4
+        with:
+          name: browser-build
+          path: dist/job-pilot/browser
+
+      - name: Authenticate to Firebase
+        env:
+          SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: |
+          if [ -z "$SERVICE_ACCOUNT" ]; then
+            echo "::error::FIREBASE_SERVICE_ACCOUNT secret is not set."
+            exit 1
+          fi
+          printf '%s' "$SERVICE_ACCOUNT" > "$RUNNER_TEMP/service-account.json"
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/service-account.json" >> "$GITHUB_ENV"
+
+      # Rules are deployed alongside hosting so the two can never drift apart.
+      - name: Deploy hosting and Firestore rules
+        run: |
+          npx --yes firebase-tools@14 deploy \
+            --only hosting,firestore:rules \
+            --project "$FIREBASE_PROJECT_ID" \
+            --non-interactive
+
+      - name: Remove service account credentials
+        if: always()
+        run: rm -f "$RUNNER_TEMP/service-account.json"
+
+      # Guards against the deployed ruleset drifting from firestore.rules.
+      # Rules tests pass against the file; only a live probe covers production.
+      - name: Verify deployed rules reject anonymous access
+        run: |
+          base="https://firestore.googleapis.com/v1/projects/$FIREBASE_PROJECT_ID/databases/(default)/documents"
+          failed=0
+
+          check() {
+            local label="$1" expected="$2" url="$3"
+            local actual
+            actual=$(curl -s -o /dev/null -w '%{http_code}' "$url")
+            if [ "$actual" = "$expected" ]; then
+              echo "ok    $label -> $actual"
+            else
+              echo "::error::$label expected HTTP $expected but got $actual"
+              failed=1
+            fi
+          }
+
+          check "anonymous read of profiles"     403 "$base/profiles?pageSize=1"
+          check "anonymous read of applications" 403 "$base/users/probe/applications?pageSize=1"
+          check "collection without a rule"      403 "$base/internal?pageSize=1"
+          check "public read of jobs"            200 "$base/jobs?pageSize=1"
+
+          exit $failed

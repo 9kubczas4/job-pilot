@@ -12,6 +12,21 @@ npm-debug.log
 yarn-error.log
 /firestore-debug.log
 
+# Firebase
+/.firebase
+firebase-debug.log
+
+# Secrets — service account keys must never be committed.
+# CI reads them from the FIREBASE_SERVICE_ACCOUNT repository secret instead.
+key.json
+*-key.json
+service-account*.json
+*.pem
+*.p12
+.env
+.env.*
+!.env.example
+
 # IDEs and editors
 .idea/
 .project

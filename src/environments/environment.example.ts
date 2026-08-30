@@ -7,6 +7,7 @@ export const environmentExample = {
     storageBucket: 'YOUR_PROJECT.appspot.com',
     messagingSenderId: 'YOUR_SENDER_ID',
     appId: 'YOUR_APP_ID',
+    measurementId: 'G-XXXXXXXXXX',
   },
   useSeedFallback: true,
   googleMapsApiKey: 'YOUR_GOOGLE_MAPS_API_KEY',

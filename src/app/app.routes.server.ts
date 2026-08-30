@@ -11,6 +11,14 @@ export const serverRoutes: ServerRoute[] = [
     renderMode: RenderMode.Prerender,
   },
   {
+    path: 'jobs/saved',
+    renderMode: RenderMode.Prerender,
+  },
+  {
+    path: 'jobs/applications',
+    renderMode: RenderMode.Prerender,
+  },
+  {
     path: 'jobs/:id',
     renderMode: RenderMode.Prerender,
     getPrerenderParams: () => Promise.resolve(getJobPrerenderParams()),

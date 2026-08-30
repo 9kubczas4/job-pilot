@@ -152,7 +152,7 @@
                 }
               </dl>
 
-              @if (savedJobs.isApplied(currentJob.id)) {
+              @if (jobApplications.isApplied(currentJob.id)) {
                 <div class="status-banner--success" role="status">
                   <p class="status-banner--success__title">Application submitted</p>
                   <p class="status-banner--success__copy">The recruiter has received your profile for this role.</p>
@@ -162,14 +162,14 @@
               <button
                 type="button"
                 class="btn job-details__apply"
-                [class.btn-primary]="!savedJobs.isApplied(currentJob.id)"
-                [class.btn--applied]="savedJobs.isApplied(currentJob.id)"
-                [disabled]="savedJobs.isApplied(currentJob.id) || applying()"
+                [class.btn-primary]="!jobApplications.isApplied(currentJob.id)"
+                [class.btn--applied]="jobApplications.isApplied(currentJob.id)"
+                [disabled]="jobApplications.isApplied(currentJob.id) || applying()"
                 (click)="apply()"
               >
                 @if (applying()) {
                   Submitting…
-                } @else if (savedJobs.isApplied(currentJob.id)) {
+                } @else if (jobApplications.isApplied(currentJob.id)) {
                   Applied
                 } @else {
                   Apply now
@@ -197,14 +197,14 @@
         <button
           type="button"
           class="btn job-details__apply"
-          [class.btn-primary]="!savedJobs.isApplied(currentJob.id)"
-          [class.btn--applied]="savedJobs.isApplied(currentJob.id)"
-          [disabled]="savedJobs.isApplied(currentJob.id) || applying()"
+          [class.btn-primary]="!jobApplications.isApplied(currentJob.id)"
+          [class.btn--applied]="jobApplications.isApplied(currentJob.id)"
+          [disabled]="jobApplications.isApplied(currentJob.id) || applying()"
           (click)="apply()"
         >
           @if (applying()) {
             Submitting…
-          } @else if (savedJobs.isApplied(currentJob.id)) {
+          } @else if (jobApplications.isApplied(currentJob.id)) {
             Applied
           } @else {
             Apply now

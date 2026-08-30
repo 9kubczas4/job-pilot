@@ -26,6 +26,7 @@ src/app/
     domain/                # models and pure business rules
     data-access/           # repositories (Firestore, HTTP)
     state/                 # stores and facades
+    {subfeature}/          # optional nested slice (e.g. jobs/saved-jobs)
 ```
 
 ## Layers

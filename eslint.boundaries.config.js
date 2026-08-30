@@ -10,6 +10,7 @@
 //     domain/                  - models and pure business rules
 //     data-access/             - persistence (Firestore, HTTP)
 //     state/                   - client state (stores)
+//     {subfeature}/            - optional nested slice (e.g. jobs/saved-jobs)
 
 const boundariesElements = [
   // --- Core (most specific first) ---
@@ -20,7 +21,14 @@ const boundariesElements = [
   // --- Shared ---
   { type: 'shared', pattern: 'src/app/shared', partialMatch: false },
 
-  // --- Features (most specific first) ---
+  // --- Subfeatures (e.g. jobs/saved-jobs, jobs/applications) ---
+  { type: 'feature-webmcp', pattern: 'src/app/features/*/*/webmcp/**', partialMatch: false },
+  { type: 'feature-domain', pattern: 'src/app/features/*/*/domain', partialMatch: false },
+  { type: 'feature-data-access', pattern: 'src/app/features/*/*/data-access', partialMatch: false },
+  { type: 'feature-state', pattern: 'src/app/features/*/*/state', partialMatch: false },
+  { type: 'feature-page', pattern: 'src/app/features/*/*/pages', partialMatch: true },
+
+  // --- Features (top-level layers) ---
   { type: 'feature-webmcp', pattern: 'src/app/features/*/webmcp/**', partialMatch: false },
   { type: 'feature-ui', pattern: 'src/app/features/*/ui', partialMatch: true },
   { type: 'feature-domain', pattern: 'src/app/features/*/domain', partialMatch: false },

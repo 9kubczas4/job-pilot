@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 Allow: /jobs
 Disallow: /profile
-Disallow: /saved
-Disallow: /applications
+Disallow: /jobs/saved
+Disallow: /jobs/applications
 
 Sitemap: https://job-pilot-1e4ee.web.app/sitemap.xml

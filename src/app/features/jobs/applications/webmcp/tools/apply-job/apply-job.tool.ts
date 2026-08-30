@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { provideExperimentalWebMcpTools } from '@angular/core';
-import { SavedJobsStore } from '@features/saved-jobs/state/saved-jobs.store';
 import { toolJson, toolText } from '@core/webmcp/tool-response';
+import { JobApplicationsStore } from '../../../state/job-applications.store';
 import { APPLY_JOB_SCHEMA } from './apply-job.schema';
 
 export function provideApplyJobWebMcpTool() {
@@ -17,10 +17,10 @@ export function provideApplyJobWebMcpTool() {
           return toolText('jobId must be a string.');
         }
 
-        const savedJobs = inject(SavedJobsStore);
+        const applications = inject(JobApplicationsStore);
         try {
-          await savedJobs.loadUserData();
-          const existing = savedJobs.applications().find((application) => application.jobId === jobId);
+          await applications.loadApplications();
+          const existing = applications.applications().find((application) => application.jobId === jobId);
           if (existing) {
             return toolJson({
               success: true,
@@ -32,7 +32,7 @@ export function provideApplyJobWebMcpTool() {
             });
           }
 
-          const application = await savedJobs.applyToJob(
+          const application = await applications.applyToJob(
             jobId,
             typeof note === 'string' ? note : undefined,
           );

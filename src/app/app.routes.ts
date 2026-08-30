@@ -1,5 +1,7 @@
 import { Routes } from '@angular/router';
 import { provideJobDetailsWebMcpTools } from '@features/jobs/webmcp/job-details.tools';
+import { provideSaveJobWebMcpTool } from '@features/jobs/saved-jobs/webmcp/tools/save-job/save-job.tool';
+import { provideApplyJobWebMcpTool } from '@features/jobs/applications/webmcp/tools/apply-job/apply-job.tool';
 import { RoutePaths } from '@core/app-paths';
 
 export const routes: Routes = [
@@ -10,12 +12,30 @@ export const routes: Routes = [
   },
   {
     path: RoutePaths.jobs,
-    providers: [provideJobDetailsWebMcpTools()],
+    providers: [
+      provideJobDetailsWebMcpTools(),
+      provideSaveJobWebMcpTool(),
+      provideApplyJobWebMcpTool(),
+    ],
     children: [
       {
         path: RoutePaths.home,
         loadComponent: () =>
           import('@features/jobs/pages/job-search/job-search.page').then((m) => m.JobSearchPageComponent),
+      },
+      {
+        path: RoutePaths.saved,
+        loadComponent: () =>
+          import('@features/jobs/saved-jobs/pages/saved-jobs/saved-jobs.page').then(
+            (m) => m.SavedJobsPageComponent,
+          ),
+      },
+      {
+        path: RoutePaths.applications,
+        loadComponent: () =>
+          import('@features/jobs/applications/pages/applications/applications.page').then(
+            (m) => m.ApplicationsPageComponent,
+          ),
       },
       {
         path: RoutePaths.jobId,
@@ -31,15 +51,13 @@ export const routes: Routes = [
   },
   {
     path: RoutePaths.saved,
-    loadComponent: () =>
-      import('@features/saved-jobs/pages/saved-jobs/saved-jobs.page').then((m) => m.SavedJobsPageComponent),
+    redirectTo: `/${RoutePaths.jobs}/${RoutePaths.saved}`,
+    pathMatch: 'full',
   },
   {
     path: RoutePaths.applications,
-    loadComponent: () =>
-      import('@features/saved-jobs/pages/applications/applications.page').then(
-        (m) => m.ApplicationsPageComponent,
-      ),
+    redirectTo: `/${RoutePaths.jobs}/${RoutePaths.applications}`,
+    pathMatch: 'full',
   },
   {
     path: RoutePaths.wildcard,

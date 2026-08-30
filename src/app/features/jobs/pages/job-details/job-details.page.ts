@@ -17,7 +17,8 @@ import { AppShellComponent } from '@core/layout/app-shell.component';
 import { enableAppShellPageScroll } from '@core/layout/enable-app-shell-page-scroll';
 import { AuthService } from '@core/auth/auth.service';
 import { AppLinks } from '@core/app-paths';
-import { SavedJobsStore } from '@features/saved-jobs/state/saved-jobs.store';
+import { SavedJobsStore } from '@features/jobs/saved-jobs/state/saved-jobs.store';
+import { JobApplicationsStore } from '@features/jobs/applications/state/job-applications.store';
 import { AuthPromptDialogComponent } from '@shared/ui/auth-prompt-dialog/auth-prompt-dialog.component';
 import { JobHeaderSearchComponent } from '../../ui/job-header-search/job-header-search.component';
 import { SaveJobButtonComponent } from '../../ui/save-job-button/save-job-button.component';
@@ -62,6 +63,7 @@ export class JobDetailsPageComponent {
   private readonly destroyRef = inject(DestroyRef);
   readonly store = inject(JobDetailsStore);
   readonly savedJobs = inject(SavedJobsStore);
+  readonly jobApplications = inject(JobApplicationsStore);
   readonly auth = inject(AuthService);
   private readonly toast = inject(ToastService);
 
@@ -105,7 +107,8 @@ export class JobDetailsPageComponent {
         return;
       }
 
-      void this.savedJobs.loadUserData();
+      void this.savedJobs.loadSavedJobs();
+      void this.jobApplications.loadApplications();
     });
 
     effect(() => {
@@ -148,7 +151,7 @@ export class JobDetailsPageComponent {
 
   apply(): void {
     const job = this.store.job();
-    if (!job || this.savedJobs.isApplied(job.id)) {
+    if (!job || this.jobApplications.isApplied(job.id)) {
       return;
     }
 
@@ -167,13 +170,13 @@ export class JobDetailsPageComponent {
 
   async submitApplication(note?: string): Promise<void> {
     const job = this.store.job();
-    if (!job || this.applying() || this.savedJobs.isApplied(job.id)) {
+    if (!job || this.applying() || this.jobApplications.isApplied(job.id)) {
       return;
     }
 
     this.applying.set(true);
     try {
-      await this.savedJobs.applyToJob(job.id, note);
+      await this.jobApplications.applyToJob(job.id, note);
       this.applyDialogOpen.set(false);
       this.toast.show(`Application submitted for ${job.title}.`);
     } catch {
@@ -207,7 +210,7 @@ export class JobDetailsPageComponent {
         return;
       }
 
-      if (!this.savedJobs.isApplied(job.id)) {
+      if (!this.jobApplications.isApplied(job.id)) {
         this.applyDialogOpen.set(true);
       }
     } catch {

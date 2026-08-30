@@ -29,7 +29,8 @@ import { JobHeaderSearchComponent } from '../../ui/job-header-search/job-header-
 import { ProfileMenuComponent } from '@shared/ui/profile-menu/profile-menu.component';
 import { ThemeToggleComponent } from '@core/layout/theme-toggle/theme-toggle.component';
 import { ToastService } from '@shared/ui/toast/toast.service';
-import { SavedJobsStore } from '@features/saved-jobs/state/saved-jobs.store';
+import { SavedJobsStore } from '@features/jobs/saved-jobs/state/saved-jobs.store';
+import { JobApplicationsStore } from '@features/jobs/applications/state/job-applications.store';
 import {
   enrichLocationCriteria,
   searchLocationEqual,
@@ -81,6 +82,7 @@ const MOBILE_LAYOUT_QUERY = '(max-width: 60rem)';
 export class JobSearchPageComponent implements OnInit {
   readonly store = inject(JobSearchStore);
   readonly savedJobs = inject(SavedJobsStore);
+  readonly jobApplications = inject(JobApplicationsStore);
   readonly headerUi = inject(HeaderUiStore);
   readonly auth = inject(AuthService);
   readonly links = AppLinks;
@@ -255,7 +257,8 @@ export class JobSearchPageComponent implements OnInit {
     });
 
     this.store.loadJobs();
-    this.savedJobs.loadUserData();
+    this.savedJobs.loadSavedJobs();
+    this.jobApplications.loadApplications();
   }
 
   private applyRouteCriteria(params: { keys: string[]; get: (key: string) => string | null }): void {

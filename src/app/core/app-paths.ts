@@ -15,8 +15,8 @@ export const AppLinks = {
   jobs: ['/', RoutePaths.jobs] as const,
   job: (id: string) => ['/', RoutePaths.jobs, id] as const,
   profile: ['/', RoutePaths.profile] as const,
-  saved: ['/', RoutePaths.saved] as const,
-  applications: ['/', RoutePaths.applications] as const,
+  saved: ['/', RoutePaths.jobs, RoutePaths.saved] as const,
+  applications: ['/', RoutePaths.jobs, RoutePaths.applications] as const,
 };
 
 export const AppProfileMenuLinks = {

@@ -182,8 +182,8 @@ features/{name}/
 | `/jobs` | jobs | Search, filters, list + map |
 | `/jobs/:id` | jobs | Job detail |
 | `/profile` | profile | Candidate profile CRUD |
-| `/saved` | saved-jobs | Saved jobs list |
-| `/applications` | saved-jobs | Submitted applications |
+| `/jobs/saved` | jobs/saved-jobs | Saved jobs list |
+| `/jobs/applications` | jobs/applications | Submitted applications |
 
 ## Hackathon Submission Checklist
 

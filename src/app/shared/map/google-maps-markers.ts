@@ -1,15 +1,15 @@
-import { ResolvedTheme } from '@core/theme/theme.service';
+import { ResolvedTheme } from '@shared/models/theme.model';
 
 const JOB_PIN_WIDTH = 36;
 const JOB_PIN_HEIGHT = 44;
 
-type MarkerPalette = {
+interface MarkerPalette {
   selectedFill: string;
   fill: string;
   stroke: string;
   inner: string;
   shadow: string;
-};
+}
 
 const LIGHT_MARKER_PALETTE: MarkerPalette = {
   selectedFill: '#2563eb',

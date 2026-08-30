@@ -1,4 +1,4 @@
-import { ResolvedTheme } from '@core/theme/theme.service';
+import { ResolvedTheme } from '@shared/models/theme.model';
 
 export const LIGHT_MAP_STYLES: google.maps.MapTypeStyle[] = [
   { elementType: 'geometry', stylers: [{ color: '#f5f5f5' }] },

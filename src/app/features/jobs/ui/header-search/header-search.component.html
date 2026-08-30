@@ -25,10 +25,12 @@
     @if (jobPanelOpen() && headerUi.jobSuggestions().length) {
       <ul id="header-search-jobs-panel" class="header-search__dropdown" role="listbox">
         @for (suggestion of headerUi.jobSuggestions(); track suggestion.id) {
-          <li role="option">
+          <li role="presentation">
             <button
               type="button"
               class="header-search__option"
+              role="option"
+              [attr.aria-selected]="false"
               (mousedown)="$event.preventDefault()"
               (click)="selectJobSuggestion(suggestion)"
             >
@@ -77,10 +79,12 @@
       @if (locationPanelOpen() && headerUi.locationSuggestions().length) {
         <ul id="header-search-location-panel" class="header-search__dropdown" role="listbox">
           @for (suggestion of headerUi.locationSuggestions(); track suggestion.id) {
-            <li role="option">
+            <li role="presentation">
               <button
                 type="button"
                 class="header-search__option"
+                role="option"
+                [attr.aria-selected]="false"
                 (mousedown)="$event.preventDefault()"
                 (click)="selectLocationSuggestion(suggestion)"
               >

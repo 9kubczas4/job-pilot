@@ -1,7 +1,7 @@
 import { CandidateProfile, ProfileFormModel } from './profile.model';
 import { isFutureMonthValue } from './month-date.utils';
 
-const COMPLETENESS_FIELDS: Array<(profile: CandidateProfile) => boolean> = [
+const COMPLETENESS_FIELDS: ((profile: CandidateProfile) => boolean)[] = [
   (profile) => Boolean(profile.firstName?.trim()),
   (profile) => Boolean(profile.lastName?.trim()),
   (profile) => Boolean(profile.headline?.trim()),

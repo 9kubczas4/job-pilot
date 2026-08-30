@@ -1,8 +1,8 @@
 import { computed, effect, inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { ResolvedTheme, ThemePreference } from '@shared/models/theme.model';
 
-export type ThemePreference = 'light' | 'dark' | 'system';
-export type ResolvedTheme = 'light' | 'dark';
+export type { ResolvedTheme, ThemePreference } from '@shared/models/theme.model';
 
 const STORAGE_KEY = 'job-pilot-theme';
 const THEME_MEDIA_QUERY = '(prefers-color-scheme: dark)';

@@ -2,10 +2,10 @@ import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { ThemePreference, ThemeService } from '@core/theme/theme.service';
 
-type ThemeOption = {
+interface ThemeOption {
   value: ThemePreference;
   label: string;
-};
+}
 
 @Component({
   selector: 'app-theme-toggle',

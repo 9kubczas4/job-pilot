@@ -32,8 +32,13 @@ const boundariesElements = [
 const boundariesFiles = [
   { category: 'app-shell', pattern: 'src/app/app.ts' },
   { category: 'app-shell', pattern: 'src/app/app.config.ts' },
+  { category: 'app-shell', pattern: 'src/app/app.config.server.ts' },
   { category: 'app-shell', pattern: 'src/app/app.routes.ts' },
+  { category: 'app-shell', pattern: 'src/app/app.routes.server.ts' },
   { category: 'app-shell', pattern: 'src/main.ts' },
+  { category: 'app-shell', pattern: 'src/main.server.ts' },
+  { category: 'app-shell', pattern: 'src/server.ts' },
+  { category: 'app-shell', pattern: 'src/app/prerender/**' },
   { category: 'core-webmcp', pattern: 'src/app/core/webmcp/**' },
   { category: 'test', pattern: '**/*.spec.ts' },
 ];

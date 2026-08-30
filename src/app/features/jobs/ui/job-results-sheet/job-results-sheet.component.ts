@@ -135,6 +135,11 @@ export class JobResultsSheetComponent {
     this.snapChange.emit(this.nextSnap(this.snap()));
   }
 
+  onHandleKeyboardActivate(event: Event): void {
+    event.preventDefault();
+    this.onHandleClick();
+  }
+
   onBackdropClick(): void {
     this.snapChange.emit('peek');
     this.clearFocus.emit();

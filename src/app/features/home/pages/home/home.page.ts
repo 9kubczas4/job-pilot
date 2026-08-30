@@ -11,7 +11,6 @@ import { isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { AppShellComponent } from '@core/layout/app-shell.component';
 import { AppLinks } from '@core/app-paths';
-import { JobHeaderSearchComponent } from '../../ui/job-header-search/job-header-search.component';
 
 interface LandingFeature {
   icon: string;
@@ -33,7 +32,7 @@ interface LandingStep {
 @Component({
   selector: 'app-home-page',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [AppShellComponent, JobHeaderSearchComponent, RouterLink],
+  imports: [AppShellComponent, RouterLink],
   templateUrl: './home.page.html',
   styleUrl: './home.page.scss',
 })

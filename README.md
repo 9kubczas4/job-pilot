@@ -178,7 +178,7 @@ features/{name}/
 
 | Path | Feature | Description |
 |------|---------|-------------|
-| `/` | core | Landing / hackathon intro |
+| `/` | home | Landing / hackathon intro |
 | `/jobs` | jobs | Search, filters, list + map |
 | `/jobs/:id` | jobs | Job detail |
 | `/profile` | profile | Candidate profile CRUD |

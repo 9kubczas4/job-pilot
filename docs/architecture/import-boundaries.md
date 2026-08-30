@@ -16,8 +16,7 @@ Configuration lives in [`eslint.boundaries.config.js`](../../eslint.boundaries.c
 
 ```
 src/app/
-  core/                    # auth, firebase, layout, home page
-    pages/
+  core/                    # auth, firebase, layout
   shared/                  # business-agnostic UI kit, map helpers, WebMCP response utils
   features/{name}/
     pages/                 # smart page (route target)

@@ -14,7 +14,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 import { fromEvent } from 'rxjs';
 import { AppLinks } from '@core/app-paths';
-import { HeaderUiStore } from '@features/jobs/state/header-ui.store';
 import { JobCardComponent } from '@features/jobs/ui/job-card/job-card.component';
 import { JobSortMenuComponent, SortMenuOption } from '@features/jobs/ui/job-sort-menu/job-sort-menu.component';
 import { JobOffer } from '@features/jobs/domain/job.model';
@@ -37,11 +36,11 @@ export class JobListComponent {
   readonly selectJob = output<string>();
   readonly toggleSave = output<string>();
   readonly sortChange = output<string>();
+  readonly scrollPositionChange = output<number>();
 
   readonly jobLink = AppLinks.job;
 
   private readonly host = inject(ElementRef<HTMLElement>);
-  private readonly headerUi = inject(HeaderUiStore);
   private readonly destroyRef = inject(DestroyRef);
   private readonly platformId = inject(PLATFORM_ID);
 
@@ -65,7 +64,7 @@ export class JobListComponent {
             return;
           }
 
-          this.headerUi.reportScrollPosition(scrollContainer.scrollTop);
+          this.scrollPositionChange.emit(scrollContainer.scrollTop);
         });
     });
   }

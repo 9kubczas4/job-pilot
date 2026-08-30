@@ -14,8 +14,10 @@ import { Cluster, MarkerClusterer } from '@googlemaps/markerclusterer';
 import { AppLinks } from '@core/app-paths';
 import { ResolvedTheme, ThemeService } from '@core/infrastructure/theme/theme.service';
 import { GOOGLE_MAPS_API_KEY } from '@shared/map/google-maps-config';
+import { getMapDefaultView } from '@shared/map/map-default-region';
 import { isGoogleMapsConfigured } from '@shared/map/google-maps-loader';
 import { createClusterMarkerIcon, createJobMarkerIcon } from '@shared/map/google-maps-markers';
+import { UserMapRegionService } from '@shared/map/user-map-region.service';
 import { DEFAULT_SEARCH_RADIUS_KM } from '@features/jobs/domain/header-search.model';
 import { getMapStylesForTheme } from '@shared/map/google-maps-styles';
 import { JobLocation, JobOffer } from '@features/jobs/domain/job.model';
@@ -23,8 +25,6 @@ import {
   buildJobMapPopupHtml,
 } from './job-map-popup';
 
-const DEFAULT_CENTER = { lat: 51.9194, lng: 19.1451 };
-const DEFAULT_ZOOM = 5;
 const MARKER_FOCUS_ZOOM = 13;
 const ZOOM_ANIMATION_MS = 500;
 const CLUSTER_ZOOM_PADDING_PX = 80;
@@ -41,6 +41,7 @@ export class JobMapComponent {
   private readonly router = inject(Router);
   private readonly ngZone = inject(NgZone);
   private readonly theme = inject(ThemeService);
+  private readonly userMapRegion = inject(UserMapRegionService);
 
   readonly jobs = input<JobOffer[]>([]);
   readonly selectedJobId = input<string | null>(null);
@@ -65,6 +66,7 @@ export class JobMapComponent {
   private mapAnimationFrame: number | null = null;
 
   constructor() {
+    this.userMapRegion.detectRegion();
     this.mapTheme = this.theme.resolved();
     this.mapOptions = this.buildMapOptions(this.mapTheme);
 
@@ -79,6 +81,17 @@ export class JobMapComponent {
       const searchCenter = this.searchCenter();
       const searchRadiusKm = this.searchRadiusKm();
       this.syncMap(jobs, selectedId, searchCenter, searchRadiusKm);
+    });
+
+    effect(() => {
+      this.userMapRegion.region();
+      if (!this.map || !this.clusterer) {
+        return;
+      }
+
+      if (this.shouldUseDefaultRegionView(this.searchCenter())) {
+        this.resetToDefaultView();
+      }
     });
   }
 
@@ -157,9 +170,7 @@ export class JobMapComponent {
 
     if (jobsChanged || searchCenterChanged) {
       this.lastSearchCenterKey = searchCenterKey;
-      if (locatedJobs.length) {
-        this.fitBoundsToJobs(locatedJobs);
-      } else if (searchCenter) {
+      if (searchCenter) {
         this.focusOnSearchCenter(searchCenter, searchRadiusKm);
       } else {
         this.resetToDefaultView();
@@ -273,7 +284,28 @@ export class JobMapComponent {
   }
 
   private resetToDefaultView(): void {
-    this.animateTo(DEFAULT_CENTER, DEFAULT_ZOOM);
+    const view = getMapDefaultView(this.userMapRegion.region());
+    this.applyMapView(view.center, view.zoom);
+  }
+
+  private applyMapView(
+    target: google.maps.LatLngLiteral,
+    targetZoom: number,
+    animate = true,
+  ): void {
+    const map = this.map;
+    if (!map) {
+      return;
+    }
+
+    const startCenter = map.getCenter();
+    if (!startCenter || !animate) {
+      map.setCenter(target);
+      map.setZoom(targetZoom);
+      return;
+    }
+
+    this.animateTo(target, targetZoom);
   }
 
   private zoomForRadiusKm(radiusKm: number): number {
@@ -299,7 +331,7 @@ export class JobMapComponent {
     }
 
     const center = cluster.bounds?.getCenter() ?? cluster.position;
-    const currentZoom = map.getZoom() ?? DEFAULT_ZOOM;
+    const currentZoom = map.getZoom() ?? getMapDefaultView(this.userMapRegion.region()).zoom;
     const targetZoom = cluster.bounds
       ? this.getZoomForBounds(cluster.bounds, CLUSTER_ZOOM_PADDING_PX)
       : currentZoom + 2;
@@ -313,7 +345,7 @@ export class JobMapComponent {
   private getZoomForBounds(bounds: google.maps.LatLngBounds, paddingPx: number): number {
     const map = this.map;
     if (!map) {
-      return DEFAULT_ZOOM;
+      return getMapDefaultView(this.userMapRegion.region()).zoom;
     }
 
     const ne = bounds.getNorthEast();
@@ -362,12 +394,14 @@ export class JobMapComponent {
 
     const startCenter = map.getCenter();
     if (!startCenter) {
+      map.setCenter(target);
+      map.setZoom(targetZoom);
       return;
     }
 
     const startLat = startCenter.lat();
     const startLng = startCenter.lng();
-    const startZoom = map.getZoom() ?? DEFAULT_ZOOM;
+    const startZoom = map.getZoom() ?? getMapDefaultView(this.userMapRegion.region()).zoom;
     const startTime = performance.now();
 
     const step = (now: number) => {
@@ -435,6 +469,10 @@ export class JobMapComponent {
     });
   }
 
+  private shouldUseDefaultRegionView(searchCenter: google.maps.LatLngLiteral | null): boolean {
+    return !searchCenter;
+  }
+
   private closeJobPopup(): void {
     this.infoWindow?.close();
   }
@@ -466,9 +504,11 @@ export class JobMapComponent {
   }
 
   private buildMapOptions(theme: ResolvedTheme): google.maps.MapOptions {
+    const defaultView = getMapDefaultView();
+
     return {
-      center: DEFAULT_CENTER,
-      zoom: DEFAULT_ZOOM,
+      center: defaultView.center,
+      zoom: defaultView.zoom,
       ...this.getMapThemeOptions(theme),
       clickableIcons: false,
       mapTypeControl: false,

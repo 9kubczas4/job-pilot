@@ -11,6 +11,9 @@ export interface HeaderSearchSlotFacade {
   readonly radiusKm: Signal<number>;
   readonly jobSuggestions: Signal<JobSearchSuggestion[]>;
   readonly locationSuggestions: Signal<LocationSearchSuggestion[]>;
+  readonly queryToolActive: Signal<boolean>;
+  readonly locationToolActive: Signal<boolean>;
+  readonly radiusToolActive: Signal<boolean>;
 
   onSearchQueryChange(
     value: string,

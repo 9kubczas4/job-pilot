@@ -48,6 +48,19 @@
     background: var(--color-primary-subtle);
     color: var(--color-primary);
   }
+
+  &--ai-updating {
+    border-color: var(--color-primary-glow-strong);
+    background: var(--color-primary-surface);
+    color: var(--color-primary);
+    box-shadow: 0 0 0 var(--space-1) var(--color-primary-surface-faint);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sort-menu__trigger {
+    transition: none;
+  }
 }
 
 .sort-menu__icon {

@@ -35,6 +35,9 @@ export class HeaderSearchComponent {
   readonly radiusKm = input(DEFAULT_SEARCH_RADIUS_KM);
   readonly jobSuggestions = input<JobSearchSuggestion[]>([]);
   readonly locationSuggestions = input<LocationSearchSuggestion[]>([]);
+  readonly queryUpdateActive = input(false);
+  readonly locationUpdateActive = input(false);
+  readonly radiusUpdateActive = input(false);
 
   readonly compact = computed(() => this.variant() === 'compact');
 

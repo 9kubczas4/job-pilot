@@ -12,6 +12,7 @@
         <app-job-sort-menu
           [options]="sortOptions()"
           [value]="sort()"
+          [aiUpdateActive]="sortUpdateActive()"
           (sortChange)="sortChange.emit($event)"
         />
       }

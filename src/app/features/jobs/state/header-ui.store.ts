@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { DestroyRef, inject, Injectable, signal, WritableSignal } from '@angular/core';
 import {
   DEFAULT_SEARCH_RADIUS_KM,
   JobSearchSuggestion,
@@ -9,6 +9,10 @@ import { JobSearchCriteria } from '@features/jobs/domain/search.model';
 const HIDE_SCROLL_ACCUMULATED_PX = 56;
 const SHOW_SCROLL_ACCUMULATED_PX = 20;
 const MIN_SCROLL_TOP_TO_HIDE_PX = 72;
+const AI_TOOL_ACTIVITY_LINGER_MS = 1200;
+const AI_TOOL_ACTIVITY_TARGETS = ['query', 'location', 'radius', 'filters', 'sort'] as const;
+
+export type JobSearchAiActivity = (typeof AI_TOOL_ACTIVITY_TARGETS)[number];
 
 @Injectable({ providedIn: 'root' })
 export class HeaderUiStore {
@@ -25,11 +29,66 @@ export class HeaderUiStore {
   readonly searchApplyTrigger = signal(0);
   readonly mobileSearchCloseRequest = signal(0);
   readonly headerHidden = signal(false);
+  readonly queryToolActive = signal(false);
+  readonly locationToolActive = signal(false);
+  readonly radiusToolActive = signal(false);
+  readonly filterToolActive = signal(false);
+  readonly sortToolActive = signal(false);
 
+  private readonly destroyRef = inject(DestroyRef);
   private lastScrollTop = 0;
   private scrollAccumulator = 0;
   private pendingScrollTop: number | null = null;
   private scrollFrameId: number | null = null;
+  private readonly activityTokens: Record<JobSearchAiActivity, number> = {
+    query: 0,
+    location: 0,
+    radius: 0,
+    filters: 0,
+    sort: 0,
+  };
+  private readonly activityTimers: Record<
+    JobSearchAiActivity,
+    ReturnType<typeof setTimeout> | null
+  > = {
+    query: null,
+    location: null,
+    radius: null,
+    filters: null,
+    sort: null,
+  };
+
+  constructor() {
+    this.destroyRef.onDestroy(() => {
+      for (const target of AI_TOOL_ACTIVITY_TARGETS) {
+        this.clearActivityTimer(target);
+      }
+    });
+  }
+
+  beginAiToolActivity(activities: readonly JobSearchAiActivity[]): () => void {
+    const activeTokens = [...new Set(activities)].map((activity) => {
+      this.clearActivityTimer(activity);
+      const token = ++this.activityTokens[activity];
+      this.activitySignal(activity).set(true);
+      return { activity, token };
+    });
+
+    return () => {
+      for (const { activity, token } of activeTokens) {
+        if (this.activityTokens[activity] !== token) {
+          continue;
+        }
+
+        this.activityTimers[activity] = setTimeout(() => {
+          if (this.activityTokens[activity] === token) {
+            this.activitySignal(activity).set(false);
+          }
+          this.activityTimers[activity] = null;
+        }, AI_TOOL_ACTIVITY_LINGER_MS);
+      }
+    };
+  }
 
   applySearch(): void {
     this.searchApplyTrigger.update((value) => value + 1);
@@ -134,6 +193,29 @@ export class HeaderUiStore {
     if (this.scrollAccumulator <= -SHOW_SCROLL_ACCUMULATED_PX) {
       this.headerHidden.set(false);
       this.scrollAccumulator = 0;
+    }
+  }
+
+  private activitySignal(activity: JobSearchAiActivity): WritableSignal<boolean> {
+    switch (activity) {
+      case 'query':
+        return this.queryToolActive;
+      case 'location':
+        return this.locationToolActive;
+      case 'radius':
+        return this.radiusToolActive;
+      case 'filters':
+        return this.filterToolActive;
+      case 'sort':
+        return this.sortToolActive;
+    }
+  }
+
+  private clearActivityTimer(activity: JobSearchAiActivity): void {
+    const timer = this.activityTimers[activity];
+    if (timer) {
+      clearTimeout(timer);
+      this.activityTimers[activity] = null;
     }
   }
 }

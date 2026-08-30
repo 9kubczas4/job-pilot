@@ -55,6 +55,7 @@ export class JobListComponent {
   readonly appliedJobIds = input<string[]>([]);
   readonly sortOptions = input<SortMenuOption[]>([]);
   readonly sort = input('newest');
+  readonly sortUpdateActive = input(false);
   readonly selectJob = output<string>();
   readonly toggleSave = output<string>();
   readonly sortChange = output<string>();

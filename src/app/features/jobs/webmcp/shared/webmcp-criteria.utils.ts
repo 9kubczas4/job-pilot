@@ -16,6 +16,21 @@ export function filterFieldsChanged(before: JobSearchCriteria, after: JobSearchC
 }
 
 export function filterCriteriaFieldsEqual(a: JobSearchCriteria, b: JobSearchCriteria): boolean {
+  return filterControlCriteriaFieldsEqual(a, b) && !sortFieldChanged(a, b);
+}
+
+export function filterControlFieldsChanged(
+  before: JobSearchCriteria,
+  after: JobSearchCriteria,
+): boolean {
+  return !filterControlCriteriaFieldsEqual(before, after);
+}
+
+export function sortFieldChanged(before: JobSearchCriteria, after: JobSearchCriteria): boolean {
+  return (before.sort ?? DEFAULT_JOB_SORT) !== (after.sort ?? DEFAULT_JOB_SORT);
+}
+
+function filterControlCriteriaFieldsEqual(a: JobSearchCriteria, b: JobSearchCriteria): boolean {
   return (
     arraysEqual(a.roles, b.roles) &&
     arraysEqual(a.skills, b.skills) &&
@@ -23,8 +38,7 @@ export function filterCriteriaFieldsEqual(a: JobSearchCriteria, b: JobSearchCrit
     arraysEqual(a.workSchedules, b.workSchedules) &&
     arraysEqual(a.workplace, b.workplace) &&
     arraysEqual(a.contracts, b.contracts) &&
-    (a.salaryMin ?? null) === (b.salaryMin ?? null) &&
-    (a.sort ?? DEFAULT_JOB_SORT) === (b.sort ?? DEFAULT_JOB_SORT)
+    (a.salaryMin ?? null) === (b.salaryMin ?? null)
   );
 }
 

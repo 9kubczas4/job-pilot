@@ -26,6 +26,7 @@ export interface SortMenuOption {
 export class JobSortMenuComponent {
   readonly options = input.required<SortMenuOption[]>();
   readonly value = input.required<string>();
+  readonly aiUpdateActive = input(false);
 
   readonly sortChange = output<string>();
 

@@ -13,6 +13,8 @@
     <input
       id="header-search-jobs"
       class="header-search__input"
+      [class.header-search__input--ai-updating]="queryUpdateActive()"
+      [attr.aria-busy]="queryUpdateActive()"
       type="search"
       name="q"
       placeholder="Title, company, skill, keyword…"
@@ -68,6 +70,8 @@
       <input
         id="header-search-location"
         class="header-search__input header-search__input--location"
+        [class.header-search__input--ai-updating]="locationUpdateActive()"
+        [attr.aria-busy]="locationUpdateActive()"
         type="search"
         name="location"
         placeholder="City or region"
@@ -107,6 +111,8 @@
         type="button"
         id="header-search-radius"
         class="header-search__radius"
+        [class.header-search__radius--ai-updating]="radiusUpdateActive()"
+        [attr.aria-busy]="radiusUpdateActive()"
         aria-haspopup="listbox"
         [attr.aria-expanded]="radiusPanelOpen()"
         aria-controls="header-search-radius-panel"

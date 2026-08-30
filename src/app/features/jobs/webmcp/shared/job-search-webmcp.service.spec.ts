@@ -78,6 +78,11 @@ describe('JobSearchWebMcpService', () => {
       radius: '50',
     });
     expect(router.url.startsWith('/jobs?')).toBe(true);
+    expect(headerUi.queryToolActive()).toBe(true);
+    expect(headerUi.locationToolActive()).toBe(true);
+    expect(headerUi.radiusToolActive()).toBe(true);
+    expect(headerUi.filterToolActive()).toBe(false);
+    expect(headerUi.sortToolActive()).toBe(false);
   });
 
   it('submits filters and preserved search fields through the UI trigger from home', async () => {
@@ -103,5 +108,59 @@ describe('JobSearchWebMcpService', () => {
       salaryMin: '7000',
     });
     expect(router.url.startsWith('/jobs?')).toBe(true);
+    expect(headerUi.queryToolActive()).toBe(false);
+    expect(headerUi.locationToolActive()).toBe(false);
+    expect(headerUi.radiusToolActive()).toBe(false);
+    expect(headerUi.filterToolActive()).toBe(true);
+    expect(headerUi.sortToolActive()).toBe(false);
+  });
+
+  it('marks only the sort control when filter_jobs changes sorting', async () => {
+    await service.applyFilterCriteria({ sort: 'salary-desc' });
+
+    expect(headerUi.queryToolActive()).toBe(false);
+    expect(headerUi.locationToolActive()).toBe(false);
+    expect(headerUi.radiusToolActive()).toBe(false);
+    expect(headerUi.filterToolActive()).toBe(false);
+    expect(headerUi.sortToolActive()).toBe(true);
+  });
+
+  it('marks only radius when search_jobs preserves query and location', async () => {
+    store.setCriteriaFromRoute({
+      query: 'Frontend',
+      locations: ['Warsaw'],
+      locationLat: 52.2297,
+      locationLng: 21.0122,
+      radiusKm: 25,
+    });
+
+    await service.applySearchCriteria({
+      query: 'Frontend',
+      locations: ['Warsaw'],
+      radiusKm: 50,
+    });
+
+    expect(headerUi.queryToolActive()).toBe(false);
+    expect(headerUi.locationToolActive()).toBe(false);
+    expect(headerUi.radiusToolActive()).toBe(true);
+    expect(headerUi.filterToolActive()).toBe(false);
+    expect(headerUi.sortToolActive()).toBe(false);
+  });
+
+  it('does not mark controls when normalized criteria stay unchanged', async () => {
+    store.setCriteriaFromRoute({
+      locations: ['Warsaw'],
+      locationLat: 52.2297,
+      locationLng: 21.0122,
+      radiusKm: 25,
+    });
+
+    await service.applySearchCriteria({ locations: ['Warsaw'], radiusKm: 25 });
+
+    expect(headerUi.queryToolActive()).toBe(false);
+    expect(headerUi.locationToolActive()).toBe(false);
+    expect(headerUi.radiusToolActive()).toBe(false);
+    expect(headerUi.filterToolActive()).toBe(false);
+    expect(headerUi.sortToolActive()).toBe(false);
   });
 });

@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, effect, inject } from '@a
 import { RouterLink } from '@angular/router';
 import { AppShellComponent } from '@core/layout/app-shell.component';
 import { enableAppShellPageScroll } from '@core/layout/enable-app-shell-page-scroll';
-import { AuthService } from '@core/auth/auth.service';
+import { AuthService } from '@core/infrastructure/auth/auth.service';
 import { ToastService } from '@shared/ui/toast/toast.service';
 import { AppLinks } from '@core/app-paths';
 import { JobHeaderSearchComponent } from '@features/jobs/ui/job-header-search/job-header-search.component';

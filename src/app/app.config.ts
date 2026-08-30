@@ -10,7 +10,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideRouter, withExperimentalAutoCleanupInjectors } from '@angular/router';
 import { provideExperimentalWebMcpForms } from '@angular/forms/signals';
 import { routes } from './app.routes';
-import { provideFirebase } from '@core/firebase/firebase.providers';
+import { provideFirebase } from '@core/infrastructure/firebase/firebase.providers';
 import { provideSearchJobsWebMcpTool } from '@features/jobs/webmcp/tools/search-jobs/search-jobs.tool';
 import { provideFilterJobsWebMcpTool } from '@features/jobs/webmcp/tools/filter-jobs/filter-jobs.tool';
 import { provideGetProfileWebMcpTool } from '@features/profile/webmcp/profile.tools';

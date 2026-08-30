@@ -15,7 +15,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { disabled, form, FormField, submit, applyEach } from '@angular/forms/signals';
 import { AppShellComponent } from '@core/layout/app-shell.component';
 import { enableAppShellPageScroll } from '@core/layout/enable-app-shell-page-scroll';
-import { AuthService } from '@core/auth/auth.service';
+import { AuthService } from '@core/infrastructure/auth/auth.service';
 import { ToastService } from '@shared/ui/toast/toast.service';
 import {
   CONTRACT_OPTIONS,

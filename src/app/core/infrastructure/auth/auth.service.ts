@@ -6,7 +6,7 @@ import {
   signOut,
   User,
 } from 'firebase/auth';
-import { FIREBASE } from '@core/firebase/firebase.providers';
+import { FIREBASE } from '@core/infrastructure/firebase/firebase.providers';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {

@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { collection, deleteDoc, doc, getDocs, setDoc } from 'firebase/firestore';
-import { FIREBASE } from '@core/firebase/firebase.providers';
+import { FIREBASE } from '@core/infrastructure/firebase/firebase.providers';
 
 @Injectable({ providedIn: 'root' })
 export class SavedJobsRepository {

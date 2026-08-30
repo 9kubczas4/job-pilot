@@ -16,7 +16,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppLinks, AppProfileMenuLinks } from '@core/app-paths';
-import { AuthService } from '@core/auth/auth.service';
+import { AuthService } from '@core/infrastructure/auth/auth.service';
 import { AppShellComponent } from '@core/layout/app-shell.component';
 import { HeaderUiStore } from '../../state/header-ui.store';
 import { AuthPromptDialogComponent } from '@shared/ui/auth-prompt-dialog/auth-prompt-dialog.component';

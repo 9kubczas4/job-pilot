@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, DestroyRef, inject, PLATFORM_ID, af
 import { isPlatformBrowser } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AppLinks, AppProfileMenuLinks } from '@core/app-paths';
-import { AuthService } from '@core/auth/auth.service';
+import { AuthService } from '@core/infrastructure/auth/auth.service';
 import { AppLogoComponent } from '@shared/ui/app-logo/app-logo.component';
 import { ProfileMenuComponent } from '@shared/ui/profile-menu/profile-menu.component';
 import { ThemeToggleComponent } from '@core/layout/theme-toggle/theme-toggle.component';

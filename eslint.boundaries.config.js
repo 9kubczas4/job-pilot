@@ -7,9 +7,14 @@
 const path = require('path');
 
 const projectRoot = path.resolve(__dirname);
+
+const coreLayerTypes = ['core-domains', 'core-infrastructure', 'core-layout', 'core'];
+
 const boundariesElements = [
   { type: 'core-page', pattern: 'src/app/core/pages', partialMatch: true },
-  { type: 'core-webmcp', pattern: 'src/app/core/webmcp', partialMatch: true },
+  { type: 'core-domains', pattern: 'src/app/core/domains', partialMatch: true },
+  { type: 'core-infrastructure', pattern: 'src/app/core/infrastructure', partialMatch: true },
+  { type: 'core-layout', pattern: 'src/app/core/layout', partialMatch: true },
   { type: 'core', pattern: 'src/app/core', partialMatch: true },
   { type: 'shared', pattern: 'src/app/shared', partialMatch: false },
 
@@ -61,7 +66,10 @@ const boundariesFiles = [
   { category: 'app-shell', pattern: 'src/main.server.ts' },
   { category: 'app-shell', pattern: 'src/server.ts' },
   { category: 'app-shell', pattern: 'src/app/prerender/**' },
-  { category: 'core-webmcp', pattern: 'src/app/core/webmcp/**' },
+  { category: 'core-domains', pattern: 'src/app/core/domains/**' },
+  { category: 'core-infrastructure', pattern: 'src/app/core/infrastructure/**' },
+  { category: 'core-layout', pattern: 'src/app/core/layout/**' },
+  { category: 'core', pattern: 'src/app/core/app-paths.ts' },
   { category: 'test', pattern: 'src/test-setup.ts' },
   { category: 'test', pattern: '**/*.spec.ts' },
 ];
@@ -100,15 +108,31 @@ const boundariesPolicies = [
     message: 'Domain may only import domain code owned by the same feature.',
   },
   {
+    from: { element: { type: 'feature-domain' } },
+    allow: { to: { element: { types: { anyOf: ['core-domains'] } } } },
+  },
+  {
+    from: { element: { type: 'feature-domain' } },
+    allow: { to: { file: { categories: 'core-domains' } } },
+  },
+  {
+    from: { element: { type: 'feature-data-access' } },
+    allow: { to: { element: { types: { anyOf: ['core-domains'] } } } },
+  },
+  {
+    from: { element: { type: 'feature-data-access' } },
+    allow: { to: { file: { categories: 'core-domains' } } },
+  },
+  {
+    from: { element: { type: 'feature-data-access' } },
+    allow: { to: { element: { types: { anyOf: ['core-infrastructure'] } } } },
+  },
+  {
     from: { element: { type: 'feature-data-access' } },
     allow: {
       to: { element: { type: 'feature-domain', captured: sameFeature } },
     },
     message: 'Data-access may only depend on domain owned by the same feature and core.',
-  },
-  {
-    from: { element: { type: 'feature-data-access' } },
-    allow: { to: { element: { type: 'core' } } },
   },
   {
     from: { element: { type: 'feature-state' } },
@@ -124,7 +148,7 @@ const boundariesPolicies = [
   },
   {
     from: { element: { type: 'feature-state' } },
-    allow: { to: { element: { type: 'core' } } },
+    allow: { to: { element: { types: { anyOf: ['core-infrastructure'] } } } },
   },
   {
     from: { element: { type: 'feature-ui' } },
@@ -140,7 +164,9 @@ const boundariesPolicies = [
   },
   {
     from: { element: { type: 'feature-ui' } },
-    allow: { to: { element: { types: ['shared', 'core'] } } },
+    allow: {
+      to: { element: { types: { anyOf: ['shared', 'core', 'core-layout', 'core-infrastructure'] } } },
+    },
   },
   {
     from: { element: { type: 'feature-page' } },
@@ -156,7 +182,9 @@ const boundariesPolicies = [
   },
   {
     from: { element: { type: 'feature-page' } },
-    allow: { to: { element: { types: ['shared', 'core'] } } },
+    allow: {
+      to: { element: { types: { anyOf: ['shared', 'core-layout', 'core-infrastructure', 'core'] } } },
+    },
   },
   {
     from: { element: { type: 'feature-webmcp' } },
@@ -172,25 +200,14 @@ const boundariesPolicies = [
   },
   {
     from: { element: { type: 'feature-webmcp' } },
-    allow: { to: { element: { types: ['shared', 'core', 'core-webmcp'] } } },
+    allow: { to: { element: { types: { anyOf: ['shared', 'core', 'core-infrastructure'] } } } },
   },
   {
     from: { element: { type: 'feature-webmcp' } },
-    allow: { to: { file: { categories: 'core-webmcp' } } },
+    allow: { to: { file: { categories: 'core-infrastructure' } } },
   },
 
-  // Profile reuses the jobs taxonomy and search header as explicit public capabilities.
-  {
-    from: {
-      element: {
-        types: ['feature-domain', 'feature-data-access'],
-        captured: { feature: 'profile' },
-      },
-    },
-    allow: {
-      to: { element: { type: 'feature-domain', captured: ownedByJobs } },
-    },
-  },
+  // Profile page reuses the jobs search header and option labels as explicit public capabilities.
   {
     from: {
       element: { type: 'feature-page', captured: { feature: 'profile' } },
@@ -202,11 +219,23 @@ const boundariesPolicies = [
 
   {
     from: { element: { type: 'core-page' } },
-    allow: { to: { element: { types: ['core', 'shared'] } } },
+    allow: { to: { element: { types: { anyOf: [...coreLayerTypes, 'shared'] } } } },
   },
   {
-    from: { element: { type: 'core-webmcp' } },
-    allow: { to: { element: { type: 'shared' } } },
+    from: { element: { type: 'core-layout' } },
+    allow: { to: { element: { types: { anyOf: [...coreLayerTypes, 'shared'] } } } },
+  },
+  {
+    from: { element: { type: 'core-infrastructure' } },
+    allow: { to: { element: { types: { anyOf: ['core-infrastructure', 'core-domains', 'shared'] } } } },
+  },
+  {
+    from: { element: { type: 'core-domains' } },
+    allow: { to: { element: { type: 'core-domains' } } },
+  },
+  {
+    from: { element: { type: 'core' } },
+    allow: { to: { element: { types: { anyOf: coreLayerTypes } } } },
   },
   {
     from: { element: { type: 'core' } },
@@ -226,7 +255,7 @@ const boundariesPolicies = [
     allow: {
       to: {
         element: {
-          types: ['core', 'core-page', 'feature-page', 'feature-webmcp', 'shared'],
+          types: ['core', 'core-page', 'core-domains', 'core-infrastructure', 'core-layout', 'feature-page', 'feature-webmcp', 'shared'],
         },
       },
     },
@@ -244,6 +273,9 @@ const boundariesPolicies = [
           types: [
             'core',
             'core-page',
+            'core-domains',
+            'core-infrastructure',
+            'core-layout',
             'feature-page',
             'feature-webmcp',
             'feature-ui',
@@ -264,6 +296,7 @@ const boundariesConfig = {
   files: ['src/**/*.ts'],
   settings: {
     'boundaries/root-path': projectRoot,
+    'boundaries/elements-single-match': true,
     'boundaries/ignore': ['src/environments/**'],
     'boundaries/elements': boundariesElements,
     'boundaries/files': boundariesFiles,

@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 import { GoogleMap } from '@angular/google-maps';
 import { Cluster, MarkerClusterer } from '@googlemaps/markerclusterer';
 import { AppLinks } from '@core/app-paths';
-import { ResolvedTheme, ThemeService } from '@core/theme/theme.service';
+import { ResolvedTheme, ThemeService } from '@core/infrastructure/theme/theme.service';
 import { GOOGLE_MAPS_API_KEY } from '@shared/map/google-maps-config';
 import { isGoogleMapsConfigured } from '@shared/map/google-maps-loader';
 import { createClusterMarkerIcon, createJobMarkerIcon } from '@shared/map/google-maps-markers';

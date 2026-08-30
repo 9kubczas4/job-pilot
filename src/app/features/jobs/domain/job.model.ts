@@ -1,9 +1,20 @@
-export type SeniorityLevel = 'junior' | 'regular' | 'senior' | 'expert';
-export type ContractType = 'b2b' | 'employment' | 'internship' | 'service-contract';
-export type WorkSchedule = 'full-time' | 'part-time' | 'freelance';
-export type WorkplaceMode = 'remote' | 'hybrid' | 'onsite';
-export type SalaryCurrency = 'PLN' | 'EUR' | 'USD';
-export type SalaryPeriod = 'month' | 'year';
+import type {
+  ContractType,
+  SalaryCurrency,
+  SalaryPeriod,
+  SeniorityLevel,
+  WorkSchedule,
+  WorkplaceMode,
+} from '@core/domains/jobs/job-taxonomy.model';
+
+export type {
+  ContractType,
+  SalaryCurrency,
+  SalaryPeriod,
+  SeniorityLevel,
+  WorkSchedule,
+  WorkplaceMode,
+} from '@core/domains/jobs/job-taxonomy.model';
 
 export interface CompanySummary {
   id: string;

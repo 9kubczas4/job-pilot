@@ -15,7 +15,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { map } from 'rxjs';
 import { AppShellComponent } from '@core/layout/app-shell.component';
 import { enableAppShellPageScroll } from '@core/layout/enable-app-shell-page-scroll';
-import { AuthService } from '@core/auth/auth.service';
+import { AuthService } from '@core/infrastructure/auth/auth.service';
 import { AppLinks } from '@core/app-paths';
 import { SavedJobsStore } from '@features/jobs/state/saved-jobs.store';
 import { JobApplicationsStore } from '@features/jobs/state/job-applications.store';

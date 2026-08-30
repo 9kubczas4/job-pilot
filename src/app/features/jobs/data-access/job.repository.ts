@@ -8,7 +8,7 @@ import {
   getDocs,
 } from 'firebase/firestore';
 import { firstValueFrom } from 'rxjs';
-import { FIREBASE } from '@core/firebase/firebase.providers';
+import { FIREBASE } from '@core/infrastructure/firebase/firebase.providers';
 import { normalizeJobOffer } from '../domain/job-normalizer';
 import { JobOffer } from '../domain/job.model';
 import { environment } from '@environments/environment';

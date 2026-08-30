@@ -1,8 +1,8 @@
 import { inject, Injectable } from '@angular/core';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
-import { AuthService } from '@core/auth/auth.service';
-import { FIREBASE } from '@core/firebase/firebase.providers';
-import { normalizeContractTypes } from '@features/jobs/domain/contract-type.utils';
+import { AuthService } from '@core/infrastructure/auth/auth.service';
+import { FIREBASE } from '@core/infrastructure/firebase/firebase.providers';
+import { normalizeContractTypes } from '@core/domains/jobs/contract-type.utils';
 import { CandidateProfile } from '@features/profile/domain/profile.model';
 import { stripUndefinedDeep } from '@features/profile/domain/profile.utils';
 

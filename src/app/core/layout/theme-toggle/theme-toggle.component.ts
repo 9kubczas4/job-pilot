@@ -1,6 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
-import { ThemePreference, ThemeService } from '@core/theme/theme.service';
+import { ThemePreference, ThemeService } from '@core/infrastructure/theme/theme.service';
 
 interface ThemeOption {
   value: ThemePreference;

@@ -20,6 +20,10 @@ export class JobDetailsStore {
     return findSimilarJobs(job, this.allJobs());
   });
 
+  async getJobById(jobId: string): Promise<JobOffer | null> {
+    return this.jobRepository.getJobById(jobId);
+  }
+
   async loadJob(jobId: string): Promise<void> {
     if (this.job()?.id !== jobId) {
       this.job.set(null);

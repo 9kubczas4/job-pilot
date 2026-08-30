@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { provideExperimentalWebMcpTools } from '@angular/core';
 import { toolJson, toolText } from '@core/infrastructure/webmcp/tool-response';
-import { JobRepository } from '@features/jobs/data-access/job.repository';
+import { JobDetailsStore } from '@features/jobs/state/job-details.store';
 import { GET_JOB_SCHEMA } from './get-job.schema';
 
 export function provideGetJobWebMcpTool() {
@@ -15,7 +15,7 @@ export function provideGetJobWebMcpTool() {
         if (typeof jobId !== 'string') {
           return toolText('jobId must be a string.');
         }
-        const job = await inject(JobRepository).getJobById(jobId);
+        const job = await inject(JobDetailsStore).getJobById(jobId);
         if (!job) {
           return toolText(`Job not found: ${jobId}`);
         }

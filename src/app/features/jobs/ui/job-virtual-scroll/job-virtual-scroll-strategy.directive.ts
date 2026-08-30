@@ -20,21 +20,11 @@ import {
   ],
 })
 export class JobVirtualScrollStrategyDirective {
-  readonly jobVirtualScrollItemSize = input(JOB_VIRTUAL_SCROLL_ITEM_SIZE_PX, {
-    alias: 'jobVirtualScrollItemSize',
-  });
-  readonly jobVirtualScrollItemGap = input(JOB_VIRTUAL_SCROLL_ITEM_GAP_PX, {
-    alias: 'jobVirtualScrollItemGap',
-  });
-  readonly jobVirtualScrollMinBufferPx = input(JOB_VIRTUAL_SCROLL_MIN_BUFFER_PX, {
-    alias: 'jobVirtualScrollMinBufferPx',
-  });
-  readonly jobVirtualScrollMaxBufferPx = input(JOB_VIRTUAL_SCROLL_MAX_BUFFER_PX, {
-    alias: 'jobVirtualScrollMaxBufferPx',
-  });
-  readonly jobVirtualScrollInsetTop = input(JOB_VIRTUAL_SCROLL_LIST_INSET_TOP_PX, {
-    alias: 'jobVirtualScrollInsetTop',
-  });
+  readonly jobVirtualScrollItemSize = input(JOB_VIRTUAL_SCROLL_ITEM_SIZE_PX);
+  readonly jobVirtualScrollItemGap = input(JOB_VIRTUAL_SCROLL_ITEM_GAP_PX);
+  readonly jobVirtualScrollMinBufferPx = input(JOB_VIRTUAL_SCROLL_MIN_BUFFER_PX);
+  readonly jobVirtualScrollMaxBufferPx = input(JOB_VIRTUAL_SCROLL_MAX_BUFFER_PX);
+  readonly jobVirtualScrollInsetTop = input(JOB_VIRTUAL_SCROLL_LIST_INSET_TOP_PX);
 
   readonly strategy = new JobFixedSizeVirtualScrollStrategy(
     JOB_VIRTUAL_SCROLL_ITEM_SIZE_PX,

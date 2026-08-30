@@ -21,7 +21,7 @@ const MIN_PLACEHOLDER_MS = 120;
   exportAs: 'appJobVirtualScrollPlaceholders',
 })
 export class JobVirtualScrollPlaceholdersDirective {
-  readonly activeChange = output<boolean>({ alias: 'activeChange' });
+  readonly activeChange = output<boolean>();
 
   readonly active = signal(false);
 

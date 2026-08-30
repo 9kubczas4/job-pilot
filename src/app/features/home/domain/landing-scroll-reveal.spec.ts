@@ -4,8 +4,6 @@ class MockIntersectionObserver {
   observe = vi.fn();
   unobserve = vi.fn();
   disconnect = vi.fn();
-
-  constructor(_callback: IntersectionObserverCallback) {}
 }
 
 describe('landing-scroll-reveal', () => {
@@ -69,7 +67,7 @@ describe('landing-scroll-reveal', () => {
       toJSON: () => ({}),
     });
 
-    setupLandingScrollReveal(host, () => {});
+    setupLandingScrollReveal(host, vi.fn());
 
     expect(visible.classList.contains('is-revealed')).toBe(true);
     expect(hidden.classList.contains('is-revealed')).toBe(false);

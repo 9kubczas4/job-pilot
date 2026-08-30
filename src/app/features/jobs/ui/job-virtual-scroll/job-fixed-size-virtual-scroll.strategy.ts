@@ -54,9 +54,13 @@ export class JobFixedSizeVirtualScrollStrategy implements VirtualScrollStrategy 
     this.updateRenderedRange();
   }
 
-  onContentRendered(): void {}
+  onContentRendered(): void {
+    return;
+  }
 
-  onRenderedOffsetChanged(): void {}
+  onRenderedOffsetChanged(): void {
+    return;
+  }
 
   scrollToIndex(index: number, behavior: ScrollBehavior): void {
     this.viewport?.scrollToOffset(index * this.itemSize, behavior);

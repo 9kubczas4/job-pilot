@@ -10,7 +10,7 @@ export function setupLandingScrollReveal(
 
   let destroyed = false;
   const scrollRoot = host.closest('.app-main');
-  const boundHandlers: Array<{ root: EventTarget; handler: () => void }> = [];
+  const boundHandlers: { root: EventTarget; handler: () => void }[] = [];
 
   const reveal = (element: Element) => {
     element.classList.add('is-revealed');

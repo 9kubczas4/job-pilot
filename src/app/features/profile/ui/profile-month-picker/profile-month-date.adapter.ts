@@ -7,7 +7,7 @@ import {
 
 @Injectable()
 export class ProfileMonthDateAdapter extends NativeDateAdapter {
-  override format(date: Date, displayFormat: Object): string {
+  override format(date: Date, displayFormat: object): string {
     if (displayFormat === 'MMM yyyy') {
       return formatMonthDisplay(date, 'short');
     }

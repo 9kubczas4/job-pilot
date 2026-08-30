@@ -1,0 +1,143 @@
+[
+  {
+    "name": "Search jobs by query and location",
+    "messages": [
+      {
+        "role": "user",
+        "type": "message",
+        "content": "Find Frontend Developer jobs in Warsaw within 25 kilometers."
+      }
+    ],
+    "expectedCall": [
+      {
+        "functionName": "search_jobs",
+        "arguments": {
+          "query": "Frontend Developer",
+          "locations": ["Warsaw"],
+          "radiusKm": 25
+        }
+      }
+    ]
+  },
+  {
+    "name": "Filter jobs with structured criteria",
+    "messages": [
+      {
+        "role": "user",
+        "type": "message",
+        "content": "Only show senior remote B2B roles paying at least 5000 USD per month, with the highest salary first."
+      }
+    ],
+    "expectedCall": [
+      {
+        "functionName": "filter_jobs",
+        "arguments": {
+          "seniority": ["senior"],
+          "workplace": ["remote"],
+          "contracts": ["b2b"],
+          "salaryMin": 5000,
+          "sort": "salary-desc"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Read job details instead of inspecting the page",
+    "messages": [
+      {
+        "role": "user",
+        "type": "message",
+        "content": "Give me the complete details for job-001 before I decide what to do."
+      }
+    ],
+    "expectedCall": [
+      {
+        "functionName": "get_job",
+        "arguments": { "jobId": "job-001" }
+      }
+    ]
+  },
+  {
+    "name": "Save a chosen job",
+    "messages": [
+      {
+        "role": "user",
+        "type": "message",
+        "content": "Save job-001 to my shortlist."
+      }
+    ],
+    "expectedCall": [
+      {
+        "functionName": "save_job",
+        "arguments": { "jobId": "job-001" }
+      }
+    ]
+  },
+  {
+    "name": "Remove a saved job",
+    "messages": [
+      {
+        "role": "user",
+        "type": "message",
+        "content": "Remove job-001 from my shortlist, but do not delete any application."
+      }
+    ],
+    "expectedCall": [
+      {
+        "functionName": "unsave_job",
+        "arguments": { "jobId": "job-001" }
+      }
+    ]
+  },
+  {
+    "name": "Apply only after explicit user intent",
+    "messages": [
+      {
+        "role": "user",
+        "type": "message",
+        "content": "I have reviewed job-001 and I confirm that I want to apply now. Add the note: Strong Angular match."
+      }
+    ],
+    "expectedCall": [
+      {
+        "functionName": "apply_job",
+        "arguments": {
+          "jobId": "job-001",
+          "note": "Strong Angular match."
+        }
+      }
+    ]
+  },
+  {
+    "name": "Read the candidate profile",
+    "messages": [
+      {
+        "role": "user",
+        "type": "message",
+        "content": "Show me my complete candidate profile."
+      }
+    ],
+    "expectedCall": [
+      {
+        "functionName": "get_profile",
+        "arguments": {}
+      }
+    ]
+  },
+  {
+    "name": "Patch the candidate profile",
+    "messages": [
+      {
+        "role": "user",
+        "type": "message",
+        "content": "Update my professional headline to Senior Angular Engineer."
+      }
+    ],
+    "expectedCall": [
+      {
+        "functionName": "update_profile",
+        "arguments": { "headline": "Senior Angular Engineer" }
+      }
+    ]
+  }
+]

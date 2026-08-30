@@ -12,6 +12,9 @@
     "seed:firestore": "node scripts/seed-firestore.mjs",
     "seed:jobs": "node scripts/expand-jobs-seed.mjs",
     "lint": "ng lint",
+    "eval:webmcp:local": "webmcp-evals local --tools webmcp-evals/tools.json --evals webmcp-evals/tool-selection.evals.json --backend vercel --model google:gemini-3.7-flash",
+    "eval:webmcp:browser": "webmcp-evals browser --url http://localhost:4200 --evals webmcp-evals/public-journeys.evals.json --backend vercel --model google:gemini-3.7-flash",
+    "eval:webmcp:smoke": "webmcp-evals smoke --url http://localhost:4200 --evals webmcp-evals/public-journeys.evals.json --verbose",
     "serve:ssr:job-pilot": "node dist/job-pilot/server/server.mjs"
   },
   "private": true,
@@ -54,6 +57,7 @@
     "prettier": "^3.8.1",
     "typescript": "~6.0.2",
     "typescript-eslint": "8.62.1",
-    "vitest": "^4.0.8"
+    "vitest": "^4.0.8",
+    "webmcp-evals": "^0.0.4"
   }
 }

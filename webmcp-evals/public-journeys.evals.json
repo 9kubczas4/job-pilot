@@ -1,0 +1,71 @@
+[
+  {
+    "name": "Search and read a known public job",
+    "messages": [
+      {
+        "role": "user",
+        "type": "message",
+        "content": "Find Frontend Developer jobs in Warsaw, then return the complete details for job-001."
+      }
+    ],
+    "expectedCall": [
+      {
+        "ordered": [
+          {
+            "functionName": "search_jobs",
+            "arguments": {
+              "query": "Frontend Developer",
+              "locations": ["Warsaw"]
+            }
+          },
+          {
+            "functionName": "get_job",
+            "arguments": { "jobId": "job-001" }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Apply non-mutating job filters",
+    "messages": [
+      {
+        "role": "user",
+        "type": "message",
+        "content": "Show the top three remote senior B2B jobs, sorted by highest salary."
+      }
+    ],
+    "expectedCall": [
+      {
+        "functionName": "filter_jobs",
+        "arguments": {
+          "seniority": ["senior"],
+          "workplace": ["remote"],
+          "contracts": ["b2b"],
+          "sort": "salary-desc"
+        }
+      },
+      {
+        "functionName": "get_job",
+        "arguments": {
+          "jobId": { "$pattern": "^job-\\d{3}$" }
+        },
+        "optional": true
+      },
+      {
+        "functionName": "get_job",
+        "arguments": {
+          "jobId": { "$pattern": "^job-\\d{3}$" }
+        },
+        "optional": true
+      },
+      {
+        "functionName": "get_job",
+        "arguments": {
+          "jobId": { "$pattern": "^job-\\d{3}$" }
+        },
+        "optional": true
+      }
+    ]
+  }
+]

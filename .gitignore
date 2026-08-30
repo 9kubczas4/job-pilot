@@ -50,6 +50,7 @@ service-account*.json
 .sass-cache/
 /connect.lock
 /coverage
+/.evals
 /libpeerconnection.log
 testem.log
 /typings

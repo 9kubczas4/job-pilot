@@ -1,0 +1,336 @@
+{
+  "tools": [
+    {
+      "name": "search_jobs",
+      "description": "Start or replace the text-and-location portion of the current job search, then navigate the UI to the resulting jobs page. Use this tool instead of interacting with the page UI or DOM. Existing structured filters from filter_jobs are preserved. Use zero or one city; call filter_jobs separately to refine or sort. Returns success, changed, normalized criteria, resultCount, and up to 10 matching jobIds; use get_job for complete details without inspecting the page.",
+      "inputSchema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "maxLength": 200,
+            "description": "Free-text query matched against job title, company, description, and skills. Omit or pass an empty string to clear the current query."
+          },
+          "locations": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1, "maxLength": 100 },
+            "maxItems": 1,
+            "description": "Zero or one city name used as the geographic search center (for example, Warsaw). Omit or pass [] to clear the current location."
+          },
+          "radiusKm": {
+            "type": "number",
+            "enum": [10, 25, 50, 100, 200],
+            "description": "Search radius in kilometers around locations[0]. Allowed values: 10, 25, 50, 100, 200. Omit to use 25 km when a location is provided."
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "filter_jobs",
+      "description": "Patch structured filters and result ordering on the current job search, then synchronize the jobs UI. Use this tool instead of interacting with the page UI or DOM. Text and location criteria from search_jobs are preserved. Omitted fields remain unchanged; pass [] to clear an array filter, 0 to clear salaryMin, or newest to restore default sorting. Returns success, changed, normalized criteria, resultCount, and up to 10 matching jobIds; use get_job for complete details without inspecting the page.",
+      "inputSchema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "roles": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1, "maxLength": 100 },
+            "maxItems": 20,
+            "description": "Role-title keywords. A job matches when its title contains any value (OR). Pass [] to clear this filter."
+          },
+          "skills": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1, "maxLength": 100 },
+            "maxItems": 20,
+            "description": "Skill names. A job matches when it lists any value (OR). Pass [] to clear this filter."
+          },
+          "seniority": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["junior", "regular", "senior", "expert"]
+            },
+            "maxItems": 4,
+            "description": "Seniority levels matched with OR. Allowed values: junior, regular, senior, expert. Pass [] to clear this filter."
+          },
+          "workSchedules": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["full-time", "part-time", "freelance"]
+            },
+            "maxItems": 3,
+            "description": "Work schedules matched with OR. Allowed values: full-time, part-time, freelance. Pass [] to clear this filter."
+          },
+          "workplace": {
+            "type": "array",
+            "items": { "type": "string", "enum": ["remote", "hybrid", "onsite"] },
+            "maxItems": 3,
+            "description": "Workplace modes matched with OR. Allowed values: remote, hybrid, onsite. Pass [] to clear this filter."
+          },
+          "contracts": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["b2b", "employment", "service-contract", "internship"]
+            },
+            "maxItems": 4,
+            "description": "Contract types matched with OR. Allowed values: b2b, employment, service-contract, internship. Pass [] to clear this filter."
+          },
+          "salaryMin": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Minimum monthly gross salary in USD. Offers in other currencies are excluded while this filter is active. Omit to preserve the current value; pass 0 to clear it."
+          },
+          "sort": {
+            "type": "string",
+            "enum": ["newest", "oldest", "salary-desc", "salary-asc", "deadline", "distance"],
+            "description": "Result ordering. Allowed values: newest, oldest, salary-desc, salary-asc, deadline, distance. distance needs a location from search_jobs; newest restores the default."
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "get_job",
+      "description": "Read one job offer by its exact jobId. Use this tool instead of interacting with the page UI or DOM. Use a jobId returned by search_jobs. This tool does not change application state and does not require sign-in. Returns the complete job record on success or a structured NOT_FOUND error when the identifier is unknown.",
+      "inputSchema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "jobId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "description": "The unique job identifier returned by search_jobs (for example, job-001)."
+          }
+        },
+        "required": ["jobId"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "save_job",
+      "description": "Save one job to the signed-in user's shortlist. Use this tool instead of interacting with the page UI or DOM. Use it when the user wants to remember or favorite a job returned by search_jobs or get_job. Requires sign-in. It is idempotent: an already saved job is not duplicated. Returns success, changed, jobId, saved: true, and the complete current savedJobIds state with savedCount.",
+      "inputSchema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "jobId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "description": "The unique job identifier returned by search_jobs or get_job (for example, job-001)."
+          }
+        },
+        "required": ["jobId"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "unsave_job",
+      "description": "Remove one job from the signed-in user's shortlist. Use this tool instead of interacting with the page UI or DOM. This does not delete the job or any existing application. Requires sign-in. It is idempotent: a job that is not saved causes no state change. Returns success, changed, jobId, saved: false, and the complete current savedJobIds state with savedCount.",
+      "inputSchema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "jobId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "description": "The unique job identifier returned by search_jobs or get_job (for example, job-001)."
+          }
+        },
+        "required": ["jobId"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "apply_job",
+      "description": "Submit a real job application for the signed-in user and add it to Applications. Use this tool instead of interacting with the page UI or DOM. This action may not be reversible, so call it only after the user has clearly chosen a job. Requires sign-in. It is idempotent: an existing application is returned without creating a duplicate. Returns success, changed, and the complete application record.",
+      "inputSchema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "jobId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "description": "The unique job identifier returned by search_jobs or get_job (for example, job-001)."
+          },
+          "note": {
+            "type": "string",
+            "maxLength": 2000,
+            "description": "Optional note stored with the application. Maximum 2,000 characters; omit when no note is needed."
+          }
+        },
+        "required": ["jobId"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "get_profile",
+      "description": "Read the complete candidate profile for the signed-in user, including identity, headline, experience, skills, work history, and job preferences. Use this tool instead of interacting with the page UI or DOM. This tool does not change state and can be called from any page. Requires sign-in. Use update_profile on /profile to make changes. Returns the complete profile or a structured UNAUTHENTICATED error.",
+      "inputSchema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "update_profile",
+      "description": "Patch one or more fields in the signed-in candidate profile and persist them immediately. Use this tool instead of interacting with the page UI or DOM. Available only on /profile. Omitted fields remain unchanged; array fields are complete replacements and accept [] to clear. Requires sign-in. Returns success, changed, and the complete updated profile, or a structured validation/authentication error.",
+      "inputSchema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "maxLength": 100,
+            "description": "Candidate first name. Pass an empty string to clear it."
+          },
+          "lastName": {
+            "type": "string",
+            "maxLength": 100,
+            "description": "Candidate last name. Pass an empty string to clear it."
+          },
+          "headline": {
+            "type": "string",
+            "maxLength": 200,
+            "description": "Short professional headline. Pass an empty string to clear it."
+          },
+          "workHistory": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "company": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 200,
+                  "description": "Employer name."
+                },
+                "title": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 200,
+                  "description": "Job title."
+                },
+                "startDate": {
+                  "type": "string",
+                  "pattern": "^$|^\\d{4}-(0[1-9]|1[0-2])$",
+                  "description": "Start month in YYYY-MM format."
+                },
+                "endDate": {
+                  "type": "string",
+                  "pattern": "^$|^\\d{4}-(0[1-9]|1[0-2])$",
+                  "description": "End month in YYYY-MM format. Omit for a current role."
+                },
+                "current": {
+                  "type": "boolean",
+                  "description": "Whether this is the current role. Defaults to false."
+                },
+                "description": {
+                  "type": "string",
+                  "maxLength": 2000,
+                  "description": "Optional summary of responsibilities or achievements."
+                }
+              },
+              "required": ["company", "title", "startDate"],
+              "additionalProperties": false
+            },
+            "maxItems": 30,
+            "description": "Complete replacement for work history. Pass [] to clear all entries; every entry needs company, title, and startDate."
+          },
+          "skills": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 100,
+                  "description": "Skill name."
+                },
+                "years": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 50,
+                  "description": "Whole years of experience, from 1 to 50."
+                }
+              },
+              "required": ["name"],
+              "additionalProperties": false
+            },
+            "maxItems": 50,
+            "description": "Complete replacement for skills. Pass [] to clear all skills."
+          },
+          "preferredRoles": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1, "maxLength": 100 },
+            "maxItems": 30,
+            "description": "Complete replacement for preferred role names. Pass [] to clear them."
+          },
+          "preferredSeniorities": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["junior", "regular", "senior", "expert"]
+            },
+            "maxItems": 4,
+            "description": "Complete replacement for preferred seniority levels. Allowed: junior, regular, senior, expert. Pass [] to clear."
+          },
+          "preferredLocations": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1, "maxLength": 100 },
+            "maxItems": 30,
+            "description": "Complete replacement for preferred city names. Pass [] to clear them."
+          },
+          "workplacePreferences": {
+            "type": "array",
+            "items": { "type": "string", "enum": ["remote", "hybrid", "onsite"] },
+            "maxItems": 3,
+            "description": "Complete replacement for workplace preferences. Allowed: remote, hybrid, onsite. Pass [] to clear."
+          },
+          "contractPreferences": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["b2b", "employment", "service-contract", "internship"]
+            },
+            "maxItems": 4,
+            "description": "Complete replacement for contract preferences. Allowed: b2b, employment, service-contract, internship. Pass [] to clear."
+          },
+          "salaryExpectation": {
+            "type": "object",
+            "properties": {
+              "min": {
+                "type": "number",
+                "minimum": 0,
+                "description": "Minimum monthly salary. Omit or pass 0 when no minimum is required."
+              },
+              "currency": {
+                "type": "string",
+                "enum": ["USD", "EUR", "PLN"],
+                "description": "Salary currency: USD, EUR, or PLN."
+              }
+            },
+            "required": ["currency"],
+            "additionalProperties": false,
+            "description": "Salary expectation. Supplying this object replaces the current salary expectation."
+          },
+          "preferences": {
+            "type": "string",
+            "maxLength": 2000,
+            "description": "Additional free-text job preferences. Pass an empty string to clear them."
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  ]
+}

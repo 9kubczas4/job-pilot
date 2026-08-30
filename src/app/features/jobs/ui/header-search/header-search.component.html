@@ -17,14 +17,14 @@
       aria-autocomplete="list"
       [attr.aria-expanded]="jobPanelOpen()"
       aria-controls="header-search-jobs-panel"
-      [value]="headerUi.searchQuery()"
+      [value]="searchQuery()"
       (input)="onJobQueryChange($any($event.target).value)"
       (focus)="onJobFocus()"
     />
 
-    @if (jobPanelOpen() && headerUi.jobSuggestions().length) {
+    @if (jobPanelOpen() && jobSuggestions().length) {
       <ul id="header-search-jobs-panel" class="header-search__dropdown" role="listbox">
-        @for (suggestion of headerUi.jobSuggestions(); track suggestion.id) {
+        @for (suggestion of jobSuggestions(); track suggestion.id) {
           <li role="presentation">
             <button
               type="button"
@@ -71,14 +71,14 @@
         aria-autocomplete="list"
         [attr.aria-expanded]="locationPanelOpen()"
         aria-controls="header-search-location-panel"
-        [value]="headerUi.locationQuery()"
+        [value]="locationQuery()"
         (input)="onLocationQueryChange($any($event.target).value)"
         (focus)="onLocationFocus()"
       />
 
-      @if (locationPanelOpen() && headerUi.locationSuggestions().length) {
+      @if (locationPanelOpen() && locationSuggestions().length) {
         <ul id="header-search-location-panel" class="header-search__dropdown" role="listbox">
-          @for (suggestion of headerUi.locationSuggestions(); track suggestion.id) {
+          @for (suggestion of locationSuggestions(); track suggestion.id) {
             <li role="presentation">
               <button
                 type="button"
@@ -89,7 +89,7 @@
                 (click)="selectLocationSuggestion(suggestion)"
               >
                 <span class="header-search__option-label">{{ suggestion.label }}</span>
-                <span class="header-search__option-meta">Within {{ headerUi.radiusKm() }} km</span>
+                <span class="header-search__option-meta">Within {{ radiusKm() }} km</span>
               </button>
             </li>
           }
@@ -111,7 +111,7 @@
           <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.75" fill="none" />
           <circle cx="12" cy="12" r="2.5" fill="currentColor" />
         </svg>
-        <span class="header-search__radius-label">{{ headerUi.radiusKm() }} km</span>
+        <span class="header-search__radius-label">{{ radiusKm() }} km</span>
         <svg class="header-search__radius-chevron" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true">
           <path
             d="M3 4.5 L6 7.5 L9 4.5"
@@ -132,13 +132,13 @@
                 type="button"
                 class="header-search__radius-option"
                 role="option"
-                [class.is-active]="headerUi.radiusKm() === radius"
-                [attr.aria-selected]="headerUi.radiusKm() === radius"
+                [class.is-active]="radiusKm() === radius"
+                [attr.aria-selected]="radiusKm() === radius"
                 (mousedown)="$event.preventDefault()"
                 (click)="selectRadius(radius)"
               >
                 <span>{{ radius }} km</span>
-                @if (headerUi.radiusKm() === radius) {
+                @if (radiusKm() === radius) {
                   <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
                     <path
                       d="M3.5 8.5 L6.5 11.5 L12.5 4.5"

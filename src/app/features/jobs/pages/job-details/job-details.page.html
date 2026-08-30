@@ -1,5 +1,5 @@
 <app-shell>
-  <app-job-header-search header-search />
+  <app-job-header-search header-search [jobsLink]="links.jobs" />
 
   @if (store.job(); as currentJob) {
     <div class="job-details">

@@ -14,6 +14,7 @@ src/app/
     domain/      # models, pure functions
     data-access/ # Firestore/HTTP repositories
     state/       # signal stores — facade for UI and WebMCP
+    shell/       # app-shell slots (smart wiring for header chrome)
     ui/          # dumb presentational components
     pages/       # smart route components
     webmcp/      # agent tools

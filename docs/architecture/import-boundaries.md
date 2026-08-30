@@ -31,6 +31,7 @@ src/app/
     domain/                # models and pure business rules
     data-access/           # repositories (Firestore, HTTP)
     state/                 # stores and facades
+    shell/                 # app-shell projection slots (header search, etc.)
 ```
 
 ## Packages
@@ -53,6 +54,7 @@ All layer imports below are scoped to the **same feature** unless noted.
 | **domain** | `features/*/domain/` | external packages, own `domain`, `core/domains` |
 | **data-access** | `features/*/data-access/` | own `domain`, `core` |
 | **state** | `features/*/state/` | own `domain`, own `data-access`, `core` |
+| **shell** | `features/*/shell/` | own `domain`, own `state`, own `ui`, `core` |
 | **ui** | `features/*/ui/` | own `domain`, own `ui`, `shared`, `core` |
 | **pages** | `features/*/pages/` | own `domain`, own `state`, own `ui`, `shared`, `core` |
 | **webmcp** | `features/*/webmcp/` | own `domain`, own `state`, own `webmcp`, `core` |

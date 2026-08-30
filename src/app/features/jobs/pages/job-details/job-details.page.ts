@@ -20,7 +20,7 @@ import { AppLinks } from '@core/app-paths';
 import { SavedJobsStore } from '@features/jobs/state/saved-jobs.store';
 import { JobApplicationsStore } from '@features/jobs/state/job-applications.store';
 import { AuthPromptDialogComponent } from '@features/jobs/ui/auth-prompt-dialog/auth-prompt-dialog.component';
-import { JobHeaderSearchComponent } from '@features/jobs/ui/job-header-search/job-header-search.component';
+import { JobHeaderSearchComponent } from '@features/jobs/shell/job-header-search.component';
 import { SaveJobButtonComponent } from '@features/jobs/ui/save-job-button/save-job-button.component';
 import {
   formatSalary,

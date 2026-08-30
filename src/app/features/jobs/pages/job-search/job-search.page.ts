@@ -24,8 +24,7 @@ import { LogoComponent } from '@shared/ui/logo/logo.component';
 import { FilterDrawerComponent } from '@shared/ui/filter-drawer/filter-drawer.component';
 import { JobFilterDrawerComponent } from '@features/jobs/ui/job-filter-drawer/job-filter-drawer.component';
 import { JobHeaderFiltersComponent } from '@features/jobs/ui/job-header-filters/job-header-filters.component';
-import { HeaderSearchComponent } from '@features/jobs/ui/header-search/header-search.component';
-import { JobHeaderSearchComponent } from '@features/jobs/ui/job-header-search/job-header-search.component';
+import { JobHeaderSearchComponent } from '@features/jobs/shell/job-header-search.component';
 import { ProfileMenuComponent } from '@shared/ui/profile-menu/profile-menu.component';
 import { ThemeToggleComponent } from '@core/layout/theme-toggle/theme-toggle.component';
 import { ToastService } from '@shared/ui/toast/toast.service';
@@ -69,7 +68,6 @@ const MOBILE_LAYOUT_QUERY = '(max-width: 60rem)';
     FilterDrawerComponent,
     JobFilterDrawerComponent,
     JobHeaderFiltersComponent,
-    HeaderSearchComponent,
     JobHeaderSearchComponent,
     ProfileMenuComponent,
     ThemeToggleComponent,

@@ -1,22 +1,18 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  DestroyRef,
   ElementRef,
   inject,
   input,
+  output,
   signal,
 } from '@angular/core';
-import { Router } from '@angular/router';
 import {
   DEFAULT_SEARCH_RADIUS_KM,
   JobSearchSuggestion,
   LocationSearchSuggestion,
   SEARCH_RADIUS_OPTIONS_KM,
 } from '@features/jobs/domain/header-search.model';
-import { HeaderUiStore } from '@features/jobs/state/header-ui.store';
-
-const SEARCH_DEBOUNCE_MS = 400;
 
 @Component({
   selector: 'app-header-search',
@@ -29,53 +25,50 @@ const SEARCH_DEBOUNCE_MS = 400;
   styleUrl: './header-search.component.scss',
 })
 export class HeaderSearchComponent {
-  readonly jobsLink = input.required<readonly string[]>();
+  readonly searchQuery = input('');
+  readonly locationQuery = input('');
+  readonly radiusKm = input(DEFAULT_SEARCH_RADIUS_KM);
+  readonly jobSuggestions = input<JobSearchSuggestion[]>([]);
+  readonly locationSuggestions = input<LocationSearchSuggestion[]>([]);
 
-  readonly headerUi = inject(HeaderUiStore);
+  readonly searchQueryChange = output<string>();
+  readonly locationQueryChange = output<string>();
+  readonly locationCoordsChange = output<{ lat?: number; lng?: number }>();
+  readonly radiusChange = output<number>();
+  readonly searchApply = output<void>();
+
   readonly radiusOptions = SEARCH_RADIUS_OPTIONS_KM;
+  readonly defaultRadius = DEFAULT_SEARCH_RADIUS_KM;
 
-  private readonly router = inject(Router);
   private readonly host = inject(ElementRef<HTMLElement>);
-  private readonly destroyRef = inject(DestroyRef);
 
   readonly jobPanelOpen = signal(false);
   readonly locationPanelOpen = signal(false);
   readonly radiusPanelOpen = signal(false);
 
-  private debounceTimer: ReturnType<typeof setTimeout> | null = null;
   private skipLocationCoordReset = false;
 
-  constructor() {
-    this.destroyRef.onDestroy(() => this.clearDebounce());
-  }
-
   onJobQueryChange(value: string): void {
-    this.headerUi.searchQuery.set(value);
+    this.searchQueryChange.emit(value);
     this.jobPanelOpen.set(value.trim().length >= 2);
     this.locationPanelOpen.set(false);
     this.radiusPanelOpen.set(false);
-    this.scheduleApplySearch();
   }
 
   onLocationQueryChange(value: string): void {
-    this.headerUi.locationQuery.set(value);
+    this.locationQueryChange.emit(value);
     if (!this.skipLocationCoordReset) {
-      this.headerUi.locationLat.set(undefined);
-      this.headerUi.locationLng.set(undefined);
+      this.locationCoordsChange.emit({ lat: undefined, lng: undefined });
     }
     this.locationPanelOpen.set(true);
     this.jobPanelOpen.set(false);
     this.radiusPanelOpen.set(false);
-    this.scheduleApplySearch();
   }
 
   onRadiusChange(value: number): void {
-    if (Number.isFinite(value)) {
-      this.headerUi.radiusKm.set(value);
-    } else {
-      this.headerUi.radiusKm.set(DEFAULT_SEARCH_RADIUS_KM);
-    }
-    this.applySearch();
+    this.radiusChange.emit(Number.isFinite(value) ? value : DEFAULT_SEARCH_RADIUS_KM);
+    this.closePanels();
+    this.searchApply.emit();
   }
 
   toggleRadiusPanel(event: Event): void {
@@ -92,7 +85,7 @@ export class HeaderSearchComponent {
   }
 
   onJobFocus(): void {
-    if (this.headerUi.searchQuery().trim().length >= 2) {
+    if (this.searchQuery().trim().length >= 2) {
       this.jobPanelOpen.set(true);
     }
     this.locationPanelOpen.set(false);
@@ -106,18 +99,20 @@ export class HeaderSearchComponent {
   }
 
   selectJobSuggestion(suggestion: JobSearchSuggestion): void {
-    this.headerUi.searchQuery.set(suggestion.value);
-    this.jobPanelOpen.set(false);
-    this.applySearch();
+    this.searchQueryChange.emit(suggestion.value);
+    this.closePanels();
+    this.searchApply.emit();
   }
 
   selectLocationSuggestion(suggestion: LocationSearchSuggestion): void {
     this.skipLocationCoordReset = true;
-    this.headerUi.locationQuery.set(suggestion.city);
-    this.headerUi.locationLat.set(suggestion.latitude);
-    this.headerUi.locationLng.set(suggestion.longitude);
-    this.locationPanelOpen.set(false);
-    this.applySearch();
+    this.locationQueryChange.emit(suggestion.city);
+    this.locationCoordsChange.emit({
+      lat: suggestion.latitude,
+      lng: suggestion.longitude,
+    });
+    this.closePanels();
+    this.searchApply.emit();
     queueMicrotask(() => {
       this.skipLocationCoordReset = false;
     });
@@ -125,7 +120,8 @@ export class HeaderSearchComponent {
 
   onSubmit(event: Event): void {
     event.preventDefault();
-    this.applySearch();
+    this.closePanels();
+    this.searchApply.emit();
   }
 
   suggestionKindLabel(kind: JobSearchSuggestion['kind']): string {
@@ -143,86 +139,13 @@ export class HeaderSearchComponent {
 
   onDocumentClick(event: MouseEvent): void {
     if (!this.host.nativeElement.contains(event.target as Node)) {
-      this.jobPanelOpen.set(false);
-      this.locationPanelOpen.set(false);
-      this.radiusPanelOpen.set(false);
+      this.closePanels();
     }
   }
 
-  readonly defaultRadius = DEFAULT_SEARCH_RADIUS_KM;
-
-  private scheduleApplySearch(): void {
-    if (!this.isJobsSearchPage()) {
-      return;
-    }
-
-    this.clearDebounce();
-    this.debounceTimer = setTimeout(() => this.applySearchOnJobsPage(), SEARCH_DEBOUNCE_MS);
-  }
-
-  private applySearch(): void {
+  private closePanels(): void {
     this.jobPanelOpen.set(false);
     this.locationPanelOpen.set(false);
     this.radiusPanelOpen.set(false);
-
-    if (this.isJobsSearchPage()) {
-      this.applySearchOnJobsPage();
-      this.headerUi.requestMobileSearchClose();
-      return;
-    }
-
-    this.router
-      .navigate(this.jobsLink(), { queryParams: this.buildQueryParams() })
-      .then((success) => {
-        if (success) {
-          this.headerUi.applySearch();
-          this.headerUi.requestMobileSearchClose();
-        }
-      });
-  }
-
-  private applySearchOnJobsPage(): void {
-    this.clearDebounce();
-    this.headerUi.applySearch();
-  }
-
-  private buildQueryParams(): Record<string, string> {
-    const queryParams: Record<string, string> = {};
-    const query = this.headerUi.searchQuery().trim();
-    const location = this.headerUi.locationQuery().trim();
-    const radius = this.headerUi.radiusKm() || DEFAULT_SEARCH_RADIUS_KM;
-
-    if (query) {
-      queryParams['q'] = query;
-    }
-    if (location) {
-      queryParams['location'] = location;
-      queryParams['radius'] = String(radius);
-      const lat = this.headerUi.locationLat();
-      const lng = this.headerUi.locationLng();
-      if (lat != null && lng != null) {
-        queryParams['lat'] = String(lat);
-        queryParams['lng'] = String(lng);
-      }
-    }
-
-    return queryParams;
-  }
-
-  private clearDebounce(): void {
-    if (this.debounceTimer) {
-      clearTimeout(this.debounceTimer);
-      this.debounceTimer = null;
-    }
-  }
-
-  private isJobsSearchPage(): boolean {
-    const path = this.router.url.split('?')[0]?.split('#')[0] ?? '';
-    const jobsPath = this.jobsLink()
-      .filter((segment) => segment !== '/')
-      .join('/');
-    const normalizedJobsPath = jobsPath.startsWith('/') ? jobsPath : `/${jobsPath}`;
-
-    return path === normalizedJobsPath || path === `${normalizedJobsPath}/`;
   }
 }

@@ -57,7 +57,7 @@
     @if (searchExpanded()) {
       <div class="jobs-mobile__search-panel" role="dialog" aria-label="Search jobs">
         <div class="jobs-mobile__search-panel-inner">
-          <app-header-search [jobsLink]="links.jobs" />
+          <app-job-header-search [jobsLink]="links.jobs" [onJobsSearchPage]="true" />
           <button type="button" class="jobs-mobile__search-done" (click)="closeSearch()">Done</button>
         </div>
       </div>
@@ -110,7 +110,7 @@
   </div>
 } @else {
   <app-shell>
-    <app-job-header-search header-search />
+    <app-job-header-search header-search [jobsLink]="links.jobs" [onJobsSearchPage]="true" />
     <app-job-header-filters
       header-actions
       [enabled]="headerUi.filtersEnabled()"

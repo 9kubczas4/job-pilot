@@ -6,6 +6,7 @@
 //   data-access → core, own domain
 //   state       → core, own domain, own data-access
 //   ui          → core, shared, own domain, own ui  (no state — use pages)
+//   shell       → core, shared, own domain, own state, own ui  (app-shell slots)
 //   pages       → core, shared, own domain, own state, own ui
 //   webmcp      → core, own domain, own state, own webmcp  (no data-access — use state)
 
@@ -50,6 +51,12 @@ const boundariesElements = [
   {
     type: 'feature-state',
     pattern: 'src/app/features/*/state',
+    capture: ['feature'],
+    partialMatch: false,
+  },
+  {
+    type: 'feature-shell',
+    pattern: 'src/app/features/*/shell',
     capture: ['feature'],
     partialMatch: false,
   },
@@ -182,6 +189,31 @@ const boundariesPolicies = [
       to: { element: { types: { anyOf: ['shared', ...coreLayerTypes] } } },
     },
     message: 'Pages may use shared and core in addition to own domain, state, and ui.',
+  },
+  {
+    from: { element: { type: 'feature-page' } },
+    allow: {
+      to: { element: { type: 'feature-shell', captured: sameFeature } },
+    },
+    message: 'Pages may compose feature shell slots owned by the same feature.',
+  },
+  {
+    from: { element: { type: 'feature-shell' } },
+    allow: {
+      to: {
+        element: {
+          types: ['feature-ui', 'feature-state', 'feature-domain', 'feature-shell'],
+          captured: sameFeature,
+        },
+      },
+    },
+    message: 'Shell slots wire UI to state for app-shell projection — same feature only.',
+  },
+  {
+    from: { element: { type: 'feature-shell' } },
+    allow: {
+      to: { element: { types: { anyOf: ['shared', ...coreLayerTypes] } } },
+    },
   },
   {
     from: { element: { type: 'feature-webmcp' } },

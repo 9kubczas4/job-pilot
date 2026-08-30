@@ -6,7 +6,7 @@ import { AuthService } from '@core/infrastructure/auth/auth.service';
 import { AppLinks } from '@core/app-paths';
 import { JobOffer } from '@features/jobs/domain/job.model';
 import { formatJobDate } from '@features/jobs/domain/job-formatters';
-import { JobHeaderSearchComponent } from '@features/jobs/ui/job-header-search/job-header-search.component';
+import { JobHeaderSearchComponent } from '@features/jobs/shell/job-header-search.component';
 import { JobCardComponent } from '@features/jobs/ui/job-card/job-card.component';
 import { JobSearchStore } from '@features/jobs/state/job-search.store';
 import { JobApplication } from '@features/jobs/domain/job-application.model';

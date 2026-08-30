@@ -4,6 +4,9 @@
 // may import its own layers. Cross-feature dependencies are denied unless an
 // explicit consumer -> owner policy is listed below.
 
+const path = require('path');
+
+const projectRoot = path.resolve(__dirname);
 const boundariesElements = [
   { type: 'core-page', pattern: 'src/app/core/pages', partialMatch: true },
   { type: 'core-webmcp', pattern: 'src/app/core/webmcp', partialMatch: true },
@@ -61,6 +64,19 @@ const boundariesFiles = [
   { category: 'core-webmcp', pattern: 'src/app/core/webmcp/**' },
   { category: 'test', pattern: 'src/test-setup.ts' },
   { category: 'test', pattern: '**/*.spec.ts' },
+];
+
+/** App bootstrap / SSR entrypoints — excluded from no-unknown-files IDE false positives. */
+const appShellFiles = [
+  'src/app/app.ts',
+  'src/app/app.config.ts',
+  'src/app/app.config.server.ts',
+  'src/app/app.routes.ts',
+  'src/app/app.routes.server.ts',
+  'src/main.ts',
+  'src/main.server.ts',
+  'src/server.ts',
+  'src/app/prerender/**/*.ts',
 ];
 
 const sameFeature = {
@@ -247,7 +263,7 @@ const boundariesConfig = {
   name: 'job-pilot/boundaries',
   files: ['src/**/*.ts'],
   settings: {
-    'boundaries/root-path': process.cwd(),
+    'boundaries/root-path': projectRoot,
     'boundaries/ignore': ['src/environments/**'],
     'boundaries/elements': boundariesElements,
     'boundaries/files': boundariesFiles,
@@ -271,4 +287,5 @@ module.exports = {
   boundariesFiles,
   boundariesPolicies,
   boundariesConfig,
+  appShellFiles,
 };

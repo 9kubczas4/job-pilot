@@ -4,7 +4,7 @@ const { defineConfig } = require('eslint/config');
 const tseslint = require('typescript-eslint');
 const angular = require('angular-eslint');
 const boundaries = require('eslint-plugin-boundaries');
-const { boundariesConfig } = require('./eslint.boundaries.config.js');
+const { boundariesConfig, appShellFiles } = require('./eslint.boundaries.config.js');
 
 module.exports = defineConfig([
   {
@@ -46,6 +46,12 @@ module.exports = defineConfig([
         },
       ],
       ...boundariesConfig.rules,
+    },
+  },
+  {
+    files: appShellFiles,
+    rules: {
+      'boundaries/no-unknown-files': 'off',
     },
   },
   {

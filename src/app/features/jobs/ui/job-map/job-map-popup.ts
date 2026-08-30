@@ -4,7 +4,6 @@ import {
   formatSeniority,
   formatContractTypes,
   formatWorkSchedules,
-  formatCompetency,
 } from '@features/jobs/domain/job-formatters';
 import { JobOffer } from '@features/jobs/domain/job.model';
 
@@ -25,7 +24,7 @@ function companyInitials(name: string): string {
 export function buildJobMapPopupHtml(job: JobOffer): string {
   const salary = formatSalary(job);
   const workplace = formatWorkplace(job);
-  const competencies = job.competencies.slice(0, 3).map((competency) => formatCompetency(competency));
+  const competencies = job.competencies.slice(0, 3).map((competency) => competency.name);
   const extraCompetencies = job.competencies.length - competencies.length;
   const contracts = formatContractTypes(job.contractTypes);
   const schedules = formatWorkSchedules(job.workSchedules);

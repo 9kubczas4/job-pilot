@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   ElementRef,
   inject,
   input,
@@ -14,22 +15,28 @@ import {
   SEARCH_RADIUS_OPTIONS_KM,
 } from '@features/jobs/domain/header-search.model';
 
+export type HeaderSearchVariant = 'full' | 'compact';
+
 @Component({
   selector: 'app-header-search',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '(document:click)': 'onDocumentClick($event)',
+    '[class.header-search-host--compact]': 'compact()',
   },
   imports: [],
   templateUrl: './header-search.component.html',
   styleUrl: './header-search.component.scss',
 })
 export class HeaderSearchComponent {
+  readonly variant = input<HeaderSearchVariant>('full');
   readonly searchQuery = input('');
   readonly locationQuery = input('');
   readonly radiusKm = input(DEFAULT_SEARCH_RADIUS_KM);
   readonly jobSuggestions = input<JobSearchSuggestion[]>([]);
   readonly locationSuggestions = input<LocationSearchSuggestion[]>([]);
+
+  readonly compact = computed(() => this.variant() === 'compact');
 
   readonly searchQueryChange = output<string>();
   readonly locationQueryChange = output<string>();

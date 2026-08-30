@@ -1,4 +1,9 @@
-<form class="header-search" role="search" (submit)="onSubmit($event)">
+<form
+  class="header-search"
+  [class.header-search--compact]="compact()"
+  role="search"
+  (submit)="onSubmit($event)"
+>
   <div class="header-search__group header-search__group--jobs">
     <label class="visually-hidden" for="header-search-jobs">Search jobs</label>
     <svg class="header-search__icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
@@ -22,7 +27,7 @@
       (focus)="onJobFocus()"
     />
 
-    @if (jobPanelOpen() && jobSuggestions().length) {
+    @if (!compact() && jobPanelOpen() && jobSuggestions().length) {
       <ul id="header-search-jobs-panel" class="header-search__dropdown" role="listbox">
         @for (suggestion of jobSuggestions(); track suggestion.id) {
           <li role="presentation">

@@ -15,6 +15,10 @@
     padding-bottom: var(--app-main-mobile-gap-bottom);
   }
 
+  body.page-scroll-y .app-main:has(.job-details) {
+    padding-bottom: 0;
+  }
+
   body.page-scroll-y .app-shell {
     height: auto;
     min-height: 100dvh;

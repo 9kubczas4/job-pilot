@@ -65,6 +65,14 @@
   border-top-color: var(--glass-border);
   background: var(--glass-surface-toolbar);
   box-shadow: var(--shadow-glass-sheet-soft);
+
+  @media (max-width: 55.99rem) {
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    width: 100%;
+    margin-inline: 0;
+  }
 }
 
 .job-details .job-card {
@@ -93,9 +101,22 @@
   }
 }
 
+@media (max-width: 55.99rem) {
+  .job-details {
+    --job-details-mobile-bar-height: calc(
+      var(--space-3) + var(--control-height-md) + var(--space-3) + env(safe-area-inset-bottom, 0px)
+    );
+    padding-bottom: 0;
+  }
+
+  .job-details__main {
+    padding-bottom: var(--job-details-mobile-bar-height);
+  }
+}
+
 @media (max-width: 40rem) {
   .job-details {
-    padding-block: var(--page-padding-block-compact);
+    padding-block-start: var(--space-4);
   }
 }
 

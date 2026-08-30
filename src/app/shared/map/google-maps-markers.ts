@@ -12,18 +12,18 @@ interface MarkerPalette {
 }
 
 const LIGHT_MARKER_PALETTE: MarkerPalette = {
-  selectedFill: '#2563eb',
-  fill: '#334155',
+  selectedFill: '#7c3aed',
+  fill: '#2563eb',
   stroke: '#ffffff',
-  inner: '#e2e8f0',
+  inner: '#ffffff',
   shadow: '#0f172a',
 };
 
 const DARK_MARKER_PALETTE: MarkerPalette = {
-  selectedFill: '#60a5fa',
-  fill: '#64748b',
-  stroke: '#1e293b',
-  inner: '#cbd5e1',
+  selectedFill: '#a78bfa',
+  fill: '#3b82f6',
+  stroke: '#0f172a',
+  inner: '#ffffff',
   shadow: '#020617',
 };
 

@@ -3,17 +3,18 @@ import { FormValueControl } from '@angular/forms/signals';
 import { MatDatepicker, MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MAT_DATE_FORMATS, provideNativeDateAdapter } from '@angular/material/core';
+import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { formatMonthValue, isFutureMonth, parseMonthValue, startOfCurrentMonth } from '@features/profile/domain/month-date.utils';
+import { ProfileMonthDateAdapter } from '@features/profile/ui/profile-month-picker/profile-month-date.adapter';
 
 const MONTH_DATE_FORMATS = {
   parse: {
-    dateInput: 'MM/yyyy',
+    dateInput: 'MMM yyyy',
   },
   display: {
-    dateInput: 'MM/yyyy',
+    dateInput: 'MMM yyyy',
     monthYearLabel: 'MMM yyyy',
-    dateA11yLabel: 'LL',
+    dateA11yLabel: 'MMMM yyyy',
     monthYearA11yLabel: 'MMMM yyyy',
   },
 };
@@ -23,7 +24,7 @@ const MONTH_DATE_FORMATS = {
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [MatFormFieldModule, MatInputModule, MatDatepickerModule],
   providers: [
-    provideNativeDateAdapter(),
+    { provide: DateAdapter, useClass: ProfileMonthDateAdapter },
     { provide: MAT_DATE_FORMATS, useValue: MONTH_DATE_FORMATS },
   ],
   template: `

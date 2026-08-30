@@ -24,6 +24,20 @@ export function formatMonthValue(date: Date | null | undefined): string | undefi
   return `${year}-${month}`;
 }
 
+export function formatMonthDisplay(
+  date: Date | null | undefined,
+  month: 'short' | 'long' = 'short',
+): string {
+  if (!date) {
+    return '';
+  }
+
+  return new Intl.DateTimeFormat('en-US', {
+    month,
+    year: 'numeric',
+  }).format(date);
+}
+
 export function startOfCurrentMonth(): Date {
   const now = new Date();
   return new Date(now.getFullYear(), now.getMonth(), 1);

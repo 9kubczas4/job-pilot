@@ -7,8 +7,6 @@ import {
   signal,
 } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -18,6 +16,11 @@ import { HeaderSearchSlotComponent } from '@core/layout/header-search-slot.compo
 import { enableAppShellPageScroll } from '@core/layout/enable-app-shell-page-scroll';
 import { AuthService } from '@core/infrastructure/auth/auth.service';
 import { ToastService } from '@shared/ui/toast/toast.service';
+import {
+  ContractType,
+  SeniorityLevel,
+  WorkplaceMode,
+} from '@core/domains/jobs/job-taxonomy.model';
 import {
   CONTRACT_OPTIONS,
   SALARY_CURRENCY_OPTIONS,
@@ -51,8 +54,6 @@ import { ProfileStore } from '@features/profile/state/profile.store';
     HeaderSearchSlotComponent,
     DatePipe,
     FormField,
-    MatButtonToggleModule,
-    MatCheckboxModule,
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
@@ -213,6 +214,49 @@ export class ProfilePageComponent {
       ...model,
       workHistory: model.workHistory.filter((_, itemIndex) => itemIndex !== index),
     }));
+  }
+
+  isSeniorityActive(value: SeniorityLevel): boolean {
+    return this.profileModel().preferredSeniorities.includes(value);
+  }
+
+  toggleSeniority(value: SeniorityLevel): void {
+    this.profileModel.update((model) => ({
+      ...model,
+      preferredSeniorities: this.toggleArrayValue(model.preferredSeniorities, value),
+    }));
+  }
+
+  isWorkplaceActive(value: WorkplaceMode): boolean {
+    return this.profileModel().workplacePreferences.includes(value);
+  }
+
+  toggleWorkplace(value: WorkplaceMode): void {
+    this.profileModel.update((model) => ({
+      ...model,
+      workplacePreferences: this.toggleArrayValue(model.workplacePreferences, value),
+    }));
+  }
+
+  isContractActive(value: ContractType): boolean {
+    return this.profileModel().contractPreferences.includes(value);
+  }
+
+  toggleContract(value: ContractType): void {
+    this.profileModel.update((model) => ({
+      ...model,
+      contractPreferences: this.toggleArrayValue(model.contractPreferences, value),
+    }));
+  }
+
+  private toggleArrayValue<T>(current: T[], value: T): T[] {
+    const next = new Set(current);
+    if (next.has(value)) {
+      next.delete(value);
+    } else {
+      next.add(value);
+    }
+    return [...next];
   }
 
   private async submitProfile(formValue: ProfileFormModel): Promise<void> {

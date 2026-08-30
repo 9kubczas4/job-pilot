@@ -1,69 +1,134 @@
 import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { MatIconModule } from '@angular/material/icon';
 import { CandidateSkill } from '@features/profile/domain/profile.model';
 
 @Component({
   selector: 'app-profile-skill-row',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [MatButtonModule, MatButtonToggleModule, MatIconModule],
   template: `
     <li class="profile-skill">
       <span class="profile-skill__name">{{ skill().name }}</span>
 
-      <mat-button-toggle-group
-        class="profile-mat-toggle-group profile-skill__level"
-        [value]="level()"
-        (change)="levelChange.emit($event.value)"
-        hideSingleSelectionIndicator
+      <span
+        class="profile-skill__level"
+        role="group"
+        [attr.aria-label]="'Proficiency for ' + skill().name"
       >
         @for (segment of segments(); track segment) {
-          <mat-button-toggle [value]="segment">{{ segment }}</mat-button-toggle>
+          <button
+            type="button"
+            class="profile-skill__dot"
+            [class.is-filled]="segment <= level()"
+            [attr.aria-label]="'Level ' + segment"
+            [attr.aria-pressed]="segment === level()"
+            (click)="levelChange.emit(segment)"
+          ></button>
         }
-      </mat-button-toggle-group>
+      </span>
 
-      <button mat-icon-button type="button" aria-label="Remove skill" (click)="remove.emit()">
-        <mat-icon fontIcon="close" />
+      <button
+        type="button"
+        class="profile-skill__remove"
+        [attr.aria-label]="'Remove ' + skill().name"
+        (click)="remove.emit()"
+      >
+        <span aria-hidden="true">×</span>
       </button>
     </li>
   `,
   styles: `
     :host {
-      display: block;
+      display: inline-flex;
     }
 
     .profile-skill {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto auto;
+      display: inline-flex;
       align-items: center;
       gap: var(--space-2);
-      padding: var(--space-2) var(--space-3);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-lg);
-      background: var(--color-surface);
+      max-width: 100%;
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-full);
+      padding: var(--space-1) var(--space-2) var(--space-1) var(--space-3);
+      background: var(--glass-surface-light);
+      backdrop-filter: blur(var(--blur-glass-sm));
     }
 
     .profile-skill__name {
       min-width: 0;
       overflow: hidden;
       color: var(--color-text);
-      font-size: var(--font-size-sm);
-      font-weight: var(--font-weight-semibold);
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-medium);
       text-overflow: ellipsis;
       white-space: nowrap;
     }
 
     .profile-skill__level {
-      width: fit-content;
-      max-width: 100%;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.125rem;
+      flex-shrink: 0;
     }
 
-    .profile-skill .mat-mdc-icon-button {
-      flex-shrink: 0;
-      width: 2rem;
-      height: 2rem;
+    .profile-skill__dot {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.75rem;
+      height: 1.75rem;
       padding: 0;
+      border: 0;
+      border-radius: var(--radius-full);
+      background: transparent;
+      cursor: pointer;
+      transition: background-color var(--transition-fast);
+
+      &::before {
+        content: '';
+        width: 0.5625rem;
+        height: 0.5625rem;
+        border-radius: var(--radius-full);
+        background: var(--color-border);
+        transition:
+          background-color var(--transition-fast),
+          transform var(--transition-fast);
+      }
+
+      &.is-filled::before {
+        background: var(--color-primary);
+      }
+
+      &:hover {
+        background: var(--color-primary-surface);
+      }
+
+      &:hover::before {
+        transform: scale(1.15);
+      }
+    }
+
+    .profile-skill__remove {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      width: 1.25rem;
+      height: 1.25rem;
+      margin-inline-start: calc(var(--space-1) * -1);
+      border: 0;
+      border-radius: var(--radius-full);
+      background: transparent;
+      color: var(--color-text-muted);
+      font-size: var(--font-size-md);
+      line-height: 1;
+      cursor: pointer;
+      transition:
+        color var(--transition-fast),
+        background-color var(--transition-fast);
+
+      &:hover {
+        background: var(--color-primary-surface);
+        color: var(--color-primary);
+      }
     }
   `,
 })

@@ -7,84 +7,44 @@
 }
 
 .profile-mat-field .mdc-text-field--outlined {
-  border-radius: var(--radius-md);
-  background: var(--color-surface-elevated);
+  border-radius: var(--radius-lg);
+  background: var(--glass-surface-field);
 }
 
-/* Chip-style toggles (workplace, contract, seniority). */
-.profile-mat-toggle-group:not(.profile-skill__level).mat-button-toggle-group {
-  display: inline-flex;
-  flex-wrap: wrap;
-  align-items: center;
-  width: fit-content;
-  max-width: 100%;
-  gap: var(--space-2);
-  border: none;
-  border-radius: 0;
-  overflow: visible;
+.profile-mat-field .mat-mdc-text-field-wrapper {
+  border-radius: var(--radius-lg);
 }
 
-.profile-mat-toggle-group:not(.profile-skill__level) .mat-button-toggle {
-  flex: 0 0 auto !important;
-  width: auto !important;
-  border: 1px solid var(--color-border) !important;
-  border-radius: var(--radius-full) !important;
-  background: var(--color-surface-elevated);
-  overflow: hidden;
+.profile-mat-field .mdc-notched-outline__leading,
+.profile-mat-field .mdc-notched-outline__notch,
+.profile-mat-field .mdc-notched-outline__trailing {
+  border-color: var(--glass-border-strong);
 }
 
-.profile-mat-toggle-group:not(.profile-skill__level) .mat-button-toggle .mat-button-toggle-button {
-  width: auto;
-  min-width: 0;
-  padding: 0;
+.profile-mat-field .mdc-text-field--focused .mdc-notched-outline__leading,
+.profile-mat-field .mdc-text-field--focused .mdc-notched-outline__notch,
+.profile-mat-field .mdc-text-field--focused .mdc-notched-outline__trailing {
+  border-color: var(--color-primary);
 }
 
-.profile-mat-toggle-group:not(.profile-skill__level) .mat-button-toggle-label-content {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  padding: var(--space-2) var(--space-3) !important;
-  font-size: var(--font-size-sm);
-  line-height: 1.25rem;
-  white-space: nowrap;
+.profile-mat-field .mat-mdc-form-field-label,
+.profile-mat-field .mat-mdc-select-value,
+.profile-mat-field .mat-mdc-input-element {
+  color: var(--color-text);
 }
 
-/* Connected skill-level segments (1-5). */
-.profile-mat-toggle-group.profile-skill__level.mat-button-toggle-group {
-  display: inline-flex;
-  flex-wrap: nowrap;
-  width: fit-content;
-  max-width: 100%;
+.profile-mat-field .mat-mdc-form-field-label {
+  color: var(--color-text-muted);
 }
 
-.profile-mat-toggle-group.profile-skill__level .mat-button-toggle {
-  flex: 0 0 auto !important;
-  width: auto !important;
+.profile-mat-field--textarea .mat-mdc-form-field-infix {
+  padding-block: var(--space-3);
 }
 
-.profile-mat-toggle-group.profile-skill__level .mat-button-toggle .mat-button-toggle-button {
-  width: auto;
-  min-width: 0;
-  padding: 0;
+.profile-mat-field .mat-mdc-select-arrow {
+  color: var(--color-text-muted);
 }
 
-.profile-mat-toggle-group.profile-skill__level .mat-button-toggle-label-content {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  min-width: 1.5rem;
-  padding: var(--space-1) var(--space-2) !important;
-  font-size: var(--font-size-xs);
-  line-height: 1.5rem;
-}
-
-.profile-mat-toggle-group .mat-button-toggle-checked {
-  background: var(--color-primary-subtle);
-  color: var(--color-primary);
-}
-
-.profile-mat-toggle-group .mat-button-toggle-checked .mat-button-toggle-focus-overlay {
-  opacity: 0;
+.profile-mat-field .mat-datepicker-toggle {
+  color: var(--color-text-muted);
 }

@@ -127,16 +127,19 @@
                       <app-profile-month-picker label="End date" [formField]="entry.endDate" />
                     </div>
 
-                    <mat-checkbox [formField]="entry.current">
-                      I currently work here
-                    </mat-checkbox>
+                    <label class="profile__checkbox">
+                      <input type="checkbox" [formField]="entry.current" />
+                      <span class="profile__checkbox-box" aria-hidden="true"></span>
+                      <span class="profile__checkbox-label">I currently work here</span>
+                    </label>
 
-                    <mat-form-field appearance="outline" class="profile-mat-field">
+                    <mat-form-field appearance="outline" class="profile-mat-field profile-mat-field--textarea">
                       <mat-label>Description</mat-label>
                       <textarea
                         matInput
+                        class="profile__textarea"
                         [formField]="entry.description"
-                        rows="3"
+                        rows="5"
                         placeholder="Key responsibilities and achievements"
                       ></textarea>
                     </mat-form-field>
@@ -155,7 +158,7 @@
           <section class="profile__section glass-card">
             <div class="profile__section-head">
               <h2 class="profile__section-title">Skills</h2>
-              <p class="profile__section-copy">Select proficiency level from 1 to 5.</p>
+              <p class="profile__section-copy">Tap the dots to rate proficiency from 1 to 5.</p>
             </div>
 
             @if (profileModel().skills.length) {
@@ -215,17 +218,18 @@
 
             <div class="profile__field">
               <span class="profile__field-label">Seniority</span>
-              <mat-button-toggle-group
-                multiple
-                hideMultipleSelectionIndicator
-                class="profile-mat-toggle-group"
-                [value]="profileForm.preferredSeniorities().value()"
-                (change)="profileForm.preferredSeniorities().value.set($event.value)"
-              >
+              <div class="cluster">
                 @for (option of seniorityOptions; track option.value) {
-                  <mat-button-toggle [value]="option.value">{{ option.label }}</mat-button-toggle>
+                  <button
+                    type="button"
+                    class="chip-btn"
+                    [class.is-active]="isSeniorityActive(option.value)"
+                    (click)="toggleSeniority(option.value)"
+                  >
+                    {{ option.label }}
+                  </button>
                 }
-              </mat-button-toggle-group>
+              </div>
             </div>
           </section>
 
@@ -237,34 +241,35 @@
 
             <div class="profile__field">
               <span class="profile__field-label">Workplace</span>
-              <mat-button-toggle-group
-                multiple
-                hideMultipleSelectionIndicator
-                class="profile-mat-toggle-group"
-                [value]="profileForm.workplacePreferences().value()"
-                (change)="profileForm.workplacePreferences().value.set($event.value)"
-              >
+              <div class="cluster">
                 @for (option of workplaceOptions; track option.value) {
-                  <mat-button-toggle [value]="option.value">{{ option.label }}</mat-button-toggle>
+                  <button
+                    type="button"
+                    class="chip-btn"
+                    [class.is-active]="isWorkplaceActive(option.value)"
+                    (click)="toggleWorkplace(option.value)"
+                  >
+                    {{ option.label }}
+                  </button>
                 }
-              </mat-button-toggle-group>
+              </div>
             </div>
 
             <div class="profile__field">
               <span class="profile__field-label">Contract type</span>
-              <mat-button-toggle-group
-                multiple
-                hideMultipleSelectionIndicator
-                class="profile-mat-toggle-group"
-                [value]="profileForm.contractPreferences().value()"
-                (change)="profileForm.contractPreferences().value.set($event.value)"
-              >
+              <div class="cluster">
                 @for (option of contractOptions; track option.value) {
-                  <mat-button-toggle [value]="option.value" [title]="option.title ?? ''">
+                  <button
+                    type="button"
+                    class="chip-btn"
+                    [class.is-active]="isContractActive(option.value)"
+                    [title]="option.title ?? ''"
+                    (click)="toggleContract(option.value)"
+                  >
                     {{ option.label }}
-                  </mat-button-toggle>
+                  </button>
                 }
-              </mat-button-toggle-group>
+              </div>
             </div>
           </section>
 
@@ -293,10 +298,11 @@
               </mat-form-field>
             </div>
 
-            <mat-form-field appearance="outline" class="profile-mat-field">
+            <mat-form-field appearance="outline" class="profile-mat-field profile-mat-field--textarea">
               <mat-label>Additional preferences</mat-label>
               <textarea
                 matInput
+                class="profile__textarea"
                 [formField]="profileForm.preferences"
                 rows="4"
                 placeholder="Availability, notice period, preferred team size…"

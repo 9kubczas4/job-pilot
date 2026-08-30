@@ -1,4 +1,4 @@
-import { DEFAULT_SEARCH_RADIUS_KM } from '@shared/models/header-search.model';
+import { DEFAULT_SEARCH_RADIUS_KM } from '../domain/header-search.model';
 import { normalizeContractType } from './contract-type.utils';
 import { JobSearchCriteria } from './search.model';
 import { ContractType } from './job.model';

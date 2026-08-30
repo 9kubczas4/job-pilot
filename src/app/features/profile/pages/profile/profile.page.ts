@@ -38,6 +38,7 @@ import {
   stripUndefinedDeep,
   validateProfileDraft,
 } from '../../domain/profile.utils';
+import { JobHeaderSearchComponent } from '@features/jobs/ui/job-header-search/job-header-search.component';
 import { ProfileMonthPickerComponent } from '../../ui/profile-month-picker/profile-month-picker.component';
 import { ProfileSkillRowComponent } from '../../ui/profile-skill-row/profile-skill-row.component';
 import { ProfileStore } from '../../state/profile.store';
@@ -47,6 +48,7 @@ import { ProfileStore } from '../../state/profile.store';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     AppShellComponent,
+    JobHeaderSearchComponent,
     DatePipe,
     FormField,
     MatButtonToggleModule,

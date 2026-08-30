@@ -3,7 +3,8 @@ import {
   DEFAULT_SEARCH_RADIUS_KM,
   JobSearchSuggestion,
   LocationSearchSuggestion,
-} from '@shared/models/header-search.model';
+} from '../domain/header-search.model';
+import { JobSearchCriteria } from '../domain/search.model';
 
 const HIDE_SCROLL_ACCUMULATED_PX = 56;
 const SHOW_SCROLL_ACCUMULATED_PX = 20;
@@ -36,6 +37,14 @@ export class HeaderUiStore {
 
   requestMobileSearchClose(): void {
     this.mobileSearchCloseRequest.update((value) => value + 1);
+  }
+
+  syncFromCriteria(criteria: JobSearchCriteria): void {
+    this.searchQuery.set(criteria.query ?? '');
+    this.locationQuery.set(criteria.locations?.[0] ?? '');
+    this.locationLat.set(criteria.locationLat);
+    this.locationLng.set(criteria.locationLng);
+    this.radiusKm.set(criteria.radiusKm ?? DEFAULT_SEARCH_RADIUS_KM);
   }
 
   openFilters(): void {

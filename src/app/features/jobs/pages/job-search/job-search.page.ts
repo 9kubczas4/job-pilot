@@ -18,11 +18,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AppLinks, AppProfileMenuLinks } from '@core/app-paths';
 import { AuthService } from '@core/auth/auth.service';
 import { AppShellComponent } from '@core/layout/app-shell.component';
-import { HeaderUiStore } from '@shared/state/header-ui.store';
+import { HeaderUiStore } from '../../state/header-ui.store';
 import { AuthPromptDialogComponent } from '@shared/ui/auth-prompt-dialog/auth-prompt-dialog.component';
 import { AppLogoComponent } from '@shared/ui/app-logo/app-logo.component';
 import { FilterDrawerComponent } from '@shared/ui/filter-drawer/filter-drawer.component';
-import { HeaderSearchComponent } from '@shared/ui/header-search/header-search.component';
+import { JobFilterDrawerComponent } from '../../ui/job-filter-drawer/job-filter-drawer.component';
+import { JobHeaderFiltersComponent } from '../../ui/job-header-filters/job-header-filters.component';
+import { HeaderSearchComponent } from '../../ui/header-search/header-search.component';
+import { JobHeaderSearchComponent } from '../../ui/job-header-search/job-header-search.component';
 import { ProfileMenuComponent } from '@shared/ui/profile-menu/profile-menu.component';
 import { ThemeToggleComponent } from '@core/layout/theme-toggle/theme-toggle.component';
 import { ToastService } from '@shared/ui/toast/toast.service';
@@ -30,7 +33,6 @@ import { SavedJobsStore } from '@features/saved-jobs/state/saved-jobs.store';
 import {
   enrichLocationCriteria,
   searchLocationEqual,
-  syncHeaderFromCriteria,
 } from '../../domain/job-search-sync.utils';
 import { buildCityCentersFromJobs, resolveCityCenter } from '../../domain/city-catalog';
 import { JobOffer } from '../../domain/job.model';
@@ -62,7 +64,10 @@ const MOBILE_LAYOUT_QUERY = '(max-width: 60rem)';
     AppLogoComponent,
     AuthPromptDialogComponent,
     FilterDrawerComponent,
+    JobFilterDrawerComponent,
+    JobHeaderFiltersComponent,
     HeaderSearchComponent,
+    JobHeaderSearchComponent,
     ProfileMenuComponent,
     ThemeToggleComponent,
     JobFiltersComponent,
@@ -264,7 +269,7 @@ export class JobSearchPageComponent implements OnInit {
 
     this.syncingFromRoute.set(true);
     this.store.setCriteriaFromRoute(routeCriteria);
-    syncHeaderFromCriteria(this.headerUi, this.store.criteria());
+    this.headerUi.syncFromCriteria(this.store.criteria());
     this.syncingFromRoute.set(false);
   }
 

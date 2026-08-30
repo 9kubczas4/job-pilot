@@ -104,9 +104,14 @@
   </div>
 } @else {
   <app-shell>
-    <section filter-panel>
-      <app-job-filters />
-    </section>
+    <app-job-header-search header-search />
+    <app-job-header-filters header-actions />
+
+    <app-job-filter-drawer filter-drawer>
+      <section filter-panel>
+        <app-job-filters />
+      </section>
+    </app-job-filter-drawer>
 
     <div class="jobs-page">
       <div class="jobs-page__aurora landing__aurora" aria-hidden="true">

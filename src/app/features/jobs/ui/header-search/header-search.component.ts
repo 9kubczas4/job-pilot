@@ -13,9 +13,8 @@ import {
   JobSearchSuggestion,
   LocationSearchSuggestion,
   SEARCH_RADIUS_OPTIONS_KM,
-} from '@shared/models/header-search.model';
-import { HeaderUiStore } from '@shared/state/header-ui.store';
-import { SearchCatalogService } from '@features/jobs/data-access/search-catalog.service';
+} from '../../domain/header-search.model';
+import { HeaderUiStore } from '../../state/header-ui.store';
 
 const SEARCH_DEBOUNCE_MS = 400;
 
@@ -35,8 +34,6 @@ export class HeaderSearchComponent {
   readonly headerUi = inject(HeaderUiStore);
   readonly radiusOptions = SEARCH_RADIUS_OPTIONS_KM;
 
-  private readonly searchCatalog = inject(SearchCatalogService);
-
   private readonly router = inject(Router);
   private readonly host = inject(ElementRef<HTMLElement>);
   private readonly destroyRef = inject(DestroyRef);
@@ -50,7 +47,6 @@ export class HeaderSearchComponent {
 
   constructor() {
     this.destroyRef.onDestroy(() => this.clearDebounce());
-    void this.searchCatalog.preload();
   }
 
   onJobQueryChange(value: string): void {
@@ -222,6 +218,11 @@ export class HeaderSearchComponent {
 
   private isJobsSearchPage(): boolean {
     const path = this.router.url.split('?')[0]?.split('#')[0] ?? '';
-    return path === '/jobs' || path === '/jobs/';
+    const jobsPath = this.jobsLink()
+      .filter((segment) => segment !== '/')
+      .join('/');
+    const normalizedJobsPath = jobsPath.startsWith('/') ? jobsPath : `/${jobsPath}`;
+
+    return path === normalizedJobsPath || path === `${normalizedJobsPath}/`;
   }
 }

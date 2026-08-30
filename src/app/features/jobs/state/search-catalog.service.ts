@@ -1,11 +1,11 @@
 import { effect, inject, Injectable } from '@angular/core';
-import { HeaderUiStore } from '@shared/state/header-ui.store';
 import { buildCityCentersFromJobs } from '../domain/city-catalog';
 import {
   buildJobSearchSuggestions,
   buildLocationSearchSuggestions,
 } from '../domain/search-suggestions';
-import { JobSearchStore } from '../state/job-search.store';
+import { HeaderUiStore } from './header-ui.store';
+import { JobSearchStore } from './job-search.store';
 
 @Injectable({ providedIn: 'root' })
 export class SearchCatalogService {

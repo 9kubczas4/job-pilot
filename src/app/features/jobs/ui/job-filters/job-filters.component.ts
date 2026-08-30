@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
-import { HeaderUiStore } from '@shared/state/header-ui.store';
+import { HeaderUiStore } from '../../state/header-ui.store';
 import {
   CONTRACT_OPTIONS,
   SENIORITY_OPTIONS,

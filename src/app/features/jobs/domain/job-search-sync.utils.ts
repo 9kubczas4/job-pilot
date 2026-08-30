@@ -1,19 +1,7 @@
-import { DEFAULT_SEARCH_RADIUS_KM } from '@shared/models/header-search.model';
-import { HeaderUiStore } from '@shared/state/header-ui.store';
+import { DEFAULT_SEARCH_RADIUS_KM } from '../domain/header-search.model';
 import { buildCityCentersFromJobs, resolveCityCenter } from './city-catalog';
 import { JobOffer } from './job.model';
 import { JobSearchCriteria } from './search.model';
-
-export function syncHeaderFromCriteria(
-  headerUi: HeaderUiStore,
-  criteria: JobSearchCriteria,
-): void {
-  headerUi.searchQuery.set(criteria.query ?? '');
-  headerUi.locationQuery.set(criteria.locations?.[0] ?? '');
-  headerUi.locationLat.set(criteria.locationLat);
-  headerUi.locationLng.set(criteria.locationLng);
-  headerUi.radiusKm.set(criteria.radiusKm ?? DEFAULT_SEARCH_RADIUS_KM);
-}
 
 export function enrichLocationCriteria(
   criteria: JobSearchCriteria,

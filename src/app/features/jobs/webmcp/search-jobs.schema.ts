@@ -1,7 +1,7 @@
 import {
   DEFAULT_SEARCH_RADIUS_KM,
   SEARCH_RADIUS_OPTIONS_KM,
-} from '@shared/models/header-search.model';
+} from '../domain/header-search.model';
 
 export const SEARCH_JOBS_SCHEMA = {
   type: 'object',

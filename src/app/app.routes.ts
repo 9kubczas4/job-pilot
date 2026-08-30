@@ -5,7 +5,8 @@ import { RoutePaths } from '@core/app-paths';
 export const routes: Routes = [
   {
     path: RoutePaths.home,
-    loadComponent: () => import('@core/pages/home/home.page').then((m) => m.HomePageComponent),
+    loadComponent: () =>
+      import('@features/jobs/pages/home/home.page').then((m) => m.HomePageComponent),
   },
   {
     path: RoutePaths.jobs,

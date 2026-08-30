@@ -5,6 +5,7 @@ import { enableAppShellPageScroll } from '@core/layout/enable-app-shell-page-scr
 import { AuthService } from '@core/auth/auth.service';
 import { ToastService } from '@shared/ui/toast/toast.service';
 import { AppLinks } from '@core/app-paths';
+import { JobHeaderSearchComponent } from '@features/jobs/ui/job-header-search/job-header-search.component';
 import { JobCardComponent } from '@features/jobs/ui/job-card/job-card.component';
 import { JobSearchStore } from '@features/jobs/state/job-search.store';
 import { SavedJobsStore } from '../../state/saved-jobs.store';
@@ -12,7 +13,7 @@ import { SavedJobsStore } from '../../state/saved-jobs.store';
 @Component({
   selector: 'app-saved-jobs-page',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [AppShellComponent, JobCardComponent, RouterLink],
+  imports: [AppShellComponent, JobHeaderSearchComponent, JobCardComponent, RouterLink],
   templateUrl: './saved-jobs.page.html',
   styleUrl: './saved-jobs.page.scss',
 })

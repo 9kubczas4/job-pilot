@@ -1,14 +1,9 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, PLATFORM_ID, afterNextRender, signal } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { isPlatformBrowser } from '@angular/common';
-import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { filter } from 'rxjs';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AppLinks, AppProfileMenuLinks } from '@core/app-paths';
 import { AuthService } from '@core/auth/auth.service';
-import { HeaderUiStore } from '@shared/state/header-ui.store';
 import { AppLogoComponent } from '@shared/ui/app-logo/app-logo.component';
-import { FilterDrawerComponent } from '@shared/ui/filter-drawer/filter-drawer.component';
-import { HeaderSearchComponent } from '@shared/ui/header-search/header-search.component';
 import { ProfileMenuComponent } from '@shared/ui/profile-menu/profile-menu.component';
 import { ThemeToggleComponent } from '@core/layout/theme-toggle/theme-toggle.component';
 
@@ -21,8 +16,6 @@ const MOBILE_SHELL_QUERY = '(max-width: 64rem)';
     RouterLink,
     RouterLinkActive,
     AppLogoComponent,
-    FilterDrawerComponent,
-    HeaderSearchComponent,
     ProfileMenuComponent,
     ThemeToggleComponent,
   ],
@@ -31,12 +24,10 @@ const MOBILE_SHELL_QUERY = '(max-width: 64rem)';
 })
 export class AppShellComponent {
   readonly auth = inject(AuthService);
-  readonly headerUi = inject(HeaderUiStore);
   readonly links = AppLinks;
   readonly profileMenuLinks = AppProfileMenuLinks;
   readonly isMobileLayout = signal(false);
 
-  private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
   private readonly platformId = inject(PLATFORM_ID);
 
@@ -53,14 +44,5 @@ export class AppShellComponent {
       mobileQuery.addEventListener('change', syncLayout);
       this.destroyRef.onDestroy(() => mobileQuery.removeEventListener('change', syncLayout));
     });
-
-    this.router.events
-      .pipe(
-        filter((event) => event instanceof NavigationEnd),
-        takeUntilDestroyed(this.destroyRef),
-      )
-      .subscribe(() => {
-        this.headerUi.showHeader();
-      });
   }
 }

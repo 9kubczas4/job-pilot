@@ -6,6 +6,7 @@ import { AuthService } from '@core/auth/auth.service';
 import { AppLinks } from '@core/app-paths';
 import { JobOffer } from '@features/jobs/domain/job.model';
 import { formatJobDate } from '@features/jobs/domain/job-formatters';
+import { JobHeaderSearchComponent } from '@features/jobs/ui/job-header-search/job-header-search.component';
 import { JobCardComponent } from '@features/jobs/ui/job-card/job-card.component';
 import { JobSearchStore } from '@features/jobs/state/job-search.store';
 import { JobApplication } from '../../domain/application.model';
@@ -19,7 +20,7 @@ interface AppliedJobEntry {
 @Component({
   selector: 'app-applications-page',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [AppShellComponent, JobCardComponent, RouterLink],
+  imports: [AppShellComponent, JobHeaderSearchComponent, JobCardComponent, RouterLink],
   templateUrl: './applications.page.html',
   styleUrl: './applications.page.scss',
 })

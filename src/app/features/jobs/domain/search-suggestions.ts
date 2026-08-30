@@ -2,7 +2,7 @@ import {
   JobSearchSuggestion,
   JobSuggestionKind,
   LocationSearchSuggestion,
-} from '@shared/models/header-search.model';
+} from '../domain/header-search.model';
 import { CityCenter, buildLocationSuggestions } from './city-catalog';
 import { JobOffer } from './job.model';
 

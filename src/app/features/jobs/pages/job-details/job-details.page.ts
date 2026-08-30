@@ -19,7 +19,8 @@ import { AuthService } from '@core/auth/auth.service';
 import { AppLinks } from '@core/app-paths';
 import { SavedJobsStore } from '@features/saved-jobs/state/saved-jobs.store';
 import { AuthPromptDialogComponent } from '@shared/ui/auth-prompt-dialog/auth-prompt-dialog.component';
-import { SaveJobButtonComponent } from '@features/jobs/ui/save-job-button/save-job-button.component';
+import { JobHeaderSearchComponent } from '../../ui/job-header-search/job-header-search.component';
+import { SaveJobButtonComponent } from '../../ui/save-job-button/save-job-button.component';
 import {
   formatSalary,
   formatWorkplace,
@@ -44,6 +45,7 @@ type AuthPromptAction = 'save' | 'apply';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     AppShellComponent,
+    JobHeaderSearchComponent,
     RouterLink,
     AuthPromptDialogComponent,
     ApplyJobDialogComponent,

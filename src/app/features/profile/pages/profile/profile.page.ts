@@ -22,7 +22,7 @@ import {
   SALARY_CURRENCY_OPTIONS,
   SENIORITY_OPTIONS,
   WORKPLACE_OPTIONS,
-} from '@features/jobs/domain/job-options';
+} from '@core/domains/jobs/job-taxonomy.options';
 import {
   createEmptyProfileFormModel,
   createEmptyWorkEntry,
@@ -38,7 +38,6 @@ import {
   stripUndefinedDeep,
   validateProfileDraft,
 } from '@features/profile/domain/profile.utils';
-import { JobHeaderSearchComponent } from '@features/jobs/ui/job-header-search/job-header-search.component';
 import { ProfileMonthPickerComponent } from '@features/profile/ui/profile-month-picker/profile-month-picker.component';
 import { ProfileSkillRowComponent } from '@features/profile/ui/profile-skill-row/profile-skill-row.component';
 import { ProfileStore } from '@features/profile/state/profile.store';
@@ -48,7 +47,6 @@ import { ProfileStore } from '@features/profile/state/profile.store';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     AppShellComponent,
-    JobHeaderSearchComponent,
     DatePipe,
     FormField,
     MatButtonToggleModule,

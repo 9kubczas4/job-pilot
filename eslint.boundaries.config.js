@@ -89,10 +89,6 @@ const sameFeature = {
   feature: '{{from.element.captured.feature}}',
 };
 
-const ownedByJobs = {
-  feature: 'jobs',
-};
-
 const boundariesPolicies = [
   { allow: { to: { module: { origin: 'external' } } } },
   { allow: { to: { module: { origin: 'core' } } } },
@@ -181,7 +177,7 @@ const boundariesPolicies = [
   {
     from: { element: { type: 'feature-page' } },
     allow: {
-      to: { element: { types: { anyOf: ['shared', 'core-layout', 'core-infrastructure', 'core'] } } },
+      to: { element: { types: { anyOf: ['shared', 'core-layout', 'core-infrastructure', 'core-domains', 'core'] } } },
     },
   },
   {
@@ -203,16 +199,6 @@ const boundariesPolicies = [
   {
     from: { element: { type: 'feature-webmcp' } },
     allow: { to: { file: { categories: 'core-infrastructure' } } },
-  },
-
-  // Profile page reuses the jobs search header and option labels as explicit public capabilities.
-  {
-    from: {
-      element: { type: 'feature-page', captured: { feature: 'profile' } },
-    },
-    allow: {
-      to: { element: { types: ['feature-domain', 'feature-ui'], captured: ownedByJobs } },
-    },
   },
 
   {

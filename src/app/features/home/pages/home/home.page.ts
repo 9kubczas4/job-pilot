@@ -12,6 +12,7 @@ import { RouterLink } from '@angular/router';
 import { AppShellComponent } from '@core/layout/app-shell.component';
 import { HeaderSearchSlotComponent } from '@core/layout/header-search-slot.component';
 import { AppLinks } from '@core/app-paths';
+import { setupLandingScrollReveal } from '@features/home/domain/landing-scroll-reveal';
 
 interface LandingFeature {
   icon: string;
@@ -19,9 +20,12 @@ interface LandingFeature {
   text: string;
 }
 
+type LandingToolScope = 'global' | 'route';
+
 interface LandingTool {
   name: string;
-  scope: string;
+  scope: LandingToolScope;
+  route?: string;
   description: string;
 }
 
@@ -39,7 +43,7 @@ interface LandingStep {
 })
 export class HomePageComponent {
   readonly links = AppLinks;
-  readonly challengeUrl = 'https://openai.com/pl-PL/webmcp-challenge/';
+  readonly challengeUrl = 'https://webmcp.devpost.com/';
   readonly webmcpDocsUrl = 'https://angular.dev/ai/webmcp';
 
   readonly features: LandingFeature[] = [
@@ -50,28 +54,28 @@ export class HomePageComponent {
     },
     {
       icon: '◎',
-      title: 'Map-first UX',
-      text: 'Explore openings geographically with a split view on desktop.',
+      title: 'Map-aware results',
+      text: 'The map zooms to your filtered results - one country or the whole world when offers span continents.',
     },
     {
       icon: '⚡',
       title: 'Agent-native',
-      text: 'Codex calls structured tools that read and write the same state as the UI - no DOM scraping.',
+      text: 'Seven global WebMCP tools share state with the UI. No brittle DOM automation.',
     },
   ];
 
-  readonly tools: LandingTool[] = [
+  readonly globalTools: LandingTool[] = [
     {
       name: 'search_jobs',
       scope: 'global',
       description:
-        'Replace text, location, and radius; preserve structured filters. Use filter_jobs to refine.',
+        'Replace text, location, and radius; preserve structured filters. Navigates to /jobs when needed.',
     },
     {
       name: 'filter_jobs',
       scope: 'global',
       description:
-        'Update structured filters and sort; preserve text and location. Array values match with OR.',
+        'Patch structured filters and sort; preserve text and location. Array values match with OR.',
     },
     {
       name: 'get_profile',
@@ -80,48 +84,57 @@ export class HomePageComponent {
         'Read headline, experience, skills, and preferences for the signed-in user from any page.',
     },
     {
-      name: 'update_profile',
-      scope: '/profile',
-      description: 'Update profile fields with validation and persist changes to the UI.',
-    },
-    {
       name: 'get_job',
-      scope: '/jobs',
-      description: 'Read full details for a single job offer.',
+      scope: 'global',
+      description: 'Read full details for a single job offer by id - no need to open the detail route first.',
     },
     {
       name: 'save_job',
-      scope: '/jobs',
-      description: 'Add a job to favourites. Idempotent for already saved jobs.',
+      scope: 'global',
+      description: 'Add a job to favourites. Idempotent when the job is already saved.',
     },
     {
       name: 'unsave_job',
-      scope: '/jobs',
-      description: 'Remove a job from favourites. Idempotent for jobs that are not saved.',
+      scope: 'global',
+      description: 'Remove a job from favourites. Idempotent when the job is not saved.',
     },
     {
       name: 'apply_job',
-      scope: '/jobs',
-      description: 'Submit a real, potentially irreversible job application.',
+      scope: 'global',
+      description: 'Submit a real job application. Requires auth and a minimal profile.',
     },
   ];
+
+  readonly routeTools: LandingTool[] = [
+    {
+      name: 'update_profile',
+      scope: 'route',
+      route: '/profile',
+      description:
+        'Update profile fields with validation (Signal Form implicit tool). Only available on the profile route.',
+    },
+  ];
+
+  readonly globalToolCount = this.globalTools.length;
+  readonly routeToolCount = this.routeTools.length;
+  readonly sparks = Array.from({ length: 18 }, (_, index) => index);
 
   readonly steps: LandingStep[] = [
     {
       title: 'Open in ChatGPT',
-      text: 'Launch Job Pilot inside the ChatGPT desktop in-app browser with WebMCP enabled.',
+      text: 'Launch Job Pilot in the ChatGPT desktop browser with WebMCP enabled (Chrome 149+).',
     },
     {
-      title: 'Complete your profile',
-      text: 'Ask Codex: “Help me complete my profile based on this CV…”',
+      title: 'Go to /profile',
+      text: 'Route-scoped update_profile is only registered on the profile page - navigate there before editing fields.',
     },
     {
       title: 'Search in plain language',
-      text: 'Try: “Find senior frontend jobs, remote or hybrid in Warsaw, minimum $8k USD.”',
+      text: 'From any page: “Find senior frontend jobs, remote or hybrid in Warsaw, minimum $8k USD.”',
     },
     {
       title: 'Watch the UI react',
-      text: 'Filters, job list, and map update in real time as tools mutate shared state.',
+      text: 'Global tools update filters, list, map, saved jobs, and applications in real time.',
     },
   ];
 
@@ -135,26 +148,9 @@ export class HomePageComponent {
         return;
       }
 
-      const targets = this.host.nativeElement.querySelectorAll('[data-reveal]');
-      if (!targets.length) {
-        return;
-      }
-
-      const observer = new IntersectionObserver(
-        (entries) => {
-          for (const entry of entries) {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('is-revealed');
-              observer.unobserve(entry.target);
-            }
-          }
-        },
-        { rootMargin: '0px 0px -8%', threshold: 0.12 },
+      setupLandingScrollReveal(this.host.nativeElement, (callback) =>
+        this.destroyRef.onDestroy(callback),
       );
-
-      const revealTargets = targets as NodeListOf<Element>;
-      revealTargets.forEach((target) => observer.observe(target));
-      this.destroyRef.onDestroy(() => observer.disconnect());
     });
   }
 }

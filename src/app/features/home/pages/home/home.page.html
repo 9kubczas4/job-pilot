@@ -1,17 +1,22 @@
 <app-shell>
   <app-header-search-slot header-search variant="compact" />
 
-  <div class="landing">
+  <div class="landing landing--showcase">
     <div class="landing__aurora" aria-hidden="true">
       <span class="landing__orb landing__orb--1"></span>
       <span class="landing__orb landing__orb--2"></span>
       <span class="landing__orb landing__orb--3"></span>
+      <span class="landing__orb landing__orb--4"></span>
+      <span class="landing__beam"></span>
+      @for (spark of sparks; track spark) {
+        <span class="landing__spark" [attr.data-spark]="spark"></span>
+      }
       <span class="landing__grid"></span>
     </div>
 
     <section class="landing-hero">
       <div class="container landing-hero__inner">
-        <div class="landing-hero__copy">
+        <div class="landing-hero__copy landing-hero__copy--showcase">
           <a
             class="landing-badge"
             [href]="challengeUrl"
@@ -38,9 +43,8 @@
           </h1>
 
           <p class="landing-hero__lead">
-            Browse offers with a polished UI - then let Codex complete your profile, search jobs,
-            save favorites, and apply through WebMCP tools that share the same domain model as the
-            interface.
+            Browse offers with a polished UI - then let Codex search, filter, save, and apply through
+            typed WebMCP tools that mutate the same stores as the interface.
           </p>
 
           <div class="landing-hero__actions">
@@ -58,12 +62,12 @@
 
           <ul class="landing-hero__stats">
             <li class="landing-stat">
-              <strong>{{ tools.length }}</strong>
-              <span>WebMCP tools</span>
+              <strong>{{ globalToolCount }}</strong>
+              <span>global tools</span>
             </li>
             <li class="landing-stat">
-              <strong>1</strong>
-              <span>shared state model</span>
+              <strong>{{ routeToolCount }}</strong>
+              <span>route-scoped tool</span>
             </li>
             <li class="landing-stat">
               <strong>0</strong>
@@ -72,25 +76,34 @@
           </ul>
         </div>
 
-        <div class="landing-terminal" aria-hidden="true">
+        <div class="landing-terminal landing-terminal--showcase" aria-hidden="true">
+          <div class="landing-terminal__glow" aria-hidden="true"></div>
           <div class="landing-terminal__chrome">
             <span></span><span></span><span></span>
             <p>Codex · job-pilot</p>
           </div>
           <div class="landing-terminal__body">
-            <p class="landing-terminal__line landing-terminal__line--prompt">
-              <span class="landing-terminal__prefix">›</span>
-              filter_jobs(&#123; workplace: ["remote", "hybrid"], salaryMin: 8000, sort: "salary-desc" &#125;)
-            </p>
-            <p class="landing-terminal__line landing-terminal__line--success">
-              ✓ 12 jobs matched · filters applied · map synced
+            <p class="landing-terminal__line landing-terminal__line--muted">
+              <span class="landing-terminal__prefix">#</span>
+              global tools - callable from any route
             </p>
             <p class="landing-terminal__line landing-terminal__line--prompt">
               <span class="landing-terminal__prefix">›</span>
-              apply_job(&#123; jobId: "job-014", note: "Available from October." &#125;)
+              search_jobs(&#123; query: "frontend", locations: ["Warsaw"], radiusKm: 50 &#125;)
             </p>
             <p class="landing-terminal__line landing-terminal__line--success">
-              ✓ Application submitted · toast shown · Applications updated
+              ✓ 12 jobs matched · navigated to /jobs · map synced
+            </p>
+            <p class="landing-terminal__line landing-terminal__line--prompt">
+              <span class="landing-terminal__prefix">›</span>
+              filter_jobs(&#123; workplace: ["remote", "hybrid"], salaryMin: 8000 &#125;)
+            </p>
+            <p class="landing-terminal__line landing-terminal__line--success">
+              ✓ 8 jobs matched · filters applied · map zoomed to Poland
+            </p>
+            <p class="landing-terminal__line landing-terminal__line--muted">
+              <span class="landing-terminal__prefix">#</span>
+              /profile - update_profile available here only
             </p>
             <p class="landing-terminal__cursor" aria-hidden="true"></p>
           </div>
@@ -101,24 +114,60 @@
     <section class="landing-section" data-reveal>
       <div class="container">
         <div class="landing-section__head">
-          <p class="landing-kicker">Why WebMCP</p>
+          <p class="landing-kicker">WebMCP tools</p>
           <h2 class="landing-section__title">Structured tools, not brittle clicks</h2>
           <p class="landing-section__lead">
-            Traditional agents scrape the DOM. Job Pilot exposes typed tools so Codex operates on
-            profiles, search criteria, and applications - the same objects your UI already uses.
+            Most tools register globally in <code>app.config.ts</code> so Codex can search, read jobs,
+            save favourites, and apply from anywhere. Profile edits use a route-scoped tool on
+            <code>/profile</code>.
           </p>
         </div>
 
-        <div class="landing-tools">
-          @for (tool of tools; track tool.name) {
-            <article class="landing-tool glass-card">
-              <div class="landing-tool__head">
-                <code class="landing-tool__name">{{ tool.name }}</code>
-                <span class="landing-tool__scope">{{ tool.scope }}</span>
-              </div>
-              <p class="landing-tool__text">{{ tool.description }}</p>
-            </article>
-          }
+        <div class="landing-scope-key" role="list" aria-label="Tool scope legend">
+          <div class="landing-scope-key__item" role="listitem">
+            <span class="landing-tool__scope landing-tool__scope--global">global</span>
+            <span>Registered app-wide - search, filter, get_job, save, unsave, apply, get_profile.</span>
+          </div>
+          <div class="landing-scope-key__item" role="listitem">
+            <span class="landing-tool__scope landing-tool__scope--route">/profile</span>
+            <span>Route-scoped - <code>update_profile</code> only while the profile page is active.</span>
+          </div>
+        </div>
+
+        <div class="landing-tools-group">
+          <h3 class="landing-tools-group__title">
+            Global
+            <span class="landing-tools-group__count">{{ globalToolCount }}</span>
+          </h3>
+          <div class="landing-tools">
+            @for (tool of globalTools; track tool.name; let index = $index) {
+              <article class="landing-tool glass-card" [attr.data-stagger]="index">
+                <div class="landing-tool__head">
+                  <code class="landing-tool__name">{{ tool.name }}</code>
+                  <span class="landing-tool__scope landing-tool__scope--global">global</span>
+                </div>
+                <p class="landing-tool__text">{{ tool.description }}</p>
+              </article>
+            }
+          </div>
+        </div>
+
+        <div class="landing-tools-group landing-tools-group--route">
+          <h3 class="landing-tools-group__title">
+            Route-scoped
+            <span class="landing-tools-group__count">{{ routeToolCount }}</span>
+          </h3>
+          <div class="landing-tools landing-tools--route">
+            @for (tool of routeTools; track tool.name) {
+              <article class="landing-tool landing-tool--route glass-card">
+                <div class="landing-tool__head">
+                  <code class="landing-tool__name">{{ tool.name }}</code>
+                  <span class="landing-tool__scope landing-tool__scope--route">{{ tool.route }}</span>
+                </div>
+                <p class="landing-tool__text">{{ tool.description }}</p>
+              </article>
+            }
+          </div>
         </div>
       </div>
     </section>
@@ -131,8 +180,8 @@
         </div>
 
         <div class="landing-features">
-          @for (feature of features; track feature.title) {
-            <article class="landing-feature glass-card">
+          @for (feature of features; track feature.title; let index = $index) {
+            <article class="landing-feature glass-card" [attr.data-stagger]="index">
               <span class="landing-feature__icon" aria-hidden="true">{{ feature.icon }}</span>
               <h3 class="landing-feature__title">{{ feature.title }}</h3>
               <p class="landing-feature__text">{{ feature.text }}</p>
@@ -172,13 +221,15 @@
 
     <section class="landing-cta" data-reveal>
       <div class="container">
-        <div class="landing-cta__panel glass-card">
+        <div class="landing-cta__panel glass-card landing-cta__panel--showcase">
           <h2 class="landing-cta__title">Ready to explore - human or agent?</h2>
           <p class="landing-cta__text">
-            Start browsing jobs manually, or open the app in ChatGPT and let Codex run the tools.
+            Start browsing jobs manually, or open the app in ChatGPT and let Codex call the global tools.
+            Open <a [routerLink]="links.profile">/profile</a> before asking Codex to edit your profile.
           </p>
           <div class="landing-cta__actions">
             <a [routerLink]="links.jobs" class="landing-btn landing-btn--primary">Go to jobs</a>
+            <a [routerLink]="links.profile" class="landing-btn landing-btn--ghost">Open profile</a>
             <a
               class="landing-btn landing-btn--ghost"
               [href]="challengeUrl"

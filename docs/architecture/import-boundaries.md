@@ -39,8 +39,8 @@ src/app/
 | Package | Path | May import | Must not be imported by |
 |---------|------|------------|---------------------------|
 | **app-shell** | `app.ts`, `app.config.ts`, `app.routes.ts`, `main.ts`, … | `core`, `shared`, `features` (pages, webmcp) | anything (except tests) |
-| **core** | `src/app/core/` | `core`, `shared` | — |
-| **shared** | `src/app/shared/` | `shared`, external | — |
+| **core** | `src/app/core/` | `core`, `shared` | - |
+| **shared** | `src/app/shared/` | `shared`, external | - |
 | **features** | `src/app/features/{name}/` | `shared`, `core`, own feature only | other features |
 
 Features are fully isolated from each other. Shared logic between features belongs in `core/domains/` (e.g. job taxonomy used by both `jobs` and `profile`), not in cross-feature `domain/` imports.
@@ -65,14 +65,14 @@ App shell files (`app.ts`, `app.config.ts`, `app.routes.ts`, `main.ts`) may impo
 
 ## Rules in plain language
 
-- **Domain** is pure business logic — no Angular services from other layers, no Firebase, no UI.
+- **Domain** is pure business logic - no Angular services from other layers, no Firebase, no UI.
 - **Data-access** talks to Firestore/HTTP and maps results to domain models.
-- **State** is the facade for UI and WebMCP — it owns reads/writes via repositories.
-- **UI** is presentational — it receives data through `input()` / `output()` and never injects stores or repositories directly.
-- **Pages** compose UI + state — they wire smart behaviour but don't call repositories or register WebMCP tools.
-- **WebMCP tools** live in `features/*/webmcp/` and inject **state** and **domain** — the same orchestration model as pages, but without importing UI components or repositories.
-- **Core** stays feature-agnostic — no imports from `features/`.
-- **Shared** stays business-agnostic — no feature-specific models (e.g. no `JobOffer` in shared).
+- **State** is the facade for UI and WebMCP - it owns reads/writes via repositories.
+- **UI** is presentational - it receives data through `input()` / `output()` and never injects stores or repositories directly.
+- **Pages** compose UI + state - they wire smart behaviour but don't call repositories or register WebMCP tools.
+- **WebMCP tools** live in `features/*/webmcp/` and inject **state** and **domain** - the same orchestration model as pages, but without importing UI components or repositories.
+- **Core** stays feature-agnostic - no imports from `features/`.
+- **Shared** stays business-agnostic - no feature-specific models (e.g. no `JobOffer` in shared).
 
 ### Dependency direction
 
@@ -82,7 +82,7 @@ domain ← data-access ← state ← pages / webmcp
                          ui (dumb, via pages)
 ```
 
-UI and WebMCP never reach persistence directly — they go through **state**.
+UI and WebMCP never reach persistence directly - they go through **state**.
 
 ## Exceptions
 

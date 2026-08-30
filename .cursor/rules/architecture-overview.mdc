@@ -7,13 +7,13 @@ alwaysApply: true
 
 ```
 src/app/
-  app.ts, app.config.ts, app.routes.ts   # app-shell — never imported elsewhere
+  app.ts, app.config.ts, app.routes.ts   # app-shell - never imported elsewhere
   core/          # auth, Firebase, layout, cross-feature domain (core/domains/)
   shared/        # business-agnostic UI kit, map helpers
   features/{name}/
     domain/      # models, pure functions
     data-access/ # Firestore/HTTP repositories
-    state/       # signal stores — facade for UI and WebMCP
+    state/       # signal stores - facade for UI and WebMCP
     shell/       # app-shell slots (smart wiring for header chrome)
     ui/          # dumb presentational components
     pages/       # smart route components
@@ -31,4 +31,4 @@ src/app/
 
 Features are fully isolated. Shared logic between features goes in `core/domains/`, not cross-feature imports.
 
-Enforced by `eslint.boundaries.config.js` — run `npm run lint` after changes.
+Enforced by `eslint.boundaries.config.js` - run `npm run lint` after changes.

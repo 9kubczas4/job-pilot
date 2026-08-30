@@ -1,4 +1,4 @@
-/** Extra “about the role” angles — merged with template.descriptions for per-offer variation. */
+/** Extra “about the role” angles - merged with template.descriptions for per-offer variation. */
 export const ROLE_DESCRIPTION_ANGLES = {
   'Frontend Developer': [
     'Own the customer onboarding wizard and checkout funnel used by 2 000+ business accounts.',

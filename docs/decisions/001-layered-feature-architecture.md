@@ -53,5 +53,5 @@ Enforce import rules with `eslint-plugin-boundaries` - configuration in `eslint.
 - Every new file has an obvious home - reduces "where does this go?" debates
 - Domain logic is testable without Angular TestBed
 - Features are isolated from each other; shared domain types live in `core/domains/` (e.g. job taxonomy used by both `jobs` and `profile`)
-- UI and WebMCP reach persistence only through `state/` — never via direct repository imports
+- UI and WebMCP reach persistence only through `state/` - never via direct repository imports
 - ESLint must be run (`npm run lint`) to catch boundary violations at CI time

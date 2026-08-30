@@ -34,10 +34,10 @@ The agent never receives a `userId` in tool payloads. Identity comes from Fireba
 | `filter_jobs` | global | Update structured filters and sort; preserve text/location (OR within arrays) |
 | `get_profile` | global | Read candidate profile (headline, experience, skills, preferences) |
 | `update_profile` | `/profile` | Update candidate profile (Signal Form implicit tool) |
-| `get_job` | `/jobs` | Read a single job offer |
-| `save_job` | `/jobs` | Add a job to favourites (idempotent) |
-| `unsave_job` | `/jobs` | Remove a job from favourites (idempotent) |
-| `apply_job` | `/jobs` | Submit a real job application (idempotent for already applied jobs) |
+| `get_job` | global | Read a single job offer |
+| `save_job` | global | Add a job to favourites (idempotent) |
+| `unsave_job` | global | Remove a job from favourites (idempotent) |
+| `apply_job` | global | Submit a real job application (idempotent for already applied jobs) |
 
 Global tools register in `app.config.ts`. Route-scoped tools register as route `providers` in `app.routes.ts`.
 
@@ -193,7 +193,7 @@ features/{name}/
 ## Hackathon Submission Checklist
 
 - [ ] Live URL accessible in ChatGPT browser / Chrome 149+ with WebMCP enabled
-- [x] Public GitHub repo with MIT license ([`LICENSE`](LICENSE) — detected in repo About)
+- [x] Public GitHub repo with MIT license ([`LICENSE`](LICENSE) - detected in repo About)
 - [ ] README explains WebMCP implementation
 - [ ] YouTube demo video (<3 min)
 - [ ] Judge test credentials (if auth required)

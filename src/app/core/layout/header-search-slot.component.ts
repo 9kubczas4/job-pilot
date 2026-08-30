@@ -6,7 +6,7 @@ import {
 } from '@core/layout/header-search/header-search.component';
 import { HEADER_SEARCH_SLOT } from '@core/layout/header-search-slot.token';
 
-/** App-shell header search slot — wires layout UI to {@link HEADER_SEARCH_SLOT}. */
+/** App-shell header search slot - wires layout UI to {@link HEADER_SEARCH_SLOT}. */
 @Component({
   selector: 'app-header-search-slot',
   changeDetection: ChangeDetectionStrategy.OnPush,

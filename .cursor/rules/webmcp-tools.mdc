@@ -7,8 +7,8 @@ alwaysApply: false
 # WebMCP Tools
 
 Tools live in `features/{name}/webmcp/tools/{tool-name}/`:
-- `{tool-name}.tool.ts` — tool definition
-- `{tool-name}.schema.ts` — Zod input schema
+- `{tool-name}.tool.ts` - tool definition
+- `{tool-name}.schema.ts` - Zod input schema
 
 ## Rules
 

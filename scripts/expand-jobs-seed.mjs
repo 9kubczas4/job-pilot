@@ -13,7 +13,7 @@ import {
 const TARGET_COUNT = 200;
 
 const LOCATIONS = [
-  // Poland — major cities
+  // Poland - major cities
   { city: 'Warsaw', country: 'Poland', latitude: 52.2297, longitude: 21.0122 },
   { city: 'Krakow', country: 'Poland', latitude: 50.0614, longitude: 19.9372 },
   { city: 'Wroclaw', country: 'Poland', latitude: 51.1079, longitude: 17.0385 },
@@ -63,7 +63,7 @@ const LOCATIONS = [
   { city: 'Krosno', country: 'Poland', latitude: 49.6833, longitude: 21.7667 },
   { city: 'Pabianice', country: 'Poland', latitude: 51.6644, longitude: 19.3547 },
   { city: 'Mielec', country: 'Poland', latitude: 50.2871, longitude: 21.4239 },
-  // United States — East
+  // United States - East
   { city: 'New York', country: 'United States', latitude: 40.7128, longitude: -74.006 },
   { city: 'Boston', country: 'United States', latitude: 42.3601, longitude: -71.0589 },
   { city: 'Philadelphia', country: 'United States', latitude: 39.9526, longitude: -75.1652 },
@@ -72,21 +72,21 @@ const LOCATIONS = [
   { city: 'Miami', country: 'United States', latitude: 25.7617, longitude: -80.1918 },
   { city: 'Charlotte', country: 'United States', latitude: 35.2271, longitude: -80.8431 },
   { city: 'Raleigh', country: 'United States', latitude: 35.7796, longitude: -78.6382 },
-  // United States — Midwest
+  // United States - Midwest
   { city: 'Chicago', country: 'United States', latitude: 41.8781, longitude: -87.6298 },
   { city: 'Detroit', country: 'United States', latitude: 42.3314, longitude: -83.0458 },
   { city: 'Minneapolis', country: 'United States', latitude: 44.9778, longitude: -93.265 },
   { city: 'Columbus', country: 'United States', latitude: 39.9612, longitude: -82.9988 },
   { city: 'Indianapolis', country: 'United States', latitude: 39.7684, longitude: -86.1581 },
   { city: 'Kansas City', country: 'United States', latitude: 39.0997, longitude: -94.5786 },
-  // United States — South & Texas
+  // United States - South & Texas
   { city: 'Austin', country: 'United States', latitude: 30.2672, longitude: -97.7431 },
   { city: 'Dallas', country: 'United States', latitude: 32.7767, longitude: -96.797 },
   { city: 'Houston', country: 'United States', latitude: 29.7604, longitude: -95.3698 },
   { city: 'San Antonio', country: 'United States', latitude: 29.4241, longitude: -98.4936 },
   { city: 'Nashville', country: 'United States', latitude: 36.1627, longitude: -86.7816 },
   { city: 'Tampa', country: 'United States', latitude: 27.9506, longitude: -82.4572 },
-  // United States — West
+  // United States - West
   { city: 'San Francisco', country: 'United States', latitude: 37.7749, longitude: -122.4194 },
   { city: 'San Jose', country: 'United States', latitude: 37.3382, longitude: -121.8863 },
   { city: 'Los Angeles', country: 'United States', latitude: 34.0522, longitude: -118.2437 },

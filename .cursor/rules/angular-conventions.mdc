@@ -6,7 +6,7 @@ alwaysApply: false
 
 # Angular Conventions
 
-- Standalone components only — no NgModules
+- Standalone components only - no NgModules
 - `inject()` over constructor injection
 - Signals: `signal()`, `computed()`, `input()`, `output()`, `effect()`
 - `ChangeDetectionStrategy.OnPush` on all components
@@ -16,11 +16,11 @@ alwaysApply: false
 
 | Layer | Pattern |
 |-------|---------|
-| ui | Dumb — `input()`/`output()` only, no store/repository injection |
-| pages | Smart — inject stores, compose ui components, handle routing |
+| ui | Dumb - `input()`/`output()` only, no store/repository injection |
+| pages | Smart - inject stores, compose ui components, handle routing |
 | state | Signal stores with `inject()` for repositories and core services |
 | webmcp | Tools inject state/domain, register via `provideXxxWebMcpTools()` |
-| domain | Pure functions and types — no Angular decorators or Firebase |
+| domain | Pure functions and types - no Angular decorators or Firebase |
 
 ## File placement checklist
 

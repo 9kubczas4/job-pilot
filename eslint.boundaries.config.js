@@ -5,10 +5,10 @@
 //   domain      → core/domains, own domain
 //   data-access → core, own domain
 //   state       → core, own domain, own data-access
-//   ui          → core, shared, own domain, own ui  (no state — use pages)
+//   ui          → core, shared, own domain, own ui  (no state - use pages)
 //   shell       → core, shared, own domain, own state, own ui  (app-shell slots)
 //   pages       → core, shared, own domain, own state, own ui
-//   webmcp      → core, own domain, own state, own webmcp  (no data-access — use state)
+//   webmcp      → core, own domain, own state, own webmcp  (no data-access - use state)
 
 const path = require('path');
 
@@ -85,7 +85,7 @@ const boundariesFiles = [
   { category: 'test', pattern: '**/*.spec.ts' },
 ];
 
-/** App bootstrap / SSR entrypoints — excluded from no-unknown-files IDE false positives. */
+/** App bootstrap / SSR entrypoints - excluded from no-unknown-files IDE false positives. */
 const appShellFiles = [
   'src/app/app.ts',
   'src/app/app.config.ts',
@@ -163,7 +163,7 @@ const boundariesPolicies = [
         },
       },
     },
-    message: 'UI may only use UI and domain owned by the same feature — reach state through pages.',
+    message: 'UI may only use UI and domain owned by the same feature - reach state through pages.',
   },
   {
     from: { element: { type: 'feature-ui' } },
@@ -207,7 +207,7 @@ const boundariesPolicies = [
         },
       },
     },
-    message: 'Shell slots wire UI to state for app-shell projection — same feature only.',
+    message: 'Shell slots wire UI to state for app-shell projection - same feature only.',
   },
   {
     from: { element: { type: 'feature-shell' } },
@@ -225,7 +225,7 @@ const boundariesPolicies = [
         },
       },
     },
-    message: 'WebMCP may use own webmcp, state, and domain — reach data-access through state, never UI.',
+    message: 'WebMCP may use own webmcp, state, and domain - reach data-access through state, never UI.',
   },
   {
     from: { element: { type: 'feature-webmcp' } },

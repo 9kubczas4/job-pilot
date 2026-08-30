@@ -4,7 +4,7 @@ import {
   LocationSearchSuggestion,
 } from '@core/domains/jobs/header-search.model';
 
-/** Cross-feature header search wiring — implemented by jobs, consumed from core layout. */
+/** Cross-feature header search wiring - implemented by jobs, consumed from core layout. */
 export interface HeaderSearchSlotFacade {
   readonly searchQuery: Signal<string>;
   readonly locationQuery: Signal<string>;

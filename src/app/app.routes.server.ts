@@ -12,7 +12,7 @@ function getJobPrerenderParams(): { id: string }[] {
  * Hybrid render modes for production builds.
  *
  * Most routes use prerender (SSG) so the demo ships static HTML for key pages.
- * That improves Core Web Vitals — especially LCP and FCP — because the browser
+ * That improves Core Web Vitals - especially LCP and FCP - because the browser
  * can paint content before Angular bootstraps, instead of waiting on JS download
  * and execution (CSR).
  *

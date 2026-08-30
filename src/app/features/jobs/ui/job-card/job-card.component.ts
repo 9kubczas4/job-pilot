@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
-import { SaveJobButtonComponent } from '@shared/ui/save-job-button/save-job-button.component';
+import { SaveJobButtonComponent } from '../save-job-button/save-job-button.component';
 import { JobOffer } from '../../domain/job.model';
 import {
   formatSalary,

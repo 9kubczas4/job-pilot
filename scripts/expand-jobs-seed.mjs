@@ -1,8 +1,16 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { normalizeCompetencies } from './lib/job-competency.utils.mjs';
+import {
+  ROLE_TEMPLATES,
+  buildCompetencies,
+  buildRoleContent,
+  findRoleTemplate,
+  pick,
+  resolveSalaryBand,
+  roundSalary,
+} from './lib/job-role-templates.mjs';
 
 const TARGET_COUNT = 200;
-const PLN_TO_USD = 0.25;
 
 const LOCATIONS = [
   // Poland — major cities
@@ -128,129 +136,6 @@ const COMPANIES = [
   { id: 'opengrid', name: 'OpenGrid' },
 ];
 
-const ROLE_TEMPLATES = [
-  {
-    title: 'Frontend Developer',
-    stack: ['Angular', 'TypeScript', 'RxJS'],
-    seniority: ['regular', 'senior'],
-    salary: [5500, 9500],
-  },
-  {
-    title: 'Frontend Tech Lead',
-    stack: ['React', 'TypeScript', 'Next.js'],
-    seniority: ['senior', 'expert'],
-    salary: [9000, 13000],
-  },
-  {
-    title: 'Staff Frontend Engineer',
-    stack: ['React', 'TypeScript', 'GraphQL'],
-    seniority: ['expert'],
-    salary: [11000, 16000],
-  },
-  {
-    title: 'Senior Frontend Engineer',
-    stack: ['Vue', 'TypeScript', 'Pinia'],
-    seniority: ['senior'],
-    salary: [8000, 12000],
-  },
-  {
-    title: 'Backend Developer',
-    stack: ['Node.js', 'TypeScript', 'PostgreSQL'],
-    seniority: ['regular', 'senior'],
-    salary: [6000, 10000],
-  },
-  {
-    title: 'Full Stack Engineer',
-    stack: ['TypeScript', 'React', 'Node.js'],
-    seniority: ['regular', 'senior'],
-    salary: [7000, 11500],
-  },
-  {
-    title: 'Cloud Engineer',
-    stack: ['AWS', 'Terraform', 'Kubernetes'],
-    seniority: ['senior', 'expert'],
-    salary: [9500, 14000],
-  },
-  {
-    title: 'ML Engineer',
-    stack: ['Python', 'PyTorch', 'MLOps'],
-    seniority: ['senior', 'expert'],
-    salary: [10000, 15000],
-  },
-  {
-    title: 'Platform Engineer',
-    stack: ['Go', 'Kubernetes', 'Docker'],
-    seniority: ['senior'],
-    salary: [9000, 13500],
-  },
-  {
-    title: 'DevOps Engineer',
-    stack: ['CI/CD', 'AWS', 'Observability'],
-    seniority: ['regular', 'senior'],
-    salary: [7500, 12000],
-  },
-  {
-    title: 'Product Designer',
-    stack: ['Figma', 'Design systems', 'UX research'],
-    seniority: ['regular', 'senior'],
-    salary: [5500, 9000],
-  },
-  {
-    title: 'Data Engineer',
-    stack: ['Python', 'Spark', 'dbt'],
-    seniority: ['regular', 'senior'],
-    salary: [7000, 12500],
-  },
-  {
-    title: 'Security Engineer',
-    stack: ['AppSec', 'Cloud security', 'IAM'],
-    seniority: ['senior'],
-    salary: [9500, 14000],
-  },
-  {
-    title: 'Mobile Developer',
-    stack: ['React Native', 'TypeScript', 'iOS'],
-    seniority: ['regular', 'senior'],
-    salary: [6500, 11000],
-  },
-  {
-    title: 'Engineering Manager',
-    stack: ['Team leadership', 'Agile', 'Hiring'],
-    seniority: ['senior', 'expert'],
-    salary: [10000, 15500],
-  },
-  {
-    title: 'Regional Sales Manager',
-    stack: ['Sales', 'CRM', 'Negotiation'],
-    seniority: ['senior'],
-    salary: [5000, 8500],
-  },
-  {
-    title: 'Marketing Specialist',
-    stack: ['Content marketing', 'Google Analytics', 'Social media'],
-    seniority: ['junior', 'regular'],
-    salary: [3500, 6000],
-  },
-  {
-    title: 'QA Engineer',
-    stack: ['Playwright', 'TypeScript', 'Test automation'],
-    seniority: ['regular', 'senior'],
-    salary: [5000, 8500],
-  },
-  {
-    title: 'Site Reliability Engineer',
-    stack: ['SRE', 'Prometheus', 'Kubernetes'],
-    seniority: ['senior', 'expert'],
-    salary: [9500, 14500],
-  },
-  {
-    title: 'Solutions Architect',
-    stack: ['AWS', 'System design', 'Integration'],
-    seniority: ['expert'],
-    salary: [12000, 17000],
-  },
-];
-
 const WORKPLACES = ['remote', 'hybrid', 'onsite'];
 const WORK_SCHEDULES = ['full-time', 'part-time', 'freelance'];
 const CONTRACT_TYPES = ['b2b', 'employment', 'service-contract', 'internship'];
@@ -344,49 +229,70 @@ function createLocationAssigner(pool) {
   };
 }
 
-function roundSalary(value) {
-  return Math.round(value / 100) * 100;
+function uniqueContractTypes(index) {
+  return [pick(CONTRACT_TYPES, index), ...(index % 5 === 0 ? [pick(CONTRACT_TYPES, index + 1)] : [])].filter(
+    (value, position, array) => array.indexOf(value) === position,
+  );
 }
 
-function plnToUsd(value) {
-  return roundSalary(value * PLN_TO_USD);
-}
+function enrichJob(job, index, assignLocation) {
+  const template = findRoleTemplate(job.title);
+  const company = job.company ?? pick(COMPANIES, index);
+  const workplace = job.workplace ?? pick(WORKPLACES, index);
+  const location = assignLocation(index);
+  const seniority = job.seniority?.length ? job.seniority : template.seniority;
+  const contractTypes = job.contractTypes?.length ? job.contractTypes : uniqueContractTypes(index);
+  const primaryContract = contractTypes[0];
+  const [salaryMin, salaryMax] = resolveSalaryBand(template, location, seniority, primaryContract, index);
+  const roleContent = buildRoleContent(template, company, workplace, index);
 
-function pick(array, index) {
-  return array[index % array.length];
-}
-
-function salarySpread([min, max], index) {
-  const span = max - min;
-  const offset = (index % 5) * Math.round(span / 8);
-  return [roundSalary(min + offset), roundSalary(max + offset)];
-}
-
-function buildCompetencies(stack) {
-  return stack.map((name, index) => ({
-    name,
-    level: 3 + (index % 3),
-    scale: 5,
-  }));
+  return {
+    ...job,
+    title: template.title,
+    company,
+    description: roleContent.description,
+    seniority,
+    salary: {
+      min: salaryMin,
+      max: salaryMax,
+      currency: 'USD',
+      period: 'month',
+    },
+    contractTypes,
+    workplace,
+    location,
+    responsibilities: roleContent.responsibilities,
+    requirements: roleContent.requirements,
+    niceToHave: roleContent.niceToHave,
+    benefits: roleContent.benefits,
+    competencies: buildCompetencies(template.stack, index),
+    workSchedules: job.workSchedules?.length ? job.workSchedules : [pick(WORK_SCHEDULES, index)],
+  };
 }
 
 function buildJob(id, template, index, assignLocation) {
   const company = pick(COMPANIES, index);
   const workplace = pick(WORKPLACES, index);
   const location = assignLocation(index);
-  const [salaryMin, salaryMax] = salarySpread(template.salary, index);
+  const contractTypes = uniqueContractTypes(index);
+  const [salaryMin, salaryMax] = resolveSalaryBand(
+    template,
+    location,
+    template.seniority,
+    contractTypes[0],
+    index,
+  );
+  const roleContent = buildRoleContent(template, company, workplace, index);
   const createdAt = new Date('2026-07-01T08:00:00.000Z');
   createdAt.setDate(createdAt.getDate() + (index % 45));
   const deadline = new Date(createdAt);
   deadline.setDate(deadline.getDate() + 14 + (index % 21));
 
-  const stackLabel = template.stack.slice(0, 3).join(', ');
-
   return {
     id,
     title: template.title,
     company,
-    description: `${template.title} opportunity working with ${stackLabel} on modern product teams.`,
+    description: roleContent.description,
     seniority: template.seniority,
     salary: {
       min: salaryMin,
@@ -394,20 +300,14 @@ function buildJob(id, template, index, assignLocation) {
       currency: 'USD',
       period: 'month',
     },
-    contractTypes: [pick(CONTRACT_TYPES, index), ...(index % 5 === 0 ? [pick(CONTRACT_TYPES, index + 1)] : [])].filter(
-      (value, position, array) => array.indexOf(value) === position,
-    ),
+    contractTypes,
     workplace,
     location,
-    responsibilities: [
-      'Build product features',
-      'Collaborate with design and backend',
-      'Improve delivery quality',
-    ],
-    requirements: template.stack.map((skill) => `Strong ${skill} experience`),
-    niceToHave: ['Accessibility', 'Performance tuning'],
-    benefits: ['Flexible hours', 'Learning budget', workplace === 'remote' ? 'Remote stipend' : 'Office perks'],
-    competencies: buildCompetencies(template.stack),
+    responsibilities: roleContent.responsibilities,
+    requirements: roleContent.requirements,
+    niceToHave: roleContent.niceToHave,
+    benefits: roleContent.benefits,
+    competencies: buildCompetencies(template.stack, index),
     workSchedules: [pick(WORK_SCHEDULES, index)],
     createdAt: createdAt.toISOString(),
     applicationDeadline: deadline.toISOString(),
@@ -415,20 +315,13 @@ function buildJob(id, template, index, assignLocation) {
 }
 
 function migrateExistingJob(job, index, assignLocation) {
-  const salary = job.salary
-    ? {
-        ...job.salary,
-        currency: 'USD',
-        min: job.salary.currency === 'PLN' ? plnToUsd(job.salary.min) : roundSalary(job.salary.min),
-        max: job.salary.currency === 'PLN' ? plnToUsd(job.salary.max) : roundSalary(job.salary.max),
-      }
-    : undefined;
+  const enriched = enrichJob(job, index, assignLocation);
 
   return {
-    ...job,
-    location: assignLocation(index),
-    salary,
-    competencies: normalizeCompetencies(job.competencies ?? job.skills),
+    ...enriched,
+    competencies: normalizeCompetencies(enriched.competencies),
+    createdAt: job.createdAt ?? enriched.createdAt,
+    applicationDeadline: job.applicationDeadline ?? enriched.applicationDeadline,
   };
 }
 

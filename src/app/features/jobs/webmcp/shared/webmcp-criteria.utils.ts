@@ -1,6 +1,6 @@
-import { DEFAULT_JOB_SORT } from '../domain/job-sort.utils';
-import { JobFilterCriteria, JobSearchCriteria } from '../domain/search.model';
-import { searchCriteriaFieldsEqual } from '../domain/search-url.utils';
+import { DEFAULT_JOB_SORT } from '../../domain/job-sort.utils';
+import { JobFilterCriteria, JobSearchCriteria } from '../../domain/search.model';
+import { searchCriteriaFieldsEqual } from '../../domain/search-url.utils';
 
 export type JobSearchInput = Pick<
   JobSearchCriteria,

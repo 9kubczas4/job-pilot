@@ -1,4 +1,4 @@
-import { JobSearchCriteria } from '../domain/search.model';
+import { JobSearchCriteria } from '../../domain/search.model';
 
 export interface JobSearchToolResult {
   success: boolean;

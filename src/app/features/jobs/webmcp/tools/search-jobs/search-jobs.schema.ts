@@ -1,7 +1,4 @@
-import {
-  DEFAULT_SEARCH_RADIUS_KM,
-  SEARCH_RADIUS_OPTIONS_KM,
-} from '../domain/header-search.model';
+import { DEFAULT_SEARCH_RADIUS_KM, SEARCH_RADIUS_OPTIONS_KM } from '../../../domain/header-search.model';
 
 export const SEARCH_JOBS_SCHEMA = {
   type: 'object',

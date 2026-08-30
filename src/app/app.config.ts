@@ -11,8 +11,8 @@ import { provideRouter, withExperimentalAutoCleanupInjectors } from '@angular/ro
 import { provideExperimentalWebMcpForms } from '@angular/forms/signals';
 import { routes } from './app.routes';
 import { provideFirebase } from '@core/firebase/firebase.providers';
-import { provideSearchJobsWebMcpTool } from '@features/jobs/webmcp/search-jobs.tool';
-import { provideFilterJobsWebMcpTool } from '@features/jobs/webmcp/filter-jobs.tool';
+import { provideSearchJobsWebMcpTool } from '@features/jobs/webmcp/tools/search-jobs/search-jobs.tool';
+import { provideFilterJobsWebMcpTool } from '@features/jobs/webmcp/tools/filter-jobs/filter-jobs.tool';
 import { provideGetProfileWebMcpTool } from '@features/profile/webmcp/profile.tools';
 import { provideSearchCatalogPreload } from '@features/jobs/webmcp/search-catalog.bootstrap';
 import { environment } from '@environments/environment';

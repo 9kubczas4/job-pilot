@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  DestroyRef,
   effect,
   inject,
   input,
@@ -43,6 +44,7 @@ export class JobMapComponent {
   private readonly ngZone = inject(NgZone);
   private readonly theme = inject(ThemeService);
   private readonly userMapRegion = inject(UserMapRegionService);
+  private readonly destroyRef = inject(DestroyRef);
 
   readonly jobs = input<JobOffer[]>([]);
   readonly selectedJobId = input<string | null>(null);
@@ -67,8 +69,11 @@ export class JobMapComponent {
   private lastSearchCenterKey = '';
   private lastViewportKey = '';
   private mapAnimationFrame: number | null = null;
+  private popupAbortController: AbortController | null = null;
+  private isDestroyed = false;
 
   constructor() {
+    this.destroyRef.onDestroy(() => this.destroyMapResources());
     this.userMapRegion.detectRegion();
     this.mapTheme = this.theme.resolved();
     this.mapOptions = this.buildMapOptions(this.mapTheme);
@@ -151,7 +156,7 @@ export class JobMapComponent {
     searchRadiusKm: number | undefined,
     fitResultsToViewport: boolean,
   ): void {
-    if (!this.map || !this.clusterer) {
+    if (this.isDestroyed || !this.map || !this.clusterer) {
       return;
     }
 
@@ -219,7 +224,7 @@ export class JobMapComponent {
     this.clusterer?.clearMarkers();
 
     for (const marker of this.markers.values()) {
-      marker.setMap(null);
+      this.disposeMarker(marker);
     }
 
     this.markers.clear();
@@ -444,6 +449,11 @@ export class JobMapComponent {
     const startTime = performance.now();
 
     const step = (now: number) => {
+      if (this.isDestroyed || !this.map) {
+        this.mapAnimationFrame = null;
+        return;
+      }
+
       const progress = Math.min((now - startTime) / durationMs, 1);
       const eased = 1 - (1 - progress) ** 3;
 
@@ -474,8 +484,16 @@ export class JobMapComponent {
       return;
     }
 
+    this.popupAbortController?.abort();
+    this.popupAbortController = new AbortController();
+    const { signal } = this.popupAbortController;
+
     google.maps.event.addListenerOnce(this.infoWindow, 'domready', () => {
-      const popup = document.querySelector(`[data-job-map-popup="${job.id}"]`);
+      if (signal.aborted || this.isDestroyed) {
+        return;
+      }
+
+      const popup = document.querySelector(`[data-job-map-popup="${CSS.escape(job.id)}"]`);
       if (!(popup instanceof HTMLElement)) {
         return;
       }
@@ -488,23 +506,31 @@ export class JobMapComponent {
         popupTail?.classList.toggle('job-map-popup-tail--hovered', hovered);
       };
 
-      popup.addEventListener('mouseenter', () => setHovered(true));
-      popup.addEventListener('mouseleave', () => setHovered(false));
+      popup.addEventListener('mouseenter', () => setHovered(true), { signal });
+      popup.addEventListener('mouseleave', () => setHovered(false), { signal });
 
-      popup.addEventListener('click', () => {
-        this.ngZone.run(() => {
-          this.router.navigate(AppLinks.job(job.id));
-        });
-      });
-
-      popup.addEventListener('keydown', (event) => {
-        if (event instanceof KeyboardEvent && (event.key === 'Enter' || event.key === ' ')) {
-          event.preventDefault();
+      popup.addEventListener(
+        'click',
+        () => {
           this.ngZone.run(() => {
             this.router.navigate(AppLinks.job(job.id));
           });
-        }
-      });
+        },
+        { signal },
+      );
+
+      popup.addEventListener(
+        'keydown',
+        (event) => {
+          if (event instanceof KeyboardEvent && (event.key === 'Enter' || event.key === ' ')) {
+            event.preventDefault();
+            this.ngZone.run(() => {
+              this.router.navigate(AppLinks.job(job.id));
+            });
+          }
+        },
+        { signal },
+      );
     });
   }
 
@@ -538,11 +564,57 @@ export class JobMapComponent {
     this.map.fitBounds(googleBounds, paddingPx);
 
     google.maps.event.addListenerOnce(this.map, 'idle', () => {
-      const zoom = this.map?.getZoom();
+      if (this.isDestroyed || !this.map) {
+        return;
+      }
+
+      const zoom = this.map.getZoom();
       if (zoom != null && zoom > 11) {
-        this.map?.setZoom(11);
+        this.map.setZoom(11);
       }
     });
+  }
+
+  private disposeMarker(marker: google.maps.Marker): void {
+    google.maps.event.clearInstanceListeners(marker);
+    marker.setMap(null);
+  }
+
+  private destroyMapResources(): void {
+    if (this.isDestroyed) {
+      return;
+    }
+
+    this.isDestroyed = true;
+    this.popupAbortController?.abort();
+    this.popupAbortController = null;
+
+    if (this.mapAnimationFrame != null) {
+      cancelAnimationFrame(this.mapAnimationFrame);
+      this.mapAnimationFrame = null;
+    }
+
+    this.infoWindow?.close();
+    if (this.infoWindow) {
+      google.maps.event.clearInstanceListeners(this.infoWindow);
+      this.infoWindow = null;
+    }
+
+    this.clusterer?.clearMarkers();
+    this.clusterer?.setMap(null);
+    this.clusterer = null;
+
+    for (const marker of this.markers.values()) {
+      this.disposeMarker(marker);
+    }
+
+    this.markers.clear();
+    this.markerJobs.clear();
+
+    if (this.map) {
+      google.maps.event.clearInstanceListeners(this.map);
+      this.map = null;
+    }
   }
 
   private buildMapOptions(theme: ResolvedTheme): google.maps.MapOptions {

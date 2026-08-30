@@ -1,7 +1,7 @@
 <div class="app-shell">
   <header class="app-header">
     <div class="app-header__start">
-      <app-logo [compact]="isMobileLayout()" [homeLink]="links.home" />
+      <app-logo [compact]="isCompactChrome()" [homeLink]="links.home" />
     </div>
 
     <div class="app-header__search">
@@ -24,9 +24,9 @@
       </nav>
 
       <div class="app-auth">
-        <app-theme-toggle [compact]="isMobileLayout()" />
+        <app-theme-toggle [compact]="isCompactChrome()" />
         <app-profile-menu
-          [compact]="isMobileLayout()"
+          [compact]="isCompactChrome()"
           [links]="profileMenuLinks"
           [loading]="auth.loading()"
           [authenticated]="auth.isAuthenticated()"

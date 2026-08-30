@@ -1,41 +1,25 @@
-import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
-import { HeaderSearchComponent } from '@features/jobs/ui/header-search/header-search.component';
-import { HeaderSearchPageSupport } from '@features/jobs/state/header-search-page.support';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { HeaderSearchSlotComponent } from '@core/layout/header-search-slot.component';
+import { HeaderSearchVariant } from '@core/layout/header-search/header-search.component';
 
-/** App-shell header search slot — wires dumb UI to {@link HeaderSearchPageSupport}. */
+/** Jobs feature alias for the shared app-shell header search slot. */
 @Component({
   selector: 'app-job-header-search',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     headerSearch: '',
   },
-  imports: [HeaderSearchComponent],
+  imports: [HeaderSearchSlotComponent],
   template: `
-    <app-header-search
-      [searchQuery]="headerSearch.headerUi.searchQuery()"
-      [locationQuery]="headerSearch.headerUi.locationQuery()"
-      [radiusKm]="headerSearch.headerUi.radiusKm()"
-      [jobSuggestions]="headerSearch.headerUi.jobSuggestions()"
-      [locationSuggestions]="headerSearch.headerUi.locationSuggestions()"
-      (searchQueryChange)="headerSearch.onSearchQueryChange($event, jobsLink(), onJobsSearchPage())"
-      (locationQueryChange)="onLocationQueryChange($event)"
-      (locationCoordsChange)="onLocationCoordsChange($event)"
-      (radiusChange)="headerSearch.onRadiusChange($event)"
-      (searchApply)="headerSearch.applySearch(jobsLink(), onJobsSearchPage())"
+    <app-header-search-slot
+      [jobsLink]="jobsLink()"
+      [onJobsSearchPage]="onJobsSearchPage()"
+      [variant]="variant()"
     />
   `,
 })
 export class JobHeaderSearchComponent {
   readonly jobsLink = input.required<readonly string[]>();
   readonly onJobsSearchPage = input(false);
-
-  readonly headerSearch = inject(HeaderSearchPageSupport);
-
-  onLocationQueryChange(value: string): void {
-    this.headerSearch.onLocationQueryChange(value, this.jobsLink(), this.onJobsSearchPage());
-  }
-
-  onLocationCoordsChange(coords: { lat?: number; lng?: number }): void {
-    this.headerSearch.onLocationCoordsChange(coords.lat, coords.lng);
-  }
+  readonly variant = input<HeaderSearchVariant>('full');
 }

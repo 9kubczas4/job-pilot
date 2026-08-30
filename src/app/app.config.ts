@@ -14,7 +14,7 @@ import { provideFirebase } from '@core/infrastructure/firebase/firebase.provider
 import { provideSearchJobsWebMcpTool } from '@features/jobs/webmcp/tools/search-jobs/search-jobs.tool';
 import { provideFilterJobsWebMcpTool } from '@features/jobs/webmcp/tools/filter-jobs/filter-jobs.tool';
 import { provideGetProfileWebMcpTool } from '@features/profile/webmcp/profile.tools';
-import { provideSearchCatalogPreload } from '@features/jobs/webmcp/search-catalog.bootstrap';
+import { provideSearchCatalogPreload, provideJobsHeaderSearch } from '@features/jobs/webmcp/search-catalog.bootstrap';
 import { environment } from '@environments/environment';
 import { isGoogleMapsConfigured, loadGoogleMapsApi } from '@shared/map/google-maps-loader';
 import { GOOGLE_MAPS_API_KEY } from '@shared/map/google-maps-config';
@@ -30,6 +30,7 @@ export const appConfig: ApplicationConfig = {
     provideFilterJobsWebMcpTool(),
     provideGetProfileWebMcpTool(),
     provideSearchCatalogPreload(),
+    ...provideJobsHeaderSearch(),
     provideRouter(routes, withExperimentalAutoCleanupInjectors()),
     { provide: GOOGLE_MAPS_API_KEY, useValue: environment.googleMapsApiKey },
     provideAppInitializer((): void | Promise<void> => {

@@ -1,23 +1,11 @@
-export type JobSuggestionKind = 'title' | 'company' | 'skill' | 'keyword';
-
-export interface JobSearchSuggestion {
-  id: string;
-  label: string;
-  sublabel?: string;
-  kind: JobSuggestionKind;
-  value: string;
-}
-
-export interface LocationSearchSuggestion {
-  id: string;
-  label: string;
-  city: string;
-  latitude: number;
-  longitude: number;
-}
+export type {
+  JobSearchSuggestion,
+  JobSuggestionKind,
+  LocationSearchSuggestion,
+} from '@core/domains/jobs/header-search.model';
 
 export {
   DEFAULT_SEARCH_RADIUS_KM,
   SEARCH_RADIUS_OPTIONS_KM,
   buildHeaderSearchQueryParams,
-} from '@core/domains/jobs/header-search-query.utils';
+} from '@core/domains/jobs/header-search.model';

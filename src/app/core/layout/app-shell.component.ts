@@ -3,11 +3,12 @@ import { isPlatformBrowser } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AppLinks, AppProfileMenuLinks } from '@core/app-paths';
 import { AuthService } from '@core/infrastructure/auth/auth.service';
+import {
+  APP_SHELL_COMPACT_CHROME_QUERY,
+} from '@core/layout/app-shell-layout.constants';
 import { LogoComponent } from '@shared/ui/logo/logo.component';
 import { ProfileMenuComponent } from '@shared/ui/profile-menu/profile-menu.component';
 import { ThemeToggleComponent } from '@core/layout/theme-toggle/theme-toggle.component';
-
-const MOBILE_SHELL_QUERY = '(max-width: 64rem)';
 
 @Component({
   selector: 'app-shell',
@@ -26,7 +27,7 @@ export class AppShellComponent {
   readonly auth = inject(AuthService);
   readonly links = AppLinks;
   readonly profileMenuLinks = AppProfileMenuLinks;
-  readonly isMobileLayout = signal(false);
+  readonly isCompactChrome = signal(false);
 
   private readonly destroyRef = inject(DestroyRef);
   private readonly platformId = inject(PLATFORM_ID);
@@ -37,12 +38,12 @@ export class AppShellComponent {
     }
 
     afterNextRender(() => {
-      const mobileQuery = window.matchMedia(MOBILE_SHELL_QUERY);
-      const syncLayout = () => this.isMobileLayout.set(mobileQuery.matches);
+      const compactChromeQuery = window.matchMedia(APP_SHELL_COMPACT_CHROME_QUERY);
+      const syncLayout = () => this.isCompactChrome.set(compactChromeQuery.matches);
 
       syncLayout();
-      mobileQuery.addEventListener('change', syncLayout);
-      this.destroyRef.onDestroy(() => mobileQuery.removeEventListener('change', syncLayout));
+      compactChromeQuery.addEventListener('change', syncLayout);
+      this.destroyRef.onDestroy(() => compactChromeQuery.removeEventListener('change', syncLayout));
     });
   }
 }

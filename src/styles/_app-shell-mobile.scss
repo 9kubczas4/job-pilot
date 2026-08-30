@@ -9,7 +9,7 @@
     max(var(--space-3), env(safe-area-inset-left, 0px));
 }
 
-@media (max-width: 64rem) {
+@media (max-width: 48rem) {
   body .app-shell .app-main {
     padding-top: var(--mobile-header-offset);
     padding-bottom: var(--app-main-mobile-gap-bottom);

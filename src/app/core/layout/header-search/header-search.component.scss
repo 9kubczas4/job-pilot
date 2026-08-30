@@ -25,9 +25,13 @@
   margin-inline: auto;
 
   &--compact {
-    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.9fr) auto;
-    max-width: 40rem;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.35fr) auto;
+    max-width: 100%;
   }
+}
+
+.header-search--compact .header-search__field--location {
+  flex: 1 1 14rem;
 }
 
 .header-search__group {

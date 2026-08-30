@@ -103,7 +103,27 @@
   overflow-y: auto;
 }
 
-@media (max-width: 64rem) {
+@media (max-width: 80rem) {
+  .app-header {
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+    grid-template-columns: auto minmax(0, 1fr) auto;
+  }
+
+  .app-header__actions {
+    gap: var(--space-1);
+  }
+
+  .app-auth {
+    gap: var(--space-1);
+  }
+
+  .app-nav {
+    display: none;
+  }
+}
+
+@media (max-width: 48rem) {
   .app-header {
     position: fixed;
     inset-inline: 0;
@@ -172,16 +192,6 @@
     gap: var(--space-1);
   }
 
-  .app-auth {
-    gap: var(--space-1);
-  }
-
-  .app-nav {
-    display: none;
-  }
-}
-
-@media (max-width: 48rem) {
   .app-header__jobs-link span {
     position: absolute;
     overflow: hidden;

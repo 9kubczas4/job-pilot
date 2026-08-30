@@ -13,7 +13,7 @@ import {
   JobSearchSuggestion,
   LocationSearchSuggestion,
   SEARCH_RADIUS_OPTIONS_KM,
-} from '@features/jobs/domain/header-search.model';
+} from '@core/domains/jobs/header-search.model';
 
 export type HeaderSearchVariant = 'full' | 'compact';
 

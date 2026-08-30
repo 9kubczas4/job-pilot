@@ -27,7 +27,7 @@
       (focus)="onJobFocus()"
     />
 
-    @if (!compact() && jobPanelOpen() && jobSuggestions().length) {
+    @if (jobPanelOpen() && jobSuggestions().length) {
       <ul id="header-search-jobs-panel" class="header-search__dropdown" role="listbox">
         @for (suggestion of jobSuggestions(); track suggestion.id) {
           <li role="presentation">

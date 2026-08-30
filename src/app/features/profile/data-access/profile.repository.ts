@@ -3,8 +3,8 @@ import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { AuthService } from '@core/auth/auth.service';
 import { FIREBASE } from '@core/firebase/firebase.providers';
 import { normalizeContractTypes } from '@features/jobs/domain/contract-type.utils';
-import { CandidateProfile } from '../domain/profile.model';
-import { stripUndefinedDeep } from '../domain/profile.utils';
+import { CandidateProfile } from '@features/profile/domain/profile.model';
+import { stripUndefinedDeep } from '@features/profile/domain/profile.utils';
 
 @Injectable({ providedIn: 'root' })
 export class ProfileRepository {

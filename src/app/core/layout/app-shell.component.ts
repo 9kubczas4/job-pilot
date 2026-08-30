@@ -3,7 +3,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AppLinks, AppProfileMenuLinks } from '@core/app-paths';
 import { AuthService } from '@core/infrastructure/auth/auth.service';
-import { AppLogoComponent } from '@shared/ui/app-logo/app-logo.component';
+import { LogoComponent } from '@shared/ui/logo/logo.component';
 import { ProfileMenuComponent } from '@shared/ui/profile-menu/profile-menu.component';
 import { ThemeToggleComponent } from '@core/layout/theme-toggle/theme-toggle.component';
 
@@ -15,7 +15,7 @@ const MOBILE_SHELL_QUERY = '(max-width: 64rem)';
   imports: [
     RouterLink,
     RouterLinkActive,
-    AppLogoComponent,
+    LogoComponent,
     ProfileMenuComponent,
     ThemeToggleComponent,
   ],

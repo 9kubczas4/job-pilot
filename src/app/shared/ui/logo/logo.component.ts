@@ -8,10 +8,10 @@ import { RouterLink } from '@angular/router';
   host: {
     '[class.logo-host--compact]': 'compact()',
   },
-  templateUrl: './app-logo.component.html',
-  styleUrl: './app-logo.component.scss',
+  templateUrl: './logo.component.html',
+  styleUrl: './logo.component.scss',
 })
-export class AppLogoComponent {
+export class LogoComponent {
   readonly compact = input(false);
   readonly homeLink = input<string | readonly string[]>('/');
 }

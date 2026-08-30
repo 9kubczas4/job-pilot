@@ -20,7 +20,7 @@ import { AuthService } from '@core/infrastructure/auth/auth.service';
 import { AppShellComponent } from '@core/layout/app-shell.component';
 import { HeaderUiStore } from '../../state/header-ui.store';
 import { AuthPromptDialogComponent } from '@shared/ui/auth-prompt-dialog/auth-prompt-dialog.component';
-import { AppLogoComponent } from '@shared/ui/app-logo/app-logo.component';
+import { LogoComponent } from '@shared/ui/logo/logo.component';
 import { FilterDrawerComponent } from '@shared/ui/filter-drawer/filter-drawer.component';
 import { JobFilterDrawerComponent } from '../../ui/job-filter-drawer/job-filter-drawer.component';
 import { JobHeaderFiltersComponent } from '../../ui/job-header-filters/job-header-filters.component';
@@ -62,7 +62,7 @@ const MOBILE_LAYOUT_QUERY = '(max-width: 60rem)';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     AppShellComponent,
-    AppLogoComponent,
+    LogoComponent,
     AuthPromptDialogComponent,
     FilterDrawerComponent,
     JobFilterDrawerComponent,

@@ -3,7 +3,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { isPlatformBrowser } from '@angular/common';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { filter } from 'rxjs';
-import { AppLinks } from '@app/app-paths';
+import { AppLinks, AppProfileMenuLinks } from '@core/app-paths';
+import { AuthService } from '@core/auth/auth.service';
 import { HeaderUiStore } from '@shared/state/header-ui.store';
 import { AppLogoComponent } from '@shared/ui/app-logo/app-logo.component';
 import { FilterDrawerComponent } from '@shared/ui/filter-drawer/filter-drawer.component';
@@ -29,8 +30,10 @@ const MOBILE_SHELL_QUERY = '(max-width: 64rem)';
   styleUrl: './app-shell.component.scss',
 })
 export class AppShellComponent {
+  readonly auth = inject(AuthService);
   readonly headerUi = inject(HeaderUiStore);
   readonly links = AppLinks;
+  readonly profileMenuLinks = AppProfileMenuLinks;
   readonly isMobileLayout = signal(false);
 
   private readonly router = inject(Router);

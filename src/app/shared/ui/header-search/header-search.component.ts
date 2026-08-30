@@ -4,10 +4,10 @@ import {
   DestroyRef,
   ElementRef,
   inject,
+  input,
   signal,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { AppLinks } from '@app/app-paths';
 import {
   DEFAULT_SEARCH_RADIUS_KM,
   JobSearchSuggestion,
@@ -30,6 +30,8 @@ const SEARCH_DEBOUNCE_MS = 400;
   styleUrl: './header-search.component.scss',
 })
 export class HeaderSearchComponent {
+  readonly jobsLink = input.required<readonly string[]>();
+
   readonly headerUi = inject(HeaderUiStore);
   readonly radiusOptions = SEARCH_RADIUS_OPTIONS_KM;
 
@@ -151,7 +153,6 @@ export class HeaderSearchComponent {
     }
   }
 
-  readonly links = AppLinks;
   readonly defaultRadius = DEFAULT_SEARCH_RADIUS_KM;
 
   private scheduleApplySearch(): void {
@@ -175,7 +176,7 @@ export class HeaderSearchComponent {
     }
 
     void this.router
-      .navigate(this.links.jobs, { queryParams: this.buildQueryParams() })
+      .navigate(this.jobsLink(), { queryParams: this.buildQueryParams() })
       .then((success) => {
         if (success) {
           this.headerUi.applySearch();

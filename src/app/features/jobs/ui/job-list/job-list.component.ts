@@ -13,7 +13,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 import { fromEvent } from 'rxjs';
-import { AppLinks } from '@app/app-paths';
+import { AppLinks } from '@core/app-paths';
 import { HeaderUiStore } from '@shared/state/header-ui.store';
 import { JobCardComponent } from '../job-card/job-card.component';
 import { JobSortMenuComponent, SortMenuOption } from '../job-sort-menu/job-sort-menu.component';

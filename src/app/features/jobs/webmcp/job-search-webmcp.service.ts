@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { AppLinks } from '@app/app-paths';
+import { AppLinks } from '@core/app-paths';
 import { DEFAULT_SEARCH_RADIUS_KM } from '@shared/models/header-search.model';
 import { JobSearchToolResult } from './job-search-tool-result.model';
 import { HeaderUiStore } from '@shared/state/header-ui.store';

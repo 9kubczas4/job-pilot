@@ -6,13 +6,13 @@ import {
   ElementRef,
   inject,
   input,
+  output,
   signal,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { filter } from 'rxjs';
-import { AppLinks } from '@app/app-paths';
-import { AuthService } from '@core/auth/auth.service';
+import { ProfileMenuLinks } from '@shared/models/profile-menu.model';
 
 @Component({
   selector: 'app-profile-menu',
@@ -29,9 +29,13 @@ import { AuthService } from '@core/auth/auth.service';
 })
 export class ProfileMenuComponent {
   readonly compact = input(false);
+  readonly loading = input(false);
+  readonly authenticated = input(false);
+  readonly displayName = input<string | null>(null);
+  readonly links = input.required<ProfileMenuLinks>();
 
-  readonly auth = inject(AuthService);
-  readonly links = AppLinks;
+  readonly signIn = output<void>();
+  readonly signOut = output<void>();
 
   private readonly host = inject(ElementRef<HTMLElement>);
   private readonly router = inject(Router);
@@ -40,7 +44,7 @@ export class ProfileMenuComponent {
   readonly menuOpen = signal(false);
 
   readonly userInitials = computed(() => {
-    const name = this.auth.user()?.displayName?.trim();
+    const name = this.displayName()?.trim();
     if (!name) {
       return '?';
     }
@@ -66,13 +70,13 @@ export class ProfileMenuComponent {
     this.menuOpen.set(false);
   }
 
-  signIn(): void {
-    void this.auth.signInWithGoogle();
+  onSignIn(): void {
+    this.signIn.emit();
   }
 
-  signOut(): void {
+  onSignOut(): void {
     this.closeMenu();
-    void this.auth.signOut();
+    this.signOut.emit();
   }
 
   onDocumentClick(event: Event): void {

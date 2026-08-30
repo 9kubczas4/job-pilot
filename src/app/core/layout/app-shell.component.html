@@ -5,7 +5,7 @@
     </div>
 
     <div class="app-header__search">
-      <app-header-search />
+      <app-header-search [jobsLink]="links.jobs" />
     </div>
 
     <a [routerLink]="links.jobs" class="app-header__jobs-link">
@@ -49,7 +49,15 @@
 
       <div class="app-auth">
         <app-theme-toggle [compact]="isMobileLayout()" />
-        <app-profile-menu [compact]="isMobileLayout()" />
+        <app-profile-menu
+          [compact]="isMobileLayout()"
+          [links]="profileMenuLinks"
+          [loading]="auth.loading()"
+          [authenticated]="auth.isAuthenticated()"
+          [displayName]="auth.user()?.displayName ?? null"
+          (signIn)="auth.signInWithGoogle()"
+          (signOut)="auth.signOut()"
+        />
       </div>
     </div>
   </header>

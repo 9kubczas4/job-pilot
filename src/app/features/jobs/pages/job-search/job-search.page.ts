@@ -15,7 +15,7 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AppLinks } from '@app/app-paths';
+import { AppLinks, AppProfileMenuLinks } from '@core/app-paths';
 import { AuthService } from '@core/auth/auth.service';
 import { AppShellComponent } from '@core/layout/app-shell.component';
 import { HeaderUiStore } from '@shared/state/header-ui.store';
@@ -79,6 +79,7 @@ export class JobSearchPageComponent implements OnInit {
   readonly headerUi = inject(HeaderUiStore);
   readonly auth = inject(AuthService);
   readonly links = AppLinks;
+  readonly profileMenuLinks = AppProfileMenuLinks;
   private readonly toast = inject(ToastService);
 
   readonly isMobileLayout = signal(false);

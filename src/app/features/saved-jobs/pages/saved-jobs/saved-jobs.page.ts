@@ -4,7 +4,7 @@ import { AppShellComponent } from '@core/layout/app-shell.component';
 import { enableAppShellPageScroll } from '@core/layout/enable-app-shell-page-scroll';
 import { AuthService } from '@core/auth/auth.service';
 import { ToastService } from '@shared/ui/toast/toast.service';
-import { AppLinks } from '@app/app-paths';
+import { AppLinks } from '@core/app-paths';
 import { JobCardComponent } from '@features/jobs/ui/job-card/job-card.component';
 import { JobSearchStore } from '@features/jobs/state/job-search.store';
 import { SavedJobsStore } from '../../state/saved-jobs.store';

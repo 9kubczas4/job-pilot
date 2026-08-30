@@ -11,7 +11,7 @@ import {
 import { Router } from '@angular/router';
 import { GoogleMap } from '@angular/google-maps';
 import { Cluster, MarkerClusterer } from '@googlemaps/markerclusterer';
-import { AppLinks } from '@app/app-paths';
+import { AppLinks } from '@core/app-paths';
 import { ResolvedTheme, ThemeService } from '@core/theme/theme.service';
 import { GOOGLE_MAPS_API_KEY } from '@shared/map/google-maps-config';
 import { isGoogleMapsConfigured } from '@shared/map/google-maps-loader';

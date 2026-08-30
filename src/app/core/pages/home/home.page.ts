@@ -10,7 +10,7 @@ import {
 import { isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { AppShellComponent } from '@core/layout/app-shell.component';
-import { AppLinks } from '@app/app-paths';
+import { AppLinks } from '@core/app-paths';
 
 interface LandingFeature {
   icon: string;

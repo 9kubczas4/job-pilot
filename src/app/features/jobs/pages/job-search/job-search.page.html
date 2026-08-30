@@ -42,14 +42,22 @@
 
         <app-theme-toggle [compact]="true" />
 
-        <app-profile-menu [compact]="true" />
+        <app-profile-menu
+          [compact]="true"
+          [links]="profileMenuLinks"
+          [loading]="auth.loading()"
+          [authenticated]="auth.isAuthenticated()"
+          [displayName]="auth.user()?.displayName ?? null"
+          (signIn)="auth.signInWithGoogle()"
+          (signOut)="auth.signOut()"
+        />
       </div>
     </header>
 
     @if (searchExpanded()) {
       <div class="jobs-mobile__search-panel" role="dialog" aria-label="Search jobs">
         <div class="jobs-mobile__search-panel-inner">
-          <app-header-search />
+          <app-header-search [jobsLink]="links.jobs" />
           <button type="button" class="jobs-mobile__search-done" (click)="closeSearch()">Done</button>
         </div>
       </div>

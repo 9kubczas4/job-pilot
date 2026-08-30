@@ -1,11 +1,11 @@
-@if (auth.loading()) {
+@if (loading()) {
   <div class="profile-menu__loading" aria-label="Loading account" aria-busy="true">
     <span class="profile-menu__loading-avatar"></span>
     @if (!compact()) {
       <span class="profile-menu__loading-label"></span>
     }
   </div>
-} @else if (auth.isAuthenticated()) {
+} @else if (authenticated()) {
   <div class="profile-menu">
     <button
       type="button"
@@ -18,7 +18,7 @@
     >
       <span class="profile-menu__avatar" aria-hidden="true">{{ userInitials() }}</span>
       @if (!compact()) {
-        <span class="profile-menu__name">{{ auth.user()?.displayName ?? 'Profile' }}</span>
+        <span class="profile-menu__name">{{ displayName() ?? 'Profile' }}</span>
         <svg class="profile-menu__chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
           <path
             d="M7 10 L12 15 L17 10"
@@ -35,7 +35,7 @@
     @if (menuOpen()) {
       <div id="profile-menu-panel" class="profile-menu__popover" role="menu">
         <a
-          [routerLink]="links.saved"
+          [routerLink]="links().saved"
           routerLinkActive="is-active"
           class="profile-menu__item"
           role="menuitem"
@@ -44,7 +44,7 @@
           Saved
         </a>
         <a
-          [routerLink]="links.applications"
+          [routerLink]="links().applications"
           routerLinkActive="is-active"
           class="profile-menu__item"
           role="menuitem"
@@ -53,7 +53,7 @@
           Applications
         </a>
         <a
-          [routerLink]="links.profile"
+          [routerLink]="links().profile"
           routerLinkActive="is-active"
           class="profile-menu__item"
           role="menuitem"
@@ -65,7 +65,7 @@
           type="button"
           class="profile-menu__item profile-menu__item--danger"
           role="menuitem"
-          (click)="signOut()"
+          (click)="onSignOut()"
         >
           Sign out
         </button>
@@ -73,5 +73,5 @@
     }
   </div>
 } @else {
-  <button type="button" class="btn btn-primary profile-menu__sign-in" (click)="signIn()">Sign in</button>
+  <button type="button" class="btn btn-primary profile-menu__sign-in" (click)="onSignIn()">Sign in</button>
 }

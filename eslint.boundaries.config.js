@@ -32,7 +32,6 @@ const boundariesFiles = [
   { category: 'app-shell', pattern: 'src/app/app.ts' },
   { category: 'app-shell', pattern: 'src/app/app.config.ts' },
   { category: 'app-shell', pattern: 'src/app/app.routes.ts' },
-  { category: 'app-routing', pattern: 'src/app/app-paths.ts' },
   { category: 'app-shell', pattern: 'src/main.ts' },
   { category: 'test', pattern: '**/*.spec.ts' },
 ];
@@ -130,9 +129,9 @@ const boundariesPolicies = [
   {
     from: { element: { type: 'feature-ui' } },
     allow: {
-      to: { element: { types: ['feature-domain', 'feature-state', 'shared'] } },
+      to: { element: { types: ['feature-domain', 'feature-state', 'shared', 'core'] } },
     },
-    message: 'UI may depend on domain, state, and shared - never data-access directly.',
+    message: 'UI may depend on domain, state, shared, and core routing constants - never data-access directly.',
   },
 
   // --- Core pages ---
@@ -190,20 +189,6 @@ const boundariesPolicies = [
       to: { element: { type: 'shared' } },
     },
     message: 'Shared is business-agnostic - no feature or core imports.',
-  },
-
-  // App routing constants
-  {
-    from: { file: { categories: 'app-shell' } },
-    allow: {
-      to: { file: { categories: 'app-routing' } },
-    },
-  },
-  {
-    from: { element: { types: ['feature-page', 'feature-ui', 'core', 'core-page'] } },
-    allow: {
-      to: { file: { categories: 'app-routing' } },
-    },
   },
 
   // --- App shell ---

@@ -35,16 +35,16 @@ src/app/
 | **domain** | `features/*/domain/` | external packages, sibling feature domain |
 | **data-access** | `features/*/data-access/` | domain, core |
 | **state** | `features/*/state/` | domain, data-access, core |
-| **ui** | `features/*/ui/` | domain, state, shared, sibling ui |
+| **ui** | `features/*/ui/` | domain, state, shared, core, sibling ui |
 | **page** | `features/*/pages/` | ui, state, domain, shared, core |
 | **webmcp** | `features/*/webmcp/` | state, domain, data-access, shared |
 | **core** | `src/app/core/` (excl. pages) | shared |
 | **core-page** | `src/app/core/pages/` | core, shared |
 | **shared** | `src/app/shared/` | shared, external |
 
-App shell files (`app.ts`, `app.config.ts`, `app.routes.ts`, `main.ts`) may import core, feature pages, feature webmcp, and shared.
+Route constants live in `core/app-paths.ts` and may be imported by pages, UI, and core.
 
-Route constants live in `app-paths.ts` and may be imported by pages, UI, and core.
+App shell files (`app.ts`, `app.config.ts`, `app.routes.ts`, `main.ts`) may import core, feature pages, feature webmcp, and shared.
 
 ## Rules in plain language
 

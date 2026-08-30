@@ -16,7 +16,7 @@ import { map } from 'rxjs';
 import { AppShellComponent } from '@core/layout/app-shell.component';
 import { enableAppShellPageScroll } from '@core/layout/enable-app-shell-page-scroll';
 import { AuthService } from '@core/auth/auth.service';
-import { AppLinks } from '@app/app-paths';
+import { AppLinks } from '@core/app-paths';
 import { SavedJobsStore } from '@features/saved-jobs/state/saved-jobs.store';
 import { AuthPromptDialogComponent } from '@shared/ui/auth-prompt-dialog/auth-prompt-dialog.component';
 import { SaveJobButtonComponent } from '@shared/ui/save-job-button/save-job-button.component';

@@ -18,3 +18,9 @@ export const AppLinks = {
   saved: ['/', RoutePaths.saved] as const,
   applications: ['/', RoutePaths.applications] as const,
 };
+
+export const AppProfileMenuLinks = {
+  saved: AppLinks.saved,
+  applications: AppLinks.applications,
+  profile: AppLinks.profile,
+} as const;

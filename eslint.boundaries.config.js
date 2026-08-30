@@ -65,7 +65,6 @@ const boundariesFiles = [
   { category: 'app-shell', pattern: 'src/main.ts' },
   { category: 'app-shell', pattern: 'src/main.server.ts' },
   { category: 'app-shell', pattern: 'src/server.ts' },
-  { category: 'app-shell', pattern: 'src/app/prerender/**' },
   { category: 'core-domains', pattern: 'src/app/core/domains/**' },
   { category: 'core-infrastructure', pattern: 'src/app/core/infrastructure/**' },
   { category: 'core-layout', pattern: 'src/app/core/layout/**' },
@@ -84,7 +83,6 @@ const appShellFiles = [
   'src/main.ts',
   'src/main.server.ts',
   'src/server.ts',
-  'src/app/prerender/**/*.ts',
 ];
 
 const sameFeature = {

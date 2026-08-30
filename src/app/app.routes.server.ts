@@ -1,5 +1,12 @@
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { PrerenderFallback, RenderMode, ServerRoute } from '@angular/ssr';
-import { getJobPrerenderParams } from './prerender/job-prerender-params';
+
+function getJobPrerenderParams(): { id: string }[] {
+  const seedPath = join(process.cwd(), 'src/assets/seed/jobs.json');
+  const jobs = JSON.parse(readFileSync(seedPath, 'utf-8')) as { id: string }[];
+  return jobs.map((job) => ({ id: job.id }));
+}
 
 /**
  * Hybrid render modes for production builds.

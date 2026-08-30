@@ -1,5 +1,9 @@
 # Job Pilot
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
+Open source under the [MIT License](LICENSE).
+
 A modern job board for humans and AI agents, built for the [OpenAI WebMCP Challenge](https://webmcp.devpost.com/).
 
 Job Pilot combines a browsing experience with [Angular 22 experimental WebMCP support](https://angular.dev/ai/webmcp). Humans browse, filter, and inspect jobs in the browser. Codex completes profiles, searches offers, saves jobs, and applies - all through tools that operate on the same domain model as the UI.
@@ -189,7 +193,7 @@ features/{name}/
 ## Hackathon Submission Checklist
 
 - [ ] Live URL accessible in ChatGPT browser / Chrome 149+ with WebMCP enabled
-- [ ] Public GitHub repo with MIT license
+- [x] Public GitHub repo with MIT license ([`LICENSE`](LICENSE) — detected in repo About)
 - [ ] README explains WebMCP implementation
 - [ ] YouTube demo video (<3 min)
 - [ ] Judge test credentials (if auth required)

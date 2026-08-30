@@ -98,7 +98,13 @@
       (closed)="headerUi.closeFilters()"
     >
       <section filter-panel>
-        <app-job-filters />
+        <app-job-filters
+          [criteria]="store.criteria()"
+          [topSkills]="filterTopSkills()"
+          (criteriaChange)="onFiltersCriteriaChange($event)"
+          (chipRemoved)="onFilterChipRemoved($event)"
+          (clearAll)="onFiltersClearAll()"
+        />
       </section>
     </app-filter-drawer>
   </div>
@@ -119,7 +125,13 @@
       (closed)="headerUi.closeFilters()"
     >
       <section filter-panel>
-        <app-job-filters />
+        <app-job-filters
+          [criteria]="store.criteria()"
+          [topSkills]="filterTopSkills()"
+          (criteriaChange)="onFiltersCriteriaChange($event)"
+          (chipRemoved)="onFilterChipRemoved($event)"
+          (clearAll)="onFiltersClearAll()"
+        />
       </section>
     </app-job-filter-drawer>
 

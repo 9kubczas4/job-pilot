@@ -54,6 +54,8 @@ import {
 } from '@features/jobs/ui/job-results-sheet/job-results-sheet.component';
 import { JobSearchCriteria, JobSortOption } from '@features/jobs/domain/search.model';
 import { DEFAULT_JOB_SORT, availableSortOptions } from '@features/jobs/domain/job-sort.utils';
+import { extractTopSkills } from '@features/jobs/domain/job-filter.utils';
+import { DEFAULT_SEARCH_RADIUS_KM } from '@features/jobs/domain/header-search.model';
 
 const MOBILE_LAYOUT_QUERY = '(max-width: 60rem)';
 
@@ -136,6 +138,7 @@ export class JobSearchPageComponent implements OnInit {
     return { lat: locationLat, lng: locationLng };
   });
   readonly searchMapRadiusKm = computed(() => this.store.criteria().radiusKm);
+  readonly filterTopSkills = computed(() => extractTopSkills(this.store.allJobs()));
 
   constructor() {
     this.headerUi.enableFilters();
@@ -285,6 +288,76 @@ export class JobSearchPageComponent implements OnInit {
     this.store.patchCriteria({
       sort: value === DEFAULT_JOB_SORT ? undefined : value,
     });
+  }
+
+  onFiltersCriteriaChange(partial: Partial<JobSearchCriteria>): void {
+    this.store.patchCriteria(partial);
+  }
+
+  onFilterChipRemoved(key: string): void {
+    if (key === 'query') {
+      this.store.patchCriteria({ query: undefined });
+      this.headerUi.searchQuery.set('');
+      return;
+    }
+
+    if (key === 'location') {
+      this.store.patchCriteria({
+        locations: undefined,
+        locationLat: undefined,
+        locationLng: undefined,
+        radiusKm: undefined,
+      });
+      this.headerUi.locationQuery.set('');
+      this.headerUi.locationLat.set(undefined);
+      this.headerUi.locationLng.set(undefined);
+      return;
+    }
+
+    if (key === 'salaryMin') {
+      this.store.patchCriteria({ salaryMin: undefined });
+      return;
+    }
+
+    const [type, value] = key.split(':');
+    const criteria = this.store.criteria();
+
+    if (type === 'workplace') {
+      this.store.patchCriteria({
+        workplace: criteria.workplace?.filter((item) => item !== value) as typeof criteria.workplace,
+      });
+    }
+    if (type === 'seniority') {
+      this.store.patchCriteria({
+        seniority: criteria.seniority?.filter((item) => item !== value) as typeof criteria.seniority,
+      });
+    }
+    if (type === 'contract') {
+      this.store.patchCriteria({
+        contracts: criteria.contracts?.filter((item) => item !== value) as typeof criteria.contracts,
+      });
+    }
+    if (type === 'schedule') {
+      this.store.patchCriteria({
+        workSchedules: criteria.workSchedules?.filter(
+          (item) => item !== value,
+        ) as typeof criteria.workSchedules,
+      });
+    }
+    if (type === 'skill') {
+      this.store.patchCriteria({
+        skills: criteria.skills?.filter((item) => item !== value),
+      });
+    }
+  }
+
+  onFiltersClearAll(): void {
+    this.store.clearCriteria();
+    this.headerUi.searchQuery.set('');
+    this.headerUi.locationQuery.set('');
+    this.headerUi.locationLat.set(undefined);
+    this.headerUi.locationLng.set(undefined);
+    this.headerUi.radiusKm.set(DEFAULT_SEARCH_RADIUS_KM);
   }
 
   onToggleSaveJob(jobId: string): void {

@@ -1,8 +1,6 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
-import { HeaderUiStore } from '@features/jobs/state/header-ui.store';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { CONTRACT_OPTIONS, SENIORITY_OPTIONS } from '@features/jobs/domain/job-options';
 import {
-  extractTopSkills,
   isArrayCriteriaActive,
   toggleArrayCriteria,
 } from '@features/jobs/domain/job-filter.utils';
@@ -14,7 +12,7 @@ import {
   formatWorkSchedule,
 } from '@features/jobs/domain/job-formatters';
 import { ContractType, SeniorityLevel, WorkSchedule, WorkplaceMode } from '@features/jobs/domain/job.model';
-import { JobSearchStore } from '@features/jobs/state/job-search.store';
+import { JobSearchCriteria } from '@features/jobs/domain/search.model';
 
 const WORK_SCHEDULE_OPTIONS = [
   { value: 'full-time' as const, label: 'Full-time' },
@@ -38,16 +36,18 @@ const SALARY_MIN_OPTIONS = [
   styleUrl: './job-filters.component.scss',
 })
 export class JobFiltersComponent {
-  readonly store = inject(JobSearchStore);
-  private readonly headerUi = inject(HeaderUiStore);
+  readonly criteria = input.required<JobSearchCriteria>();
+  readonly topSkills = input<string[]>([]);
+
+  readonly criteriaChange = output<Partial<JobSearchCriteria>>();
+  readonly chipRemoved = output<string>();
+  readonly clearAll = output<void>();
 
   readonly workplaceOptions = ['remote', 'hybrid', 'onsite'] as const;
   readonly seniorityOptions = SENIORITY_OPTIONS;
   readonly contractOptions = CONTRACT_OPTIONS;
   readonly scheduleOptions = WORK_SCHEDULE_OPTIONS;
   readonly salaryMinOptions = SALARY_MIN_OPTIONS;
-
-  readonly topSkills = computed(() => extractTopSkills(this.store.allJobs()));
 
   readonly formatWorkplaceMode = formatWorkplaceMode;
   readonly formatSeniorityLevel = formatSeniorityLevel;
@@ -56,73 +56,73 @@ export class JobFiltersComponent {
   readonly formatTagLabel = formatTagLabel;
 
   isWorkplaceActive(option: WorkplaceMode): boolean {
-    return isArrayCriteriaActive(this.store.criteria().workplace, option);
+    return isArrayCriteriaActive(this.criteria().workplace, option);
   }
 
   toggleWorkplace(option: WorkplaceMode): void {
-    const criteria = this.store.criteria();
-    this.store.patchCriteria({
+    const criteria = this.criteria();
+    this.criteriaChange.emit({
       workplace: toggleArrayCriteria(criteria.workplace, option),
     });
   }
 
   isSeniorityActive(option: SeniorityLevel): boolean {
-    return isArrayCriteriaActive(this.store.criteria().seniority, option);
+    return isArrayCriteriaActive(this.criteria().seniority, option);
   }
 
   toggleSeniority(option: SeniorityLevel): void {
-    const criteria = this.store.criteria();
-    this.store.patchCriteria({
+    const criteria = this.criteria();
+    this.criteriaChange.emit({
       seniority: toggleArrayCriteria(criteria.seniority, option),
     });
   }
 
   isContractActive(option: ContractType): boolean {
-    return isArrayCriteriaActive(this.store.criteria().contracts, option);
+    return isArrayCriteriaActive(this.criteria().contracts, option);
   }
 
   toggleContract(option: ContractType): void {
-    const criteria = this.store.criteria();
-    this.store.patchCriteria({
+    const criteria = this.criteria();
+    this.criteriaChange.emit({
       contracts: toggleArrayCriteria(criteria.contracts, option),
     });
   }
 
   isScheduleActive(option: WorkSchedule): boolean {
-    return isArrayCriteriaActive(this.store.criteria().workSchedules, option);
+    return isArrayCriteriaActive(this.criteria().workSchedules, option);
   }
 
   toggleSchedule(option: WorkSchedule): void {
-    const criteria = this.store.criteria();
-    this.store.patchCriteria({
+    const criteria = this.criteria();
+    this.criteriaChange.emit({
       workSchedules: toggleArrayCriteria(criteria.workSchedules, option),
     });
   }
 
   isSkillActive(skill: string): boolean {
-    return isArrayCriteriaActive(this.store.criteria().skills, skill);
+    return isArrayCriteriaActive(this.criteria().skills, skill);
   }
 
   toggleSkill(skill: string): void {
-    const criteria = this.store.criteria();
-    this.store.patchCriteria({
+    const criteria = this.criteria();
+    this.criteriaChange.emit({
       skills: toggleArrayCriteria(criteria.skills, skill),
     });
   }
 
   isSalaryMinActive(value: number): boolean {
-    return this.store.criteria().salaryMin === value;
+    return this.criteria().salaryMin === value;
   }
 
   toggleSalaryMin(value: number): void {
-    const current = this.store.criteria().salaryMin;
-    this.store.patchCriteria({
+    const current = this.criteria().salaryMin;
+    this.criteriaChange.emit({
       salaryMin: current === value ? undefined : value,
     });
   }
 
   activeChips(): { key: string; label: string }[] {
-    const criteria = this.store.criteria();
+    const criteria = this.criteria();
     const chips: { key: string; label: string }[] = [];
 
     if (criteria.query) {
@@ -162,59 +162,10 @@ export class JobFiltersComponent {
   }
 
   removeChip(key: string): void {
-    if (key === 'query') {
-      this.store.patchCriteria({ query: undefined });
-      this.headerUi.searchQuery.set('');
-      return;
-    }
+    this.chipRemoved.emit(key);
+  }
 
-    if (key === 'location') {
-      this.store.patchCriteria({
-        locations: undefined,
-        locationLat: undefined,
-        locationLng: undefined,
-        radiusKm: undefined,
-      });
-      this.headerUi.locationQuery.set('');
-      this.headerUi.locationLat.set(undefined);
-      this.headerUi.locationLng.set(undefined);
-      return;
-    }
-
-    if (key === 'salaryMin') {
-      this.store.patchCriteria({ salaryMin: undefined });
-      return;
-    }
-
-    const [type, value] = key.split(':');
-    const criteria = this.store.criteria();
-
-    if (type === 'workplace') {
-      this.store.patchCriteria({
-        workplace: criteria.workplace?.filter((item) => item !== value) as typeof criteria.workplace,
-      });
-    }
-    if (type === 'seniority') {
-      this.store.patchCriteria({
-        seniority: criteria.seniority?.filter((item) => item !== value) as typeof criteria.seniority,
-      });
-    }
-    if (type === 'contract') {
-      this.store.patchCriteria({
-        contracts: criteria.contracts?.filter((item) => item !== value) as typeof criteria.contracts,
-      });
-    }
-    if (type === 'schedule') {
-      this.store.patchCriteria({
-        workSchedules: criteria.workSchedules?.filter(
-          (item) => item !== value,
-        ) as typeof criteria.workSchedules,
-      });
-    }
-    if (type === 'skill') {
-      this.store.patchCriteria({
-        skills: criteria.skills?.filter((item) => item !== value),
-      });
-    }
+  onClearAll(): void {
+    this.clearAll.emit();
   }
 }

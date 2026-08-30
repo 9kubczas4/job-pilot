@@ -4,7 +4,7 @@ import { MatDatepicker, MatDatepickerModule } from '@angular/material/datepicker
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MAT_DATE_FORMATS, provideNativeDateAdapter } from '@angular/material/core';
-import { formatMonthValue, isFutureMonth, parseMonthValue, startOfCurrentMonth } from '../../domain/month-date.utils';
+import { formatMonthValue, isFutureMonth, parseMonthValue, startOfCurrentMonth } from '@features/profile/domain/month-date.utils';
 
 const MONTH_DATE_FORMATS = {
   parse: {

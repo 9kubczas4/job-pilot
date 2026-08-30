@@ -1,8 +1,8 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { AuthService } from '@core/infrastructure/auth/auth.service';
-import { CandidateProfile } from '../domain/profile.model';
-import { stripUndefinedDeep } from '../domain/profile.utils';
-import { ProfileRepository } from '../data-access/profile.repository';
+import { CandidateProfile } from '@features/profile/domain/profile.model';
+import { stripUndefinedDeep } from '@features/profile/domain/profile.utils';
+import { ProfileRepository } from '@features/profile/data-access/profile.repository';
 
 @Injectable({ providedIn: 'root' })
 export class ProfileStore {

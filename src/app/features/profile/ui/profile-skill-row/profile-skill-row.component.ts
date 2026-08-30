@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, input, output } from '@an
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatIconModule } from '@angular/material/icon';
-import { CandidateSkill } from '../../domain/profile.model';
+import { CandidateSkill } from '@features/profile/domain/profile.model';
 
 @Component({
   selector: 'app-profile-skill-row',

@@ -27,7 +27,7 @@ import {
   createEmptyProfileFormModel,
   createEmptyWorkEntry,
   ProfileFormModel,
-} from '../../domain/profile.model';
+} from '@features/profile/domain/profile.model';
 import {
   formModelToCandidateProfile,
   parseDisplayName,
@@ -37,11 +37,11 @@ import {
   profileToFormModel,
   stripUndefinedDeep,
   validateProfileDraft,
-} from '../../domain/profile.utils';
+} from '@features/profile/domain/profile.utils';
 import { JobHeaderSearchComponent } from '@features/jobs/ui/job-header-search/job-header-search.component';
-import { ProfileMonthPickerComponent } from '../../ui/profile-month-picker/profile-month-picker.component';
-import { ProfileSkillRowComponent } from '../../ui/profile-skill-row/profile-skill-row.component';
-import { ProfileStore } from '../../state/profile.store';
+import { ProfileMonthPickerComponent } from '@features/profile/ui/profile-month-picker/profile-month-picker.component';
+import { ProfileSkillRowComponent } from '@features/profile/ui/profile-skill-row/profile-skill-row.component';
+import { ProfileStore } from '@features/profile/state/profile.store';
 
 @Component({
   selector: 'app-profile-page',
@@ -81,7 +81,7 @@ export class ProfilePageComponent {
     this.profileModel,
     (field) => {
       applyEach(field.workHistory, (entry) => {
-        disabled(entry.endDate, ({ valueOf }) => valueOf(entry.current));
+        disabled(entry.endDate, { when: ({ valueOf }) => valueOf(entry.current) });
       });
     },
     {

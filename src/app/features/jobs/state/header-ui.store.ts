@@ -3,8 +3,8 @@ import {
   DEFAULT_SEARCH_RADIUS_KM,
   JobSearchSuggestion,
   LocationSearchSuggestion,
-} from '../domain/header-search.model';
-import { JobSearchCriteria } from '../domain/search.model';
+} from '@features/jobs/domain/header-search.model';
+import { JobSearchCriteria } from '@features/jobs/domain/search.model';
 
 const HIDE_SCROLL_ACCUMULATED_PX = 56;
 const SHOW_SCROLL_ACCUMULATED_PX = 20;

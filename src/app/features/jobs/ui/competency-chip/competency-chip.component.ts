@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
-import { JobCompetency } from '../../domain/job.model';
-import { formatTagLabel } from '../../domain/job-formatters';
-import { normalizeCompetencyScale } from '../../domain/job-competency.utils';
+import { JobCompetency } from '@features/jobs/domain/job.model';
+import { formatTagLabel } from '@features/jobs/domain/job-formatters';
+import { normalizeCompetencyScale } from '@features/jobs/domain/job-competency.utils';
 
 @Component({
   selector: 'app-competency-chip',

@@ -1,9 +1,9 @@
 import { effect, inject, Injectable } from '@angular/core';
-import { buildCityCentersFromJobs } from '../domain/city-catalog';
+import { buildCityCentersFromJobs } from '@features/jobs/domain/city-catalog';
 import {
   buildJobSearchSuggestions,
   buildLocationSearchSuggestions,
-} from '../domain/search-suggestions';
+} from '@features/jobs/domain/search-suggestions';
 import { HeaderUiStore } from './header-ui.store';
 import { JobSearchStore } from './job-search.store';
 

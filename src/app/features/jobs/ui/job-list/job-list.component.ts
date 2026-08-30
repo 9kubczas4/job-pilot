@@ -14,10 +14,10 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 import { fromEvent } from 'rxjs';
 import { AppLinks } from '@core/app-paths';
-import { HeaderUiStore } from '../../state/header-ui.store';
-import { JobCardComponent } from '../job-card/job-card.component';
-import { JobSortMenuComponent, SortMenuOption } from '../job-sort-menu/job-sort-menu.component';
-import { JobOffer } from '../../domain/job.model';
+import { HeaderUiStore } from '@features/jobs/state/header-ui.store';
+import { JobCardComponent } from '@features/jobs/ui/job-card/job-card.component';
+import { JobSortMenuComponent, SortMenuOption } from '@features/jobs/ui/job-sort-menu/job-sort-menu.component';
+import { JobOffer } from '@features/jobs/domain/job.model';
 
 @Component({
   selector: 'app-job-list',

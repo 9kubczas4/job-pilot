@@ -18,14 +18,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AppLinks, AppProfileMenuLinks } from '@core/app-paths';
 import { AuthService } from '@core/infrastructure/auth/auth.service';
 import { AppShellComponent } from '@core/layout/app-shell.component';
-import { HeaderUiStore } from '../../state/header-ui.store';
-import { AuthPromptDialogComponent } from '../../ui/auth-prompt-dialog/auth-prompt-dialog.component';
+import { HeaderUiStore } from '@features/jobs/state/header-ui.store';
+import { AuthPromptDialogComponent } from '@features/jobs/ui/auth-prompt-dialog/auth-prompt-dialog.component';
 import { LogoComponent } from '@shared/ui/logo/logo.component';
 import { FilterDrawerComponent } from '@shared/ui/filter-drawer/filter-drawer.component';
-import { JobFilterDrawerComponent } from '../../ui/job-filter-drawer/job-filter-drawer.component';
-import { JobHeaderFiltersComponent } from '../../ui/job-header-filters/job-header-filters.component';
-import { HeaderSearchComponent } from '../../ui/header-search/header-search.component';
-import { JobHeaderSearchComponent } from '../../ui/job-header-search/job-header-search.component';
+import { JobFilterDrawerComponent } from '@features/jobs/ui/job-filter-drawer/job-filter-drawer.component';
+import { JobHeaderFiltersComponent } from '@features/jobs/ui/job-header-filters/job-header-filters.component';
+import { HeaderSearchComponent } from '@features/jobs/ui/header-search/header-search.component';
+import { JobHeaderSearchComponent } from '@features/jobs/ui/job-header-search/job-header-search.component';
 import { ProfileMenuComponent } from '@shared/ui/profile-menu/profile-menu.component';
 import { ThemeToggleComponent } from '@core/layout/theme-toggle/theme-toggle.component';
 import { ToastService } from '@shared/ui/toast/toast.service';
@@ -36,24 +36,24 @@ import {
   searchLocationEqual,
 } from '../../domain/job-search-sync.utils';
 import { buildCityCentersFromJobs, resolveCityCenter } from '../../domain/city-catalog';
-import { JobOffer } from '../../domain/job.model';
+import { JobOffer } from '@features/jobs/domain/job.model';
 import {
   criteriaToQueryParams,
   normalizeLocationCriteria,
   queryParamsEqual,
   queryParamsToCriteria,
   routeCriteriaEqual,
-} from '../../domain/search-url.utils';
-import { JobSearchStore } from '../../state/job-search.store';
-import { JobFiltersComponent } from '../../ui/job-filters/job-filters.component';
-import { JobListComponent } from '../../ui/job-list/job-list.component';
-import { JobMapComponent } from '../../ui/job-map/job-map.component';
+} from '@features/jobs/domain/search-url.utils';
+import { JobSearchStore } from '@features/jobs/state/job-search.store';
+import { JobFiltersComponent } from '@features/jobs/ui/job-filters/job-filters.component';
+import { JobListComponent } from '@features/jobs/ui/job-list/job-list.component';
+import { JobMapComponent } from '@features/jobs/ui/job-map/job-map.component';
 import {
   JobResultsSheetComponent,
   JobSheetSnap,
-} from '../../ui/job-results-sheet/job-results-sheet.component';
-import { JobSearchCriteria, JobSortOption } from '../../domain/search.model';
-import { DEFAULT_JOB_SORT, availableSortOptions } from '../../domain/job-sort.utils';
+} from '@features/jobs/ui/job-results-sheet/job-results-sheet.component';
+import { JobSearchCriteria, JobSortOption } from '@features/jobs/domain/search.model';
+import { DEFAULT_JOB_SORT, availableSortOptions } from '@features/jobs/domain/job-sort.utils';
 
 const MOBILE_LAYOUT_QUERY = '(max-width: 60rem)';
 

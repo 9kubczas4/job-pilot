@@ -1,7 +1,7 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { AuthService } from '@core/infrastructure/auth/auth.service';
-import { JobApplication } from '../domain/job-application.model';
-import { JobApplicationsRepository } from '../data-access/job-applications.repository';
+import { JobApplication } from '@features/jobs/domain/job-application.model';
+import { JobApplicationsRepository } from '@features/jobs/data-access/job-applications.repository';
 
 @Injectable({ providedIn: 'root' })
 export class JobApplicationsStore {

@@ -9,8 +9,8 @@ import {
 } from 'firebase/firestore';
 import { firstValueFrom } from 'rxjs';
 import { FIREBASE } from '@core/infrastructure/firebase/firebase.providers';
-import { normalizeJobOffer } from '../domain/job-normalizer';
-import { JobOffer } from '../domain/job.model';
+import { normalizeJobOffer } from '@features/jobs/domain/job-normalizer';
+import { JobOffer } from '@features/jobs/domain/job.model';
 import { environment } from '@environments/environment';
 
 @Injectable({ providedIn: 'root' })

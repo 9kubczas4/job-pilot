@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { HeaderUiStore } from '../../state/header-ui.store';
+import { HeaderUiStore } from '@features/jobs/state/header-ui.store';
 
 @Component({
   selector: 'app-job-header-filters',

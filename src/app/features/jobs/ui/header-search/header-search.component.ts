@@ -13,8 +13,8 @@ import {
   JobSearchSuggestion,
   LocationSearchSuggestion,
   SEARCH_RADIUS_OPTIONS_KM,
-} from '../../domain/header-search.model';
-import { HeaderUiStore } from '../../state/header-ui.store';
+} from '@features/jobs/domain/header-search.model';
+import { HeaderUiStore } from '@features/jobs/state/header-ui.store';
 
 const SEARCH_DEBOUNCE_MS = 400;
 

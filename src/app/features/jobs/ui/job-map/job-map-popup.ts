@@ -5,8 +5,8 @@ import {
   formatContractTypes,
   formatWorkSchedules,
   formatCompetency,
-} from '../../domain/job-formatters';
-import { JobOffer } from '../../domain/job.model';
+} from '@features/jobs/domain/job-formatters';
+import { JobOffer } from '@features/jobs/domain/job.model';
 
 function escapeHtml(value: string): string {
   return value

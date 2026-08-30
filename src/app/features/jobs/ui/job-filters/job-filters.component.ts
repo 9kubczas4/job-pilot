@@ -1,20 +1,20 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
-import { HeaderUiStore } from '../../state/header-ui.store';
-import { CONTRACT_OPTIONS, SENIORITY_OPTIONS } from '../../domain/job-options';
+import { HeaderUiStore } from '@features/jobs/state/header-ui.store';
+import { CONTRACT_OPTIONS, SENIORITY_OPTIONS } from '@features/jobs/domain/job-options';
 import {
   extractTopSkills,
   isArrayCriteriaActive,
   toggleArrayCriteria,
-} from '../../domain/job-filter.utils';
+} from '@features/jobs/domain/job-filter.utils';
 import {
   formatContractType,
   formatSeniorityLevel,
   formatTagLabel,
   formatWorkplaceMode,
   formatWorkSchedule,
-} from '../../domain/job-formatters';
-import { ContractType, SeniorityLevel, WorkSchedule, WorkplaceMode } from '../../domain/job.model';
-import { JobSearchStore } from '../../state/job-search.store';
+} from '@features/jobs/domain/job-formatters';
+import { ContractType, SeniorityLevel, WorkSchedule, WorkplaceMode } from '@features/jobs/domain/job.model';
+import { JobSearchStore } from '@features/jobs/state/job-search.store';
 
 const WORK_SCHEDULE_OPTIONS = [
   { value: 'full-time' as const, label: 'Full-time' },

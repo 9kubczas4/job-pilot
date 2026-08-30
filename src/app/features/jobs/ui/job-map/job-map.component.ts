@@ -16,9 +16,9 @@ import { ResolvedTheme, ThemeService } from '@core/infrastructure/theme/theme.se
 import { GOOGLE_MAPS_API_KEY } from '@shared/map/google-maps-config';
 import { isGoogleMapsConfigured } from '@shared/map/google-maps-loader';
 import { createClusterMarkerIcon, createJobMarkerIcon } from '@shared/map/google-maps-markers';
-import { DEFAULT_SEARCH_RADIUS_KM } from '../../domain/header-search.model';
+import { DEFAULT_SEARCH_RADIUS_KM } from '@features/jobs/domain/header-search.model';
 import { getMapStylesForTheme } from '@shared/map/google-maps-styles';
-import { JobLocation, JobOffer } from '../../domain/job.model';
+import { JobLocation, JobOffer } from '@features/jobs/domain/job.model';
 import {
   buildJobMapPopupHtml,
 } from './job-map-popup';

@@ -19,9 +19,9 @@ import { AuthService } from '@core/infrastructure/auth/auth.service';
 import { AppLinks } from '@core/app-paths';
 import { SavedJobsStore } from '@features/jobs/state/saved-jobs.store';
 import { JobApplicationsStore } from '@features/jobs/state/job-applications.store';
-import { AuthPromptDialogComponent } from '../../ui/auth-prompt-dialog/auth-prompt-dialog.component';
-import { JobHeaderSearchComponent } from '../../ui/job-header-search/job-header-search.component';
-import { SaveJobButtonComponent } from '../../ui/save-job-button/save-job-button.component';
+import { AuthPromptDialogComponent } from '@features/jobs/ui/auth-prompt-dialog/auth-prompt-dialog.component';
+import { JobHeaderSearchComponent } from '@features/jobs/ui/job-header-search/job-header-search.component';
+import { SaveJobButtonComponent } from '@features/jobs/ui/save-job-button/save-job-button.component';
 import {
   formatSalary,
   formatWorkplace,
@@ -31,13 +31,13 @@ import {
   formatJobDate,
   formatApplicationDeadline,
   formatWorkplaceMode,
-} from '../../domain/job-formatters';
-import { JobOffer } from '../../domain/job.model';
+} from '@features/jobs/domain/job-formatters';
+import { JobOffer } from '@features/jobs/domain/job.model';
 import { ToastService } from '@shared/ui/toast/toast.service';
-import { JobCardComponent } from '../../ui/job-card/job-card.component';
-import { CompetencyChipComponent } from '../../ui/competency-chip/competency-chip.component';
-import { ApplyJobDialogComponent } from '../../ui/apply-job-dialog/apply-job-dialog.component';
-import { JobDetailsStore } from '../../state/job-details.store';
+import { JobCardComponent } from '@features/jobs/ui/job-card/job-card.component';
+import { CompetencyChipComponent } from '@features/jobs/ui/competency-chip/competency-chip.component';
+import { ApplyJobDialogComponent } from '@features/jobs/ui/apply-job-dialog/apply-job-dialog.component';
+import { JobDetailsStore } from '@features/jobs/state/job-details.store';
 
 type AuthPromptAction = 'save' | 'apply';
 

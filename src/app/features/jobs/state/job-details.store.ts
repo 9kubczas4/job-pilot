@@ -1,7 +1,7 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
-import { findSimilarJobs } from '../domain/job-similarity.utils';
-import { JobOffer } from '../domain/job.model';
-import { JobRepository } from '../data-access/job.repository';
+import { findSimilarJobs } from '@features/jobs/domain/job-similarity.utils';
+import { JobOffer } from '@features/jobs/domain/job.model';
+import { JobRepository } from '@features/jobs/data-access/job.repository';
 
 @Injectable({ providedIn: 'root' })
 export class JobDetailsStore {

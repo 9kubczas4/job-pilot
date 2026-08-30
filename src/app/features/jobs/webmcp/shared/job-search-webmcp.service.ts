@@ -1,17 +1,17 @@
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppLinks } from '@core/app-paths';
-import { DEFAULT_SEARCH_RADIUS_KM } from '../../domain/header-search.model';
+import { DEFAULT_SEARCH_RADIUS_KM } from '@features/jobs/domain/header-search.model';
 import { JobSearchToolResult } from './job-search-tool-result.model';
-import { HeaderUiStore } from '../../state/header-ui.store';
-import { buildCityCentersFromJobs, resolveCityCenter } from '../../domain/city-catalog';
+import { HeaderUiStore } from '@features/jobs/state/header-ui.store';
+import { buildCityCentersFromJobs, resolveCityCenter } from '@features/jobs/domain/city-catalog';
 import {
   enrichLocationCriteria,
   searchLocationEqual,
-} from '../../domain/job-search-sync.utils';
-import { JobFilterCriteria } from '../../domain/search.model';
-import { criteriaToQueryParams } from '../../domain/search-url.utils';
-import { JobSearchStore } from '../../state/job-search.store';
+} from '@features/jobs/domain/job-search-sync.utils';
+import { JobFilterCriteria } from '@features/jobs/domain/search.model';
+import { criteriaToQueryParams } from '@features/jobs/domain/search-url.utils';
+import { JobSearchStore } from '@features/jobs/state/job-search.store';
 import {
   filterFieldsChanged,
   JobSearchInput,

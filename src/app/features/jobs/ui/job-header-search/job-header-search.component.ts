@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AppLinks } from '@core/app-paths';
-import { HeaderSearchComponent } from '../header-search/header-search.component';
+import { HeaderSearchComponent } from '@features/jobs/ui/header-search/header-search.component';
 
 @Component({
   selector: 'app-job-header-search',

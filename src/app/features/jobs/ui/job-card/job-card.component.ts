@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
-import { SaveJobButtonComponent } from '../save-job-button/save-job-button.component';
-import { JobOffer } from '../../domain/job.model';
+import { SaveJobButtonComponent } from '@features/jobs/ui/save-job-button/save-job-button.component';
+import { JobOffer } from '@features/jobs/domain/job.model';
 import {
   formatSalary,
   formatWorkplaceMode,
   formatSeniorityLevel,
   formatWorkSchedule,
   formatContractType,
-} from '../../domain/job-formatters';
+} from '@features/jobs/domain/job-formatters';
 
 @Component({
   selector: 'app-job-card',

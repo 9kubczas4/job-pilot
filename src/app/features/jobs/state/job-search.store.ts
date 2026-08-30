@@ -1,10 +1,10 @@
 import { computed, effect, inject, Injectable, signal } from '@angular/core';
-import { JobOffer, MapBounds } from '../domain/job.model';
-import { matchesSearchCriteria } from '../domain/job-matcher';
-import { sortJobs } from '../domain/job-sort.utils';
-import { searchCriteriaFieldsEqual } from '../domain/search-url.utils';
-import { JobSearchCriteria } from '../domain/search.model';
-import { JobRepository } from '../data-access/job.repository';
+import { JobOffer, MapBounds } from '@features/jobs/domain/job.model';
+import { matchesSearchCriteria } from '@features/jobs/domain/job-matcher';
+import { sortJobs } from '@features/jobs/domain/job-sort.utils';
+import { searchCriteriaFieldsEqual } from '@features/jobs/domain/search-url.utils';
+import { JobSearchCriteria } from '@features/jobs/domain/search.model';
+import { JobRepository } from '@features/jobs/data-access/job.repository';
 
 @Injectable({ providedIn: 'root' })
 export class JobSearchStore {

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FilterDrawerComponent } from '@shared/ui/filter-drawer/filter-drawer.component';
-import { HeaderUiStore } from '../../state/header-ui.store';
+import { HeaderUiStore } from '@features/jobs/state/header-ui.store';
 
 @Component({
   selector: 'app-job-filter-drawer',

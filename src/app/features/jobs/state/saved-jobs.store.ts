@@ -1,6 +1,6 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { AuthService } from '@core/infrastructure/auth/auth.service';
-import { SavedJobsRepository } from '../data-access/saved-jobs.repository';
+import { SavedJobsRepository } from '@features/jobs/data-access/saved-jobs.repository';
 
 @Injectable({ providedIn: 'root' })
 export class SavedJobsStore {

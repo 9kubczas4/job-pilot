@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { provideExperimentalWebMcpTools } from '@angular/core';
 import { toolJson, toolText } from '@core/infrastructure/webmcp/tool-response';
-import { JobApplicationsStore } from '../../../state/job-applications.store';
+import { JobApplicationsStore } from '@features/jobs/state/job-applications.store';
 import { APPLY_JOB_SCHEMA } from './apply-job.schema';
 
 export function provideApplyJobWebMcpTool() {

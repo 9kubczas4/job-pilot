@@ -1,6 +1,6 @@
 import { inject, provideExperimentalWebMcpTools, WebMcpToolDescriptor } from '@angular/core';
 import { toolJson, toolText } from '@core/infrastructure/webmcp/tool-response';
-import { SavedJobsStore } from '../../../state/saved-jobs.store';
+import { SavedJobsStore } from '@features/jobs/state/saved-jobs.store';
 import { SAVED_JOB_INPUT_SCHEMA } from './saved-jobs.schema';
 
 export const SAVED_JOBS_WEBMCP_TOOLS: WebMcpToolDescriptor<typeof SAVED_JOB_INPUT_SCHEMA>[] = [

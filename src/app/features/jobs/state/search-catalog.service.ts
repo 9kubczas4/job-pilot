@@ -27,7 +27,7 @@ export class SearchCatalogService {
     });
   }
 
-  preload(): Promise<void> {
+  ensureCatalogLoaded(): Promise<void> {
     return this.store.loadJobs();
   }
 }

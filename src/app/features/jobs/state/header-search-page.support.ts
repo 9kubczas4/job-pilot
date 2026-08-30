@@ -5,6 +5,7 @@ import {
   DEFAULT_SEARCH_RADIUS_KM,
 } from '@features/jobs/domain/header-search.model';
 import { HeaderUiStore } from './header-ui.store';
+import { SearchCatalogService } from './search-catalog.service';
 
 const SEARCH_DEBOUNCE_MS = 400;
 
@@ -12,6 +13,7 @@ const SEARCH_DEBOUNCE_MS = 400;
 export class HeaderSearchPageSupport {
   readonly headerUi = inject(HeaderUiStore);
 
+  private readonly catalog = inject(SearchCatalogService);
   private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
   private debounceTimer: ReturnType<typeof setTimeout> | null = null;
@@ -25,6 +27,7 @@ export class HeaderSearchPageSupport {
     jobsLink: readonly string[],
     onJobsSearchPage: boolean,
   ): void {
+    void this.catalog.ensureCatalogLoaded();
     this.headerUi.searchQuery.set(value);
     this.scheduleApplySearch(jobsLink, onJobsSearchPage);
   }
@@ -35,6 +38,7 @@ export class HeaderSearchPageSupport {
     onJobsSearchPage: boolean,
     resetCoords = true,
   ): void {
+    void this.catalog.ensureCatalogLoaded();
     this.headerUi.locationQuery.set(value);
     if (resetCoords) {
       this.headerUi.locationLat.set(undefined);
@@ -53,6 +57,7 @@ export class HeaderSearchPageSupport {
   }
 
   applySearch(jobsLink: readonly string[], onJobsSearchPage: boolean): void {
+    void this.catalog.ensureCatalogLoaded();
     this.clearDebounce();
 
     if (onJobsSearchPage) {

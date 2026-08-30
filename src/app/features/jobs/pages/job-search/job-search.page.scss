@@ -26,3 +26,10 @@
 .search-layout__panel--map {
   min-width: 0;
 }
+
+.search-layout__map-skeleton,
+.jobs-mobile__map-skeleton {
+  height: 100%;
+  min-height: 0;
+  border-inline-start: 1px solid var(--color-border);
+}

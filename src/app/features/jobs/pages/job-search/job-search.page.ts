@@ -56,6 +56,8 @@ import { DEFAULT_JOB_SORT, availableSortOptions } from '@features/jobs/domain/jo
 import { extractTopSkills } from '@features/jobs/domain/job-filter.utils';
 import { DEFAULT_SEARCH_RADIUS_KM } from '@features/jobs/domain/header-search.model';
 import { hasActiveSearchOrFilter } from '@features/jobs/domain/search-active.utils';
+import { environment } from '@environments/environment';
+import { isGoogleMapsConfigured, loadGoogleMapsApi } from '@shared/map/google-maps-loader';
 
 const MOBILE_LAYOUT_QUERY = '(max-width: 60rem)';
 
@@ -144,6 +146,12 @@ export class JobSearchPageComponent implements OnInit {
     this.headerUi.enableFilters();
     this.applyRouteCriteria(this.route.snapshot.queryParamMap);
     this.lastAppliedTrigger.set(this.headerUi.searchApplyTrigger());
+
+    if (isPlatformBrowser(this.platformId) && isGoogleMapsConfigured(environment.googleMapsApiKey)) {
+      afterNextRender(() => {
+        void loadGoogleMapsApi(environment.googleMapsApiKey);
+      });
+    }
 
     this.destroyRef.onDestroy(() => {
       this.headerUi.disableFilters();

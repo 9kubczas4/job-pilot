@@ -3,6 +3,10 @@
     <p class="map-placeholder__title">Map unavailable</p>
     <p class="map-placeholder__text">Add a Google Maps API key to <code>environment.googleMapsApiKey</code>.</p>
   </div>
+} @else if (!mapsApiReady()) {
+  <div class="map-placeholder map-placeholder--loading" aria-hidden="true">
+    <p class="map-placeholder__title">Loading map…</p>
+  </div>
 } @else if (mapError()) {
   <div class="map-placeholder">
     <p class="map-placeholder__title">Map unavailable</p>

@@ -1,4 +1,5 @@
 import {
+  afterNextRender,
   ChangeDetectionStrategy,
   Component,
   DestroyRef,
@@ -7,8 +8,10 @@ import {
   input,
   NgZone,
   output,
+  PLATFORM_ID,
   signal,
 } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
 import { GoogleMap } from '@angular/google-maps';
 import { Cluster, MarkerClusterer } from '@googlemaps/markerclusterer';
@@ -17,7 +20,7 @@ import { ResolvedTheme, ThemeService } from '@core/infrastructure/theme/theme.se
 import { GOOGLE_MAPS_API_KEY } from '@shared/map/google-maps-config';
 import { getMapDefaultView } from '@shared/map/map-default-region';
 import { resolveMapResultsViewport, type MapGeoBounds } from '@shared/map/map-results-viewport';
-import { isGoogleMapsConfigured } from '@shared/map/google-maps-loader';
+import { isGoogleMapsConfigured, loadGoogleMapsApi } from '@shared/map/google-maps-loader';
 import { createClusterMarkerIcon, createJobMarkerIcon } from '@shared/map/google-maps-markers';
 import { UserMapRegionService } from '@shared/map/user-map-region.service';
 import { DEFAULT_SEARCH_RADIUS_KM } from '@features/jobs/domain/header-search.model';
@@ -40,6 +43,7 @@ const CLUSTER_ZOOM_PADDING_PX = 80;
 })
 export class JobMapComponent {
   private readonly apiKey = inject(GOOGLE_MAPS_API_KEY, { optional: true }) ?? '';
+  private readonly platformId = inject(PLATFORM_ID);
   private readonly router = inject(Router);
   private readonly ngZone = inject(NgZone);
   private readonly theme = inject(ThemeService);
@@ -55,6 +59,7 @@ export class JobMapComponent {
   readonly selectJob = output<string>();
 
   readonly mapsConfigured = isGoogleMapsConfigured(this.apiKey);
+  readonly mapsApiReady = signal(!isGoogleMapsConfigured(this.apiKey));
   readonly mapError = signal(false);
   readonly mapOptions: google.maps.MapOptions;
 
@@ -77,6 +82,14 @@ export class JobMapComponent {
     this.userMapRegion.detectRegion();
     this.mapTheme = this.theme.resolved();
     this.mapOptions = this.buildMapOptions(this.mapTheme);
+
+    if (isPlatformBrowser(this.platformId) && this.mapsConfigured) {
+      afterNextRender(() => {
+        void loadGoogleMapsApi(this.apiKey)
+          .then(() => this.mapsApiReady.set(true))
+          .catch(() => this.mapError.set(true));
+      });
+    }
 
     effect(() => {
       const theme = this.theme.resolved();

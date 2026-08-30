@@ -1,0 +1,53 @@
+---
+description: Feature layer import rules enforced by ESLint boundaries
+globs: src/app/features/**/*.ts
+alwaysApply: false
+---
+
+# Feature Import Boundaries
+
+Same-feature imports only (unless noted). Full reference: `docs/architecture/import-boundaries.md`.
+
+| Layer | May import |
+|-------|------------|
+| domain | own domain, `core/domains` |
+| data-access | own domain, core |
+| state | own domain, own data-access, core |
+| ui | own domain, own ui, shared, core |
+| pages | own domain, own state, own ui, shared, core |
+| webmcp | own domain, own state, own webmcp, core |
+
+## Dependency direction
+
+```
+domain ← data-access ← state ← pages / webmcp
+                              ↑
+                         ui (wired by pages)
+```
+
+## Do / Don't
+
+```typescript
+// ❌ UI injecting a store
+@Component({ ... })
+export class JobListComponent {
+  private readonly store = inject(JobSearchStore);
+}
+
+// ✅ UI receives data via inputs; page wires the store
+@Component({ ... })
+export class JobListComponent {
+  readonly jobs = input.required<JobOffer[]>();
+  readonly jobSelected = output<string>();
+}
+
+// ❌ WebMCP tool injecting a repository
+export function getJobTool() {
+  const repo = inject(JobRepository);
+}
+
+// ✅ WebMCP tool goes through state
+export function getJobTool() {
+  const store = inject(JobDetailsStore);
+}
+```

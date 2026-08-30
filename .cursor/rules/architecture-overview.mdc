@@ -1,0 +1,33 @@
+---
+description: Job Pilot package layout and where new code belongs
+alwaysApply: true
+---
+
+# Architecture Overview
+
+```
+src/app/
+  app.ts, app.config.ts, app.routes.ts   # app-shell — never imported elsewhere
+  core/          # auth, Firebase, layout, cross-feature domain (core/domains/)
+  shared/        # business-agnostic UI kit, map helpers
+  features/{name}/
+    domain/      # models, pure functions
+    data-access/ # Firestore/HTTP repositories
+    state/       # signal stores — facade for UI and WebMCP
+    ui/          # dumb presentational components
+    pages/       # smart route components
+    webmcp/      # agent tools
+```
+
+## Package rules
+
+| Package | May import |
+|---------|------------|
+| app-shell | core, shared, features (pages, webmcp) |
+| core | core, shared |
+| shared | shared only |
+| features | shared, core, **own feature only** |
+
+Features are fully isolated. Shared logic between features goes in `core/domains/`, not cross-feature imports.
+
+Enforced by `eslint.boundaries.config.js` — run `npm run lint` after changes.

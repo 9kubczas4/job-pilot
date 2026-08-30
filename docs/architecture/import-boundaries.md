@@ -16,7 +16,13 @@ Configuration lives in [`eslint.boundaries.config.js`](../../eslint.boundaries.c
 
 ```
 src/app/
-  core/                    # auth, firebase, layout
+  app.ts, app.config.ts, app.routes.ts   # app-shell (bootstrap only)
+  core/                    # auth, firebase, layout, shared domain models
+    domains/               # cross-feature business types (e.g. job taxonomy)
+    infrastructure/        # Firebase, auth services
+    layout/                # AppShell, page scroll helpers
+    pages/                 # core-level route pages
+    app-paths.ts           # route constants
   shared/                  # business-agnostic UI kit, map helpers, WebMCP response utils
   features/{name}/
     pages/                 # smart page (route target)
@@ -25,22 +31,31 @@ src/app/
     domain/                # models and pure business rules
     data-access/           # repositories (Firestore, HTTP)
     state/                 # stores and facades
-    {subfeature}/          # optional nested slice (e.g. jobs/saved-jobs)
 ```
 
-## Layers
+## Packages
+
+| Package | Path | May import | Must not be imported by |
+|---------|------|------------|---------------------------|
+| **app-shell** | `app.ts`, `app.config.ts`, `app.routes.ts`, `main.ts`, … | `core`, `shared`, `features` (pages, webmcp) | anything (except tests) |
+| **core** | `src/app/core/` | `core`, `shared` | — |
+| **shared** | `src/app/shared/` | `shared`, external | — |
+| **features** | `src/app/features/{name}/` | `shared`, `core`, own feature only | other features |
+
+Features are fully isolated from each other. Shared logic between features belongs in `core/domains/` (e.g. job taxonomy used by both `jobs` and `profile`), not in cross-feature `domain/` imports.
+
+## Feature layers
+
+All layer imports below are scoped to the **same feature** unless noted.
 
 | Layer | Path | May import |
 |-------|------|------------|
-| **domain** | `features/*/domain/` | external packages, sibling feature domain |
-| **data-access** | `features/*/data-access/` | domain, core |
-| **state** | `features/*/state/` | domain, data-access, core |
-| **ui** | `features/*/ui/` | domain, state, shared, core, sibling ui |
-| **page** | `features/*/pages/` | ui, state, domain, shared, core |
-| **webmcp** | `features/*/webmcp/` | state, domain, data-access, shared, core |
-| **core** | `src/app/core/` (excl. pages) | shared |
-| **core-page** | `src/app/core/pages/` | core, shared |
-| **shared** | `src/app/shared/` | shared, external |
+| **domain** | `features/*/domain/` | external packages, own `domain`, `core/domains` |
+| **data-access** | `features/*/data-access/` | own `domain`, `core` |
+| **state** | `features/*/state/` | own `domain`, own `data-access`, `core` |
+| **ui** | `features/*/ui/` | own `domain`, own `ui`, `shared`, `core` |
+| **pages** | `features/*/pages/` | own `domain`, own `state`, own `ui`, `shared`, `core` |
+| **webmcp** | `features/*/webmcp/` | own `domain`, own `state`, own `webmcp`, `core` |
 
 Route constants live in `core/app-paths.ts` and may be imported by pages, UI, and core.
 
@@ -48,12 +63,32 @@ App shell files (`app.ts`, `app.config.ts`, `app.routes.ts`, `main.ts`) may impo
 
 ## Rules in plain language
 
-- **Domain** is pure business logic - no Angular services from other layers, no Firebase, no UI.
-- **UI** never talks to Firestore directly - it goes through **state**.
-- **Pages** compose UI + state - they don't call repositories or register WebMCP tools.
-- **WebMCP tools** live in **`features/*/webmcp/`** and inject **state** / **domain** / **data-access** - the same model as the UI, but without importing UI components.
-- **Core** stays feature-agnostic - no imports from `features/`.
-- **Shared** stays business-agnostic - no feature-specific models (e.g. no `JobOffer` in shared).
+- **Domain** is pure business logic — no Angular services from other layers, no Firebase, no UI.
+- **Data-access** talks to Firestore/HTTP and maps results to domain models.
+- **State** is the facade for UI and WebMCP — it owns reads/writes via repositories.
+- **UI** is presentational — it receives data through `input()` / `output()` and never injects stores or repositories directly.
+- **Pages** compose UI + state — they wire smart behaviour but don't call repositories or register WebMCP tools.
+- **WebMCP tools** live in `features/*/webmcp/` and inject **state** and **domain** — the same orchestration model as pages, but without importing UI components or repositories.
+- **Core** stays feature-agnostic — no imports from `features/`.
+- **Shared** stays business-agnostic — no feature-specific models (e.g. no `JobOffer` in shared).
+
+### Dependency direction
+
+```
+domain ← data-access ← state ← pages / webmcp
+                              ↑
+                         ui (dumb, via pages)
+```
+
+UI and WebMCP never reach persistence directly — they go through **state**.
+
+## Exceptions
+
+| Scope | Rule |
+|-------|------|
+| `*.spec.ts` | May import any layer (test convenience) |
+| `src/environments/**` | Excluded from boundary linting |
+| `src/test-setup.ts` | Treated as test category |
 
 ## Adding a new file
 

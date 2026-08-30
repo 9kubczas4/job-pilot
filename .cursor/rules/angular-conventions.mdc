@@ -1,0 +1,30 @@
+---
+description: Angular 22 conventions used in Job Pilot
+globs: src/app/**/*.ts
+alwaysApply: false
+---
+
+# Angular Conventions
+
+- Standalone components only — no NgModules
+- `inject()` over constructor injection
+- Signals: `signal()`, `computed()`, `input()`, `output()`, `effect()`
+- `ChangeDetectionStrategy.OnPush` on all components
+- Prefix: `app` (elements kebab-case, directives camelCase)
+
+## Layer responsibilities
+
+| Layer | Pattern |
+|-------|---------|
+| ui | Dumb — `input()`/`output()` only, no store/repository injection |
+| pages | Smart — inject stores, compose ui components, handle routing |
+| state | Signal stores with `inject()` for repositories and core services |
+| webmcp | Tools inject state/domain, register via `provideXxxWebMcpTools()` |
+| domain | Pure functions and types — no Angular decorators or Firebase |
+
+## File placement checklist
+
+1. New repository → `features/{name}/data-access/`
+2. New store → `features/{name}/state/`
+3. New agent tool → `features/{name}/webmcp/tools/{tool-name}/`
+4. Cross-feature type → `core/domains/`, not another feature's domain

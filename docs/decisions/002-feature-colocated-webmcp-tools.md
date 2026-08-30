@@ -10,7 +10,7 @@ Accepted
 
 Job Pilot exposes eight WebMCP tools so Codex can search jobs, manage profiles, and apply to offers. Early planning placed all tools in `core/webmcp/tools/`, but as features matured it became clear that tools are tightly coupled to feature stores and repositories.
 
-Tools must share the same state as the UI (`JobSearchStore`, `ProfileStore`, `SavedJobsStore`) without creating circular imports or violating layer boundaries.
+Tools must share the same state as pages (`JobSearchStore`, `ProfileStore`, `SavedJobsStore`) without creating circular imports or violating layer boundaries. Tools inject **state**, not repositories directly.
 
 ## Decision
 

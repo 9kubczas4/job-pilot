@@ -1,8 +1,13 @@
 // Architectural import boundaries for Job Pilot.
 //
-// Every route-level feature lives directly under `features/{name}`. A feature
-// may import its own layers. Cross-feature dependencies are denied unless an
-// explicit consumer -> owner policy is listed below.
+// Packages: app-shell (never imported), core, shared, features (isolated).
+// Feature layers (same-feature only unless noted):
+//   domain      → core/domains, own domain
+//   data-access → core, own domain
+//   state       → core, own domain, own data-access
+//   ui          → core, shared, own domain, own ui  (no state — use pages)
+//   pages       → core, shared, own domain, own state, own ui
+//   webmcp      → core, own domain, own state, own webmcp  (no data-access — use state)
 
 const path = require('path');
 
@@ -111,15 +116,11 @@ const boundariesPolicies = [
   },
   {
     from: { element: { type: 'feature-data-access' } },
-    allow: { to: { element: { types: { anyOf: ['core-domains'] } } } },
+    allow: { to: { element: { types: { anyOf: coreLayerTypes } } } },
   },
   {
     from: { element: { type: 'feature-data-access' } },
     allow: { to: { file: { categories: 'core-domains' } } },
-  },
-  {
-    from: { element: { type: 'feature-data-access' } },
-    allow: { to: { element: { types: { anyOf: ['core-infrastructure'] } } } },
   },
   {
     from: { element: { type: 'feature-data-access' } },
@@ -142,24 +143,25 @@ const boundariesPolicies = [
   },
   {
     from: { element: { type: 'feature-state' } },
-    allow: { to: { element: { types: { anyOf: ['core-infrastructure'] } } } },
+    allow: { to: { element: { types: { anyOf: coreLayerTypes } } } },
+    message: 'State may use core, domain, and data-access owned by the same feature.',
   },
   {
     from: { element: { type: 'feature-ui' } },
     allow: {
       to: {
         element: {
-          types: ['feature-ui', 'feature-domain', 'feature-state'],
+          types: ['feature-ui', 'feature-domain'],
           captured: sameFeature,
         },
       },
     },
-    message: 'UI may only use UI, domain, and state owned by the same feature.',
+    message: 'UI may only use UI and domain owned by the same feature — reach state through pages.',
   },
   {
     from: { element: { type: 'feature-ui' } },
     allow: {
-      to: { element: { types: { anyOf: ['shared', 'core', 'core-layout', 'core-infrastructure'] } } },
+      to: { element: { types: { anyOf: ['shared', ...coreLayerTypes] } } },
     },
   },
   {
@@ -177,28 +179,25 @@ const boundariesPolicies = [
   {
     from: { element: { type: 'feature-page' } },
     allow: {
-      to: { element: { types: { anyOf: ['shared', 'core-layout', 'core-infrastructure', 'core-domains', 'core'] } } },
+      to: { element: { types: { anyOf: ['shared', ...coreLayerTypes] } } },
     },
+    message: 'Pages may use shared and core in addition to own domain, state, and ui.',
   },
   {
     from: { element: { type: 'feature-webmcp' } },
     allow: {
       to: {
         element: {
-          types: ['feature-webmcp', 'feature-state', 'feature-domain', 'feature-data-access'],
+          types: ['feature-webmcp', 'feature-state', 'feature-domain'],
           captured: sameFeature,
         },
       },
     },
-    message: 'WebMCP may orchestrate layers owned by the same feature, never UI.',
+    message: 'WebMCP may use own webmcp, state, and domain — reach data-access through state, never UI.',
   },
   {
     from: { element: { type: 'feature-webmcp' } },
-    allow: { to: { element: { types: { anyOf: ['shared', 'core', 'core-infrastructure'] } } } },
-  },
-  {
-    from: { element: { type: 'feature-webmcp' } },
-    allow: { to: { file: { categories: 'core-infrastructure' } } },
+    allow: { to: { element: { types: { anyOf: ['shared', ...coreLayerTypes] } } } },
   },
 
   {

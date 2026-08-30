@@ -1,0 +1,41 @@
+---
+description: WebMCP tool authoring conventions
+globs: src/app/features/**/webmcp/**/*.ts
+alwaysApply: false
+---
+
+# WebMCP Tools
+
+Tools live in `features/{name}/webmcp/tools/{tool-name}/`:
+- `{tool-name}.tool.ts` — tool definition
+- `{tool-name}.schema.ts` — Zod input schema
+
+## Rules
+
+- Inject **state** stores, never repositories directly
+- Never import UI components
+- Shared response helpers: `@core/infrastructure/webmcp/tool-response` (`toolJson`, `toolText`)
+- Register globally in `app.config.ts` or route-scoped via `providers: [provideXxxWebMcpTools()]`
+
+```typescript
+// ✅ Pattern
+export function provideSearchJobsTool(): Provider {
+  return {
+    provide: WEBMCP_TOOL,
+    useFactory: () => {
+      const store = inject(JobSearchStore);
+      return {
+        name: 'search_jobs',
+        description: '...',
+        inputSchema: searchJobsSchema,
+        handler: async (input) => {
+          store.search(input.query);
+          return toolJson({ count: store.results().length });
+        },
+      };
+    },
+  };
+}
+```
+
+See ADR-002: `docs/decisions/002-feature-colocated-webmcp-tools.md`.

@@ -25,7 +25,7 @@ Organize each feature under `src/app/features/{name}/` with five layers:
 | `state/` | Signal-based stores consumed by UI and WebMCP |
 | `ui/` | Presentational components |
 | `pages/` | Route-level smart components that compose UI + state |
-| `webmcp/` | Agent tools that inject stores/repositories (see ADR-002) |
+| `webmcp/` | Agent tools that inject stores (see ADR-002) |
 
 Infrastructure lives in `core/` (auth, Firebase, layout). Business-agnostic code lives in `shared/`.
 
@@ -52,5 +52,6 @@ Enforce import rules with `eslint-plugin-boundaries` - configuration in `eslint.
 
 - Every new file has an obvious home - reduces "where does this go?" debates
 - Domain logic is testable without Angular TestBed
-- Cross-feature domain imports are allowed (e.g. profile enums used by job filters) but limited to `domain/` ↔ `domain/`
+- Features are isolated from each other; shared domain types live in `core/domains/` (e.g. job taxonomy used by both `jobs` and `profile`)
+- UI and WebMCP reach persistence only through `state/` — never via direct repository imports
 - ESLint must be run (`npm run lint`) to catch boundary violations at CI time

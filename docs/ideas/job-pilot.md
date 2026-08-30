@@ -211,17 +211,21 @@ src/app/
 
 ### Import boundaries (summary)
 
-| Layer | May import |
-|-------|------------|
-| `domain` | external, sibling feature domain |
-| `data-access` | domain, core |
-| `state` | domain, data-access, core |
-| `ui` | domain, state, shared, sibling ui |
-| `pages/` | ui, state, domain, shared, core |
-| `webmcp/` | state, domain, data-access, shared |
-| `core` | shared |
+See [`docs/architecture/import-boundaries.md`](../architecture/import-boundaries.md) for the full reference. Highlights:
+
+| Layer | May import (same feature unless noted) |
+|-------|----------------------------------------|
+| `domain` | external, own domain, `core/domains` |
+| `data-access` | own domain, core |
+| `state` | own domain, own data-access, core |
+| `ui` | own domain, own ui, shared, core |
+| `pages/` | own domain, own state, own ui, shared, core |
+| `webmcp/` | own domain, own state, own webmcp, core |
+| `core` | core, shared |
 | `core/pages` | core, shared |
 | `shared` | shared, external |
+
+Features are isolated from each other. Shared logic goes in `core/domains/`.
 
 ## Open Questions
 

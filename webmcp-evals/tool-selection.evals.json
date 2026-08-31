@@ -13,7 +13,7 @@
         "functionName": "search_jobs",
         "arguments": {
           "query": "Frontend Developer",
-          "locations": ["Warsaw"],
+          "location": "Warsaw",
           "radiusKm": 25
         }
       }
@@ -30,7 +30,7 @@
     ],
     "expectedCall": [
       {
-        "functionName": "filter_jobs",
+        "functionName": "search_jobs",
         "arguments": {
           "seniority": ["senior"],
           "workplace": ["remote"],

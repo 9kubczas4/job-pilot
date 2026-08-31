@@ -59,13 +59,12 @@ describe('landing-terminal-typewriter', () => {
     await runPromise;
 
     expect(updates).toEqual(['', 'a', 'ab', '', 'o', 'ok', 'done']);
-    expect(LANDING_TERMINAL_SCRIPT.length).toBe(11);
   });
 
   it('renders the full script instantly for reduced-motion fallback helpers', () => {
     const state = createInstantTerminalState(LANDING_TERMINAL_SCRIPT);
     expect(state.done).toBe(true);
-    expect(state.completedLines).toHaveLength(11);
+    expect(state.completedLines).toHaveLength(LANDING_TERMINAL_SCRIPT.length);
     expect(state.activeLine).toBeNull();
   });
 });

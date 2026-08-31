@@ -3,7 +3,6 @@ import publicJourneys from '../../webmcp-evals/public-journeys.evals.json';
 import toolSelectionEvals from '../../webmcp-evals/tool-selection.evals.json';
 import evalTools from '../../webmcp-evals/tools.json';
 import { APPLY_JOB_WEBMCP_TOOL } from './features/jobs/webmcp/tools/apply-job/apply-job.tool';
-import { FILTER_JOBS_WEBMCP_TOOL } from './features/jobs/webmcp/tools/filter-jobs/filter-jobs.tool';
 import { GET_JOB_WEBMCP_TOOL } from './features/jobs/webmcp/tools/get-job/get-job.tool';
 import { SAVED_JOBS_WEBMCP_TOOLS } from './features/jobs/webmcp/tools/saved-jobs/saved-jobs.tool';
 import { SEARCH_JOBS_WEBMCP_TOOL } from './features/jobs/webmcp/tools/search-jobs/search-jobs.tool';
@@ -16,7 +15,6 @@ import {
 
 const runtimeTools = [
   SEARCH_JOBS_WEBMCP_TOOL,
-  FILTER_JOBS_WEBMCP_TOOL,
   HIGHLIGHT_JOB_WEBMCP_TOOL,
   COMPARE_OFFERS_WEBMCP_TOOL,
   GET_JOB_WEBMCP_TOOL,
@@ -55,7 +53,7 @@ describe('WebMCP eval fixtures', () => {
     );
 
     expect(calledToolNames).toEqual(
-      new Set(['search_jobs', 'filter_jobs', 'highlight_job', 'get_job']),
+      new Set(['search_jobs', 'highlight_job', 'get_job']),
     );
   });
 });

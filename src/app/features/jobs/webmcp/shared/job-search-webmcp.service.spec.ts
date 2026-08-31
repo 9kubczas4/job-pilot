@@ -65,7 +65,7 @@ describe('JobSearchWebMcpService', () => {
 
     await service.applySearchCriteria({
       query: 'Frontend',
-      locations: ['Warsaw'],
+      location: 'Warsaw',
       radiusKm: 50,
     });
 
@@ -89,7 +89,7 @@ describe('JobSearchWebMcpService', () => {
   it('returns lightweight job summaries alongside ids from search_jobs', async () => {
     const result = await service.applySearchCriteria({
       query: 'Frontend',
-      locations: ['Warsaw'],
+      location: 'Warsaw',
       radiusKm: 25,
     });
 
@@ -109,64 +109,6 @@ describe('JobSearchWebMcpService', () => {
     ]);
   });
 
-  it('returns the same lightweight job summaries from filter_jobs', async () => {
-    const result = await service.applyFilterCriteria({ workplace: ['remote'] });
-
-    expect(result.jobIds).toEqual(['job-001']);
-    expect(result.results).toEqual([
-      {
-        id: 'job-001',
-        title: 'Frontend Developer',
-        company: 'Acme',
-        location: 'Warsaw',
-        workplace: 'remote',
-        salary: { min: 12000, max: 17000, currency: 'USD', period: 'month' },
-        seniority: ['senior'],
-        skills: ['Angular'],
-      },
-    ]);
-  });
-
-  it('submits filters and preserved search fields through the UI trigger from home', async () => {
-    store.setCriteriaFromRoute({
-      query: 'Angular',
-      locations: ['Warsaw'],
-      locationLat: 52.2297,
-      locationLng: 21.0122,
-      radiusKm: 25,
-    });
-    headerUi.syncFromCriteria(store.criteria());
-    const triggerBefore = headerUi.searchApplyTrigger();
-
-    await service.applyFilterCriteria({ workplace: ['remote'], salaryMin: 7000 });
-
-    expect(headerUi.searchQuery()).toBe('Angular');
-    expect(headerUi.locationQuery()).toBe('Warsaw');
-    expect(headerUi.searchApplyTrigger()).toBe(triggerBefore + 1);
-    expect(router.parseUrl(router.url).queryParams).toMatchObject({
-      q: 'Angular',
-      location: 'Warsaw',
-      workplace: 'remote',
-      salaryMin: '7000',
-    });
-    expect(router.url.startsWith('/jobs?')).toBe(true);
-    expect(headerUi.queryToolActive()).toBe(false);
-    expect(headerUi.locationToolActive()).toBe(false);
-    expect(headerUi.radiusToolActive()).toBe(false);
-    expect(headerUi.filterToolActive()).toBe(true);
-    expect(headerUi.sortToolActive()).toBe(false);
-  });
-
-  it('marks only the sort control when filter_jobs changes sorting', async () => {
-    await service.applyFilterCriteria({ sort: 'salary-desc' });
-
-    expect(headerUi.queryToolActive()).toBe(false);
-    expect(headerUi.locationToolActive()).toBe(false);
-    expect(headerUi.radiusToolActive()).toBe(false);
-    expect(headerUi.filterToolActive()).toBe(false);
-    expect(headerUi.sortToolActive()).toBe(true);
-  });
-
   it('marks only radius when search_jobs preserves query and location', async () => {
     store.setCriteriaFromRoute({
       query: 'Frontend',
@@ -178,7 +120,7 @@ describe('JobSearchWebMcpService', () => {
 
     await service.applySearchCriteria({
       query: 'Frontend',
-      locations: ['Warsaw'],
+      location: 'Warsaw',
       radiusKm: 50,
     });
 
@@ -197,12 +139,54 @@ describe('JobSearchWebMcpService', () => {
       radiusKm: 25,
     });
 
-    await service.applySearchCriteria({ locations: ['Warsaw'], radiusKm: 25 });
+    await service.applySearchCriteria({ location: 'Warsaw', radiusKm: 25 });
 
     expect(headerUi.queryToolActive()).toBe(false);
     expect(headerUi.locationToolActive()).toBe(false);
     expect(headerUi.radiusToolActive()).toBe(false);
     expect(headerUi.filterToolActive()).toBe(false);
     expect(headerUi.sortToolActive()).toBe(false);
+  });
+
+  it('replaces the complete search state and clears omitted filters', async () => {
+    store.setCriteriaFromRoute({
+      query: 'Legacy query',
+      locations: ['Krakow'],
+      workplace: ['onsite'],
+      skills: ['Java'],
+      salaryMin: 9000,
+      sort: 'salary-asc',
+    });
+
+    await service.applySearchCriteria({
+      query: 'Frontend',
+      location: 'Warsaw',
+      workplace: ['remote'],
+      seniority: ['senior'],
+      sort: 'salary-desc',
+    });
+
+    expect(store.criteria()).toEqual({
+      query: 'Frontend',
+      locations: ['Warsaw'],
+      locationLat: WARSAW_JOB.location?.latitude,
+      locationLng: WARSAW_JOB.location?.longitude,
+      radiusKm: 25,
+      workplace: ['remote'],
+      seniority: ['senior'],
+      skills: undefined,
+      contracts: undefined,
+      workSchedules: undefined,
+      salaryMin: undefined,
+      roles: undefined,
+      sort: 'salary-desc',
+    });
+    expect(router.parseUrl(router.url).queryParams).toMatchObject({
+      q: 'Frontend',
+      location: 'Warsaw',
+      workplace: 'remote',
+      seniority: 'senior',
+      sort: 'salary-desc',
+    });
   });
 });

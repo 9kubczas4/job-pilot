@@ -10,7 +10,7 @@ Job Pilot combines a browsing experience with [Angular 22 experimental WebMCP su
 
 ## Why WebMCP
 
-Traditional agents interact with web apps through DOM automation. Job Pilot exposes structured tools (`search_jobs`, `filter_jobs`, `compare_offers`, `highlight_job`, `apply_job`, and more) so Codex can:
+Traditional agents interact with web apps through DOM automation. Job Pilot exposes structured tools (`search_jobs`, `compare_offers`, `highlight_job`, `apply_job`, and more) so Codex can:
 
 - read and update the candidate profile
 - translate natural-language intent into `JobSearchCriteria`
@@ -30,12 +30,11 @@ The agent never receives a `userId` in tool payloads. Identity comes from Fireba
 
 ## WebMCP Tools
 
-Eleven tools total: **9 global** + **2 route-scoped**. Full catalog: [`docs/specs/webmcp-tools.md`](docs/specs/webmcp-tools.md).
+Ten tools total: **8 global** + **2 route-scoped**. Full catalog: [`docs/specs/webmcp-tools.md`](docs/specs/webmcp-tools.md).
 
 | Tool | Scope | Purpose |
 |------|-------|---------|
-| `search_jobs` | global | Replace text, location, and radius; preserve structured filters |
-| `filter_jobs` | global | Update structured filters and sort; preserve text/location (OR within arrays) |
+| `search_jobs` | global | Replace the complete search state and update `/jobs` once |
 | `get_job` | global | Read a single job offer by id |
 | `compare_offers` | global | Open a comparison drawer (2–5 offers) with badges, notes, and optional highlighted pick |
 | `get_saved_jobs` | global | Read the signed-in user's saved shortlist |

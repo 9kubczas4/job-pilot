@@ -10,7 +10,6 @@ import { routes } from './app.routes';
 import { provideFirebase } from '@core/infrastructure/firebase/firebase.providers';
 import { AnalyticsService } from '@core/infrastructure/analytics/analytics.service';
 import { provideSearchJobsWebMcpTool } from '@features/jobs/webmcp/tools/search-jobs/search-jobs.tool';
-import { provideFilterJobsWebMcpTool } from '@features/jobs/webmcp/tools/filter-jobs/filter-jobs.tool';
 import { provideGetProfileWebMcpTool } from '@features/profile/webmcp/profile.tools';
 import { provideGetJobWebMcpTool } from '@features/jobs/webmcp/tools/get-job/get-job.tool';
 import { provideSavedJobsWebMcpTools } from '@features/jobs/webmcp/tools/saved-jobs/saved-jobs.tool';
@@ -27,7 +26,6 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideFirebase(),
     provideSearchJobsWebMcpTool(),
-    provideFilterJobsWebMcpTool(),
     provideGetProfileWebMcpTool(),
     provideGetJobWebMcpTool(),
     provideSavedJobsWebMcpTools(),

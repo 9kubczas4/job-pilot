@@ -1,22 +1,26 @@
 import { DEFAULT_JOB_SORT } from '@features/jobs/domain/job-sort.utils';
-import { JobFilterCriteria, JobSearchCriteria } from '@features/jobs/domain/search.model';
+import { JobSearchCriteria } from '@features/jobs/domain/search.model';
 import { searchCriteriaFieldsEqual } from '@features/jobs/domain/search-url.utils';
 
 export type JobSearchInput = Pick<
   JobSearchCriteria,
-  'query' | 'locations' | 'locationLat' | 'locationLng' | 'radiusKm'
->;
+  | 'query'
+  | 'roles'
+  | 'skills'
+  | 'seniority'
+  | 'workSchedules'
+  | 'workplace'
+  | 'contracts'
+  | 'salaryMin'
+  | 'radiusKm'
+  | 'sort'
+> & {
+  location?: string;
+  limit?: number;
+};
 
 export function searchFieldsChanged(before: JobSearchCriteria, after: JobSearchCriteria): boolean {
   return !searchCriteriaFieldsEqual(before, after);
-}
-
-export function filterFieldsChanged(before: JobSearchCriteria, after: JobSearchCriteria): boolean {
-  return !filterCriteriaFieldsEqual(before, after);
-}
-
-export function filterCriteriaFieldsEqual(a: JobSearchCriteria, b: JobSearchCriteria): boolean {
-  return filterControlCriteriaFieldsEqual(a, b) && !sortFieldChanged(a, b);
 }
 
 export function filterControlFieldsChanged(
@@ -50,40 +54,4 @@ function arraysEqual<T>(a: T[] | undefined, b: T[] | undefined): boolean {
   }
 
   return left.every((value, index) => value === right[index]);
-}
-
-function normalizeArrayField<T>(value: T[] | undefined): T[] | undefined {
-  return value?.length ? value : undefined;
-}
-
-export function normalizeFilterPatch(input: JobFilterCriteria): Partial<JobSearchCriteria> {
-  const patch: Partial<JobSearchCriteria> = {};
-
-  if ('roles' in input) {
-    patch.roles = normalizeArrayField(input.roles);
-  }
-  if ('skills' in input) {
-    patch.skills = normalizeArrayField(input.skills);
-  }
-  if ('seniority' in input) {
-    patch.seniority = normalizeArrayField(input.seniority);
-  }
-  if ('workSchedules' in input) {
-    patch.workSchedules = normalizeArrayField(input.workSchedules);
-  }
-  if ('workplace' in input) {
-    patch.workplace = normalizeArrayField(input.workplace);
-  }
-  if ('contracts' in input) {
-    patch.contracts = normalizeArrayField(input.contracts);
-  }
-  if ('salaryMin' in input) {
-    patch.salaryMin = input.salaryMin ?? undefined;
-  }
-  if ('sort' in input) {
-    patch.sort =
-      input.sort == null || input.sort === DEFAULT_JOB_SORT ? undefined : input.sort;
-  }
-
-  return patch;
 }

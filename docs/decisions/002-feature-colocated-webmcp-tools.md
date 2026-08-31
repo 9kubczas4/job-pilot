@@ -8,7 +8,7 @@ Accepted
 
 ## Context
 
-Job Pilot exposes eleven WebMCP tools so Codex can search jobs, compare offers, highlight a current result, manage saved jobs and profiles, and apply to offers. Early planning placed all tools in `core/webmcp/tools/`, but as features matured it became clear that tools are tightly coupled to feature stores and repositories.
+Job Pilot exposes ten WebMCP tools so Codex can search jobs, compare offers, highlight a current result, manage saved jobs and profiles, and apply to offers. Early planning placed all tools in `core/webmcp/tools/`, but as features matured it became clear that tools are tightly coupled to feature stores and repositories.
 
 Tools must share the same state as pages (`JobSearchStore`, `ProfileStore`, `SavedJobsStore`) without creating circular imports or violating layer boundaries. Tools inject **state**, not repositories directly.
 
@@ -19,7 +19,6 @@ Colocate WebMCP tools inside each feature at `features/{name}/webmcp/`:
 | Tool(s) | Location | Registration |
 |---------|----------|--------------|
 | `search_jobs` | `features/jobs/webmcp/tools/search-jobs/search-jobs.tool.ts` | `app.config.ts` (global) |
-| `filter_jobs` | `features/jobs/webmcp/tools/filter-jobs/filter-jobs.tool.ts` | `app.config.ts` (global) |
 | `get_job` | `features/jobs/webmcp/tools/get-job/get-job.tool.ts` | `app.config.ts` (global) |
 | `compare_offers` | `features/jobs/webmcp/tools/compare-offers/compare-offers.tool.ts` | `app.config.ts` (global) |
 | `get_saved_jobs`, `save_job`, `unsave_job` | `features/jobs/webmcp/tools/saved-jobs/saved-jobs.tool.ts` | `app.config.ts` (global) |

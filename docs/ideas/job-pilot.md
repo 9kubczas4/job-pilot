@@ -34,12 +34,11 @@ The agent runs in **Codex** (ChatGPT desktop in-app browser). The app exposes to
 - Modern, clean UI
 - Static prerender for all routes; job detail pages pre-generated at build time
 
-### WebMCP Tools (11, implemented)
+### WebMCP Tools (10, implemented)
 
 | Tool | Registration | Source |
 |------|--------------|--------|
 | `search_jobs` | Global (`app.config.ts`) | `features/jobs/webmcp/tools/search-jobs/search-jobs.tool.ts` |
-| `filter_jobs` | Global (`app.config.ts`) | `features/jobs/webmcp/tools/filter-jobs/filter-jobs.tool.ts` |
 | `get_job` | Global (`app.config.ts`) | `features/jobs/webmcp/tools/get-job/get-job.tool.ts` |
 | `compare_offers` | Global (`app.config.ts`) | `features/jobs/webmcp/tools/compare-offers/compare-offers.tool.ts` |
 | `get_saved_jobs` | Global (`app.config.ts`) | `features/jobs/webmcp/tools/saved-jobs/saved-jobs.tool.ts` |

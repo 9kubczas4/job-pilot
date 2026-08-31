@@ -2,7 +2,7 @@
   "tools": [
     {
       "name": "search_jobs",
-      "description": "Start or replace the text-and-location portion of the current job search, then navigate the UI to the resulting jobs page. Use this tool instead of interacting with the page UI or DOM. Existing structured filters from filter_jobs are preserved. Use zero or one city; call filter_jobs separately to refine or sort. Returns success, changed, normalized criteria, resultCount, and up to 10 lightweight results with matching jobIds. Each result includes id, title, company, location, distanceKm when available, workplace, salary, seniority, and skills; use get_job only for the complete description, requirements, responsibilities, benefits, or application details.",
+      "description": "Search jobs using complete criteria and update the jobs page. Each call replaces the current search state; omitted fields use defaults. Returns normalized criteria, total count, and lightweight results.",
       "inputSchema": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "type": "object",
@@ -10,41 +10,30 @@
           "query": {
             "type": "string",
             "maxLength": 200,
-            "description": "Free-text query matched against job title, company, description, and skills. Omit or pass an empty string to clear the current query."
+            "description": "Text matched against job title, company, description, and skills."
           },
-          "locations": {
-            "type": "array",
-            "items": { "type": "string", "minLength": 1, "maxLength": 100 },
-            "maxItems": 1,
-            "description": "Zero or one city name used as the geographic search center (for example, Warsaw). Omit or pass [] to clear the current location."
+          "location": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "description": "City used as the geographic search center."
           },
           "radiusKm": {
             "type": "number",
             "enum": [10, 25, 50, 100, 200],
-            "description": "Search radius in kilometers around locations[0]. Allowed values: 10, 25, 50, 100, 200. Omit to use 25 km when a location is provided."
-          }
-        },
-        "additionalProperties": false
-      }
-    },
-    {
-      "name": "filter_jobs",
-      "description": "Patch structured filters and result ordering on the current job search, then synchronize the jobs UI. Use this tool instead of interacting with the page UI or DOM. Text and location criteria from search_jobs are preserved. Omitted fields remain unchanged; pass [] to clear an array filter, 0 to clear salaryMin, or newest to restore default sorting. Returns success, changed, normalized criteria, resultCount, and up to 10 lightweight results with matching jobIds. Each result includes id, title, company, location, distanceKm when available, workplace, salary, seniority, and skills; use get_job only for the complete description, requirements, responsibilities, benefits, or application details.",
-      "inputSchema": {
-        "$schema": "https://json-schema.org/draft/2020-12/schema",
-        "type": "object",
-        "properties": {
+            "description": "Search radius in kilometers around location. Allowed values: 10, 25, 50, 100, 200. Omit to use 25 km when a location is provided."
+          },
           "roles": {
             "type": "array",
             "items": { "type": "string", "minLength": 1, "maxLength": 100 },
             "maxItems": 20,
-            "description": "Role-title keywords. A job matches when its title contains any value (OR). Pass [] to clear this filter."
+            "description": "Role-title keywords matched with OR."
           },
           "skills": {
             "type": "array",
             "items": { "type": "string", "minLength": 1, "maxLength": 100 },
             "maxItems": 20,
-            "description": "Skill names. A job matches when it lists any value (OR). Pass [] to clear this filter."
+            "description": "Skill names matched with OR."
           },
           "seniority": {
             "type": "array",
@@ -53,7 +42,7 @@
               "enum": ["junior", "regular", "senior", "expert"]
             },
             "maxItems": 4,
-            "description": "Seniority levels matched with OR. Allowed values: junior, regular, senior, expert. Pass [] to clear this filter."
+            "description": "Seniority levels matched with OR."
           },
           "workSchedules": {
             "type": "array",
@@ -62,13 +51,13 @@
               "enum": ["full-time", "part-time", "freelance"]
             },
             "maxItems": 3,
-            "description": "Work schedules matched with OR. Allowed values: full-time, part-time, freelance. Pass [] to clear this filter."
+            "description": "Work schedules matched with OR."
           },
           "workplace": {
             "type": "array",
             "items": { "type": "string", "enum": ["remote", "hybrid", "onsite"] },
             "maxItems": 3,
-            "description": "Workplace modes matched with OR. Allowed values: remote, hybrid, onsite. Pass [] to clear this filter."
+            "description": "Workplace modes matched with OR."
           },
           "contracts": {
             "type": "array",
@@ -77,17 +66,23 @@
               "enum": ["b2b", "employment", "service-contract", "internship"]
             },
             "maxItems": 4,
-            "description": "Contract types matched with OR. Allowed values: b2b, employment, service-contract, internship. Pass [] to clear this filter."
+            "description": "Contract types matched with OR."
           },
           "salaryMin": {
             "type": "number",
             "minimum": 0,
-            "description": "Minimum monthly gross salary in USD. Offers in other currencies are excluded while this filter is active. Omit to preserve the current value; pass 0 to clear it."
+            "description": "Minimum acceptable monthly gross salary in USD."
           },
           "sort": {
             "type": "string",
             "enum": ["newest", "oldest", "salary-desc", "salary-asc", "deadline", "distance"],
-            "description": "Result ordering. Allowed values: newest, oldest, salary-desc, salary-asc, deadline, distance. distance needs a location from search_jobs; newest restores the default."
+            "description": "Result ordering. Defaults to newest."
+          },
+          "limit": {
+            "description": "Maximum number of lightweight results to return.",
+            "maximum": 20,
+            "minimum": 1,
+            "type": "integer"
           }
         },
         "additionalProperties": false
@@ -104,7 +99,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 128,
-            "description": "The exact job identifier from the current search results returned by search_jobs or filter_jobs."
+            "description": "The exact job identifier from the current search results returned by search_jobs."
           }
         },
         "required": ["jobId"],

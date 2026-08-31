@@ -11,7 +11,7 @@ describe('apply_job WebMCP tool', () => {
   const auth = { isAuthenticated: vi.fn<() => boolean>() };
   const applications = {
     loadApplications: vi.fn<() => Promise<void>>(),
-    applications: vi.fn<() => Array<{ jobId: string; appliedAt: string; note?: string }>>(() => []),
+    applications: vi.fn<() => { jobId: string; appliedAt: string; note?: string }[]>(() => []),
     applyToJob: vi.fn(),
   };
 

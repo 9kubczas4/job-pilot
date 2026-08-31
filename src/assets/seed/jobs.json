@@ -606,8 +606,8 @@
     "location": {
       "city": "Chicago",
       "country": "United States",
-      "latitude": 41.8781,
-      "longitude": -87.6298
+      "latitude": 41.8917,
+      "longitude": -87.604
     },
     "responsibilities": [
       "Collaborate with backend engineers on API contracts and error handling",
@@ -10060,8 +10060,8 @@
     "location": {
       "city": "Chicago",
       "country": "United States",
-      "latitude": 41.9394,
-      "longitude": -87.6108
+      "latitude": 41.9142,
+      "longitude": -87.624
     },
     "responsibilities": [
       "Translate Figma designs into pixel-accurate, responsive layouts",
@@ -13222,8 +13222,8 @@
     "location": {
       "city": "Chicago",
       "country": "United States",
-      "latitude": 41.9167,
-      "longitude": -87.5398
+      "latitude": 41.9025,
+      "longitude": -87.618
     },
     "responsibilities": [
       "Participate in on-call rotation (shared, lightweight)",

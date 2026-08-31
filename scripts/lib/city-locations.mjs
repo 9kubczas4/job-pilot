@@ -19,12 +19,12 @@ export const CITY_LOCATIONS = {
     { city: 'Boston', country: 'United States', latitude: 42.3505, longitude: -71.0754 },
   ],
   Chicago: [
+    { city: 'Chicago', country: 'United States', latitude: 41.8917, longitude: -87.604 },
+    { city: 'Chicago', country: 'United States', latitude: 41.9025, longitude: -87.618 },
+    { city: 'Chicago', country: 'United States', latitude: 41.9142, longitude: -87.624 },
+    { city: 'Chicago', country: 'United States', latitude: 41.9214, longitude: -87.625 },
+    { city: 'Chicago', country: 'United States', latitude: 41.8675, longitude: -87.613 },
     { city: 'Chicago', country: 'United States', latitude: 41.8781, longitude: -87.6298 },
-    { city: 'Chicago', country: 'United States', latitude: 41.8819, longitude: -87.6278 },
-    { city: 'Chicago', country: 'United States', latitude: 41.8925, longitude: -87.6244 },
-    { city: 'Chicago', country: 'United States', latitude: 41.8656, longitude: -87.6173 },
-    { city: 'Chicago', country: 'United States', latitude: 41.8506, longitude: -87.6177 },
-    { city: 'Chicago', country: 'United States', latitude: 41.9033, longitude: -87.6367 },
   ],
   'San Francisco': [
     { city: 'San Francisco', country: 'United States', latitude: 37.7749, longitude: -122.4194 },

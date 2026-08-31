@@ -11,6 +11,7 @@
     "test": "ng test",
     "test:firestore-rules": "firebase emulators:exec --only firestore \"vitest run tests/firestore.rules.spec.ts --environment node\"",
     "seed:firestore": "node scripts/seed-firestore.mjs",
+    "cleanup:profile-collections": "node scripts/cleanup-profile-collections.mjs",
     "seed:jobs": "node scripts/expand-jobs-seed.mjs",
     "lint": "ng lint",
     "eval:webmcp:local": "webmcp-evals local --tools webmcp-evals/tools.json --evals webmcp-evals/tool-selection.evals.json --backend vercel --model google:gemini-3.7-flash",

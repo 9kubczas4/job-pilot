@@ -39,8 +39,8 @@ import { JobOffer } from '@features/jobs/domain/job.model';
 import { ToastService } from '@shared/ui/toast/toast.service';
 import { JobCardComponent } from '@features/jobs/ui/job-card/job-card.component';
 import { CompetencyChipComponent } from '@features/jobs/ui/competency-chip/competency-chip.component';
-import { ApplyJobDialogComponent } from '@features/jobs/ui/apply-job-dialog/apply-job-dialog.component';
 import { JobDetailsStore } from '@features/jobs/state/job-details.store';
+import { ApplyJobStore } from '@features/jobs/state/apply-job.store';
 
 type AuthPromptAction = 'save' | 'apply';
 
@@ -52,7 +52,6 @@ type AuthPromptAction = 'save' | 'apply';
     JobHeaderSearchComponent,
     RouterLink,
     AuthPromptDialogComponent,
-    ApplyJobDialogComponent,
     SaveJobButtonComponent,
     JobCardComponent,
     CompetencyChipComponent,
@@ -67,14 +66,13 @@ export class JobDetailsPageComponent {
   readonly store = inject(JobDetailsStore);
   readonly savedJobs = inject(SavedJobsStore);
   readonly jobApplications = inject(JobApplicationsStore);
+  readonly applyJobStore = inject(ApplyJobStore);
   readonly auth = inject(AuthService);
   private readonly toast = inject(ToastService);
   private readonly pageSeo = inject(PageSeoService);
 
   readonly authPromptOpen = signal(false);
   readonly authPromptAction = signal<AuthPromptAction>('save');
-  readonly applyDialogOpen = signal(false);
-  readonly applying = signal(false);
   readonly links = AppLinks;
   readonly skeletonListRows = [0, 1, 2, 3];
   readonly skeletonColumns = [0, 1];
@@ -124,7 +122,7 @@ export class JobDetailsPageComponent {
 
       untracked(() => {
         this.authPromptOpen.set(false);
-        this.applyDialogOpen.set(false);
+        this.applyJobStore.dismiss();
         this.store.loadJob(jobId);
       });
 
@@ -176,29 +174,7 @@ export class JobDetailsPageComponent {
       return;
     }
 
-    this.applyDialogOpen.set(true);
-  }
-
-  closeApplyDialog(): void {
-    this.applyDialogOpen.set(false);
-  }
-
-  async submitApplication(note?: string): Promise<void> {
-    const job = this.store.job();
-    if (!job || this.applying() || this.jobApplications.isApplied(job.id)) {
-      return;
-    }
-
-    this.applying.set(true);
-    try {
-      await this.jobApplications.applyToJob(job.id, note);
-      this.applyDialogOpen.set(false);
-      this.toast.show(`Application submitted for ${job.title}.`);
-    } catch {
-      this.toast.show('Could not submit application. Please try again.', 5000);
-    } finally {
-      this.applying.set(false);
-    }
+    this.applyJobStore.show({ jobId: job.id });
   }
 
   closeAuthPrompt(): void {
@@ -226,7 +202,7 @@ export class JobDetailsPageComponent {
       }
 
       if (!this.jobApplications.isApplied(job.id)) {
-        this.applyDialogOpen.set(true);
+        this.applyJobStore.show({ jobId: job.id });
       }
     } catch {
       // User dismissed the provider popup or sign-in failed.

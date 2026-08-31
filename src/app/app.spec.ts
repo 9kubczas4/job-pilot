@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { JobRepository } from '@features/jobs/data-access/job.repository';
+import { ApplyJobStore } from '@features/jobs/state/apply-job.store';
 import { App } from './app';
 
 describe('App', () => {
@@ -14,6 +15,15 @@ describe('App', () => {
           useValue: {
             getJobById: () => Promise.resolve(null),
             getAllJobs: () => Promise.resolve([]),
+          },
+        },
+        {
+          provide: ApplyJobStore,
+          useValue: {
+            presentation: () => null,
+            isOpen: () => false,
+            submitting: () => false,
+            dismiss: () => undefined,
           },
         },
       ],

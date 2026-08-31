@@ -281,14 +281,3 @@
   (closed)="closeAuthPrompt()"
   (confirmed)="confirmAuthPrompt()"
 />
-
-@if (store.job(); as currentJob) {
-  <app-apply-job-dialog
-    [open]="applyDialogOpen()"
-    [jobTitle]="currentJob.title"
-    [companyName]="currentJob.company.name"
-    [submitting]="applying()"
-    (closed)="closeApplyDialog()"
-    (confirmed)="submitApplication($event)"
-  />
-}

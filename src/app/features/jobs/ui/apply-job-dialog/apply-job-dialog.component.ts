@@ -22,6 +22,7 @@ export class ApplyJobDialogComponent {
   readonly open = input(false);
   readonly jobTitle = input('');
   readonly companyName = input('');
+  readonly initialNote = input('');
   readonly submitting = input(false);
 
   readonly closed = output<void>();
@@ -35,6 +36,7 @@ export class ApplyJobDialogComponent {
   constructor() {
     effect(() => {
       if (this.open()) {
+        this.note.set(this.initialNote());
         this.onOpen();
         return;
       }

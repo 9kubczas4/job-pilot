@@ -5,14 +5,16 @@ import { ThemeService } from '@core/infrastructure/theme/theme.service';
 import { ToastHostComponent } from '@shared/ui/toast/toast-host.component';
 import { ToastService } from '@shared/ui/toast/toast.service';
 import { JobCompareDrawerHostComponent } from '@features/jobs/shell/job-compare-drawer-host.component';
+import { ApplyJobDialogHostComponent } from '@features/jobs/shell/apply-job-dialog-host.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ToastHostComponent, JobCompareDrawerHostComponent],
+  imports: [RouterOutlet, ToastHostComponent, JobCompareDrawerHostComponent, ApplyJobDialogHostComponent],
   template: `
     <router-outlet />
     <app-toast-host />
     <app-job-compare-drawer-host />
+    <app-apply-job-dialog-host />
   `,
 })
 export class App {

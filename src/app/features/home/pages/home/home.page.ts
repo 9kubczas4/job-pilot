@@ -78,7 +78,7 @@ export class HomePageComponent {
         'Replace complete search criteria and update filters, results, URL, and map in one operation.',
     },
     {
-      name: 'get_job',
+      name: 'get_jobs',
       scope: 'global',
       description: 'Read full details for a single job offer by id - no need to open the detail route first.',
     },

@@ -35,7 +35,7 @@ Ten tools total: **8 global** + **2 route-scoped**. Full catalog: [`docs/specs/w
 | Tool | Scope | Purpose |
 |------|-------|---------|
 | `search_jobs` | global | Replace the complete search state and update `/jobs` once |
-| `get_job` | global | Read a single job offer by id |
+| `get_jobs` | global | Read one to five job offers by id |
 | `compare_offers` | global | Open a comparison drawer (2–5 offers) with badges, notes, and optional highlighted pick |
 | `get_saved_jobs` | global | Read the signed-in user's saved shortlist |
 | `save_job` | global | Add a job to favourites (idempotent) |

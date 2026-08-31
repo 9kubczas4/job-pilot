@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { describe, expect, it } from 'vitest';
 import type { ZodWebMcpTool } from '@core/infrastructure/webmcp/zod-webmcp-tool';
 import { APPLY_JOB_WEBMCP_TOOL } from './tools/apply-job/apply-job.tool';
-import { GET_JOB_WEBMCP_TOOL } from './tools/get-job/get-job.tool';
+import { GET_JOBS_WEBMCP_TOOL } from './tools/get-jobs/get-jobs.tool';
 import { SAVED_JOBS_WEBMCP_TOOLS } from './tools/saved-jobs/saved-jobs.tool';
 import { SEARCH_JOBS_WEBMCP_TOOL } from './tools/search-jobs/search-jobs.tool';
 import { HIGHLIGHT_JOB_WEBMCP_TOOL } from './tools/highlight-job/highlight-job.tool';
@@ -12,7 +12,7 @@ const tools: readonly ZodWebMcpTool[] = [
   SEARCH_JOBS_WEBMCP_TOOL,
   HIGHLIGHT_JOB_WEBMCP_TOOL,
   COMPARE_OFFERS_WEBMCP_TOOL,
-  GET_JOB_WEBMCP_TOOL,
+  GET_JOBS_WEBMCP_TOOL,
   APPLY_JOB_WEBMCP_TOOL,
   ...SAVED_JOBS_WEBMCP_TOOLS,
 ];
@@ -34,7 +34,7 @@ describe('jobs WebMCP contracts', () => {
   });
 
   it.each([
-    [GET_JOB_WEBMCP_TOOL, { jobId: '' }],
+    [GET_JOBS_WEBMCP_TOOL, { jobIds: [] }],
     [APPLY_JOB_WEBMCP_TOOL, { jobId: 'job-001', note: 'x'.repeat(2001) }],
     [SEARCH_JOBS_WEBMCP_TOOL, { location: 'x'.repeat(101) }],
     [SEARCH_JOBS_WEBMCP_TOOL, { radiusKm: 50 }],

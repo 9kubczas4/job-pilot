@@ -14,14 +14,14 @@ export const SAVED_JOBS_WEBMCP_TOOLS = [
   defineZodWebMcpTool({
     name: 'get_saved_jobs',
     description:
-      "Read the signed-in user's saved job shortlist. Use this tool instead of interacting with the page UI or DOM. This tool does not change application state and is available from any page. Requires sign-in. Returns changed: false, savedCount, the complete savedJobIds state, lightweight details for jobs still available in the catalog, and unavailableJobIds for saved offers that no longer exist. Use get_job for complete offer details.",
+      "Read the signed-in user's saved job shortlist. Use this tool instead of interacting with the page UI or DOM. This tool does not change application state and is available from any page. Requires sign-in. Returns changed: false, savedCount, the complete savedJobIds state, lightweight details for jobs still available in the catalog, and unavailableJobIds for saved offers that no longer exist. Use get_jobs for complete offer details.",
     inputSchema: GET_SAVED_JOBS_INPUT_SCHEMA,
     execute: () => readSavedJobs(),
   }),
   defineZodWebMcpTool({
     name: 'save_job',
     description:
-      "Save one job to the signed-in user's shortlist. Use this tool instead of interacting with the page UI or DOM. Use it when the user wants to remember or favorite a job returned by search_jobs or get_job. Requires sign-in. It is idempotent: an already saved job is not duplicated. Returns success, changed, jobId, saved: true, and the complete current savedJobIds state with savedCount.",
+      "Save one job to the signed-in user's shortlist. Use this tool instead of interacting with the page UI or DOM. Use it when the user wants to remember or favorite a job returned by search_jobs or get_jobs. Requires sign-in. It is idempotent: an already saved job is not duplicated. Returns success, changed, jobId, saved: true, and the complete current savedJobIds state with savedCount.",
     inputSchema: SAVED_JOB_INPUT_SCHEMA,
     execute: ({ jobId }) => updateSavedState(jobId, true),
   }),

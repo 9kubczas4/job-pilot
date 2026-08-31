@@ -11,7 +11,7 @@ Callable from any route.
 | Tool | Mutates state | Auth | Purpose |
 |------|---------------|------|---------|
 | `search_jobs` | Yes | No | Replace complete search criteria and navigate to `/jobs` once |
-| `get_job` | No | No | Read one full job offer by `jobId` |
+| `get_jobs` | No | No | Read up to five full job offers by `jobIds` |
 | `compare_offers` | Yes (UI) | No | Open a transient drawer comparing 2–5 offers with badges, notes, and optional highlighted pick |
 | `get_saved_jobs` | No | Yes | Read the signed-in user's saved shortlist |
 | `save_job` | Yes | Yes | Add a job to favourites (idempotent) |
@@ -33,11 +33,11 @@ Registered only while the matching route is active.
 ### Search and explore
 
 1. `search_jobs` → complete criteria, filters, list, and map update on `/jobs`
-2. `get_job` → read full description before deciding
+2. `get_jobs` → read full descriptions before deciding
 
 ### Recommend and compare
 
-1. `get_job` or `search_jobs` to gather candidates
+1. `get_jobs` or `search_jobs` to gather candidates
 2. `compare_offers` → drawer with summary, per-offer badges, optional `highlighted: true` on the primary pick
 3. On `/jobs`, `highlight_job` → point to one result on the map (must be in current results)
 
@@ -61,6 +61,6 @@ Registered only while the matching route is active.
 
 Static catalog for tool-selection evals: [`webmcp-evals/tools.json`](../../webmcp-evals/tools.json) (global tools + `update_profile`).
 
-Live smoke journeys: [`webmcp-evals/public-journeys.evals.json`](../../webmcp-evals/public-journeys.evals.json) (`search_jobs`, `highlight_job`, `get_job`).
+Live smoke journeys: [`webmcp-evals/public-journeys.evals.json`](../../webmcp-evals/public-journeys.evals.json) (`search_jobs`, `highlight_job`, `get_jobs`).
 
 Contract test: `src/app/webmcp-evals.contract.spec.ts` keeps fixtures synchronized with runtime descriptors.

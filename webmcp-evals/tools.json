@@ -108,7 +108,7 @@
     },
     {
       "name": "compare_offers",
-      "description": "Open a transient comparison drawer with the agent analysis for two to five job offers. Use this tool instead of interacting with the page UI or DOM. Use it when the user should see a side-by-side recommendation with optional per-offer badges (for example, najlepsza, interesujaca, rozwojowa), short notes, and an optional highlighted primary pick with a gradient border and star. Accepts any known jobId from search_jobs, get_job, or get_saved_jobs. Does not change search filters, saved jobs, or applications. Returns NOT_FOUND when fewer than two requested jobs resolve.",
+      "description": "Open a transient comparison drawer with the agent analysis for two to five job offers. Use this tool instead of interacting with the page UI or DOM. Use it when the user should see a side-by-side recommendation with optional per-offer badges (for example, najlepsza, interesujaca, rozwojowa), short notes, and an optional highlighted primary pick with a gradient border and star. Accepts any known jobId from search_jobs, get_jobs, or get_saved_jobs. Does not change search filters, saved jobs, or applications. Returns NOT_FOUND when fewer than two requested jobs resolve.",
       "inputSchema": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "type": "object",
@@ -136,7 +136,7 @@
                   "type": "string",
                   "minLength": 1,
                   "maxLength": 128,
-                  "description": "The unique job identifier returned by search_jobs, get_job, or get_saved_jobs (for example, job-001)."
+                  "description": "The unique job identifier returned by search_jobs, get_jobs, or get_saved_jobs (for example, job-001)."
                 },
                 "badge": {
                   "type": "string",
@@ -165,26 +165,32 @@
       }
     },
     {
-      "name": "get_job",
-      "description": "Read one job offer by its exact jobId. Use this tool instead of interacting with the page UI or DOM. Use a jobId returned by search_jobs. This tool does not change application state and does not require sign-in. Returns the complete job record on success or a structured NOT_FOUND error when the identifier is unknown.",
+      "name": "get_jobs",
+      "description": "Return complete job records for one to five IDs in input order. Missing offers are marked per item. Does not change application state.",
       "inputSchema": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "type": "object",
         "properties": {
-          "jobId": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 128,
-            "description": "The unique job identifier returned by search_jobs (for example, job-001)."
+          "jobIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "minItems": 1,
+            "maxItems": 5,
+            "uniqueItems": true,
+            "description": "One to five unique job identifiers returned by search_jobs."
           }
         },
-        "required": ["jobId"],
+        "required": ["jobIds"],
         "additionalProperties": false
       }
     },
     {
       "name": "get_saved_jobs",
-      "description": "Read the signed-in user's saved job shortlist. Use this tool instead of interacting with the page UI or DOM. This tool does not change application state and is available from any page. Requires sign-in. Returns changed: false, savedCount, the complete savedJobIds state, lightweight details for jobs still available in the catalog, and unavailableJobIds for saved offers that no longer exist. Use get_job for complete offer details.",
+      "description": "Read the signed-in user's saved job shortlist. Use this tool instead of interacting with the page UI or DOM. This tool does not change application state and is available from any page. Requires sign-in. Returns changed: false, savedCount, the complete savedJobIds state, lightweight details for jobs still available in the catalog, and unavailableJobIds for saved offers that no longer exist. Use get_jobs for complete offer details.",
       "inputSchema": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "type": "object",
@@ -194,7 +200,7 @@
     },
     {
       "name": "save_job",
-      "description": "Save one job to the signed-in user's shortlist. Use this tool instead of interacting with the page UI or DOM. Use it when the user wants to remember or favorite a job returned by search_jobs or get_job. Requires sign-in. It is idempotent: an already saved job is not duplicated. Returns success, changed, jobId, saved: true, and the complete current savedJobIds state with savedCount.",
+      "description": "Save one job to the signed-in user's shortlist. Use this tool instead of interacting with the page UI or DOM. Use it when the user wants to remember or favorite a job returned by search_jobs or get_jobs. Requires sign-in. It is idempotent: an already saved job is not duplicated. Returns success, changed, jobId, saved: true, and the complete current savedJobIds state with savedCount.",
       "inputSchema": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "type": "object",
@@ -203,7 +209,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 128,
-            "description": "The unique job identifier returned by search_jobs or get_job (for example, job-001)."
+            "description": "The unique job identifier returned by search_jobs or get_jobs (for example, job-001)."
           }
         },
         "required": ["jobId"],
@@ -221,7 +227,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 128,
-            "description": "The unique job identifier returned by search_jobs or get_job (for example, job-001)."
+            "description": "The unique job identifier returned by search_jobs or get_jobs (for example, job-001)."
           }
         },
         "required": ["jobId"],
@@ -239,7 +245,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 128,
-            "description": "The unique job identifier returned by search_jobs or get_job (for example, job-001)."
+            "description": "The unique job identifier returned by search_jobs or get_jobs (for example, job-001)."
           },
           "note": {
             "type": "string",

@@ -19,8 +19,8 @@
             }
           },
           {
-            "functionName": "get_job",
-            "arguments": { "jobId": "job-001" }
+            "functionName": "get_jobs",
+            "arguments": { "jobIds": ["job-001"] }
           }
         ]
       }
@@ -46,23 +46,13 @@
         }
       },
       {
-        "functionName": "get_job",
+        "functionName": "get_jobs",
         "arguments": {
-          "jobId": { "$pattern": "^job-\\d{3}$" }
-        },
-        "optional": true
-      },
-      {
-        "functionName": "get_job",
-        "arguments": {
-          "jobId": { "$pattern": "^job-\\d{3}$" }
-        },
-        "optional": true
-      },
-      {
-        "functionName": "get_job",
-        "arguments": {
-          "jobId": { "$pattern": "^job-\\d{3}$" }
+          "jobIds": [
+            { "$pattern": "^job-\\d{3}$" },
+            { "$pattern": "^job-\\d{3}$" },
+            { "$pattern": "^job-\\d{3}$" }
+          ]
         },
         "optional": true
       }

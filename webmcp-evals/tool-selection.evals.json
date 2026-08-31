@@ -52,8 +52,8 @@
     ],
     "expectedCall": [
       {
-        "functionName": "get_job",
-        "arguments": { "jobId": "job-001" }
+        "functionName": "get_jobs",
+        "arguments": { "jobIds": ["job-001"] }
       }
     ]
   },

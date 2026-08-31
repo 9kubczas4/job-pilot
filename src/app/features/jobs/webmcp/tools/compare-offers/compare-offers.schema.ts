@@ -3,7 +3,7 @@ import { z } from 'zod';
 const COMPARE_OFFERS_ENTRY_SCHEMA = z.strictObject({
   jobId: z.string().trim().min(1).max(128).meta({
     description:
-      'The unique job identifier returned by search_jobs, get_job, or get_saved_jobs (for example, job-001).',
+      'The unique job identifier returned by search_jobs, get_jobs, or get_saved_jobs (for example, job-001).',
   }),
   badge: z.string().trim().min(1).max(64).optional().meta({
     description:

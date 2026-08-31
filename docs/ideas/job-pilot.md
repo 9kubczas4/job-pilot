@@ -39,7 +39,7 @@ The agent runs in **Codex** (ChatGPT desktop in-app browser). The app exposes to
 | Tool | Registration | Source |
 |------|--------------|--------|
 | `search_jobs` | Global (`app.config.ts`) | `features/jobs/webmcp/tools/search-jobs/search-jobs.tool.ts` |
-| `get_job` | Global (`app.config.ts`) | `features/jobs/webmcp/tools/get-job/get-job.tool.ts` |
+| `get_jobs` | Global (`app.config.ts`) | `features/jobs/webmcp/tools/get-jobs/get-jobs.tool.ts` |
 | `compare_offers` | Global (`app.config.ts`) | `features/jobs/webmcp/tools/compare-offers/compare-offers.tool.ts` |
 | `get_saved_jobs` | Global (`app.config.ts`) | `features/jobs/webmcp/tools/saved-jobs/saved-jobs.tool.ts` |
 | `save_job` | Global (`app.config.ts`) | `features/jobs/webmcp/tools/saved-jobs/saved-jobs.tool.ts` |
@@ -83,7 +83,7 @@ Full catalog: [`docs/specs/webmcp-tools.md`](../specs/webmcp-tools.md).
 3. Codex: *"Find lead frontend jobs, remote/hybrid Warsaw, 25k+"* → `search_jobs` → **UI reacts live**
 4. Codex: compare top picks → `compare_offers` → **recommendation drawer opens**
 5. Codex: *"Show the best one on the map"* → `highlight_job` on `/jobs`
-6. `get_job` → `save_job` → `apply_job`
+6. `get_jobs` → `save_job` → `apply_job`
 
 ## Not Doing (and Why)
 

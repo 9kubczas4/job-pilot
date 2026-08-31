@@ -19,7 +19,7 @@ Colocate WebMCP tools inside each feature at `features/{name}/webmcp/`:
 | Tool(s) | Location | Registration |
 |---------|----------|--------------|
 | `search_jobs` | `features/jobs/webmcp/tools/search-jobs/search-jobs.tool.ts` | `app.config.ts` (global) |
-| `get_job` | `features/jobs/webmcp/tools/get-job/get-job.tool.ts` | `app.config.ts` (global) |
+| `get_jobs` | `features/jobs/webmcp/tools/get-jobs/get-jobs.tool.ts` | `app.config.ts` (global) |
 | `compare_offers` | `features/jobs/webmcp/tools/compare-offers/compare-offers.tool.ts` | `app.config.ts` (global) |
 | `get_saved_jobs`, `save_job`, `unsave_job` | `features/jobs/webmcp/tools/saved-jobs/saved-jobs.tool.ts` | `app.config.ts` (global) |
 | `apply_job` | `features/jobs/webmcp/tools/apply-job/apply-job.tool.ts` | `app.config.ts` (global) |

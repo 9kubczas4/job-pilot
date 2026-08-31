@@ -94,6 +94,24 @@
       }
     },
     {
+      "name": "highlight_job",
+      "description": "Visually point to one job from the current results on /jobs. Use this tool instead of interacting with the page UI or DOM. Use it when identifying a recommended or otherwise notable offer. It selects the marker, focuses the map, opens the job popover, and reveals the map on mobile without changing search filters, the URL, saved jobs, or applications. Requires an exact jobId present in the current search results and returns JOB_NOT_IN_RESULTS otherwise.",
+      "inputSchema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "jobId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "description": "The exact job identifier from the current search results returned by search_jobs or filter_jobs."
+          }
+        },
+        "required": ["jobId"],
+        "additionalProperties": false
+      }
+    },
+    {
       "name": "get_job",
       "description": "Read one job offer by its exact jobId. Use this tool instead of interacting with the page UI or DOM. Use a jobId returned by search_jobs. This tool does not change application state and does not require sign-in. Returns the complete job record on success or a structured NOT_FOUND error when the identifier is unknown.",
       "inputSchema": {

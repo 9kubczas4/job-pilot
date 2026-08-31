@@ -44,6 +44,7 @@ import {
   routeCriteriaEqual,
 } from '@features/jobs/domain/search-url.utils';
 import { JobSearchStore } from '@features/jobs/state/job-search.store';
+import { JobHighlightStore } from '@features/jobs/state/job-highlight.store';
 import { JobFiltersComponent } from '@features/jobs/ui/job-filters/job-filters.component';
 import { JobListComponent } from '@features/jobs/ui/job-list/job-list.component';
 import { JobMapComponent } from '@features/jobs/ui/job-map/job-map.component';
@@ -87,6 +88,7 @@ export class JobSearchPageComponent implements OnInit {
   readonly savedJobs = inject(SavedJobsStore);
   readonly jobApplications = inject(JobApplicationsStore);
   readonly headerUi = inject(HeaderUiStore);
+  readonly jobHighlight = inject(JobHighlightStore);
   readonly auth = inject(AuthService);
   readonly links = AppLinks;
   readonly profileMenuLinks = AppProfileMenuLinks;
@@ -154,6 +156,11 @@ export class JobSearchPageComponent implements OnInit {
     }
 
     this.destroyRef.onDestroy(() => {
+      const highlightedJobId = this.jobHighlight.request()?.jobId;
+      this.jobHighlight.clear();
+      if (highlightedJobId && this.store.selectedJobId() === highlightedJobId) {
+        this.store.selectJob(null);
+      }
       this.headerUi.disableFilters();
       this.headerUi.showHeader();
     });
@@ -252,6 +259,18 @@ export class JobSearchPageComponent implements OnInit {
     });
 
     effect(() => {
+      const request = this.jobHighlight.request();
+      if (!request || !this.isMobileLayout()) {
+        return;
+      }
+
+      this.searchExpanded.set(false);
+      this.sheetFocusJobId.set(null);
+      this.sheetSnap.set('collapsed');
+      queueMicrotask(() => this.jobMap()?.notifyVisible());
+    });
+
+    effect(() => {
       if (!this.isMobileLayout()) {
         return;
       }
@@ -288,6 +307,7 @@ export class JobSearchPageComponent implements OnInit {
   }
 
   onSelectJob(jobId: string): void {
+    this.jobHighlight.clear();
     this.store.selectJob(jobId);
   }
 
@@ -410,6 +430,7 @@ export class JobSearchPageComponent implements OnInit {
   }
 
   onMobileSelectJob(jobId: string): void {
+    this.jobHighlight.clear();
     this.store.selectJob(jobId);
     this.sheetFocusJobId.set(jobId);
     this.sheetSnap.set('half');

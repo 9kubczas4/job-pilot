@@ -26,6 +26,7 @@ import { UserMapRegionService } from '@shared/map/user-map-region.service';
 import { DEFAULT_SEARCH_RADIUS_KM } from '@features/jobs/domain/header-search.model';
 import { getMapStylesForTheme } from '@shared/map/google-maps-styles';
 import { JobLocation, JobOffer } from '@features/jobs/domain/job.model';
+import { JobHighlightRequest } from '@features/jobs/domain/job-highlight.model';
 import {
   buildJobMapPopupHtml,
 } from './job-map-popup';
@@ -56,6 +57,7 @@ export class JobMapComponent {
   readonly searchRadiusKm = input<number | undefined>(undefined);
   readonly fitResultsToViewport = input(false);
   readonly showPopups = input(true);
+  readonly highlightRequest = input<JobHighlightRequest | null>(null);
   readonly selectJob = output<string>();
 
   readonly mapsConfigured = isGoogleMapsConfigured(this.apiKey);
@@ -73,8 +75,11 @@ export class JobMapComponent {
   private lastJobIdsKey = '';
   private lastSearchCenterKey = '';
   private lastViewportKey = '';
+  private lastHighlightRequestId = 0;
   private mapAnimationFrame: number | null = null;
   private popupAbortController: AbortController | null = null;
+  private activeAiPopupJobId: string | null = null;
+  private prefersReducedMotion = false;
   private isDestroyed = false;
 
   constructor() {
@@ -84,6 +89,16 @@ export class JobMapComponent {
     this.mapOptions = this.buildMapOptions(this.mapTheme);
 
     if (isPlatformBrowser(this.platformId) && this.mapsConfigured) {
+      const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const syncMotionPreference = () => {
+        this.prefersReducedMotion = motionQuery.matches;
+      };
+      syncMotionPreference();
+      motionQuery.addEventListener('change', syncMotionPreference);
+      this.destroyRef.onDestroy(() =>
+        motionQuery.removeEventListener('change', syncMotionPreference),
+      );
+
       afterNextRender(() => {
         void loadGoogleMapsApi(this.apiKey)
           .then(() => this.mapsApiReady.set(true))
@@ -102,7 +117,9 @@ export class JobMapComponent {
       const searchCenter = this.searchCenter();
       const searchRadiusKm = this.searchRadiusKm();
       const fitResultsToViewport = this.fitResultsToViewport();
+      const highlightRequest = this.highlightRequest();
       this.syncMap(jobs, selectedId, searchCenter, searchRadiusKm, fitResultsToViewport);
+      this.applyHighlightRequest(highlightRequest);
     });
 
     effect(() => {
@@ -148,6 +165,7 @@ export class JobMapComponent {
       this.searchRadiusKm(),
       this.fitResultsToViewport(),
     );
+    this.applyHighlightRequest(this.highlightRequest());
   }
 
   onAuthFailure(): void {
@@ -444,6 +462,12 @@ export class JobMapComponent {
       return;
     }
 
+    if (this.prefersReducedMotion) {
+      map.setCenter(target);
+      map.setZoom(targetZoom);
+      return;
+    }
+
     if (this.mapAnimationFrame != null) {
       cancelAnimationFrame(this.mapAnimationFrame);
       this.mapAnimationFrame = null;
@@ -486,8 +510,36 @@ export class JobMapComponent {
     this.mapAnimationFrame = requestAnimationFrame(step);
   }
 
-  private openJobPopup(job: JobOffer, marker: google.maps.Marker): void {
-    this.infoWindow?.setContent(buildJobMapPopupHtml(job));
+  private applyHighlightRequest(request: JobHighlightRequest | null): void {
+    if (!request) {
+      if (this.activeAiPopupJobId) {
+        this.closeJobPopup();
+      }
+      return;
+    }
+
+    if (request.requestId === this.lastHighlightRequestId) {
+      return;
+    }
+
+    const marker = this.markers.get(request.jobId);
+    const job = this.jobs().find((candidate) => candidate.id === request.jobId);
+    if (!marker || !job?.location || !this.map || !this.infoWindow) {
+      return;
+    }
+
+    this.lastHighlightRequestId = request.requestId;
+    this.focusOnMarker(job.location);
+    this.openJobPopup(job, marker, true);
+  }
+
+  private openJobPopup(
+    job: JobOffer,
+    marker: google.maps.Marker,
+    aiHighlighted = false,
+  ): void {
+    this.activeAiPopupJobId = aiHighlighted ? job.id : null;
+    this.infoWindow?.setContent(buildJobMapPopupHtml(job, { aiHighlighted }));
     this.infoWindow?.open({ map: this.map!, anchor: marker });
     this.attachPopupNavigation(job);
   }
@@ -555,6 +607,7 @@ export class JobMapComponent {
   }
 
   private closeJobPopup(): void {
+    this.activeAiPopupJobId = null;
     this.infoWindow?.close();
   }
 

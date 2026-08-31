@@ -21,13 +21,19 @@ function companyInitials(name: string): string {
   return parts.map((part) => part[0]?.toUpperCase() ?? '').join('') || '?';
 }
 
-export function buildJobMapPopupHtml(job: JobOffer): string {
+export function buildJobMapPopupHtml(
+  job: JobOffer,
+  options: { aiHighlighted?: boolean } = {},
+): string {
   const salary = formatSalary(job);
   const workplace = formatWorkplace(job);
   const competencies = job.competencies.slice(0, 3).map((competency) => competency.name);
   const extraCompetencies = job.competencies.length - competencies.length;
   const contracts = formatContractTypes(job.contractTypes);
   const schedules = formatWorkSchedules(job.workSchedules);
+  const popupClass = options.aiHighlighted
+    ? 'job-map-popup job-map-popup--ai-highlighted'
+    : 'job-map-popup';
 
   const competenciesHtml = competencies.length
     ? `<div class="job-map-popup__competencies">
@@ -44,7 +50,7 @@ export function buildJobMapPopupHtml(job: JobOffer): string {
 
   return `
     <article
-      class="job-map-popup"
+      class="${popupClass}"
       data-job-map-popup="${escapeHtml(job.id)}"
       role="link"
       tabindex="0"

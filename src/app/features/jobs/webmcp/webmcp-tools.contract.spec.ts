@@ -5,10 +5,12 @@ import { FILTER_JOBS_WEBMCP_TOOL } from './tools/filter-jobs/filter-jobs.tool';
 import { GET_JOB_WEBMCP_TOOL } from './tools/get-job/get-job.tool';
 import { SAVED_JOBS_WEBMCP_TOOLS } from './tools/saved-jobs/saved-jobs.tool';
 import { SEARCH_JOBS_WEBMCP_TOOL } from './tools/search-jobs/search-jobs.tool';
+import { HIGHLIGHT_JOB_WEBMCP_TOOL } from './tools/highlight-job/highlight-job.tool';
 
 const tools = [
   SEARCH_JOBS_WEBMCP_TOOL,
   FILTER_JOBS_WEBMCP_TOOL,
+  HIGHLIGHT_JOB_WEBMCP_TOOL,
   GET_JOB_WEBMCP_TOOL,
   APPLY_JOB_WEBMCP_TOOL,
   ...SAVED_JOBS_WEBMCP_TOOLS,
@@ -38,6 +40,7 @@ describe('jobs WebMCP contracts', () => {
     [SEARCH_JOBS_WEBMCP_TOOL, { locations: ['Warsaw', 'Krakow'] }],
     [SEARCH_JOBS_WEBMCP_TOOL, { radiusKm: 50 }],
     [FILTER_JOBS_WEBMCP_TOOL, { salaryMin: -1 }],
+    [HIGHLIGHT_JOB_WEBMCP_TOOL, { jobId: '   ' }],
     [SAVED_JOBS_WEBMCP_TOOLS[0], { jobId: '   ' }],
   ])('rejects invalid arguments before executing %s', async (tool, input) => {
     const result = await executeTool(tool, input);

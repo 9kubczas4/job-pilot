@@ -76,6 +76,7 @@
           [searchRadiusKm]="searchMapRadiusKm()"
           [fitResultsToViewport]="fitMapToResults()"
           [showPopups]="false"
+          [highlightRequest]="jobHighlight.request()"
           (selectJob)="onMobileSelectJob($event)"
         />
       } @placeholder {
@@ -179,6 +180,7 @@
               [searchCenter]="searchMapCenter()"
               [searchRadiusKm]="searchMapRadiusKm()"
               [fitResultsToViewport]="fitMapToResults()"
+              [highlightRequest]="jobHighlight.request()"
               (selectJob)="onSelectJob($event)"
             />
           } @placeholder {

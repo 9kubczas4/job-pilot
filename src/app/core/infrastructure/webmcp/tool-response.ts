@@ -7,7 +7,11 @@ export function toolJson(data: unknown): { content: { type: 'text'; text: string
 }
 
 export type WebMcpErrorCode =
-  'INVALID_ARGUMENTS' | 'NOT_FOUND' | 'UNAUTHENTICATED' | 'EXECUTION_FAILED';
+  | 'INVALID_ARGUMENTS'
+  | 'NOT_FOUND'
+  | 'JOB_NOT_IN_RESULTS'
+  | 'UNAUTHENTICATED'
+  | 'EXECUTION_FAILED';
 
 export interface WebMcpValidationIssue {
   path: string;

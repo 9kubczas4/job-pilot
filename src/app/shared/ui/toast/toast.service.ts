@@ -19,7 +19,7 @@ export class ToastService {
     this.showNotification({ message: text, kind: 'default' }, durationMs);
   }
 
-  showAiToolActivated(toolName: string, durationMs = 2600): void {
+  showAiToolActivated(toolName: string, durationMs = 5000): void {
     this.showNotification(
       {
         message: 'AI tool activated',

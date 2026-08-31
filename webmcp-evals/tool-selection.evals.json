@@ -58,6 +58,22 @@
     ]
   },
   {
+    "name": "Highlight a recommended job on the map",
+    "messages": [
+      {
+        "role": "user",
+        "type": "message",
+        "content": "Show me which offer you recommend by highlighting job-001 on the current jobs map."
+      }
+    ],
+    "expectedCall": [
+      {
+        "functionName": "highlight_job",
+        "arguments": { "jobId": "job-001" }
+      }
+    ]
+  },
+  {
     "name": "Save a chosen job",
     "messages": [
       {

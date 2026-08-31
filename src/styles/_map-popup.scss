@@ -49,6 +49,35 @@
   background: var(--color-map-popup-hover);
 }
 
+.job-map-popup--ai-highlighted {
+  animation: job-map-popup-ai-highlight 720ms ease-out;
+}
+
+@keyframes job-map-popup-ai-highlight {
+  0% {
+    opacity: 0.72;
+    transform: translateY(6px) scale(0.97);
+  }
+
+  45% {
+    opacity: 1;
+    box-shadow: 0 0 0 4px var(--color-primary-surface), var(--shadow-md);
+    transform: translateY(0) scale(1.015);
+  }
+
+  100% {
+    opacity: 1;
+    box-shadow: var(--shadow-md);
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .job-map-popup--ai-highlighted {
+    animation: none;
+  }
+}
+
 .job-map-popup__identity {
   display: flex;
   gap: 12px;

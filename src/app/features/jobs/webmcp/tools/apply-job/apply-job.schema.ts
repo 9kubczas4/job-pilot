@@ -7,6 +7,6 @@ export const APPLY_JOB_INPUT_SCHEMA = z.strictObject({
   }),
   note: z.string().trim().max(2000).optional().meta({
     description:
-      'Optional note stored with the application. Maximum 2,000 characters; omit when no note is needed.',
+      'Optional message pre-filled in the apply dialog for the user to review before submitting. Maximum 2,000 characters; omit when no note is needed.',
   }),
 });

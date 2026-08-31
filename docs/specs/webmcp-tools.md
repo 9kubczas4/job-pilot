@@ -17,7 +17,7 @@ Callable from any route.
 | `get_saved_jobs` | No | Yes | Read the signed-in user's saved shortlist |
 | `save_job` | Yes | Yes | Add a job to favourites (idempotent) |
 | `unsave_job` | Yes | Yes | Remove a job from favourites (idempotent) |
-| `apply_job` | Yes | Yes | Submit a job application (idempotent) |
+| `apply_job` | Yes | Yes | Open the apply dialog with an optional pre-filled message; user submits manually |
 | `get_profile` | No | Yes | Read the signed-in candidate profile |
 
 ## Route-scoped tools (2)
@@ -47,7 +47,7 @@ Registered only while the matching route is active.
 
 1. `get_saved_jobs` → read shortlist
 2. `save_job` / `unsave_job` → manage favourites
-3. `apply_job` → submit application (requires profile)
+3. `apply_job` → open the apply dialog with an optional pre-filled message; user clicks Submit
 
 ### Profile
 

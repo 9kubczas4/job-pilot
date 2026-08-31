@@ -17,7 +17,7 @@ Traditional agents interact with web apps through DOM automation. Job Pilot expo
 - update filters, list, and map in real time
 - compare offers in a recommendation drawer with badges and a highlighted pick
 - focus a job on the map from current search results
-- save and apply to jobs for the authenticated user
+- save and apply to jobs for the authenticated user (apply opens a confirmation dialog)
 
 The agent never receives a `userId` in tool payloads. Identity comes from Firebase Auth in the app.
 
@@ -41,7 +41,7 @@ Eleven tools total: **9 global** + **2 route-scoped**. Full catalog: [`docs/spec
 | `get_saved_jobs` | global | Read the signed-in user's saved shortlist |
 | `save_job` | global | Add a job to favourites (idempotent) |
 | `unsave_job` | global | Remove a job from favourites (idempotent) |
-| `apply_job` | global | Submit a real job application (idempotent for already applied jobs) |
+| `apply_job` | global | Open the apply dialog with an optional pre-filled message; user submits manually |
 | `get_profile` | global | Read candidate profile (headline, experience, skills, preferences) |
 | `highlight_job` | `/jobs` | Focus one job from current search results on the map (marker, popover, AI animation) |
 | `update_profile` | `/profile` | Update candidate profile (Signal Form implicit tool) |

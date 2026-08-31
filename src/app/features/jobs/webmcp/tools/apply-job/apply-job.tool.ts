@@ -5,34 +5,47 @@ import {
   defineZodWebMcpTool,
   provideZodWebMcpTools,
 } from '@core/infrastructure/webmcp/zod-webmcp-tool';
+import { ApplyJobStore } from '@features/jobs/state/apply-job.store';
 import { JobApplicationsStore } from '@features/jobs/state/job-applications.store';
 import { APPLY_JOB_INPUT_SCHEMA } from './apply-job.schema';
 
 export const APPLY_JOB_WEBMCP_TOOL = defineZodWebMcpTool({
   name: 'apply_job',
   description:
-    'Submit a real job application for the signed-in user and add it to Applications. Use this tool instead of interacting with the page UI or DOM. This action may not be reversible, so call it only after the user has clearly chosen a job. Requires sign-in. It is idempotent: an existing application is returned without creating a duplicate. Returns success, changed, and the complete application record.',
+    'Open the job application dialog with an optional pre-filled message. Use this tool instead of interacting with the page UI or DOM. The user must review the message and click Submit — this tool does not submit the application automatically. Call it only after the user has clearly chosen a job. Requires sign-in. If the user already applied, returns the existing application without opening the dialog. Returns success, dialogOpened, job details, and prefilledNote.',
   inputSchema: APPLY_JOB_INPUT_SCHEMA,
   execute: async ({ jobId, note }) => {
-    if (!inject(AuthService).isAuthenticated()) {
+    const auth = inject(AuthService);
+    const applications = inject(JobApplicationsStore);
+    const applyJobStore = inject(ApplyJobStore);
+
+    if (!auth.isAuthenticated()) {
       return toolFailure('UNAUTHENTICATED', 'Sign in before applying to a job.');
     }
 
-    const applications = inject(JobApplicationsStore);
     await applications.loadApplications();
     const existing = applications.applications().find((application) => application.jobId === jobId);
 
     if (existing) {
       return toolSuccess({
         changed: false,
+        alreadyApplied: true,
         application: { ...existing, status: 'applied' },
       });
     }
 
-    const application = await applications.applyToJob(jobId, note || undefined);
+    const result = await applyJobStore.show({ jobId, note });
+    if (!result) {
+      return toolFailure('NOT_FOUND', `Job offer not found: ${jobId}.`);
+    }
+
     return toolSuccess({
       changed: true,
-      application: { ...application, status: 'applied' },
+      dialogOpened: true,
+      jobId: result.jobId,
+      jobTitle: result.jobTitle,
+      companyName: result.companyName,
+      prefilledNote: result.prefilledNote,
     });
   },
 });

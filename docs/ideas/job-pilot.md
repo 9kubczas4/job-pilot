@@ -56,7 +56,8 @@ Full catalog: [`docs/specs/webmcp-tools.md`](../specs/webmcp-tools.md).
 
 - Input: `{ jobId, note? }`
 - Requires auth + minimal profile
-- Persists to `/users/{userId}/applications/{jobId}`
+- Opens the apply dialog with an optional pre-filled message; user submits manually
+- Persists to `/users/{userId}/applications/{jobId}` only after the user confirms
 - UI: toast + "Applied" badge on job card + entry on `/applications`
 
 ### Platform

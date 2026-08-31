@@ -112,7 +112,7 @@ export class HomePageComponent {
     {
       name: 'apply_job',
       scope: 'global',
-      description: 'Submit a real job application. Requires auth and a minimal profile.',
+      description: 'Open the apply dialog with a pre-filled message; user submits manually. Requires auth.',
     },
     {
       name: 'get_profile',

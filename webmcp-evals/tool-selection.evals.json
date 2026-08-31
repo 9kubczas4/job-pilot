@@ -74,6 +74,22 @@
     ]
   },
   {
+    "name": "Read saved jobs without mixing them into the profile",
+    "messages": [
+      {
+        "role": "user",
+        "type": "message",
+        "content": "Which job offers have I saved?"
+      }
+    ],
+    "expectedCall": [
+      {
+        "functionName": "get_saved_jobs",
+        "arguments": {}
+      }
+    ]
+  },
+  {
     "name": "Save a chosen job",
     "messages": [
       {

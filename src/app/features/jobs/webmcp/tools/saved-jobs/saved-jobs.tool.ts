@@ -5,10 +5,19 @@ import {
   defineZodWebMcpTool,
   provideZodWebMcpTools,
 } from '@core/infrastructure/webmcp/zod-webmcp-tool';
+import { JobOffer } from '@features/jobs/domain/job.model';
+import { JobSearchStore } from '@features/jobs/state/job-search.store';
 import { SavedJobsStore } from '@features/jobs/state/saved-jobs.store';
-import { SAVED_JOB_INPUT_SCHEMA } from './saved-jobs.schema';
+import { GET_SAVED_JOBS_INPUT_SCHEMA, SAVED_JOB_INPUT_SCHEMA } from './saved-jobs.schema';
 
 export const SAVED_JOBS_WEBMCP_TOOLS = [
+  defineZodWebMcpTool({
+    name: 'get_saved_jobs',
+    description:
+      "Read the signed-in user's saved job shortlist. Use this tool instead of interacting with the page UI or DOM. This tool does not change application state and is available from any page. Requires sign-in. Returns changed: false, savedCount, the complete savedJobIds state, lightweight details for jobs still available in the catalog, and unavailableJobIds for saved offers that no longer exist. Use get_job for complete offer details.",
+    inputSchema: GET_SAVED_JOBS_INPUT_SCHEMA,
+    execute: () => readSavedJobs(),
+  }),
   defineZodWebMcpTool({
     name: 'save_job',
     description:
@@ -27,6 +36,32 @@ export const SAVED_JOBS_WEBMCP_TOOLS = [
 
 export function provideSavedJobsWebMcpTools() {
   return provideZodWebMcpTools(SAVED_JOBS_WEBMCP_TOOLS);
+}
+
+async function readSavedJobs() {
+  if (!inject(AuthService).isAuthenticated()) {
+    return toolFailure('UNAUTHENTICATED', 'Sign in before reading saved jobs.');
+  }
+
+  const savedJobs = inject(SavedJobsStore);
+  const jobSearch = inject(JobSearchStore);
+  await Promise.all([savedJobs.loadSavedJobs(), jobSearch.loadJobs()]);
+
+  const savedJobIds = savedJobs.savedJobIds();
+  const jobsById = new Map(jobSearch.allJobs().map((job) => [job.id, job]));
+  const jobs = savedJobIds.flatMap((jobId) => {
+    const job = jobsById.get(jobId);
+    return job ? [toSavedJobSummary(job)] : [];
+  });
+  const unavailableJobIds = savedJobIds.filter((jobId) => !jobsById.has(jobId));
+
+  return toolSuccess({
+    changed: false,
+    savedCount: savedJobIds.length,
+    savedJobIds,
+    unavailableJobIds,
+    jobs,
+  });
 }
 
 async function updateSavedState(jobId: string, shouldBeSaved: boolean) {
@@ -60,4 +95,17 @@ async function updateSavedState(jobId: string, shouldBeSaved: boolean) {
     savedJobIds,
     savedCount: savedJobIds.length,
   });
+}
+
+function toSavedJobSummary(job: JobOffer) {
+  return {
+    id: job.id,
+    title: job.title,
+    company: job.company.name,
+    ...(job.location ? { location: job.location.city } : {}),
+    workplace: job.workplace,
+    ...(job.salary ? { salary: { ...job.salary } } : {}),
+    seniority: [...job.seniority],
+    skills: job.competencies.map((competency) => competency.name),
+  };
 }

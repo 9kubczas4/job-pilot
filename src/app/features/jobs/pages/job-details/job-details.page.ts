@@ -96,6 +96,20 @@ export class JobDetailsPageComponent {
       : 'Sign in to add offers to your saved list and access them from any device.',
   );
 
+  readonly applying = computed(() => {
+    const jobId = this.store.job()?.id;
+    if (!jobId) {
+      return false;
+    }
+
+    if (this.applyJobStore.loading()) {
+      return true;
+    }
+
+    const presentation = this.applyJobStore.presentation();
+    return presentation?.jobId === jobId && this.applyJobStore.submitting();
+  });
+
   private readonly routeJobId = toSignal(
     this.route.paramMap.pipe(map((params) => params.get('id'))),
     { initialValue: this.route.snapshot.paramMap.get('id') },

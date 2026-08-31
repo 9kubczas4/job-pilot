@@ -223,6 +223,19 @@
     background: var(--color-primary-surface);
     color: var(--color-primary);
   }
+
+  &--ai-updating {
+    border-color: var(--color-primary-glow-strong);
+    background: var(--color-primary-surface);
+    color: var(--color-primary);
+    box-shadow: 0 0 0 var(--space-1) var(--color-primary-surface-faint);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jobs-mobile__filters {
+    transition: none;
+  }
 }
 
 .jobs-mobile__filters-badge {

@@ -95,6 +95,14 @@
   min-width: 0;
 }
 
+.header-search__input--ai-updating,
+.header-search__radius--ai-updating {
+  border-color: var(--color-primary-glow-strong);
+  background: var(--color-primary-surface);
+  color: var(--color-primary);
+  box-shadow: 0 0 0 var(--space-1) var(--color-primary-surface-faint);
+}
+
 .header-search__radius-field {
   position: relative;
   flex-shrink: 0;
@@ -366,6 +374,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .header-search__input {
+    transition: none;
+  }
+
   .header-search__submit::before {
     animation: none;
     background: var(--gradient-button);

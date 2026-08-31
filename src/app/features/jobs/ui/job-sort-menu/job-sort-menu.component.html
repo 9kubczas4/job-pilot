@@ -2,6 +2,8 @@
   <button
     type="button"
     class="sort-menu__trigger"
+    [class.sort-menu__trigger--ai-updating]="aiUpdateActive()"
+    [attr.aria-busy]="aiUpdateActive()"
     aria-haspopup="listbox"
     [attr.aria-expanded]="panelOpen()"
     (click)="togglePanel($event)"

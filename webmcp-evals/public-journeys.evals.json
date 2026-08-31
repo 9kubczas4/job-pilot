@@ -67,5 +67,32 @@
         "optional": true
       }
     ]
+  },
+  {
+    "name": "Search and visually highlight a public job",
+    "messages": [
+      {
+        "role": "user",
+        "type": "message",
+        "content": "Find Frontend Developer jobs in Warsaw and highlight job-001 on the map."
+      }
+    ],
+    "expectedCall": [
+      {
+        "ordered": [
+          {
+            "functionName": "search_jobs",
+            "arguments": {
+              "query": "Frontend Developer",
+              "locations": ["Warsaw"]
+            }
+          },
+          {
+            "functionName": "highlight_job",
+            "arguments": { "jobId": "job-001" }
+          }
+        ]
+      }
+    ]
   }
 ]

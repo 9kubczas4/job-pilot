@@ -8,8 +8,9 @@ GoogleChromeLabs.
 - `tool-selection.evals.json` evaluates whether a model chooses each WebMCP tool with the
   expected arguments. It uses `tools.json`, which represents the complete tool set exposed
   on `/profile`: all global tools plus the route-scoped `update_profile` tool.
-- `public-journeys.evals.json` exercises only non-mutating, unauthenticated tools. It is safe
-  to use for live browser evaluations and deterministic smoke tests.
+- `public-journeys.evals.json` exercises only data-safe, unauthenticated tools, including the
+  transient map-only `highlight_job` interaction. It is safe to use for live browser
+  evaluations and deterministic smoke tests.
 
 The Angular contract test fails if `tools.json` drifts from the runtime descriptors or if an
 eval suite loses required tool coverage.

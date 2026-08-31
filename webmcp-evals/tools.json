@@ -2,7 +2,7 @@
   "tools": [
     {
       "name": "search_jobs",
-      "description": "Start or replace the text-and-location portion of the current job search, then navigate the UI to the resulting jobs page. Use this tool instead of interacting with the page UI or DOM. Existing structured filters from filter_jobs are preserved. Use zero or one city; call filter_jobs separately to refine or sort. Returns success, changed, normalized criteria, resultCount, and up to 10 matching jobIds; use get_job for complete details without inspecting the page.",
+      "description": "Start or replace the text-and-location portion of the current job search, then navigate the UI to the resulting jobs page. Use this tool instead of interacting with the page UI or DOM. Existing structured filters from filter_jobs are preserved. Use zero or one city; call filter_jobs separately to refine or sort. Returns success, changed, normalized criteria, resultCount, and up to 10 lightweight results with matching jobIds. Each result includes id, title, company, location, distanceKm when available, workplace, salary, seniority, and skills; use get_job only for the complete description, requirements, responsibilities, benefits, or application details.",
       "inputSchema": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "type": "object",
@@ -29,7 +29,7 @@
     },
     {
       "name": "filter_jobs",
-      "description": "Patch structured filters and result ordering on the current job search, then synchronize the jobs UI. Use this tool instead of interacting with the page UI or DOM. Text and location criteria from search_jobs are preserved. Omitted fields remain unchanged; pass [] to clear an array filter, 0 to clear salaryMin, or newest to restore default sorting. Returns success, changed, normalized criteria, resultCount, and up to 10 matching jobIds; use get_job for complete details without inspecting the page.",
+      "description": "Patch structured filters and result ordering on the current job search, then synchronize the jobs UI. Use this tool instead of interacting with the page UI or DOM. Text and location criteria from search_jobs are preserved. Omitted fields remain unchanged; pass [] to clear an array filter, 0 to clear salaryMin, or newest to restore default sorting. Returns success, changed, normalized criteria, resultCount, and up to 10 lightweight results with matching jobIds. Each result includes id, title, company, location, distanceKm when available, workplace, salary, seniority, and skills; use get_job only for the complete description, requirements, responsibilities, benefits, or application details.",
       "inputSchema": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "type": "object",
@@ -94,6 +94,24 @@
       }
     },
     {
+      "name": "highlight_job",
+      "description": "Visually point to one job from the current results on /jobs. Use this tool instead of interacting with the page UI or DOM. Use it when identifying a recommended or otherwise notable offer. It selects the marker, focuses the map, opens the job popover, and reveals the map on mobile without changing search filters, the URL, saved jobs, or applications. Requires an exact jobId present in the current search results and returns JOB_NOT_IN_RESULTS otherwise.",
+      "inputSchema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "jobId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "description": "The exact job identifier from the current search results returned by search_jobs or filter_jobs."
+          }
+        },
+        "required": ["jobId"],
+        "additionalProperties": false
+      }
+    },
+    {
       "name": "get_job",
       "description": "Read one job offer by its exact jobId. Use this tool instead of interacting with the page UI or DOM. Use a jobId returned by search_jobs. This tool does not change application state and does not require sign-in. Returns the complete job record on success or a structured NOT_FOUND error when the identifier is unknown.",
       "inputSchema": {
@@ -108,6 +126,16 @@
           }
         },
         "required": ["jobId"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "get_saved_jobs",
+      "description": "Read the signed-in user's saved job shortlist. Use this tool instead of interacting with the page UI or DOM. This tool does not change application state and is available from any page. Requires sign-in. Returns changed: false, savedCount, the complete savedJobIds state, lightweight details for jobs still available in the catalog, and unavailableJobIds for saved offers that no longer exist. Use get_job for complete offer details.",
+      "inputSchema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {},
         "additionalProperties": false
       }
     },

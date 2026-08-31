@@ -15,6 +15,9 @@ export function provideHeaderSearchSlot(): Provider {
         radiusKm: ui.radiusKm,
         jobSuggestions: ui.jobSuggestions,
         locationSuggestions: ui.locationSuggestions,
+        queryToolActive: ui.queryToolActive,
+        locationToolActive: ui.locationToolActive,
+        radiusToolActive: ui.radiusToolActive,
         onSearchQueryChange: (value, jobsLink, onJobsSearchPage) =>
           support.onSearchQueryChange(value, jobsLink, onJobsSearchPage),
         onLocationQueryChange: (value, jobsLink, onJobsSearchPage) =>

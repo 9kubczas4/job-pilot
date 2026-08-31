@@ -23,7 +23,10 @@
           type="button"
           class="jobs-mobile__filters"
           [class.jobs-mobile__filters--active]="headerUi.filtersOpen()"
+          [class.jobs-mobile__filters--ai-updating]="headerUi.filterToolActive()"
           [attr.aria-expanded]="headerUi.filtersOpen()"
+          [attr.aria-busy]="headerUi.filterToolActive()"
+          aria-label="Filters"
           aria-controls="jobs-mobile-filter-drawer"
           (click)="headerUi.toggleFilters()"
         >
@@ -73,6 +76,7 @@
           [searchRadiusKm]="searchMapRadiusKm()"
           [fitResultsToViewport]="fitMapToResults()"
           [showPopups]="false"
+          [highlightRequest]="jobHighlight.request()"
           (selectJob)="onMobileSelectJob($event)"
         />
       } @placeholder {
@@ -88,6 +92,7 @@
       [appliedJobIds]="jobApplications.appliedJobIds()"
       [sortOptions]="sortOptions()"
       [sort]="currentSort()"
+      [sortUpdateActive]="headerUi.sortToolActive()"
       [snap]="sheetSnap()"
       [focusJobId]="sheetFocusJobId()"
       (snapChange)="onSheetSnapChange($event)"
@@ -121,6 +126,7 @@
       [enabled]="headerUi.filtersEnabled()"
       [open]="headerUi.filtersOpen()"
       [activeCount]="headerUi.activeFilterCount()"
+      [aiUpdateActive]="headerUi.filterToolActive()"
       (toggleFilters)="headerUi.toggleFilters()"
     />
 
@@ -158,6 +164,7 @@
             [appliedJobIds]="jobApplications.appliedJobIds()"
             [sortOptions]="sortOptions()"
             [sort]="currentSort()"
+            [sortUpdateActive]="headerUi.sortToolActive()"
             (selectJob)="onSelectJob($event)"
             (toggleSave)="onToggleSaveJob($event)"
             (sortChange)="onSortChange($event)"
@@ -173,6 +180,7 @@
               [searchCenter]="searchMapCenter()"
               [searchRadiusKm]="searchMapRadiusKm()"
               [fitResultsToViewport]="fitMapToResults()"
+              [highlightRequest]="jobHighlight.request()"
               (selectJob)="onSelectJob($event)"
             />
           } @placeholder {
@@ -191,4 +199,3 @@
   (closed)="closeAuthPrompt()"
   (confirmed)="confirmAuthPrompt()"
 />
-

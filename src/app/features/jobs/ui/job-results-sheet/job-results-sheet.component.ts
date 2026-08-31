@@ -55,6 +55,7 @@ export class JobResultsSheetComponent {
   readonly focusJobId = input<string | null>(null);
   readonly sortOptions = input<SortMenuOption[]>([]);
   readonly sort = input('newest');
+  readonly sortUpdateActive = input(false);
 
   readonly snapChange = output<JobSheetSnap>();
   readonly selectJob = output<string>();

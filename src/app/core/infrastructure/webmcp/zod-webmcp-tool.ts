@@ -1,9 +1,11 @@
 import {
+  inject,
   provideExperimentalWebMcpTools,
   type EnvironmentProviders,
   type WebMcpClient,
   type WebMcpToolDescriptor,
 } from '@angular/core';
+import { ToastService } from '@shared/ui/toast/toast.service';
 import { z } from 'zod';
 import { toolFailure, toolJson } from './tool-response';
 
@@ -91,6 +93,8 @@ export function defineZodWebMcpTool<TSchema extends z.ZodType>(
     inputSchema: z.toJSONSchema(options.inputSchema) as WebMcpObjectSchema,
     run,
     execute: async (input, client) => {
+      inject(ToastService).showAiToolActivated(options.name);
+
       const parsed = options.inputSchema.safeParse(input);
       if (!parsed.success) {
         return toolJson(

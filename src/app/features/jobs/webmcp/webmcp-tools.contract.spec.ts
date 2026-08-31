@@ -1,14 +1,17 @@
 import { TestBed } from '@angular/core/testing';
 import { describe, expect, it } from 'vitest';
+import type { ZodWebMcpTool } from '@core/infrastructure/webmcp/zod-webmcp-tool';
 import { APPLY_JOB_WEBMCP_TOOL } from './tools/apply-job/apply-job.tool';
 import { FILTER_JOBS_WEBMCP_TOOL } from './tools/filter-jobs/filter-jobs.tool';
 import { GET_JOB_WEBMCP_TOOL } from './tools/get-job/get-job.tool';
 import { SAVED_JOBS_WEBMCP_TOOLS } from './tools/saved-jobs/saved-jobs.tool';
 import { SEARCH_JOBS_WEBMCP_TOOL } from './tools/search-jobs/search-jobs.tool';
+import { HIGHLIGHT_JOB_WEBMCP_TOOL } from './tools/highlight-job/highlight-job.tool';
 
-const tools = [
+const tools: readonly ZodWebMcpTool[] = [
   SEARCH_JOBS_WEBMCP_TOOL,
   FILTER_JOBS_WEBMCP_TOOL,
+  HIGHLIGHT_JOB_WEBMCP_TOOL,
   GET_JOB_WEBMCP_TOOL,
   APPLY_JOB_WEBMCP_TOOL,
   ...SAVED_JOBS_WEBMCP_TOOLS,
@@ -38,7 +41,9 @@ describe('jobs WebMCP contracts', () => {
     [SEARCH_JOBS_WEBMCP_TOOL, { locations: ['Warsaw', 'Krakow'] }],
     [SEARCH_JOBS_WEBMCP_TOOL, { radiusKm: 50 }],
     [FILTER_JOBS_WEBMCP_TOOL, { salaryMin: -1 }],
-    [SAVED_JOBS_WEBMCP_TOOLS[0], { jobId: '   ' }],
+    [HIGHLIGHT_JOB_WEBMCP_TOOL, { jobId: '   ' }],
+    [SAVED_JOBS_WEBMCP_TOOLS[0], { unexpected: true }],
+    [SAVED_JOBS_WEBMCP_TOOLS[1], { jobId: '   ' }],
   ])('rejects invalid arguments before executing %s', async (tool, input) => {
     const result = await executeTool(tool, input);
 
@@ -49,7 +54,7 @@ describe('jobs WebMCP contracts', () => {
   });
 });
 
-async function executeTool(tool: (typeof tools)[number], input: unknown) {
+async function executeTool(tool: ZodWebMcpTool, input: unknown) {
   const response = await TestBed.runInInjectionContext(() =>
     tool.execute(input, { signal: new AbortController().signal }),
   );

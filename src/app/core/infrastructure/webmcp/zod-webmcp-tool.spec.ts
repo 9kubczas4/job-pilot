@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { describe, expect, it, vi } from 'vitest';
 import { z } from 'zod';
+import { ToastService } from '@shared/ui/toast/toast.service';
 import { defineZodWebMcpTool } from './zod-webmcp-tool';
 
 describe('defineZodWebMcpTool', () => {
@@ -53,6 +54,15 @@ describe('defineZodWebMcpTool', () => {
       { jobId: 'job-001' },
       expect.objectContaining({ signal: expect.any(AbortSignal) }),
     );
+  });
+
+  it('announces tool activation through the global toast service', async () => {
+    const toast = TestBed.inject(ToastService);
+    const showAiToolActivated = vi.spyOn(toast, 'showAiToolActivated');
+
+    await executeTool(tool, { jobId: 'job-001' });
+
+    expect(showAiToolActivated).toHaveBeenCalledWith('example_tool');
   });
 
   it('converts unexpected execution failures to the shared error envelope', async () => {

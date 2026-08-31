@@ -12,7 +12,9 @@ import { ChangeDetectionStrategy, Component, input, output } from '@angular/core
         type="button"
         class="header-action"
         [class.header-action--active]="open()"
+        [class.header-action--ai-updating]="aiUpdateActive()"
         [attr.aria-expanded]="open()"
+        [attr.aria-busy]="aiUpdateActive()"
         aria-controls="app-filter-drawer"
         (click)="toggleFilters.emit()"
       >
@@ -39,5 +41,6 @@ export class JobHeaderFiltersComponent {
   readonly enabled = input(false);
   readonly open = input(false);
   readonly activeCount = input(0);
+  readonly aiUpdateActive = input(false);
   readonly toggleFilters = output<void>();
 }

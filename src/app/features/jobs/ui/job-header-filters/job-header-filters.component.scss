@@ -26,6 +26,13 @@
     background: var(--color-primary-subtle);
     color: var(--color-primary);
   }
+
+  &--ai-updating {
+    border-color: var(--color-primary-glow-strong);
+    background: var(--color-primary-surface);
+    color: var(--color-primary);
+    box-shadow: 0 0 0 var(--space-1) var(--color-primary-surface-faint);
+  }
 }
 
 .header-action__badge {
@@ -65,5 +72,11 @@
   .header-action {
     padding: var(--space-2);
     border-radius: var(--radius-md);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header-action {
+    transition: none;
   }
 }

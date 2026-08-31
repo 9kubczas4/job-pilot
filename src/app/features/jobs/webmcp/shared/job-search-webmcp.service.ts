@@ -1,92 +1,122 @@
 import { inject, Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { AppLinks } from '@core/app-paths';
+import { haversineDistanceKm } from '@features/jobs/domain/geo.utils';
 import { DEFAULT_SEARCH_RADIUS_KM } from '@features/jobs/domain/header-search.model';
-import { JobSearchToolResult } from './job-search-tool-result.model';
-import { HeaderUiStore } from '@features/jobs/state/header-ui.store';
+import { JobOffer } from '@features/jobs/domain/job.model';
+import {
+  JobSearchResultSummary,
+  JobSearchToolResult,
+} from './job-search-tool-result.model';
+import { HeaderSearchPageSupport } from '@features/jobs/state/header-search-page.support';
+import { JobSearchAiActivity } from '@features/jobs/state/header-ui.store';
 import { buildCityCentersFromJobs, resolveCityCenter } from '@features/jobs/domain/city-catalog';
 import {
   enrichLocationCriteria,
   searchLocationEqual,
 } from '@features/jobs/domain/job-search-sync.utils';
-import { JobFilterCriteria } from '@features/jobs/domain/search.model';
-import { criteriaToQueryParams } from '@features/jobs/domain/search-url.utils';
+import { JobFilterCriteria, JobSearchCriteria } from '@features/jobs/domain/search.model';
 import { JobSearchStore } from '@features/jobs/state/job-search.store';
 import {
   filterFieldsChanged,
+  filterControlFieldsChanged,
   JobSearchInput,
   normalizeFilterPatch,
   searchFieldsChanged,
+  sortFieldChanged,
 } from './webmcp-criteria.utils';
 
 @Injectable({ providedIn: 'root' })
 export class JobSearchWebMcpService {
   private readonly store = inject(JobSearchStore);
-  private readonly headerUi = inject(HeaderUiStore);
-  private readonly router = inject(Router);
+  private readonly headerSearch = inject(HeaderSearchPageSupport);
 
   async applySearchCriteria(input: JobSearchInput): Promise<JobSearchToolResult> {
-    await this.store.loadJobs();
+    let finishActivity: () => void = () => undefined;
 
-    const before = this.store.criteria();
-    const location = input.locations?.[0]?.trim();
-    let locationLat = input.locationLat;
-    let locationLng = input.locationLng;
-    let radiusKm = input.radiusKm;
+    try {
+      await this.store.loadJobs();
 
-    if (location) {
-      if (radiusKm == null) {
-        radiusKm = DEFAULT_SEARCH_RADIUS_KM;
-      }
+      const before = this.store.criteria();
+      const location = input.locations?.[0]?.trim();
+      let locationLat = input.locationLat;
+      let locationLng = input.locationLng;
+      let radiusKm = input.radiusKm;
 
-      if (locationLat == null || locationLng == null) {
-        const city = resolveCityCenter(buildCityCentersFromJobs(this.store.allJobs()), location);
-        if (city) {
-          locationLat = city.latitude;
-          locationLng = city.longitude;
+      if (location) {
+        if (radiusKm == null) {
+          radiusKm = DEFAULT_SEARCH_RADIUS_KM;
         }
+
+        if (locationLat == null || locationLng == null) {
+          const city = resolveCityCenter(buildCityCentersFromJobs(this.store.allJobs()), location);
+          if (city) {
+            locationLat = city.latitude;
+            locationLng = city.longitude;
+          }
+        }
+      } else {
+        locationLat = undefined;
+        locationLng = undefined;
+        radiusKm = undefined;
       }
-    } else {
-      locationLat = undefined;
-      locationLng = undefined;
-      radiusKm = undefined;
+
+      this.store.applyRouteSearchCriteria({
+        query: input.query?.trim() || undefined,
+        locations: location ? [location] : undefined,
+        locationLat,
+        locationLng,
+        radiusKm: location ? radiusKm : undefined,
+      });
+
+      finishActivity = this.headerSearch.headerUi.beginAiToolActivity(
+        changedSearchControls(before, this.store.criteria()),
+      );
+
+      return await this.syncUiAndNavigate(() =>
+        searchFieldsChanged(before, this.store.criteria()),
+      );
+    } finally {
+      finishActivity();
     }
-
-    this.store.applyRouteSearchCriteria({
-      query: input.query?.trim() || undefined,
-      locations: location ? [location] : undefined,
-      locationLat,
-      locationLng,
-      radiusKm: location ? radiusKm : undefined,
-    });
-
-    return this.syncUiAndNavigate(() => searchFieldsChanged(before, this.store.criteria()));
   }
 
   async applyFilterCriteria(input: JobFilterCriteria): Promise<JobSearchToolResult> {
-    await this.store.loadJobs();
+    let finishActivity: () => void = () => undefined;
 
-    const before = this.store.criteria();
-    this.store.patchCriteria(normalizeFilterPatch(input));
+    try {
+      await this.store.loadJobs();
 
-    return this.syncUiAndNavigate(() => filterFieldsChanged(before, this.store.criteria()));
+      const before = this.store.criteria();
+      this.store.patchCriteria(normalizeFilterPatch(input));
+      const after = this.store.criteria();
+
+      finishActivity = this.headerSearch.headerUi.beginAiToolActivity([
+        ...(filterControlFieldsChanged(before, after) ? (['filters'] as const) : []),
+        ...(sortFieldChanged(before, after) ? (['sort'] as const) : []),
+      ]);
+
+      return await this.syncUiAndNavigate(() =>
+        filterFieldsChanged(before, this.store.criteria()),
+      );
+    } finally {
+      finishActivity();
+    }
   }
 
   private async syncUiAndNavigate(changed: () => boolean): Promise<JobSearchToolResult> {
     this.enrichStoredLocationIfNeeded();
-    this.headerUi.syncFromCriteria(this.store.criteria());
+    await this.headerSearch.submitCriteria(this.store.criteria(), AppLinks.jobs);
 
-    await this.router.navigate(AppLinks.jobs, {
-      queryParams: criteriaToQueryParams(this.store.criteria()),
-      replaceUrl: true,
-    });
+    const criteria = this.store.criteria();
+    const jobs = this.store.jobs().slice(0, 10);
 
     return {
       success: true,
       changed: changed(),
-      criteria: this.store.criteria(),
+      criteria,
       resultCount: this.store.jobs().length,
-      jobIds: this.store.jobs().slice(0, 10).map((job) => job.id),
+      jobIds: jobs.map((job) => job.id),
+      results: jobs.map((job) => toJobSearchResultSummary(job, criteria)),
     };
   }
 
@@ -108,4 +138,64 @@ export class JobSearchWebMcpService {
       radiusKm: enriched.radiusKm,
     });
   }
+}
+
+function toJobSearchResultSummary(
+  job: JobOffer,
+  criteria: JobSearchCriteria,
+): JobSearchResultSummary {
+  const distanceKm = jobDistanceKm(job, criteria);
+
+  return {
+    id: job.id,
+    title: job.title,
+    company: job.company.name,
+    ...(job.location ? { location: job.location.city } : {}),
+    ...(distanceKm == null ? {} : { distanceKm }),
+    workplace: job.workplace,
+    ...(job.salary ? { salary: { ...job.salary } } : {}),
+    seniority: [...job.seniority],
+    skills: job.competencies.map((competency) => competency.name),
+  };
+}
+
+function jobDistanceKm(job: JobOffer, criteria: JobSearchCriteria): number | undefined {
+  if (
+    criteria.locationLat == null ||
+    criteria.locationLng == null ||
+    !job.location
+  ) {
+    return undefined;
+  }
+
+  const distance = haversineDistanceKm(
+    criteria.locationLat,
+    criteria.locationLng,
+    job.location.latitude,
+    job.location.longitude,
+  );
+  return Math.round(distance * 10) / 10;
+}
+
+function changedSearchControls(
+  before: JobSearchCriteria,
+  after: JobSearchCriteria,
+): JobSearchAiActivity[] {
+  const controls: JobSearchAiActivity[] = [];
+
+  if ((before.query ?? '').trim() !== (after.query ?? '').trim()) {
+    controls.push('query');
+  }
+  if ((before.locations?.[0] ?? '').trim() !== (after.locations?.[0] ?? '').trim()) {
+    controls.push('location');
+  }
+  if (displayRadius(before) !== displayRadius(after)) {
+    controls.push('radius');
+  }
+
+  return controls;
+}
+
+function displayRadius(criteria: JobSearchCriteria): number {
+  return criteria.radiusKm ?? DEFAULT_SEARCH_RADIUS_KM;
 }

@@ -9,7 +9,7 @@ export function setupLandingScrollReveal(
   }
 
   let destroyed = false;
-  const scrollRoot = host.closest('.app-main');
+  const scrollRoot = resolveLandingScrollRoot(host);
   const boundHandlers: { root: EventTarget; handler: () => void }[] = [];
 
   const reveal = (element: Element) => {
@@ -82,6 +82,10 @@ export function setupLandingScrollReveal(
       root.removeEventListener('scroll', handler);
     }
   });
+}
+
+function resolveLandingScrollRoot(host: HTMLElement): Element | null {
+  return host.querySelector('.app-main') ?? host.closest('.app-main');
 }
 
 function isIntersecting(element: Element, scrollRoot: Element | null): boolean {

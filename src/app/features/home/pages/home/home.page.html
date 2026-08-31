@@ -43,7 +43,7 @@
           </h1>
 
           <p class="landing-hero__lead">
-            Browse offers with a polished UI - then let Codex search, filter, save, and apply through
+            Browse offers with a polished UI - then let Codex search, filter, compare, save, and apply through
             typed WebMCP tools that mutate the same stores as the interface.
           </p>
 
@@ -67,7 +67,7 @@
             </li>
             <li class="landing-stat">
               <strong>{{ routeToolCount }}</strong>
-              <span>route-scoped tool</span>
+              <span>route-scoped tools</span>
             </li>
             <li class="landing-stat">
               <strong>0</strong>
@@ -76,38 +76,7 @@
           </ul>
         </div>
 
-        <div class="landing-terminal landing-terminal--showcase" aria-hidden="true">
-          <div class="landing-terminal__glow" aria-hidden="true"></div>
-          <div class="landing-terminal__chrome">
-            <span></span><span></span><span></span>
-            <p>Codex · job-pilot</p>
-          </div>
-          <div class="landing-terminal__body">
-            <p class="landing-terminal__line landing-terminal__line--muted">
-              <span class="landing-terminal__prefix">#</span>
-              global tools - callable from any route
-            </p>
-            <p class="landing-terminal__line landing-terminal__line--prompt">
-              <span class="landing-terminal__prefix">›</span>
-              search_jobs(&#123; query: "frontend", locations: ["Warsaw"], radiusKm: 50 &#125;)
-            </p>
-            <p class="landing-terminal__line landing-terminal__line--success">
-              ✓ 12 jobs matched · navigated to /jobs · map synced
-            </p>
-            <p class="landing-terminal__line landing-terminal__line--prompt">
-              <span class="landing-terminal__prefix">›</span>
-              filter_jobs(&#123; workplace: ["remote", "hybrid"], salaryMin: 8000 &#125;)
-            </p>
-            <p class="landing-terminal__line landing-terminal__line--success">
-              ✓ 8 jobs matched · filters applied · map zoomed to Poland
-            </p>
-            <p class="landing-terminal__line landing-terminal__line--muted">
-              <span class="landing-terminal__prefix">#</span>
-              /profile - update_profile available here only
-            </p>
-            <p class="landing-terminal__cursor" aria-hidden="true"></p>
-          </div>
-        </div>
+        <app-landing-terminal-showcase />
       </div>
     </section>
 
@@ -117,20 +86,31 @@
           <p class="landing-kicker">WebMCP tools</p>
           <h2 class="landing-section__title">Structured tools, not brittle clicks</h2>
           <p class="landing-section__lead">
-            Most tools register globally in <code>app.config.ts</code> so Codex can search, read jobs,
-            save favourites, and apply from anywhere. Profile edits use a route-scoped tool on
-            <code>/profile</code>.
+            Nine tools register globally in <code>app.config.ts</code> so Codex can search, read jobs, compare
+            offers, manage favourites, apply, and read profiles from anywhere. Two route-scoped tools focus the
+            map on <code>/jobs</code> and edit the profile on <code>/profile</code>.
           </p>
         </div>
 
         <div class="landing-scope-key" role="list" aria-label="Tool scope legend">
           <div class="landing-scope-key__item" role="listitem">
             <span class="landing-tool__scope landing-tool__scope--global">global</span>
-            <span>Registered app-wide - search, filter, get_job, save, unsave, apply, get_profile.</span>
+            <span
+              >Search, filter, read jobs, compare offers, saved jobs, apply, and read profile from any
+              route.</span
+            >
+          </div>
+          <div class="landing-scope-key__item" role="listitem">
+            <span class="landing-tool__scope landing-tool__scope--route">/jobs</span>
+            <span
+              >Route-scoped — <code>highlight_job</code> focuses one current result on the map.</span
+            >
           </div>
           <div class="landing-scope-key__item" role="listitem">
             <span class="landing-tool__scope landing-tool__scope--route">/profile</span>
-            <span>Route-scoped - <code>update_profile</code> only while the profile page is active.</span>
+            <span
+              >Route-scoped — <code>update_profile</code> only while the profile page is active.</span
+            >
           </div>
         </div>
 
@@ -225,7 +205,8 @@
           <h2 class="landing-cta__title">Ready to explore - human or agent?</h2>
           <p class="landing-cta__text">
             Start browsing jobs manually, or open the app in ChatGPT and let Codex call the global tools.
-            Open <a [routerLink]="links.profile">/profile</a> before asking Codex to edit your profile.
+            On <a [routerLink]="links.jobs">/jobs</a>, ask Codex to highlight or compare offers. Open
+            <a [routerLink]="links.profile">/profile</a> before editing your profile.
           </p>
           <div class="landing-cta__actions">
             <a [routerLink]="links.jobs" class="landing-btn landing-btn--primary">Go to jobs</a>

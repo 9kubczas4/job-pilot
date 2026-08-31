@@ -510,7 +510,7 @@
 .landing-features {
   display: grid;
   gap: var(--space-4);
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .landing-feature {
@@ -754,8 +754,8 @@
     .landing-stat strong,
     .landing-btn--primary,
     .landing-terminal__glow,
-    .landing-terminal--showcase .landing-terminal__line,
-    .landing-terminal--showcase .landing-terminal__cursor,
+    .landing-terminal--showcase .landing-terminal__line--entered,
+    .landing-terminal--showcase .landing-terminal__cursor--ready,
     .landing-kicker::after,
     .landing-section.is-revealed .landing-tool,
     .landing-section.is-revealed .landing-feature,
@@ -766,8 +766,8 @@
       animation: none;
     }
 
-    .landing-terminal--showcase .landing-terminal__line,
-    .landing-terminal--showcase .landing-terminal__cursor {
+    .landing-terminal--showcase .landing-terminal__line--entered,
+    .landing-terminal--showcase .landing-terminal__cursor--ready {
       opacity: 1;
       transform: none;
     }
@@ -946,40 +946,12 @@
       z-index: 2;
     }
 
-    .landing-terminal__line {
-      opacity: 0;
-      animation: landing-showcase-line 700ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
-
-      &:nth-child(1) {
-        animation-delay: 700ms;
-      }
-
-      &:nth-child(2) {
-        animation-delay: 950ms;
-      }
-
-      &:nth-child(3) {
-        animation-delay: 1200ms;
-      }
-
-      &:nth-child(4) {
-        animation-delay: 1450ms;
-      }
-
-      &:nth-child(5) {
-        animation-delay: 1700ms;
-      }
-
-      &:nth-child(6) {
-        animation-delay: 1950ms;
-      }
+    .landing-terminal__line--entered {
+      animation: landing-showcase-line 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
     }
 
-    .landing-terminal__cursor {
-      animation:
-        landing-showcase-line 700ms cubic-bezier(0.22, 1, 0.36, 1) 2200ms forwards,
-        landing-blink 1.1s step-end 2900ms infinite;
-      opacity: 0;
+    .landing-terminal__cursor--ready {
+      opacity: 1;
     }
   }
 
@@ -1016,7 +988,7 @@
       animation: landing-showcase-pop 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
     }
 
-    @for $i from 0 through 7 {
+    @for $i from 0 through 8 {
       .landing-tool[data-stagger='#{$i}'] {
         animation-delay: #{120 + $i * 70}ms;
       }

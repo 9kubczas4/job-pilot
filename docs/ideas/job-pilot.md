@@ -34,18 +34,23 @@ The agent runs in **Codex** (ChatGPT desktop in-app browser). The app exposes to
 - Modern, clean UI
 - Static prerender for all routes; job detail pages pre-generated at build time
 
-### WebMCP Tools (8, implemented)
+### WebMCP Tools (11, implemented)
 
 | Tool | Registration | Source |
 |------|--------------|--------|
 | `search_jobs` | Global (`app.config.ts`) | `features/jobs/webmcp/tools/search-jobs/search-jobs.tool.ts` |
 | `filter_jobs` | Global (`app.config.ts`) | `features/jobs/webmcp/tools/filter-jobs/filter-jobs.tool.ts` |
+| `get_job` | Global (`app.config.ts`) | `features/jobs/webmcp/tools/get-job/get-job.tool.ts` |
+| `compare_offers` | Global (`app.config.ts`) | `features/jobs/webmcp/tools/compare-offers/compare-offers.tool.ts` |
+| `get_saved_jobs` | Global (`app.config.ts`) | `features/jobs/webmcp/tools/saved-jobs/saved-jobs.tool.ts` |
+| `save_job` | Global (`app.config.ts`) | `features/jobs/webmcp/tools/saved-jobs/saved-jobs.tool.ts` |
+| `unsave_job` | Global (`app.config.ts`) | `features/jobs/webmcp/tools/saved-jobs/saved-jobs.tool.ts` |
+| `apply_job` | Global (`app.config.ts`) | `features/jobs/webmcp/tools/apply-job/apply-job.tool.ts` |
 | `get_profile` | Global (`app.config.ts`) | `features/profile/webmcp/profile.tools.ts` |
-| `update_profile` | Route `/profile` | `features/profile/pages/profile/profile.page.ts` (Signal Form implicit tool) |
-| `get_job` | Route `/jobs` | `features/jobs/webmcp/job-details.tools.ts` |
-| `save_job` | Route `/jobs` | `features/jobs/webmcp/tools/saved-jobs/saved-jobs.tool.ts` |
-| `unsave_job` | Route `/jobs` | `features/jobs/webmcp/tools/saved-jobs/saved-jobs.tool.ts` |
-| `apply_job` | Route `/jobs` | `features/jobs/webmcp/tools/apply-job/apply-job.tool.ts` |
+| `highlight_job` | Route `/jobs` | `features/jobs/webmcp/tools/highlight-job/highlight-job.tool.ts` |
+| `update_profile` | Route `/profile` | `features/profile/webmcp/profile.tools.ts` (Signal Form implicit tool) |
+
+Full catalog: [`docs/specs/webmcp-tools.md`](../specs/webmcp-tools.md).
 
 #### `apply_job` (minimal)
 
@@ -74,9 +79,11 @@ The agent runs in **Codex** (ChatGPT desktop in-app browser). The app exposes to
 ### Hero demo flow
 
 1. Job board looks like a real product
-2. Codex: complete profile from CV → `update_profile` (schema inferred from Signal Form)
+2. Codex: complete profile from CV → `update_profile` on `/profile`
 3. Codex: *"Find lead frontend jobs, remote/hybrid Warsaw, 25k+"* → `search_jobs` → **UI reacts live**
-4. `get_job` → `save_job` → `unsave_job` or `apply_job`
+4. Codex: compare top picks → `compare_offers` → **recommendation drawer opens**
+5. Codex: *"Show the best one on the map"* → `highlight_job` on `/jobs`
+6. `get_job` → `save_job` → `apply_job`
 
 ## Not Doing (and Why)
 
@@ -239,5 +246,5 @@ Features are isolated from each other. Shared logic goes in `core/domains/`.
 |-------|------|--------|
 | 1. Foundation | Angular, Firebase, auth, seed jobs, list + filters + URL routing | Done |
 | 2. Map + Profile | Google Maps + sync, profile CRUD, saved jobs | Done |
-| 3. WebMCP | 8 tools, SearchStore integration, security rules | Done |
+| 3. WebMCP | 11 tools, SearchStore integration, agent feedback drawer, security rules | Done |
 | 4. Polish + Submit | UI polish, prerender, video, README, license, deploy | In progress |

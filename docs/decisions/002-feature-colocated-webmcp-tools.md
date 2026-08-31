@@ -8,7 +8,7 @@ Accepted
 
 ## Context
 
-Job Pilot exposes ten WebMCP tools so Codex can search jobs, highlight a current result, manage saved jobs and profiles, and apply to offers. Early planning placed all tools in `core/webmcp/tools/`, but as features matured it became clear that tools are tightly coupled to feature stores and repositories.
+Job Pilot exposes eleven WebMCP tools so Codex can search jobs, compare offers, highlight a current result, manage saved jobs and profiles, and apply to offers. Early planning placed all tools in `core/webmcp/tools/`, but as features matured it became clear that tools are tightly coupled to feature stores and repositories.
 
 Tools must share the same state as pages (`JobSearchStore`, `ProfileStore`, `SavedJobsStore`) without creating circular imports or violating layer boundaries. Tools inject **state**, not repositories directly.
 
@@ -20,14 +20,16 @@ Colocate WebMCP tools inside each feature at `features/{name}/webmcp/`:
 |---------|----------|--------------|
 | `search_jobs` | `features/jobs/webmcp/tools/search-jobs/search-jobs.tool.ts` | `app.config.ts` (global) |
 | `filter_jobs` | `features/jobs/webmcp/tools/filter-jobs/filter-jobs.tool.ts` | `app.config.ts` (global) |
-| `highlight_job` | `features/jobs/webmcp/tools/highlight-job/highlight-job.tool.ts` | Route provider on `/jobs` search |
-| `get_profile` | `features/profile/webmcp/profile.tools.ts` | `app.config.ts` (global) |
-| `update_profile` | `features/profile/pages/profile/profile.page.ts` | Signal Form implicit tool on `/profile` |
-| `get_job` | `features/jobs/webmcp/job-details.tools.ts` | Route provider on `/jobs` |
+| `get_job` | `features/jobs/webmcp/tools/get-job/get-job.tool.ts` | `app.config.ts` (global) |
+| `compare_offers` | `features/jobs/webmcp/tools/compare-offers/compare-offers.tool.ts` | `app.config.ts` (global) |
 | `get_saved_jobs`, `save_job`, `unsave_job` | `features/jobs/webmcp/tools/saved-jobs/saved-jobs.tool.ts` | `app.config.ts` (global) |
-| `apply_job` | `features/jobs/webmcp/tools/apply-job/apply-job.tool.ts` | Route provider on `/jobs` |
+| `apply_job` | `features/jobs/webmcp/tools/apply-job/apply-job.tool.ts` | `app.config.ts` (global) |
+| `highlight_job` | `features/jobs/webmcp/tools/highlight-job/highlight-job.tool.ts` | Route provider on `/jobs` search |
+| `get_profile`, `update_profile` | `features/profile/webmcp/profile.tools.ts` | Global / route `/profile` |
 
-Shared response helpers (`toolJson`, `toolText`) live in `core/webmcp/tool-response.ts`.
+Shared response helpers (`toolJson`, `toolText`) live in `core/infrastructure/webmcp/tool-response.ts`.
+
+See also [`docs/specs/webmcp-tools.md`](../specs/webmcp-tools.md) for the full catalog.
 
 Route-scoped tools use `providers: [provideXxxWebMcpTools()]` on the matching route. Global tools register in `app.config.ts`.
 

@@ -1,4 +1,4 @@
-import { haversineDistanceKm } from './geo.utils';
+import { haversineDistanceMi } from './geo.utils';
 import { JobOffer } from './job.model';
 import { JobSearchCriteria } from './search.model';
 
@@ -44,19 +44,19 @@ export function matchesSearchCriteria(job: JobOffer, criteria: JobSearchCriteria
     }
   }
 
-  if (criteria.locationLat != null && criteria.locationLng != null && criteria.radiusKm != null) {
+  if (criteria.locationLat != null && criteria.locationLng != null && criteria.radiusMi != null) {
     if (!job.location) {
       return false;
     }
 
-    const distanceKm = haversineDistanceKm(
+    const distanceMi = haversineDistanceMi(
       criteria.locationLat,
       criteria.locationLng,
       job.location.latitude,
       job.location.longitude,
     );
 
-    if (distanceKm > criteria.radiusKm) {
+    if (distanceMi > criteria.radiusMi) {
       return false;
     }
   } else if (criteria.locations?.length) {

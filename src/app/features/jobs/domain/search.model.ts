@@ -20,7 +20,7 @@ export interface JobSearchCriteria {
   workSchedules?: WorkSchedule[];
   contracts?: ContractType[];
   salaryMin?: number;
-  radiusKm?: number;
+  radiusMi?: number;
   sort?: JobSortOption;
 }
 

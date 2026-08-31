@@ -12,7 +12,7 @@ export type JobSearchInput = Pick<
   | 'workplace'
   | 'contracts'
   | 'salaryMin'
-  | 'radiusKm'
+  | 'radiusMi'
   | 'sort'
 > & {
   location?: string;

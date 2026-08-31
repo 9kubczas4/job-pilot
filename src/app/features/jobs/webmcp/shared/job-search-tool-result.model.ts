@@ -10,7 +10,7 @@ export interface JobSearchResultSummary {
   title: string;
   company: string;
   location?: string;
-  distanceKm?: number;
+  distanceMi?: number;
   workplace: WorkplaceMode;
   salary?: JobSalary;
   seniority: SeniorityLevel[];

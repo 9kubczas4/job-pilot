@@ -9,10 +9,10 @@ import {
   signal,
 } from '@angular/core';
 import {
-  DEFAULT_SEARCH_RADIUS_KM,
+  DEFAULT_SEARCH_RADIUS_MI,
   JobSearchSuggestion,
   LocationSearchSuggestion,
-  SEARCH_RADIUS_OPTIONS_KM,
+  SEARCH_RADIUS_OPTIONS_MI,
 } from '@core/domains/jobs/header-search.model';
 
 export type HeaderSearchVariant = 'full' | 'compact';
@@ -32,7 +32,7 @@ export class HeaderSearchComponent {
   readonly variant = input<HeaderSearchVariant>('full');
   readonly searchQuery = input('');
   readonly locationQuery = input('');
-  readonly radiusKm = input(DEFAULT_SEARCH_RADIUS_KM);
+  readonly radiusMi = input(DEFAULT_SEARCH_RADIUS_MI);
   readonly jobSuggestions = input<JobSearchSuggestion[]>([]);
   readonly locationSuggestions = input<LocationSearchSuggestion[]>([]);
   readonly queryUpdateActive = input(false);
@@ -47,8 +47,8 @@ export class HeaderSearchComponent {
   readonly radiusChange = output<number>();
   readonly searchApply = output<void>();
 
-  readonly radiusOptions = SEARCH_RADIUS_OPTIONS_KM;
-  readonly defaultRadius = DEFAULT_SEARCH_RADIUS_KM;
+  readonly radiusOptions = SEARCH_RADIUS_OPTIONS_MI;
+  readonly defaultRadius = DEFAULT_SEARCH_RADIUS_MI;
 
   private readonly host = inject(ElementRef<HTMLElement>);
 
@@ -76,7 +76,7 @@ export class HeaderSearchComponent {
   }
 
   onRadiusChange(value: number): void {
-    this.radiusChange.emit(Number.isFinite(value) ? value : DEFAULT_SEARCH_RADIUS_KM);
+    this.radiusChange.emit(Number.isFinite(value) ? value : DEFAULT_SEARCH_RADIUS_MI);
     this.closePanels();
     this.searchApply.emit();
   }

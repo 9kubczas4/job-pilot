@@ -5,7 +5,7 @@
       {
         "role": "user",
         "type": "message",
-        "content": "Find Frontend Developer jobs in Warsaw, then return the complete details for job-001."
+        "content": "Find Frontend Developer jobs in New York, then return the complete details for job-001."
       }
     ],
     "expectedCall": [
@@ -15,7 +15,7 @@
             "functionName": "search_jobs",
             "arguments": {
               "query": "Frontend Developer",
-              "location": "Warsaw"
+              "location": "New York"
             }
           },
           {
@@ -64,7 +64,7 @@
       {
         "role": "user",
         "type": "message",
-        "content": "Find Frontend Developer jobs in Warsaw and highlight job-001 on the map."
+        "content": "Find Frontend Developer jobs in New York and highlight job-001 on the map."
       }
     ],
     "expectedCall": [
@@ -74,7 +74,7 @@
             "functionName": "search_jobs",
             "arguments": {
               "query": "Frontend Developer",
-              "location": "Warsaw"
+              "location": "New York"
             }
           },
           {

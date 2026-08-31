@@ -17,7 +17,7 @@ export interface LocationSearchSuggestion {
 }
 
 export {
-  DEFAULT_SEARCH_RADIUS_KM,
-  SEARCH_RADIUS_OPTIONS_KM,
+  DEFAULT_SEARCH_RADIUS_MI,
+  SEARCH_RADIUS_OPTIONS_MI,
   buildHeaderSearchQueryParams,
 } from './header-search-query.utils';

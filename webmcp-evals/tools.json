@@ -18,10 +18,10 @@
             "maxLength": 100,
             "description": "City used as the geographic search center."
           },
-          "radiusKm": {
+          "radiusMi": {
             "type": "number",
-            "enum": [10, 25, 50, 100, 200],
-            "description": "Search radius in kilometers around location. Allowed values: 10, 25, 50, 100, 200. Omit to use 25 km when a location is provided."
+            "enum": [25, 50, 100, 150, 250],
+            "description": "Search radius in miles around location. Allowed values: 25, 50, 100, 150, 250. Omit to use 50 mi when a location is provided."
           },
           "roles": {
             "type": "array",

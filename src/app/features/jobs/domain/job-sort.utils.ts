@@ -52,7 +52,7 @@ export function isDistanceSortAvailable(criteria: JobSearchCriteria): boolean {
   return (
     criteria.locationLat != null &&
     criteria.locationLng != null &&
-    criteria.radiusKm != null
+    criteria.radiusMi != null
   );
 }
 

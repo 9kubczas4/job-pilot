@@ -142,7 +142,7 @@ export class HomePageComponent {
     },
     {
       title: 'Search in plain language',
-      text: 'From any page: “Find senior frontend jobs, remote or hybrid in Warsaw, minimum $8k USD.”',
+      text: 'From any page: “Find senior frontend jobs, remote or hybrid in New York, minimum $8k USD.”',
     },
     {
       title: 'Compare and recommend',

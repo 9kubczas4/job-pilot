@@ -36,7 +36,7 @@ Map helpers live in `shared/map/` because they are rendering infrastructure, not
 
 ### Google Maps without clustering
 - Pros: Simpler implementation
-- Cons: 40+ markers in Warsaw overlap and degrade UX
+- Cons: 40+ markers in dense metro areas overlap and degrade UX
 - Rejected: Clustering is implemented with `@googlemaps/markerclusterer`
 
 ## Consequences

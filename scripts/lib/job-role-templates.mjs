@@ -537,7 +537,7 @@ export const ROLE_TEMPLATES = [
     seniority: ['senior'],
     salary: { poland: [5000, 8000], us: [7000, 11000] },
     descriptions: [
-      'Own regional revenue targets for enterprise SaaS sales across Poland and CEE. Lead a team of account executives and key account growth.',
+      'Own regional revenue targets for enterprise SaaS sales across the United States. Lead a team of account executives and key account growth.',
       'Regional sales manager driving new logo acquisition and expansion in retail and FMCG verticals with a consultative sales approach.',
     ],
     responsibilities: [
@@ -550,7 +550,7 @@ export const ROLE_TEMPLATES = [
     requirements: [
       '5+ years in B2B technology sales with management experience',
       'Track record of exceeding quota in enterprise deals',
-      'Fluent Polish and English; additional CEE language a plus',
+      'Fluent English; experience selling into North American mid-market and enterprise accounts',
       'Experience selling SaaS with 6–12 month sales cycles',
       'Valid driving license for client visits',
     ],

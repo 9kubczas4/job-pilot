@@ -80,7 +80,7 @@ Full catalog: [`docs/specs/webmcp-tools.md`](../specs/webmcp-tools.md).
 
 1. Job board looks like a real product
 2. Codex: complete profile from CV → `update_profile`
-3. Codex: *"Find lead frontend jobs, remote/hybrid Warsaw, 25k+"* → `search_jobs` → **UI reacts live**
+3. Codex: *"Find lead frontend jobs, remote/hybrid New York, 25k+"* → `search_jobs` → **UI reacts live**
 4. Codex: compare top picks → `compare_offers` → **recommendation drawer opens**
 5. Codex: *"Show the best one on the map"* → `highlight_job` on `/jobs`
 6. `get_jobs` → `save_job` → `apply_job`

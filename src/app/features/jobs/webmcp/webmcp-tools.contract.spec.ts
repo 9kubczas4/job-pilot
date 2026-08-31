@@ -37,7 +37,7 @@ describe('jobs WebMCP contracts', () => {
     [GET_JOBS_WEBMCP_TOOL, { jobIds: [] }],
     [APPLY_JOB_WEBMCP_TOOL, { jobId: 'job-001', note: 'x'.repeat(2001) }],
     [SEARCH_JOBS_WEBMCP_TOOL, { location: 'x'.repeat(101) }],
-    [SEARCH_JOBS_WEBMCP_TOOL, { radiusKm: 50 }],
+    [SEARCH_JOBS_WEBMCP_TOOL, { radiusMi: 50 }],
     [SEARCH_JOBS_WEBMCP_TOOL, { sort: 'distance' }],
     [SEARCH_JOBS_WEBMCP_TOOL, { salaryMin: -1 }],
     [HIGHLIGHT_JOB_WEBMCP_TOOL, { jobId: '   ' }],

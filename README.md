@@ -146,7 +146,7 @@ Deploy the `dist/job-pilot/browser` output.
 3. Sign in with Google for profile, saved jobs, and applications.
 4. In Codex, try:
    - "Help me complete my profile based on this CV…" (navigate to `/profile` first for edits)
-   - "Find lead frontend jobs, remote or hybrid in Warsaw, minimum $8k USD."
+   - "Find lead frontend jobs, remote or hybrid in New York, minimum $8k USD."
    - "Compare these three offers and show me your recommendation on the page."
    - "Highlight the best match on the map." (on `/jobs` with current results)
    - "Save this job and apply to the Frontend Tech Lead role."

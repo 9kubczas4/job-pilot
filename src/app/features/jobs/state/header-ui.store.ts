@@ -1,6 +1,6 @@
 import { DestroyRef, inject, Injectable, signal, WritableSignal } from '@angular/core';
 import {
-  DEFAULT_SEARCH_RADIUS_KM,
+  DEFAULT_SEARCH_RADIUS_MI,
   JobSearchSuggestion,
   LocationSearchSuggestion,
 } from '@features/jobs/domain/header-search.model';
@@ -22,7 +22,7 @@ export class HeaderUiStore {
   readonly locationQuery = signal('');
   readonly locationLat = signal<number | undefined>(undefined);
   readonly locationLng = signal<number | undefined>(undefined);
-  readonly radiusKm = signal(DEFAULT_SEARCH_RADIUS_KM);
+  readonly radiusMi = signal(DEFAULT_SEARCH_RADIUS_MI);
   readonly jobSuggestions = signal<JobSearchSuggestion[]>([]);
   readonly locationSuggestions = signal<LocationSearchSuggestion[]>([]);
   readonly activeFilterCount = signal(0);
@@ -103,7 +103,7 @@ export class HeaderUiStore {
     this.locationQuery.set(criteria.locations?.[0] ?? '');
     this.locationLat.set(criteria.locationLat);
     this.locationLng.set(criteria.locationLng);
-    this.radiusKm.set(criteria.radiusKm ?? DEFAULT_SEARCH_RADIUS_KM);
+    this.radiusMi.set(criteria.radiusMi ?? DEFAULT_SEARCH_RADIUS_MI);
   }
 
   openFilters(): void {

@@ -91,7 +91,7 @@ export const ROLE_DESCRIPTION_ANGLES = {
     'Align two product streams after an org restructure with clear ownership boundaries.',
   ],
   'Regional Sales Manager': [
-    'Expand enterprise ARR in Poland and CEE with a team of five account executives.',
+    'Expand enterprise ARR across the United States with a team of five account executives.',
     'Build pipeline in retail verticals through executive workshops and proof-of-value pilots.',
     'Coach reps on multi-threaded deals with procurement and legal stakeholders.',
     'Partner with marketing on regional events, case studies, and localized campaigns.',

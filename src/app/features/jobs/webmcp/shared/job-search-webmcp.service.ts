@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { AppLinks } from '@core/app-paths';
-import { haversineDistanceKm } from '@features/jobs/domain/geo.utils';
-import { DEFAULT_SEARCH_RADIUS_KM } from '@features/jobs/domain/header-search.model';
+import { haversineDistanceMi } from '@features/jobs/domain/geo.utils';
+import { DEFAULT_SEARCH_RADIUS_MI } from '@features/jobs/domain/header-search.model';
 import { JobOffer } from '@features/jobs/domain/job.model';
 import {
   JobSearchResultSummary,
@@ -91,7 +91,7 @@ export class JobSearchWebMcpService {
       locations: location ? [location] : undefined,
       locationLat: city?.latitude,
       locationLng: city?.longitude,
-      radiusKm: location ? (input.radiusKm ?? DEFAULT_SEARCH_RADIUS_KM) : undefined,
+      radiusMi: location ? (input.radiusMi ?? DEFAULT_SEARCH_RADIUS_MI) : undefined,
       sort: input.sort === 'newest' ? undefined : input.sort,
     };
   }
@@ -111,7 +111,7 @@ export class JobSearchWebMcpService {
     this.store.patchSearchCriteria({
       locationLat: enriched.locationLat,
       locationLng: enriched.locationLng,
-      radiusKm: enriched.radiusKm,
+      radiusMi: enriched.radiusMi,
     });
   }
 }
@@ -124,14 +124,14 @@ function toJobSearchResultSummary(
   job: JobOffer,
   criteria: JobSearchCriteria,
 ): JobSearchResultSummary {
-  const distanceKm = jobDistanceKm(job, criteria);
+  const distanceMi = jobDistanceMi(job, criteria);
 
   return {
     id: job.id,
     title: job.title,
     company: job.company.name,
     ...(job.location ? { location: job.location.city } : {}),
-    ...(distanceKm == null ? {} : { distanceKm }),
+    ...(distanceMi == null ? {} : { distanceMi }),
     workplace: job.workplace,
     ...(job.salary ? { salary: { ...job.salary } } : {}),
     seniority: [...job.seniority],
@@ -139,7 +139,7 @@ function toJobSearchResultSummary(
   };
 }
 
-function jobDistanceKm(job: JobOffer, criteria: JobSearchCriteria): number | undefined {
+function jobDistanceMi(job: JobOffer, criteria: JobSearchCriteria): number | undefined {
   if (
     criteria.locationLat == null ||
     criteria.locationLng == null ||
@@ -148,7 +148,7 @@ function jobDistanceKm(job: JobOffer, criteria: JobSearchCriteria): number | und
     return undefined;
   }
 
-  const distance = haversineDistanceKm(
+  const distance = haversineDistanceMi(
     criteria.locationLat,
     criteria.locationLng,
     job.location.latitude,
@@ -177,5 +177,5 @@ function changedSearchControls(
 }
 
 function displayRadius(criteria: JobSearchCriteria): number {
-  return criteria.radiusKm ?? DEFAULT_SEARCH_RADIUS_KM;
+  return criteria.radiusMi ?? DEFAULT_SEARCH_RADIUS_MI;
 }

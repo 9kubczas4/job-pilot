@@ -12,7 +12,7 @@ export function provideHeaderSearchSlot(): Provider {
       return {
         searchQuery: ui.searchQuery,
         locationQuery: ui.locationQuery,
-        radiusKm: ui.radiusKm,
+        radiusMi: ui.radiusMi,
         jobSuggestions: ui.jobSuggestions,
         locationSuggestions: ui.locationSuggestions,
         queryToolActive: ui.queryToolActive,

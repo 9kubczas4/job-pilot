@@ -55,7 +55,7 @@ import {
 import { JobSearchCriteria, JobSortOption } from '@features/jobs/domain/search.model';
 import { DEFAULT_JOB_SORT, availableSortOptions } from '@features/jobs/domain/job-sort.utils';
 import { extractTopSkills } from '@features/jobs/domain/job-filter.utils';
-import { DEFAULT_SEARCH_RADIUS_KM } from '@features/jobs/domain/header-search.model';
+import { DEFAULT_SEARCH_RADIUS_MI } from '@features/jobs/domain/header-search.model';
 import { hasActiveSearchOrFilter } from '@features/jobs/domain/search-active.utils';
 import { environment } from '@environments/environment';
 import { isGoogleMapsConfigured, loadGoogleMapsApi } from '@shared/map/google-maps-loader';
@@ -116,16 +116,16 @@ export class JobSearchPageComponent implements OnInit {
   readonly searchSummary = computed(() => {
     const query = this.headerUi.searchQuery().trim();
     const location = this.headerUi.locationQuery().trim();
-    const radius = this.headerUi.radiusKm();
+    const radius = this.headerUi.radiusMi();
 
     if (query && location) {
-      return `${query} · ${location} · ${radius} km`;
+      return `${query} · ${location} · ${radius} mi`;
     }
     if (query) {
       return query;
     }
     if (location) {
-      return `${location} · ${radius} km`;
+      return `${location} · ${radius} mi`;
     }
     return 'Search jobs';
   });
@@ -140,7 +140,7 @@ export class JobSearchPageComponent implements OnInit {
 
     return { lat: locationLat, lng: locationLng };
   });
-  readonly searchMapRadiusKm = computed(() => this.store.criteria().radiusKm);
+  readonly searchMapRadiusMi = computed(() => this.store.criteria().radiusMi);
   readonly fitMapToResults = computed(() => hasActiveSearchOrFilter(this.store.criteria()));
   readonly filterTopSkills = computed(() => extractTopSkills(this.store.allJobs()));
 
@@ -253,7 +253,7 @@ export class JobSearchPageComponent implements OnInit {
       this.store.patchSearchCriteria({
         locationLat: enriched.locationLat,
         locationLng: enriched.locationLng,
-        radiusKm: enriched.radiusKm,
+        radiusMi: enriched.radiusMi,
       });
       this.syncingFromHeader.set(false);
     });
@@ -334,7 +334,7 @@ export class JobSearchPageComponent implements OnInit {
         locations: undefined,
         locationLat: undefined,
         locationLng: undefined,
-        radiusKm: undefined,
+        radiusMi: undefined,
       });
       this.headerUi.locationQuery.set('');
       this.headerUi.locationLat.set(undefined);
@@ -385,7 +385,7 @@ export class JobSearchPageComponent implements OnInit {
     this.headerUi.locationQuery.set('');
     this.headerUi.locationLat.set(undefined);
     this.headerUi.locationLng.set(undefined);
-    this.headerUi.radiusKm.set(DEFAULT_SEARCH_RADIUS_KM);
+    this.headerUi.radiusMi.set(DEFAULT_SEARCH_RADIUS_MI);
   }
 
   onToggleSaveJob(jobId: string): void {
@@ -463,7 +463,7 @@ function buildCriteriaPatchFromHeader(
   jobs: JobOffer[],
 ): Pick<
   JobSearchCriteria,
-  'query' | 'locations' | 'locationLat' | 'locationLng' | 'radiusKm'
+  'query' | 'locations' | 'locationLat' | 'locationLng' | 'radiusMi'
 > {
   const query = headerUi.searchQuery().trim();
   const locationQuery = headerUi.locationQuery().trim();
@@ -471,7 +471,7 @@ function buildCriteriaPatchFromHeader(
   const resolvedCity = resolveCityCenter(catalog, locationQuery);
   const locationPatch = normalizeLocationCriteria(
     locationQuery,
-    headerUi.radiusKm(),
+    headerUi.radiusMi(),
     headerUi.locationLat() ?? resolvedCity?.latitude,
     headerUi.locationLng() ?? resolvedCity?.longitude,
   );

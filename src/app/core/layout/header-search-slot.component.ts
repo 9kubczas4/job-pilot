@@ -19,7 +19,7 @@ import { HEADER_SEARCH_SLOT } from '@core/layout/header-search-slot.token';
       [variant]="variant()"
       [searchQuery]="slot.searchQuery()"
       [locationQuery]="slot.locationQuery()"
-      [radiusKm]="slot.radiusKm()"
+      [radiusMi]="slot.radiusMi()"
       [jobSuggestions]="slot.jobSuggestions()"
       [locationSuggestions]="slot.locationSuggestions()"
       [queryUpdateActive]="slot.queryToolActive()"

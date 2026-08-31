@@ -23,7 +23,7 @@ export const LANDING_TERMINAL_SCRIPT: readonly LandingTerminalLine[] = [
     kind: 'prompt',
     prefix: '›',
     text:
-      'search_jobs({ query: "frontend", location: "Warsaw", radiusKm: 50, workplace: ["remote", "hybrid"], salaryMin: 8000 })',
+      'search_jobs({ query: "frontend", location: "New York", radiusMi: 50, workplace: ["remote", "hybrid"], salaryMin: 8000 })',
   },
   {
     kind: 'success',

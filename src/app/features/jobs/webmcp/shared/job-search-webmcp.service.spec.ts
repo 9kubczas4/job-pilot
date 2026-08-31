@@ -11,22 +11,22 @@ import { JobSearchWebMcpService } from './job-search-webmcp.service';
 @Component({ template: '' })
 class EmptyPageComponent {}
 
-const WARSAW_JOB: JobOffer = {
+const NEW_YORK_JOB: JobOffer = {
   id: 'job-001',
   title: 'Frontend Developer',
   company: { id: 'acme', name: 'Acme' },
-  description: 'Angular role in Warsaw.',
+  description: 'Angular role in New York.',
   seniority: ['senior'],
   competencies: [{ name: 'Angular', level: 5 }],
-  salary: { min: 12000, max: 17000, currency: 'USD', period: 'month' },
+  salary: { min: 7500, max: 11500, currency: 'USD', period: 'month' },
   workSchedules: ['full-time'],
   contractTypes: ['b2b'],
   workplace: 'remote',
   location: {
-    city: 'Warsaw',
-    country: 'Poland',
-    latitude: 52.2297,
-    longitude: 21.0122,
+    city: 'New York',
+    country: 'United States',
+    latitude: 40.7128,
+    longitude: -74.006,
   },
   responsibilities: [],
   requirements: [],
@@ -48,7 +48,7 @@ describe('JobSearchWebMcpService', () => {
         ]),
         {
           provide: JobRepository,
-          useValue: { getAllJobs: () => Promise.resolve([WARSAW_JOB]) },
+          useValue: { getAllJobs: () => Promise.resolve([NEW_YORK_JOB]) },
         },
       ],
     }).compileComponents();
@@ -65,18 +65,18 @@ describe('JobSearchWebMcpService', () => {
 
     await service.applySearchCriteria({
       query: 'Frontend',
-      location: 'Warsaw',
-      radiusKm: 50,
+      location: 'New York',
+      radiusMi: 100,
     });
 
     expect(headerUi.searchQuery()).toBe('Frontend');
-    expect(headerUi.locationQuery()).toBe('Warsaw');
-    expect(headerUi.radiusKm()).toBe(50);
+    expect(headerUi.locationQuery()).toBe('New York');
+    expect(headerUi.radiusMi()).toBe(100);
     expect(headerUi.searchApplyTrigger()).toBe(triggerBefore + 1);
     expect(router.parseUrl(router.url).queryParams).toMatchObject({
       q: 'Frontend',
-      location: 'Warsaw',
-      radius: '50',
+      location: 'New York',
+      radius: '100',
     });
     expect(router.url.startsWith('/jobs?')).toBe(true);
     expect(headerUi.queryToolActive()).toBe(true);
@@ -89,8 +89,8 @@ describe('JobSearchWebMcpService', () => {
   it('returns lightweight job summaries alongside ids from search_jobs', async () => {
     const result = await service.applySearchCriteria({
       query: 'Frontend',
-      location: 'Warsaw',
-      radiusKm: 25,
+      location: 'New York',
+      radiusMi: 25,
     });
 
     expect(result.jobIds).toEqual(['job-001']);
@@ -99,10 +99,10 @@ describe('JobSearchWebMcpService', () => {
         id: 'job-001',
         title: 'Frontend Developer',
         company: 'Acme',
-        location: 'Warsaw',
-        distanceKm: 0,
+        location: 'New York',
+        distanceMi: 0,
         workplace: 'remote',
-        salary: { min: 12000, max: 17000, currency: 'USD', period: 'month' },
+        salary: { min: 7500, max: 11500, currency: 'USD', period: 'month' },
         seniority: ['senior'],
         skills: ['Angular'],
       },
@@ -112,16 +112,16 @@ describe('JobSearchWebMcpService', () => {
   it('marks only radius when search_jobs preserves query and location', async () => {
     store.setCriteriaFromRoute({
       query: 'Frontend',
-      locations: ['Warsaw'],
-      locationLat: 52.2297,
-      locationLng: 21.0122,
-      radiusKm: 25,
+      locations: ['New York'],
+      locationLat: 40.7128,
+      locationLng: -74.006,
+      radiusMi: 25,
     });
 
     await service.applySearchCriteria({
       query: 'Frontend',
-      location: 'Warsaw',
-      radiusKm: 50,
+      location: 'New York',
+      radiusMi: 50,
     });
 
     expect(headerUi.queryToolActive()).toBe(false);
@@ -133,13 +133,13 @@ describe('JobSearchWebMcpService', () => {
 
   it('does not mark controls when normalized criteria stay unchanged', async () => {
     store.setCriteriaFromRoute({
-      locations: ['Warsaw'],
-      locationLat: 52.2297,
-      locationLng: 21.0122,
-      radiusKm: 25,
+      locations: ['New York'],
+      locationLat: 40.7128,
+      locationLng: -74.006,
+      radiusMi: 25,
     });
 
-    await service.applySearchCriteria({ location: 'Warsaw', radiusKm: 25 });
+    await service.applySearchCriteria({ location: 'New York', radiusMi: 25 });
 
     expect(headerUi.queryToolActive()).toBe(false);
     expect(headerUi.locationToolActive()).toBe(false);
@@ -151,7 +151,7 @@ describe('JobSearchWebMcpService', () => {
   it('replaces the complete search state and clears omitted filters', async () => {
     store.setCriteriaFromRoute({
       query: 'Legacy query',
-      locations: ['Krakow'],
+      locations: ['Boston'],
       workplace: ['onsite'],
       skills: ['Java'],
       salaryMin: 9000,
@@ -160,7 +160,7 @@ describe('JobSearchWebMcpService', () => {
 
     await service.applySearchCriteria({
       query: 'Frontend',
-      location: 'Warsaw',
+      location: 'New York',
       workplace: ['remote'],
       seniority: ['senior'],
       sort: 'salary-desc',
@@ -168,10 +168,10 @@ describe('JobSearchWebMcpService', () => {
 
     expect(store.criteria()).toEqual({
       query: 'Frontend',
-      locations: ['Warsaw'],
-      locationLat: WARSAW_JOB.location?.latitude,
-      locationLng: WARSAW_JOB.location?.longitude,
-      radiusKm: 25,
+      locations: ['New York'],
+      locationLat: NEW_YORK_JOB.location?.latitude,
+      locationLng: NEW_YORK_JOB.location?.longitude,
+      radiusMi: 50,
       workplace: ['remote'],
       seniority: ['senior'],
       skills: undefined,
@@ -183,7 +183,7 @@ describe('JobSearchWebMcpService', () => {
     });
     expect(router.parseUrl(router.url).queryParams).toMatchObject({
       q: 'Frontend',
-      location: 'Warsaw',
+      location: 'New York',
       workplace: 'remote',
       seniority: 'senior',
       sort: 'salary-desc',

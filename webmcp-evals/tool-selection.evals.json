@@ -5,7 +5,7 @@
       {
         "role": "user",
         "type": "message",
-        "content": "Find Frontend Developer jobs in Warsaw within 25 kilometers."
+        "content": "Find Frontend Developer jobs in New York within 50 miles."
       }
     ],
     "expectedCall": [
@@ -13,8 +13,8 @@
         "functionName": "search_jobs",
         "arguments": {
           "query": "Frontend Developer",
-          "location": "Warsaw",
-          "radiusKm": 25
+          "location": "New York",
+          "radiusMi": 50
         }
       }
     ]

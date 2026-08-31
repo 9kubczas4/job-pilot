@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import {
-  DEFAULT_SEARCH_RADIUS_KM,
-  SEARCH_RADIUS_OPTIONS_KM,
+  DEFAULT_SEARCH_RADIUS_MI,
+  SEARCH_RADIUS_OPTIONS_MI,
 } from '../../../domain/header-search.model';
 
 const keywordList = (description: string) =>
@@ -19,11 +19,11 @@ export const SEARCH_JOBS_INPUT_SCHEMA = z
     location: z.string().trim().min(1).max(100).optional().meta({
       description: 'City used as the geographic search center.',
     }),
-    radiusKm: z
-      .literal(SEARCH_RADIUS_OPTIONS_KM)
+    radiusMi: z
+      .literal(SEARCH_RADIUS_OPTIONS_MI)
       .optional()
       .meta({
-        description: `Search radius in kilometers around location. Allowed values: ${SEARCH_RADIUS_OPTIONS_KM.join(', ')}. Omit to use ${DEFAULT_SEARCH_RADIUS_KM} km when a location is provided.`,
+        description: `Search radius in miles around location. Allowed values: ${SEARCH_RADIUS_OPTIONS_MI.join(', ')}. Omit to use ${DEFAULT_SEARCH_RADIUS_MI} mi when a location is provided.`,
       }),
     roles: keywordList('Role-title keywords matched with OR.'),
     skills: keywordList('Skill names matched with OR.'),
@@ -59,11 +59,11 @@ export const SEARCH_JOBS_INPUT_SCHEMA = z
     }),
   })
   .superRefine((input, context) => {
-    if (input.radiusKm != null && !input.location) {
+    if (input.radiusMi != null && !input.location) {
       context.addIssue({
         code: 'custom',
-        path: ['radiusKm'],
-        message: 'radiusKm requires one location.',
+        path: ['radiusMi'],
+        message: 'radiusMi requires one location.',
       });
     }
     if (input.sort === 'distance' && !input.location) {

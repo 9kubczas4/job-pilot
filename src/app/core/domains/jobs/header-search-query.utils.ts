@@ -1,17 +1,17 @@
-export const SEARCH_RADIUS_OPTIONS_KM = [10, 25, 50, 100, 200] as const;
-export const DEFAULT_SEARCH_RADIUS_KM = 25;
+export const SEARCH_RADIUS_OPTIONS_MI = [25, 50, 100, 150, 250] as const;
+export const DEFAULT_SEARCH_RADIUS_MI = 50;
 
 export function buildHeaderSearchQueryParams(state: {
   searchQuery: string;
   locationQuery: string;
   locationLat?: number;
   locationLng?: number;
-  radiusKm: number;
+  radiusMi: number;
 }): Record<string, string> {
   const queryParams: Record<string, string> = {};
   const query = state.searchQuery.trim();
   const location = state.locationQuery.trim();
-  const radius = state.radiusKm || DEFAULT_SEARCH_RADIUS_KM;
+  const radius = state.radiusMi || DEFAULT_SEARCH_RADIUS_MI;
 
   if (query) {
     queryParams['q'] = query;

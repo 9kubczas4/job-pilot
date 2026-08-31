@@ -73,7 +73,7 @@
   white-space: nowrap;
 }
 
-@media (max-width: 64rem) {
+@media (max-width: 60rem) {
   :host {
     inset-block-end: auto;
     inset-block-start: calc(var(--mobile-header-offset) + var(--space-2));

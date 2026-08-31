@@ -38,6 +38,10 @@
   will-change: transform;
 }
 
+.drawer-panel--wide {
+  width: min(100vw, 36rem);
+}
+
 .drawer-root.is-open .drawer-panel {
   transform: translateX(0);
 }

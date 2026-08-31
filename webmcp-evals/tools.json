@@ -112,6 +112,64 @@
       }
     },
     {
+      "name": "compare_offers",
+      "description": "Open a transient comparison drawer with the agent analysis for two to five job offers. Use this tool instead of interacting with the page UI or DOM. Use it when the user should see a side-by-side recommendation with optional per-offer badges (for example, najlepsza, interesujaca, rozwojowa), short notes, and an optional highlighted primary pick with a gradient border and star. Accepts any known jobId from search_jobs, get_job, or get_saved_jobs. Does not change search filters, saved jobs, or applications. Returns NOT_FOUND when fewer than two requested jobs resolve.",
+      "inputSchema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120,
+            "description": "Optional drawer heading shown above the comparison. Defaults to \"Offer comparison\" when omitted."
+          },
+          "summary": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000,
+            "description": "Overall agent analysis or recommendation shown at the top of the drawer. Maximum 2,000 characters."
+          },
+          "offers": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 5,
+            "items": {
+              "type": "object",
+              "properties": {
+                "jobId": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128,
+                  "description": "The unique job identifier returned by search_jobs, get_job, or get_saved_jobs (for example, job-001)."
+                },
+                "badge": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 64,
+                  "description": "Optional free-text badge for this offer (for example, najlepsza, interesujaca, rozwojowa). Omit when no badge is needed."
+                },
+                "note": {
+                  "type": "string",
+                  "maxLength": 500,
+                  "description": "Optional short note explaining why this badge or ranking applies to this offer. Maximum 500 characters."
+                },
+                "highlighted": {
+                  "type": "boolean",
+                  "description": "When true, visually emphasize this offer with an animated gradient border and star icon. Use for the single primary recommendation; at most one offer may be highlighted."
+                }
+              },
+              "required": ["jobId"],
+              "additionalProperties": false
+            },
+            "description": "Two to five offers to compare. Each entry needs a jobId and may include an optional badge and note."
+          }
+        },
+        "required": ["summary", "offers"],
+        "additionalProperties": false
+      }
+    },
+    {
       "name": "get_job",
       "description": "Read one job offer by its exact jobId. Use this tool instead of interacting with the page UI or DOM. Use a jobId returned by search_jobs. This tool does not change application state and does not require sign-in. Returns the complete job record on success or a structured NOT_FOUND error when the identifier is unknown.",
       "inputSchema": {

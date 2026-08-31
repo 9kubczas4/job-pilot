@@ -270,7 +270,7 @@ const boundariesPolicies = [
     allow: {
       to: {
         element: {
-          types: ['core', 'core-page', 'core-domains', 'core-infrastructure', 'core-layout', 'feature-page', 'feature-webmcp', 'shared'],
+          types: ['core', 'core-page', 'core-domains', 'core-infrastructure', 'core-layout', 'feature-page', 'feature-webmcp', 'feature-shell', 'shared'],
         },
       },
     },

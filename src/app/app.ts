@@ -4,13 +4,15 @@ import { RouterOutlet } from '@angular/router';
 import { ThemeService } from '@core/infrastructure/theme/theme.service';
 import { ToastHostComponent } from '@shared/ui/toast/toast-host.component';
 import { ToastService } from '@shared/ui/toast/toast.service';
+import { JobCompareDrawerHostComponent } from '@features/jobs/shell/job-compare-drawer-host.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ToastHostComponent],
+  imports: [RouterOutlet, ToastHostComponent, JobCompareDrawerHostComponent],
   template: `
     <router-outlet />
     <app-toast-host />
+    <app-job-compare-drawer-host />
   `,
 })
 export class App {

@@ -74,6 +74,28 @@
     ]
   },
   {
+    "name": "Compare offers with agent feedback on the page",
+    "messages": [
+      {
+        "role": "user",
+        "type": "message",
+        "content": "Compare job-001 and job-002 for me and show your recommendation on the page. Mark job-001 as najlepsza."
+      }
+    ],
+    "expectedCall": [
+      {
+        "functionName": "compare_offers",
+        "arguments": {
+          "summary": "job-001 is the strongest match overall.",
+          "offers": [
+            { "jobId": "job-001", "badge": "najlepsza" },
+            { "jobId": "job-002" }
+          ]
+        }
+      }
+    ]
+  },
+  {
     "name": "Read saved jobs without mixing them into the profile",
     "messages": [
       {

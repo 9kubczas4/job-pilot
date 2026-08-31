@@ -1,10 +1,22 @@
 import { TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
+import { JobRepository } from '@features/jobs/data-access/job.repository';
 import { App } from './app';
 
 describe('App', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
+      providers: [
+        provideRouter([]),
+        {
+          provide: JobRepository,
+          useValue: {
+            getJobById: () => Promise.resolve(null),
+            getAllJobs: () => Promise.resolve([]),
+          },
+        },
+      ],
     }).compileComponents();
   });
 

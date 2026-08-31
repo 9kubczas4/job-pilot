@@ -8,6 +8,7 @@ import { GET_JOB_WEBMCP_TOOL } from './features/jobs/webmcp/tools/get-job/get-jo
 import { SAVED_JOBS_WEBMCP_TOOLS } from './features/jobs/webmcp/tools/saved-jobs/saved-jobs.tool';
 import { SEARCH_JOBS_WEBMCP_TOOL } from './features/jobs/webmcp/tools/search-jobs/search-jobs.tool';
 import { HIGHLIGHT_JOB_WEBMCP_TOOL } from './features/jobs/webmcp/tools/highlight-job/highlight-job.tool';
+import { COMPARE_OFFERS_WEBMCP_TOOL } from './features/jobs/webmcp/tools/compare-offers/compare-offers.tool';
 import {
   GET_PROFILE_WEBMCP_TOOL,
   UPDATE_PROFILE_WEBMCP_TOOL,
@@ -17,6 +18,7 @@ const runtimeTools = [
   SEARCH_JOBS_WEBMCP_TOOL,
   FILTER_JOBS_WEBMCP_TOOL,
   HIGHLIGHT_JOB_WEBMCP_TOOL,
+  COMPARE_OFFERS_WEBMCP_TOOL,
   GET_JOB_WEBMCP_TOOL,
   ...SAVED_JOBS_WEBMCP_TOOLS,
   APPLY_JOB_WEBMCP_TOOL,

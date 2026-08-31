@@ -20,6 +20,7 @@ import {
 export class FilterDrawerComponent {
   readonly open = input(false);
   readonly title = input('Filters');
+  readonly wide = input(false);
   readonly closed = output<void>();
 
   private readonly panelRef = viewChild<ElementRef<HTMLElement>>('panel');

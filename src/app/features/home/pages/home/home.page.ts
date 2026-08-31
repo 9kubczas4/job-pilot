@@ -13,6 +13,7 @@ import { AppShellComponent } from '@core/layout/app-shell.component';
 import { HeaderSearchSlotComponent } from '@core/layout/header-search-slot.component';
 import { AppLinks } from '@core/app-paths';
 import { setupLandingScrollReveal } from '@features/home/domain/landing-scroll-reveal';
+import { LandingTerminalShowcaseComponent } from '@features/home/ui/landing-terminal-showcase/landing-terminal-showcase.component';
 
 interface LandingFeature {
   icon: string;
@@ -37,7 +38,7 @@ interface LandingStep {
 @Component({
   selector: 'app-home-page',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [AppShellComponent, HeaderSearchSlotComponent, RouterLink],
+  imports: [AppShellComponent, HeaderSearchSlotComponent, LandingTerminalShowcaseComponent, RouterLink],
   templateUrl: './home.page.html',
   styleUrl: './home.page.scss',
 })
@@ -55,12 +56,17 @@ export class HomePageComponent {
     {
       icon: '◎',
       title: 'Map-aware results',
-      text: 'The map zooms to your filtered results - one country or the whole world when offers span continents.',
+      text: 'The map zooms to your filtered results - highlight_job focuses a marker with a live popover.',
+    },
+    {
+      icon: '✦',
+      title: 'Agent feedback',
+      text: 'compare_offers opens a recommendation drawer with badges, notes, and an optional highlighted pick.',
     },
     {
       icon: '⚡',
       title: 'Agent-native',
-      text: 'Seven global WebMCP tools share state with the UI. No brittle DOM automation.',
+      text: 'Nine global WebMCP tools share state with the UI. Two route-scoped tools for map focus and profile edits.',
     },
   ];
 
@@ -78,15 +84,20 @@ export class HomePageComponent {
         'Patch structured filters and sort; preserve text and location. Array values match with OR.',
     },
     {
-      name: 'get_profile',
-      scope: 'global',
-      description:
-        'Read headline, experience, skills, and preferences for the signed-in user from any page.',
-    },
-    {
       name: 'get_job',
       scope: 'global',
       description: 'Read full details for a single job offer by id - no need to open the detail route first.',
+    },
+    {
+      name: 'compare_offers',
+      scope: 'global',
+      description:
+        'Open a comparison drawer with agent summary, per-offer badges and notes, and an optional highlighted primary pick.',
+    },
+    {
+      name: 'get_saved_jobs',
+      scope: 'global',
+      description: 'Read the signed-in user saved shortlist with lightweight job details from any page.',
     },
     {
       name: 'save_job',
@@ -103,9 +114,22 @@ export class HomePageComponent {
       scope: 'global',
       description: 'Submit a real job application. Requires auth and a minimal profile.',
     },
+    {
+      name: 'get_profile',
+      scope: 'global',
+      description:
+        'Read headline, experience, skills, and preferences for the signed-in user from any page.',
+    },
   ];
 
   readonly routeTools: LandingTool[] = [
+    {
+      name: 'highlight_job',
+      scope: 'route',
+      route: '/jobs',
+      description:
+        'Focus one job from the current search results on the map - marker, popover, and AI highlight animation.',
+    },
     {
       name: 'update_profile',
       scope: 'route',
@@ -125,16 +149,16 @@ export class HomePageComponent {
       text: 'Launch Job Pilot in the ChatGPT desktop browser with WebMCP enabled (Chrome 149+).',
     },
     {
-      title: 'Go to /profile',
-      text: 'Route-scoped update_profile is only registered on the profile page - navigate there before editing fields.',
-    },
-    {
       title: 'Search in plain language',
       text: 'From any page: “Find senior frontend jobs, remote or hybrid in Warsaw, minimum $8k USD.”',
     },
     {
+      title: 'Compare and recommend',
+      text: 'Ask Codex to compare offers — compare_offers opens a drawer with badges, notes, and a highlighted pick.',
+    },
+    {
       title: 'Watch the UI react',
-      text: 'Global tools update filters, list, map, saved jobs, and applications in real time.',
+      text: 'Tools update filters, list, map, saved jobs, applications, and agent feedback surfaces in real time.',
     },
   ];
 

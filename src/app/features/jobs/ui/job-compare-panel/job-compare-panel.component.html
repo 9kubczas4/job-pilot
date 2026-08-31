@@ -1,0 +1,76 @@
+<section class="compare-panel" aria-live="polite">
+  <div class="compare-panel__summary">
+    <p class="compare-panel__eyebrow">Agent insight</p>
+    <p class="compare-panel__summary-text">{{ summary() }}</p>
+  </div>
+
+  @if (loading()) {
+    <p class="compare-panel__loading">Loading offers…</p>
+  } @else {
+    <ol class="compare-panel__list">
+      @for (entry of offers(); track entry.jobId) {
+        <li class="compare-panel__item">
+          <div
+            class="compare-panel__offer-shell"
+            [class.compare-panel__offer-shell--highlighted]="entry.highlighted"
+          >
+            <a
+              class="compare-panel__offer"
+              [routerLink]="jobLink(entry.jobId)"
+              (click)="onOfferClick(entry.jobId)"
+            >
+              @if (entry.highlighted) {
+                <span class="compare-panel__star" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="18" height="18" focusable="false">
+                    <path
+                      d="M12 3.5 L14.6 9.2 L20.8 10.1 L16.2 14.4 L17.3 20.6 L12 17.6 L6.7 20.6 L7.8 14.4 L3.2 10.1 L9.4 9.2 Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </span>
+              }
+
+              @if (entry.badge) {
+                <span class="compare-panel__badge">{{ entry.badge }}</span>
+              }
+
+            <div class="compare-panel__offer-header">
+              <span class="compare-panel__logo" aria-hidden="true">
+                {{ companyInitials(entry.job.company.name) }}
+              </span>
+
+              <div class="compare-panel__intro">
+                <h3 class="compare-panel__title">{{ entry.job.title }}</h3>
+                <p class="compare-panel__company">{{ entry.job.company.name }}</p>
+              </div>
+            </div>
+
+            @if (formatSalary(entry.job); as salary) {
+              <p class="compare-panel__salary">{{ salary }}</p>
+            }
+
+            <div class="compare-panel__facts">
+              @if (entry.job.location?.city; as city) {
+                <span class="compare-panel__fact">{{ city }}</span>
+              }
+              <span class="compare-panel__fact">{{ formatWorkplaceMode(entry.job.workplace) }}</span>
+              @for (level of entry.job.seniority.slice(0, 2); track level) {
+                <span class="compare-panel__fact">{{ formatSeniorityLevel(level) }}</span>
+              }
+              @for (contract of entry.job.contractTypes.slice(0, 2); track contract) {
+                <span class="compare-panel__fact">{{ formatContractType(contract) }}</span>
+              }
+            </div>
+
+            @if (entry.note) {
+              <p class="compare-panel__note">{{ entry.note }}</p>
+            }
+
+            <span class="compare-panel__cta">View details</span>
+            </a>
+          </div>
+        </li>
+      }
+    </ol>
+  }
+</section>

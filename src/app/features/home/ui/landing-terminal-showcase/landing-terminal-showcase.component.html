@@ -1,0 +1,33 @@
+<div class="landing-terminal landing-terminal--showcase" aria-hidden="true">
+  <div class="landing-terminal__glow" aria-hidden="true"></div>
+  <div class="landing-terminal__chrome">
+    <span></span><span></span><span></span>
+    <p>Codex · job-pilot</p>
+  </div>
+  <div #terminalBody class="landing-terminal__body">
+    @for (line of state().completedLines; track $index) {
+      <p
+        class="landing-terminal__line landing-terminal__line--{{ line.kind }}"
+        [class.landing-terminal__line--entered]="!isStaticLine($index)"
+      >
+        @if (line.prefix) {
+          <span class="landing-terminal__prefix">{{ line.prefix }}</span>
+        }
+        {{ line.text }}
+      </p>
+    }
+
+    @if (state().activeLine; as line) {
+      <p class="landing-terminal__line landing-terminal__line--{{ line.kind }}">
+        @if (line.prefix) {
+          <span class="landing-terminal__prefix">{{ line.prefix }}</span>
+        }
+        {{ activeText(state()) }}<span class="landing-terminal__inline-cursor" aria-hidden="true"></span>
+      </p>
+    }
+
+    @if (state().done) {
+      <p class="landing-terminal__cursor landing-terminal__cursor--ready" aria-hidden="true"></p>
+    }
+  </div>
+</div>

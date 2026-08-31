@@ -15,6 +15,7 @@ import { provideGetProfileWebMcpTool } from '@features/profile/webmcp/profile.to
 import { provideGetJobWebMcpTool } from '@features/jobs/webmcp/tools/get-job/get-job.tool';
 import { provideSavedJobsWebMcpTools } from '@features/jobs/webmcp/tools/saved-jobs/saved-jobs.tool';
 import { provideApplyJobWebMcpTool } from '@features/jobs/webmcp/tools/apply-job/apply-job.tool';
+import { provideCompareOffersWebMcpTool } from '@features/jobs/webmcp/tools/compare-offers/compare-offers.tool';
 import { provideJobsHeaderSearch } from '@features/jobs/webmcp/search-catalog.bootstrap';
 import { environment } from '@environments/environment';
 import { GOOGLE_MAPS_API_KEY } from '@shared/map/google-maps-config';
@@ -31,6 +32,7 @@ export const appConfig: ApplicationConfig = {
     provideGetJobWebMcpTool(),
     provideSavedJobsWebMcpTools(),
     provideApplyJobWebMcpTool(),
+    provideCompareOffersWebMcpTool(),
     ...provideJobsHeaderSearch(),
     provideRouter(routes, withExperimentalAutoCleanupInjectors()),
     { provide: GOOGLE_MAPS_API_KEY, useValue: environment.googleMapsApiKey },

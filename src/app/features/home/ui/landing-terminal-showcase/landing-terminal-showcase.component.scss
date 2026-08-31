@@ -1,0 +1,44 @@
+:host {
+  display: block;
+}
+
+.landing-terminal--showcase {
+  display: flex;
+  flex-direction: column;
+  height: 26.5rem;
+  min-height: 26.5rem;
+}
+
+.landing-terminal__body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  scroll-behavior: auto;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.landing-terminal__inline-cursor {
+  display: inline-block;
+  width: 0.55rem;
+  height: 1rem;
+  margin-inline-start: 1px;
+  vertical-align: -0.15em;
+  background: #93c5fd;
+  animation: landing-blink 1.1s step-end infinite;
+}
+
+.landing-terminal__cursor--ready {
+  opacity: 1;
+  animation: landing-blink 1.1s step-end infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-terminal__inline-cursor,
+  .landing-terminal__cursor--ready {
+    animation: none;
+  }
+}

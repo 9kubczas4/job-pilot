@@ -10,11 +10,13 @@ Job Pilot combines a browsing experience with [Angular 22 experimental WebMCP su
 
 ## Why WebMCP
 
-Traditional agents interact with web apps through DOM automation. Job Pilot exposes structured tools (`search_jobs`, `filter_jobs`, `update_profile`, `apply_job`, and more) so Codex can:
+Traditional agents interact with web apps through DOM automation. Job Pilot exposes structured tools (`search_jobs`, `filter_jobs`, `compare_offers`, `highlight_job`, `apply_job`, and more) so Codex can:
 
 - read and update the candidate profile
 - translate natural-language intent into `JobSearchCriteria`
 - update filters, list, and map in real time
+- compare offers in a recommendation drawer with badges and a highlighted pick
+- focus a job on the map from current search results
 - save and apply to jobs for the authenticated user
 
 The agent never receives a `userId` in tool payloads. Identity comes from Firebase Auth in the app.
@@ -28,16 +30,21 @@ The agent never receives a `userId` in tool payloads. Identity comes from Fireba
 
 ## WebMCP Tools
 
+Eleven tools total: **9 global** + **2 route-scoped**. Full catalog: [`docs/specs/webmcp-tools.md`](docs/specs/webmcp-tools.md).
+
 | Tool | Scope | Purpose |
 |------|-------|---------|
 | `search_jobs` | global | Replace text, location, and radius; preserve structured filters |
 | `filter_jobs` | global | Update structured filters and sort; preserve text/location (OR within arrays) |
-| `get_profile` | global | Read candidate profile (headline, experience, skills, preferences) |
-| `update_profile` | `/profile` | Update candidate profile (Signal Form implicit tool) |
-| `get_job` | global | Read a single job offer |
+| `get_job` | global | Read a single job offer by id |
+| `compare_offers` | global | Open a comparison drawer (2–5 offers) with badges, notes, and optional highlighted pick |
+| `get_saved_jobs` | global | Read the signed-in user's saved shortlist |
 | `save_job` | global | Add a job to favourites (idempotent) |
 | `unsave_job` | global | Remove a job from favourites (idempotent) |
 | `apply_job` | global | Submit a real job application (idempotent for already applied jobs) |
+| `get_profile` | global | Read candidate profile (headline, experience, skills, preferences) |
+| `highlight_job` | `/jobs` | Focus one job from current search results on the map (marker, popover, AI animation) |
+| `update_profile` | `/profile` | Update candidate profile (Signal Form implicit tool) |
 
 Global tools register in `app.config.ts`. Route-scoped tools register as route `providers` in `app.routes.ts`.
 
@@ -139,19 +146,22 @@ Deploy the `dist/job-pilot/browser` output.
 2. Open the app in that browser.
 3. Sign in with Google for profile, saved jobs, and applications.
 4. In Codex, try:
-   - "Help me complete my profile based on this CV…"
+   - "Help me complete my profile based on this CV…" (navigate to `/profile` first for edits)
    - "Find lead frontend jobs, remote or hybrid in Warsaw, minimum $8k USD."
+   - "Compare these three offers and show me your recommendation on the page."
+   - "Highlight the best match on the map." (on `/jobs` with current results)
    - "Save this job and apply to the Frontend Tech Lead role."
 
-Expected result: profile updates appear in `/profile`, search updates filters/list/map on `/jobs`, and job cards show Saved/Applied state.
+Expected result: profile updates appear in `/profile`, search updates filters/list/map on `/jobs`, `compare_offers` opens the recommendation drawer, `highlight_job` focuses the map, and job cards show Saved/Applied state.
 
 ## Demo Video Script (<3 min)
 
 1. Show the job board UI (list + map)
 2. Complete profile from CV via Codex
 3. Run natural-language job search and show live UI reaction
-4. Save and apply to a job
-5. Explain: agent uses domain tools, not DOM clicks
+4. Compare offers with `compare_offers` and highlight the pick on the map with `highlight_job`
+5. Save and apply to a job
+6. Explain: agent uses domain tools, not DOM clicks
 
 ## Project Structure
 
@@ -190,17 +200,12 @@ features/{name}/
 | `/jobs/saved` | jobs/saved-jobs | Saved jobs list |
 | `/jobs/applications` | jobs/applications | Submitted applications |
 
-## Hackathon Submission Checklist
-
-- [ ] Live URL accessible in ChatGPT browser / Chrome 149+ with WebMCP enabled
-- [x] Public GitHub repo with MIT license ([`LICENSE`](LICENSE) - detected in repo About)
-- [ ] README explains WebMCP implementation
-- [ ] YouTube demo video (<3 min)
-- [ ] Judge test credentials (if auth required)
 
 ## Documentation
 
 - Product intent: [`docs/ideas/job-pilot.md`](docs/ideas/job-pilot.md)
+- WebMCP tool catalog: [`docs/specs/webmcp-tools.md`](docs/specs/webmcp-tools.md)
+- Tool specs: [`docs/specs/highlight-job-webmcp.md`](docs/specs/highlight-job-webmcp.md), [`docs/specs/compare-offers-webmcp.md`](docs/specs/compare-offers-webmcp.md)
 - Architecture decisions: [`docs/decisions/`](docs/decisions/)
 - Import boundaries: [`docs/architecture/import-boundaries.md`](docs/architecture/import-boundaries.md)
 - Angular WebMCP: https://angular.dev/ai/webmcp

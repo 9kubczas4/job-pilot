@@ -7,11 +7,13 @@ import { GET_JOB_WEBMCP_TOOL } from './tools/get-job/get-job.tool';
 import { SAVED_JOBS_WEBMCP_TOOLS } from './tools/saved-jobs/saved-jobs.tool';
 import { SEARCH_JOBS_WEBMCP_TOOL } from './tools/search-jobs/search-jobs.tool';
 import { HIGHLIGHT_JOB_WEBMCP_TOOL } from './tools/highlight-job/highlight-job.tool';
+import { COMPARE_OFFERS_WEBMCP_TOOL } from './tools/compare-offers/compare-offers.tool';
 
 const tools: readonly ZodWebMcpTool[] = [
   SEARCH_JOBS_WEBMCP_TOOL,
   FILTER_JOBS_WEBMCP_TOOL,
   HIGHLIGHT_JOB_WEBMCP_TOOL,
+  COMPARE_OFFERS_WEBMCP_TOOL,
   GET_JOB_WEBMCP_TOOL,
   APPLY_JOB_WEBMCP_TOOL,
   ...SAVED_JOBS_WEBMCP_TOOLS,
@@ -42,6 +44,30 @@ describe('jobs WebMCP contracts', () => {
     [SEARCH_JOBS_WEBMCP_TOOL, { radiusKm: 50 }],
     [FILTER_JOBS_WEBMCP_TOOL, { salaryMin: -1 }],
     [HIGHLIGHT_JOB_WEBMCP_TOOL, { jobId: '   ' }],
+    [
+      COMPARE_OFFERS_WEBMCP_TOOL,
+      { summary: 'Too few offers', offers: [{ jobId: 'job-001' }] },
+    ],
+    [
+      COMPARE_OFFERS_WEBMCP_TOOL,
+      {
+        summary: 'Duplicate ids',
+        offers: [
+          { jobId: 'job-001' },
+          { jobId: 'job-001' },
+        ],
+      },
+    ],
+    [
+      COMPARE_OFFERS_WEBMCP_TOOL,
+      {
+        summary: 'Too many highlights',
+        offers: [
+          { jobId: 'job-001', highlighted: true },
+          { jobId: 'job-002', highlighted: true },
+        ],
+      },
+    ],
     [SAVED_JOBS_WEBMCP_TOOLS[0], { unexpected: true }],
     [SAVED_JOBS_WEBMCP_TOOLS[1], { jobId: '   ' }],
   ])('rejects invalid arguments before executing %s', async (tool, input) => {

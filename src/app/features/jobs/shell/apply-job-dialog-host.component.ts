@@ -30,7 +30,7 @@ export class ApplyJobDialogHostComponent {
     this.store.dismiss();
   }
 
-  async onConfirm(note?: string): Promise<void> {
+  async onConfirm(note: string): Promise<void> {
     const jobTitle = this.store.presentation()?.jobTitle;
 
     try {

@@ -30,7 +30,7 @@ export class JobApplicationsStore {
     return this.appliedJobIds().includes(jobId);
   }
 
-  async applyToJob(jobId: string, note?: string): Promise<JobApplication> {
+  async applyToJob(jobId: string, note: string): Promise<JobApplication> {
     const userId = this.auth.requireUserId();
     const application = await this.repository.applyToJob(userId, jobId, note);
     this.appliedJobIds.update((ids) => (ids.includes(jobId) ? ids : [...ids, jobId]));

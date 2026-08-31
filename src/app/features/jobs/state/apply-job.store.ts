@@ -58,19 +58,21 @@ export class ApplyJobStore {
     }
   }
 
-  async submit(note?: string): Promise<JobApplication> {
+  async submit(note: string): Promise<JobApplication> {
     const presentation = this.presentationState();
     if (!presentation || this.submittingState()) {
       throw new Error('No apply dialog is open.');
     }
 
+    const trimmedNote = note.trim();
+    if (!trimmedNote) {
+      throw new Error('Application message is required.');
+    }
+
     this.submittingState.set(true);
 
     try {
-      const application = await this.applicationsStore.applyToJob(
-        presentation.jobId,
-        note?.trim() || undefined,
-      );
+      const application = await this.applicationsStore.applyToJob(presentation.jobId, trimmedNote);
       this.dismiss();
       return application;
     } finally {

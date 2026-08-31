@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   effect,
   ElementRef,
   input,
@@ -26,9 +27,10 @@ export class ApplyJobDialogComponent {
   readonly submitting = input(false);
 
   readonly closed = output<void>();
-  readonly confirmed = output<string | undefined>();
+  readonly confirmed = output<string>();
 
   readonly note = signal('');
+  readonly canSubmit = computed(() => this.note().trim().length > 0);
 
   private readonly dialogRef = viewChild<ElementRef<HTMLElement>>('dialog');
   private previouslyFocused: HTMLElement | null = null;
@@ -68,12 +70,11 @@ export class ApplyJobDialogComponent {
   }
 
   onConfirm(): void {
-    if (this.submitting()) {
+    if (this.submitting() || !this.canSubmit()) {
       return;
     }
 
-    const value = this.note().trim();
-    this.confirmed.emit(value || undefined);
+    this.confirmed.emit(this.note().trim());
   }
 
   private onOpen(): void {

@@ -236,7 +236,7 @@
     },
     {
       "name": "apply_job",
-      "description": "Open a job application dialog with an optional message. Use this tool instead of interacting with the page UI or DOM. Requires sign-in and a chosen job. The user must review and submit; this tool never submits.",
+      "description": "Open a job application dialog with a required message. Use this tool instead of interacting with the page UI or DOM. Requires sign-in and a chosen job. The user must review and submit; this tool never submits.",
       "inputSchema": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "type": "object",
@@ -249,11 +249,12 @@
           },
           "note": {
             "type": "string",
+            "minLength": 1,
             "maxLength": 2000,
-            "description": "Optional message pre-filled in the apply dialog for the user to review before submitting. Maximum 2,000 characters; omit when no note is needed."
+            "description": "Message pre-filled in the apply dialog for the user to review before submitting. Required; maximum 2,000 characters."
           }
         },
-        "required": ["jobId"],
+        "required": ["jobId", "note"],
         "additionalProperties": false
       }
     },

@@ -5,8 +5,8 @@ export const APPLY_JOB_INPUT_SCHEMA = z.strictObject({
     description:
       'The unique job identifier returned by search_jobs or get_jobs (for example, job-001).',
   }),
-  note: z.string().trim().max(2000).optional().meta({
+  note: z.string().trim().min(1).max(2000).meta({
     description:
-      'Optional message pre-filled in the apply dialog for the user to review before submitting. Maximum 2,000 characters; omit when no note is needed.',
+      'Message pre-filled in the apply dialog for the user to review before submitting. Required; maximum 2,000 characters.',
   }),
 });

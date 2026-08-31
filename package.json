@@ -16,6 +16,7 @@
     "eval:webmcp:local": "webmcp-evals local --tools webmcp-evals/tools.json --evals webmcp-evals/tool-selection.evals.json --backend vercel --model google:gemini-3.7-flash",
     "eval:webmcp:browser": "webmcp-evals browser --url http://localhost:4200 --evals webmcp-evals/public-journeys.evals.json --backend vercel --model google:gemini-3.7-flash",
     "eval:webmcp:smoke": "webmcp-evals smoke --url http://localhost:4200 --evals webmcp-evals/public-journeys.evals.json --verbose",
+    "measure:webmcp": "node scripts/measure-webmcp-baseline.mjs",
     "serve:ssr:job-pilot": "node dist/job-pilot/server/server.mjs"
   },
   "private": true,

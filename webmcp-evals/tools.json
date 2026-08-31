@@ -90,7 +90,7 @@
     },
     {
       "name": "highlight_job",
-      "description": "Highlight a job in the current /jobs results. Use this tool instead of interacting with the page UI or DOM. Focuses its map marker and opens its preview without changing filters. Requires a visible jobId.",
+      "description": "Highlight a specific job offer in the current results whenever the user refers to, selects, asks about, or wants to focus on that offer. Focuses its map marker and opens its preview without changing filters. Requires a visible job ID.",
       "inputSchema": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "type": "object",

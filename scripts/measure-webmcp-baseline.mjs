@@ -29,6 +29,7 @@ const report = {
     medianJobBytes: percentile(jobPayloadBytes, 0.5),
     maximumJobBytes: jobPayloadBytes.at(-1) ?? 0,
     estimatedFiveJobBatchBytes: Math.round(average(jobPayloadBytes) * 5),
+    estimatedMaximumBatchBytes: Math.round(average(jobPayloadBytes) * 20),
   },
   publicJourneys: {
     journeyCount: journeys.length,

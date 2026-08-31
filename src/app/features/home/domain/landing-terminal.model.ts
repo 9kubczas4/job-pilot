@@ -56,7 +56,7 @@ export const LANDING_TERMINAL_SCRIPT: readonly LandingTerminalLine[] = [
   {
     kind: 'muted',
     prefix: '#',
-    text: '/profile - update_profile available here only',
+    text: 'update_profile available globally',
   },
 ];
 

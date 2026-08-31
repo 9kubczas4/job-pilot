@@ -12,7 +12,7 @@ import { APPLY_JOB_INPUT_SCHEMA } from './apply-job.schema';
 export const APPLY_JOB_WEBMCP_TOOL = defineZodWebMcpTool({
   name: 'apply_job',
   description:
-    'Open the job application dialog with an optional pre-filled message. Use this tool instead of interacting with the page UI or DOM. The user must review the message and click Submit — this tool does not submit the application automatically. Call it only after the user has clearly chosen a job. Requires sign-in. If the user already applied, returns the existing application without opening the dialog. Returns success, dialogOpened, job details, and prefilledNote.',
+    'Open a job application dialog with an optional message. Use this tool instead of interacting with the page UI or DOM. Requires sign-in and a chosen job. The user must review and submit; this tool never submits.',
   inputSchema: APPLY_JOB_INPUT_SCHEMA,
   execute: async ({ jobId, note }) => {
     const auth = inject(AuthService);

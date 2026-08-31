@@ -114,6 +114,11 @@ export class HomePageComponent {
       description:
         'Read headline, experience, skills, and preferences for the signed-in user from any page.',
     },
+    {
+      name: 'update_profile',
+      scope: 'global',
+      description: 'Update validated profile fields from any page.',
+    },
   ];
 
   readonly routeTools: LandingTool[] = [
@@ -123,13 +128,6 @@ export class HomePageComponent {
       route: '/jobs',
       description:
         'Focus one job from the current search results on the map - marker, popover, and AI highlight animation.',
-    },
-    {
-      name: 'update_profile',
-      scope: 'route',
-      route: '/profile',
-      description:
-        'Update profile fields with validation (Signal Form implicit tool). Only available on the profile route.',
     },
   ];
 

@@ -47,7 +47,7 @@ The agent runs in **Codex** (ChatGPT desktop in-app browser). The app exposes to
 | `apply_job` | Global (`app.config.ts`) | `features/jobs/webmcp/tools/apply-job/apply-job.tool.ts` |
 | `get_profile` | Global (`app.config.ts`) | `features/profile/webmcp/profile.tools.ts` |
 | `highlight_job` | Route `/jobs` | `features/jobs/webmcp/tools/highlight-job/highlight-job.tool.ts` |
-| `update_profile` | Route `/profile` | `features/profile/webmcp/profile.tools.ts` (Signal Form implicit tool) |
+| `update_profile` | Global (`app.config.ts`) | `features/profile/webmcp/profile.tools.ts` |
 
 Full catalog: [`docs/specs/webmcp-tools.md`](../specs/webmcp-tools.md).
 
@@ -79,7 +79,7 @@ Full catalog: [`docs/specs/webmcp-tools.md`](../specs/webmcp-tools.md).
 ### Hero demo flow
 
 1. Job board looks like a real product
-2. Codex: complete profile from CV → `update_profile` on `/profile`
+2. Codex: complete profile from CV → `update_profile`
 3. Codex: *"Find lead frontend jobs, remote/hybrid Warsaw, 25k+"* → `search_jobs` → **UI reacts live**
 4. Codex: compare top picks → `compare_offers` → **recommendation drawer opens**
 5. Codex: *"Show the best one on the map"* → `highlight_job` on `/jobs`

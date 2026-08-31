@@ -30,20 +30,20 @@ The agent never receives a `userId` in tool payloads. Identity comes from Fireba
 
 ## WebMCP Tools
 
-Ten tools total: **8 global** + **2 route-scoped**. Full catalog: [`docs/specs/webmcp-tools.md`](docs/specs/webmcp-tools.md).
+Ten tools total: **9 global** + **1 route-scoped**. Full catalog: [`docs/specs/webmcp-tools.md`](docs/specs/webmcp-tools.md).
 
 | Tool | Scope | Purpose |
 |------|-------|---------|
 | `search_jobs` | global | Replace the complete search state and update `/jobs` once |
-| `get_jobs` | global | Read one to five job offers by id |
+| `get_jobs` | global | Read one to twenty job offers by id |
 | `compare_offers` | global | Open a comparison drawer (2–5 offers) with badges, notes, and optional highlighted pick |
 | `get_saved_jobs` | global | Read the signed-in user's saved shortlist |
 | `save_job` | global | Add a job to favourites (idempotent) |
 | `unsave_job` | global | Remove a job from favourites (idempotent) |
 | `apply_job` | global | Open the apply dialog with an optional pre-filled message; user submits manually |
 | `get_profile` | global | Read candidate profile (headline, experience, skills, preferences) |
+| `update_profile` | global | Update candidate profile fields |
 | `highlight_job` | `/jobs` | Focus one job from current search results on the map (marker, popover, AI animation) |
-| `update_profile` | `/profile` | Update candidate profile (Signal Form implicit tool) |
 
 Global tools register in `app.config.ts`. Route-scoped tools register as route `providers` in `app.routes.ts`.
 

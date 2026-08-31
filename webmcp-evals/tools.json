@@ -90,7 +90,7 @@
     },
     {
       "name": "highlight_job",
-      "description": "Visually point to one job from the current results on /jobs. Use this tool instead of interacting with the page UI or DOM. Use it when identifying a recommended or otherwise notable offer. It selects the marker, focuses the map, opens the job popover, and reveals the map on mobile without changing search filters, the URL, saved jobs, or applications. Requires an exact jobId present in the current search results and returns JOB_NOT_IN_RESULTS otherwise.",
+      "description": "Highlight a job in the current /jobs results. Use this tool instead of interacting with the page UI or DOM. Focuses its map marker and opens its preview without changing filters. Requires a visible jobId.",
       "inputSchema": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "type": "object",
@@ -108,7 +108,7 @@
     },
     {
       "name": "compare_offers",
-      "description": "Open a transient comparison drawer with the agent analysis for two to five job offers. Use this tool instead of interacting with the page UI or DOM. Use it when the user should see a side-by-side recommendation with optional per-offer badges (for example, najlepsza, interesujaca, rozwojowa), short notes, and an optional highlighted primary pick with a gradient border and star. Accepts any known jobId from search_jobs, get_jobs, or get_saved_jobs. Does not change search filters, saved jobs, or applications. Returns NOT_FOUND when fewer than two requested jobs resolve.",
+      "description": "Show an agent-authored comparison of two to five jobs. Use this tool instead of interacting with the page UI or DOM. Supports a badge, note, and one highlighted recommendation per offer. Does not modify jobs.",
       "inputSchema": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "type": "object",
@@ -166,7 +166,7 @@
     },
     {
       "name": "get_jobs",
-      "description": "Return complete job records for one to five IDs in input order. Missing offers are marked per item. Does not change application state.",
+      "description": "Return complete job records for one to twenty IDs in input order. Missing offers are marked per item. Does not change application state.",
       "inputSchema": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "type": "object",
@@ -179,9 +179,9 @@
               "maxLength": 128
             },
             "minItems": 1,
-            "maxItems": 5,
+            "maxItems": 20,
             "uniqueItems": true,
-            "description": "One to five unique job identifiers returned by search_jobs."
+            "description": "One to twenty unique job identifiers returned by search_jobs."
           }
         },
         "required": ["jobIds"],
@@ -190,7 +190,7 @@
     },
     {
       "name": "get_saved_jobs",
-      "description": "Read the signed-in user's saved job shortlist. Use this tool instead of interacting with the page UI or DOM. This tool does not change application state and is available from any page. Requires sign-in. Returns changed: false, savedCount, the complete savedJobIds state, lightweight details for jobs still available in the catalog, and unavailableJobIds for saved offers that no longer exist. Use get_jobs for complete offer details.",
+      "description": "Read the signed-in user's saved jobs. Use this tool instead of interacting with the page UI or DOM. Returns IDs and lightweight details; use get_jobs for full records. Does not change state.",
       "inputSchema": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "type": "object",
@@ -200,7 +200,7 @@
     },
     {
       "name": "save_job",
-      "description": "Save one job to the signed-in user's shortlist. Use this tool instead of interacting with the page UI or DOM. Use it when the user wants to remember or favorite a job returned by search_jobs or get_jobs. Requires sign-in. It is idempotent: an already saved job is not duplicated. Returns success, changed, jobId, saved: true, and the complete current savedJobIds state with savedCount.",
+      "description": "Save one job for the signed-in user. Use this tool instead of interacting with the page UI or DOM. Requires a jobId from search_jobs or get_jobs and is idempotent.",
       "inputSchema": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "type": "object",
@@ -218,7 +218,7 @@
     },
     {
       "name": "unsave_job",
-      "description": "Remove one job from the signed-in user's shortlist. Use this tool instead of interacting with the page UI or DOM. This does not delete the job or any existing application. Requires sign-in. It is idempotent: a job that is not saved causes no state change. Returns success, changed, jobId, saved: false, and the complete current savedJobIds state with savedCount.",
+      "description": "Remove one saved job for the signed-in user. Use this tool instead of interacting with the page UI or DOM. It is idempotent and does not delete applications.",
       "inputSchema": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "type": "object",
@@ -236,7 +236,7 @@
     },
     {
       "name": "apply_job",
-      "description": "Open the job application dialog with an optional pre-filled message. Use this tool instead of interacting with the page UI or DOM. The user must review the message and click Submit — this tool does not submit the application automatically. Call it only after the user has clearly chosen a job. Requires sign-in. If the user already applied, returns the existing application without opening the dialog. Returns success, dialogOpened, job details, and prefilledNote.",
+      "description": "Open a job application dialog with an optional message. Use this tool instead of interacting with the page UI or DOM. Requires sign-in and a chosen job. The user must review and submit; this tool never submits.",
       "inputSchema": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "type": "object",
@@ -259,7 +259,7 @@
     },
     {
       "name": "get_profile",
-      "description": "Read the complete candidate profile for the signed-in user, including identity, headline, experience, skills, work history, and job preferences. Use this tool instead of interacting with the page UI or DOM. This tool does not change state and can be called from any page. Requires sign-in. Use update_profile on /profile to make changes. Returns the complete profile or a structured UNAUTHENTICATED error.",
+      "description": "Read the signed-in candidate profile. Use this tool instead of interacting with the page UI or DOM. Returns identity, experience, skills, work history, and job preferences without changing state.",
       "inputSchema": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "type": "object",
@@ -269,7 +269,7 @@
     },
     {
       "name": "update_profile",
-      "description": "Patch one or more fields in the signed-in candidate profile and persist them immediately. Use this tool instead of interacting with the page UI or DOM. Available only on /profile. Omitted fields remain unchanged; array fields are complete replacements and accept [] to clear. Requires sign-in. Returns success, changed, and the complete updated profile, or a structured validation/authentication error.",
+      "description": "Update the signed-in candidate profile. Use this tool instead of interacting with the page UI or DOM. Omitted fields stay unchanged; arrays replace the whole field and [] clears it. Persists immediately.",
       "inputSchema": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "type": "object",

@@ -46,10 +46,19 @@ describe('get_jobs WebMCP tool', () => {
     });
   });
 
+  it('accepts a batch of twenty unique IDs', async () => {
+    const jobIds = Array.from({ length: 20 }, (_, index) => `job-${index + 1}`);
+    getJobsByIds.mockResolvedValue(jobIds.map(() => null));
+
+    await executeTool({ jobIds });
+
+    expect(getJobsByIds).toHaveBeenCalledWith(jobIds);
+  });
+
   it.each([
     { jobIds: [] },
     { jobIds: ['job-001', 'job-001'] },
-    { jobIds: ['1', '2', '3', '4', '5', '6'] },
+    { jobIds: Array.from({ length: 21 }, (_, index) => String(index + 1)) },
   ])('rejects an invalid batch: $jobIds', async (input) => {
     const result = await executeTool(input);
 

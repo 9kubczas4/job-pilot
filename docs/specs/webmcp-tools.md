@@ -4,29 +4,29 @@ Job Pilot exposes **10 WebMCP tools** for Codex. Global tools register in `app.c
 
 Tool descriptions are intentionally concise to reduce catalog overhead.
 
-## Global tools (8)
+## Global tools (9)
 
 Callable from any route.
 
 | Tool | Mutates state | Auth | Purpose |
 |------|---------------|------|---------|
 | `search_jobs` | Yes | No | Replace complete search criteria and navigate to `/jobs` once |
-| `get_jobs` | No | No | Read up to five full job offers by `jobIds` |
+| `get_jobs` | No | No | Read up to twenty full job offers by `jobIds` |
 | `compare_offers` | Yes (UI) | No | Open a transient drawer comparing 2–5 offers with badges, notes, and optional highlighted pick |
 | `get_saved_jobs` | No | Yes | Read the signed-in user's saved shortlist |
 | `save_job` | Yes | Yes | Add a job to favourites (idempotent) |
 | `unsave_job` | Yes | Yes | Remove a job from favourites (idempotent) |
 | `apply_job` | Yes | Yes | Open the apply dialog with an optional pre-filled message; user submits manually |
 | `get_profile` | No | Yes | Read the signed-in candidate profile |
+| `update_profile` | Yes | Yes | Patch candidate profile fields |
 
-## Route-scoped tools (2)
+## Route-scoped tools (1)
 
 Registered only while the matching route is active.
 
 | Tool | Route | Mutates state | Auth | Purpose |
 |------|-------|---------------|------|---------|
 | `highlight_job` | `/jobs` | Yes (UI) | No | Focus one job from **current search results** on the map — marker, popover, AI animation |
-| `update_profile` | `/profile` | Yes | Yes | Patch candidate profile fields (Signal Form implicit tool) |
 
 ## Typical agent flows
 
@@ -50,7 +50,7 @@ Registered only while the matching route is active.
 ### Profile
 
 1. Navigate to `/profile`
-2. `get_profile` (any route) or `update_profile` (on `/profile` only)
+2. `get_profile` or `update_profile` from any route
 
 ## Specs
 

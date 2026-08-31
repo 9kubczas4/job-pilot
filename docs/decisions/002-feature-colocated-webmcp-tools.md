@@ -24,7 +24,7 @@ Colocate WebMCP tools inside each feature at `features/{name}/webmcp/`:
 | `get_saved_jobs`, `save_job`, `unsave_job` | `features/jobs/webmcp/tools/saved-jobs/saved-jobs.tool.ts` | `app.config.ts` (global) |
 | `apply_job` | `features/jobs/webmcp/tools/apply-job/apply-job.tool.ts` | `app.config.ts` (global) |
 | `highlight_job` | `features/jobs/webmcp/tools/highlight-job/highlight-job.tool.ts` | Route provider on `/jobs` search |
-| `get_profile`, `update_profile` | `features/profile/webmcp/profile.tools.ts` | Global / route `/profile` |
+| `get_profile`, `update_profile` | `features/profile/webmcp/profile.tools.ts` | `app.config.ts` (global) |
 
 Shared response helpers (`toolJson`, `toolText`) live in `core/infrastructure/webmcp/tool-response.ts`.
 

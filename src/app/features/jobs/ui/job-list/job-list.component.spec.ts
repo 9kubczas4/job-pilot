@@ -31,7 +31,9 @@ describe('JobListComponent', () => {
     const fixture = TestBed.createComponent(JobListComponent);
     fixture.componentRef.setInput('jobs', []);
     fixture.componentRef.setInput('loading', true);
-    await fixture.whenStable();
+    fixture.detectChanges();
+    await new Promise<void>((resolve) => setTimeout(resolve, 0));
+    fixture.detectChanges();
 
     expect(fixture.nativeElement.querySelector('cdk-virtual-scroll-viewport')).toBeTruthy();
     expect(fixture.nativeElement.querySelectorAll('app-job-card-skeleton').length).toBeGreaterThan(1);
@@ -41,7 +43,9 @@ describe('JobListComponent', () => {
   it('renders job results through a fixed-size CDK virtual viewport', async () => {
     const fixture = TestBed.createComponent(JobListComponent);
     fixture.componentRef.setInput('jobs', JOBS);
-    await fixture.whenStable();
+    fixture.detectChanges();
+    await new Promise<void>((resolve) => setTimeout(resolve, 0));
+    fixture.detectChanges();
 
     const viewport = fixture.nativeElement.querySelector('cdk-virtual-scroll-viewport');
 

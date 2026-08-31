@@ -11,8 +11,7 @@ describe('JobHeaderFiltersComponent', () => {
     const fixture = TestBed.createComponent(JobHeaderFiltersComponent);
     fixture.componentRef.setInput('enabled', true);
     fixture.componentRef.setInput('aiUpdateActive', true);
-
-    await fixture.whenStable();
+    fixture.detectChanges();
 
     const button = fixture.nativeElement.querySelector('.header-action') as HTMLButtonElement;
     expect(button.classList.contains('header-action--ai-updating')).toBe(true);

@@ -90,5 +90,28 @@ export function setMediaQueryMatches(media: string, matches: boolean): void {
   getEntry(media).setMatches(matches);
 }
 
+class ResizeObserverMock implements ResizeObserver {
+  observe(): void {
+    return;
+  }
+
+  unobserve(): void {
+    return;
+  }
+
+  disconnect(): void {
+    return;
+  }
+}
+
+export function installResizeObserverMock(): void {
+  Object.defineProperty(globalThis, 'ResizeObserver', {
+    configurable: true,
+    writable: true,
+    value: ResizeObserverMock,
+  });
+}
+
 installMatchMediaMock();
+installResizeObserverMock();
 beforeEach(resetMatchMediaMock);

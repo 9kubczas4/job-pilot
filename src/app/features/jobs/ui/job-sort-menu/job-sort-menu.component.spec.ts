@@ -12,8 +12,7 @@ describe('JobSortMenuComponent', () => {
     fixture.componentRef.setInput('options', [{ value: 'newest', label: 'Newest' }]);
     fixture.componentRef.setInput('value', 'newest');
     fixture.componentRef.setInput('aiUpdateActive', true);
-
-    await fixture.whenStable();
+    fixture.detectChanges();
 
     const button = fixture.nativeElement.querySelector('.sort-menu__trigger') as HTMLButtonElement;
     expect(button.classList.contains('sort-menu__trigger--ai-updating')).toBe(true);

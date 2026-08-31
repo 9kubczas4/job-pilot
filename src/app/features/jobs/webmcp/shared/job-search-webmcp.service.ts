@@ -1,7 +1,12 @@
 import { inject, Injectable } from '@angular/core';
 import { AppLinks } from '@core/app-paths';
+import { haversineDistanceKm } from '@features/jobs/domain/geo.utils';
 import { DEFAULT_SEARCH_RADIUS_KM } from '@features/jobs/domain/header-search.model';
-import { JobSearchToolResult } from './job-search-tool-result.model';
+import { JobOffer } from '@features/jobs/domain/job.model';
+import {
+  JobSearchResultSummary,
+  JobSearchToolResult,
+} from './job-search-tool-result.model';
 import { HeaderSearchPageSupport } from '@features/jobs/state/header-search-page.support';
 import { JobSearchAiActivity } from '@features/jobs/state/header-ui.store';
 import { buildCityCentersFromJobs, resolveCityCenter } from '@features/jobs/domain/city-catalog';
@@ -102,12 +107,16 @@ export class JobSearchWebMcpService {
     this.enrichStoredLocationIfNeeded();
     await this.headerSearch.submitCriteria(this.store.criteria(), AppLinks.jobs);
 
+    const criteria = this.store.criteria();
+    const jobs = this.store.jobs().slice(0, 10);
+
     return {
       success: true,
       changed: changed(),
-      criteria: this.store.criteria(),
+      criteria,
       resultCount: this.store.jobs().length,
-      jobIds: this.store.jobs().slice(0, 10).map((job) => job.id),
+      jobIds: jobs.map((job) => job.id),
+      results: jobs.map((job) => toJobSearchResultSummary(job, criteria)),
     };
   }
 
@@ -129,6 +138,43 @@ export class JobSearchWebMcpService {
       radiusKm: enriched.radiusKm,
     });
   }
+}
+
+function toJobSearchResultSummary(
+  job: JobOffer,
+  criteria: JobSearchCriteria,
+): JobSearchResultSummary {
+  const distanceKm = jobDistanceKm(job, criteria);
+
+  return {
+    id: job.id,
+    title: job.title,
+    company: job.company.name,
+    ...(job.location ? { location: job.location.city } : {}),
+    ...(distanceKm == null ? {} : { distanceKm }),
+    workplace: job.workplace,
+    ...(job.salary ? { salary: { ...job.salary } } : {}),
+    seniority: [...job.seniority],
+    skills: job.competencies.map((competency) => competency.name),
+  };
+}
+
+function jobDistanceKm(job: JobOffer, criteria: JobSearchCriteria): number | undefined {
+  if (
+    criteria.locationLat == null ||
+    criteria.locationLng == null ||
+    !job.location
+  ) {
+    return undefined;
+  }
+
+  const distance = haversineDistanceKm(
+    criteria.locationLat,
+    criteria.locationLng,
+    job.location.latitude,
+    job.location.longitude,
+  );
+  return Math.round(distance * 10) / 10;
 }
 
 function changedSearchControls(

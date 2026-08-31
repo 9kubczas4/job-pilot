@@ -18,6 +18,7 @@ const WARSAW_JOB: JobOffer = {
   description: 'Angular role in Warsaw.',
   seniority: ['senior'],
   competencies: [{ name: 'Angular', level: 5 }],
+  salary: { min: 12000, max: 17000, currency: 'USD', period: 'month' },
   workSchedules: ['full-time'],
   contractTypes: ['b2b'],
   workplace: 'remote',
@@ -83,6 +84,47 @@ describe('JobSearchWebMcpService', () => {
     expect(headerUi.radiusToolActive()).toBe(true);
     expect(headerUi.filterToolActive()).toBe(false);
     expect(headerUi.sortToolActive()).toBe(false);
+  });
+
+  it('returns lightweight job summaries alongside ids from search_jobs', async () => {
+    const result = await service.applySearchCriteria({
+      query: 'Frontend',
+      locations: ['Warsaw'],
+      radiusKm: 25,
+    });
+
+    expect(result.jobIds).toEqual(['job-001']);
+    expect(result.results).toEqual([
+      {
+        id: 'job-001',
+        title: 'Frontend Developer',
+        company: 'Acme',
+        location: 'Warsaw',
+        distanceKm: 0,
+        workplace: 'remote',
+        salary: { min: 12000, max: 17000, currency: 'USD', period: 'month' },
+        seniority: ['senior'],
+        skills: ['Angular'],
+      },
+    ]);
+  });
+
+  it('returns the same lightweight job summaries from filter_jobs', async () => {
+    const result = await service.applyFilterCriteria({ workplace: ['remote'] });
+
+    expect(result.jobIds).toEqual(['job-001']);
+    expect(result.results).toEqual([
+      {
+        id: 'job-001',
+        title: 'Frontend Developer',
+        company: 'Acme',
+        location: 'Warsaw',
+        workplace: 'remote',
+        salary: { min: 12000, max: 17000, currency: 'USD', period: 'month' },
+        seniority: ['senior'],
+        skills: ['Angular'],
+      },
+    ]);
   });
 
   it('submits filters and preserved search fields through the UI trigger from home', async () => {

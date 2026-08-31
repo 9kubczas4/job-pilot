@@ -1,3 +1,4 @@
+import { NgZone } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { describe, expect, it, vi } from 'vitest';
 import { z } from 'zod';
@@ -54,6 +55,21 @@ describe('defineZodWebMcpTool', () => {
       { jobId: 'job-001' },
       expect.objectContaining({ signal: expect.any(AbortSignal) }),
     );
+  });
+
+  it('runs tool implementations through Angular\'s zone so UI state changes render', async () => {
+    const zoneAwareTool = defineZodWebMcpTool({
+      name: 'zone_aware_tool',
+      description: 'Checks the execution context.',
+      inputSchema: z.strictObject({}),
+      execute: () => ({ success: true }),
+    });
+    const run = vi.spyOn(TestBed.inject(NgZone), 'run');
+
+    const result = await executeTool(zoneAwareTool, {});
+
+    expect(result).toEqual({ success: true });
+    expect(run).toHaveBeenCalledOnce();
   });
 
   it('announces tool activation through the global toast service', async () => {

@@ -6,7 +6,10 @@ Open source under the [MIT License](LICENSE).
 
 A modern job board for humans and AI agents, built for the [OpenAI WebMCP Challenge](https://webmcp.devpost.com/).
 
-Job Pilot combines a browsing experience with [Angular 22 experimental WebMCP support](https://angular.dev/ai/webmcp). Humans browse, filter, and inspect jobs in the browser. Codex completes profiles, searches offers, saves jobs, and applies - all through tools that operate on the same domain model as the UI.
+- [Live demo](https://job-pilot-1e4ee.web.app/)
+- [Demo video](https://www.youtube.com/watch?v=3udl7qP6Vrk)
+
+Job Pilot combines a browsing experience with [Angular 22 experimental WebMCP support](https://angular.dev/ai/webmcp). Humans browse, filter, and inspect jobs in the browser. Codex completes profiles, searches and compares offers, saves jobs, and prepares applications for the user's review - all through tools that operate on the same domain model as the UI.
 
 ## Why WebMCP
 
@@ -17,7 +20,7 @@ Traditional agents interact with web apps through DOM automation. Job Pilot expo
 - update filters, list, and map in real time
 - compare offers in a recommendation drawer with badges and a highlighted pick
 - focus a job on the map from current search results
-- save and apply to jobs for the authenticated user (apply opens a confirmation dialog)
+- save jobs and prepare applications for the authenticated user (the user reviews and submits manually)
 
 The agent never receives a `userId` in tool payloads. Identity comes from Firebase Auth in the app.
 
@@ -40,7 +43,7 @@ Ten tools total: **9 global** + **1 route-scoped**. Full catalog: [`docs/specs/w
 | `get_saved_jobs` | global | Read the signed-in user's saved shortlist |
 | `save_job` | global | Add a job to favourites (idempotent) |
 | `unsave_job` | global | Remove a job from favourites (idempotent) |
-| `apply_job` | global | Open the apply dialog with an optional pre-filled message; user submits manually |
+| `apply_job` | global | Open the apply dialog with a required pre-filled message; user reviews and submits manually |
 | `get_profile` | global | Read candidate profile (headline, experience, skills, preferences) |
 | `update_profile` | global | Update candidate profile fields |
 | `highlight_job` | `/jobs` | Focus one job from current search results on the map (marker, popover, AI animation) |
@@ -145,18 +148,20 @@ Deploy the `dist/job-pilot/browser` output.
 2. Open the app in that browser.
 3. Sign in with Google for profile, saved jobs, and applications.
 4. In Codex, try:
-   - "Help me complete my profile based on this CV…" (navigate to `/profile` first for edits)
+   - Paste a CV or LinkedIn summary into Codex and ask: "Help me map this information into my candidate profile." (navigate to `/profile` first for edits)
    - "Find lead frontend jobs, remote or hybrid in New York, minimum $8k USD."
    - "Compare these three offers and show me your recommendation on the page."
    - "Highlight the best match on the map." (on `/jobs` with current results)
-   - "Save this job and apply to the Frontend Tech Lead role."
+   - "Save this job and prepare an application for the Frontend Tech Lead role."
 
 Expected result: profile updates appear in `/profile`, search updates filters/list/map on `/jobs`, `compare_offers` opens the recommendation drawer, `highlight_job` focuses the map, and job cards show Saved/Applied state.
 
 ## Demo Video Script (<3 min)
 
+[Watch the Job Pilot WebMCP demo on YouTube](https://www.youtube.com/watch?v=3udl7qP6Vrk).
+
 1. Show the job board UI (list + map)
-2. Complete profile from CV via Codex
+2. Paste a CV into Codex and map it into the candidate profile
 3. Run natural-language job search and show live UI reaction
 4. Compare offers with `compare_offers` and highlight the pick on the map with `highlight_job`
 5. Save and apply to a job

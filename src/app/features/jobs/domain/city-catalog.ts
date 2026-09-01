@@ -15,6 +15,27 @@ function normalizeCityQuery(value: string): string {
     .toLowerCase();
 }
 
+/** Keep only the city segment when users paste values like "Boston, United States". */
+export function parseCitySearchQuery(query: string): string {
+  const trimmed = query.trim();
+  if (!trimmed) {
+    return '';
+  }
+
+  const [cityPart] = trimmed.split(',');
+  return cityPart.trim();
+}
+
+function matchesCityName(cityName: string, query: string): boolean {
+  const normalizedQuery = normalizeCityQuery(parseCitySearchQuery(query));
+  if (!normalizedQuery) {
+    return true;
+  }
+
+  const normalizedCity = normalizeCityQuery(cityName);
+  return normalizedCity === normalizedQuery || normalizedCity.startsWith(normalizedQuery);
+}
+
 export function buildCityCentersFromJobs(jobs: JobOffer[]): CityCenter[] {
   const grouped = new Map<string, { country: string; latSum: number; lngSum: number; count: number }>();
 
@@ -49,17 +70,24 @@ export function buildCityCentersFromJobs(jobs: JobOffer[]): CityCenter[] {
 }
 
 export function resolveCityCenter(catalog: CityCenter[], query: string): CityCenter | null {
-  const normalized = normalizeCityQuery(query.trim());
+  const normalized = normalizeCityQuery(parseCitySearchQuery(query));
   if (!normalized || !catalog.length) {
     return null;
   }
 
-  return (
-    catalog.find((entry) => {
-      const city = normalizeCityQuery(entry.city);
-      return city === normalized || city.startsWith(normalized);
-    }) ?? null
-  );
+  const matches = catalog.filter((entry) => matchesCityName(entry.city, query));
+  if (!matches.length) {
+    return null;
+  }
+
+  const exact = matches.find((entry) => normalizeCityQuery(entry.city) === normalized);
+  if (exact) {
+    return exact;
+  }
+
+  return [...matches].sort(
+    (a, b) => b.jobCount - a.jobCount || a.city.localeCompare(b.city),
+  )[0];
 }
 
 export function buildLocationSuggestions(
@@ -67,7 +95,7 @@ export function buildLocationSuggestions(
   query: string,
   limit = 6,
 ): CityCenter[] {
-  const normalized = normalizeCityQuery(query.trim());
+  const normalized = normalizeCityQuery(parseCitySearchQuery(query));
   const sorted = [...catalog].sort(
     (a, b) => b.jobCount - a.jobCount || a.city.localeCompare(b.city),
   );
@@ -76,7 +104,5 @@ export function buildLocationSuggestions(
     return sorted.slice(0, limit);
   }
 
-  return sorted
-    .filter((entry) => normalizeCityQuery(entry.city).includes(normalized))
-    .slice(0, limit);
+  return sorted.filter((entry) => matchesCityName(entry.city, query)).slice(0, limit);
 }

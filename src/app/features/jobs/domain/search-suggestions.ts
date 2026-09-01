@@ -66,7 +66,7 @@ export function buildLocationSearchSuggestions(
 ): LocationSearchSuggestion[] {
   return buildLocationSuggestions(catalog, query).map((city) => ({
     id: city.city,
-    label: `${city.city}, ${city.country}`,
+    label: city.city,
     city: city.city,
     latitude: city.latitude,
     longitude: city.longitude,

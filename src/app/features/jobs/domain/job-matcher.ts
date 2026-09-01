@@ -1,3 +1,4 @@
+import { parseCitySearchQuery } from './city-catalog';
 import { haversineDistanceMi } from './geo.utils';
 import { JobOffer } from './job.model';
 import { JobSearchCriteria } from './search.model';
@@ -61,7 +62,12 @@ export function matchesSearchCriteria(job: JobOffer, criteria: JobSearchCriteria
     }
   } else if (criteria.locations?.length) {
     const city = job.location?.city.toLowerCase() ?? '';
-    if (!criteria.locations.some((location) => city.includes(location.toLowerCase()))) {
+    if (
+      !criteria.locations.some((location) => {
+        const searchCity = parseCitySearchQuery(location).toLowerCase();
+        return searchCity && (city === searchCity || city.startsWith(searchCity));
+      })
+    ) {
       return false;
     }
   }

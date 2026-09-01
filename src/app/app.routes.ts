@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { RoutePaths } from '@core/app-paths';
-import { provideUpdateProfileWebMcpTool } from '@features/profile/webmcp/profile.tools';
 import { provideHighlightJobWebMcpTool } from '@features/jobs/webmcp/tools/highlight-job/highlight-job.tool';
 
 export const routes: Routes = [
@@ -45,7 +44,6 @@ export const routes: Routes = [
   },
   {
     path: RoutePaths.profile,
-    providers: [provideUpdateProfileWebMcpTool()],
     loadComponent: () =>
       import('@features/profile/pages/profile/profile.page').then((m) => m.ProfilePageComponent),
   },

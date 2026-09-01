@@ -129,10 +129,10 @@ export class JobFiltersComponent {
       chips.push({ key: 'query', label: criteria.query });
     }
     if (criteria.locations?.length) {
-      const radius = criteria.radiusKm;
+      const radius = criteria.radiusMi;
       const label =
         radius != null && criteria.locationLat != null
-          ? `${criteria.locations[0]} · ${radius} km`
+          ? `${criteria.locations[0]} · ${radius} mi`
           : criteria.locations[0];
       chips.push({ key: 'location', label });
     }

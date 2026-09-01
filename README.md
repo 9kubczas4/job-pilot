@@ -10,7 +10,7 @@ Job Pilot combines a browsing experience with [Angular 22 experimental WebMCP su
 
 ## Why WebMCP
 
-Traditional agents interact with web apps through DOM automation. Job Pilot exposes structured tools (`search_jobs`, `filter_jobs`, `compare_offers`, `highlight_job`, `apply_job`, and more) so Codex can:
+Traditional agents interact with web apps through DOM automation. Job Pilot exposes structured tools (`search_jobs`, `compare_offers`, `highlight_job`, `apply_job`, and more) so Codex can:
 
 - read and update the candidate profile
 - translate natural-language intent into `JobSearchCriteria`
@@ -30,21 +30,20 @@ The agent never receives a `userId` in tool payloads. Identity comes from Fireba
 
 ## WebMCP Tools
 
-Eleven tools total: **9 global** + **2 route-scoped**. Full catalog: [`docs/specs/webmcp-tools.md`](docs/specs/webmcp-tools.md).
+Ten tools total: **9 global** + **1 route-scoped**. Full catalog: [`docs/specs/webmcp-tools.md`](docs/specs/webmcp-tools.md).
 
 | Tool | Scope | Purpose |
 |------|-------|---------|
-| `search_jobs` | global | Replace text, location, and radius; preserve structured filters |
-| `filter_jobs` | global | Update structured filters and sort; preserve text/location (OR within arrays) |
-| `get_job` | global | Read a single job offer by id |
+| `search_jobs` | global | Replace the complete search state and update `/jobs` once |
+| `get_jobs` | global | Read one to twenty job offers by id |
 | `compare_offers` | global | Open a comparison drawer (2–5 offers) with badges, notes, and optional highlighted pick |
 | `get_saved_jobs` | global | Read the signed-in user's saved shortlist |
 | `save_job` | global | Add a job to favourites (idempotent) |
 | `unsave_job` | global | Remove a job from favourites (idempotent) |
 | `apply_job` | global | Open the apply dialog with an optional pre-filled message; user submits manually |
 | `get_profile` | global | Read candidate profile (headline, experience, skills, preferences) |
+| `update_profile` | global | Update candidate profile fields |
 | `highlight_job` | `/jobs` | Focus one job from current search results on the map (marker, popover, AI animation) |
-| `update_profile` | `/profile` | Update candidate profile (Signal Form implicit tool) |
 
 Global tools register in `app.config.ts`. Route-scoped tools register as route `providers` in `app.routes.ts`.
 
@@ -147,7 +146,7 @@ Deploy the `dist/job-pilot/browser` output.
 3. Sign in with Google for profile, saved jobs, and applications.
 4. In Codex, try:
    - "Help me complete my profile based on this CV…" (navigate to `/profile` first for edits)
-   - "Find lead frontend jobs, remote or hybrid in Warsaw, minimum $8k USD."
+   - "Find lead frontend jobs, remote or hybrid in New York, minimum $8k USD."
    - "Compare these three offers and show me your recommendation on the page."
    - "Highlight the best match on the map." (on `/jobs` with current results)
    - "Save this job and apply to the Frontend Tech Lead role."

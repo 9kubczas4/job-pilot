@@ -1,4 +1,4 @@
-import { DEFAULT_SEARCH_RADIUS_KM } from '../domain/header-search.model';
+import { DEFAULT_SEARCH_RADIUS_MI } from '../domain/header-search.model';
 import { normalizeContractType } from './contract-type.utils';
 import { JobSearchCriteria } from './search.model';
 import { ContractType } from './job.model';
@@ -18,8 +18,8 @@ export function criteriaToQueryParams(criteria: JobSearchCriteria): Record<strin
   if (criteria.locationLng != null) {
     params['lng'] = String(criteria.locationLng);
   }
-  if (criteria.radiusKm != null) {
-    params['radius'] = String(criteria.radiusKm);
+  if (criteria.radiusMi != null) {
+    params['radius'] = String(criteria.radiusMi);
   }
   if (criteria.workplace?.length) {
     params['workplace'] = criteria.workplace.join(',');
@@ -57,10 +57,10 @@ export function queryParamsToCriteria(params: Record<string, string | undefined>
     locations: splitParam(params['location']),
     locationLat: Number.isFinite(lat) ? lat : undefined,
     locationLng: Number.isFinite(lng) ? lng : undefined,
-    radiusKm: Number.isFinite(radius)
+    radiusMi: Number.isFinite(radius)
       ? radius
       : hasLocation
-        ? DEFAULT_SEARCH_RADIUS_KM
+        ? DEFAULT_SEARCH_RADIUS_MI
         : undefined,
     workplace: splitParam(params['workplace']) as JobSearchCriteria['workplace'],
     seniority: splitParam(params['seniority']) as JobSearchCriteria['seniority'],
@@ -74,17 +74,17 @@ export function queryParamsToCriteria(params: Record<string, string | undefined>
 
 export function normalizeLocationCriteria(
   locationQuery: string,
-  radiusKm: number,
+  radiusMi: number,
   lat?: number,
   lng?: number,
-): Pick<JobSearchCriteria, 'locations' | 'locationLat' | 'locationLng' | 'radiusKm'> {
+): Pick<JobSearchCriteria, 'locations' | 'locationLat' | 'locationLng' | 'radiusMi'> {
   const trimmed = locationQuery.trim();
   if (!trimmed) {
     return {
       locations: undefined,
       locationLat: undefined,
       locationLng: undefined,
-      radiusKm: undefined,
+      radiusMi: undefined,
     };
   }
 
@@ -92,7 +92,7 @@ export function normalizeLocationCriteria(
     locations: [trimmed],
     locationLat: lat,
     locationLng: lng,
-    radiusKm: lat != null && lng != null ? radiusKm : undefined,
+    radiusMi: lat != null && lng != null ? radiusMi : undefined,
   };
 }
 
@@ -128,7 +128,7 @@ export function routeSearchCriteriaEqual(
   current: JobSearchCriteria,
   route: Pick<
     JobSearchCriteria,
-    'query' | 'locations' | 'locationLat' | 'locationLng' | 'radiusKm'
+    'query' | 'locations' | 'locationLat' | 'locationLng' | 'radiusMi'
   >,
 ): boolean {
   return (
@@ -136,18 +136,18 @@ export function routeSearchCriteriaEqual(
     (current.locations?.[0] ?? '') === (route.locations?.[0] ?? '') &&
     (current.locationLat ?? null) === (route.locationLat ?? null) &&
     (current.locationLng ?? null) === (route.locationLng ?? null) &&
-    (current.radiusKm ?? null) === (route.radiusKm ?? null)
+    (current.radiusMi ?? null) === (route.radiusMi ?? null)
   );
 }
 
 export function searchCriteriaFieldsEqual(
   a: Pick<
     JobSearchCriteria,
-    'query' | 'locations' | 'locationLat' | 'locationLng' | 'radiusKm'
+    'query' | 'locations' | 'locationLat' | 'locationLng' | 'radiusMi'
   >,
   b: Pick<
     JobSearchCriteria,
-    'query' | 'locations' | 'locationLat' | 'locationLng' | 'radiusKm'
+    'query' | 'locations' | 'locationLat' | 'locationLng' | 'radiusMi'
   >,
 ): boolean {
   return routeSearchCriteriaEqual(a as JobSearchCriteria, b);
@@ -180,7 +180,7 @@ function serializeCriteria(criteria: JobSearchCriteria): string {
     locations: criteria.locations ?? [],
     locationLat: criteria.locationLat ?? null,
     locationLng: criteria.locationLng ?? null,
-    radiusKm: criteria.radiusKm ?? null,
+    radiusMi: criteria.radiusMi ?? null,
     workplace: criteria.workplace ?? [],
     seniority: criteria.seniority ?? [],
     skills: criteria.skills ?? [],

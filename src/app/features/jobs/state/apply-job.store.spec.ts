@@ -72,6 +72,14 @@ describe('ApplyJobStore', () => {
     expect(store.isOpen()).toBe(false);
   });
 
+  it('rejects submit without a message', async () => {
+    await store.show({ jobId: 'job-001' });
+
+    await expect(store.submit('   ')).rejects.toThrow('Application message is required.');
+    expect(applicationsStore.applyToJob).not.toHaveBeenCalled();
+    expect(store.isOpen()).toBe(true);
+  });
+
   it('clears state on dismiss', async () => {
     await store.show({ jobId: 'job-001' });
 

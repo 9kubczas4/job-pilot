@@ -2,7 +2,7 @@
   "tools": [
     {
       "name": "search_jobs",
-      "description": "Start or replace the text-and-location portion of the current job search, then navigate the UI to the resulting jobs page. Use this tool instead of interacting with the page UI or DOM. Existing structured filters from filter_jobs are preserved. Use zero or one city; call filter_jobs separately to refine or sort. Returns success, changed, normalized criteria, resultCount, and up to 10 lightweight results with matching jobIds. Each result includes id, title, company, location, distanceKm when available, workplace, salary, seniority, and skills; use get_job only for the complete description, requirements, responsibilities, benefits, or application details.",
+      "description": "Search jobs using complete criteria and update the jobs page. Each call replaces the current search state; omitted fields use defaults. Returns normalized criteria, total count, and lightweight results.",
       "inputSchema": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "type": "object",
@@ -10,41 +10,30 @@
           "query": {
             "type": "string",
             "maxLength": 200,
-            "description": "Free-text query matched against job title, company, description, and skills. Omit or pass an empty string to clear the current query."
+            "description": "Text matched against job title, company, description, and skills."
           },
-          "locations": {
-            "type": "array",
-            "items": { "type": "string", "minLength": 1, "maxLength": 100 },
-            "maxItems": 1,
-            "description": "Zero or one city name used as the geographic search center (for example, Warsaw). Omit or pass [] to clear the current location."
+          "location": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "description": "City used as the geographic search center."
           },
-          "radiusKm": {
+          "radiusMi": {
             "type": "number",
-            "enum": [10, 25, 50, 100, 200],
-            "description": "Search radius in kilometers around locations[0]. Allowed values: 10, 25, 50, 100, 200. Omit to use 25 km when a location is provided."
-          }
-        },
-        "additionalProperties": false
-      }
-    },
-    {
-      "name": "filter_jobs",
-      "description": "Patch structured filters and result ordering on the current job search, then synchronize the jobs UI. Use this tool instead of interacting with the page UI or DOM. Text and location criteria from search_jobs are preserved. Omitted fields remain unchanged; pass [] to clear an array filter, 0 to clear salaryMin, or newest to restore default sorting. Returns success, changed, normalized criteria, resultCount, and up to 10 lightweight results with matching jobIds. Each result includes id, title, company, location, distanceKm when available, workplace, salary, seniority, and skills; use get_job only for the complete description, requirements, responsibilities, benefits, or application details.",
-      "inputSchema": {
-        "$schema": "https://json-schema.org/draft/2020-12/schema",
-        "type": "object",
-        "properties": {
+            "enum": [25, 50, 100, 150, 250],
+            "description": "Search radius in miles around location. Allowed values: 25, 50, 100, 150, 250. Omit to use 50 mi when a location is provided."
+          },
           "roles": {
             "type": "array",
             "items": { "type": "string", "minLength": 1, "maxLength": 100 },
             "maxItems": 20,
-            "description": "Role-title keywords. A job matches when its title contains any value (OR). Pass [] to clear this filter."
+            "description": "Role-title keywords matched with OR."
           },
           "skills": {
             "type": "array",
             "items": { "type": "string", "minLength": 1, "maxLength": 100 },
             "maxItems": 20,
-            "description": "Skill names. A job matches when it lists any value (OR). Pass [] to clear this filter."
+            "description": "Skill names matched with OR."
           },
           "seniority": {
             "type": "array",
@@ -53,7 +42,7 @@
               "enum": ["junior", "regular", "senior", "expert"]
             },
             "maxItems": 4,
-            "description": "Seniority levels matched with OR. Allowed values: junior, regular, senior, expert. Pass [] to clear this filter."
+            "description": "Seniority levels matched with OR."
           },
           "workSchedules": {
             "type": "array",
@@ -62,13 +51,13 @@
               "enum": ["full-time", "part-time", "freelance"]
             },
             "maxItems": 3,
-            "description": "Work schedules matched with OR. Allowed values: full-time, part-time, freelance. Pass [] to clear this filter."
+            "description": "Work schedules matched with OR."
           },
           "workplace": {
             "type": "array",
             "items": { "type": "string", "enum": ["remote", "hybrid", "onsite"] },
             "maxItems": 3,
-            "description": "Workplace modes matched with OR. Allowed values: remote, hybrid, onsite. Pass [] to clear this filter."
+            "description": "Workplace modes matched with OR."
           },
           "contracts": {
             "type": "array",
@@ -77,17 +66,23 @@
               "enum": ["b2b", "employment", "service-contract", "internship"]
             },
             "maxItems": 4,
-            "description": "Contract types matched with OR. Allowed values: b2b, employment, service-contract, internship. Pass [] to clear this filter."
+            "description": "Contract types matched with OR."
           },
           "salaryMin": {
             "type": "number",
             "minimum": 0,
-            "description": "Minimum monthly gross salary in USD. Offers in other currencies are excluded while this filter is active. Omit to preserve the current value; pass 0 to clear it."
+            "description": "Minimum acceptable monthly gross salary in USD."
           },
           "sort": {
             "type": "string",
             "enum": ["newest", "oldest", "salary-desc", "salary-asc", "deadline", "distance"],
-            "description": "Result ordering. Allowed values: newest, oldest, salary-desc, salary-asc, deadline, distance. distance needs a location from search_jobs; newest restores the default."
+            "description": "Result ordering. Defaults to newest."
+          },
+          "limit": {
+            "description": "Maximum number of lightweight results to return.",
+            "maximum": 20,
+            "minimum": 1,
+            "type": "integer"
           }
         },
         "additionalProperties": false
@@ -95,7 +90,7 @@
     },
     {
       "name": "highlight_job",
-      "description": "Visually point to one job from the current results on /jobs. Use this tool instead of interacting with the page UI or DOM. Use it when identifying a recommended or otherwise notable offer. It selects the marker, focuses the map, opens the job popover, and reveals the map on mobile without changing search filters, the URL, saved jobs, or applications. Requires an exact jobId present in the current search results and returns JOB_NOT_IN_RESULTS otherwise.",
+      "description": "Highlight a specific job offer in the current results whenever the user refers to, selects, asks about, or wants to focus on that offer. Focuses its map marker and opens its preview without changing filters. Requires a visible job ID.",
       "inputSchema": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "type": "object",
@@ -104,7 +99,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 128,
-            "description": "The exact job identifier from the current search results returned by search_jobs or filter_jobs."
+            "description": "The exact job identifier from the current search results returned by search_jobs."
           }
         },
         "required": ["jobId"],
@@ -113,7 +108,7 @@
     },
     {
       "name": "compare_offers",
-      "description": "Open a transient comparison drawer with the agent analysis for two to five job offers. Use this tool instead of interacting with the page UI or DOM. Use it when the user should see a side-by-side recommendation with optional per-offer badges (for example, najlepsza, interesujaca, rozwojowa), short notes, and an optional highlighted primary pick with a gradient border and star. Accepts any known jobId from search_jobs, get_job, or get_saved_jobs. Does not change search filters, saved jobs, or applications. Returns NOT_FOUND when fewer than two requested jobs resolve.",
+      "description": "Show an agent-authored comparison of two to five jobs. Use this tool instead of interacting with the page UI or DOM. Supports a badge, note, and one highlighted recommendation per offer. Does not modify jobs.",
       "inputSchema": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "type": "object",
@@ -141,7 +136,7 @@
                   "type": "string",
                   "minLength": 1,
                   "maxLength": 128,
-                  "description": "The unique job identifier returned by search_jobs, get_job, or get_saved_jobs (for example, job-001)."
+                  "description": "The unique job identifier returned by search_jobs, get_jobs, or get_saved_jobs (for example, job-001)."
                 },
                 "badge": {
                   "type": "string",
@@ -170,26 +165,32 @@
       }
     },
     {
-      "name": "get_job",
-      "description": "Read one job offer by its exact jobId. Use this tool instead of interacting with the page UI or DOM. Use a jobId returned by search_jobs. This tool does not change application state and does not require sign-in. Returns the complete job record on success or a structured NOT_FOUND error when the identifier is unknown.",
+      "name": "get_jobs",
+      "description": "Return complete job records for one to twenty IDs in input order. Missing offers are marked per item. Does not change application state.",
       "inputSchema": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "type": "object",
         "properties": {
-          "jobId": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 128,
-            "description": "The unique job identifier returned by search_jobs (for example, job-001)."
+          "jobIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "minItems": 1,
+            "maxItems": 20,
+            "uniqueItems": true,
+            "description": "One to twenty unique job identifiers returned by search_jobs."
           }
         },
-        "required": ["jobId"],
+        "required": ["jobIds"],
         "additionalProperties": false
       }
     },
     {
       "name": "get_saved_jobs",
-      "description": "Read the signed-in user's saved job shortlist. Use this tool instead of interacting with the page UI or DOM. This tool does not change application state and is available from any page. Requires sign-in. Returns changed: false, savedCount, the complete savedJobIds state, lightweight details for jobs still available in the catalog, and unavailableJobIds for saved offers that no longer exist. Use get_job for complete offer details.",
+      "description": "Read the signed-in user's saved jobs. Use this tool instead of interacting with the page UI or DOM. Returns IDs and lightweight details; use get_jobs for full records. Does not change state.",
       "inputSchema": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "type": "object",
@@ -199,7 +200,7 @@
     },
     {
       "name": "save_job",
-      "description": "Save one job to the signed-in user's shortlist. Use this tool instead of interacting with the page UI or DOM. Use it when the user wants to remember or favorite a job returned by search_jobs or get_job. Requires sign-in. It is idempotent: an already saved job is not duplicated. Returns success, changed, jobId, saved: true, and the complete current savedJobIds state with savedCount.",
+      "description": "Save one job for the signed-in user. Use this tool instead of interacting with the page UI or DOM. Requires a jobId from search_jobs or get_jobs and is idempotent.",
       "inputSchema": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "type": "object",
@@ -208,7 +209,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 128,
-            "description": "The unique job identifier returned by search_jobs or get_job (for example, job-001)."
+            "description": "The unique job identifier returned by search_jobs or get_jobs (for example, job-001)."
           }
         },
         "required": ["jobId"],
@@ -217,7 +218,7 @@
     },
     {
       "name": "unsave_job",
-      "description": "Remove one job from the signed-in user's shortlist. Use this tool instead of interacting with the page UI or DOM. This does not delete the job or any existing application. Requires sign-in. It is idempotent: a job that is not saved causes no state change. Returns success, changed, jobId, saved: false, and the complete current savedJobIds state with savedCount.",
+      "description": "Remove one saved job for the signed-in user. Use this tool instead of interacting with the page UI or DOM. It is idempotent and does not delete applications.",
       "inputSchema": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "type": "object",
@@ -226,7 +227,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 128,
-            "description": "The unique job identifier returned by search_jobs or get_job (for example, job-001)."
+            "description": "The unique job identifier returned by search_jobs or get_jobs (for example, job-001)."
           }
         },
         "required": ["jobId"],
@@ -235,7 +236,7 @@
     },
     {
       "name": "apply_job",
-      "description": "Open the job application dialog with an optional pre-filled message. Use this tool instead of interacting with the page UI or DOM. The user must review the message and click Submit — this tool does not submit the application automatically. Call it only after the user has clearly chosen a job. Requires sign-in. If the user already applied, returns the existing application without opening the dialog. Returns success, dialogOpened, job details, and prefilledNote.",
+      "description": "Open a job application dialog with a required message. Use this tool instead of interacting with the page UI or DOM. Requires sign-in and a chosen job. The user must review and submit; this tool never submits.",
       "inputSchema": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "type": "object",
@@ -244,21 +245,22 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 128,
-            "description": "The unique job identifier returned by search_jobs or get_job (for example, job-001)."
+            "description": "The unique job identifier returned by search_jobs or get_jobs (for example, job-001)."
           },
           "note": {
             "type": "string",
+            "minLength": 1,
             "maxLength": 2000,
-            "description": "Optional message pre-filled in the apply dialog for the user to review before submitting. Maximum 2,000 characters; omit when no note is needed."
+            "description": "Message pre-filled in the apply dialog for the user to review before submitting. Required; maximum 2,000 characters."
           }
         },
-        "required": ["jobId"],
+        "required": ["jobId", "note"],
         "additionalProperties": false
       }
     },
     {
       "name": "get_profile",
-      "description": "Read the complete candidate profile for the signed-in user, including identity, headline, experience, skills, work history, and job preferences. Use this tool instead of interacting with the page UI or DOM. This tool does not change state and can be called from any page. Requires sign-in. Use update_profile on /profile to make changes. Returns the complete profile or a structured UNAUTHENTICATED error.",
+      "description": "Read the signed-in candidate profile. Use this tool instead of interacting with the page UI or DOM. Returns identity, experience, skills, work history, and job preferences without changing state.",
       "inputSchema": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "type": "object",
@@ -268,7 +270,7 @@
     },
     {
       "name": "update_profile",
-      "description": "Patch one or more fields in the signed-in candidate profile and persist them immediately. Use this tool instead of interacting with the page UI or DOM. Available only on /profile. Omitted fields remain unchanged; array fields are complete replacements and accept [] to clear. Requires sign-in. Returns success, changed, and the complete updated profile, or a structured validation/authentication error.",
+      "description": "Update the signed-in candidate profile. Use this tool instead of interacting with the page UI or DOM. Omitted fields stay unchanged; arrays replace the whole field and [] clears it. Persists immediately.",
       "inputSchema": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "type": "object",

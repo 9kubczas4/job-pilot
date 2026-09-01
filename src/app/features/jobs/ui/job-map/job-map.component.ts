@@ -23,7 +23,7 @@ import { resolveMapResultsViewport, type MapGeoBounds } from '@shared/map/map-re
 import { isGoogleMapsConfigured, loadGoogleMapsApi } from '@shared/map/google-maps-loader';
 import { createClusterMarkerIcon, createJobMarkerIcon } from '@shared/map/google-maps-markers';
 import { UserMapRegionService } from '@shared/map/user-map-region.service';
-import { DEFAULT_SEARCH_RADIUS_KM } from '@features/jobs/domain/header-search.model';
+import { DEFAULT_SEARCH_RADIUS_MI } from '@features/jobs/domain/header-search.model';
 import { getMapStylesForTheme } from '@shared/map/google-maps-styles';
 import { JobLocation, JobOffer } from '@features/jobs/domain/job.model';
 import { JobHighlightRequest } from '@features/jobs/domain/job-highlight.model';
@@ -197,7 +197,7 @@ export class JobMapComponent {
       .sort()
       .join(',');
     const searchCenterKey = searchCenter
-      ? `${searchCenter.lat},${searchCenter.lng},${searchRadiusKm ?? DEFAULT_SEARCH_RADIUS_KM}`
+      ? `${searchCenter.lat},${searchCenter.lng},${searchRadiusKm ?? DEFAULT_SEARCH_RADIUS_MI}`
       : '';
     const viewportKey = fitResultsToViewport ? `fit:${jobIdsKey}` : searchCenterKey;
 
@@ -353,9 +353,9 @@ export class JobMapComponent {
 
   private focusOnSearchCenter(
     center: google.maps.LatLngLiteral,
-    radiusKm: number | undefined,
+    radiusMi: number | undefined,
   ): void {
-    this.animateTo(center, this.zoomForRadiusKm(radiusKm ?? DEFAULT_SEARCH_RADIUS_KM));
+    this.animateTo(center, this.zoomForRadiusMi(radiusMi ?? DEFAULT_SEARCH_RADIUS_MI));
   }
 
   private resetToDefaultView(): void {
@@ -383,20 +383,20 @@ export class JobMapComponent {
     this.animateTo(target, targetZoom);
   }
 
-  private zoomForRadiusKm(radiusKm: number): number {
-    if (radiusKm <= 10) {
-      return 12;
-    }
-    if (radiusKm <= 25) {
+  private zoomForRadiusMi(radiusMi: number): number {
+    if (radiusMi <= 25) {
       return 11;
     }
-    if (radiusKm <= 50) {
+    if (radiusMi <= 50) {
       return 10;
     }
-    if (radiusKm <= 100) {
+    if (radiusMi <= 100) {
       return 9;
     }
-    return 8;
+    if (radiusMi <= 150) {
+      return 8;
+    }
+    return 7;
   }
 
   private focusOnCluster(cluster: Cluster): void {

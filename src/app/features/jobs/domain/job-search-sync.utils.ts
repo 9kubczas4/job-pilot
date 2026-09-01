@@ -1,4 +1,4 @@
-import { DEFAULT_SEARCH_RADIUS_KM } from '../domain/header-search.model';
+import { DEFAULT_SEARCH_RADIUS_MI } from '../domain/header-search.model';
 import { buildCityCentersFromJobs, resolveCityCenter } from './city-catalog';
 import { JobOffer } from './job.model';
 import { JobSearchCriteria } from './search.model';
@@ -20,7 +20,7 @@ export function enrichLocationCriteria(
     ...criteria,
     locationLat: city.latitude,
     locationLng: city.longitude,
-    radiusKm: criteria.radiusKm ?? DEFAULT_SEARCH_RADIUS_KM,
+    radiusMi: criteria.radiusMi ?? DEFAULT_SEARCH_RADIUS_MI,
   };
 }
 
@@ -29,6 +29,6 @@ export function searchLocationEqual(a: JobSearchCriteria, b: JobSearchCriteria):
     (a.locations?.[0] ?? '') === (b.locations?.[0] ?? '') &&
     (a.locationLat ?? null) === (b.locationLat ?? null) &&
     (a.locationLng ?? null) === (b.locationLng ?? null) &&
-    (a.radiusKm ?? null) === (b.radiusKm ?? null)
+    (a.radiusMi ?? null) === (b.radiusMi ?? null)
   );
 }

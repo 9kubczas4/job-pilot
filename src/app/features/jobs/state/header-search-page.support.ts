@@ -2,7 +2,7 @@ import { DestroyRef, inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   buildHeaderSearchQueryParams,
-  DEFAULT_SEARCH_RADIUS_KM,
+  DEFAULT_SEARCH_RADIUS_MI,
 } from '@features/jobs/domain/header-search.model';
 import { criteriaToQueryParams } from '@features/jobs/domain/search-url.utils';
 import { JobSearchCriteria } from '@features/jobs/domain/search.model';
@@ -55,7 +55,7 @@ export class HeaderSearchPageSupport {
   }
 
   onRadiusChange(value: number): void {
-    this.headerUi.radiusKm.set(Number.isFinite(value) ? value : DEFAULT_SEARCH_RADIUS_KM);
+    this.headerUi.radiusMi.set(Number.isFinite(value) ? value : DEFAULT_SEARCH_RADIUS_MI);
   }
 
   applySearch(jobsLink: readonly string[], onJobsSearchPage: boolean): void {
@@ -100,7 +100,7 @@ export class HeaderSearchPageSupport {
       locationQuery: this.headerUi.locationQuery(),
       locationLat: this.headerUi.locationLat(),
       locationLng: this.headerUi.locationLng(),
-      radiusKm: this.headerUi.radiusKm(),
+      radiusMi: this.headerUi.radiusMi(),
     });
   }
 

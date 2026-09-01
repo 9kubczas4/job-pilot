@@ -98,7 +98,7 @@
                 (click)="selectLocationSuggestion(suggestion)"
               >
                 <span class="header-search__option-label">{{ suggestion.label }}</span>
-                <span class="header-search__option-meta">Within {{ radiusKm() }} km</span>
+                <span class="header-search__option-meta">Within {{ radiusMi() }} mi</span>
               </button>
             </li>
           }
@@ -122,7 +122,7 @@
           <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.75" fill="none" />
           <circle cx="12" cy="12" r="2.5" fill="currentColor" />
         </svg>
-        <span class="header-search__radius-label">{{ radiusKm() }} km</span>
+        <span class="header-search__radius-label">{{ radiusMi() }} mi</span>
         <svg class="header-search__radius-chevron" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true">
           <path
             d="M3 4.5 L6 7.5 L9 4.5"
@@ -143,13 +143,13 @@
                 type="button"
                 class="header-search__radius-option"
                 role="option"
-                [class.is-active]="radiusKm() === radius"
-                [attr.aria-selected]="radiusKm() === radius"
+                [class.is-active]="radiusMi() === radius"
+                [attr.aria-selected]="radiusMi() === radius"
                 (mousedown)="$event.preventDefault()"
                 (click)="selectRadius(radius)"
               >
-                <span>{{ radius }} km</span>
-                @if (radiusKm() === radius) {
+                <span>{{ radius }} mi</span>
+                @if (radiusMi() === radius) {
                   <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
                     <path
                       d="M3.5 8.5 L6.5 11.5 L12.5 4.5"

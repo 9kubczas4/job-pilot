@@ -1,5 +1,6 @@
 import {
   inject,
+  NgZone,
   provideExperimentalWebMcpTools,
   type EnvironmentProviders,
   type WebMcpClient,
@@ -110,7 +111,9 @@ export function defineZodWebMcpTool<TSchema extends z.ZodType>(
       }
 
       try {
-        return toolJson(await run(parsed.data, client));
+        // The browser Model Context API invokes tools outside Angular's zone.
+        // Re-enter it so router navigation and signal-backed UI updates are rendered.
+        return toolJson(await inject(NgZone).run(() => run(parsed.data, client)));
       } catch (error) {
         return toolJson(
           toolFailure(

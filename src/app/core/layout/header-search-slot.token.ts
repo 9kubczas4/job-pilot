@@ -8,7 +8,7 @@ import {
 export interface HeaderSearchSlotFacade {
   readonly searchQuery: Signal<string>;
   readonly locationQuery: Signal<string>;
-  readonly radiusKm: Signal<number>;
+  readonly radiusMi: Signal<number>;
   readonly jobSuggestions: Signal<JobSearchSuggestion[]>;
   readonly locationSuggestions: Signal<LocationSearchSuggestion[]>;
   readonly queryToolActive: Signal<boolean>;

@@ -29,14 +29,17 @@
     </div>
 
     <p class="apply-dialog__message">
-      Your profile will be shared with the recruiter. You can add an optional note below.
+      Your profile will be shared with the recruiter. Add a short message explaining why you are a
+      good fit.
     </p>
 
     <label class="apply-dialog__field">
-      <span class="apply-dialog__label">Message (optional)</span>
+      <span class="apply-dialog__label">Message</span>
       <textarea
         class="apply-dialog__note input"
         rows="4"
+        required
+        aria-required="true"
         [disabled]="submitting()"
         [value]="note()"
         placeholder="Why you're a great fit, availability, notice period…"
@@ -48,7 +51,12 @@
       <button type="button" class="btn btn-ghost" [disabled]="submitting()" (click)="requestClose()">
         Cancel
       </button>
-      <button type="button" class="btn btn-primary" [disabled]="submitting()" (click)="onConfirm()">
+      <button
+        type="button"
+        class="btn btn-primary"
+        [disabled]="submitting() || !canSubmit()"
+        (click)="onConfirm()"
+      >
         {{ submitting() ? 'Submitting…' : 'Submit application' }}
       </button>
     </div>

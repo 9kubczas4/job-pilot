@@ -68,7 +68,7 @@ export class JobSearchStore {
   applyRouteSearchCriteria(
     partial: Pick<
       JobSearchCriteria,
-      'query' | 'locations' | 'locationLat' | 'locationLng' | 'radiusKm'
+      'query' | 'locations' | 'locationLat' | 'locationLng' | 'radiusMi'
     >,
   ): void {
     this.criteria.update((current) => {
@@ -78,7 +78,7 @@ export class JobSearchStore {
         locations: partial.locations,
         locationLat: partial.locationLat,
         locationLng: partial.locationLng,
-        radiusKm: partial.radiusKm,
+        radiusMi: partial.radiusMi,
       };
 
       return searchCriteriaFieldsEqual(current, next) ? current : next;
@@ -88,7 +88,7 @@ export class JobSearchStore {
   patchSearchCriteria(
     partial: Pick<
       JobSearchCriteria,
-      'query' | 'locations' | 'locationLat' | 'locationLng' | 'radiusKm'
+      'query' | 'locations' | 'locationLat' | 'locationLng' | 'radiusMi'
     >,
   ): void {
     this.criteria.update((current) => {
@@ -111,7 +111,7 @@ export class JobSearchStore {
       locations: route.locations,
       locationLat: route.locationLat,
       locationLng: route.locationLng,
-      radiusKm: route.radiusKm,
+      radiusMi: route.radiusMi,
       workplace: route.workplace,
       seniority: route.seniority,
       skills: route.skills,

@@ -20,8 +20,68 @@ export class JobRepository {
   private readonly platformId = inject(PLATFORM_ID);
 
   private seedCache: JobOffer[] | null = null;
+  private catalogCache: JobOffer[] | null = null;
+  private catalogLoadPromise: Promise<JobOffer[]> | null = null;
+  private readonly jobsById = new Map<string, JobOffer | null>();
+  private readonly jobLoadPromises = new Map<string, Promise<JobOffer | null>>();
 
   async getAllJobs(): Promise<JobOffer[]> {
+    if (this.catalogCache) {
+      return this.catalogCache;
+    }
+    if (this.catalogLoadPromise) {
+      return this.catalogLoadPromise;
+    }
+
+    this.catalogLoadPromise = this.loadAllJobs()
+      .then((jobs) => {
+        this.catalogCache = jobs;
+        for (const job of jobs) {
+          this.jobsById.set(job.id, job);
+        }
+        return jobs;
+      })
+      .finally(() => {
+        this.catalogLoadPromise = null;
+      });
+
+    return this.catalogLoadPromise;
+  }
+
+  async getJobById(jobId: string): Promise<JobOffer | null> {
+    if (this.jobsById.has(jobId)) {
+      return this.jobsById.get(jobId) ?? null;
+    }
+    if (this.catalogCache) {
+      return null;
+    }
+    if (this.catalogLoadPromise) {
+      await this.catalogLoadPromise;
+      return this.jobsById.get(jobId) ?? null;
+    }
+
+    const pending = this.jobLoadPromises.get(jobId);
+    if (pending) {
+      return pending;
+    }
+
+    const loadPromise = this.loadJobById(jobId)
+      .then((job) => {
+        this.jobsById.set(jobId, job);
+        return job;
+      })
+      .finally(() => {
+        this.jobLoadPromises.delete(jobId);
+      });
+    this.jobLoadPromises.set(jobId, loadPromise);
+    return loadPromise;
+  }
+
+  async getJobsByIds(jobIds: readonly string[]): Promise<(JobOffer | null)[]> {
+    return Promise.all(jobIds.map((jobId) => this.getJobById(jobId)));
+  }
+
+  private async loadAllJobs(): Promise<JobOffer[]> {
     if (isPlatformServer(this.platformId)) {
       return this.loadSeedJobs(true);
     }
@@ -40,7 +100,7 @@ export class JobRepository {
     return this.loadSeedJobs();
   }
 
-  async getJobById(jobId: string): Promise<JobOffer | null> {
+  private async loadJobById(jobId: string): Promise<JobOffer | null> {
     if (isPlatformServer(this.platformId)) {
       const jobs = await this.loadSeedJobs(true);
       return jobs.find((job) => job.id === jobId) ?? null;

@@ -66,7 +66,7 @@ export class HomePageComponent {
     {
       icon: '⚡',
       title: 'Agent-native',
-      text: 'Nine global WebMCP tools share state with the UI. Two route-scoped tools for map focus and profile edits.',
+      text: 'Eight global WebMCP tools share state with the UI. Two route-scoped tools for map focus and profile edits.',
     },
   ];
 
@@ -75,16 +75,10 @@ export class HomePageComponent {
       name: 'search_jobs',
       scope: 'global',
       description:
-        'Replace text, location, and radius; preserve structured filters. Navigates to /jobs when needed.',
+        'Replace complete search criteria and update filters, results, URL, and map in one operation.',
     },
     {
-      name: 'filter_jobs',
-      scope: 'global',
-      description:
-        'Patch structured filters and sort; preserve text and location. Array values match with OR.',
-    },
-    {
-      name: 'get_job',
+      name: 'get_jobs',
       scope: 'global',
       description: 'Read full details for a single job offer by id - no need to open the detail route first.',
     },
@@ -120,6 +114,11 @@ export class HomePageComponent {
       description:
         'Read headline, experience, skills, and preferences for the signed-in user from any page.',
     },
+    {
+      name: 'update_profile',
+      scope: 'global',
+      description: 'Update validated profile fields from any page.',
+    },
   ];
 
   readonly routeTools: LandingTool[] = [
@@ -129,13 +128,6 @@ export class HomePageComponent {
       route: '/jobs',
       description:
         'Focus one job from the current search results on the map - marker, popover, and AI highlight animation.',
-    },
-    {
-      name: 'update_profile',
-      scope: 'route',
-      route: '/profile',
-      description:
-        'Update profile fields with validation (Signal Form implicit tool). Only available on the profile route.',
     },
   ];
 
@@ -150,7 +142,7 @@ export class HomePageComponent {
     },
     {
       title: 'Search in plain language',
-      text: 'From any page: “Find senior frontend jobs, remote or hybrid in Warsaw, minimum $8k USD.”',
+      text: 'From any page: “Find senior frontend jobs, remote or hybrid in New York, minimum $8k USD.”',
     },
     {
       title: 'Compare and recommend',

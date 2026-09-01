@@ -24,6 +24,10 @@ export class JobDetailsStore {
     return this.jobRepository.getJobById(jobId);
   }
 
+  async getJobsByIds(jobIds: readonly string[]): Promise<(JobOffer | null)[]> {
+    return this.jobRepository.getJobsByIds(jobIds);
+  }
+
   async loadJob(jobId: string): Promise<void> {
     if (this.job()?.id !== jobId) {
       this.job.set(null);

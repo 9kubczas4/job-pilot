@@ -5,7 +5,7 @@
       {
         "role": "user",
         "type": "message",
-        "content": "Find Frontend Developer jobs in Warsaw, then return the complete details for job-001."
+        "content": "Find Frontend Developer jobs in New York, then return the complete details for job-001."
       }
     ],
     "expectedCall": [
@@ -15,12 +15,12 @@
             "functionName": "search_jobs",
             "arguments": {
               "query": "Frontend Developer",
-              "locations": ["Warsaw"]
+              "location": "New York"
             }
           },
           {
-            "functionName": "get_job",
-            "arguments": { "jobId": "job-001" }
+            "functionName": "get_jobs",
+            "arguments": { "jobIds": ["job-001"] }
           }
         ]
       }
@@ -37,7 +37,7 @@
     ],
     "expectedCall": [
       {
-        "functionName": "filter_jobs",
+        "functionName": "search_jobs",
         "arguments": {
           "seniority": ["senior"],
           "workplace": ["remote"],
@@ -46,23 +46,13 @@
         }
       },
       {
-        "functionName": "get_job",
+        "functionName": "get_jobs",
         "arguments": {
-          "jobId": { "$pattern": "^job-\\d{3}$" }
-        },
-        "optional": true
-      },
-      {
-        "functionName": "get_job",
-        "arguments": {
-          "jobId": { "$pattern": "^job-\\d{3}$" }
-        },
-        "optional": true
-      },
-      {
-        "functionName": "get_job",
-        "arguments": {
-          "jobId": { "$pattern": "^job-\\d{3}$" }
+          "jobIds": [
+            { "$pattern": "^job-\\d{3}$" },
+            { "$pattern": "^job-\\d{3}$" },
+            { "$pattern": "^job-\\d{3}$" }
+          ]
         },
         "optional": true
       }
@@ -74,7 +64,7 @@
       {
         "role": "user",
         "type": "message",
-        "content": "Find Frontend Developer jobs in Warsaw and highlight job-001 on the map."
+        "content": "Find Frontend Developer jobs in New York and highlight job-001 on the map."
       }
     ],
     "expectedCall": [
@@ -84,7 +74,7 @@
             "functionName": "search_jobs",
             "arguments": {
               "query": "Frontend Developer",
-              "locations": ["Warsaw"]
+              "location": "New York"
             }
           },
           {

@@ -22,20 +22,12 @@ export const LANDING_TERMINAL_SCRIPT: readonly LandingTerminalLine[] = [
   {
     kind: 'prompt',
     prefix: '›',
-    text: 'search_jobs({ query: "frontend", locations: ["Warsaw"], radiusKm: 50 })',
+    text:
+      'search_jobs({ query: "frontend", location: "New York", radiusMi: 50, workplace: ["remote", "hybrid"], salaryMin: 8000 })',
   },
   {
     kind: 'success',
-    text: '✓ 12 jobs matched · navigated to /jobs · map synced',
-  },
-  {
-    kind: 'prompt',
-    prefix: '›',
-    text: 'filter_jobs({ workplace: ["remote", "hybrid"], salaryMin: 8000 })',
-  },
-  {
-    kind: 'success',
-    text: '✓ 8 jobs matched · filters applied · map zoomed to Poland',
+    text: '✓ 8 jobs matched · filters applied · navigated once · map synced',
   },
   {
     kind: 'prompt',
@@ -64,7 +56,7 @@ export const LANDING_TERMINAL_SCRIPT: readonly LandingTerminalLine[] = [
   {
     kind: 'muted',
     prefix: '#',
-    text: '/profile - update_profile available here only',
+    text: 'update_profile available globally',
   },
 ];
 

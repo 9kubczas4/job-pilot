@@ -14,7 +14,7 @@ export class JobApplicationsRepository {
     return snapshot.docs.map((item) => item.data() as JobApplication);
   }
 
-  async applyToJob(userId: string, jobId: string, note?: string): Promise<JobApplication> {
+  async applyToJob(userId: string, jobId: string, note: string): Promise<JobApplication> {
     const application: JobApplication = {
       jobId,
       appliedAt: new Date().toISOString(),

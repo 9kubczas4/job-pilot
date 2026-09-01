@@ -12,8 +12,8 @@
       "expert"
     ],
     "salary": {
-      "min": 5200,
-      "max": 8200,
+      "min": 7500,
+      "max": 11500,
       "currency": "USD",
       "period": "month"
     },
@@ -67,10 +67,10 @@
     "createdAt": "2026-08-28T20:15:00.573Z",
     "applicationDeadline": "2026-09-18T20:15:00.573Z",
     "location": {
-      "city": "Warsaw",
-      "country": "Poland",
-      "latitude": 52.2297,
-      "longitude": 21.0122
+      "city": "New York",
+      "country": "United States",
+      "latitude": 40.7128,
+      "longitude": -74.006
     }
   },
   {
@@ -86,8 +86,8 @@
       "senior"
     ],
     "salary": {
-      "min": 8200,
-      "max": 11300,
+      "min": 11000,
+      "max": 14900,
       "currency": "USD",
       "period": "month"
     },
@@ -96,10 +96,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Krakow",
-      "country": "Poland",
-      "latitude": 50.0614,
-      "longitude": 19.9372
+      "city": "Boston",
+      "country": "United States",
+      "latitude": 42.3601,
+      "longitude": -71.0589
     },
     "responsibilities": [
       "Define frontend architecture, coding standards, and review practices",
@@ -160,8 +160,8 @@
       "expert"
     ],
     "salary": {
-      "min": 13600,
-      "max": 18200,
+      "min": 17700,
+      "max": 22900,
       "currency": "USD",
       "period": "month"
     },
@@ -170,10 +170,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Wroclaw",
-      "country": "Poland",
-      "latitude": 51.1079,
-      "longitude": 17.0385
+      "city": "Philadelphia",
+      "country": "United States",
+      "latitude": 39.9526,
+      "longitude": -75.1652
     },
     "responsibilities": [
       "Represent frontend in architecture reviews and incident post-mortems",
@@ -230,8 +230,8 @@
       "regular"
     ],
     "salary": {
-      "min": 6000,
-      "max": 8400,
+      "min": 7800,
+      "max": 10600,
       "currency": "USD",
       "period": "month"
     },
@@ -280,10 +280,10 @@
     "createdAt": "2026-08-25T20:15:00.574Z",
     "applicationDeadline": "2026-09-18T20:15:00.574Z",
     "location": {
-      "city": "Gdansk",
-      "country": "Poland",
-      "latitude": 54.352,
-      "longitude": 18.6466
+      "city": "Washington",
+      "country": "United States",
+      "latitude": 38.9072,
+      "longitude": -77.0369
     }
   },
   {
@@ -299,8 +299,8 @@
       "expert"
     ],
     "salary": {
-      "min": 7600,
-      "max": 11600,
+      "min": 10300,
+      "max": 14800,
       "currency": "USD",
       "period": "month"
     },
@@ -309,10 +309,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Poznan",
-      "country": "Poland",
-      "latitude": 52.4064,
-      "longitude": 16.9252
+      "city": "Atlanta",
+      "country": "United States",
+      "latitude": 33.749,
+      "longitude": -84.388
     },
     "responsibilities": [
       "Participate in on-call rotation (shared, lightweight)",
@@ -374,8 +374,8 @@
       "senior"
     ],
     "salary": {
-      "min": 6200,
-      "max": 9700,
+      "min": 8400,
+      "max": 12800,
       "currency": "USD",
       "period": "month"
     },
@@ -430,10 +430,10 @@
     "createdAt": "2026-08-23T20:15:00.574Z",
     "applicationDeadline": "2026-09-18T20:15:00.574Z",
     "location": {
-      "city": "Lodz",
-      "country": "Poland",
-      "latitude": 51.7592,
-      "longitude": 19.456
+      "city": "Miami",
+      "country": "United States",
+      "latitude": 25.7617,
+      "longitude": -80.1918
     }
   },
   {
@@ -449,8 +449,8 @@
       "expert"
     ],
     "salary": {
-      "min": 11400,
-      "max": 16000,
+      "min": 14900,
+      "max": 20700,
       "currency": "USD",
       "period": "month"
     },
@@ -503,10 +503,10 @@
     "createdAt": "2026-08-22T20:15:00.574Z",
     "applicationDeadline": "2026-09-18T20:15:00.574Z",
     "location": {
-      "city": "Katowice",
-      "country": "Poland",
-      "latitude": 50.2649,
-      "longitude": 19.0238
+      "city": "Charlotte",
+      "country": "United States",
+      "latitude": 35.2271,
+      "longitude": -80.8431
     }
   },
   {
@@ -522,8 +522,8 @@
       "regular"
     ],
     "salary": {
-      "min": 7600,
-      "max": 10800,
+      "min": 10200,
+      "max": 13700,
       "currency": "USD",
       "period": "month"
     },
@@ -532,10 +532,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Lublin",
-      "country": "Poland",
-      "latitude": 51.2465,
-      "longitude": 22.5684
+      "city": "Raleigh",
+      "country": "United States",
+      "latitude": 35.7796,
+      "longitude": -78.6382
     },
     "responsibilities": [
       "Train and evaluate models with PyTorch or scikit-learn",
@@ -594,8 +594,8 @@
       "expert"
     ],
     "salary": {
-      "min": 6100,
-      "max": 9100,
+      "min": 8700,
+      "max": 12700,
       "currency": "USD",
       "period": "month"
     },
@@ -604,10 +604,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Szczecin",
-      "country": "Poland",
-      "latitude": 53.4285,
-      "longitude": 14.5528
+      "city": "Chicago",
+      "country": "United States",
+      "latitude": 41.8917,
+      "longitude": -87.604
     },
     "responsibilities": [
       "Collaborate with backend engineers on API contracts and error handling",
@@ -659,14 +659,14 @@
       "id": "novatech",
       "name": "NovaTech"
     },
-    "description": "NovaTech's Bydgoszcz team is looking for a frontend tech lead. Coach mid-level engineers while driving a design-system refresh ahead of a major rebrand.",
+    "description": "NovaTech's Detroit team is looking for a frontend tech lead. Coach mid-level engineers while driving a design-system refresh ahead of a major rebrand.",
     "seniority": [
       "regular",
       "senior"
     ],
     "salary": {
-      "min": 9200,
-      "max": 12200,
+      "min": 12100,
+      "max": 16100,
       "currency": "USD",
       "period": "month"
     },
@@ -718,10 +718,10 @@
     "createdAt": "2026-08-19T20:15:00.574Z",
     "applicationDeadline": "2026-09-18T20:15:00.574Z",
     "location": {
-      "city": "Bydgoszcz",
-      "country": "Poland",
-      "latitude": 53.1235,
-      "longitude": 18.0084
+      "city": "Detroit",
+      "country": "United States",
+      "latitude": 42.3314,
+      "longitude": -83.0458
     }
   },
   {
@@ -737,8 +737,8 @@
       "expert"
     ],
     "salary": {
-      "min": 12600,
-      "max": 17300,
+      "min": 16700,
+      "max": 21900,
       "currency": "USD",
       "period": "month"
     },
@@ -793,10 +793,10 @@
     "createdAt": "2026-08-18T20:15:00.574Z",
     "applicationDeadline": "2026-09-18T20:15:00.574Z",
     "location": {
-      "city": "Bialystok",
-      "country": "Poland",
-      "latitude": 53.1325,
-      "longitude": 23.1688
+      "city": "Minneapolis",
+      "country": "United States",
+      "latitude": 44.9778,
+      "longitude": -93.265
     }
   },
   {
@@ -806,14 +806,14 @@
       "id": "skylabs",
       "name": "SkyLabs"
     },
-    "description": "SkyLabs's Rzeszow team is looking for a senior frontend engineer. Rebuild warehouse operator dashboards with live inventory updates and offline-tolerant views.",
+    "description": "SkyLabs's Columbus team is looking for a senior frontend engineer. Rebuild warehouse operator dashboards with live inventory updates and offline-tolerant views.",
     "seniority": [
       "junior",
       "regular"
     ],
     "salary": {
-      "min": 5500,
-      "max": 7900,
+      "min": 7300,
+      "max": 10100,
       "currency": "USD",
       "period": "month"
     },
@@ -822,10 +822,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Rzeszow",
-      "country": "Poland",
-      "latitude": 50.0412,
-      "longitude": 21.9991
+      "city": "Columbus",
+      "country": "United States",
+      "latitude": 39.9612,
+      "longitude": -82.9988
     },
     "responsibilities": [
       "Deliver high-complexity features with minimal supervision",
@@ -884,8 +884,8 @@
       "expert"
     ],
     "salary": {
-      "min": 6800,
-      "max": 10800,
+      "min": 9400,
+      "max": 13900,
       "currency": "USD",
       "period": "month"
     },
@@ -942,10 +942,10 @@
     "createdAt": "2026-08-16T20:15:00.574Z",
     "applicationDeadline": "2026-09-18T20:15:00.574Z",
     "location": {
-      "city": "Torun",
-      "country": "Poland",
-      "latitude": 53.0138,
-      "longitude": 18.5984
+      "city": "Indianapolis",
+      "country": "United States",
+      "latitude": 39.7684,
+      "longitude": -86.1581
     }
   },
   {
@@ -961,8 +961,8 @@
       "senior"
     ],
     "salary": {
-      "min": 7200,
-      "max": 10700,
+      "min": 9700,
+      "max": 14100,
       "currency": "USD",
       "period": "month"
     },
@@ -971,10 +971,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Kielce",
-      "country": "Poland",
-      "latitude": 50.8661,
-      "longitude": 20.6286
+      "city": "Kansas City",
+      "country": "United States",
+      "latitude": 39.0997,
+      "longitude": -94.5786
     },
     "responsibilities": [
       "Collaborate directly with product owners on scope and timelines",
@@ -1027,8 +1027,8 @@
       "expert"
     ],
     "salary": {
-      "min": 12800,
-      "max": 17400,
+      "min": 16700,
+      "max": 22400,
       "currency": "USD",
       "period": "month"
     },
@@ -1037,10 +1037,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Olsztyn",
-      "country": "Poland",
-      "latitude": 53.7784,
-      "longitude": 20.4801
+      "city": "Austin",
+      "country": "United States",
+      "latitude": 30.2672,
+      "longitude": -97.7431
     },
     "responsibilities": [
       "Implement IAM policies, secrets management, and compliance controls",
@@ -1099,8 +1099,8 @@
       "regular"
     ],
     "salary": {
-      "min": 7000,
-      "max": 10200,
+      "min": 9500,
+      "max": 13000,
       "currency": "USD",
       "period": "month"
     },
@@ -1155,10 +1155,10 @@
     "createdAt": "2026-08-13T20:15:00.574Z",
     "applicationDeadline": "2026-09-04T20:15:00.574Z",
     "location": {
-      "city": "Gdynia",
-      "country": "Poland",
-      "latitude": 54.5189,
-      "longitude": 18.5305
+      "city": "Dallas",
+      "country": "United States",
+      "latitude": 32.7767,
+      "longitude": -96.797
     }
   },
   {
@@ -1174,8 +1174,8 @@
       "expert"
     ],
     "salary": {
-      "min": 5500,
-      "max": 8500,
+      "min": 7900,
+      "max": 11900,
       "currency": "USD",
       "period": "month"
     },
@@ -1184,10 +1184,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Sopot",
-      "country": "Poland",
-      "latitude": 54.4418,
-      "longitude": 18.5601
+      "city": "Houston",
+      "country": "United States",
+      "latitude": 29.7604,
+      "longitude": -95.3698
     },
     "responsibilities": [
       "Write unit and integration tests for critical user flows",
@@ -1243,8 +1243,8 @@
       "senior"
     ],
     "salary": {
-      "min": 8500,
-      "max": 11600,
+      "min": 11400,
+      "max": 15300,
       "currency": "USD",
       "period": "month"
     },
@@ -1253,10 +1253,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Gliwice",
-      "country": "Poland",
-      "latitude": 50.2945,
-      "longitude": 18.6714
+      "city": "San Antonio",
+      "country": "United States",
+      "latitude": 29.4241,
+      "longitude": -98.4936
     },
     "responsibilities": [
       "Drive adoption of Next.js App Router and performance budgets",
@@ -1315,8 +1315,8 @@
       "expert"
     ],
     "salary": {
-      "min": 14000,
-      "max": 18600,
+      "min": 18200,
+      "max": 23400,
       "currency": "USD",
       "period": "month"
     },
@@ -1367,10 +1367,10 @@
     "createdAt": "2026-08-10T20:15:00.574Z",
     "applicationDeadline": "2026-09-04T20:15:00.574Z",
     "location": {
-      "city": "Zabrze",
-      "country": "Poland",
-      "latitude": 50.3249,
-      "longitude": 18.7857
+      "city": "Nashville",
+      "country": "United States",
+      "latitude": 36.1627,
+      "longitude": -86.7816
     }
   },
   {
@@ -1386,8 +1386,8 @@
       "regular"
     ],
     "salary": {
-      "min": 6200,
-      "max": 8700,
+      "min": 8100,
+      "max": 10900,
       "currency": "USD",
       "period": "month"
     },
@@ -1396,10 +1396,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Bielsko-Biala",
-      "country": "Poland",
-      "latitude": 49.8224,
-      "longitude": 19.0469
+      "city": "Tampa",
+      "country": "United States",
+      "latitude": 27.9506,
+      "longitude": -82.4572
     },
     "responsibilities": [
       "Deliver high-complexity features with minimal supervision",
@@ -1459,8 +1459,8 @@
       "expert"
     ],
     "salary": {
-      "min": 6000,
-      "max": 10000,
+      "min": 8500,
+      "max": 13000,
       "currency": "USD",
       "period": "month"
     },
@@ -1511,10 +1511,10 @@
     "createdAt": "2026-08-08T20:15:00.574Z",
     "applicationDeadline": "2026-09-04T20:15:00.574Z",
     "location": {
-      "city": "Czestochowa",
-      "country": "Poland",
-      "latitude": 50.8118,
-      "longitude": 19.1203
+      "city": "San Francisco",
+      "country": "United States",
+      "latitude": 37.7749,
+      "longitude": -122.4194
     }
   },
   {
@@ -1530,8 +1530,8 @@
       "senior"
     ],
     "salary": {
-      "min": 6500,
-      "max": 10000,
+      "min": 8800,
+      "max": 13200,
       "currency": "USD",
       "period": "month"
     },
@@ -1582,10 +1582,10 @@
     "createdAt": "2026-08-07T20:15:00.574Z",
     "applicationDeadline": "2026-09-04T20:15:00.574Z",
     "location": {
-      "city": "Radom",
-      "country": "Poland",
-      "latitude": 51.4027,
-      "longitude": 21.1471
+      "city": "San Jose",
+      "country": "United States",
+      "latitude": 37.3382,
+      "longitude": -121.8863
     }
   },
   {
@@ -1601,8 +1601,8 @@
       "expert"
     ],
     "salary": {
-      "min": 11800,
-      "max": 16400,
+      "min": 15500,
+      "max": 21300,
       "currency": "USD",
       "period": "month"
     },
@@ -1611,10 +1611,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Sosnowiec",
-      "country": "Poland",
-      "latitude": 50.278,
-      "longitude": 19.1344
+      "city": "Los Angeles",
+      "country": "United States",
+      "latitude": 34.0522,
+      "longitude": -118.2437
     },
     "responsibilities": [
       "Operate Kubernetes clusters: upgrades, autoscaling, networking",
@@ -1670,8 +1670,8 @@
       "regular"
     ],
     "salary": {
-      "min": 7900,
-      "max": 11100,
+      "min": 10500,
+      "max": 14000,
       "currency": "USD",
       "period": "month"
     },
@@ -1680,10 +1680,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Opole",
-      "country": "Poland",
-      "latitude": 50.6751,
-      "longitude": 17.9213
+      "city": "San Diego",
+      "country": "United States",
+      "latitude": 32.7157,
+      "longitude": -117.1611
     },
     "responsibilities": [
       "Train and evaluate models with PyTorch or scikit-learn",
@@ -1743,8 +1743,8 @@
       "expert"
     ],
     "salary": {
-      "min": 6400,
-      "max": 9400,
+      "min": 9100,
+      "max": 13100,
       "currency": "USD",
       "period": "month"
     },
@@ -1796,10 +1796,10 @@
     "createdAt": "2026-08-04T20:15:00.574Z",
     "applicationDeadline": "2026-09-04T20:15:00.574Z",
     "location": {
-      "city": "Gorzow Wielkopolski",
-      "country": "Poland",
-      "latitude": 52.7368,
-      "longitude": 15.2288
+      "city": "Seattle",
+      "country": "United States",
+      "latitude": 47.6062,
+      "longitude": -122.3321
     }
   },
   {
@@ -1809,14 +1809,14 @@
       "id": "novatech",
       "name": "NovaTech"
     },
-    "description": "NovaTech's Plock team is looking for a frontend tech lead. Lead a frontend chapter of 4–6 engineers building a customer portal on React and Next.js. You set technical direction while still contributing hands-on code.",
+    "description": "NovaTech's Portland team is looking for a frontend tech lead. Lead a frontend chapter of 4–6 engineers building a customer portal on React and Next.js. You set technical direction while still contributing hands-on code.",
     "seniority": [
       "regular",
       "senior"
     ],
     "salary": {
-      "min": 7900,
-      "max": 11000,
+      "min": 10600,
+      "max": 14500,
       "currency": "USD",
       "period": "month"
     },
@@ -1864,10 +1864,10 @@
     "createdAt": "2026-08-03T20:15:00.574Z",
     "applicationDeadline": "2026-09-04T20:15:00.574Z",
     "location": {
-      "city": "Plock",
-      "country": "Poland",
-      "latitude": 52.5468,
-      "longitude": 19.7064
+      "city": "Portland",
+      "country": "United States",
+      "latitude": 45.5152,
+      "longitude": -122.6784
     }
   },
   {
@@ -1883,8 +1883,8 @@
       "expert"
     ],
     "salary": {
-      "min": 13100,
-      "max": 17700,
+      "min": 17200,
+      "max": 22400,
       "currency": "USD",
       "period": "month"
     },
@@ -1893,10 +1893,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Tarnow",
-      "country": "Poland",
-      "latitude": 50.0121,
-      "longitude": 20.9858
+      "city": "Denver",
+      "country": "United States",
+      "latitude": 39.7392,
+      "longitude": -104.9903
     },
     "responsibilities": [
       "Lead performance initiatives: Core Web Vitals, bundle analysis, caching",
@@ -1956,8 +1956,8 @@
       "regular"
     ],
     "salary": {
-      "min": 5700,
-      "max": 8200,
+      "min": 7600,
+      "max": 10400,
       "currency": "USD",
       "period": "month"
     },
@@ -2010,10 +2010,10 @@
     "createdAt": "2026-08-01T20:15:00.574Z",
     "applicationDeadline": "2026-09-04T20:15:00.574Z",
     "location": {
-      "city": "Kalisz",
-      "country": "Poland",
-      "latitude": 51.7617,
-      "longitude": 18.091
+      "city": "Salt Lake City",
+      "country": "United States",
+      "latitude": 40.7608,
+      "longitude": -111.891
     }
   },
   {
@@ -2029,8 +2029,8 @@
       "expert"
     ],
     "salary": {
-      "min": 7200,
-      "max": 11200,
+      "min": 9900,
+      "max": 14400,
       "currency": "USD",
       "period": "month"
     },
@@ -2039,10 +2039,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Legnica",
-      "country": "Poland",
-      "latitude": 51.207,
-      "longitude": 16.1619
+      "city": "Phoenix",
+      "country": "United States",
+      "latitude": 33.4484,
+      "longitude": -112.074
     },
     "responsibilities": [
       "Add observability: structured logging, metrics, and tracing",
@@ -2104,8 +2104,8 @@
       "senior"
     ],
     "salary": {
-      "min": 7600,
-      "max": 11100,
+      "min": 10100,
+      "max": 14500,
       "currency": "USD",
       "period": "month"
     },
@@ -2114,10 +2114,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Zielona Gora",
-      "country": "Poland",
-      "latitude": 51.9356,
-      "longitude": 15.5064
+      "city": "Las Vegas",
+      "country": "United States",
+      "latitude": 36.1699,
+      "longitude": -115.1398
     },
     "responsibilities": [
       "Collaborate directly with product owners on scope and timelines",
@@ -2166,14 +2166,14 @@
       "id": "devforge",
       "name": "DevForge"
     },
-    "description": "DevForge's Walbrzych team is looking for a cloud engineer. Implement disaster-recovery runbooks and quarterly game days for critical services.",
+    "description": "DevForge's Pittsburgh team is looking for a cloud engineer. Implement disaster-recovery runbooks and quarterly game days for critical services.",
     "seniority": [
       "expert",
       "expert"
     ],
     "salary": {
-      "min": 10900,
-      "max": 15500,
+      "min": 14400,
+      "max": 20100,
       "currency": "USD",
       "period": "month"
     },
@@ -2224,10 +2224,10 @@
     "createdAt": "2026-07-29T20:15:00.574Z",
     "applicationDeadline": "2026-08-21T20:15:00.574Z",
     "location": {
-      "city": "Walbrzych",
-      "country": "Poland",
-      "latitude": 50.7714,
-      "longitude": 16.2843
+      "city": "Pittsburgh",
+      "country": "United States",
+      "latitude": 40.4406,
+      "longitude": -79.9959
     }
   },
   {
@@ -2243,8 +2243,8 @@
       "regular"
     ],
     "salary": {
-      "min": 7300,
-      "max": 10500,
+      "min": 9800,
+      "max": 13300,
       "currency": "USD",
       "period": "month"
     },
@@ -2253,10 +2253,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Slupsk",
-      "country": "Poland",
-      "latitude": 54.4641,
-      "longitude": 17.0285
+      "city": "Cleveland",
+      "country": "United States",
+      "latitude": 41.4993,
+      "longitude": -81.6944
     },
     "responsibilities": [
       "Maintain feature stores and data validation checks",
@@ -2315,8 +2315,8 @@
       "expert"
     ],
     "salary": {
-      "min": 5800,
-      "max": 8800,
+      "min": 8300,
+      "max": 12300,
       "currency": "USD",
       "period": "month"
     },
@@ -2325,10 +2325,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Koszalin",
-      "country": "Poland",
-      "latitude": 54.1944,
-      "longitude": 16.1722
+      "city": "Milwaukee",
+      "country": "United States",
+      "latitude": 43.0389,
+      "longitude": -87.9065
     },
     "responsibilities": [
       "Translate Figma designs into pixel-accurate, responsive layouts",
@@ -2385,8 +2385,8 @@
       "senior"
     ],
     "salary": {
-      "min": 8800,
-      "max": 11900,
+      "min": 11700,
+      "max": 15700,
       "currency": "USD",
       "period": "month"
     },
@@ -2441,10 +2441,10 @@
     "createdAt": "2026-07-26T20:15:00.574Z",
     "applicationDeadline": "2026-08-21T20:15:00.574Z",
     "location": {
-      "city": "Jelenia Gora",
-      "country": "Poland",
-      "latitude": 50.9045,
-      "longitude": 15.7198
+      "city": "Jacksonville",
+      "country": "United States",
+      "latitude": 30.3322,
+      "longitude": -81.6557
     }
   },
   {
@@ -2460,8 +2460,8 @@
       "expert"
     ],
     "salary": {
-      "min": 14500,
-      "max": 19100,
+      "min": 18700,
+      "max": 23900,
       "currency": "USD",
       "period": "month"
     },
@@ -2470,10 +2470,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Nowy Sacz",
-      "country": "Poland",
-      "latitude": 49.6249,
-      "longitude": 20.6915
+      "city": "Memphis",
+      "country": "United States",
+      "latitude": 35.1495,
+      "longitude": -90.049
     },
     "responsibilities": [
       "Represent frontend in architecture reviews and incident post-mortems",
@@ -2533,8 +2533,8 @@
       "regular"
     ],
     "salary": {
-      "min": 5300,
-      "max": 7700,
+      "min": 7000,
+      "max": 9800,
       "currency": "USD",
       "period": "month"
     },
@@ -2587,10 +2587,10 @@
     "createdAt": "2026-07-24T20:15:00.574Z",
     "applicationDeadline": "2026-08-21T20:15:00.574Z",
     "location": {
-      "city": "Konin",
-      "country": "Poland",
-      "latitude": 52.2231,
-      "longitude": 18.2512
+      "city": "Louisville",
+      "country": "United States",
+      "latitude": 38.2527,
+      "longitude": -85.7585
     }
   },
   {
@@ -2606,8 +2606,8 @@
       "expert"
     ],
     "salary": {
-      "min": 6400,
-      "max": 10400,
+      "min": 9000,
+      "max": 13500,
       "currency": "USD",
       "period": "month"
     },
@@ -2660,10 +2660,10 @@
     "createdAt": "2026-07-23T20:15:00.574Z",
     "applicationDeadline": "2026-08-21T20:15:00.574Z",
     "location": {
-      "city": "Pila",
-      "country": "Poland",
-      "latitude": 53.1514,
-      "longitude": 16.7378
+      "city": "Richmond",
+      "country": "United States",
+      "latitude": 37.5407,
+      "longitude": -77.436
     }
   },
   {
@@ -2679,8 +2679,8 @@
       "senior"
     ],
     "salary": {
-      "min": 6900,
-      "max": 10400,
+      "min": 9200,
+      "max": 13600,
       "currency": "USD",
       "period": "month"
     },
@@ -2689,10 +2689,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Elblag",
-      "country": "Poland",
-      "latitude": 54.1561,
-      "longitude": 19.4045
+      "city": "Providence",
+      "country": "United States",
+      "latitude": 41.824,
+      "longitude": -71.4128
     },
     "responsibilities": [
       "Collaborate directly with product owners on scope and timelines",
@@ -2754,8 +2754,8 @@
       "expert"
     ],
     "salary": {
-      "min": 12300,
-      "max": 16900,
+      "min": 16100,
+      "max": 21900,
       "currency": "USD",
       "period": "month"
     },
@@ -2764,10 +2764,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Grudziadz",
-      "country": "Poland",
-      "latitude": 53.4843,
-      "longitude": 18.7536
+      "city": "Buffalo",
+      "country": "United States",
+      "latitude": 42.8864,
+      "longitude": -78.8784
     },
     "responsibilities": [
       "Build CI/CD integrations for infrastructure changes with review gates",
@@ -2827,8 +2827,8 @@
       "regular"
     ],
     "salary": {
-      "min": 8300,
-      "max": 11400,
+      "min": 10900,
+      "max": 14300,
       "currency": "USD",
       "period": "month"
     },
@@ -2878,10 +2878,10 @@
     "createdAt": "2026-07-20T20:15:00.574Z",
     "applicationDeadline": "2026-08-21T20:15:00.574Z",
     "location": {
-      "city": "Rybnik",
-      "country": "Poland",
-      "latitude": 50.1022,
-      "longitude": 18.5464
+      "city": "Boise",
+      "country": "United States",
+      "latitude": 43.615,
+      "longitude": -116.2023
     }
   },
   {
@@ -2913,8 +2913,8 @@
       }
     ],
     "salary": {
-      "min": 4100,
-      "max": 6600,
+      "min": 5700,
+      "max": 9000,
       "currency": "USD",
       "period": "month"
     },
@@ -2926,10 +2926,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Tychy",
-      "country": "Poland",
-      "latitude": 50.1372,
-      "longitude": 18.9664
+      "city": "Albuquerque",
+      "country": "United States",
+      "latitude": 35.0844,
+      "longitude": -106.6504
     },
     "responsibilities": [
       "Forecast accurately in Salesforce/HubSpot CRM",
@@ -2985,8 +2985,8 @@
       }
     ],
     "salary": {
-      "min": 3000,
-      "max": 5000,
+      "min": 4200,
+      "max": 6900,
       "currency": "USD",
       "period": "month"
     },
@@ -3018,10 +3018,10 @@
     "createdAt": "2026-08-20T10:00:00.000Z",
     "applicationDeadline": "2026-09-10T23:59:59.000Z",
     "location": {
-      "city": "Dabrowa Gornicza",
-      "country": "Poland",
-      "latitude": 50.3219,
-      "longitude": 19.1889
+      "city": "Oklahoma City",
+      "country": "United States",
+      "latitude": 35.4676,
+      "longitude": -97.5164
     },
     "niceToHave": []
   },
@@ -3032,13 +3032,13 @@
       "id": "cloudscale",
       "name": "CloudScale"
     },
-    "description": "CloudScale's Chorzow team is looking for a staff frontend engineer. Staff-level IC role spanning multiple product teams. You tackle cross-cutting frontend challenges: performance, observability, and platform tooling.",
+    "description": "CloudScale's New Orleans team is looking for a staff frontend engineer. Staff-level IC role spanning multiple product teams. You tackle cross-cutting frontend challenges: performance, observability, and platform tooling.",
     "seniority": [
       "expert"
     ],
     "salary": {
-      "min": 12200,
-      "max": 16400,
+      "min": 15900,
+      "max": 20600,
       "currency": "USD",
       "period": "month"
     },
@@ -3047,10 +3047,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Chorzow",
-      "country": "Poland",
-      "latitude": 50.2984,
-      "longitude": 18.9543
+      "city": "New Orleans",
+      "country": "United States",
+      "latitude": 29.9511,
+      "longitude": -90.0715
     },
     "responsibilities": [
       "Lead performance initiatives: Core Web Vitals, bundle analysis, caching",
@@ -3107,8 +3107,8 @@
       "senior"
     ],
     "salary": {
-      "min": 3800,
-      "max": 5400,
+      "min": 5000,
+      "max": 6800,
       "currency": "USD",
       "period": "month"
     },
@@ -3117,10 +3117,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Suwalki",
-      "country": "Poland",
-      "latitude": 54.1118,
-      "longitude": 22.9308
+      "city": "Orlando",
+      "country": "United States",
+      "latitude": 28.5383,
+      "longitude": -81.3792
     },
     "responsibilities": [
       "Onboard new team members on frontend conventions",
@@ -3183,8 +3183,8 @@
       "senior"
     ],
     "salary": {
-      "min": 6700,
-      "max": 10200,
+      "min": 9100,
+      "max": 13000,
       "currency": "USD",
       "period": "month"
     },
@@ -3193,10 +3193,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Zamosc",
-      "country": "Poland",
-      "latitude": 50.7231,
-      "longitude": 23.2519
+      "city": "New York",
+      "country": "United States",
+      "latitude": 40.7361,
+      "longitude": -73.973
     },
     "responsibilities": [
       "Write efficient SQL queries and database migrations",
@@ -3255,8 +3255,8 @@
       "senior"
     ],
     "salary": {
-      "min": 5100,
-      "max": 7900,
+      "min": 6900,
+      "max": 10500,
       "currency": "USD",
       "period": "month"
     },
@@ -3266,10 +3266,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Leszno",
-      "country": "Poland",
-      "latitude": 51.845,
-      "longitude": 16.5749
+      "city": "Boston",
+      "country": "United States",
+      "latitude": 42.3684,
+      "longitude": -71.014
     },
     "responsibilities": [
       "Collaborate directly with product owners on scope and timelines",
@@ -3328,8 +3328,8 @@
       "expert"
     ],
     "salary": {
-      "min": 8900,
-      "max": 12500,
+      "min": 11700,
+      "max": 16200,
       "currency": "USD",
       "period": "month"
     },
@@ -3338,10 +3338,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Krosno",
-      "country": "Poland",
-      "latitude": 49.6833,
-      "longitude": 21.7667
+      "city": "Philadelphia",
+      "country": "United States",
+      "latitude": 39.9437,
+      "longitude": -75.1221
     },
     "responsibilities": [
       "Provision and maintain AWS resources via Terraform modules",
@@ -3399,14 +3399,14 @@
       "id": "nimbus",
       "name": "Nimbus Labs"
     },
-    "description": "Nimbus Labs's Pabianice team is looking for a ml engineer. Own model monitoring: drift alerts, retraining schedules, and rollback playbooks.",
+    "description": "Nimbus Labs's Washington team is looking for a ml engineer. Own model monitoring: drift alerts, retraining schedules, and rollback playbooks.",
     "seniority": [
       "senior",
       "expert"
     ],
     "salary": {
-      "min": 4900,
-      "max": 6900,
+      "min": 6500,
+      "max": 8800,
       "currency": "USD",
       "period": "month"
     },
@@ -3415,10 +3415,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Pabianice",
-      "country": "Poland",
-      "latitude": 51.6644,
-      "longitude": 19.3547
+      "city": "Washington",
+      "country": "United States",
+      "latitude": 38.8835,
+      "longitude": -77.0053
     },
     "responsibilities": [
       "Package models for serving (Docker, batch and real-time endpoints)",
@@ -3475,8 +3475,8 @@
       "senior"
     ],
     "salary": {
-      "min": 10200,
-      "max": 14200,
+      "min": 12900,
+      "max": 17400,
       "currency": "USD",
       "period": "month"
     },
@@ -3485,10 +3485,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Mielec",
-      "country": "Poland",
-      "latitude": 50.2871,
-      "longitude": 21.4239
+      "city": "Atlanta",
+      "country": "United States",
+      "latitude": 33.7163,
+      "longitude": -84.376
     },
     "responsibilities": [
       "Document runbooks and internal platform RFCs",
@@ -3553,10 +3553,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "New York",
+      "city": "Miami",
       "country": "United States",
-      "latitude": 40.7128,
-      "longitude": -74.006
+      "latitude": 25.7283,
+      "longitude": -80.1997
     },
     "responsibilities": [
       "Manage AWS deployment targets and environment promotion",
@@ -3609,7 +3609,7 @@
       "id": "northbridge",
       "name": "Northbridge"
     },
-    "description": "Northbridge's Boston team is looking for a product designer. Evolve design tokens and Figma libraries ahead of a multi-product rebrand.",
+    "description": "Northbridge's Charlotte team is looking for a product designer. Evolve design tokens and Figma libraries ahead of a multi-product rebrand.",
     "seniority": [
       "regular",
       "senior"
@@ -3626,10 +3626,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Boston",
+      "city": "Charlotte",
       "country": "United States",
-      "latitude": 42.3601,
-      "longitude": -71.0589
+      "latitude": 35.2013,
+      "longitude": -80.8705
     },
     "responsibilities": [
       "Ensure accessibility and responsive behavior across breakpoints",
@@ -3700,10 +3700,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Philadelphia",
+      "city": "Raleigh",
       "country": "United States",
-      "latitude": 39.9526,
-      "longitude": -75.1652
+      "latitude": 35.7679,
+      "longitude": -78.6778
     },
     "responsibilities": [
       "Monitor data quality SLAs and incident response for pipelines",
@@ -3769,10 +3769,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Washington",
+      "city": "Chicago",
       "country": "United States",
-      "latitude": 38.9072,
-      "longitude": -77.0369
+      "latitude": 41.8834,
+      "longitude": -87.6751
     },
     "responsibilities": [
       "Run vulnerability assessments and coordinate remediation",
@@ -3840,10 +3840,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Atlanta",
+      "city": "Detroit",
       "country": "United States",
-      "latitude": 33.749,
-      "longitude": -84.388
+      "latitude": 42.3524,
+      "longitude": -83.0822
     },
     "responsibilities": [
       "Implement screens and navigation in React Native",
@@ -3899,7 +3899,7 @@
       "id": "quantumleaf",
       "name": "QuantumLeaf"
     },
-    "description": "QuantumLeaf's Miami team is looking for a engineering manager. Scale a squad from four to eight engineers while keeping predictable delivery.",
+    "description": "QuantumLeaf's Minneapolis team is looking for a engineering manager. Scale a squad from four to eight engineers while keeping predictable delivery.",
     "seniority": [
       "senior",
       "expert"
@@ -3915,10 +3915,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Miami",
+      "city": "Minneapolis",
       "country": "United States",
-      "latitude": 25.7617,
-      "longitude": -80.1918
+      "latitude": 45.0093,
+      "longitude": -93.2839
     },
     "responsibilities": [
       "Lead hiring, onboarding, and career development for your team",
@@ -3987,10 +3987,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Charlotte",
+      "city": "Columbus",
       "country": "United States",
-      "latitude": 35.2271,
-      "longitude": -80.8431
+      "latitude": 39.9952,
+      "longitude": -82.9941
     },
     "responsibilities": [
       "Coach account executives on discovery, demos, and closing",
@@ -4000,7 +4000,7 @@
       "Forecast accurately in Salesforce/HubSpot CRM"
     ],
     "requirements": [
-      "Fluent Polish and English; additional CEE language a plus",
+      "Fluent English; experience selling into North American mid-market and enterprise accounts",
       "Track record of exceeding quota in enterprise deals",
       "5+ years in B2B technology sales with management experience",
       "Valid driving license for client visits"
@@ -4063,10 +4063,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Raleigh",
+      "city": "Indianapolis",
       "country": "United States",
-      "latitude": 35.7796,
-      "longitude": -78.6382
+      "latitude": 39.7964,
+      "longitude": -86.1326
     },
     "responsibilities": [
       "Create and schedule content for blog, LinkedIn, and newsletters",
@@ -4132,10 +4132,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Chicago",
+      "city": "Kansas City",
       "country": "United States",
-      "latitude": 41.8781,
-      "longitude": -87.6298
+      "latitude": 39.1147,
+      "longitude": -94.539
     },
     "responsibilities": [
       "Maintain test data fixtures and CI integration for nightly runs",
@@ -4203,10 +4203,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Detroit",
+      "city": "Austin",
       "country": "United States",
-      "latitude": 42.3314,
-      "longitude": -83.0458
+      "latitude": 30.2654,
+      "longitude": -97.7036
     },
     "responsibilities": [
       "Define and monitor SLOs/SLIs with error budget policies",
@@ -4258,7 +4258,7 @@
       "id": "opengrid",
       "name": "OpenGrid"
     },
-    "description": "OpenGrid's Minneapolis team is looking for a solutions architect. Lead discovery workshops for enterprise prospects with complex integration requirements.",
+    "description": "OpenGrid's Dallas team is looking for a solutions architect. Lead discovery workshops for enterprise prospects with complex integration requirements.",
     "seniority": [
       "expert"
     ],
@@ -4273,10 +4273,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Minneapolis",
+      "city": "Dallas",
       "country": "United States",
-      "latitude": 44.9778,
-      "longitude": -93.265
+      "latitude": 32.7586,
+      "longitude": -96.7625
     },
     "responsibilities": [
       "Lead technical discovery and architecture workshops with prospects",
@@ -4346,10 +4346,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Columbus",
+      "city": "Houston",
       "country": "United States",
-      "latitude": 39.9612,
-      "longitude": -82.9988
+      "latitude": 29.7305,
+      "longitude": -95.3507
     },
     "responsibilities": [
       "Write unit and integration tests for critical user flows",
@@ -4422,10 +4422,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Indianapolis",
+      "city": "San Antonio",
       "country": "United States",
-      "latitude": 39.7684,
-      "longitude": -86.1581
+      "latitude": 29.3899,
+      "longitude": -98.4936
     },
     "responsibilities": [
       "Break down epics with product and mentor mid-level developers",
@@ -4494,10 +4494,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Kansas City",
+      "city": "Nashville",
       "country": "United States",
-      "latitude": 39.0997,
-      "longitude": -94.5786
+      "latitude": 36.1328,
+      "longitude": -86.8021
     },
     "responsibilities": [
       "Lead performance initiatives: Core Web Vitals, bundle analysis, caching",
@@ -4561,10 +4561,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Austin",
+      "city": "Tampa",
       "country": "United States",
-      "latitude": 30.2672,
-      "longitude": -97.7431
+      "latitude": 27.9325,
+      "longitude": -82.49
     },
     "responsibilities": [
       "Optimize rendering for data-heavy tables and live updates",
@@ -4634,10 +4634,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Dallas",
+      "city": "San Francisco",
       "country": "United States",
-      "latitude": 32.7767,
-      "longitude": -96.797
+      "latitude": 37.7731,
+      "longitude": -122.4626
     },
     "responsibilities": [
       "Design and implement HTTP APIs with clear versioning and error contracts",
@@ -4690,7 +4690,7 @@
       "id": "stackline",
       "name": "Stackline"
     },
-    "description": "Stackline's Houston team is looking for a full stack engineer. Ship a greenfield analytics module from Postgres schema to React dashboards.",
+    "description": "Stackline's San Jose team is looking for a full stack engineer. Ship a greenfield analytics module from Postgres schema to React dashboards.",
     "seniority": [
       "regular",
       "senior"
@@ -4707,10 +4707,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Houston",
+      "city": "San Jose",
       "country": "United States",
-      "latitude": 29.7604,
-      "longitude": -95.3698
+      "latitude": 37.3532,
+      "longitude": -121.9249
     },
     "responsibilities": [
       "Design database schemas and write migrations",
@@ -4779,10 +4779,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "San Antonio",
+      "city": "Los Angeles",
       "country": "United States",
-      "latitude": 29.4241,
-      "longitude": -98.4936
+      "latitude": 34.0802,
+      "longitude": -118.2674
     },
     "responsibilities": [
       "Build CI/CD integrations for infrastructure changes with review gates",
@@ -4853,10 +4853,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Nashville",
+      "city": "San Diego",
       "country": "United States",
-      "latitude": 36.1627,
-      "longitude": -86.7816
+      "latitude": 32.7497,
+      "longitude": -117.1653
     },
     "responsibilities": [
       "Monitor model drift and retraining triggers in production",
@@ -4927,10 +4927,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Tampa",
+      "city": "Seattle",
       "country": "United States",
-      "latitude": 27.9506,
-      "longitude": -82.4572
+      "latitude": 47.6377,
+      "longitude": -122.3123
     },
     "responsibilities": [
       "Develop platform services and CLIs in Go",
@@ -4999,10 +4999,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "San Francisco",
+      "city": "Portland",
       "country": "United States",
-      "latitude": 37.7749,
-      "longitude": -122.4194
+      "latitude": 45.5362,
+      "longitude": -122.64
     },
     "responsibilities": [
       "Manage AWS deployment targets and environment promotion",
@@ -5073,10 +5073,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "San Jose",
+      "city": "Denver",
       "country": "United States",
-      "latitude": 37.3382,
-      "longitude": -121.8863
+      "latitude": 39.7445,
+      "longitude": -104.9464
     },
     "responsibilities": [
       "Ensure accessibility and responsive behavior across breakpoints",
@@ -5143,10 +5143,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Los Angeles",
+      "city": "Salt Lake City",
       "country": "United States",
-      "latitude": 34.0522,
-      "longitude": -118.2437
+      "latitude": 40.7491,
+      "longitude": -111.8486
     },
     "responsibilities": [
       "Develop Spark jobs and orchestrate daily pipeline runs",
@@ -5213,10 +5213,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "San Diego",
+      "city": "Phoenix",
       "country": "United States",
-      "latitude": 32.7157,
-      "longitude": -117.1611
+      "latitude": 33.4226,
+      "longitude": -112.0471
     },
     "responsibilities": [
       "Support incident response for security events",
@@ -5286,10 +5286,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Seattle",
+      "city": "Las Vegas",
       "country": "United States",
-      "latitude": 47.6062,
-      "longitude": -122.3321
+      "latitude": 36.1365,
+      "longitude": -115.131
     },
     "responsibilities": [
       "Write unit and Detox/Maestro E2E tests for releases",
@@ -5344,7 +5344,7 @@
       "id": "quantumleaf",
       "name": "QuantumLeaf"
     },
-    "description": "QuantumLeaf's Portland team is looking for a engineering manager. Engineering manager for a squad of 6–8 engineers building core platform services. Balance delivery, people development, and technical strategy.",
+    "description": "QuantumLeaf's Pittsburgh team is looking for a engineering manager. Engineering manager for a squad of 6–8 engineers building core platform services. Balance delivery, people development, and technical strategy.",
     "seniority": [
       "senior",
       "expert"
@@ -5360,10 +5360,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Portland",
+      "city": "Pittsburgh",
       "country": "United States",
-      "latitude": 45.5152,
-      "longitude": -122.6784
+      "latitude": 40.4079,
+      "longitude": -80.009
     },
     "responsibilities": [
       "Conduct 1:1s, performance reviews, and feedback cycles",
@@ -5431,10 +5431,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Denver",
+      "city": "Cleveland",
       "country": "United States",
-      "latitude": 39.7392,
-      "longitude": -104.9903
+      "latitude": 41.4756,
+      "longitude": -81.7272
     },
     "responsibilities": [
       "Build relationships with C-level buyers and procurement",
@@ -5442,7 +5442,7 @@
       "Forecast accurately in Salesforce/HubSpot CRM"
     ],
     "requirements": [
-      "Fluent Polish and English; additional CEE language a plus",
+      "Fluent English; experience selling into North American mid-market and enterprise accounts",
       "Experience selling SaaS with 6–12 month sales cycles",
       "Valid driving license for client visits"
     ],
@@ -5502,10 +5502,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Salt Lake City",
+      "city": "Milwaukee",
       "country": "United States",
-      "latitude": 40.7608,
-      "longitude": -111.891
+      "latitude": 43.03,
+      "longitude": -87.9517
     },
     "responsibilities": [
       "Coordinate with design on landing pages and creatives",
@@ -5577,10 +5577,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Phoenix",
+      "city": "Jacksonville",
       "country": "United States",
-      "latitude": 33.4484,
-      "longitude": -112.074
+      "latitude": 30.3405,
+      "longitude": -81.6941
     },
     "responsibilities": [
       "Advocate for quality gates in the development lifecycle",
@@ -5628,7 +5628,7 @@
       "id": "skyforge",
       "name": "SkyForge"
     },
-    "description": "SkyForge's Las Vegas team is looking for a site reliability engineer. Run game days and chaos experiments on Kubernetes workloads before Black Friday traffic.",
+    "description": "SkyForge's Memphis team is looking for a site reliability engineer. Run game days and chaos experiments on Kubernetes workloads before Black Friday traffic.",
     "seniority": [
       "senior",
       "expert"
@@ -5644,10 +5644,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Las Vegas",
+      "city": "Memphis",
       "country": "United States",
-      "latitude": 36.1699,
-      "longitude": -115.1398
+      "latitude": 35.1728,
+      "longitude": -90.0796
     },
     "responsibilities": [
       "Define and monitor SLOs/SLIs with error budget policies",
@@ -5701,7 +5701,7 @@
       "id": "opengrid",
       "name": "OpenGrid"
     },
-    "description": "OpenGrid's Pittsburgh team is looking for a solutions architect. Support sales on RFP responses, security questionnaires, and effort estimates.",
+    "description": "OpenGrid's Louisville team is looking for a solutions architect. Support sales on RFP responses, security questionnaires, and effort estimates.",
     "seniority": [
       "expert"
     ],
@@ -5716,10 +5716,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Pittsburgh",
+      "city": "Louisville",
       "country": "United States",
-      "latitude": 40.4406,
-      "longitude": -79.9959
+      "latitude": 38.2852,
+      "longitude": -85.772
     },
     "responsibilities": [
       "Stay current on AWS services and industry compliance requirements",
@@ -5787,10 +5787,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Cleveland",
+      "city": "Richmond",
       "country": "United States",
-      "latitude": 41.4993,
-      "longitude": -81.6944
+      "latitude": 37.5742,
+      "longitude": -77.4278
     },
     "responsibilities": [
       "Participate in code reviews and frontend guild sessions",
@@ -5858,10 +5858,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Milwaukee",
+      "city": "Providence",
       "country": "United States",
-      "latitude": 43.0389,
-      "longitude": -87.9065
+      "latitude": 41.8502,
+      "longitude": -71.3833
     },
     "responsibilities": [
       "Own production incidents affecting the web client when needed",
@@ -5932,10 +5932,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Jacksonville",
+      "city": "Buffalo",
       "country": "United States",
-      "latitude": 30.3322,
-      "longitude": -81.6557
+      "latitude": 42.8986,
+      "longitude": -78.8348
     },
     "responsibilities": [
       "Mentor senior engineers and raise the bar in code reviews",
@@ -5998,10 +5998,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Memphis",
+      "city": "Boise",
       "country": "United States",
-      "latitude": 35.1495,
-      "longitude": -90.049
+      "latitude": 43.6102,
+      "longitude": -116.1556
     },
     "responsibilities": [
       "Optimize rendering for data-heavy tables and live updates",
@@ -6071,10 +6071,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Louisville",
+      "city": "Albuquerque",
       "country": "United States",
-      "latitude": 38.2527,
-      "longitude": -85.7585
+      "latitude": 35.0638,
+      "longitude": -106.6171
     },
     "responsibilities": [
       "Write efficient SQL queries and database migrations",
@@ -6147,10 +6147,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Richmond",
+      "city": "Oklahoma City",
       "country": "United States",
-      "latitude": 37.5407,
-      "longitude": -77.436
+      "latitude": 35.4364,
+      "longitude": -97.4993
     },
     "responsibilities": [
       "Build full features spanning React frontend and Express/Nest APIs",
@@ -6217,10 +6217,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Providence",
+      "city": "New Orleans",
       "country": "United States",
-      "latitude": 41.824,
-      "longitude": -71.4128
+      "latitude": 29.9171,
+      "longitude": -90.0749
     },
     "responsibilities": [
       "Provision and maintain AWS resources via Terraform modules",
@@ -6291,10 +6291,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Buffalo",
+      "city": "Orlando",
       "country": "United States",
-      "latitude": 42.8864,
-      "longitude": -78.8784
+      "latitude": 28.51,
+      "longitude": -81.4009
     },
     "responsibilities": [
       "Train and evaluate models with PyTorch or scikit-learn",
@@ -6362,10 +6362,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Boise",
+      "city": "New York",
       "country": "United States",
-      "latitude": 43.615,
-      "longitude": -116.2023
+      "latitude": 40.7094,
+      "longitude": -73.9421
     },
     "responsibilities": [
       "Support product teams during migrations to the platform",
@@ -6429,10 +6429,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Albuquerque",
+      "city": "Boston",
       "country": "United States",
-      "latitude": 35.0844,
-      "longitude": -106.6504
+      "latitude": 42.3336,
+      "longitude": -71.0038
     },
     "responsibilities": [
       "Automate secrets rotation and certificate management",
@@ -6499,10 +6499,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Oklahoma City",
+      "city": "Philadelphia",
       "country": "United States",
-      "latitude": 35.4676,
-      "longitude": -97.5164
+      "latitude": 39.9097,
+      "longitude": -75.1355
     },
     "responsibilities": [
       "Run discovery sessions, user interviews, and usability tests",
@@ -6552,7 +6552,7 @@
       "id": "bluepeak",
       "name": "BluePeak"
     },
-    "description": "BluePeak's New Orleans team is looking for a data engineer. Build batch and streaming data pipelines feeding analytics and ML features. Stack: Python, Apache Spark, dbt, and cloud warehouse (Snowflake/BigQuery).",
+    "description": "BluePeak's Washington team is looking for a data engineer. Build batch and streaming data pipelines feeding analytics and ML features. Stack: Python, Apache Spark, dbt, and cloud warehouse (Snowflake/BigQuery).",
     "seniority": [
       "regular",
       "senior"
@@ -6568,10 +6568,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "New Orleans",
+      "city": "Washington",
       "country": "United States",
-      "latitude": 29.9511,
-      "longitude": -90.0715
+      "latitude": 38.8586,
+      "longitude": -77.038
     },
     "responsibilities": [
       "Develop Spark jobs and orchestrate daily pipeline runs",
@@ -6638,10 +6638,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Orlando",
+      "city": "Atlanta",
       "country": "United States",
-      "latitude": 28.5383,
-      "longitude": -81.3792
+      "latitude": 33.7069,
+      "longitude": -84.4172
     },
     "responsibilities": [
       "Maintain IAM policies, SSO, and least-privilege access",
@@ -6703,8 +6703,8 @@
       "senior"
     ],
     "salary": {
-      "min": 5600,
-      "max": 8400,
+      "min": 7500,
+      "max": 10700,
       "currency": "USD",
       "period": "month"
     },
@@ -6713,10 +6713,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Warsaw",
-      "country": "Poland",
-      "latitude": 52.253,
-      "longitude": 21.053
+      "city": "Miami",
+      "country": "United States",
+      "latitude": 25.7367,
+      "longitude": -80.238
     },
     "responsibilities": [
       "Implement screens and navigation in React Native",
@@ -6774,8 +6774,8 @@
       "expert"
     ],
     "salary": {
-      "min": 10800,
-      "max": 15300,
+      "min": 14300,
+      "max": 19700,
       "currency": "USD",
       "period": "month"
     },
@@ -6784,10 +6784,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Krakow",
-      "country": "Poland",
-      "latitude": 50.0697,
-      "longitude": 19.9889
+      "city": "Charlotte",
+      "country": "United States",
+      "latitude": 35.2254,
+      "longitude": -80.9025
     },
     "responsibilities": [
       "Remove blockers and improve engineering processes",
@@ -6845,8 +6845,8 @@
       "senior"
     ],
     "salary": {
-      "min": 2300,
-      "max": 3600,
+      "min": 3200,
+      "max": 5000,
       "currency": "USD",
       "period": "month"
     },
@@ -6856,10 +6856,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Wroclaw",
-      "country": "Poland",
-      "latitude": 51.099,
-      "longitude": 17.0911
+      "city": "Raleigh",
+      "country": "United States",
+      "latitude": 35.8016,
+      "longitude": -78.6916
     },
     "responsibilities": [
       "Forecast accurately in Salesforce/HubSpot CRM",
@@ -6870,7 +6870,7 @@
     ],
     "requirements": [
       "Valid driving license for client visits",
-      "Fluent Polish and English; additional CEE language a plus",
+      "Fluent English; experience selling into North American mid-market and enterprise accounts",
       "5+ years in B2B technology sales with management experience"
     ],
     "niceToHave": [],
@@ -6916,8 +6916,8 @@
       "regular"
     ],
     "salary": {
-      "min": 2400,
-      "max": 4000,
+      "min": 3400,
+      "max": 5500,
       "currency": "USD",
       "period": "month"
     },
@@ -6926,10 +6926,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Gdansk",
-      "country": "Poland",
-      "latitude": 54.3283,
-      "longitude": 18.6888
+      "city": "Chicago",
+      "country": "United States",
+      "latitude": 41.9184,
+      "longitude": -87.6663
     },
     "responsibilities": [
       "Support paid campaigns on Google Ads and Meta with A/B tests",
@@ -6981,14 +6981,14 @@
       "id": "corelane",
       "name": "CoreLane"
     },
-    "description": "CoreLane's Poznan team is looking for a qa engineer. Expand Playwright coverage for checkout, billing, and admin flows before peak season.",
+    "description": "CoreLane's Detroit team is looking for a qa engineer. Expand Playwright coverage for checkout, billing, and admin flows before peak season.",
     "seniority": [
       "regular",
       "senior"
     ],
     "salary": {
-      "min": 4100,
-      "max": 6600,
+      "min": 5700,
+      "max": 8900,
       "currency": "USD",
       "period": "month"
     },
@@ -6997,10 +6997,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Poznan",
-      "country": "Poland",
-      "latitude": 52.3737,
-      "longitude": 16.9416
+      "city": "Detroit",
+      "country": "United States",
+      "latitude": 42.3798,
+      "longitude": -83.0515
     },
     "responsibilities": [
       "Maintain test data fixtures and CI integration for nightly runs",
@@ -7059,8 +7059,8 @@
       "expert"
     ],
     "salary": {
-      "min": 9800,
-      "max": 13800,
+      "min": 12700,
+      "max": 17700,
       "currency": "USD",
       "period": "month"
     },
@@ -7069,10 +7069,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Lodz",
-      "country": "Poland",
-      "latitude": 51.7258,
-      "longitude": 19.4445
+      "city": "Minneapolis",
+      "country": "United States",
+      "latitude": 45.0222,
+      "longitude": -93.2371
     },
     "responsibilities": [
       "Lead incident response, post-mortems, and action item follow-up",
@@ -7122,13 +7122,13 @@
       "id": "opengrid",
       "name": "OpenGrid"
     },
-    "description": "OpenGrid's Katowice team is looking for a solutions architect. Support sales on RFP responses, security questionnaires, and effort estimates.",
+    "description": "OpenGrid's Columbus team is looking for a solutions architect. Support sales on RFP responses, security questionnaires, and effort estimates.",
     "seniority": [
       "expert"
     ],
     "salary": {
-      "min": 7100,
-      "max": 9500,
+      "min": 9400,
+      "max": 12700,
       "currency": "USD",
       "period": "month"
     },
@@ -7137,10 +7137,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Katowice",
-      "country": "Poland",
-      "latitude": 50.2391,
-      "longitude": 18.9887
+      "city": "Columbus",
+      "country": "United States",
+      "latitude": 39.9904,
+      "longitude": -82.9482
     },
     "responsibilities": [
       "Stay current on AWS services and industry compliance requirements",
@@ -7201,8 +7201,8 @@
       "senior"
     ],
     "salary": {
-      "min": 4600,
-      "max": 7200,
+      "min": 6600,
+      "max": 10100,
       "currency": "USD",
       "period": "month"
     },
@@ -7212,10 +7212,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Lublin",
-      "country": "Poland",
-      "latitude": 51.2348,
-      "longitude": 22.5171
+      "city": "Indianapolis",
+      "country": "United States",
+      "latitude": 39.7751,
+      "longitude": -86.0955
     },
     "responsibilities": [
       "Implement UI features in Angular with reusable, testable components",
@@ -7274,8 +7274,8 @@
       "expert"
     ],
     "salary": {
-      "min": 7700,
-      "max": 10500,
+      "min": 10200,
+      "max": 13900,
       "currency": "USD",
       "period": "month"
     },
@@ -7284,10 +7284,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Szczecin",
-      "country": "Poland",
-      "latitude": 53.4338,
-      "longitude": 14.4961
+      "city": "Kansas City",
+      "country": "United States",
+      "latitude": 39.0823,
+      "longitude": -94.5202
     },
     "responsibilities": [
       "Partner with design on component API and design-system evolution",
@@ -7345,8 +7345,8 @@
       "expert"
     ],
     "salary": {
-      "min": 12200,
-      "max": 16400,
+      "min": 15900,
+      "max": 20600,
       "currency": "USD",
       "period": "month"
     },
@@ -7355,10 +7355,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Bydgoszcz",
-      "country": "Poland",
-      "latitude": 53.1445,
-      "longitude": 17.9635
+      "city": "Austin",
+      "country": "United States",
+      "latitude": 30.23,
+      "longitude": -97.707
     },
     "responsibilities": [
       "Design and roll out frontend platform capabilities (build tooling, linting, testing)",
@@ -7415,8 +7415,8 @@
       "senior"
     ],
     "salary": {
-      "min": 3800,
-      "max": 5400,
+      "min": 5000,
+      "max": 6800,
       "currency": "USD",
       "period": "month"
     },
@@ -7425,10 +7425,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Bialystok",
-      "country": "Poland",
-      "latitude": 53.164,
-      "longitude": 23.1465
+      "city": "Dallas",
+      "country": "United States",
+      "latitude": 32.729,
+      "longitude": -96.786
     },
     "responsibilities": [
       "Onboard new team members on frontend conventions",
@@ -7488,8 +7488,8 @@
       "senior"
     ],
     "salary": {
-      "min": 6700,
-      "max": 10200,
+      "min": 9100,
+      "max": 13000,
       "currency": "USD",
       "period": "month"
     },
@@ -7498,10 +7498,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Rzeszow",
-      "country": "Poland",
-      "latitude": 50.0752,
-      "longitude": 22.0047
+      "city": "Houston",
+      "country": "United States",
+      "latitude": 29.7142,
+      "longitude": -95.3871
     },
     "responsibilities": [
       "Integrate with third-party payment and notification providers",
@@ -7559,8 +7559,8 @@
       "senior"
     ],
     "salary": {
-      "min": 5100,
-      "max": 7900,
+      "min": 6900,
+      "max": 10500,
       "currency": "USD",
       "period": "month"
     },
@@ -7570,10 +7570,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Torun",
-      "country": "Poland",
-      "latitude": 53.0418,
-      "longitude": 18.631
+      "city": "San Antonio",
+      "country": "United States",
+      "latitude": 29.391,
+      "longitude": -98.5344
     },
     "responsibilities": [
       "Collaborate directly with product owners on scope and timelines",
@@ -7636,8 +7636,8 @@
       "expert"
     ],
     "salary": {
-      "min": 8900,
-      "max": 12500,
+      "min": 11700,
+      "max": 16200,
       "currency": "USD",
       "period": "month"
     },
@@ -7646,10 +7646,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Kielce",
-      "country": "Poland",
-      "latitude": 50.8811,
-      "longitude": 20.6773
+      "city": "Nashville",
+      "country": "United States",
+      "latitude": 36.1509,
+      "longitude": -86.84
     },
     "responsibilities": [
       "Implement IAM policies, secrets management, and compliance controls",
@@ -7706,8 +7706,8 @@
       "expert"
     ],
     "salary": {
-      "min": 4900,
-      "max": 6900,
+      "min": 6500,
+      "max": 8800,
       "currency": "USD",
       "period": "month"
     },
@@ -7716,10 +7716,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Olsztyn",
-      "country": "Poland",
-      "latitude": 53.7766,
-      "longitude": 20.5379
+      "city": "Tampa",
+      "country": "United States",
+      "latitude": 27.9632,
+      "longitude": -82.5103
     },
     "responsibilities": [
       "Train and evaluate models with PyTorch or scikit-learn",
@@ -7774,8 +7774,8 @@
       "senior"
     ],
     "salary": {
-      "min": 10200,
-      "max": 14200,
+      "min": 12900,
+      "max": 17400,
       "currency": "USD",
       "period": "month"
     },
@@ -7784,10 +7784,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Gdynia",
-      "country": "Poland",
-      "latitude": 54.5008,
-      "longitude": 18.5804
+      "city": "San Francisco",
+      "country": "United States",
+      "latitude": 37.8086,
+      "longitude": -122.4636
     },
     "responsibilities": [
       "Maintain Kubernetes operators and Helm charts",
@@ -7850,8 +7850,8 @@
       "senior"
     ],
     "salary": {
-      "min": 6600,
-      "max": 9500,
+      "min": 8700,
+      "max": 12300,
       "currency": "USD",
       "period": "month"
     },
@@ -7860,10 +7860,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Sopot",
-      "country": "Poland",
-      "latitude": 54.4119,
-      "longitude": 18.5886
+      "city": "San Jose",
+      "country": "United States",
+      "latitude": 37.3846,
+      "longitude": -121.9042
     },
     "responsibilities": [
       "Configure alerting, dashboards, and SLO error budgets",
@@ -7919,8 +7919,8 @@
       "senior"
     ],
     "salary": {
-      "min": 4400,
-      "max": 7100,
+      "min": 6300,
+      "max": 9900,
       "currency": "USD",
       "period": "month"
     },
@@ -7930,10 +7930,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Gliwice",
-      "country": "Poland",
-      "latitude": 50.2603,
-      "longitude": 18.6714
+      "city": "Los Angeles",
+      "country": "United States",
+      "latitude": 34.0997,
+      "longitude": -118.2315
     },
     "responsibilities": [
       "Create wireframes, prototypes, and final UI in Figma",
@@ -7989,8 +7989,8 @@
       "senior"
     ],
     "salary": {
-      "min": 3000,
-      "max": 5000,
+      "min": 4000,
+      "max": 6200,
       "currency": "USD",
       "period": "month"
     },
@@ -7999,10 +7999,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Zabrze",
-      "country": "Poland",
-      "latitude": 50.295,
-      "longitude": 18.7598
+      "city": "San Diego",
+      "country": "United States",
+      "latitude": 32.7523,
+      "longitude": -117.1232
     },
     "responsibilities": [
       "Develop Spark jobs and orchestrate daily pipeline runs",
@@ -8051,13 +8051,13 @@
       "id": "vertex",
       "name": "Vertex Systems"
     },
-    "description": "Vertex Systems's Bielsko-Biala team is looking for a security engineer. Application security engineer conducting threat modeling, secure code reviews, and tooling integration (SAST/DAST) for product teams.",
+    "description": "Vertex Systems's Seattle team is looking for a security engineer. Application security engineer conducting threat modeling, secure code reviews, and tooling integration (SAST/DAST) for product teams.",
     "seniority": [
       "senior"
     ],
     "salary": {
-      "min": 10400,
-      "max": 14900,
+      "min": 13500,
+      "max": 18500,
       "currency": "USD",
       "period": "month"
     },
@@ -8066,10 +8066,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Bielsko-Biala",
-      "country": "Poland",
-      "latitude": 49.8043,
-      "longitude": 19.002
+      "city": "Seattle",
+      "country": "United States",
+      "latitude": 47.6228,
+      "longitude": -122.2644
     },
     "responsibilities": [
       "Run vulnerability assessments and coordinate remediation",
@@ -8128,8 +8128,8 @@
       "senior"
     ],
     "salary": {
-      "min": 5600,
-      "max": 8400,
+      "min": 7500,
+      "max": 10700,
       "currency": "USD",
       "period": "month"
     },
@@ -8138,10 +8138,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Czestochowa",
-      "country": "Poland",
-      "latitude": 50.81,
-      "longitude": 19.0663
+      "city": "Portland",
+      "country": "United States",
+      "latitude": 45.5076,
+      "longitude": -122.61
     },
     "responsibilities": [
       "Implement screens and navigation in React Native",
@@ -8197,8 +8197,8 @@
       "expert"
     ],
     "salary": {
-      "min": 10800,
-      "max": 15300,
+      "min": 14300,
+      "max": 19700,
       "currency": "USD",
       "period": "month"
     },
@@ -8207,10 +8207,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Radom",
-      "country": "Poland",
-      "latitude": 51.4177,
-      "longitude": 21.0978
+      "city": "Denver",
+      "country": "United States",
+      "latitude": 39.7093,
+      "longitude": -104.9406
     },
     "responsibilities": [
       "Partner with product on roadmap planning and estimation",
@@ -8263,13 +8263,13 @@
       "id": "riverstone",
       "name": "Riverstone"
     },
-    "description": "An experienced regional sales manager is needed at Riverstone to strengthen the product engineering org. Expand enterprise ARR in Poland and CEE with a team of five account executives.",
+    "description": "An experienced regional sales manager is needed at Riverstone to strengthen the product engineering org. Expand enterprise ARR across the United States with a team of five account executives.",
     "seniority": [
       "senior"
     ],
     "salary": {
-      "min": 2300,
-      "max": 3600,
+      "min": 3200,
+      "max": 5000,
       "currency": "USD",
       "period": "month"
     },
@@ -8279,10 +8279,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Sosnowiec",
-      "country": "Poland",
-      "latitude": 50.306,
-      "longitude": 19.1037
+      "city": "Salt Lake City",
+      "country": "United States",
+      "latitude": 40.7161,
+      "longitude": -111.866
     },
     "responsibilities": [
       "Build relationships with C-level buyers and procurement",
@@ -8291,7 +8291,7 @@
     ],
     "requirements": [
       "Valid driving license for client visits",
-      "Fluent Polish and English; additional CEE language a plus"
+      "Fluent English; experience selling into North American mid-market and enterprise accounts"
     ],
     "niceToHave": [],
     "benefits": [
@@ -8330,14 +8330,14 @@
       "id": "brightpath",
       "name": "BrightPath"
     },
-    "description": "BrightPath's Opole team is looking for a marketing specialist. Digital marketing specialist planning content, social campaigns, and performance reporting for a B2B software brand entering new markets.",
+    "description": "BrightPath's Phoenix team is looking for a marketing specialist. Digital marketing specialist planning content, social campaigns, and performance reporting for a B2B software brand entering new markets.",
     "seniority": [
       "junior",
       "regular"
     ],
     "salary": {
-      "min": 2400,
-      "max": 4000,
+      "min": 3400,
+      "max": 5500,
       "currency": "USD",
       "period": "month"
     },
@@ -8346,10 +8346,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Opole",
-      "country": "Poland",
-      "latitude": 50.7091,
-      "longitude": 17.9157
+      "city": "Phoenix",
+      "country": "United States",
+      "latitude": 33.4001,
+      "longitude": -112.0801
     },
     "responsibilities": [
       "Support paid campaigns on Google Ads and Meta with A/B tests",
@@ -8407,8 +8407,8 @@
       "senior"
     ],
     "salary": {
-      "min": 4100,
-      "max": 6600,
+      "min": 5700,
+      "max": 8900,
       "currency": "USD",
       "period": "month"
     },
@@ -8417,10 +8417,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Gorzow Wielkopolski",
-      "country": "Poland",
-      "latitude": 52.7683,
-      "longitude": 15.2509
+      "city": "Las Vegas",
+      "country": "United States",
+      "latitude": 36.1301,
+      "longitude": -115.1743
     },
     "responsibilities": [
       "Log defects with clear reproduction steps and severity",
@@ -8476,8 +8476,8 @@
       "expert"
     ],
     "salary": {
-      "min": 9800,
-      "max": 13800,
+      "min": 12700,
+      "max": 17700,
       "currency": "USD",
       "period": "month"
     },
@@ -8486,10 +8486,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Plock",
-      "country": "Poland",
-      "latitude": 52.5678,
-      "longitude": 19.7507
+      "city": "Pittsburgh",
+      "country": "United States",
+      "latitude": 40.4193,
+      "longitude": -80.0532
     },
     "responsibilities": [
       "Capacity plan for traffic growth and seasonal peaks",
@@ -8549,8 +8549,8 @@
       "expert"
     ],
     "salary": {
-      "min": 7100,
-      "max": 9500,
+      "min": 9400,
+      "max": 12700,
       "currency": "USD",
       "period": "month"
     },
@@ -8559,10 +8559,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Tarnow",
-      "country": "Poland",
-      "latitude": 50.0174,
-      "longitude": 21.0383
+      "city": "Cleveland",
+      "country": "United States",
+      "latitude": 41.5018,
+      "longitude": -81.7592
     },
     "responsibilities": [
       "Lead technical discovery and architecture workshops with prospects",
@@ -8620,8 +8620,8 @@
       "senior"
     ],
     "salary": {
-      "min": 4600,
-      "max": 7200,
+      "min": 6600,
+      "max": 10100,
       "currency": "USD",
       "period": "month"
     },
@@ -8631,10 +8631,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Kalisz",
-      "country": "Poland",
-      "latitude": 51.75,
-      "longitude": 18.1429
+      "city": "Milwaukee",
+      "country": "United States",
+      "latitude": 43.0646,
+      "longitude": -87.9629
     },
     "responsibilities": [
       "Collaborate with backend engineers on API contracts and error handling",
@@ -8693,8 +8693,8 @@
       "expert"
     ],
     "salary": {
-      "min": 7700,
-      "max": 10500,
+      "min": 10200,
+      "max": 13900,
       "currency": "USD",
       "period": "month"
     },
@@ -8703,10 +8703,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Legnica",
-      "country": "Poland",
-      "latitude": 51.1812,
-      "longitude": 16.1977
+      "city": "Jacksonville",
+      "country": "United States",
+      "latitude": 30.3747,
+      "longitude": -81.683
     },
     "responsibilities": [
       "Own production incidents affecting the web client when needed",
@@ -8767,8 +8767,8 @@
       "expert"
     ],
     "salary": {
-      "min": 12200,
-      "max": 16400,
+      "min": 15900,
+      "max": 20600,
       "currency": "USD",
       "period": "month"
     },
@@ -8777,10 +8777,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Zielona Gora",
-      "country": "Poland",
-      "latitude": 51.9022,
-      "longitude": 15.5179
+      "city": "Memphis",
+      "country": "United States",
+      "latitude": 35.1981,
+      "longitude": -90.049
     },
     "responsibilities": [
       "Represent frontend in architecture reviews and incident post-mortems",
@@ -8830,13 +8830,13 @@
       "id": "dataforge",
       "name": "DataForge"
     },
-    "description": "DataForge's Walbrzych team is looking for a senior frontend engineer. Drive accessibility remediation across legacy screens ahead of an enterprise audit.",
+    "description": "DataForge's Louisville team is looking for a senior frontend engineer. Drive accessibility remediation across legacy screens ahead of an enterprise audit.",
     "seniority": [
       "senior"
     ],
     "salary": {
-      "min": 3800,
-      "max": 5400,
+      "min": 5000,
+      "max": 6800,
       "currency": "USD",
       "period": "month"
     },
@@ -8845,10 +8845,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Walbrzych",
-      "country": "Poland",
-      "latitude": 50.7387,
-      "longitude": 16.2685
+      "city": "Louisville",
+      "country": "United States",
+      "latitude": 38.2952,
+      "longitude": -85.7285
     },
     "responsibilities": [
       "Improve component library coverage and documentation",
@@ -8904,14 +8904,14 @@
       "id": "pixelworks",
       "name": "PixelWorks"
     },
-    "description": "PixelWorks's Slupsk team is looking for a backend developer. Own the invoicing microservice that processes thousands of transactions daily.",
+    "description": "PixelWorks's Richmond team is looking for a backend developer. Own the invoicing microservice that processes thousands of transactions daily.",
     "seniority": [
       "regular",
       "senior"
     ],
     "salary": {
-      "min": 6700,
-      "max": 10200,
+      "min": 9100,
+      "max": 13000,
       "currency": "USD",
       "period": "month"
     },
@@ -8920,10 +8920,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Slupsk",
-      "country": "Poland",
-      "latitude": 54.4404,
-      "longitude": 16.9862
+      "city": "Richmond",
+      "country": "United States",
+      "latitude": 37.5664,
+      "longitude": -77.384
     },
     "responsibilities": [
       "Integrate with third-party payment and notification providers",
@@ -8983,8 +8983,8 @@
       "senior"
     ],
     "salary": {
-      "min": 5100,
-      "max": 7900,
+      "min": 6900,
+      "max": 10500,
       "currency": "USD",
       "period": "month"
     },
@@ -8994,10 +8994,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Koszalin",
-      "country": "Poland",
-      "latitude": 54.1855,
-      "longitude": 16.1158
+      "city": "Providence",
+      "country": "United States",
+      "latitude": 41.8265,
+      "longitude": -71.3477
     },
     "responsibilities": [
       "Design database schemas and write migrations",
@@ -9055,8 +9055,8 @@
       "expert"
     ],
     "salary": {
-      "min": 8900,
-      "max": 12500,
+      "min": 11700,
+      "max": 16200,
       "currency": "USD",
       "period": "month"
     },
@@ -9065,10 +9065,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Jelenia Gora",
-      "country": "Poland",
-      "latitude": 50.9128,
-      "longitude": 15.6672
+      "city": "Buffalo",
+      "country": "United States",
+      "latitude": 42.8651,
+      "longitude": -78.8188
     },
     "responsibilities": [
       "Provision and maintain AWS resources via Terraform modules",
@@ -9127,8 +9127,8 @@
       "expert"
     ],
     "salary": {
-      "min": 4900,
-      "max": 6900,
+      "min": 6500,
+      "max": 8800,
       "currency": "USD",
       "period": "month"
     },
@@ -9137,10 +9137,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Nowy Sacz",
-      "country": "Poland",
-      "latitude": 49.6482,
-      "longitude": 20.6529
+      "city": "Boise",
+      "country": "United States",
+      "latitude": 43.5752,
+      "longitude": -116.1639
     },
     "responsibilities": [
       "Collaborate with data engineers on training datasets",
@@ -9192,8 +9192,8 @@
       "senior"
     ],
     "salary": {
-      "min": 10200,
-      "max": 14200,
+      "min": 12900,
+      "max": 17400,
       "currency": "USD",
       "period": "month"
     },
@@ -9202,10 +9202,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Konin",
-      "country": "Poland",
-      "latitude": 52.2556,
-      "longitude": 18.2339
+      "city": "Albuquerque",
+      "country": "United States",
+      "latitude": 35.0361,
+      "longitude": -106.6442
     },
     "responsibilities": [
       "Define service templates, observability defaults, and SLO baselines",
@@ -9264,8 +9264,8 @@
       "senior"
     ],
     "salary": {
-      "min": 6600,
-      "max": 9500,
+      "min": 8700,
+      "max": 12300,
       "currency": "USD",
       "period": "month"
     },
@@ -9274,10 +9274,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Pila",
-      "country": "Poland",
-      "latitude": 53.1849,
-      "longitude": 16.7487
+      "city": "Oklahoma City",
+      "country": "United States",
+      "latitude": 35.4229,
+      "longitude": -97.5397
     },
     "responsibilities": [
       "Support developers with local dev environments and debugging",
@@ -9333,8 +9333,8 @@
       "senior"
     ],
     "salary": {
-      "min": 4400,
-      "max": 7100,
+      "min": 6300,
+      "max": 9900,
       "currency": "USD",
       "period": "month"
     },
@@ -9344,10 +9344,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Elblag",
-      "country": "Poland",
-      "latitude": 54.1823,
-      "longitude": 19.442
+      "city": "New Orleans",
+      "country": "United States",
+      "latitude": 29.9212,
+      "longitude": -90.1157
     },
     "responsibilities": [
       "Present design rationale to product and engineering",
@@ -9403,8 +9403,8 @@
       "senior"
     ],
     "salary": {
-      "min": 3000,
-      "max": 5000,
+      "min": 4000,
+      "max": 6200,
       "currency": "USD",
       "period": "month"
     },
@@ -9413,10 +9413,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Grudziadz",
-      "country": "Poland",
-      "latitude": 53.4965,
-      "longitude": 18.8072
+      "city": "Orlando",
+      "country": "United States",
+      "latitude": 28.5307,
+      "longitude": -81.4338
     },
     "responsibilities": [
       "Partner with analysts on semantic layer and metric definitions",
@@ -9476,8 +9476,8 @@
       "senior"
     ],
     "salary": {
-      "min": 10400,
-      "max": 14900,
+      "min": 13500,
+      "max": 18500,
       "currency": "USD",
       "period": "month"
     },
@@ -9486,10 +9486,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Rybnik",
-      "country": "Poland",
-      "latitude": 50.0974,
-      "longitude": 18.5992
+      "city": "New York",
+      "country": "United States",
+      "latitude": 40.6639,
+      "longitude": -73.9538
     },
     "responsibilities": [
       "Maintain IAM policies, SSO, and least-privilege access",
@@ -9550,8 +9550,8 @@
       "senior"
     ],
     "salary": {
-      "min": 5600,
-      "max": 8400,
+      "min": 7500,
+      "max": 10700,
       "currency": "USD",
       "period": "month"
     },
@@ -9560,10 +9560,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Tychy",
-      "country": "Poland",
-      "latitude": 50.1166,
-      "longitude": 19.009
+      "city": "Boston",
+      "country": "United States",
+      "latitude": 42.2981,
+      "longitude": -71.0441
     },
     "responsibilities": [
       "Release to App Store and Google Play with CI automation",
@@ -9622,8 +9622,8 @@
       "expert"
     ],
     "salary": {
-      "min": 10800,
-      "max": 15300,
+      "min": 14300,
+      "max": 19700,
       "currency": "USD",
       "period": "month"
     },
@@ -9632,10 +9632,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Dabrowa Gornicza",
-      "country": "Poland",
-      "latitude": 50.2907,
-      "longitude": 19.2107
+      "city": "Philadelphia",
+      "country": "United States",
+      "latitude": 39.8931,
+      "longitude": -75.1919
     },
     "responsibilities": [
       "Remove blockers and improve engineering processes",
@@ -9683,13 +9683,13 @@
       "id": "riverstone",
       "name": "Riverstone"
     },
-    "description": "An experienced regional sales manager is needed at Riverstone to strengthen the product engineering org. Own regional revenue targets for enterprise SaaS sales across Poland and CEE. Lead a team of account executives and key account growth.",
+    "description": "An experienced regional sales manager is needed at Riverstone to strengthen the product engineering org. Own regional revenue targets for enterprise SaaS sales across the United States. Lead a team of account executives and key account growth.",
     "seniority": [
       "senior"
     ],
     "salary": {
-      "min": 2300,
-      "max": 3600,
+      "min": 3200,
+      "max": 5000,
       "currency": "USD",
       "period": "month"
     },
@@ -9699,10 +9699,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Chorzow",
-      "country": "Poland",
-      "latitude": 50.2644,
-      "longitude": 18.9496
+      "city": "Washington",
+      "country": "United States",
+      "latitude": 38.8651,
+      "longitude": -77.097
     },
     "responsibilities": [
       "Coach account executives on discovery, demos, and closing",
@@ -9712,7 +9712,7 @@
       "Forecast accurately in Salesforce/HubSpot CRM"
     ],
     "requirements": [
-      "Fluent Polish and English; additional CEE language a plus",
+      "Fluent English; experience selling into North American mid-market and enterprise accounts",
       "Track record of exceeding quota in enterprise deals"
     ],
     "niceToHave": [
@@ -9755,14 +9755,14 @@
       "id": "brightpath",
       "name": "BrightPath"
     },
-    "description": "BrightPath's Suwalki team is looking for a marketing specialist. Launch localized landing pages and paid experiments for three new country entries.",
+    "description": "BrightPath's Atlanta team is looking for a marketing specialist. Launch localized landing pages and paid experiments for three new country entries.",
     "seniority": [
       "junior",
       "regular"
     ],
     "salary": {
-      "min": 2400,
-      "max": 4000,
+      "min": 3400,
+      "max": 5500,
       "currency": "USD",
       "period": "month"
     },
@@ -9771,10 +9771,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Suwalki",
-      "country": "Poland",
-      "latitude": 54.0835,
-      "longitude": 22.8982
+      "city": "Atlanta",
+      "country": "United States",
+      "latitude": 33.7348,
+      "longitude": -84.4618
     },
     "responsibilities": [
       "Coordinate with design on landing pages and creatives",
@@ -9831,8 +9831,8 @@
       "senior"
     ],
     "salary": {
-      "min": 4100,
-      "max": 6600,
+      "min": 5700,
+      "max": 8900,
       "currency": "USD",
       "period": "month"
     },
@@ -9841,10 +9841,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Zamosc",
-      "country": "Poland",
-      "latitude": 50.7076,
-      "longitude": 23.2038
+      "city": "Miami",
+      "country": "United States",
+      "latitude": 25.779,
+      "longitude": -80.259
     },
     "responsibilities": [
       "Perform exploratory testing on new features before release",
@@ -9904,8 +9904,8 @@
       "expert"
     ],
     "salary": {
-      "min": 9800,
-      "max": 13800,
+      "min": 12700,
+      "max": 17700,
       "currency": "USD",
       "period": "month"
     },
@@ -9914,10 +9914,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Leszno",
-      "country": "Poland",
-      "latitude": 51.8462,
-      "longitude": 16.5196
+      "city": "Charlotte",
+      "country": "United States",
+      "latitude": 35.2716,
+      "longitude": -80.8976
     },
     "responsibilities": [
       "Lead incident response, post-mortems, and action item follow-up",
@@ -9976,8 +9976,8 @@
       "expert"
     ],
     "salary": {
-      "min": 7100,
-      "max": 9500,
+      "min": 9400,
+      "max": 12700,
       "currency": "USD",
       "period": "month"
     },
@@ -9986,10 +9986,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Krosno",
-      "country": "Poland",
-      "latitude": 49.7009,
-      "longitude": 21.7214
+      "city": "Raleigh",
+      "country": "United States",
+      "latitude": 35.8401,
+      "longitude": -78.6596
     },
     "responsibilities": [
       "Lead technical discovery and architecture workshops with prospects",
@@ -10047,8 +10047,8 @@
       "senior"
     ],
     "salary": {
-      "min": 4600,
-      "max": 7200,
+      "min": 6600,
+      "max": 10100,
       "currency": "USD",
       "period": "month"
     },
@@ -10058,10 +10058,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Pabianice",
-      "country": "Poland",
-      "latitude": 51.694,
-      "longitude": 19.3271
+      "city": "Chicago",
+      "country": "United States",
+      "latitude": 41.9142,
+      "longitude": -87.624
     },
     "responsibilities": [
       "Translate Figma designs into pixel-accurate, responsive layouts",
@@ -10118,8 +10118,8 @@
       "expert"
     ],
     "salary": {
-      "min": 7700,
-      "max": 10500,
+      "min": 10200,
+      "max": 13900,
       "currency": "USD",
       "period": "month"
     },
@@ -10128,10 +10128,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Mielec",
-      "country": "Poland",
-      "latitude": 50.3213,
-      "longitude": 21.423
+      "city": "Detroit",
+      "country": "United States",
+      "latitude": 42.3782,
+      "longitude": -82.9888
     },
     "responsibilities": [
       "Break down epics with product and mentor mid-level developers",
@@ -10201,10 +10201,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "New York",
+      "city": "Minneapolis",
       "country": "United States",
-      "latitude": 40.743,
-      "longitude": -73.9848
+      "latitude": 44.9983,
+      "longitude": -93.1808
     },
     "responsibilities": [
       "Mentor senior engineers and raise the bar in code reviews",
@@ -10276,10 +10276,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Boston",
+      "city": "Columbus",
       "country": "United States",
-      "latitude": 42.3787,
-      "longitude": -71.0201
+      "latitude": 39.9502,
+      "longitude": -82.9179
     },
     "responsibilities": [
       "Optimize rendering for data-heavy tables and live updates",
@@ -10348,10 +10348,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Philadelphia",
+      "city": "Indianapolis",
       "country": "United States",
-      "latitude": 39.955,
-      "longitude": -75.1207
+      "latitude": 39.7288,
+      "longitude": -86.0945
     },
     "responsibilities": [
       "Write efficient SQL queries and database migrations",
@@ -10418,10 +10418,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Washington",
+      "city": "Kansas City",
       "country": "United States",
-      "latitude": 38.8928,
-      "longitude": -76.9971
+      "latitude": 39.0413,
+      "longitude": -94.5482
     },
     "responsibilities": [
       "Collaborate directly with product owners on scope and timelines",
@@ -10476,7 +10476,7 @@
       "id": "orbitsoft",
       "name": "OrbitSoft"
     },
-    "description": "OrbitSoft's Atlanta team is looking for a cloud engineer. Design a multi-account AWS landing zone with guardrails for ten product teams.",
+    "description": "OrbitSoft's Austin team is looking for a cloud engineer. Design a multi-account AWS landing zone with guardrails for ten product teams.",
     "seniority": [
       "senior",
       "expert"
@@ -10492,10 +10492,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Atlanta",
+      "city": "Austin",
       "country": "United States",
-      "latitude": 33.7214,
-      "longitude": -84.3638
+      "latitude": 30.2047,
+      "longitude": -97.752
     },
     "responsibilities": [
       "Monitor cloud spend and right-size resources quarterly",
@@ -10564,10 +10564,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Miami",
+      "city": "Dallas",
       "country": "United States",
-      "latitude": 25.7278,
-      "longitude": -80.1872
+      "latitude": 32.7258,
+      "longitude": -96.841
     },
     "responsibilities": [
       "Monitor model drift and retraining triggers in production",
@@ -10620,7 +10620,7 @@
       "id": "retailplus",
       "name": "RetailPlus"
     },
-    "description": "RetailPlus's Charlotte team is looking for a platform engineer. Ship a self-service environment provisioner used by every new microservice team.",
+    "description": "RetailPlus's Houston team is looking for a platform engineer. Ship a self-service environment provisioner used by every new microservice team.",
     "seniority": [
       "senior"
     ],
@@ -10635,10 +10635,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Charlotte",
+      "city": "Houston",
       "country": "United States",
-      "latitude": 35.1954,
-      "longitude": -80.8588
+      "latitude": 29.7338,
+      "longitude": -95.4355
     },
     "responsibilities": [
       "Document runbooks and internal platform RFCs",
@@ -10703,10 +10703,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Raleigh",
+      "city": "San Antonio",
       "country": "United States",
-      "latitude": 35.7581,
-      "longitude": -78.6709
+      "latitude": 29.4285,
+      "longitude": -98.5657
     },
     "responsibilities": [
       "Configure alerting, dashboards, and SLO error budgets",
@@ -10778,10 +10778,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Chicago",
+      "city": "Nashville",
       "country": "United States",
-      "latitude": 41.8722,
-      "longitude": -87.675
+      "latitude": 36.197,
+      "longitude": -86.847
     },
     "responsibilities": [
       "Present design rationale to product and engineering",
@@ -10848,10 +10848,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Detroit",
+      "city": "Tampa",
       "country": "United States",
-      "latitude": 42.3425,
-      "longitude": -83.0895
+      "latitude": 28.0062,
+      "longitude": -82.4907
     },
     "responsibilities": [
       "Monitor data quality SLAs and incident response for pipelines",
@@ -10917,10 +10917,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Minneapolis",
+      "city": "San Francisco",
       "country": "United States",
-      "latitude": 45.0032,
-      "longitude": -93.2973
+      "latitude": 37.8378,
+      "longitude": -122.418
     },
     "responsibilities": [
       "Run vulnerability assessments and coordinate remediation",
@@ -10993,10 +10993,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Columbus",
+      "city": "San Jose",
       "country": "United States",
-      "latitude": 39.9945,
-      "longitude": -83.0088
+      "latitude": 37.3927,
+      "longitude": -121.8467
     },
     "responsibilities": [
       "Release to App Store and Google Play with CI automation",
@@ -11066,10 +11066,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Indianapolis",
+      "city": "Los Angeles",
       "country": "United States",
-      "latitude": 39.8012,
-      "longitude": -86.1458
+      "latitude": 34.0846,
+      "longitude": -118.1785
     },
     "responsibilities": [
       "Partner with product on roadmap planning and estimation",
@@ -11139,10 +11139,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Kansas City",
+      "city": "San Diego",
       "country": "United States",
-      "latitude": 39.1239,
-      "longitude": -94.5475
+      "latitude": 32.7179,
+      "longitude": -117.0863
     },
     "responsibilities": [
       "Build relationships with C-level buyers and procurement",
@@ -11152,7 +11152,7 @@
       "Coach account executives on discovery, demos, and closing"
     ],
     "requirements": [
-      "Fluent Polish and English; additional CEE language a plus",
+      "Fluent English; experience selling into North American mid-market and enterprise accounts",
       "5+ years in B2B technology sales with management experience"
     ],
     "niceToHave": [],
@@ -11208,10 +11208,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Austin",
+      "city": "Seattle",
       "country": "United States",
-      "latitude": 30.2766,
-      "longitude": -97.7051
+      "latitude": 47.5776,
+      "longitude": -122.249
     },
     "responsibilities": [
       "Support paid campaigns on Google Ads and Meta with A/B tests",
@@ -11280,10 +11280,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Dallas",
+      "city": "Portland",
       "country": "United States",
-      "latitude": 32.769,
-      "longitude": -96.7574
+      "latitude": 45.463,
+      "longitude": -122.6282
     },
     "responsibilities": [
       "Log defects with clear reproduction steps and severity",
@@ -11352,10 +11352,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Houston",
+      "city": "Denver",
       "country": "United States",
-      "latitude": 29.7375,
-      "longitude": -95.3406
+      "latitude": 39.6765,
+      "longitude": -104.9832
     },
     "responsibilities": [
       "Lead incident response, post-mortems, and action item follow-up",
@@ -11423,10 +11423,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "San Antonio",
+      "city": "Salt Lake City",
       "country": "United States",
-      "latitude": 29.3918,
-      "longitude": -98.4808
+      "latitude": 40.7033,
+      "longitude": -111.9248
     },
     "responsibilities": [
       "Stay current on AWS services and industry compliance requirements",
@@ -11498,10 +11498,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Nashville",
+      "city": "Phoenix",
       "country": "United States",
-      "latitude": 36.129,
-      "longitude": -86.7889
+      "latitude": 33.4105,
+      "longitude": -112.1342
     },
     "responsibilities": [
       "Implement UI features in Angular with reusable, testable components",
@@ -11573,10 +11573,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Tampa",
+      "city": "Las Vegas",
       "country": "United States",
-      "latitude": 27.924,
-      "longitude": -82.4815
+      "latitude": 36.1611,
+      "longitude": -115.217
     },
     "responsibilities": [
       "Partner with design on component API and design-system evolution",
@@ -11648,10 +11648,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "San Francisco",
+      "city": "Pittsburgh",
       "country": "United States",
-      "latitude": 37.7621,
-      "longitude": -122.4595
+      "latitude": 40.4631,
+      "longitude": -80.0731
     },
     "responsibilities": [
       "Lead performance initiatives: Core Web Vitals, bundle analysis, caching",
@@ -11702,7 +11702,7 @@
       "id": "dataforge",
       "name": "DataForge"
     },
-    "description": "DataForge's San Jose team is looking for a senior frontend engineer. Senior engineer on a Vue 3 product team rebuilding a logistics dashboard used by warehouse operators across Europe.",
+    "description": "DataForge's Cleveland team is looking for a senior frontend engineer. Senior engineer on a Vue 3 product team rebuilding a logistics dashboard used by warehouse operators across Europe.",
     "seniority": [
       "senior"
     ],
@@ -11717,10 +11717,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "San Jose",
+      "city": "Cleveland",
       "country": "United States",
-      "latitude": 37.3424,
-      "longitude": -121.929
+      "latitude": 41.5475,
+      "longitude": -81.7485
     },
     "responsibilities": [
       "Onboard new team members on frontend conventions",
@@ -11785,10 +11785,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Los Angeles",
+      "city": "Milwaukee",
       "country": "United States",
-      "latitude": 34.0723,
-      "longitude": -118.2771
+      "latitude": 43.1007,
+      "longitude": -87.923
     },
     "responsibilities": [
       "Design and implement HTTP APIs with clear versioning and error contracts",
@@ -11858,10 +11858,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "San Diego",
+      "city": "Jacksonville",
       "country": "United States",
-      "latitude": 32.7467,
-      "longitude": -117.1783
+      "latitude": 30.3921,
+      "longitude": -81.6331
     },
     "responsibilities": [
       "Collaborate directly with product owners on scope and timelines",
@@ -11912,7 +11912,7 @@
       "id": "orbitsoft",
       "name": "OrbitSoft"
     },
-    "description": "OrbitSoft's Seattle team is looking for a cloud engineer. Implement disaster-recovery runbooks and quarterly game days for critical services.",
+    "description": "OrbitSoft's Memphis team is looking for a cloud engineer. Implement disaster-recovery runbooks and quarterly game days for critical services.",
     "seniority": [
       "senior",
       "expert"
@@ -11928,10 +11928,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Seattle",
+      "city": "Memphis",
       "country": "United States",
-      "latitude": 47.6403,
-      "longitude": -122.3286
+      "latitude": 35.1924,
+      "longitude": -89.9927
     },
     "responsibilities": [
       "Provision and maintain AWS resources via Terraform modules",
@@ -11999,10 +11999,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Portland",
+      "city": "Louisville",
       "country": "United States",
-      "latitude": 45.5439,
-      "longitude": -122.6518
+      "latitude": 38.2679,
+      "longitude": -85.6807
     },
     "responsibilities": [
       "Maintain feature stores and data validation checks",
@@ -12069,10 +12069,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Denver",
+      "city": "Richmond",
       "country": "United States",
-      "latitude": 39.7552,
-      "longitude": -104.9511
+      "latitude": 37.5244,
+      "longitude": -77.3593
     },
     "responsibilities": [
       "Develop platform services and CLIs in Go",
@@ -12142,10 +12142,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Salt Lake City",
+      "city": "Providence",
       "country": "United States",
-      "latitude": 40.7602,
-      "longitude": -111.8459
+      "latitude": 41.7803,
+      "longitude": -71.3521
     },
     "responsibilities": [
       "Manage AWS deployment targets and environment promotion",
@@ -12215,10 +12215,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Phoenix",
+      "city": "Buffalo",
       "country": "United States",
-      "latitude": 33.4313,
-      "longitude": -112.0385
+      "latitude": 42.8262,
+      "longitude": -78.8533
     },
     "responsibilities": [
       "Create wireframes, prototypes, and final UI in Figma",
@@ -12292,10 +12292,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Las Vegas",
+      "city": "Boise",
       "country": "United States",
-      "latitude": 36.1406,
-      "longitude": -115.118
+      "latitude": 43.5534,
+      "longitude": -116.2204
     },
     "responsibilities": [
       "Optimize warehouse costs and query performance",
@@ -12366,10 +12366,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Pittsburgh",
+      "city": "Albuquerque",
       "country": "United States",
-      "latitude": 40.4064,
-      "longitude": -79.9943
+      "latitude": 35.0369,
+      "longitude": -106.7008
     },
     "responsibilities": [
       "Perform threat modeling and security reviews for new features",
@@ -12436,10 +12436,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Cleveland",
+      "city": "Oklahoma City",
       "country": "United States",
-      "latitude": 41.4688,
-      "longitude": -81.7151
+      "latitude": 35.446,
+      "longitude": -97.589
     },
     "responsibilities": [
       "Integrate REST/GraphQL APIs with robust offline handling",
@@ -12507,10 +12507,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Milwaukee",
+      "city": "New Orleans",
       "country": "United States",
-      "latitude": 43.0198,
-      "longitude": -87.9453
+      "latitude": 29.9609,
+      "longitude": -90.1433
     },
     "responsibilities": [
       "Represent engineering in cross-functional leadership forums",
@@ -12566,7 +12566,7 @@
       "id": "riverstone",
       "name": "Riverstone"
     },
-    "description": "Riverstone's Jacksonville team is looking for a regional sales manager. Own regional revenue targets for enterprise SaaS sales across Poland and CEE. Lead a team of account executives and key account growth.",
+    "description": "Riverstone's Orlando team is looking for a regional sales manager. Own regional revenue targets for enterprise SaaS sales across the United States. Lead a team of account executives and key account growth.",
     "seniority": [
       "senior"
     ],
@@ -12582,10 +12582,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Jacksonville",
+      "city": "Orlando",
       "country": "United States",
-      "latitude": 30.3292,
-      "longitude": -81.6951
+      "latitude": 28.577,
+      "longitude": -81.4357
     },
     "responsibilities": [
       "Collaborate with marketing on regional campaigns and events",
@@ -12637,7 +12637,7 @@
       "id": "brightpath",
       "name": "BrightPath"
     },
-    "description": "BrightPath's Memphis team is looking for a marketing specialist. Launch localized landing pages and paid experiments for three new country entries.",
+    "description": "BrightPath's New York team is looking for a marketing specialist. Launch localized landing pages and paid experiments for three new country entries.",
     "seniority": [
       "junior",
       "regular"
@@ -12653,10 +12653,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Memphis",
+      "city": "New York",
       "country": "United States",
-      "latitude": 35.1634,
-      "longitude": -90.0872
+      "latitude": 40.6362,
+      "longitude": -74.0202
     },
     "responsibilities": [
       "Set up UTM tracking and monthly performance dashboards",
@@ -12721,10 +12721,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Louisville",
+      "city": "Boston",
       "country": "United States",
-      "latitude": 38.28,
-      "longitude": -85.7847
+      "latitude": 42.2983,
+      "longitude": -71.1218
     },
     "responsibilities": [
       "Log defects with clear reproduction steps and severity",
@@ -12795,10 +12795,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Richmond",
+      "city": "Philadelphia",
       "country": "United States",
-      "latitude": 37.5745,
-      "longitude": -77.442
+      "latitude": 39.9211,
+      "longitude": -75.2573
     },
     "responsibilities": [
       "Capacity plan for traffic growth and seasonal peaks",
@@ -12860,10 +12860,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Providence",
+      "city": "Washington",
       "country": "United States",
-      "latitude": 41.8559,
-      "longitude": -71.3964
+      "latitude": 38.9139,
+      "longitude": -77.1359
     },
     "responsibilities": [
       "Mentor senior engineers on system design patterns",
@@ -12920,7 +12920,7 @@
       "id": "acme",
       "name": "Acme"
     },
-    "description": "Acme's Buffalo team is looking for a frontend developer. Build polished, accessible user interfaces for a B2B SaaS product used by thousands of customers daily. You will own feature delivery from design handoff through production release.",
+    "description": "Acme's Atlanta team is looking for a frontend developer. Build polished, accessible user interfaces for a B2B SaaS product used by thousands of customers daily. You will own feature delivery from design handoff through production release.",
     "seniority": [
       "regular",
       "senior"
@@ -12937,10 +12937,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Buffalo",
+      "city": "Atlanta",
       "country": "United States",
-      "latitude": 42.9084,
-      "longitude": -78.8427
+      "latitude": 33.7922,
+      "longitude": -84.4652
     },
     "responsibilities": [
       "Participate in code reviews and frontend guild sessions",
@@ -13010,10 +13010,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Boise",
+      "city": "Miami",
       "country": "United States",
-      "latitude": 43.6215,
-      "longitude": -116.156
+      "latitude": 25.8306,
+      "longitude": -80.2308
     },
     "responsibilities": [
       "Drive adoption of Next.js App Router and performance budgets",
@@ -13080,10 +13080,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Albuquerque",
+      "city": "Charlotte",
       "country": "United States",
-      "latitude": 35.0738,
-      "longitude": -106.6107
+      "latitude": 35.3044,
+      "longitude": -80.8398
     },
     "responsibilities": [
       "Design and roll out frontend platform capabilities (build tooling, linting, testing)",
@@ -13152,10 +13152,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Oklahoma City",
+      "city": "Raleigh",
       "country": "United States",
-      "latitude": 35.4426,
-      "longitude": -97.4878
+      "latitude": 35.8459,
+      "longitude": -78.5891
     },
     "responsibilities": [
       "Onboard new team members on frontend conventions",
@@ -13220,10 +13220,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "New Orleans",
+      "city": "Chicago",
       "country": "United States",
-      "latitude": 29.9179,
-      "longitude": -90.062
+      "latitude": 41.9025,
+      "longitude": -87.618
     },
     "responsibilities": [
       "Participate in on-call rotation (shared, lightweight)",
@@ -13290,10 +13290,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Orlando",
+      "city": "Detroit",
       "country": "United States",
-      "latitude": 28.5053,
-      "longitude": -81.3893
+      "latitude": 42.3327,
+      "longitude": -82.9412
     },
     "responsibilities": [
       "Collaborate directly with product owners on scope and timelines",
@@ -13349,14 +13349,14 @@
       "id": "orbitsoft",
       "name": "OrbitSoft"
     },
-    "description": "OrbitSoft's Warsaw team is looking for a cloud engineer. Design and operate cloud infrastructure on AWS for a multi-tenant SaaS platform. Infrastructure as code with Terraform and workloads on EKS.",
+    "description": "OrbitSoft's Minneapolis team is looking for a cloud engineer. Design and operate cloud infrastructure on AWS for a multi-tenant SaaS platform. Infrastructure as code with Terraform and workloads on EKS.",
     "seniority": [
       "senior",
       "expert"
     ],
     "salary": {
-      "min": 8900,
-      "max": 12500,
+      "min": 11700,
+      "max": 16200,
       "currency": "USD",
       "period": "month"
     },
@@ -13365,10 +13365,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Warsaw",
-      "country": "Poland",
-      "latitude": 52.2263,
-      "longitude": 21.0913
+      "city": "Minneapolis",
+      "country": "United States",
+      "latitude": 44.9414,
+      "longitude": -93.1685
     },
     "responsibilities": [
       "Operate Kubernetes clusters: upgrades, autoscaling, networking",
@@ -13425,8 +13425,8 @@
       "expert"
     ],
     "salary": {
-      "min": 4900,
-      "max": 6900,
+      "min": 6500,
+      "max": 8800,
       "currency": "USD",
       "period": "month"
     },
@@ -13435,10 +13435,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Krakow",
-      "country": "Poland",
-      "latitude": 50.0349,
-      "longitude": 20.0006
+      "city": "Columbus",
+      "country": "United States",
+      "latitude": 39.8963,
+      "longitude": -82.9439
     },
     "responsibilities": [
       "Monitor model drift and retraining triggers in production",
@@ -13493,8 +13493,8 @@
       "senior"
     ],
     "salary": {
-      "min": 10200,
-      "max": 14200,
+      "min": 12900,
+      "max": 17400,
       "currency": "USD",
       "period": "month"
     },
@@ -13503,10 +13503,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Wroclaw",
-      "country": "Poland",
-      "latitude": 51.065,
-      "longitude": 17.0748
+      "city": "Indianapolis",
+      "country": "United States",
+      "latitude": 39.6912,
+      "longitude": -86.1511
     },
     "responsibilities": [
       "Maintain Kubernetes operators and Helm charts",
@@ -13567,8 +13567,8 @@
       "senior"
     ],
     "salary": {
-      "min": 6600,
-      "max": 9500,
+      "min": 8700,
+      "max": 12300,
       "currency": "USD",
       "period": "month"
     },
@@ -13577,10 +13577,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Gdansk",
-      "country": "Poland",
-      "latitude": 54.3034,
-      "longitude": 18.6451
+      "city": "Kansas City",
+      "country": "United States",
+      "latitude": 39.0296,
+      "longitude": -94.6207
     },
     "responsibilities": [
       "Configure alerting, dashboards, and SLO error budgets",
@@ -13640,8 +13640,8 @@
       "senior"
     ],
     "salary": {
-      "min": 4400,
-      "max": 7100,
+      "min": 6300,
+      "max": 9900,
       "currency": "USD",
       "period": "month"
     },
@@ -13651,10 +13651,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Poznan",
-      "country": "Poland",
-      "latitude": 52.3643,
-      "longitude": 16.8854
+      "city": "Austin",
+      "country": "United States",
+      "latitude": 30.2217,
+      "longitude": -97.8155
     },
     "responsibilities": [
       "Ensure accessibility and responsive behavior across breakpoints",
@@ -13715,8 +13715,8 @@
       "senior"
     ],
     "salary": {
-      "min": 3000,
-      "max": 5000,
+      "min": 4000,
+      "max": 6200,
       "currency": "USD",
       "period": "month"
     },
@@ -13725,10 +13725,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Lodz",
-      "country": "Poland",
-      "latitude": 51.7342,
-      "longitude": 19.3888
+      "city": "Dallas",
+      "country": "United States",
+      "latitude": 32.7672,
+      "longitude": -96.8883
     },
     "responsibilities": [
       "Develop Spark jobs and orchestrate daily pipeline runs",
@@ -13784,13 +13784,13 @@
       "id": "vertex",
       "name": "Vertex Systems"
     },
-    "description": "Vertex Systems's Katowice team is looking for a security engineer. Build developer-friendly SAST gates that block merges without slowing delivery.",
+    "description": "Vertex Systems's Houston team is looking for a security engineer. Build developer-friendly SAST gates that block merges without slowing delivery.",
     "seniority": [
       "senior"
     ],
     "salary": {
-      "min": 10400,
-      "max": 14900,
+      "min": 13500,
+      "max": 18500,
       "currency": "USD",
       "period": "month"
     },
@@ -13799,10 +13799,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Katowice",
-      "country": "Poland",
-      "latitude": 50.2632,
-      "longitude": 18.9479
+      "city": "Houston",
+      "country": "United States",
+      "latitude": 29.7893,
+      "longitude": -95.4524
     },
     "responsibilities": [
       "Run vulnerability assessments and coordinate remediation",
@@ -13866,8 +13866,8 @@
       "senior"
     ],
     "salary": {
-      "min": 5600,
-      "max": 8400,
+      "min": 7500,
+      "max": 10700,
       "currency": "USD",
       "period": "month"
     },
@@ -13876,10 +13876,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Lublin",
-      "country": "Poland",
-      "latitude": 51.2685,
-      "longitude": 22.4992
+      "city": "San Antonio",
+      "country": "United States",
+      "latitude": 29.4842,
+      "longitude": -98.5495
     },
     "responsibilities": [
       "Write unit and Detox/Maestro E2E tests for releases",
@@ -13940,8 +13940,8 @@
       "expert"
     ],
     "salary": {
-      "min": 10800,
-      "max": 15300,
+      "min": 14300,
+      "max": 19700,
       "currency": "USD",
       "period": "month"
     },
@@ -13950,10 +13950,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Szczecin",
-      "country": "Poland",
-      "latitude": 53.4688,
-      "longitude": 14.5072
+      "city": "Nashville",
+      "country": "United States",
+      "latitude": 36.2389,
+      "longitude": -86.7983
     },
     "responsibilities": [
       "Conduct 1:1s, performance reviews, and feedback cycles",
@@ -14014,8 +14014,8 @@
       "senior"
     ],
     "salary": {
-      "min": 2300,
-      "max": 3600,
+      "min": 3200,
+      "max": 5000,
       "currency": "USD",
       "period": "month"
     },
@@ -14025,10 +14025,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Bydgoszcz",
-      "country": "Poland",
-      "latitude": 53.1719,
-      "longitude": 18.0013
+      "city": "Tampa",
+      "country": "United States",
+      "latitude": 28.0237,
+      "longitude": -82.4287
     },
     "responsibilities": [
       "Forecast accurately in Salesforce/HubSpot CRM",
@@ -14042,7 +14042,7 @@
       "5+ years in B2B technology sales with management experience",
       "Valid driving license for client visits",
       "Experience selling SaaS with 6–12 month sales cycles",
-      "Fluent Polish and English; additional CEE language a plus"
+      "Fluent English; experience selling into North American mid-market and enterprise accounts"
     ],
     "niceToHave": [
       "Partner/channel sales background",
@@ -14091,8 +14091,8 @@
       "regular"
     ],
     "salary": {
-      "min": 2400,
-      "max": 4000,
+      "min": 3400,
+      "max": 5500,
       "currency": "USD",
       "period": "month"
     },
@@ -14101,10 +14101,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Bialystok",
-      "country": "Poland",
-      "latitude": 53.1769,
-      "longitude": 23.2018
+      "city": "San Francisco",
+      "country": "United States",
+      "latitude": 37.8266,
+      "longitude": -122.3466
     },
     "responsibilities": [
       "Support paid campaigns on Google Ads and Meta with A/B tests",
@@ -14163,8 +14163,8 @@
       "senior"
     ],
     "salary": {
-      "min": 4100,
-      "max": 6600,
+      "min": 5700,
+      "max": 8900,
       "currency": "USD",
       "period": "month"
     },
@@ -14173,10 +14173,10 @@
     ],
     "workplace": "onsite",
     "location": {
-      "city": "Rzeszow",
-      "country": "Poland",
-      "latitude": 50.0704,
-      "longitude": 22.0595
+      "city": "San Jose",
+      "country": "United States",
+      "latitude": 37.3556,
+      "longitude": -121.7915
     },
     "responsibilities": [
       "Advocate for quality gates in the development lifecycle",
@@ -14234,8 +14234,8 @@
       "expert"
     ],
     "salary": {
-      "min": 9800,
-      "max": 13800,
+      "min": 12700,
+      "max": 17700,
       "currency": "USD",
       "period": "month"
     },
@@ -14244,10 +14244,10 @@
     ],
     "workplace": "remote",
     "location": {
-      "city": "Torun",
-      "country": "Poland",
-      "latitude": 53.0205,
-      "longitude": 18.6783
+      "city": "Los Angeles",
+      "country": "United States",
+      "latitude": 34.0308,
+      "longitude": -118.154
     },
     "responsibilities": [
       "Define and monitor SLOs/SLIs with error budget policies",
@@ -14307,8 +14307,8 @@
       "expert"
     ],
     "salary": {
-      "min": 7100,
-      "max": 9500,
+      "min": 9400,
+      "max": 12700,
       "currency": "USD",
       "period": "month"
     },
@@ -14317,10 +14317,10 @@
     ],
     "workplace": "hybrid",
     "location": {
-      "city": "Kielce",
-      "country": "Poland",
-      "latitude": 50.8487,
-      "longitude": 20.7004
+      "city": "San Diego",
+      "country": "United States",
+      "latitude": 32.661,
+      "longitude": -117.0961
     },
     "responsibilities": [
       "Stay current on AWS services and industry compliance requirements",

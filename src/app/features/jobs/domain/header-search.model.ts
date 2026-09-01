@@ -5,7 +5,7 @@ export type {
 } from '@core/domains/jobs/header-search.model';
 
 export {
-  DEFAULT_SEARCH_RADIUS_KM,
-  SEARCH_RADIUS_OPTIONS_KM,
+  DEFAULT_SEARCH_RADIUS_MI,
+  SEARCH_RADIUS_OPTIONS_MI,
   buildHeaderSearchQueryParams,
 } from '@core/domains/jobs/header-search.model';

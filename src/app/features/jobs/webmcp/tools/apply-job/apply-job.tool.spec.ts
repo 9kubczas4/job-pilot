@@ -59,7 +59,10 @@ describe('apply_job WebMCP tool', () => {
 
   it('returns UNAUTHENTICATED without loading applications', async () => {
     const response = await TestBed.runInInjectionContext(() =>
-      APPLY_JOB_WEBMCP_TOOL.execute({ jobId: 'job-001' }, { signal: new AbortController().signal }),
+      APPLY_JOB_WEBMCP_TOOL.execute(
+        { jobId: 'job-001', note: 'Strong Angular match.' },
+        { signal: new AbortController().signal },
+      ),
     );
 
     expect(JSON.parse(response.content[0].text)).toEqual({

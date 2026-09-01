@@ -52,8 +52,64 @@
     ],
     "expectedCall": [
       {
-        "functionName": "get_jobs",
-        "arguments": { "jobIds": ["job-001"] }
+        "ordered": [
+          {
+            "functionName": "get_jobs",
+            "arguments": { "jobIds": ["job-001"] }
+          },
+          {
+            "functionName": "highlight_job",
+            "arguments": { "jobId": "job-001" }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Show where a job is located on the map",
+    "messages": [
+      {
+        "role": "user",
+        "type": "message",
+        "content": "Where is job-001 located? Show me on the map."
+      }
+    ],
+    "expectedCall": [
+      {
+        "functionName": "highlight_job",
+        "arguments": { "jobId": "job-001" }
+      }
+    ]
+  },
+  {
+    "name": "Answer a location question in Polish",
+    "messages": [
+      {
+        "role": "user",
+        "type": "message",
+        "content": "Gdzie znajduje się oferta job-001 albo siedziba tej firmy?"
+      }
+    ],
+    "expectedCall": [
+      {
+        "functionName": "highlight_job",
+        "arguments": { "jobId": "job-001" }
+      }
+    ]
+  },
+  {
+    "name": "Present one recommended job on the map",
+    "messages": [
+      {
+        "role": "user",
+        "type": "message",
+        "content": "Job-001 looks like the best match for me — show me that offer on the map."
+      }
+    ],
+    "expectedCall": [
+      {
+        "functionName": "highlight_job",
+        "arguments": { "jobId": "job-001" }
       }
     ]
   },
@@ -84,14 +140,22 @@
     ],
     "expectedCall": [
       {
-        "functionName": "compare_offers",
-        "arguments": {
-          "summary": "job-001 is the strongest match overall.",
-          "offers": [
-            { "jobId": "job-001", "badge": "najlepsza" },
-            { "jobId": "job-002" }
-          ]
-        }
+        "ordered": [
+          {
+            "functionName": "compare_offers",
+            "arguments": {
+              "summary": "job-001 is the strongest match overall.",
+              "offers": [
+                { "jobId": "job-001", "badge": "najlepsza" },
+                { "jobId": "job-002" }
+              ]
+            }
+          },
+          {
+            "functionName": "highlight_job",
+            "arguments": { "jobId": "job-001" }
+          }
+        ]
       }
     ]
   },

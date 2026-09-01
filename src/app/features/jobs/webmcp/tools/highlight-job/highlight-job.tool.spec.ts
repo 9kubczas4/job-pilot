@@ -62,7 +62,7 @@ describe('highlight_job WebMCP tool', () => {
           type: 'string',
           minLength: 1,
           maxLength: 128,
-          description: expect.stringContaining('current search results'),
+          description: expect.stringContaining('current /jobs search results'),
         },
       },
     });

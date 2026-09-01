@@ -26,7 +26,7 @@ Registered only while the matching route is active.
 
 | Tool | Route | Mutates state | Auth | Purpose |
 |------|-------|---------------|------|---------|
-| `highlight_job` | `/jobs` | Yes (UI) | No | Focus one job from **current search results** on the map — marker, popover, AI animation |
+| `highlight_job` | `/jobs` | Yes (UI) | No | Focus one job from **current search results** on the map when presenting or discussing a single offer, or when the user asks where it is located |
 
 ## Typical agent flows
 
@@ -39,7 +39,7 @@ Registered only while the matching route is active.
 
 1. `get_jobs` or `search_jobs` to gather candidates
 2. `compare_offers` → drawer with summary, per-offer badges, optional `highlighted: true` on the primary pick
-3. On `/jobs`, `highlight_job` → point to one result on the map (must be in current results)
+3. On `/jobs`, call `highlight_job` whenever you present, discuss, or answer questions about **one** visible offer — including location or headquarters questions and follow-ups after `get_jobs` or `compare_offers`
 
 ### Saved jobs and apply
 

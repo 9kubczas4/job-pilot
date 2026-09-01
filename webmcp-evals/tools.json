@@ -90,7 +90,7 @@
     },
     {
       "name": "highlight_job",
-      "description": "Highlight a specific job offer in the current results whenever the user refers to, selects, asks about, or wants to focus on that offer. Focuses its map marker and opens its preview without changing filters. Requires a visible job ID.",
+      "description": "Focus one job from the current /jobs search results on the map whenever you present, discuss, or answer questions about a single visible offer — including where it is located, where the company is based, or follow-ups about that offer. Selects the marker, opens the popover, and plays the AI highlight animation without changing filters. Requires a job ID from the current results.",
       "inputSchema": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "type": "object",
@@ -99,7 +99,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 128,
-            "description": "The exact job identifier from the current search results returned by search_jobs."
+            "description": "The exact job identifier from the current /jobs search results (for example from search_jobs). Use when focusing, presenting, or answering questions about one visible offer."
           }
         },
         "required": ["jobId"],
@@ -108,7 +108,7 @@
     },
     {
       "name": "compare_offers",
-      "description": "Show an agent-authored comparison of two to five jobs. Use this tool instead of interacting with the page UI or DOM. Supports a badge, note, and one highlighted recommendation per offer. Does not modify jobs.",
+      "description": "Show an agent-authored comparison of two to five jobs. Use this tool instead of interacting with the page UI or DOM. Supports a badge, note, and one highlighted recommendation per offer. Does not modify jobs. On /jobs, when you then discuss or recommend a single primary pick, also call highlight_job for that jobId.",
       "inputSchema": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "type": "object",
@@ -166,7 +166,7 @@
     },
     {
       "name": "get_jobs",
-      "description": "Return complete job records for one to twenty IDs in input order. Missing offers are marked per item. Does not change application state.",
+      "description": "Return complete job records for one to twenty IDs in input order. Missing offers are marked per item. Does not change application state. On /jobs, when discussing one visible offer, also call highlight_job with the same jobId so the map focuses it.",
       "inputSchema": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "type": "object",

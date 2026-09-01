@@ -127,7 +127,7 @@ export class HomePageComponent {
       scope: 'route',
       route: '/jobs',
       description:
-        'Focus one job from the current search results on the map - marker, popover, and AI highlight animation.',
+        'Focus one job from the current search results on the map when presenting or discussing a single offer, or when the user asks where it is located.',
     },
   ];
 

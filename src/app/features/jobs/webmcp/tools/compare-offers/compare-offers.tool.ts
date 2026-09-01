@@ -11,7 +11,7 @@ import { COMPARE_OFFERS_INPUT_SCHEMA } from './compare-offers.schema';
 export const COMPARE_OFFERS_WEBMCP_TOOL = defineZodWebMcpTool({
   name: 'compare_offers',
   description:
-    'Show an agent-authored comparison of two to five jobs. Use this tool instead of interacting with the page UI or DOM. Supports a badge, note, and one highlighted recommendation per offer. Does not modify jobs.',
+    'Show an agent-authored comparison of two to five jobs. Use this tool instead of interacting with the page UI or DOM. Supports a badge, note, and one highlighted recommendation per offer. Does not modify jobs. On /jobs, when you then discuss or recommend a single primary pick, also call highlight_job for that jobId.',
   inputSchema: COMPARE_OFFERS_INPUT_SCHEMA,
   execute: async (input) => {
     const result = await inject(JobCompareStore).show({

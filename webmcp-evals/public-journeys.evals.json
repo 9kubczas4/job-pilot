@@ -21,6 +21,10 @@
           {
             "functionName": "get_jobs",
             "arguments": { "jobIds": ["job-001"] }
+          },
+          {
+            "functionName": "highlight_job",
+            "arguments": { "jobId": "job-001" }
           }
         ]
       }
@@ -65,6 +69,33 @@
         "role": "user",
         "type": "message",
         "content": "Find Frontend Developer jobs in New York and highlight job-001 on the map."
+      }
+    ],
+    "expectedCall": [
+      {
+        "ordered": [
+          {
+            "functionName": "search_jobs",
+            "arguments": {
+              "query": "Frontend Developer",
+              "location": "New York"
+            }
+          },
+          {
+            "functionName": "highlight_job",
+            "arguments": { "jobId": "job-001" }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Search and show where a public job is located",
+    "messages": [
+      {
+        "role": "user",
+        "type": "message",
+        "content": "Find Frontend Developer jobs in New York, then show me where job-001 is on the map."
       }
     ],
     "expectedCall": [

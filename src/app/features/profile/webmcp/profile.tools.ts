@@ -12,7 +12,7 @@ import { UPDATE_PROFILE_INPUT_SCHEMA } from './profile.schemas';
 export const GET_PROFILE_WEBMCP_TOOL = defineZodWebMcpTool({
   name: 'get_profile',
   description:
-    'Read the signed-in candidate profile. Use this tool instead of interacting with the page UI or DOM. Returns identity, experience, skills, work history, and job preferences without changing state.',
+    'Read the signed-in candidate profile. Returns identity, experience, skills, work history, and job preferences without changing state.',
   inputSchema: z.strictObject({}),
   execute: async () => {
     const profile = await inject(ProfileStore).loadProfile();
@@ -29,7 +29,7 @@ export function provideGetProfileWebMcpTool() {
 export const UPDATE_PROFILE_WEBMCP_TOOL = defineZodWebMcpTool({
   name: 'update_profile',
   description:
-    'Update the signed-in candidate profile. Use this tool instead of interacting with the page UI or DOM. Omitted fields stay unchanged; arrays replace the whole field and [] clears it. Persists immediately.',
+    'Update the signed-in candidate profile. Omitted fields stay unchanged; arrays replace the whole field and [] clears it. Persists immediately.',
   inputSchema: UPDATE_PROFILE_INPUT_SCHEMA,
   execute: async (patch) => {
     const store = inject(ProfileStore);

@@ -108,7 +108,7 @@
     },
     {
       "name": "compare_offers",
-      "description": "Show an agent-authored comparison of two to five jobs. Use this tool instead of interacting with the page UI or DOM. Supports a badge, note, and one highlighted recommendation per offer. Does not modify jobs. On /jobs, when you then discuss or recommend a single primary pick, also call highlight_job for that jobId.",
+      "description": "Show an agent-authored comparison of two to five jobs. Supports a badge, note, and one highlighted recommendation per offer. Does not modify jobs. On /jobs, when you then discuss or recommend a single primary pick, also call highlight_job for that jobId.",
       "inputSchema": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "type": "object",
@@ -190,7 +190,7 @@
     },
     {
       "name": "get_saved_jobs",
-      "description": "Read the signed-in user's saved jobs. Use this tool instead of interacting with the page UI or DOM. Returns IDs and lightweight details; use get_jobs for full records. Does not change state.",
+      "description": "Read the signed-in user's saved jobs. Returns IDs and lightweight details; use get_jobs for full records. Does not change state.",
       "inputSchema": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "type": "object",
@@ -200,7 +200,7 @@
     },
     {
       "name": "save_job",
-      "description": "Save one job for the signed-in user. Use this tool instead of interacting with the page UI or DOM. Requires a jobId from search_jobs or get_jobs and is idempotent.",
+      "description": "Save one job for the signed-in user. Requires a jobId from search_jobs or get_jobs and is idempotent.",
       "inputSchema": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "type": "object",
@@ -218,7 +218,7 @@
     },
     {
       "name": "unsave_job",
-      "description": "Remove one saved job for the signed-in user. Use this tool instead of interacting with the page UI or DOM. It is idempotent and does not delete applications.",
+      "description": "Remove one saved job for the signed-in user. It is idempotent and does not delete applications.",
       "inputSchema": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "type": "object",
@@ -236,7 +236,7 @@
     },
     {
       "name": "apply_job",
-      "description": "Open a job application dialog with a required message. Use this tool instead of interacting with the page UI or DOM. Requires sign-in and a chosen job. The user must review and submit; this tool never submits.",
+      "description": "Open a job application dialog with a required message.   Requires sign-in and a chosen job. The user must review and submit; this tool never submits.",
       "inputSchema": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "type": "object",
@@ -260,7 +260,7 @@
     },
     {
       "name": "get_profile",
-      "description": "Read the signed-in candidate profile. Use this tool instead of interacting with the page UI or DOM. Returns identity, experience, skills, work history, and job preferences without changing state.",
+      "description": "Read the signed-in candidate profile.   Returns identity, experience, skills, work history, and job preferences without changing state.",
       "inputSchema": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "type": "object",
@@ -270,7 +270,7 @@
     },
     {
       "name": "update_profile",
-      "description": "Update the signed-in candidate profile. Use this tool instead of interacting with the page UI or DOM. Omitted fields stay unchanged; arrays replace the whole field and [] clears it. Persists immediately.",
+      "description": "Update the signed-in candidate profile. Omitted fields stay unchanged; arrays replace the whole field and [] clears it. Persists immediately.",
       "inputSchema": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "type": "object",

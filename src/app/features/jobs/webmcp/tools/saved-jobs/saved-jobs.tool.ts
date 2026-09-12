@@ -14,21 +14,21 @@ export const SAVED_JOBS_WEBMCP_TOOLS = [
   defineZodWebMcpTool({
     name: 'get_saved_jobs',
     description:
-      "Read the signed-in user's saved jobs. Use this tool instead of interacting with the page UI or DOM. Returns IDs and lightweight details; use get_jobs for full records. Does not change state.",
+      "Read the signed-in user's saved jobs. Returns IDs and lightweight details; use get_jobs for full records. Does not change state.",
     inputSchema: GET_SAVED_JOBS_INPUT_SCHEMA,
     execute: () => readSavedJobs(),
   }),
   defineZodWebMcpTool({
     name: 'save_job',
     description:
-      "Save one job for the signed-in user. Use this tool instead of interacting with the page UI or DOM. Requires a jobId from search_jobs or get_jobs and is idempotent.",
+      "Save one job for the signed-in user. Requires a jobId from search_jobs or get_jobs and is idempotent.",
     inputSchema: SAVED_JOB_INPUT_SCHEMA,
     execute: ({ jobId }) => updateSavedState(jobId, true),
   }),
   defineZodWebMcpTool({
     name: 'unsave_job',
     description:
-      "Remove one saved job for the signed-in user. Use this tool instead of interacting with the page UI or DOM. It is idempotent and does not delete applications.",
+      "Remove one saved job for the signed-in user. It is idempotent and does not delete applications.",
     inputSchema: SAVED_JOB_INPUT_SCHEMA,
     execute: ({ jobId }) => updateSavedState(jobId, false),
   }),

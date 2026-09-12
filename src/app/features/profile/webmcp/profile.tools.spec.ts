@@ -3,11 +3,6 @@ import { describe, expect, it } from 'vitest';
 import { GET_PROFILE_WEBMCP_TOOL, UPDATE_PROFILE_WEBMCP_TOOL } from './profile.tools';
 
 describe('get_profile WebMCP contract', () => {
-  it('directs the agent to use the tool instead of the UI or DOM', () => {
-    expect(GET_PROFILE_WEBMCP_TOOL.description).toContain(
-      'Use this tool instead of interacting with the page UI or DOM.',
-    );
-  });
 
   it('rejects unexpected arguments with the shared error envelope', async () => {
     const response = await TestBed.runInInjectionContext(() =>
@@ -25,11 +20,6 @@ describe('get_profile WebMCP contract', () => {
 });
 
 describe('update_profile WebMCP contract', () => {
-  it('directs the agent to use the tool instead of the UI or DOM', () => {
-    expect(UPDATE_PROFILE_WEBMCP_TOOL.description).toContain(
-      'Use this tool instead of interacting with the page UI or DOM.',
-    );
-  });
 
   it('describes every top-level parameter and rejects empty patches', async () => {
     for (const [name, schema] of Object.entries(

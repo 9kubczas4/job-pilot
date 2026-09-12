@@ -82,7 +82,7 @@ describe('saved jobs WebMCP tools', () => {
         properties: {
           jobId: {
             type: 'string',
-            description: expect.stringContaining('job identifier'),
+            description: expect.stringContaining('Job ID'),
           },
         },
       });

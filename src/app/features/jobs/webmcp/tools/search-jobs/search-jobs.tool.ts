@@ -9,7 +9,7 @@ import { SEARCH_JOBS_INPUT_SCHEMA } from './search-jobs.schema';
 export const SEARCH_JOBS_WEBMCP_TOOL = defineZodWebMcpTool({
   name: 'search_jobs',
   description:
-    'Search jobs using complete criteria and update the jobs page. Each call replaces the current search state; omitted fields use defaults. Returns normalized criteria, total count, and lightweight results.',
+    'Search and replace the /jobs criteria with a complete filter set (omitted fields reset to defaults). Use when the user wants new results; returns normalized criteria, total count, and lightweight summaries (salary includes currency + period; distances in miles).',
   inputSchema: SEARCH_JOBS_INPUT_SCHEMA,
   execute: async (input) => ({
     ...(await inject(JobSearchWebMcpService).applySearchCriteria(input)),

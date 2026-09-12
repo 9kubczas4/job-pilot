@@ -11,11 +11,12 @@ export type JobSearchInput = Pick<
   | 'workSchedules'
   | 'workplace'
   | 'contracts'
-  | 'salaryMin'
   | 'radiusMi'
   | 'sort'
 > & {
   location?: string;
+  /** Minimum monthly gross salary in USD. */
+  salaryMinUsd?: number;
   limit?: number;
 };
 

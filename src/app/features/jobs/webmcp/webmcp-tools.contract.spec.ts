@@ -40,7 +40,10 @@ describe('jobs WebMCP contracts', () => {
     [SEARCH_JOBS_WEBMCP_TOOL, { location: 'x'.repeat(101) }],
     [SEARCH_JOBS_WEBMCP_TOOL, { radiusMi: 50 }],
     [SEARCH_JOBS_WEBMCP_TOOL, { sort: 'distance' }],
-    [SEARCH_JOBS_WEBMCP_TOOL, { salaryMin: -1 }],
+    [SEARCH_JOBS_WEBMCP_TOOL, { salaryMinUsd: -1 }],
+    [SEARCH_JOBS_WEBMCP_TOOL, { salaryMin: 5000 }],
+    [SEARCH_JOBS_WEBMCP_TOOL, { limit: 0 }],
+    [SEARCH_JOBS_WEBMCP_TOOL, { limit: 21 }],
     [HIGHLIGHT_JOB_WEBMCP_TOOL, { jobId: '   ' }],
     [
       COMPARE_OFFERS_WEBMCP_TOOL,

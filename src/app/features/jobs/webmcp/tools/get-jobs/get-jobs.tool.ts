@@ -10,7 +10,7 @@ import { GET_JOBS_INPUT_SCHEMA } from './get-jobs.schema';
 export const GET_JOBS_WEBMCP_TOOL = defineZodWebMcpTool({
   name: 'get_jobs',
   description:
-    'Return complete job records for one to twenty IDs in input order. Missing offers are marked per item. Does not change application state. On /jobs, when discussing one visible offer, also call highlight_job with the same jobId so the map focuses it.',
+    'Fetch full job records for 1–20 IDs in input order. Use when you need complete offer details; returns found/not_found per ID (dates are ISO 8601; salary includes currency + period) without changing state.',
   inputSchema: GET_JOBS_INPUT_SCHEMA,
   execute: async ({ jobIds }) => {
     const jobs = await inject(JobDetailsStore).getJobsByIds(jobIds);

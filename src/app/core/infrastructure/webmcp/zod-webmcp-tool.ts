@@ -91,7 +91,7 @@ export function defineZodWebMcpTool<TSchema extends z.ZodType>(
   return {
     name: options.name,
     description: options.description,
-    inputSchema: z.toJSONSchema(options.inputSchema) as WebMcpObjectSchema,
+    inputSchema: z.toJSONSchema(options.inputSchema, { io: 'input' }) as WebMcpObjectSchema,
     run,
     execute: async (input, client) => {
       inject(ToastService).showAiToolActivated(options.name);

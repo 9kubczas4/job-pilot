@@ -9,7 +9,7 @@ export const GET_JOBS_INPUT_SCHEMA = z.strictObject({
       message: 'Each jobId may appear only once.',
     })
     .meta({
-      description: 'One to twenty unique job identifiers returned by search_jobs.',
+      description: 'One to twenty unique job IDs from search_jobs or get_saved_jobs.',
       uniqueItems: true,
     }),
 });

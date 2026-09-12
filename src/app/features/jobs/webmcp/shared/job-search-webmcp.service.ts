@@ -22,6 +22,10 @@ import {
   JobSearchInput,
   sortFieldChanged,
 } from './webmcp-criteria.utils';
+import {
+  SEARCH_JOBS_DEFAULT_LIMIT,
+  SEARCH_JOBS_MAX_LIMIT,
+} from '../tools/search-jobs/search-jobs.schema';
 
 @Injectable({ providedIn: 'root' })
 export class JobSearchWebMcpService {
@@ -46,7 +50,7 @@ export class JobSearchWebMcpService {
 
       return await this.syncUiAndNavigate(
         () => !routeCriteriaEqual(before, this.store.criteria()),
-        input.limit,
+        clampResultLimit(input.limit),
       );
     } finally {
       finishActivity();
@@ -55,7 +59,7 @@ export class JobSearchWebMcpService {
 
   private async syncUiAndNavigate(
     changed: () => boolean,
-    resultLimit = 10,
+    resultLimit: number,
   ): Promise<JobSearchToolResult> {
     this.enrichStoredLocationIfNeeded();
     await this.headerSearch.submitCriteria(this.store.criteria(), AppLinks.jobs);
@@ -87,12 +91,12 @@ export class JobSearchWebMcpService {
       workSchedules: normalizeList(input.workSchedules),
       workplace: normalizeList(input.workplace),
       contracts: normalizeList(input.contracts),
-      salaryMin: input.salaryMin || undefined,
+      salaryMin: input.salaryMinUsd || undefined,
       locations: location ? [location] : undefined,
       locationLat: city?.latitude,
       locationLng: city?.longitude,
       radiusMi: location ? (input.radiusMi ?? DEFAULT_SEARCH_RADIUS_MI) : undefined,
-      sort: input.sort === 'newest' ? undefined : input.sort,
+      sort: input.sort === 'newest' || input.sort == null ? undefined : input.sort,
     };
   }
 
@@ -178,4 +182,13 @@ function changedSearchControls(
 
 function displayRadius(criteria: JobSearchCriteria): number {
   return criteria.radiusMi ?? DEFAULT_SEARCH_RADIUS_MI;
+}
+
+/** Caps result page size in the handler so callers need not encode limits in prompts. */
+function clampResultLimit(limit: number | undefined): number {
+  if (limit == null || !Number.isFinite(limit)) {
+    return SEARCH_JOBS_DEFAULT_LIMIT;
+  }
+
+  return Math.min(SEARCH_JOBS_MAX_LIMIT, Math.max(1, Math.trunc(limit)));
 }

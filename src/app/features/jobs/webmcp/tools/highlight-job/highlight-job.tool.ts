@@ -11,7 +11,7 @@ import { HIGHLIGHT_JOB_INPUT_SCHEMA } from './highlight-job.schema';
 export const HIGHLIGHT_JOB_WEBMCP_TOOL = defineZodWebMcpTool({
   name: 'highlight_job',
   description:
-    'Focus one job from the current /jobs search results on the map whenever you present, discuss, or answer questions about a single visible offer — including where it is located, where the company is based, or follow-ups about that offer. Selects the marker, opens the popover, and plays the AI highlight animation without changing filters. Requires a job ID from the current results.',
+    'Focus one job from the current /jobs search results on the map (selects marker, opens popover, plays highlight). Use when discussing a single visible offer; returns a short job summary without changing filters.',
   inputSchema: HIGHLIGHT_JOB_INPUT_SCHEMA,
   execute: async ({ jobId }) => {
     const searchStore = inject(JobSearchStore);

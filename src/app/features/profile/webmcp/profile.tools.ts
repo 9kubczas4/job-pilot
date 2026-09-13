@@ -29,7 +29,7 @@ export function provideGetProfileWebMcpTool() {
 export const UPDATE_PROFILE_WEBMCP_TOOL = defineZodWebMcpTool({
   name: 'update_profile',
   description:
-    'Update the signed-in candidate profile. Omitted fields stay unchanged; arrays replace the whole field and [] clears it. Persists immediately.',
+    'Update the candidate profile. Omitted fields stay unchanged; arrays replace the whole field and [] clears it. Persists immediately.',
   inputSchema: UPDATE_PROFILE_INPUT_SCHEMA,
   execute: async (patch) => {
     const store = inject(ProfileStore);

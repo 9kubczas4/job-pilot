@@ -74,9 +74,9 @@ npm run demo
 
 Open `http://localhost:4200`. The Emulator Suite UI is at `http://127.0.0.1:4000`.
 If port 4200 is occupied, run `DEMO_PORT=4201 npm run demo` and open `http://localhost:4201`.
-This command starts the Auth and Firestore emulators, loads the 200 sample jobs into Firestore, and starts Angular. Use **Sign in** in the header to choose Alex, Sam, or Taylor. Choose the same person in two browsers to access the same local profile, saved jobs, and applications. Other sign-in buttons use Alex by default. Demo accounts are created on first sign-in. An existing anonymous session is linked to the selected account when it is available, preserving its local data. No real Google account or Firebase project is needed. Stop everything with `Ctrl+C`.
+This command starts the Auth and Firestore emulators, loads the 200 sample jobs into Firestore, and starts Angular. Use **Sign in** in the header to choose Alex, Sam, or Taylor. Choose the same person in two browsers to access the same local profile, saved jobs, and applications. Other sign-in buttons use Alex by default. Demo accounts are created on first sign-in. An existing anonymous session is linked to the selected account when it is available, preserving its local data. No real Google account or Firebase project is needed. Stop everything with `Ctrl+C` to save emulator data for the next run.
 
-Demo data is reset each time you run the command. The Google map still requires a working Maps API key and internet connection; job list, authentication, and Firestore data run locally.
+Auth and Firestore data is imported from and exported to `.firebase/emulator-data`, which is ignored by Git. Demo job documents are refreshed by the seed script on startup; local accounts, profiles, saved jobs, and applications persist between runs. To reset all local emulator data, stop the demo and remove `.firebase/emulator-data`. The Google map still requires a working Maps API key and internet connection; job list, authentication, and Firestore data run locally.
 
 The development environment uses the Firebase project ID `demo-job-pilot`, which has no live Firebase resources. The production configuration remains separate and is not used by `npm run demo`.
 
@@ -155,7 +155,7 @@ Deploy the `dist/job-pilot/browser` output.
 | `npm run preview:static` | Serve static build locally |
 | `npm run serve:ssr:job-pilot` | Run Express SSR server after build |
 | `npm run seed:firestore` | Seed jobs to Firestore (admin) |
-| `npm run demo` | Start local Auth and Firestore emulators, seed jobs, and serve Angular |
+| `npm run demo` | Start local Auth and Firestore emulators with persisted data, seed jobs, and serve Angular |
 | `npm test` | Unit tests (Vitest) |
 | `npm run lint` | ESLint including import boundaries |
 

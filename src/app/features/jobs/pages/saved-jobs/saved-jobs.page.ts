@@ -36,10 +36,8 @@ export class SavedJobsPageComponent {
     this.searchStore.loadJobs();
 
     effect(() => {
-      if (this.auth.loading() || !this.auth.isAuthenticated()) {
-        return;
-      }
-
+      if (this.auth.loading()) return;
+      this.auth.userId();
       this.savedJobsStore.loadSavedJobs();
     });
   }
@@ -50,6 +48,6 @@ export class SavedJobsPageComponent {
   }
 
   signIn(): void {
-    this.auth.signInWithGoogle();
+    this.auth.signIn();
   }
 }

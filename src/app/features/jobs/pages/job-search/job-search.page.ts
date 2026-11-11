@@ -149,6 +149,13 @@ export class JobSearchPageComponent implements OnInit {
     this.applyRouteCriteria(this.route.snapshot.queryParamMap);
     this.lastAppliedTrigger.set(this.headerUi.searchApplyTrigger());
 
+    effect(() => {
+      if (this.auth.loading()) return;
+      this.auth.userId();
+      this.savedJobs.loadSavedJobs();
+      this.jobApplications.loadApplications();
+    });
+
     if (isPlatformBrowser(this.platformId) && isGoogleMapsConfigured(environment.googleMapsApiKey)) {
       afterNextRender(() => {
         void loadGoogleMapsApi(environment.googleMapsApiKey);
@@ -287,8 +294,6 @@ export class JobSearchPageComponent implements OnInit {
     });
 
     this.store.loadJobs();
-    this.savedJobs.loadSavedJobs();
-    this.jobApplications.loadApplications();
   }
 
   private applyRouteCriteria(params: { keys: string[]; get: (key: string) => string | null }): void {
@@ -412,7 +417,7 @@ export class JobSearchPageComponent implements OnInit {
 
   async confirmAuthPrompt(): Promise<void> {
     try {
-      await this.auth.signInWithGoogle();
+      await this.auth.signIn();
       this.authPromptOpen.set(false);
 
       const jobId = this.pendingSaveJobId;

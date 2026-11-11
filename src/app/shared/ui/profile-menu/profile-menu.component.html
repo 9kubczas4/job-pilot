@@ -60,6 +60,15 @@
         >
           Profile
         </a>
+        @if (demoAccounts().length) {
+          <div class="profile-menu__divider"></div>
+          <p class="profile-menu__group-label">Switch local account</p>
+          @for (account of demoAccounts(); track account.id) {
+            <button type="button" class="profile-menu__item" role="menuitem" (click)="onSignIn(account.id)">
+              {{ account.name }}
+            </button>
+          }
+        }
         <button
           type="button"
           class="profile-menu__item profile-menu__item--danger"
@@ -72,5 +81,30 @@
     }
   </div>
 } @else {
-  <button type="button" class="btn btn-primary profile-menu__sign-in" (click)="onSignIn()">Sign in</button>
+  @if (demoAccounts().length) {
+    <div class="profile-menu">
+      <button
+        type="button"
+        class="btn btn-primary profile-menu__sign-in"
+        [attr.aria-expanded]="menuOpen()"
+        aria-controls="profile-menu-panel"
+        aria-haspopup="menu"
+        (click)="toggleMenu()"
+      >
+        Sign in
+      </button>
+      @if (menuOpen()) {
+        <div id="profile-menu-panel" class="profile-menu__popover" role="menu" aria-label="Local demo accounts">
+          <p class="profile-menu__group-label">Choose a local account</p>
+          @for (account of demoAccounts(); track account.id) {
+            <button type="button" class="profile-menu__item" role="menuitem" (click)="onSignIn(account.id)">
+              {{ account.name }}
+            </button>
+          }
+        </div>
+      }
+    </div>
+  } @else {
+    <button type="button" class="btn btn-primary profile-menu__sign-in" (click)="onSignIn()">Sign in</button>
+  }
 }

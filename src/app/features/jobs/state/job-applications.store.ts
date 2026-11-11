@@ -7,6 +7,7 @@ import { JobApplicationsRepository } from '@features/jobs/data-access/job-applic
 export class JobApplicationsStore {
   private readonly repository = inject(JobApplicationsRepository);
   private readonly auth = inject(AuthService);
+  private loadedUserId: string | null = null;
 
   readonly appliedJobIds = signal<string[]>([]);
   readonly applications = signal<JobApplication[]>([]);
@@ -15,13 +16,17 @@ export class JobApplicationsStore {
 
   async loadApplications(): Promise<void> {
     const userId = this.auth.userId();
-    if (!userId) {
+    if (userId !== this.loadedUserId) {
+      this.loadedUserId = userId;
       this.appliedJobIds.set([]);
       this.applications.set([]);
+    }
+    if (!userId) {
       return;
     }
 
     const applications = await this.repository.loadApplications(userId);
+    if (this.auth.userId() !== userId) return;
     this.applications.set(applications);
     this.appliedJobIds.set(applications.map((application) => application.jobId));
   }

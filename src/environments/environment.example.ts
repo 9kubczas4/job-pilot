@@ -9,6 +9,7 @@ export const environmentExample = {
     appId: 'YOUR_APP_ID',
     measurementId: 'G-XXXXXXXXXX',
   },
+  useFirebaseEmulators: false,
   useSeedFallback: true,
   googleMapsApiKey: 'YOUR_GOOGLE_MAPS_API_KEY',
   siteUrl: 'https://YOUR_PROJECT.web.app',

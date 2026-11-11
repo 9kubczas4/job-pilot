@@ -120,10 +120,8 @@ export class JobDetailsPageComponent {
     this.destroyRef.onDestroy(() => this.pageSeo.restoreDefaults());
 
     effect(() => {
-      if (this.auth.loading() || !this.auth.isAuthenticated()) {
-        return;
-      }
-
+      if (this.auth.loading()) return;
+      this.auth.userId();
       this.savedJobs.loadSavedJobs();
       this.jobApplications.loadApplications();
     });
@@ -199,7 +197,7 @@ export class JobDetailsPageComponent {
     const action = this.authPromptAction();
 
     try {
-      await this.auth.signInWithGoogle();
+      await this.auth.signIn();
       this.authPromptOpen.set(false);
 
       const job = this.store.job();

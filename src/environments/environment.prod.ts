@@ -9,6 +9,7 @@ export const environment = {
     appId: '1:5309542448:web:7c78a72dbb4e97451abdf5',
     measurementId: 'G-JK21J3MR22',
   },
+  useFirebaseEmulators: false,
   useSeedFallback: false,
   googleMapsApiKey: 'AIzaSyAMmn3uHY8gw3paGhLRiNXCc0G8i_5O92I',
   siteUrl: 'https://job-pilot-1e4ee.web.app',

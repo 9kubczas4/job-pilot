@@ -60,6 +60,6 @@ export class ApplicationsPageComponent {
   }
 
   signIn(): void {
-    this.auth.signInWithGoogle();
+    this.auth.signIn();
   }
 }

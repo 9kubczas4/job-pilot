@@ -50,6 +50,6 @@ export class SavedJobsPageComponent {
   }
 
   signIn(): void {
-    this.auth.signInWithGoogle();
+    this.auth.signIn();
   }
 }

@@ -199,7 +199,7 @@ export class JobDetailsPageComponent {
     const action = this.authPromptAction();
 
     try {
-      await this.auth.signInWithGoogle();
+      await this.auth.signIn();
       this.authPromptOpen.set(false);
 
       const job = this.store.job();

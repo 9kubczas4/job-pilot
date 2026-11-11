@@ -31,7 +31,7 @@
           [loading]="auth.loading()"
           [authenticated]="auth.isAuthenticated()"
           [displayName]="auth.user()?.displayName ?? null"
-          (signIn)="auth.signInWithGoogle()"
+          (signIn)="auth.signIn()"
           (signOut)="auth.signOut()"
         />
       </div>

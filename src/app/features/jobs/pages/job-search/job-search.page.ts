@@ -412,7 +412,7 @@ export class JobSearchPageComponent implements OnInit {
 
   async confirmAuthPrompt(): Promise<void> {
     try {
-      await this.auth.signInWithGoogle();
+      await this.auth.signIn();
       this.authPromptOpen.set(false);
 
       const jobId = this.pendingSaveJobId;

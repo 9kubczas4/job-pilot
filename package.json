@@ -5,6 +5,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "demo": "firebase emulators:exec --project demo-job-pilot --only auth,firestore --ui \"npm run seed:demo && npm start -- --port ${DEMO_PORT:-4200}\"",
+    "seed:demo": "node scripts/seed-demo.mjs",
     "build": "ng build",
     "preview:static": "npx --yes serve dist/job-pilot/browser -s",
     "watch": "ng build --watch --configuration development",

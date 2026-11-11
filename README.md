@@ -55,7 +55,7 @@ Global tools register in `app.config.ts`. Route-scoped tools register as route `
 ### Prerequisites
 
 - Node.js 20+
-- Firebase project
+- Java 21+ (for the Firestore emulator)
 - ChatGPT desktop app (for Codex + in-app browser testing)
 
 ### Install
@@ -64,7 +64,23 @@ Global tools register in `app.config.ts`. Route-scoped tools register as route `
 npm install
 ```
 
-### Configure Firebase
+### Local presentation demo
+
+After `npm install`, run one command:
+
+```bash
+npm run demo
+```
+
+Open `http://localhost:4200`. The Emulator Suite UI is at `http://127.0.0.1:4000`.
+If port 4200 is occupied, run `DEMO_PORT=4201 npm run demo` and open `http://localhost:4201`.
+This command starts the Auth and Firestore emulators, loads the 200 sample jobs into Firestore, and starts Angular. Click **Sign in** to create a local anonymous demo session; no real Google account or Firebase project is needed. Profile changes, saved jobs, and applications then use local Firestore. Stop everything with `Ctrl+C`.
+
+Demo data is reset each time you run the command. The Google map still requires a working Maps API key and internet connection; job list, authentication, and Firestore data run locally.
+
+The development environment uses the Firebase project ID `demo-job-pilot`, which has no live Firebase resources. The production configuration remains separate and is not used by `npm run demo`.
+
+### Configure Firebase for a non-demo environment
 
 Copy values from `src/environments/environment.example.ts` into:
 
@@ -81,13 +97,13 @@ Enable Google Sign-In in Firebase Authentication.
 
 On the hackathon free tier you get **10,000 map loads/month** at no cost. Set a quota limit in GCP if you want a hard cap.
 
-### Run locally
+### Run Angular separately
 
 ```bash
 npm start
 ```
 
-Open `http://localhost:4200`.
+Open `http://localhost:4200`. Start the emulators and seed them first, or use `npm run demo` above.
 
 ### Seed Firestore (admin)
 
@@ -139,6 +155,7 @@ Deploy the `dist/job-pilot/browser` output.
 | `npm run preview:static` | Serve static build locally |
 | `npm run serve:ssr:job-pilot` | Run Express SSR server after build |
 | `npm run seed:firestore` | Seed jobs to Firestore (admin) |
+| `npm run demo` | Start local Auth and Firestore emulators, seed jobs, and serve Angular |
 | `npm test` | Unit tests (Vitest) |
 | `npm run lint` | ESLint including import boundaries |
 

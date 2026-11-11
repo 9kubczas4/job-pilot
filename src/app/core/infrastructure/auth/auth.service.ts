@@ -2,11 +2,13 @@ import { computed, inject, Injectable, signal } from '@angular/core';
 import {
   GoogleAuthProvider,
   onAuthStateChanged,
+  signInAnonymously,
   signInWithPopup,
   signOut,
   User,
 } from 'firebase/auth';
 import { FIREBASE } from '@core/infrastructure/firebase/firebase.providers';
+import { environment } from '@environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -24,7 +26,12 @@ export class AuthService {
     });
   }
 
-  async signInWithGoogle(): Promise<void> {
+  async signIn(): Promise<void> {
+    if (environment.useFirebaseEmulators) {
+      await signInAnonymously(this.firebase.auth);
+      return;
+    }
+
     await signInWithPopup(this.firebase.auth, new GoogleAuthProvider());
   }
 

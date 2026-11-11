@@ -170,7 +170,7 @@ export class ProfilePageComponent {
   }
 
   signIn(): void {
-    this.auth.signInWithGoogle();
+    this.auth.signIn();
   }
 
   addSkill(): void {

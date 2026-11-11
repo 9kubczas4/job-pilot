@@ -6,6 +6,7 @@ import { SavedJobsRepository } from '@features/jobs/data-access/saved-jobs.repos
 export class SavedJobsStore {
   private readonly repository = inject(SavedJobsRepository);
   private readonly auth = inject(AuthService);
+  private loadedUserId: string | null = null;
 
   readonly savedJobIds = signal<string[]>([]);
 
@@ -13,13 +14,16 @@ export class SavedJobsStore {
 
   async loadSavedJobs(): Promise<void> {
     const userId = this.auth.userId();
-    if (!userId) {
+    if (userId !== this.loadedUserId) {
+      this.loadedUserId = userId;
       this.savedJobIds.set([]);
+    }
+    if (!userId) {
       return;
     }
 
     const savedIds = await this.repository.loadSavedJobIds(userId);
-    this.savedJobIds.set(savedIds);
+    if (this.auth.userId() === userId) this.savedJobIds.set(savedIds);
   }
 
   isSaved(jobId: string): boolean {

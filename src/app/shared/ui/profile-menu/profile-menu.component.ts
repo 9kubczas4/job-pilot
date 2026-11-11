@@ -13,6 +13,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { filter } from 'rxjs';
 import { ProfileMenuLinks } from '@shared/models/profile-menu.model';
+import { DEMO_ACCOUNTS, DemoAccountId } from '@shared/models/demo-accounts';
 
 @Component({
   selector: 'app-profile-menu',
@@ -32,9 +33,10 @@ export class ProfileMenuComponent {
   readonly loading = input(false);
   readonly authenticated = input(false);
   readonly displayName = input<string | null>(null);
+  readonly demoAccounts = input<readonly (typeof DEMO_ACCOUNTS)[number][]>([]);
   readonly links = input.required<ProfileMenuLinks>();
 
-  readonly signIn = output<void>();
+  readonly signIn = output<DemoAccountId>();
   readonly signOut = output<void>();
 
   private readonly host = inject(ElementRef<HTMLElement>);
@@ -70,8 +72,9 @@ export class ProfileMenuComponent {
     this.menuOpen.set(false);
   }
 
-  onSignIn(): void {
-    this.signIn.emit();
+  onSignIn(accountId: DemoAccountId = DEMO_ACCOUNTS[0].id): void {
+    this.closeMenu();
+    this.signIn.emit(accountId);
   }
 
   onSignOut(): void {

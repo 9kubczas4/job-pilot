@@ -30,8 +30,9 @@
           [links]="profileMenuLinks"
           [loading]="auth.loading()"
           [authenticated]="auth.isAuthenticated()"
-          [displayName]="auth.user()?.displayName ?? null"
-          (signIn)="auth.signIn()"
+          [displayName]="auth.displayName()"
+          [demoAccounts]="auth.demoAccounts"
+          (signIn)="auth.signIn($event)"
           (signOut)="auth.signOut()"
         />
       </div>

@@ -119,10 +119,7 @@ export class ProfilePageComponent {
     enableAppShellPageScroll();
 
     effect(() => {
-      if (this.auth.loading() || !this.auth.isAuthenticated()) {
-        return;
-      }
-
+      if (this.auth.loading() || !this.auth.userId()) return;
       this.store.loadProfile().then((profile) => {
         if (!profile) {
           return;

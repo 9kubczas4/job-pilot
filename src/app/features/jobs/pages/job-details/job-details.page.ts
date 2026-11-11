@@ -120,10 +120,8 @@ export class JobDetailsPageComponent {
     this.destroyRef.onDestroy(() => this.pageSeo.restoreDefaults());
 
     effect(() => {
-      if (this.auth.loading() || !this.auth.isAuthenticated()) {
-        return;
-      }
-
+      if (this.auth.loading()) return;
+      this.auth.userId();
       this.savedJobs.loadSavedJobs();
       this.jobApplications.loadApplications();
     });
